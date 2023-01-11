@@ -11,6 +11,8 @@ import (
 type InternalServerException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The input text was not in valid UTF-8 character encoding. Check your text then
 // retry your request.
 type InvalidEncodingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,13 +52,20 @@ func (e *InvalidEncodingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEncodingException) ErrorCode() string             { return "InvalidEncodingException" }
+func (e *InvalidEncodingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidEncodingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidEncodingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request that you made is invalid. Check your request to determine why it's
 // invalid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +79,20 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource identified by the specified Amazon Resource Name (ARN) was not
 // found. Check the ARN and try your request again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -83,13 +106,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Comprehend Medical; service is temporarily unavailable. Please wait and then
 // retry your request.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -103,13 +133,20 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The size of the text you submitted exceeds the size limit. Reduce the size of
 // the text or use a smaller document and then retry your request.
 type TextSizeLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -123,7 +160,12 @@ func (e *TextSizeLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TextSizeLimitExceededException) ErrorCode() string             { return "TextSizeLimitExceededException" }
+func (e *TextSizeLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TextSizeLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have made too many requests within a short period of time. Wait for a short
@@ -131,6 +173,8 @@ func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // information about a service limit increase.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -144,13 +188,20 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The filter that you specified for the operation is invalid. Check the filter
 // values that you entered and try your request again.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -164,5 +215,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

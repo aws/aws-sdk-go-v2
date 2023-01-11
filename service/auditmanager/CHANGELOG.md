@@ -1,3 +1,11 @@
+# v1.23.0 (2023-01-06)
+
+* **Feature**: This release introduces a new data retention option in your Audit Manager settings. You can now use the DeregistrationPolicy parameter to specify if you want to delete your data when you deregister Audit Manager.
+
+# v1.22.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.21.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

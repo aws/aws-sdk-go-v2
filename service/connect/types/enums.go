@@ -194,6 +194,8 @@ const (
 	ContactInitiationMethodQueueTransfer ContactInitiationMethod = "QUEUE_TRANSFER"
 	ContactInitiationMethodCallback      ContactInitiationMethod = "CALLBACK"
 	ContactInitiationMethodApi           ContactInitiationMethod = "API"
+	ContactInitiationMethodDisconnect    ContactInitiationMethod = "DISCONNECT"
+	ContactInitiationMethodMonitor       ContactInitiationMethod = "MONITOR"
 )
 
 // Values returns all known values for ContactInitiationMethod. Note that this can
@@ -207,6 +209,8 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 		"QUEUE_TRANSFER",
 		"CALLBACK",
 		"API",
+		"DISCONNECT",
+		"MONITOR",
 	}
 }
 

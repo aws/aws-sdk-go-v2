@@ -33,6 +33,18 @@ type CreatePortalInput struct {
 	// The additional encryption context of the portal.
 	AdditionalEncryptionContext map[string]string
 
+	// The type of authentication integration points used when signing into the web
+	// portal. Defaults to Standard. Standard web portals are authenticated directly
+	// through your identity provider. You need to call CreateIdentityProvider to
+	// integrate your identity provider with your web portal. User and group access to
+	// your web portal is controlled through your identity provider.
+	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
+	// Center (successor to AWS Single Sign-On). They provide additional features, such
+	// as IdP-initiated authentication. Identity sources (including external identity
+	// provider integration), plus user and group access to your web portal, can be
+	// configured in the IAM Identity Center.
+	AuthenticationType types.AuthenticationType
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
 	// With an idempotent request, if the original request completes successfully,

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves subscription information for the specified subscription ID.
+// Retrieves the subscription information for the specified subscription ID. You
+// can get information about a specific subscriber.
 func (c *Client) GetSubscriber(ctx context.Context, params *GetSubscriberInput, optFns ...func(*Options)) (*GetSubscriberOutput, error) {
 	if params == nil {
 		params = &GetSubscriberInput{}
@@ -29,8 +30,8 @@ func (c *Client) GetSubscriber(ctx context.Context, params *GetSubscriberInput, 
 
 type GetSubscriberInput struct {
 
-	// A value created by Security Lake that uniquely identifies your GetSubscriber API
-	// request.
+	// A value created by Amazon Security Lake that uniquely identifies your
+	// GetSubscriber API request.
 	//
 	// This member is required.
 	Id *string
@@ -40,7 +41,7 @@ type GetSubscriberInput struct {
 
 type GetSubscriberOutput struct {
 
-	// Subscription information for the specified subscription ID
+	// The subscription information for the specified subscription ID.
 	Subscriber *types.SubscriberResource
 
 	// Metadata pertaining to the operation's result.

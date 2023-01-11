@@ -13,7 +13,13 @@ import (
 )
 
 // Lists the set of CA certificates provided by Amazon RDS for this Amazon Web
-// Services account.
+// Services account. For more information, see Using SSL/TLS to encrypt a
+// connection to a DB instance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+// cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+// in the Amazon Aurora User Guide.
 func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCertificatesInput, optFns ...func(*Options)) (*DescribeCertificatesOutput, error) {
 	if params == nil {
 		params = &DescribeCertificatesInput{}

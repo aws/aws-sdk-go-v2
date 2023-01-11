@@ -1,3 +1,7 @@
+# v1.24.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.23.0 (2022-12-30)
 
 * **Feature**: Extend response headers policy to support removing headers from viewer responses

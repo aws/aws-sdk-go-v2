@@ -188,7 +188,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -508,9 +508,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -521,9 +521,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -534,9 +534,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -547,9 +547,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -560,9 +560,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -573,9 +573,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -586,9 +586,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -599,9 +599,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -612,9 +612,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -625,9 +625,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -638,9 +638,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -651,9 +651,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -664,9 +664,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -677,9 +677,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -690,9 +690,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -703,9 +703,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -716,9 +716,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -729,9 +729,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -742,9 +742,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -755,9 +755,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -768,9 +768,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -780,9 +780,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -792,9 +792,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1173,7 +1173,13 @@
                 "RuntimeEnvironmentVariables": {
                     "target": "com.amazonaws.apprunner#RuntimeEnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of\n        <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.</p>"
+                        "smithy.api#documentation": "<p>The environment variables that are available to your running App Runner service. An array of key-value pairs.</p>"
+                    }
+                },
+                "RuntimeEnvironmentSecrets": {
+                    "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecrets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul> \n         </note>"
                     }
                 }
             },
@@ -2773,7 +2779,7 @@
                 "RuntimeEnvironmentVariables": {
                     "target": "com.amazonaws.apprunner#RuntimeEnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p>Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code>\n      are reserved for system use and aren't valid.</p>"
+                        "smithy.api#documentation": "<p>Environment variables that are available to your running App Runner service. An array of key-value pairs.</p>"
                     }
                 },
                 "StartCommand": {
@@ -2786,6 +2792,12 @@
                     "target": "com.amazonaws.apprunner#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The port that your application listens to in the container.</p>\n         <p>Default: <code>8080</code>\n         </p>"
+                    }
+                },
+                "RuntimeEnvironmentSecrets": {
+                    "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecrets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul> \n         </note>"
                     }
                 }
             },
@@ -4042,6 +4054,35 @@
                         "smithy.api#enumValue": "RUBY_31"
                     }
                 }
+            }
+        },
+        "com.amazonaws.apprunner#RuntimeEnvironmentSecrets": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecretsName"
+            },
+            "value": {
+                "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecretsValue"
+            }
+        },
+        "com.amazonaws.apprunner#RuntimeEnvironmentSecretsName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.apprunner#RuntimeEnvironmentSecretsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.apprunner#RuntimeEnvironmentVariables": {

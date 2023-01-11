@@ -11,6 +11,8 @@ import (
 type ArgumentException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *ArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ArgumentException) ErrorCode() string             { return "ArgumentException" }
+func (e *ArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested object could not be deleted.
 type CannotDeleteException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *CannotDeleteException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CannotDeleteException) ErrorCode() string             { return "CannotDeleteException" }
+func (e *CannotDeleteException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CannotDeleteException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An entity with the same name already exists.
 type IdempotencyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,7 +77,12 @@ func (e *IdempotencyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IdempotencyException) ErrorCode() string             { return "IdempotencyException" }
+func (e *IdempotencyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IdempotencyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal exception was raised in the service. Contact
@@ -69,6 +90,8 @@ func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // you see this error.
 type InternalServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -82,13 +105,20 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // There was an error with the update request, or you do not have sufficient
 // permissions to update this VPC endpoint configuration.
 type InvalidOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -102,12 +132,19 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
+func (e *InvalidOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A limit was exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -121,13 +158,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception gets thrown when a user is not eligible to perform the specified
 // transaction.
 type NotEligibleException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -141,12 +185,19 @@ func (e *NotEligibleException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotEligibleException) ErrorCode() string             { return "NotEligibleException" }
+func (e *NotEligibleException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotEligibleException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotEligibleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified entity was not found.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -160,12 +211,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a problem with the service account.
 type ServiceAccountException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -179,12 +237,19 @@ func (e *ServiceAccountException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceAccountException) ErrorCode() string             { return "ServiceAccountException" }
+func (e *ServiceAccountException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceAccountException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation was not successful. Try again.
 type TagOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -200,13 +265,20 @@ func (e *TagOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagOperationException) ErrorCode() string             { return "TagOperationException" }
+func (e *TagOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TagOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request doesn't comply with the AWS Identity and Access Management (IAM) tag
 // policy. Correct your request and then retry it.
 type TagPolicyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -222,13 +294,20 @@ func (e *TagPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagPolicyException) ErrorCode() string             { return "TagPolicyException" }
+func (e *TagPolicyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TagPolicyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The list of tags on the repository is over the limit. The maximum number of tags
 // that can be applied to a repository is 50.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -244,5 +323,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

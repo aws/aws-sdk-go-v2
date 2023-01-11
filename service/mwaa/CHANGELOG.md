@@ -1,3 +1,8 @@
+# v1.14.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* **Documentation**: MWAA supports Apache Airflow version 2.4.3.
+
 # v1.13.14 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

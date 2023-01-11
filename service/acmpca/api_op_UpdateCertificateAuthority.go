@@ -14,12 +14,12 @@ import (
 // Updates the status or configuration of a private certificate authority (CA).
 // Your private CA must be in the ACTIVE or DISABLED state before you can update
 // it. You can disable a private CA that is in the ACTIVE state or make a CA that
-// is in the DISABLED state active again. Both PCA and the IAM principal must have
-// permission to write to the S3 bucket that you specify. If the IAM principal
-// making the call does not have permission to write to the bucket, then an
-// exception is thrown. For more information, see Access policies for CRLs in
-// Amazon S3
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies).
+// is in the DISABLED state active again. Both Amazon Web Services Private CA and
+// the IAM principal must have permission to write to the S3 bucket that you
+// specify. If the IAM principal making the call does not have permission to write
+// to the bucket, then an exception is thrown. For more information, see Access
+// policies for CRLs in Amazon S3
+// (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies).
 func (c *Client) UpdateCertificateAuthority(ctx context.Context, params *UpdateCertificateAuthorityInput, optFns ...func(*Options)) (*UpdateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateAuthorityInput{}
@@ -48,10 +48,28 @@ type UpdateCertificateAuthorityInput struct {
 	// support, to enable a certificate revocation list (CRL), to enable both, or to
 	// enable neither. If this parameter is not supplied, existing capibilites remain
 	// unchanged. For more information, see the OcspConfiguration
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html)
 	// and CrlConfiguration
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html)
-	// types.
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html)
+	// types. The following requirements apply to revocation configurations.
+	//
+	// * A
+	// configuration disabling CRLs or OCSP must contain only the Enabled=False
+	// parameter, and will fail if other parameters such as CustomCname or
+	// ExpirationInDays are included.
+	//
+	// * In a CRL configuration, the S3BucketName
+	// parameter must conform to Amazon S3 bucket naming rules
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
+	//
+	// *
+	// A configuration containing a custom Canonical Name (CNAME) parameter for CRLs or
+	// OCSP must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt) restrictions
+	// on the use of special characters in a CNAME.
+	//
+	// * In a CRL or OCSP configuration,
+	// the value of a CNAME parameter must not include a protocol prefix such as
+	// "http://" or "https://".
 	RevocationConfiguration *types.RevocationConfiguration
 
 	// Status of your private CA.

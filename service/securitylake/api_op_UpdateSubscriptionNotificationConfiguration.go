@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new subscription notification or add the existing subscription
+// Creates a new subscription notification or adds the existing subscription
 // notification setting for the specified subscription ID.
 func (c *Client) UpdateSubscriptionNotificationConfiguration(ctx context.Context, params *UpdateSubscriptionNotificationConfigurationInput, optFns ...func(*Options)) (*UpdateSubscriptionNotificationConfigurationOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ type UpdateSubscriptionNotificationConfigurationInput struct {
 	SubscriptionId *string
 
 	// Create a new subscription notification for the specified subscription ID in
-	// Security Lake.
+	// Amazon Security Lake.
 	CreateSqs *bool
 
 	// The key name for the subscription notification.
@@ -59,7 +59,7 @@ type UpdateSubscriptionNotificationConfigurationInput struct {
 
 type UpdateSubscriptionNotificationConfigurationOutput struct {
 
-	// Returns the Amazon resource name (ARN) of the queue.
+	// Returns the ARN of the queue.
 	QueueArn *string
 
 	// Metadata pertaining to the operation's result.

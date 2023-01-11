@@ -46,31 +46,29 @@ type StartExportTaskInput struct {
 	// The ID of the Amazon Web Services KMS key to use to encrypt the snapshot
 	// exported to Amazon S3. The Amazon Web Services KMS key identifier is the key
 	// ARN, key ID, alias ARN, or alias name for the KMS key. The caller of this
-	// operation must be authorized to execute the following operations. These can be
-	// set in the Amazon Web Services KMS key policy:
+	// operation must be authorized to run the following operations. These can be set
+	// in the Amazon Web Services KMS key policy:
 	//
-	// * GrantOperation.Encrypt
+	// * kms:Encrypt
 	//
-	// *
-	// GrantOperation.Decrypt
-	//
-	// * GrantOperation.GenerateDataKey
+	// * kms:Decrypt
 	//
 	// *
-	// GrantOperation.GenerateDataKeyWithoutPlaintext
+	// kms:GenerateDataKey
+	//
+	// * kms:GenerateDataKeyWithoutPlaintext
 	//
 	// *
-	// GrantOperation.ReEncryptFrom
+	// kms:ReEncryptFrom
 	//
-	// * GrantOperation.ReEncryptTo
+	// * kms:ReEncryptTo
+	//
+	// * kms:CreateGrant
+	//
+	// * kms:DescribeKey
 	//
 	// *
-	// GrantOperation.CreateGrant
-	//
-	// * GrantOperation.DescribeKey
-	//
-	// *
-	// GrantOperation.RetireGrant
+	// kms:RetireGrant
 	//
 	// This member is required.
 	KmsKeyId *string

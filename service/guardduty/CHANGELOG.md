@@ -1,3 +1,7 @@
+# v1.17.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.16.6 (2022-12-16)
 
 * **Documentation**: This release provides the valid characters for the Description and Name field.

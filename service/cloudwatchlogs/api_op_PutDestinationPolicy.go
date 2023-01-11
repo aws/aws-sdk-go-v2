@@ -14,10 +14,7 @@ import (
 // access policy is an IAM policy document
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html) that
 // is used to authorize claims to register a subscription filter against a given
-// destination. If multiple Amazon Web Services accounts are sending logs to this
-// destination, each sender account must be listed separately in the policy. The
-// policy does not support specifying * as the Principal or the use of the
-// aws:PrincipalOrgId global key.
+// destination.
 func (c *Client) PutDestinationPolicy(ctx context.Context, params *PutDestinationPolicyInput, optFns ...func(*Options)) (*PutDestinationPolicyOutput, error) {
 	if params == nil {
 		params = &PutDestinationPolicyInput{}

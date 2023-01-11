@@ -54,7 +54,7 @@ type GetEvidenceInput struct {
 
 type GetEvidenceOutput struct {
 
-	// The evidence that the GetEvidenceResponse API returned.
+	// The evidence that the GetEvidence API returned.
 	Evidence *types.Evidence
 
 	// Metadata pertaining to the operation's result.

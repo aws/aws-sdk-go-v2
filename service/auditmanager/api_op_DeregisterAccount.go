@@ -11,45 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters an account in Audit Manager. When you deregister your account from
-// Audit Manager, your data isn’t deleted. If you want to delete your resource
-// data, you must perform that task separately before you deregister your account.
-// Either, you can do this in the Audit Manager console. Or, you can use one of the
-// delete API operations that are provided by Audit Manager. To delete your Audit
-// Manager resource data, see the following instructions:
-//
-// * DeleteAssessment
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html)
-// (see also: Deleting an assessment
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html)
-// in the Audit Manager User Guide)
-//
-// * DeleteAssessmentFramework
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html)
-// (see also: Deleting a custom framework
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html)
-// in the Audit Manager User Guide)
-//
-// * DeleteAssessmentFrameworkShare
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html)
-// (see also: Deleting a share request
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html)
-// in the Audit Manager User Guide)
-//
-// * DeleteAssessmentReport
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html)
-// (see also: Deleting an assessment report
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps)
-// in the Audit Manager User Guide)
-//
-// * DeleteControl
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html)
-// (see also: Deleting a custom control
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html)
-// in the Audit Manager User Guide)
-//
-// At this time, Audit Manager doesn't provide an
-// option to delete evidence. All available delete operations are listed above.
+// Deregisters an account in Audit Manager. Before you deregister, you can use the
+// UpdateSettings
+// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_UpdateSettings.html)
+// API operation to set your preferred data retention policy. By default, Audit
+// Manager retains your data. If you want to delete your data, you can use the
+// DeregistrationPolicy attribute to request the deletion of your data. For more
+// information about data retention, see Data Protection
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html)
+// in the Audit Manager User Guide.
 func (c *Client) DeregisterAccount(ctx context.Context, params *DeregisterAccountInput, optFns ...func(*Options)) (*DeregisterAccountOutput, error) {
 	if params == nil {
 		params = &DeregisterAccountInput{}

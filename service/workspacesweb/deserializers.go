@@ -8700,6 +8700,15 @@ func awsRestjson1_deserializeDocumentPortal(v **types.Portal, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "authenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
 		case "browserSettingsArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8889,6 +8898,15 @@ func awsRestjson1_deserializeDocumentPortalSummary(v **types.PortalSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "authenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
 		case "browserSettingsArn":
 			if value != nil {
 				jtv, ok := value.(string)

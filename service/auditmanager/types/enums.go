@@ -207,6 +207,24 @@ func (DelegationStatus) Values() []DelegationStatus {
 	}
 }
 
+type DeleteResources string
+
+// Enum values for DeleteResources
+const (
+	DeleteResourcesAll     DeleteResources = "ALL"
+	DeleteResourcesDefault DeleteResources = "DEFAULT"
+)
+
+// Values returns all known values for DeleteResources. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteResources) Values() []DeleteResources {
+	return []DeleteResources{
+		"ALL",
+		"DEFAULT",
+	}
+}
+
 type EvidenceFinderBackfillStatus string
 
 // Enum values for EvidenceFinderBackfillStatus
@@ -336,6 +354,7 @@ const (
 	SettingAttributeDefaultAssessmentReportsDestination SettingAttribute = "DEFAULT_ASSESSMENT_REPORTS_DESTINATION"
 	SettingAttributeDefaultProcessOwners                SettingAttribute = "DEFAULT_PROCESS_OWNERS"
 	SettingAttributeEvidenceFinderEnablement            SettingAttribute = "EVIDENCE_FINDER_ENABLEMENT"
+	SettingAttributeDeregistrationPolicy                SettingAttribute = "DEREGISTRATION_POLICY"
 )
 
 // Values returns all known values for SettingAttribute. Note that this can be
@@ -349,6 +368,7 @@ func (SettingAttribute) Values() []SettingAttribute {
 		"DEFAULT_ASSESSMENT_REPORTS_DESTINATION",
 		"DEFAULT_PROCESS_OWNERS",
 		"EVIDENCE_FINDER_ENABLEMENT",
+		"DEREGISTRATION_POLICY",
 	}
 }
 

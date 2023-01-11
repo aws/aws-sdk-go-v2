@@ -120,8 +120,14 @@ type ModifyDBInstanceInput struct {
 	// PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
 	BackupRetentionPeriod *int32
 
-	// Specifies the certificate to associate with the DB instance. This setting
-	// doesn't apply to RDS Custom.
+	// Specifies the CA certificate identifier to use for the DB instance’s server
+	// certificate. This setting doesn't apply to RDS Custom. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
 	CACertificateIdentifier *string
 
 	// A value that indicates whether the DB instance is restarted when you rotate your

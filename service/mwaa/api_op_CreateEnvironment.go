@@ -81,9 +81,9 @@ type CreateEnvironmentInput struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version for your environment. If no value is specified, it
-	// defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2. To
-	// learn more, see Apache Airflow versions on Amazon Managed Workflows for Apache
-	// Airflow (MWAA)
+	// defaults to the latest version. Valid values: 1.10.12, 2.0.2, 2.2.2, and 2.4.3.
+	// For more information, see Apache Airflow versions on Amazon Managed Workflows
+	// for Apache Airflow (MWAA)
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html).
 	AirflowVersion *string
 

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -34,7 +34,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10240
+                    "max": 25600
                 }
             }
         },
@@ -60,7 +60,13 @@
             }
         },
         "com.amazonaws.ecrpublic#Arn": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.ecrpublic#AuthorizationData": {
             "type": "structure",
@@ -68,7 +74,7 @@
                 "authorizationToken": {
                     "target": "com.amazonaws.ecrpublic#Base64",
                     "traits": {
-                        "smithy.api#documentation": "<p>A base64-encoded string that contains authorization data for a public Amazon ECR registry.\n         When the string is decoded, it is presented in the format <code>user:password</code> for\n         public registry authentication using <code>docker login</code>.</p>"
+                        "smithy.api#documentation": "<p>A base64-encoded string that contains authorization data for a public Amazon ECR registry.\n         When the string is decoded, it's presented in the format <code>user:password</code> for\n         public registry authentication using <code>docker login</code>.</p>"
                     }
                 },
                 "expiresAt": {
@@ -108,10 +114,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Checks the availability of one or more image layers within a repository in a public\n         registry. When an image is pushed to a repository, each image layer is checked to verify if\n         it has been uploaded before. If it has been uploaded, then the image layer is\n         skipped.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Checks the availability of one or more image layers that are within a repository in a\n         public registry. When an image is pushed to a repository, each image layer is checked to\n         verify if it has been uploaded before. If it has been uploaded, then the image layer is\n         skipped.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecrpublic#BatchCheckLayerAvailabilityRequest": {
@@ -120,13 +129,13 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the image layers to\n         check. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, associated with the public registry that\n         contains the image layers to check. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository that is associated with the image layers to check.</p>",
+                        "smithy.api#documentation": "<p>The name of the repository that's associated with the image layers to check.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -145,7 +154,7 @@
                 "layers": {
                     "target": "com.amazonaws.ecrpublic#LayerList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of image layer objects corresponding to the image layer references in the\n         request.</p>"
+                        "smithy.api#documentation": "<p>A list of image layer objects that correspond to the image layer references in the\n         request.</p>"
                     }
                 },
                 "failures": {
@@ -173,10 +182,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a list of specified images within a repository in a public registry. Images are\n         specified with either an <code>imageTag</code> or <code>imageDigest</code>.</p>\n         <p>You can remove a tag from an image by specifying the image's tag in your request. When\n         you remove the last tag from an image, the image is deleted from your repository.</p>\n         <p>You can completely delete an image (and all of its tags) by specifying the image's\n         digest in your request.</p>"
+                "smithy.api#documentation": "<p>Deletes a list of specified images that are within a repository in a public registry.\n         Images are specified with either an <code>imageTag</code> or\n         <code>imageDigest</code>.</p>\n         <p>You can remove a tag from an image by specifying the image's tag in your request. When\n         you remove the last tag from an image, the image is deleted from your repository.</p>\n         <p>You can completely delete an image (and all of its tags) by specifying the digest of the\n         image in your request.</p>"
             }
         },
         "com.amazonaws.ecrpublic#BatchDeleteImageRequest": {
@@ -185,7 +197,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the image to delete.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the registry that contains the image to\n         delete. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -283,7 +295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Informs Amazon ECR that the image layer upload has completed for a specified public registry,\n         repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of\n         the image layer for data validation purposes.</p>\n         <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image\n         layer to verify that the upload has completed.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Informs Amazon ECR that the image layer upload is complete for a specified public registry,\n         repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of\n         the image layer for data validation purposes.</p>\n         <p>When an image is pushed, the CompleteLayerUpload API is called once for each new image\n         layer to verify that the upload is complete.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecrpublic#CompleteLayerUploadRequest": {
@@ -292,7 +304,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which to upload layers.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, associated with the registry where layers are\n         uploaded. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -324,19 +336,19 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public registry ID associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The public registry ID that's associated with the request.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
                     }
                 },
                 "uploadId": {
                     "target": "com.amazonaws.ecrpublic#UploadId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upload ID associated with the layer.</p>"
+                        "smithy.api#documentation": "<p>The upload ID that's associated with the layer.</p>"
                     }
                 },
                 "layerDigest": {
@@ -373,6 +385,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -385,7 +400,7 @@
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name to use for the repository. This appears publicly in the Amazon ECR Public Gallery.\n         The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it\n         can be prepended with a namespace to group the repository into a category (such as\n            <code>project-a/nginx-web-app</code>).</p>",
+                        "smithy.api#documentation": "<p>The name to use for the repository. This appears publicly in the Amazon ECR Public Gallery.\n         The repository name can be specified on its own (for example <code>nginx-web-app</code>) or\n         prepended with a namespace to group the repository into a category (for example\n            <code>project-a/nginx-web-app</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -398,7 +413,7 @@
                 "tags": {
                     "target": "com.amazonaws.ecrpublic#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata that you apply to the repository to help you categorize and organize them.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>The metadata that you apply to each repository to help categorize and organize your\n         repositories. Each tag consists of a key and an optional value. You define both of them.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
                     }
                 }
             }
@@ -421,7 +436,10 @@
             "type": "timestamp"
         },
         "com.amazonaws.ecrpublic#DefaultRegistryAliasFlag": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.ecrpublic#DeleteRepository": {
             "type": "operation",
@@ -443,10 +461,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a repository in a public registry. If the repository contains images, you must\n         either delete all images in the repository or use the <code>force</code> option which\n         deletes all images on your behalf before deleting the repository.</p>"
+                "smithy.api#documentation": "<p>Deletes a repository in a public registry. If the repository contains images, you must\n         either manually delete all images in the repository or use the <code>force</code> option.\n         This option deletes all images on your behalf before deleting the repository.</p>"
             }
         },
         "com.amazonaws.ecrpublic#DeleteRepositoryPolicy": {
@@ -469,10 +490,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the repository policy associated with the specified repository.</p>"
+                "smithy.api#documentation": "<p>Deletes the repository policy that's associated with the specified repository.</p>"
             }
         },
         "com.amazonaws.ecrpublic#DeleteRepositoryPolicyRequest": {
@@ -481,13 +505,13 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the repository\n         policy to delete. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry that contains the\n         repository policy to delete. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository that is associated with the repository policy to\n         delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the repository that's associated with the repository policy to\n         delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -499,13 +523,13 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The registry ID that's associated with the request.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
                     }
                 },
                 "policyText": {
@@ -522,7 +546,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the repository to\n         delete. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry that contains the\n         repository to delete. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -535,7 +559,8 @@
                 "force": {
                     "target": "com.amazonaws.ecrpublic#ForceFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p> If a repository contains images, forces the deletion.</p>"
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p> The force option can be used to delete a repository that contains images. If the force\n         option is not used, the repository must be empty prior to deletion.</p>"
                     }
                 }
             }
@@ -568,6 +593,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -586,7 +614,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the repository in\n         which to describe images. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry that contains the\n         repository where images are described. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -599,13 +627,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>DescribeImageTags</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. This value is\n            <code>null</code> when there are no more results to return. This option cannot be used\n         when you specify images with <code>imageIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a previous paginated\n            <code>DescribeImageTags</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. If there are no more\n         results to return, this value is <code>null</code>. If you specify images with\n            <code>imageIds</code>, you can't use this option.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.ecrpublic#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of repository results returned by <code>DescribeImageTags</code> in\n         paginated output. When this parameter is used, <code>DescribeImageTags</code> only returns\n            <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n         response element. The remaining results of the initial request can be seen by sending\n         another <code>DescribeImageTags</code> request with the returned <code>nextToken</code>\n         value. This value can be between 1 and 1000. If this parameter\n         is not used, then <code>DescribeImageTags</code> returns up to 100\n         results and a <code>nextToken</code> value, if applicable. This option cannot be used when\n         you specify images with <code>imageIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of repository results that's returned by\n            <code>DescribeImageTags</code> in paginated output. When this parameter is used,\n            <code>DescribeImageTags</code> only returns <code>maxResults</code> results in a single\n         page along with a <code>nextToken</code> response element. You can see the remaining\n         results of the initial request by sending another <code>DescribeImageTags</code> request\n         with the returned <code>nextToken</code> value. This value can be between 1\n         and 1000. If this parameter isn't used, then <code>DescribeImageTags</code>\n         returns up to 100 results and a <code>nextToken</code> value, if\n         applicable. If you specify images with <code>imageIds</code>, you can't use this\n         option.</p>"
                     }
                 }
             }
@@ -622,7 +650,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>DescribeImageTags</code>\n         request. When the results of a <code>DescribeImageTags</code> request exceed\n            <code>maxResults</code>, this value can be used to retrieve the next page of results.\n         This value is <code>null</code> when there are no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>DescribeImageTags</code>\n         request. When the results of a <code>DescribeImageTags</code> request exceed\n            <code>maxResults</code>, you can use this value to retrieve the next page of results. If\n         there are no more results to return, this value is <code>null</code>.</p>"
                     }
                 }
             }
@@ -647,10 +675,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about the images in a repository in a public registry.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers before\n            pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n            command shows the uncompressed image size, so it may return a larger image size than the\n            image sizes returned by <a>DescribeImages</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns metadata that's related to the images in a repository in a public\n         registry.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers before\n            pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n            command shows the uncompressed image size. Therefore, it might return a larger image\n            size than the image sizes that are returned by <a>DescribeImages</a>.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -665,7 +696,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the repository in\n         which to describe images. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry that contains the\n         repository where images are described. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -684,13 +715,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>DescribeImages</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. This value is\n            <code>null</code> when there are no more results to return. This option cannot be used\n         when you specify images with <code>imageIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a previous paginated\n            <code>DescribeImages</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. If there are no more\n         results to return, this value is <code>null</code>. If you specify images with\n            <code>imageIds</code>, you can't use this option.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.ecrpublic#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of repository results returned by <code>DescribeImages</code> in\n         paginated output. When this parameter is used, <code>DescribeImages</code> only returns\n            <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n         response element. The remaining results of the initial request can be seen by sending\n         another <code>DescribeImages</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 1000. If this parameter is not\n         used, then <code>DescribeImages</code> returns up to 100 results and a\n            <code>nextToken</code> value, if applicable. This option cannot be used when you specify\n         images with <code>imageIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of repository results that's returned by <code>DescribeImages</code>\n         in paginated output. When this parameter is used, <code>DescribeImages</code> only returns\n            <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n         response element. You can see the remaining results of the initial request by sending\n         another <code>DescribeImages</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 1000. If this parameter isn't\n         used, then <code>DescribeImages</code> returns up to 100 results and a\n            <code>nextToken</code> value, if applicable. If you specify images with\n            <code>imageIds</code>, you can't use this option.</p>"
                     }
                 }
             }
@@ -707,7 +738,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>DescribeImages</code>\n         request. When the results of a <code>DescribeImages</code> request exceed\n            <code>maxResults</code>, this value can be used to retrieve the next page of results.\n         This value is <code>null</code> when there are no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>DescribeImages</code>\n         request. When the results of a <code>DescribeImages</code> request exceed\n            <code>maxResults</code>, you can use this value to retrieve the next page of results. If\n         there are no more results to return, this value is <code>null</code>.</p>"
                     }
                 }
             }
@@ -747,13 +778,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>DescribeRegistries</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. This value is\n            <code>null</code> when there are no more results to return.</p> \n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a previous paginated\n            <code>DescribeRegistries</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. If there are no more\n         results to return, this value is <code>null</code>.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.ecrpublic#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of repository results returned by <code>DescribeRegistries</code> in\n         paginated output. When this parameter is used, <code>DescribeRegistries</code> only returns\n            <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n         response element. The remaining results of the initial request can be seen by sending\n         another <code>DescribeRegistries</code> request with the returned <code>nextToken</code>\n         value. This value can be between 1 and 1000. If this parameter\n         is not used, then <code>DescribeRegistries</code> returns up to 100\n         results and a <code>nextToken</code> value, if applicable.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of repository results that's returned by\n            <code>DescribeRegistries</code> in paginated output. When this parameter is used,\n            <code>DescribeRegistries</code> only returns <code>maxResults</code> results in a single\n         page along with a <code>nextToken</code> response element. The remaining results of the\n         initial request can be seen by sending another <code>DescribeRegistries</code> request with\n         the returned <code>nextToken</code> value. This value can be between 1 and\n         1000. If this parameter isn't used, then <code>DescribeRegistries</code>\n         returns up to 100 results and a <code>nextToken</code> value, if\n         applicable.</p>"
                     }
                 }
             }
@@ -764,14 +795,14 @@
                 "registries": {
                     "target": "com.amazonaws.ecrpublic#RegistryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing the details for a public registry.</p>",
+                        "smithy.api#documentation": "<p>An object that contains the details for a public registry.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n            <code>DescribeRepositories</code> request. When the results of a\n            <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can\n         be used to retrieve the next page of results. This value is <code>null</code> when there\n         are no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n            <code>DescribeRepositories</code> request. If the results of a\n            <code>DescribeRepositories</code> request exceed <code>maxResults</code>, you can use\n         this value to retrieve the next page of results. If there are no more results, this value\n         is <code>null</code>.</p>"
                     }
                 }
             }
@@ -793,10 +824,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes repositories in a public registry.</p>",
+                "smithy.api#documentation": "<p>Describes repositories that are in a public registry.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -811,7 +845,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repositories to be\n         described. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the registry that contains the repositories\n         to be described. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryNames": {
@@ -823,13 +857,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. This value is\n            <code>null</code> when there are no more results to return. This option cannot be used\n         when you specify repositories with <code>repositoryNames</code>.</p> \n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a previous paginated\n            <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value. If there are no more\n         results to return, this value is <code>null</code>. If you specify repositories with\n            <code>repositoryNames</code>, you can't use this option.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.ecrpublic#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of repository results returned by <code>DescribeRepositories</code>\n         in paginated output. When this parameter is used, <code>DescribeRepositories</code> only\n         returns <code>maxResults</code> results in a single page along with a\n            <code>nextToken</code> response element. The remaining results of the initial request\n         can be seen by sending another <code>DescribeRepositories</code> request with the returned\n            <code>nextToken</code> value. This value can be between 1 and\n         1000. If this parameter is not used, then <code>DescribeRepositories</code>\n         returns up to 100 results and a <code>nextToken</code> value, if\n         applicable. This option cannot be used when you specify repositories with\n            <code>repositoryNames</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of repository results that's returned by\n            <code>DescribeRepositories</code> in paginated output. When this parameter is used,\n            <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a\n         single page along with a <code>nextToken</code> response element. You can see the remaining\n         results of the initial request by sending another <code>DescribeRepositories</code> request\n         with the returned <code>nextToken</code> value. This value can be between 1\n         and 1000. If this parameter isn't used, then <code>DescribeRepositories</code>\n         returns up to 100 results and a <code>nextToken</code> value, if\n         applicable. If you specify repositories with <code>repositoryNames</code>, you can't use\n         this option.</p>"
                     }
                 }
             }
@@ -846,7 +880,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.ecrpublic#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n            <code>DescribeRepositories</code> request. When the results of a\n            <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can\n         be used to retrieve the next page of results. This value is <code>null</code> when there\n         are no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n            <code>DescribeRepositories</code> request. When the results of a\n            <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can\n         be used to retrieve the next page of results. If there are no more results to return, this\n         value is <code>null</code>.</p>"
                     }
                 }
             }
@@ -859,7 +893,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified layer upload does not contain any layer parts.</p>",
+                "smithy.api#documentation": "<p>The specified layer upload doesn't contain any layer parts.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -870,7 +904,10 @@
             "type": "timestamp"
         },
         "com.amazonaws.ecrpublic#ForceFlag": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.ecrpublic#GetAuthorizationToken": {
             "type": "operation",
@@ -886,10 +923,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an authorization token. An authorization token represents your IAM\n         authentication credentials and can be used to access any Amazon ECR registry that your IAM\n         principal has access to. The authorization token is valid for 12 hours. This API requires\n         the <code>ecr-public:GetAuthorizationToken</code> and\n            <code>sts:GetServiceBearerToken</code> permissions.</p>"
+                "smithy.api#documentation": "<p>Retrieves an authorization token. An authorization token represents your IAM\n         authentication credentials. You can use it to access any Amazon ECR registry that your IAM\n         principal has access to. The authorization token is valid for 12 hours. This API requires\n         the <code>ecr-public:GetAuthorizationToken</code> and\n            <code>sts:GetServiceBearerToken</code> permissions.</p>"
             }
         },
         "com.amazonaws.ecrpublic#GetAuthorizationTokenRequest": {
@@ -956,10 +996,16 @@
                     "target": "com.amazonaws.ecrpublic#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.ecrpublic#RepositoryCatalogDataNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -972,7 +1018,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repositories to be\n         described. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the registry that contains the repositories\n         to be described. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1015,6 +1061,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -1027,7 +1076,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the repository.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry that contains the\n         repository. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1045,19 +1094,19 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The registry ID that's associated with the request.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
                     }
                 },
                 "policyText": {
                     "target": "com.amazonaws.ecrpublic#RepositoryPolicyText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository policy text associated with the repository. The policy text will be in\n         JSON format.</p>"
+                        "smithy.api#documentation": "<p>The repository policy text that's associated with the repository. The policy text will\n         be in JSON format.</p>"
                     }
                 }
             }
@@ -1068,25 +1117,25 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry containing the image.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the registry containing the image.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository associated with the image.</p>"
+                        "smithy.api#documentation": "<p>The name of the repository that's associated with the image.</p>"
                     }
                 },
                 "imageId": {
                     "target": "com.amazonaws.ecrpublic#ImageIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing the image tag and image digest associated with an image.</p>"
+                        "smithy.api#documentation": "<p>An object that contains the image tag and image digest associated with an image.</p>"
                     }
                 },
                 "imageManifest": {
                     "target": "com.amazonaws.ecrpublic#ImageManifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image manifest associated with the image.</p>"
+                        "smithy.api#documentation": "<p>The image manifest that's associated with the image.</p>"
                     }
                 },
                 "imageManifestMediaType": {
@@ -1097,7 +1146,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing an Amazon ECR image.</p>"
+                "smithy.api#documentation": "<p>An object that represents an Amazon ECR image.</p>"
             }
         },
         "com.amazonaws.ecrpublic#ImageAlreadyExistsException": {
@@ -1118,13 +1167,13 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry to which this image\n         belongs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry where this image\n         belongs.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository to which this image belongs.</p>"
+                        "smithy.api#documentation": "<p>The name of the repository where this image belongs.</p>"
                     }
                 },
                 "imageDigest": {
@@ -1136,19 +1185,19 @@
                 "imageTags": {
                     "target": "com.amazonaws.ecrpublic#ImageTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags associated with this image.</p>"
+                        "smithy.api#documentation": "<p>The list of tags that's associated with this image.</p>"
                     }
                 },
                 "imageSizeInBytes": {
                     "target": "com.amazonaws.ecrpublic#ImageSizeInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this will be the max size of all manifests in the\n         list.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers before\n            pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n            command shows the uncompressed image size, so it may return a larger image size than the\n            image sizes returned by <a>DescribeImages</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this is the max size of all manifests in the\n         list.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers before\n            pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n            command shows the uncompressed image size, so it might return a larger image size than\n            the image sizes that are returned by <a>DescribeImages</a>.</p>\n         </note>"
                     }
                 },
                 "imagePushedAt": {
                     "target": "com.amazonaws.ecrpublic#PushTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, at which the current\n         image was pushed to the repository. </p>"
+                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, that the current image\n         was pushed to the repository at. </p>"
                     }
                 },
                 "imageManifestMediaType": {
@@ -1165,7 +1214,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that describes an image returned by a <a>DescribeImages</a>\n         operation.</p>"
+                "smithy.api#documentation": "<p>An object that describes an image that's returned by a <a>DescribeImages</a>\n         operation.</p>"
             }
         },
         "com.amazonaws.ecrpublic#ImageDetailList": {
@@ -1185,7 +1234,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified image digest does not match the digest that Amazon ECR calculated for the\n         image.</p>",
+                "smithy.api#documentation": "<p>The specified image digest doesn't match the digest that Amazon ECR calculated for the\n         image.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1195,13 +1244,13 @@
                 "imageId": {
                     "target": "com.amazonaws.ecrpublic#ImageIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image ID associated with the failure.</p>"
+                        "smithy.api#documentation": "<p>The image ID that's associated with the failure.</p>"
                     }
                 },
                 "failureCode": {
                     "target": "com.amazonaws.ecrpublic#ImageFailureCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code associated with the failure.</p>"
+                        "smithy.api#documentation": "<p>The code that's associated with the failure.</p>"
                     }
                 },
                 "failureReason": {
@@ -1212,42 +1261,54 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing an Amazon ECR image failure.</p>"
+                "smithy.api#documentation": "<p>An object that represents an Amazon ECR image failure.</p>"
             }
         },
         "com.amazonaws.ecrpublic#ImageFailureCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InvalidImageDigest",
-                        "name": "InvalidImageDigest"
-                    },
-                    {
-                        "value": "InvalidImageTag",
-                        "name": "InvalidImageTag"
-                    },
-                    {
-                        "value": "ImageTagDoesNotMatchDigest",
-                        "name": "ImageTagDoesNotMatchDigest"
-                    },
-                    {
-                        "value": "ImageNotFound",
-                        "name": "ImageNotFound"
-                    },
-                    {
-                        "value": "MissingDigestAndTag",
-                        "name": "MissingDigestAndTag"
-                    },
-                    {
-                        "value": "ImageReferencedByManifestList",
-                        "name": "ImageReferencedByManifestList"
-                    },
-                    {
-                        "value": "KmsError",
-                        "name": "KmsError"
+            "type": "enum",
+            "members": {
+                "InvalidImageDigest": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidImageDigest"
                     }
-                ]
+                },
+                "InvalidImageTag": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidImageTag"
+                    }
+                },
+                "ImageTagDoesNotMatchDigest": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImageTagDoesNotMatchDigest"
+                    }
+                },
+                "ImageNotFound": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImageNotFound"
+                    }
+                },
+                "MissingDigestAndTag": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingDigestAndTag"
+                    }
+                },
+                "ImageReferencedByManifestList": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImageReferencedByManifestList"
+                    }
+                },
+                "KmsError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KmsError"
+                    }
+                }
             }
         },
         "com.amazonaws.ecrpublic#ImageFailureList": {
@@ -1271,7 +1332,7 @@
                 "imageTag": {
                     "target": "com.amazonaws.ecrpublic#ImageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag used for the image.</p>"
+                        "smithy.api#documentation": "<p>The tag that's used for the image.</p>"
                     }
                 }
             },
@@ -1308,15 +1369,12 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The image requested does not exist in the specified repository.</p>",
+                "smithy.api#documentation": "<p>The image requested doesn't exist in the specified repository.</p>",
                 "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ecrpublic#ImageSizeInBytes": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.ecrpublic#ImageTag": {
             "type": "string",
@@ -1345,13 +1403,13 @@
                 "imageTag": {
                     "target": "com.amazonaws.ecrpublic#ImageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag associated with the image.</p>"
+                        "smithy.api#documentation": "<p>The tag that's associated with the image.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.ecrpublic#CreationTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time stamp indicating when the image tag was created.</p>"
+                        "smithy.api#documentation": "<p>The time stamp that indicates when the image tag was created.</p>"
                     }
                 },
                 "imageDetail": {
@@ -1362,7 +1420,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing the image tag details for an image.</p>"
+                "smithy.api#documentation": "<p>An object that represents the image tag details for an image.</p>"
             }
         },
         "com.amazonaws.ecrpublic#ImageTagDetailList": {
@@ -1403,7 +1461,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Notifies Amazon ECR that you intend to upload an image layer.</p>\n         <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that\n         has not already been uploaded. Whether or not an image layer has been uploaded is\n         determined by the BatchCheckLayerAvailability API action.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Notifies Amazon ECR that you intend to upload an image layer.</p>\n         <p>When an image is pushed, the InitiateLayerUpload API is called once for each image layer\n         that hasn't already been uploaded. Whether an image layer uploads is determined by the\n         BatchCheckLayerAvailability API action.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecrpublic#InitiateLayerUploadRequest": {
@@ -1412,13 +1470,13 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which you intend to upload layers.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, that's associated with the registry to which\n         you intend to upload layers. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository to which you intend to upload layers.</p>",
+                        "smithy.api#documentation": "<p>The name of the repository that you want to upload layers to.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1449,7 +1507,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The layer digest calculation performed by Amazon ECR upon receipt of the image layer does not\n         match the digest specified.</p>",
+                "smithy.api#documentation": "<p>The layer digest calculation performed by Amazon ECR when the image layer doesn't match the\n         digest specified.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1459,7 +1517,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the layer part.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the layer part.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1471,7 +1529,7 @@
                 "uploadId": {
                     "target": "com.amazonaws.ecrpublic#UploadId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upload ID associated with the layer part.</p>"
+                        "smithy.api#documentation": "<p>The upload ID that's associated with the layer part.</p>"
                     }
                 },
                 "lastValidByteReceived": {
@@ -1485,7 +1543,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The layer part size is not valid, or the first byte specified is not consecutive to the\n         last byte of a previous layer part upload.</p>",
+                "smithy.api#documentation": "<p>The layer part size isn't valid, or the first byte specified isn't consecutive to the\n         last byte of a previous layer part upload.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1542,7 +1600,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing an Amazon ECR image layer.</p>"
+                "smithy.api#documentation": "<p>An object that represents an Amazon ECR image layer.</p>"
             }
         },
         "com.amazonaws.ecrpublic#LayerAlreadyExistsException": {
@@ -1558,24 +1616,26 @@
             }
         },
         "com.amazonaws.ecrpublic#LayerAvailability": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "UNAVAILABLE",
-                        "name": "UNAVAILABLE"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.ecrpublic#LayerDigest": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+$"
             }
         },
         "com.amazonaws.ecrpublic#LayerDigestList": {
@@ -1596,13 +1656,13 @@
                 "layerDigest": {
                     "target": "com.amazonaws.ecrpublic#BatchedOperationLayerDigest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer digest associated with the failure.</p>"
+                        "smithy.api#documentation": "<p>The layer digest that's associated with the failure.</p>"
                     }
                 },
                 "failureCode": {
                     "target": "com.amazonaws.ecrpublic#LayerFailureCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure code associated with the failure.</p>"
+                        "smithy.api#documentation": "<p>The failure code that's associated with the failure.</p>"
                     }
                 },
                 "failureReason": {
@@ -1613,22 +1673,24 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing an Amazon ECR image layer failure.</p>"
+                "smithy.api#documentation": "<p>An object that represents an Amazon ECR image layer failure.</p>"
             }
         },
         "com.amazonaws.ecrpublic#LayerFailureCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InvalidLayerDigest",
-                        "name": "InvalidLayerDigest"
-                    },
-                    {
-                        "value": "MissingLayerDigest",
-                        "name": "MissingLayerDigest"
+            "type": "enum",
+            "members": {
+                "InvalidLayerDigest": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidLayerDigest"
                     }
-                ]
+                },
+                "MissingLayerDigest": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingLayerDigest"
+                    }
+                }
             }
         },
         "com.amazonaws.ecrpublic#LayerFailureList": {
@@ -1668,10 +1730,7 @@
             }
         },
         "com.amazonaws.ecrpublic#LayerSizeInBytes": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.ecrpublic#LayersNotFoundException": {
             "type": "structure",
@@ -1681,7 +1740,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified layers could not be found, or the specified layer is not valid for this\n         repository.</p>",
+                "smithy.api#documentation": "<p>The specified layers can't be found, or the specified layer isn't valid for this\n         repository.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1693,7 +1752,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation did not succeed because it would have exceeded a service limit for your\n         account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html\">Amazon ECR Service Quotas</a> in the\n         Amazon Elastic Container Registry User Guide.</p>",
+                "smithy.api#documentation": "<p>The operation didn't succeed because it would have exceeded a service limit for your\n         account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html\">Amazon ECR Service Quotas</a> in the\n         Amazon Elastic Container Registry User Guide.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1714,6 +1773,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -1726,7 +1788,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ecrpublic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the\n         supported resource is an Amazon ECR Public repository.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the\n         supported resource is an Amazon ECR Public repository.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1753,15 +1815,11 @@
             }
         },
         "com.amazonaws.ecrpublic#MarketplaceCertified": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.ecrpublic#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -1798,14 +1856,16 @@
         "com.amazonaws.ecrpublic#PartSize": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
             }
         },
         "com.amazonaws.ecrpublic#PrimaryRegistryAliasFlag": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.ecrpublic#PushTimestamp": {
             "type": "timestamp"
@@ -1854,7 +1914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the image manifest and tags associated with an image.</p>\n         <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is\n         called once to create or update the image manifest and the tags associated with the\n         image.</p>\n      \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates the image manifest and tags that are associated with an image.</p>\n         <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is\n         called once to create or update the image manifest and the tags that are associated with\n         the image.</p>\n      \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecrpublic#PutImageRequest": {
@@ -1863,27 +1923,27 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the repository in\n         which to put the image. If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, that's associated with the public registry that\n         contains the repository where the image is put. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository in which to put the image.</p>",
+                        "smithy.api#documentation": "<p>The name of the repository where the image is put.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "imageManifest": {
                     "target": "com.amazonaws.ecrpublic#ImageManifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image manifest corresponding to the image to be uploaded.</p>",
+                        "smithy.api#documentation": "<p>The image manifest that corresponds to the image to be uploaded.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "imageManifestMediaType": {
                     "target": "com.amazonaws.ecrpublic#MediaType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media type of the image manifest. If you push an image manifest that does not\n         contain the <code>mediaType</code> field, you must specify the\n            <code>imageManifestMediaType</code> in the request.</p>"
+                        "smithy.api#documentation": "<p>The media type of the image manifest. If you push an image manifest that doesn't contain\n         the <code>mediaType</code> field, you must specify the <code>imageManifestMediaType</code>\n         in the request.</p>"
                     }
                 },
                 "imageTag": {
@@ -1895,7 +1955,7 @@
                 "imageDigest": {
                     "target": "com.amazonaws.ecrpublic#ImageDigest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image digest of the image manifest corresponding to the image.</p>"
+                        "smithy.api#documentation": "<p>The image digest of the image manifest that corresponds to the image.</p>"
                     }
                 }
             }
@@ -1931,7 +1991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create or updates the catalog data for a public registry.</p>"
+                "smithy.api#documentation": "<p>Create or update the catalog data for a public registry.</p>"
             }
         },
         "com.amazonaws.ecrpublic#PutRegistryCatalogDataRequest": {
@@ -1974,6 +2034,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -1986,7 +2049,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry the repository is in.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry the repository is in.\n         If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -2028,13 +2091,13 @@
                 "imageSizeInBytes": {
                     "target": "com.amazonaws.ecrpublic#ImageSizeInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this will be the max size of all manifests in the\n         list.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers before\n            pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n            command shows the uncompressed image size, so it may return a larger image size than the\n            image sizes returned by <a>DescribeImages</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The size, in bytes, of the image in the repository.</p>\n         <p>If the image is a manifest list, this is the max size of all manifests in the\n         list.</p>\n         <note>\n            <p>Beginning with Docker version 1.9, the Docker client compresses image layers before\n            pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n            command shows the uncompressed image size, so it might return a larger image size than\n            the image sizes that are returned by <a>DescribeImages</a>.</p>\n         </note>"
                     }
                 },
                 "imagePushedAt": {
                     "target": "com.amazonaws.ecrpublic#PushTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, at which the current\n         image tag was pushed to the repository.</p>"
+                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, which the current image\n         tag was pushed to the repository at.</p>"
                     }
                 },
                 "imageManifestMediaType": {
@@ -2051,7 +2114,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that describes the image tag details returned by a <a>DescribeImageTags</a> action.</p>"
+                "smithy.api#documentation": "<p>An object that describes the image tag details that are returned by a <a>DescribeImageTags</a> action.</p>"
             }
         },
         "com.amazonaws.ecrpublic#ReferencedImagesNotFoundException": {
@@ -2062,7 +2125,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The manifest list is referencing an image that does not exist.</p>",
+                "smithy.api#documentation": "<p>The manifest list is referencing an image that doesn't exist.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2072,7 +2135,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry. If you do not specify a registry, the default public registry is assumed.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the registry.\n         If you do not specify a registry, the default public registry is assumed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2093,14 +2156,14 @@
                 "verified": {
                     "target": "com.amazonaws.ecrpublic#RegistryVerified",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the account is verified. This indicates whether the account is an AWS\n         Marketplace vendor. If an account is verified, each public repository will received a\n         verified account badge on the Amazon ECR Public Gallery.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the account is a verified Amazon Web Services Marketplace vendor. If an account is verified,\n         each public repository receives a verified account badge on the\n         Amazon ECR Public Gallery.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "aliases": {
                     "target": "com.amazonaws.ecrpublic#RegistryAliasList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects representing the aliases for a public registry.</p>",
+                        "smithy.api#documentation": "<p>An array of objects that represents the aliases for a public registry.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2129,20 +2192,22 @@
                 "primaryRegistryAlias": {
                     "target": "com.amazonaws.ecrpublic#PrimaryRegistryAliasFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not the registry alias is the primary alias for the registry. If true, the\n         alias is the primary registry alias and is displayed in both the repository URL and the\n         image URI used in the <code>docker pull</code> commands on the Amazon ECR Public Gallery.</p>\n         <note>\n            <p>A registry alias that is not the primary registry alias can be used in the repository\n            URI in a <code>docker pull</code> command.</p>\n         </note>",
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the registry alias is the primary alias for the registry. If true, the\n         alias is the primary registry alias and is displayed in both the repository URL and the\n         image URI used in the <code>docker pull</code> commands on the Amazon ECR Public Gallery.</p>\n         <note>\n            <p>A registry alias that isn't the primary registry alias can be used in the repository\n            URI in a <code>docker pull</code> command.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "defaultRegistryAlias": {
                     "target": "com.amazonaws.ecrpublic#DefaultRegistryAliasFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not the registry alias is the default alias for the registry. When the first\n         public repository is created, your public registry is assigned a default registry\n         alias.</p>",
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the registry alias is the default alias for the registry. When the\n         first public repository is created, your public registry is assigned a default registry\n         alias.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing the aliases for a public registry. A public registry is given an\n         alias upon creation but a custom alias can be set using the Amazon ECR console. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html\">Registries</a> in the\n            <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>An object representing the aliases for a public registry. A public registry is given an\n         alias when it's created. However, a custom alias can be set using the Amazon ECR console. For\n         more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html\">Registries</a> in the\n            <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecrpublic#RegistryAliasList": {
@@ -2158,26 +2223,30 @@
                     "min": 2,
                     "max": 50
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9]+(?:[._-][a-z0-9]+)*"
+                "smithy.api#pattern": "^[a-z][a-z0-9]+(?:[._-][a-z0-9]+)*$"
             }
         },
         "com.amazonaws.ecrpublic#RegistryAliasStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "REJECTED",
-                        "name": "REJECTED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecrpublic#RegistryCatalogData": {
@@ -2206,15 +2275,15 @@
         "com.amazonaws.ecrpublic#RegistryId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9]{12}"
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.ecrpublic#RegistryIdOrAlias": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
+                    "min": 2,
+                    "max": 50
                 }
             }
         },
@@ -2232,15 +2301,12 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The registry does not exist.</p>",
+                "smithy.api#documentation": "<p>The registry doesn't exist.</p>",
                 "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ecrpublic#RegistryVerified": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.ecrpublic#Repository": {
             "type": "structure",
@@ -2248,13 +2314,13 @@
                 "repositoryArn": {
                     "target": "com.amazonaws.ecrpublic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
                     }
                 },
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the public registry that contains the\n         repository.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the public registry that contains the\n         repository.</p>"
                     }
                 },
                 "repositoryName": {
@@ -2316,7 +2382,7 @@
                 "logoUrl": {
                     "target": "com.amazonaws.ecrpublic#ResourceUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL containing the logo associated with the repository.</p>"
+                        "smithy.api#documentation": "<p>The URL that contains the logo that's associated with the repository.</p>"
                     }
                 },
                 "aboutText": {
@@ -2334,7 +2400,7 @@
                 "marketplaceCertified": {
                     "target": "com.amazonaws.ecrpublic#MarketplaceCertified",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not the repository is certified by AWS Marketplace.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the repository is certified by Amazon Web Services Marketplace.</p>"
                     }
                 }
             },
@@ -2354,13 +2420,13 @@
                 "architectures": {
                     "target": "com.amazonaws.ecrpublic#ArchitectureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system architecture that the images in the repository are compatible with. On the\n         Amazon ECR Public Gallery, the following supported architectures will appear as badges on the\n         repository and are used as search filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Linux</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Windows</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If an unsupported tag is added to your repository catalog data, it will be associated\n            with the repository and can be retrieved using the API but will not be discoverable in\n            the Amazon ECR Public Gallery.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The system architecture that the images in the repository are compatible with. On the\n         Amazon ECR Public Gallery, the following supported architectures appear as badges on the\n         repository and are used as search filters.</p>\n         <note>\n            <p>If an unsupported tag is added to your repository catalog data, it's associated with\n            the repository and can be retrieved using the API but isn't discoverable in the\n            Amazon ECR Public Gallery.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>ARM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ARM 64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>x86</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>x86-64</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "operatingSystems": {
                     "target": "com.amazonaws.ecrpublic#OperatingSystemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating systems that the images in the repository are compatible with. On the\n         Amazon ECR Public Gallery, the following supported operating systems will appear as badges on\n         the repository and are used as search filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ARM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ARM 64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>x86</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>x86-64</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If an unsupported tag is added to your repository catalog data, it will be associated\n            with the repository and can be retrieved using the API but will not be discoverable in\n            the Amazon ECR Public Gallery.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The operating systems that the images in the repository are compatible with. On the\n         Amazon ECR Public Gallery, the following supported operating systems appear as badges on the\n         repository and are used as search filters.</p>\n         <note>\n            <p>If an unsupported tag is added to your repository catalog data, it's associated with\n            the repository and can be retrieved using the API but isn't discoverable in the\n            Amazon ECR Public Gallery.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>Linux</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Windows</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "logoImageBlob": {
@@ -2372,18 +2438,30 @@
                 "aboutText": {
                     "target": "com.amazonaws.ecrpublic#AboutText",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed description of the contents of the repository. It is publicly visible in the\n         Amazon ECR Public Gallery. The text must be in markdown format.</p>"
+                        "smithy.api#documentation": "<p>A detailed description of the contents of the repository. It's publicly visible in the\n         Amazon ECR Public Gallery. The text must be in markdown format.</p>"
                     }
                 },
                 "usageText": {
                     "target": "com.amazonaws.ecrpublic#UsageText",
                     "traits": {
-                        "smithy.api#documentation": "<p>Detailed information on how to use the contents of the repository. It is publicly\n         visible in the Amazon ECR Public Gallery. The usage text provides context, support information,\n         and additional usage details for users of the repository. The text must be in markdown\n         format.</p>"
+                        "smithy.api#documentation": "<p>Detailed information about how to use the contents of the repository. It's publicly\n         visible in the Amazon ECR Public Gallery. The usage text provides context, support information,\n         and additional usage details for users of the repository. The text must be in markdown\n         format.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing the catalog data for a repository. This data is publicly visible in\n         the Amazon ECR Public Gallery.</p>"
+                "smithy.api#documentation": "<p>An object that contains the catalog data for a repository. This data is publicly visible\n         in the Amazon ECR Public Gallery.</p>"
+            }
+        },
+        "com.amazonaws.ecrpublic#RepositoryCatalogDataNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecrpublic#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The repository catalog data doesn't exist.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ecrpublic#RepositoryDescription": {
@@ -2408,7 +2486,7 @@
                     "min": 2,
                     "max": 205
                 },
-                "smithy.api#pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"
+                "smithy.api#pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"
             }
         },
         "com.amazonaws.ecrpublic#RepositoryNameList": {
@@ -2443,7 +2521,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified repository could not be found. Check the spelling of the specified\n         repository and ensure that you are performing operations on the correct registry.</p>",
+                "smithy.api#documentation": "<p>The specified repository can't be found. Check the spelling of the specified repository\n         and ensure that you're performing operations on the correct registry.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2455,7 +2533,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified repository and registry combination does not have an associated repository\n         policy.</p>",
+                "smithy.api#documentation": "<p>The specified repository and registry combination doesn't have an associated repository\n         policy.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2506,6 +2584,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -2518,7 +2599,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that's associated with the registry that contains the repository.\n         If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -2538,7 +2619,8 @@
                 "force": {
                     "target": "com.amazonaws.ecrpublic#ForceFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the policy you are attempting to set on a repository policy would prevent you from\n         setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental\n         repository lock outs.</p>"
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If the policy that you want to set on a repository policy would prevent you from setting\n         another policy in the future, you must force the <a>SetRepositoryPolicy</a>\n         operation. This prevents accidental repository lockouts.</p>"
                     }
                 }
             }
@@ -2549,19 +2631,19 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The registry ID that's associated with the request.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
                     }
                 },
                 "policyText": {
                     "target": "com.amazonaws.ecrpublic#RepositoryPolicyText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON repository policy text applied to the repository.</p>"
+                        "smithy.api#documentation": "<p>The JSON repository policy text that's applied to the repository.</p>"
                     }
                 }
             }
@@ -2652,10 +2734,466 @@
                     "name": "ecr-public"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic Container Registry Public</fullname>\n         <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Amazon ECR provides both\n         public and private registries to host your container images. You can use the familiar\n         Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR provides a\n         secure, scalable, and reliable registry for your Docker or Open Container Initiative (OCI)\n         images. Amazon ECR supports public repositories with this API. For information about the Amazon ECR\n         API for private repositories, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/APIReference/Welcome.html\">Amazon Elastic Container Registry API Reference</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Elastic Container Registry Public</fullname>\n         <p>Amazon Elastic Container Registry Public (Amazon ECR Public) is a managed container image registry service. Amazon ECR provides both\n         public and private registries to host your container images. You can use the Docker CLI or\n         your preferred client to push, pull, and manage images. Amazon ECR provides a secure, scalable,\n         and reliable registry for your Docker or Open Container Initiative (OCI) images. Amazon ECR\n         supports public repositories with this API. For information about the Amazon ECR API for private\n         repositories, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/APIReference/Welcome.html\">Amazon Elastic Container Registry API Reference</a>.</p>",
                 "smithy.api#title": "Amazon Elastic Container Registry Public",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ecr-public.amazonaws.com/doc/2020-12-02/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://api.ecr-public-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://api.ecr-public-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://api.ecr-public.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://api.ecr-public.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-west-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-west-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-west-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-west-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://api.ecr-public.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
                 }
             }
         },
@@ -2676,7 +3214,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them. Each\n         tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+                "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them. Each\n         tag consists of a key and an optional value. You define both. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
             }
         },
         "com.amazonaws.ecrpublic#TagKey": {
@@ -2735,10 +3273,13 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource are not specified in the request parameters, they are not\n         changed. When a resource is deleted, the tags associated with that resource are deleted as\n         well.</p>"
+                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource aren't specified in the request parameters, they aren't\n         changed. When a resource is deleted, the tags associated with that resource are also\n         deleted.</p>"
             }
         },
         "com.amazonaws.ecrpublic#TagResourceRequest": {
@@ -2747,7 +3288,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ecrpublic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the\n         supported resource is an Amazon ECR Public repository.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to add tags to. Currently, the supported\n         resource is an Amazon ECR Public repository.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2793,7 +3334,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The action is not supported in this Region.</p>",
+                "smithy.api#documentation": "<p>The action isn't supported in this Region.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2820,6 +3361,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
                 }
             ],
             "traits": {
@@ -2832,7 +3376,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ecrpublic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported\n         resource is an Amazon ECR Public repository.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to delete tags from. Currently, the supported resource is\n         an Amazon ECR Public repository.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2852,7 +3396,7 @@
         "com.amazonaws.ecrpublic#UploadId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.ecrpublic#UploadLayerPart": {
@@ -2890,7 +3434,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads an image layer part to Amazon ECR.</p>\n         <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of\n         each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is\n         called once per each new image layer part.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Uploads an image layer part to Amazon ECR.</p>\n         <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of\n         each image layer part can be 20971520 bytes (about 20MB). The UploadLayerPart API is called\n         once for each new image layer part.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecrpublic#UploadLayerPartRequest": {
@@ -2899,13 +3443,13 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which you are uploading layer parts.\n         If you do not specify a registry, the default public registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, that's associated with the registry that you're\n         uploading layer parts to. If you do not specify a registry, the default public registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository to which you are uploading layer parts.</p>",
+                        "smithy.api#documentation": "<p>The name of the repository that you're uploading layer parts to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2945,25 +3489,25 @@
                 "registryId": {
                     "target": "com.amazonaws.ecrpublic#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The registry ID that's associated with the request.</p>"
                     }
                 },
                 "repositoryName": {
                     "target": "com.amazonaws.ecrpublic#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
                     }
                 },
                 "uploadId": {
                     "target": "com.amazonaws.ecrpublic#UploadId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upload ID associated with the request.</p>"
+                        "smithy.api#documentation": "<p>The upload ID that's associated with the request.</p>"
                     }
                 },
                 "lastByteReceived": {
                     "target": "com.amazonaws.ecrpublic#PartSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The integer value of the last byte received in the request.</p>"
+                        "smithy.api#documentation": "<p>The integer value of the last byte that's received in the request.</p>"
                     }
                 }
             }
@@ -2976,7 +3520,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The upload could not be found, or the specified upload ID is not valid for this\n         repository.</p>",
+                "smithy.api#documentation": "<p>The upload can't be found, or the specified upload ID isn't valid for this\n         repository.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2988,7 +3532,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10240
+                    "max": 25600
                 }
             }
         }

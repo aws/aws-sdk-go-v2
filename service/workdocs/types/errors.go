@@ -11,6 +11,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -32,6 +37,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // operation.
 type ConflictingOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,13 +52,20 @@ func (e *ConflictingOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictingOperationException) ErrorCode() string             { return "ConflictingOperationException" }
+func (e *ConflictingOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictingOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The limit has been reached on the number of custom properties for the specified
 // resource.
 type CustomMetadataLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -66,7 +80,10 @@ func (e *CustomMetadataLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomMetadataLimitExceededException) ErrorCode() string {
-	return "CustomMetadataLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "CustomMetadataLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CustomMetadataLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -75,6 +92,8 @@ func (e *CustomMetadataLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The last user in the organization is being deactivated.
 type DeactivatingLastSystemUserException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -91,7 +110,10 @@ func (e *DeactivatingLastSystemUserException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeactivatingLastSystemUserException) ErrorCode() string {
-	return "DeactivatingLastSystemUserException"
+	if e.ErrorCodeOverride == nil {
+		return "DeactivatingLastSystemUserException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *DeactivatingLastSystemUserException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -101,6 +123,8 @@ func (e *DeactivatingLastSystemUserException) ErrorFault() smithy.ErrorFault {
 // to create or delete a comment on that document.
 type DocumentLockedForCommentsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -115,7 +139,10 @@ func (e *DocumentLockedForCommentsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DocumentLockedForCommentsException) ErrorCode() string {
-	return "DocumentLockedForCommentsException"
+	if e.ErrorCodeOverride == nil {
+		return "DocumentLockedForCommentsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *DocumentLockedForCommentsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -125,6 +152,8 @@ func (e *DocumentLockedForCommentsException) ErrorFault() smithy.ErrorFault {
 // version upload calls for a document that has been checked out from Web client.
 type DraftUploadOutOfSyncException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -138,12 +167,19 @@ func (e *DraftUploadOutOfSyncException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DraftUploadOutOfSyncException) ErrorCode() string             { return "DraftUploadOutOfSyncException" }
+func (e *DraftUploadOutOfSyncException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DraftUploadOutOfSyncException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DraftUploadOutOfSyncException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource already exists.
 type EntityAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -157,12 +193,19 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExistsException" }
+func (e *EntityAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource does not exist.
 type EntityNotExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	EntityIds []string
 
@@ -178,7 +221,12 @@ func (e *EntityNotExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityNotExistsException) ErrorCode() string             { return "EntityNotExistsException" }
+func (e *EntityNotExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityNotExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityNotExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The AWS Directory Service cannot reach an on-premises instance. Or a dependency
@@ -186,6 +234,8 @@ func (e *EntityNotExistsException) ErrorFault() smithy.ErrorFault { return smith
 // Directory.
 type FailedDependencyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -199,12 +249,19 @@ func (e *FailedDependencyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FailedDependencyException) ErrorCode() string             { return "FailedDependencyException" }
+func (e *FailedDependencyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "FailedDependencyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user is undergoing transfer of ownership.
 type IllegalUserStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -218,12 +275,19 @@ func (e *IllegalUserStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IllegalUserStateException) ErrorCode() string             { return "IllegalUserStateException" }
+func (e *IllegalUserStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IllegalUserStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IllegalUserStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The pagination marker or limit fields are not valid.
 type InvalidArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -237,12 +301,19 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not allowed on the specified comment object.
 type InvalidCommentOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -257,13 +328,18 @@ func (e *InvalidCommentOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCommentOperationException) ErrorCode() string {
-	return "InvalidCommentOperationException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCommentOperationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidCommentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation is invalid.
 type InvalidOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -277,12 +353,19 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
+func (e *InvalidOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The password is invalid.
 type InvalidPasswordException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -296,13 +379,20 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
+func (e *InvalidPasswordException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPasswordException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum of 100,000 files and folders under the parent folder has been
 // exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -316,12 +406,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified document version is not in the INITIALIZED state.
 type ProhibitedStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -335,13 +432,20 @@ func (e *ProhibitedStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ProhibitedStateException) ErrorCode() string             { return "ProhibitedStateException" }
+func (e *ProhibitedStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ProhibitedStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ProhibitedStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The response is too large to return. The request must include a filter to reduce
 // the size of the response.
 type RequestedEntityTooLargeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -356,13 +460,18 @@ func (e *RequestedEntityTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestedEntityTooLargeException) ErrorCode() string {
-	return "RequestedEntityTooLargeException"
+	if e.ErrorCodeOverride == nil {
+		return "RequestedEntityTooLargeException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *RequestedEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is already checked out.
 type ResourceAlreadyCheckedOutException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -377,7 +486,10 @@ func (e *ResourceAlreadyCheckedOutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyCheckedOutException) ErrorCode() string {
-	return "ResourceAlreadyCheckedOutException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceAlreadyCheckedOutException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceAlreadyCheckedOutException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -386,6 +498,8 @@ func (e *ResourceAlreadyCheckedOutException) ErrorFault() smithy.ErrorFault {
 // One or more of the dependencies is unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -399,12 +513,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The storage limit has been exceeded.
 type StorageLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -418,12 +539,19 @@ func (e *StorageLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StorageLimitExceededException) ErrorCode() string             { return "StorageLimitExceededException" }
+func (e *StorageLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StorageLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StorageLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The storage limit will be exceeded.
 type StorageLimitWillExceedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -438,13 +566,18 @@ func (e *StorageLimitWillExceedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageLimitWillExceedException) ErrorCode() string {
-	return "StorageLimitWillExceedException"
+	if e.ErrorCodeOverride == nil {
+		return "StorageLimitWillExceedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *StorageLimitWillExceedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The limit has been reached on the number of labels for the specified resource.
 type TooManyLabelsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -458,13 +591,20 @@ func (e *TooManyLabelsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyLabelsException) ErrorCode() string             { return "TooManyLabelsException" }
+func (e *TooManyLabelsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyLabelsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyLabelsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of subscriptions for the WorkDocs
 // instance.
 type TooManySubscriptionsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -478,12 +618,19 @@ func (e *TooManySubscriptionsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManySubscriptionsException) ErrorCode() string             { return "TooManySubscriptionsException" }
+func (e *TooManySubscriptionsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManySubscriptionsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManySubscriptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation is not permitted.
 type UnauthorizedOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -499,12 +646,19 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedOperationException) ErrorCode() string             { return "UnauthorizedOperationException" }
+func (e *UnauthorizedOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnauthorizedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnauthorizedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The caller does not have access to perform the action on the resource.
 type UnauthorizedResourceAccessException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -519,7 +673,10 @@ func (e *UnauthorizedResourceAccessException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedResourceAccessException) ErrorCode() string {
-	return "UnauthorizedResourceAccessException"
+	if e.ErrorCodeOverride == nil {
+		return "UnauthorizedResourceAccessException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedResourceAccessException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

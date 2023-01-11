@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve the Security Lake configuration object for the specified account ID.
-// This API does not take input parameters.
+// Retrieves a snapshot of the current Region, including whether Amazon Security
+// Lake is enabled for those accounts and which sources Security Lake is collecting
+// data from.
 func (c *Client) GetDatalakeStatus(ctx context.Context, params *GetDatalakeStatusInput, optFns ...func(*Options)) (*GetDatalakeStatusOutput, error) {
 	if params == nil {
 		params = &GetDatalakeStatusInput{}
@@ -31,19 +32,20 @@ func (c *Client) GetDatalakeStatus(ctx context.Context, params *GetDatalakeStatu
 
 type GetDatalakeStatusInput struct {
 
-	// The account IDs for which a static snapshot of the current Region, including
-	// enabled accounts and log sources is retrieved.
+	// The Amazon Web Services account ID for which a static snapshot of the current
+	// Amazon Web Services Region, including enabled accounts and log sources, is
+	// retrieved.
 	AccountSet []string
 
 	// The maximum limit of accounts for which the static snapshot of the current
-	// Region including enabled accounts and log sources is retrieved.
+	// Region, including enabled accounts and log sources, is retrieved.
 	MaxAccountResults *int32
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
+	// Lists if there are more results available. The value of nextToken is a unique
+	// pagination token for each page. Repeat the call using the returned token to
+	// retrieve the next page. Keep all other arguments unchanged. Each pagination
+	// token expires after 24 hours. Using an expired pagination token will return an
+	// HTTP 400 InvalidToken error.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,11 +58,11 @@ type GetDatalakeStatusOutput struct {
 	// This member is required.
 	AccountSourcesList []types.AccountSources
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
+	// Lists if there are more results available. The value of nextToken is a unique
+	// pagination token for each page. Repeat the call using the returned token to
+	// retrieve the next page. Keep all other arguments unchanged. Each pagination
+	// token expires after 24 hours. Using an expired pagination token will return an
+	// HTTP 400 InvalidToken error.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,7 +142,7 @@ var _ GetDatalakeStatusAPIClient = (*Client)(nil)
 // GetDatalakeStatusPaginatorOptions is the paginator options for GetDatalakeStatus
 type GetDatalakeStatusPaginatorOptions struct {
 	// The maximum limit of accounts for which the static snapshot of the current
-	// Region including enabled accounts and log sources is retrieved.
+	// Region, including enabled accounts and log sources, is retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

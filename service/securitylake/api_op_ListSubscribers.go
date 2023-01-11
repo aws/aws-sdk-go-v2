@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all subscribers for the specific Security Lake account ID.
+// List all subscribers for the specific Amazon Security Lake account ID. You can
+// retrieve a list of subscriptions associated with a specific organization or
+// Amazon Web Services account.
 func (c *Client) ListSubscribers(ctx context.Context, params *ListSubscribersInput, optFns ...func(*Options)) (*ListSubscribersOutput, error) {
 	if params == nil {
 		params = &ListSubscribersInput{}
@@ -33,8 +35,8 @@ type ListSubscribersInput struct {
 	// The maximum number of accounts for which the configuration is displayed.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. You can make the
-	// call again using the returned token to retrieve the next page.
+	// If nextToken is returned, there are more results available. You can repeat the
+	// call using the returned token to retrieve the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -42,13 +44,13 @@ type ListSubscribersInput struct {
 
 type ListSubscribersOutput struct {
 
-	// The subscribers available in the specified Security Lake account ID.
+	// The subscribers available for the specified Security Lake account ID.
 	//
 	// This member is required.
 	Subscribers []types.SubscriberResource
 
-	// If nextToken is returned, there are more results available. You can make the
-	// call again using the returned token to retrieve the next page.
+	// If nextToken is returned, there are more results available. You can repeat the
+	// call using the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

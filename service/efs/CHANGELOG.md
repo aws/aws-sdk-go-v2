@@ -1,3 +1,7 @@
+# v1.19.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.18.3 (2022-12-16)
 
 * **Documentation**: General documentation updates for EFS.

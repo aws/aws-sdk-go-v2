@@ -3561,7 +3561,7 @@ func awsRestjson1_deserializeOpDocumentListSubscribersOutput(v **ListSubscribers
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SafeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}

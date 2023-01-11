@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Security Lake administrator account for the organization. This API
-// can only be called by the organization management account. The organization
-// management account cannot be the delegated administrator account.
+// Deletes the Amazon Security Lake delegated administrator account for the
+// organization. This API can only be called by the organization management
+// account. The organization management account cannot be the delegated
+// administrator account.
 func (c *Client) DeleteDatalakeDelegatedAdmin(ctx context.Context, params *DeleteDatalakeDelegatedAdminInput, optFns ...func(*Options)) (*DeleteDatalakeDelegatedAdminOutput, error) {
 	if params == nil {
 		params = &DeleteDatalakeDelegatedAdminInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteDatalakeDelegatedAdmin(ctx context.Context, params *Delet
 
 type DeleteDatalakeDelegatedAdminInput struct {
 
-	// Account ID the Security Lake delegated administrator.
+	// The account ID the Security Lake delegated administrator.
 	//
 	// This member is required.
 	Account *string

@@ -13,6 +13,8 @@ import (
 type DnssecLimitExceeded struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,12 +27,19 @@ func (e *DnssecLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DnssecLimitExceeded) ErrorCode() string             { return "DnssecLimitExceeded" }
+func (e *DnssecLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DnssecLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DnssecLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of domains has exceeded the allowed threshold for the account.
 type DomainLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *DomainLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DomainLimitExceeded) ErrorCode() string             { return "DomainLimitExceeded" }
+func (e *DomainLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DomainLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DomainLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is already in progress for the domain.
 type DuplicateRequest struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,7 +79,12 @@ func (e *DuplicateRequest) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateRequest) ErrorCode() string             { return "DuplicateRequest" }
+func (e *DuplicateRequest) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateRequest"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested item is not acceptable. For example, for APIs that accept a domain
@@ -72,6 +93,8 @@ func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // password might be invalid.
 type InvalidInput struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -85,13 +108,20 @@ func (e *InvalidInput) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
+func (e *InvalidInput) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInput"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of operations or jobs running exceeded the allowed threshold for the
 // account.
 type OperationLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -105,12 +135,19 @@ func (e *OperationLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationLimitExceeded) ErrorCode() string             { return "OperationLimitExceeded" }
+func (e *OperationLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The top-level domain does not support this operation.
 type TLDRulesViolation struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -124,12 +161,19 @@ func (e *TLDRulesViolation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TLDRulesViolation) ErrorCode() string             { return "TLDRulesViolation" }
+func (e *TLDRulesViolation) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TLDRulesViolation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TLDRulesViolation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Route 53 does not support this top-level domain (TLD).
 type UnsupportedTLD struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -143,5 +187,10 @@ func (e *UnsupportedTLD) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedTLD) ErrorCode() string             { return "UnsupportedTLD" }
+func (e *UnsupportedTLD) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedTLD"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedTLD) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

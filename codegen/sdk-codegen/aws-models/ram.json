@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -91,7 +91,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 }
             }
@@ -115,21 +115,6 @@
         },
         "com.amazonaws.ram#AmazonResourceSharing": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "RAM",
-                    "arnNamespace": "ram",
-                    "cloudFormationName": "RAM",
-                    "cloudTrailEventSource": "ram.amazonaws.com",
-                    "endpointPrefix": "ram"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ram"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides\n            descriptions and syntax for each of the actions and data types in RAM. RAM is a\n            service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts. If you\n            have multiple Amazon Web Services accounts, you can use RAM to share those resources with other\n            accounts. If you use Organizations to manage your accounts, then you share your resources\n            with your organization or organizational units (OUs). For supported resource types, you\n            can also share resources with individual Identity and Access Management (IAM) roles an users. </p>\n        \n        <p>To learn more about RAM, see the following resources:</p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"http://aws.amazon.com/ram\">Resource Access Manager product page</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/\">Resource Access Manager User\n                        Guide</a>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#title": "AWS Resource Access Manager"
-            },
             "version": "2018-01-04",
             "operations": [
                 {
@@ -207,7 +192,1024 @@
                 {
                     "target": "com.amazonaws.ram#UpdateResourceShare"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "RAM",
+                    "arnNamespace": "ram",
+                    "cloudFormationName": "RAM",
+                    "cloudTrailEventSource": "ram.amazonaws.com",
+                    "endpointPrefix": "ram"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ram"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides\n            descriptions and syntax for each of the actions and data types in RAM. RAM is a\n            service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts. If you\n            have multiple Amazon Web Services accounts, you can use RAM to share those resources with other\n            accounts. If you use Organizations to manage your accounts, then you share your resources\n            with your organization or organizational units (OUs). For supported resource types, you\n            can also share resources with individual Identity and Access Management (IAM) roles an users. </p>\n         <p>To learn more about RAM, see the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"http://aws.amazon.com/ram\">Resource Access Manager product page</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/\">Resource Access Manager User\n                        Guide</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Resource Access Manager",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ram-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://ram.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ram-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ram.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "us-gov-east-1"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://ram.us-gov-east-1.amazonaws.com",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "us-gov-west-1"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://ram.us-gov-west-1.amazonaws.com",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://ram.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ram-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.ram#AssociateResourceShare": {
             "type": "operation",
@@ -321,13 +1323,13 @@
                 "replace": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the specified permission should replace or add to the existing\n            permission associated with the resource share. Use <code>true</code> to replace the current\n            permissions. Use <code>false</code> to add the permission to the current permission. The\n            default value is <code>false</code>.</p>\n        <note>\n            <p>A resource share can have only one permission per resource type. If a resource share already has a\n                permission for the specified resource type and you don't set <code>replace</code> to\n                    <code>true</code> then the operation returns an error. This helps prevent\n                accidental overwriting of a permission.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the specified permission should replace or add to the existing\n            permission associated with the resource share. Use <code>true</code> to replace the current\n            permissions. Use <code>false</code> to add the permission to the current permission. The\n            default value is <code>false</code>.</p>\n         <note>\n            <p>A resource share can have only one permission per resource type. If a resource share already has a\n                permission for the specified resource type and you don't set <code>replace</code> to\n                    <code>true</code> then the operation returns an error. This helps prevent\n                accidental overwriting of a permission.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 },
                 "permissionVersion": {
@@ -374,13 +1376,13 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of principals to whom you want to the resource share. This can be\n                <code>null</code> if you want to add only resources.</p>\n        <p>What the principals can do with the resources in the share is determined by the RAM\n            permissions that you associate with the resource share. See <a>AssociateResourceSharePermission</a>.</p>\n        <p>You can include the following values:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n                <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of principals to whom you want to the resource share. This can be\n                <code>null</code> if you want to add only resources.</p>\n         <p>What the principals can do with the resources in the share is determined by the RAM\n            permissions that you associate with the resource share. See <a>AssociateResourceSharePermission</a>.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 }
             }
@@ -403,10 +1405,7 @@
             }
         },
         "com.amazonaws.ram#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.ram#CreateResourceShare": {
             "type": "operation",
@@ -452,7 +1451,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource share. You can provide a list of the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> for the resources that you\n            want to share, a list of principals you want to share the resources with, and the\n            permissions to grant those principals.</p>\n        <note>\n            <p>Sharing a resource makes it available for use by principals outside of the\n                Amazon Web Services account that created the resource. Sharing doesn't change any permissions or\n                quotas that apply to the resource in the account that created it.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Creates a resource share. You can provide a list of the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> for the resources that you\n            want to share, a list of principals you want to share the resources with, and the\n            permissions to grant those principals.</p>\n         <note>\n            <p>Sharing a resource makes it available for use by principals outside of the\n                Amazon Web Services account that created the resource. Sharing doesn't change any permissions or\n                quotas that apply to the resource in the account that created it.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createresourceshare",
@@ -479,7 +1478,7 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of one or more principals to associate with the resource share.</p>\n        <p>You can include the following values:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n                <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of one or more principals to associate with the resource share.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -497,7 +1496,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 },
                 "permissionArns": {
@@ -588,7 +1587,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>",
                         "smithy.api#httpQuery": "clientToken"
                     }
                 }
@@ -724,7 +1723,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 }
             }
@@ -765,13 +1764,13 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of one or more principals that no longer are to have access to the\n            resources in this resource share.</p>\n        <p>You can include the following values:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n                <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of one or more principals that no longer are to have access to the\n            resources in this resource share.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 }
             }
@@ -813,7 +1812,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables resource sharing within your organization in Organizations. Calling this operation\n            enables RAM to retrieve information about the organization and its structure. This\n            lets you share resources with all of the accounts in an organization by specifying the\n            organization's ID, or all of the accounts in an organizational unit (OU) by specifying\n            the OU's ID. Until you enable sharing within the organization, you can specify only\n            individual Amazon Web Services accounts, or for supported resource types, IAM users and\n            roles.</p>\n        <p>You must call this operation from an IAM user or role in the organization's\n            management account.</p>",
+                "smithy.api#documentation": "<p>Enables resource sharing within your organization in Organizations. Calling this operation\n            enables RAM to retrieve information about the organization and its structure. This\n            lets you share resources with all of the accounts in an organization by specifying the\n            organization's ID, or all of the accounts in an organizational unit (OU) by specifying\n            the OU's ID. Until you enable sharing within the organization, you can specify only\n            individual Amazon Web Services accounts, or for supported resource types, IAM users and\n            roles.</p>\n         <p>You must call this operation from an IAM user or role in the organization's\n            management account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/enablesharingwithawsorganization",
@@ -1043,7 +2042,7 @@
                 "associationType": {
                     "target": "com.amazonaws.ram#ResourceShareAssociationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether you want to retrieve the associations that involve a specified\n            resource or principal.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PRINCIPAL</code> – list the principals that are associated with\n                    the specified resource share.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RESOURCE</code> – list the resources that are associated with the\n                    specified resource share.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether you want to retrieve the associations that involve a specified\n            resource or principal.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRINCIPAL</code> – list the principals that are associated with\n                    the specified resource share.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE</code> – list the resources that are associated with the\n                    specified resource share.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1056,13 +2055,13 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of the resource whose resource shares you want to retrieve.</p>\n        <p>You cannot specify this parameter if the association type is\n            <code>PRINCIPAL</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of the resource whose resource shares you want to retrieve.</p>\n         <p>You cannot specify this parameter if the association type is\n            <code>PRINCIPAL</code>.</p>"
                     }
                 },
                 "principal": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an\n            Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an\n            individual IAM user or role.</p>\n        <p>You cannot specify this parameter if the association type is\n            <code>RESOURCE</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an\n            Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an\n            individual IAM user or role.</p>\n         <p>You cannot specify this parameter if the association type is\n            <code>RESOURCE</code>.</p>"
                     }
                 },
                 "associationStatus": {
@@ -1256,7 +2255,7 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.ram#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to retrieve details of only those resource shares that match the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resource shares that your\n                    account shares with other accounts</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> – resource shares\n                    that other accounts share with your account</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies that you want to retrieve details of only those resource shares that match the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resource shares that your\n                    account shares with other accounts</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> – resource shares\n                    that other accounts share with your account</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1330,10 +2329,7 @@
             }
         },
         "com.amazonaws.ram#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.ram#InvalidClientTokenException": {
             "type": "structure",
@@ -1531,7 +2527,7 @@
                 "resourceRegionScope": {
                     "target": "com.amazonaws.ram#ResourceRegionScopeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want the results to include only \n            resources that have the specified scope.</p>\n            <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – the results include both global and \n                    regional resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – the results include only global \n                    resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – the results include only regional \n                    resources or resource types.</p>\n            </li>\n         </ul>\n            <p>The default value is <code>ALL</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want the results to include only \n            resources that have the specified scope.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – the results include both global and \n                    regional resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – the results include only global \n                    resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – the results include only regional \n                    resources or resource types.</p>\n            </li>\n         </ul>\n         <p>The default value is <code>ALL</code>.</p>"
                     }
                 }
             }
@@ -1766,7 +2762,7 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.ram#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list information for only resource shares that match the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – principals that\n                    your account is sharing resources with</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    principals that are sharing resources with your account</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies that you want to list information for only resource shares that match the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – principals that\n                    your account is sharing resources with</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    principals that are sharing resources with your account</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1779,13 +2775,13 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list information for only the listed principals.</p>\n        <p>You can include the following values:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n                <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies that you want to list information for only the listed principals.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list information for only principals associated with resource shares\n            that include the specified resource type.</p>\n        <p>For a list of valid values, query the <a>ListResourceTypes</a>\n            operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want to list information for only principals associated with resource shares\n            that include the specified resource type.</p>\n         <p>For a list of valid values, query the <a>ListResourceTypes</a>\n            operation.</p>"
                     }
                 },
                 "resourceShareArns": {
@@ -1965,7 +2961,7 @@
                 "resourceRegionScope": {
                     "target": "com.amazonaws.ram#ResourceRegionScopeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want the results to include only \n            resources that have the specified scope.</p>\n            <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – the results include both global and \n                    regional resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – the results include only global \n                    resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – the results include only regional \n                    resources or resource types.</p>\n            </li>\n         </ul>\n            <p>The default value is <code>ALL</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want the results to include only \n            resources that have the specified scope.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – the results include both global and \n                    regional resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – the results include only global \n                    resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – the results include only regional \n                    resources or resource types.</p>\n            </li>\n         </ul>\n         <p>The default value is <code>ALL</code>.</p>"
                     }
                 }
             }
@@ -2038,7 +3034,7 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.ram#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list only the resource shares that match the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resources that\n                    your account shares with other accounts</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    resources that other accounts share with your account</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies that you want to list only the resource shares that match the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resources that\n                    your account shares with other accounts</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    resources that other accounts share with your account</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2051,7 +3047,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list only the resource shares that include resources of the specified\n            resource type.</p>\n        <p>For valid values, query the <a>ListResourceTypes</a> operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want to list only the resource shares that include resources of the specified\n            resource type.</p>\n         <p>For valid values, query the <a>ListResourceTypes</a> operation.</p>"
                     }
                 },
                 "resourceArns": {
@@ -2081,7 +3077,7 @@
                 "resourceRegionScope": {
                     "target": "com.amazonaws.ram#ResourceRegionScopeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want the results to include only \n            resources that have the specified scope.</p>\n            <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – the results include both global and \n                    regional resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – the results include only global \n                    resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – the results include only regional \n                    resources or resource types.</p>\n            </li>\n         </ul>\n            <p>The default value is <code>ALL</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want the results to include only \n            resources that have the specified scope.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – the results include both global and \n                    regional resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – the results include only global \n                    resources or resource types.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – the results include only regional \n                    resources or resource types.</p>\n            </li>\n         </ul>\n         <p>The default value is <code>ALL</code>.</p>"
                     }
                 }
             }
@@ -2126,7 +3122,6 @@
         "com.amazonaws.ram#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -2285,7 +3280,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When you attach a resource-based permission policy to a resource, it automatically\n            creates a resource share. However, resource shares created this way are visible only to the resource share owner, and\n            the resource share can't be modified in RAM.</p>\n        <p>You can use this operation to promote the resource share to a full RAM resource share. When you promote\n            a resource share, you can then manage the resource share in RAM and it becomes visible to all of the\n            principals you shared it with.</p>",
+                "smithy.api#documentation": "<p>When you attach a resource-based permission policy to a resource, it automatically\n            creates a resource share. However, resource shares created this way are visible only to the resource share owner, and\n            the resource share can't be modified in RAM.</p>\n         <p>You can use this operation to promote the resource share to a full RAM resource share. When you promote\n            a resource share, you can then manage the resource share in RAM and it becomes visible to all of the\n            principals you shared it with.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/promoteresourcesharecreatedfrompolicy",
@@ -2380,7 +3375,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 }
             }
@@ -2456,7 +3451,7 @@
                 "resourceRegionScope": {
                     "target": "com.amazonaws.ram#ResourceRegionScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the scope of visibility of this resource:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>REGIONAL</b> – The resource can be\n                    accessed only by using requests that target the Amazon Web Services Region in which the\n                    resource exists.</p>\n            </li>\n            <li>\n                <p>\n                  <b>GLOBAL</b> – The resource can be accessed\n                    from any Amazon Web Services Region.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the scope of visibility of this resource:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>REGIONAL</b> – The resource can be\n                    accessed only by using requests that target the Amazon Web Services Region in which the\n                    resource exists.</p>\n            </li>\n            <li>\n               <p>\n                  <b>GLOBAL</b> – The resource can be accessed\n                    from any Amazon Web Services Region.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2503,52 +3498,60 @@
             }
         },
         "com.amazonaws.ram#ResourceOwner": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SELF",
-                        "name": "SELF"
-                    },
-                    {
-                        "value": "OTHER-ACCOUNTS",
-                        "name": "OTHER_ACCOUNTS"
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
                     }
-                ]
+                },
+                "OTHER_ACCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER-ACCOUNTS"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceRegionScope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REGIONAL",
-                        "name": "REGIONAL"
-                    },
-                    {
-                        "value": "GLOBAL",
-                        "name": "GLOBAL"
+            "type": "enum",
+            "members": {
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
                     }
-                ]
+                },
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceRegionScopeFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "REGIONAL",
-                        "name": "REGIONAL"
-                    },
-                    {
-                        "value": "GLOBAL",
-                        "name": "GLOBAL"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                },
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceShare": {
@@ -2611,7 +3614,7 @@
                 "featureSet": {
                     "target": "com.amazonaws.ram#ResourceShareFeatureSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the resource share was created. Possible values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an\n                    Identity and Access Management (IAM) resource-based permission policy attached to the resource.\n                    This type of resource share is visible only to the Amazon Web Services account that created it. You\n                    can't modify it in RAM unless you promote it. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being\n                    promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STANDARD</code> - Indicates that the resource share was created in RAM using the\n                    console or APIs. These resource shares are visible to all principals you share the resource share\n                    with. You can modify these resource shares in RAM using the console or APIs.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates how the resource share was created. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an\n                    Identity and Access Management (IAM) resource-based permission policy attached to the resource.\n                    This type of resource share is visible only to the Amazon Web Services account that created it. You\n                    can't modify it in RAM unless you promote it. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being\n                    promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Indicates that the resource share was created in RAM using the\n                    console or APIs. These resource shares are visible to all principals you share the resource share\n                    with. You can modify these resource shares in RAM using the console or APIs.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2646,7 +3649,7 @@
                 "associatedEntity": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The associated entity. This can be either of the following:</p>\n        <ul>\n            <li>\n                <p>For a resource association, this is the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of the resource.</p>\n            </li>\n            <li>\n                <p>For principal associations, this is one of the following:</p>\n                <ul>\n                  <li>\n                        <p>The ID of an Amazon Web Services account</p>\n                    </li>\n                  <li>\n                        <p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations</p>\n                    </li>\n                  <li>\n                        <p>The ARN of an organizational unit (OU) in Organizations</p>\n                    </li>\n                  <li>\n                        <p>The ARN of an IAM role</p>\n                    </li>\n                  <li>\n                        <p>The ARN of an IAM user</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The associated entity. This can be either of the following:</p>\n         <ul>\n            <li>\n               <p>For a resource association, this is the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of the resource.</p>\n            </li>\n            <li>\n               <p>For principal associations, this is one of the following:</p>\n               <ul>\n                  <li>\n                     <p>The ID of an Amazon Web Services account</p>\n                  </li>\n                  <li>\n                     <p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of an organization in Organizations</p>\n                  </li>\n                  <li>\n                     <p>The ARN of an organizational unit (OU) in Organizations</p>\n                  </li>\n                  <li>\n                     <p>The ARN of an IAM role</p>\n                  </li>\n                  <li>\n                     <p>The ARN of an IAM user</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "associationType": {
@@ -2700,64 +3703,78 @@
             }
         },
         "com.amazonaws.ram#ResourceShareAssociationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSOCIATING",
-                        "name": "ASSOCIATING"
-                    },
-                    {
-                        "value": "ASSOCIATED",
-                        "name": "ASSOCIATED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "DISASSOCIATING",
-                        "name": "DISASSOCIATING"
-                    },
-                    {
-                        "value": "DISASSOCIATED",
-                        "name": "DISASSOCIATED"
+            "type": "enum",
+            "members": {
+                "ASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATING"
                     }
-                ]
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATED"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceShareAssociationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PRINCIPAL",
-                        "name": "PRINCIPAL"
-                    },
-                    {
-                        "value": "RESOURCE",
-                        "name": "RESOURCE"
+            "type": "enum",
+            "members": {
+                "PRINCIPAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRINCIPAL"
                     }
-                ]
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceShareFeatureSet": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED_FROM_POLICY",
-                        "name": "CREATED_FROM_POLICY"
-                    },
-                    {
-                        "value": "PROMOTING_TO_STANDARD",
-                        "name": "PROMOTING_TO_STANDARD"
-                    },
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
+            "type": "enum",
+            "members": {
+                "CREATED_FROM_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED_FROM_POLICY"
                     }
-                ]
+                },
+                "PROMOTING_TO_STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROMOTING_TO_STANDARD"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceShareInvitation": {
@@ -2924,26 +3941,32 @@
             }
         },
         "com.amazonaws.ram#ResourceShareInvitationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "ACCEPTED",
-                        "name": "ACCEPTED"
-                    },
-                    {
-                        "value": "REJECTED",
-                        "name": "REJECTED"
-                    },
-                    {
-                        "value": "EXPIRED",
-                        "name": "EXPIRED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceShareLimitExceededException": {
@@ -3109,57 +4132,73 @@
             }
         },
         "com.amazonaws.ram#ResourceShareStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ResourceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "ZONAL_RESOURCE_INACCESSIBLE",
-                        "name": "ZONAL_RESOURCE_INACCESSIBLE"
-                    },
-                    {
-                        "value": "LIMIT_EXCEEDED",
-                        "name": "LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "UNAVAILABLE",
-                        "name": "UNAVAILABLE"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "ZONAL_RESOURCE_INACCESSIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZONAL_RESOURCE_INACCESSIBLE"
+                    }
+                },
+                "LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED"
+                    }
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.ram#ServerInternalException": {
@@ -3200,7 +4239,7 @@
                 "resourceRegionScope": {
                     "target": "com.amazonaws.ram#ResourceRegionScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the scope of visibility of resources of this type:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>REGIONAL</b> – The resource can be\n                    accessed only by using requests that target the Amazon Web Services Region in which the\n                    resource exists.</p>\n            </li>\n            <li>\n                <p>\n                  <b>GLOBAL</b> – The resource can be accessed\n                    from any Amazon Web Services Region.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the scope of visibility of resources of this type:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>REGIONAL</b> – The resource can be\n                    accessed only by using requests that target the Amazon Web Services Region in which the\n                    resource exists.</p>\n            </li>\n            <li>\n               <p>\n                  <b>GLOBAL</b> – The resource can be accessed\n                    from any Amazon Web Services Region.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3257,7 +4296,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing a tag. A tag is metadata that you can attach to your resources\n            to help organize and categorize them. You can also use them to help you secure your\n            resources. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources\n                using tags</a>.</p>\n        <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the\n                <i>Amazon Web Services General Reference Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A structure containing a tag. A tag is metadata that you can attach to your resources\n            to help organize and categorize them. You can also use them to help you secure your\n            resources. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources\n                using tags</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the\n                <i>Amazon Web Services General Reference Guide</i>.</p>"
             }
         },
         "com.amazonaws.ram#TagFilter": {
@@ -3578,7 +4617,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n             <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>"
                     }
                 }
             }

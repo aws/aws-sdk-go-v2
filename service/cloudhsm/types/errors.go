@@ -11,6 +11,8 @@ import (
 type CloudHsmInternalException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	Retryable bool
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *CloudHsmInternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CloudHsmInternalException) ErrorCode() string             { return "CloudHsmInternalException" }
+func (e *CloudHsmInternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmInternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Indicates that an exception occurred in the AWS CloudHSM service.
 type CloudHsmServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Retryable bool
 
@@ -46,12 +55,19 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CloudHsmServiceException) ErrorCode() string             { return "CloudHsmServiceException" }
+func (e *CloudHsmServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that one or more of the request parameters are not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Retryable bool
 
@@ -67,5 +83,10 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

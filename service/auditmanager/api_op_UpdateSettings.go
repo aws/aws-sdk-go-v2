@@ -35,6 +35,11 @@ type UpdateSettingsInput struct {
 	// A list of the default audit owners.
 	DefaultProcessOwners []types.Role
 
+	// The deregistration policy for your Audit Manager data. You can use this
+	// attribute to determine how your data is handled when you deregister Audit
+	// Manager.
+	DeregistrationPolicy *types.DeregistrationPolicy
+
 	// Specifies whether the evidence finder feature is enabled. Change this attribute
 	// to enable or disable evidence finder. When you use this attribute to disable
 	// evidence finder, Audit Manager deletes the event data store that’s used to query
@@ -43,10 +48,7 @@ type UpdateSettingsInput struct {
 	// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html)
 	// and then re-register
 	// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html)
-	// Audit Manager. Disabling evidence finder is permanent, so consider this decision
-	// carefully before you proceed. If you’re using Audit Manager as a delegated
-	// administrator, keep in mind that this action applies to all member accounts in
-	// your organization.
+	// Audit Manager.
 	EvidenceFinderEnabled *bool
 
 	// The KMS key details.

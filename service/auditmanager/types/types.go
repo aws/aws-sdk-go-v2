@@ -42,7 +42,7 @@ type AssessmentControl struct {
 	// The description of the control.
 	Description *string
 
-	// The amount of evidence that's generated for the control.
+	// The amount of evidence that's collected for the control.
 	EvidenceCount int32
 
 	// The list of data sources for the evidence.
@@ -86,7 +86,7 @@ type AssessmentControlSet struct {
 	// The roles that are associated with the control set.
 	Roles []Role
 
-	// Specifies the current status of the control set.
+	// The current status of the control set.
 	Status ControlSetStatus
 
 	// The total number of evidence objects that are retrieved automatically for the
@@ -198,7 +198,7 @@ type AssessmentFrameworkMetadata struct {
 	// The number of controls that are associated with the framework.
 	ControlsCount int32
 
-	// Specifies when the framework was created.
+	// The time when the framework was created.
 	CreatedAt *time.Time
 
 	// The description of the framework.
@@ -207,7 +207,7 @@ type AssessmentFrameworkMetadata struct {
 	// The unique identifier for the framework.
 	Id *string
 
-	// Specifies when the framework was most recently updated.
+	// The time when the framework was most recently updated.
 	LastUpdatedAt *time.Time
 
 	// The logo that's associated with the framework.
@@ -556,7 +556,7 @@ type Control struct {
 	// for the control.
 	ControlSources *string
 
-	// Specifies when the control was created.
+	// The time when the control was created.
 	CreatedAt *time.Time
 
 	// The IAM user or role that created the control.
@@ -568,7 +568,7 @@ type Control struct {
 	// The unique identifier for the control.
 	Id *string
 
-	// Specifies when the control was most recently updated.
+	// The time when the control was most recently updated.
 	LastUpdatedAt *time.Time
 
 	// The IAM user or role that most recently updated the control.
@@ -720,7 +720,7 @@ type ControlMappingSource struct {
 	// collection is automated or manual.
 	SourceSetUpOption SourceSetUpOption
 
-	// Specifies one of the five types of data sources for evidence collection.
+	// Specifies one of the five data source types for evidence collection.
 	SourceType SourceType
 
 	// The instructions for troubleshooting the control.
@@ -739,13 +739,13 @@ type ControlMetadata struct {
 	// the control.
 	ControlSources *string
 
-	// Specifies when the control was created.
+	// The time when the control was created.
 	CreatedAt *time.Time
 
 	// The unique identifier for the control.
 	Id *string
 
-	// Specifies when the control was most recently updated.
+	// The time when the control was most recently updated.
 	LastUpdatedAt *time.Time
 
 	// The name of the control.
@@ -935,9 +935,43 @@ type DelegationMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The deregistration policy for the data that's stored in Audit Manager. You can
+// use this attribute to determine how your data is handled when you deregister
+// Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html).
+// By default, Audit Manager retains evidence data for two years from the time of
+// its creation. Other Audit Manager resources (including assessments, custom
+// controls, and custom frameworks) remain in Audit Manager indefinitely, and are
+// available if you re-register Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html)
+// in the future. For more information about data retention, see Data Protection
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html)
+// in the Audit Manager User Guide. If you choose to delete all data, this action
+// permanently deletes all evidence data in your account within seven days. It also
+// deletes all of the Audit Manager resources that you created, including
+// assessments, custom controls, and custom frameworks. Your data will not be
+// available if you re-register Audit Manager in the future.
+type DeregistrationPolicy struct {
+
+	// Specifies which Audit Manager data will be deleted when you deregister Audit
+	// Manager.
+	//
+	// * If you set the value to ALL, all of your data is deleted within
+	// seven days of deregistration.
+	//
+	// * If you set the value to DEFAULT, none of your
+	// data is deleted at the time of deregistration. However, keep in mind that the
+	// Audit Manager data retention policy still applies. As a result, any evidence
+	// data will be deleted two years after its creation date. Your other Audit Manager
+	// resources will continue to exist indefinitely.
+	DeleteResources DeleteResources
+
+	noSmithyDocumentSerde
+}
+
 // A record that contains the information needed to demonstrate compliance with the
 // requirements specified by a control. Examples of evidence include change
-// activity triggered by a user, or a system configuration snapshot.
+// activity invoked by a user, or a system configuration snapshot.
 type Evidence struct {
 
 	// Specifies whether the evidence is included in the assessment report.
@@ -1014,17 +1048,17 @@ type EvidenceFinderEnablement struct {
 
 	// The current status of the evidence data backfill process. The backfill starts
 	// after you enable evidence finder. During this task, Audit Manager populates an
-	// event data store with your past evidence data so that your evidence can be
-	// queried.
+	// event data store with your past two years’ worth of evidence data so that your
+	// evidence can be queried.
 	//
-	// * NOT_STARTED means that the backfill hasn’t started yet.
+	// * NOT_STARTED means that the backfill hasn’t started
+	// yet.
 	//
-	// *
-	// IN_PROGRESS means that the backfill is in progress. This can take up to 24 hours
-	// to complete, depending on the amount of evidence data.
+	// * IN_PROGRESS means that the backfill is in progress. This can take up to
+	// 7 days to complete, depending on the amount of evidence data.
 	//
-	// * COMPLETED means that
-	// the backfill is complete. All of your past evidence is now queryable.
+	// * COMPLETED means
+	// that the backfill is complete. All of your past evidence is now queryable.
 	BackfillStatus EvidenceFinderBackfillStatus
 
 	// The current status of the evidence finder feature and the related event data
@@ -1035,18 +1069,18 @@ type EvidenceFinderEnablement struct {
 	// queries.
 	//
 	// * ENABLED means that an event data store was successfully created and
-	// evidence finder is enabled. We recommend that you wait 24 hours until the event
-	// data store is backfilled with your past evidence data. You can use evidence
-	// finder in the meantime, but not all data might be available until the backfill
-	// is complete.
+	// evidence finder is enabled. We recommend that you wait 7 days until the event
+	// data store is backfilled with your past two years’ worth of evidence data. You
+	// can use evidence finder in the meantime, but not all data might be available
+	// until the backfill is complete.
 	//
-	// * DISABLE_IN_PROGRESS means that you requested to disable evidence
-	// finder, and your request is pending the deletion of the event data store.
+	// * DISABLE_IN_PROGRESS means that you requested
+	// to disable evidence finder, and your request is pending the deletion of the
+	// event data store.
 	//
-	// *
-	// DISABLED means that you have permanently disabled evidence finder and the event
-	// data store has been deleted. You can't re-enable evidence finder after this
-	// point.
+	// * DISABLED means that you have permanently disabled evidence
+	// finder and the event data store has been deleted. You can't re-enable evidence
+	// finder after this point.
 	EnablementStatus EvidenceFinderEnablementStatus
 
 	// Represents any errors that occurred when enabling or disabling evidence finder.
@@ -1103,7 +1137,7 @@ type Framework struct {
 	// The sources that Audit Manager collects evidence from for the control.
 	ControlSources *string
 
-	// Specifies when the framework was created.
+	// The time when the framework was created.
 	CreatedAt *time.Time
 
 	// The IAM user or role that created the framework.
@@ -1115,7 +1149,7 @@ type Framework struct {
 	// The unique identifier for the framework.
 	Id *string
 
-	// Specifies when the framework was most recently updated.
+	// The time when the framework was most recently updated.
 	LastUpdatedAt *time.Time
 
 	// The IAM user or role that most recently updated the framework.
@@ -1396,6 +1430,11 @@ type Settings struct {
 
 	// The designated default audit owners.
 	DefaultProcessOwners []Role
+
+	// The deregistration policy for your Audit Manager data. You can use this
+	// attribute to determine how your data is handled when you deregister Audit
+	// Manager.
+	DeregistrationPolicy *DeregistrationPolicy
 
 	// The current evidence finder status and event data store details.
 	EvidenceFinderEnablement *EvidenceFinderEnablement

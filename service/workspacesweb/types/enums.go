@@ -2,6 +2,24 @@
 
 package types
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypeStandard          AuthenticationType = "Standard"
+	AuthenticationTypeIamIdentityCenter AuthenticationType = "IAM_Identity_Center"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"Standard",
+		"IAM_Identity_Center",
+	}
+}
+
 type BrowserType string
 
 // Enum values for BrowserType

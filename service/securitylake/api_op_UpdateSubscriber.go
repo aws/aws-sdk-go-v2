@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the subscription permission for the given Security Lake account ID.
+// Updates an existing subscription for the given Amazon Security Lake account ID.
+// You can update a subscriber by changing the sources that the subscriber consumes
+// data from.
 func (c *Client) UpdateSubscriber(ctx context.Context, params *UpdateSubscriberInput, optFns ...func(*Options)) (*UpdateSubscriberOutput, error) {
 	if params == nil {
 		params = &UpdateSubscriberInput{}
@@ -29,25 +31,26 @@ func (c *Client) UpdateSubscriber(ctx context.Context, params *UpdateSubscriberI
 
 type UpdateSubscriberInput struct {
 
-	// A value created by Security Lake that uniquely identifies your UpdateSubscriber
-	// API request.
+	// A value created by Security Lake that uniquely identifies your subscription.
 	//
 	// This member is required.
 	Id *string
 
-	// External ID of the Security Lake account.
-	ExternalId *string
-
-	// The supported Amazon Web Services services from which logs and events are
-	// collected. Amazon Security Lake supports logs and events collection for the
-	// following natively-supported Amazon Web Services services. For more information,
-	// see the Amazon Security Lake User Guide.
+	// The supported Amazon Web Services from which logs and events are collected. For
+	// the list of supported Amazon Web Services, see the Amazon Security Lake User
+	// Guide
+	// (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html).
+	//
+	// This member is required.
 	SourceTypes []types.SourceType
 
-	// Description of the Security Lake account subscriber.
+	// The external ID of the Security Lake account.
+	ExternalId *string
+
+	// The description of the Security Lake account subscriber.
 	SubscriberDescription *string
 
-	// Name of the Security Lake account subscriber.
+	// The name of the Security Lake account subscriber.
 	SubscriberName *string
 
 	noSmithyDocumentSerde
@@ -55,7 +58,7 @@ type UpdateSubscriberInput struct {
 
 type UpdateSubscriberOutput struct {
 
-	// The account subscriber in Amazon Security Lake.
+	// The account of the subscriber.
 	Subscriber *types.SubscriberResource
 
 	// Metadata pertaining to the operation's result.

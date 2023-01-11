@@ -12,7 +12,7 @@ import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.SyntheticClone;
+import software.amazon.smithy.go.codegen.Synthetic;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
@@ -253,12 +253,12 @@ public final class XmlProtocolUtils {
         String shapeName = shapeSymbol.getName();
         ServiceShape service = context.getService();
 
-        // check if synthetic cloned shape
-        Optional<SyntheticClone> clone = shape.getTrait(SyntheticClone.class);
-        if (clone.isPresent()) {
-            SyntheticClone cl = clone.get();
-            if (cl.getArchetype().isPresent()) {
-                shapeName = cl.getArchetype().get().getName(service);
+        // check if synthetic shape
+        Optional<Synthetic> synthOptional = shape.getTrait(Synthetic.class);
+        if (synthOptional.isPresent()) {
+            Synthetic synth = synthOptional.get();
+            if (synth.getArchetype().isPresent()) {
+                shapeName = synth.getArchetype().get().getName(service);
             }
         }
 
@@ -349,7 +349,7 @@ public final class XmlProtocolUtils {
      * This method is used indirectly by generateErrorDispatcher to generate operation specific error handling functions
      *
      * @param context the generation context
-     * @see <a href="https://awslabs.github.io/smithy/1.0/spec/aws/aws-restxml-protocol.html#operation-error-serialization">Rest-XML operation error serialization.</a>
+     * @see <a href="https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#error-response-serialization">Rest-XML operation error serialization.</a>
      */
     public static void writeXmlErrorMessageCodeDeserializer(ProtocolGenerator.GenerationContext context) {
         GoWriter writer = context.getWriter().get();

@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the maximum limit of active signaling channels for this Amazon
 // Web Services account in this region.
 type AccountChannelLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,7 +53,10 @@ func (e *AccountChannelLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountChannelLimitExceededException) ErrorCode() string {
-	return "AccountChannelLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "AccountChannelLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AccountChannelLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -53,6 +65,8 @@ func (e *AccountChannelLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The number of streams created for the account is too high.
 type AccountStreamLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,7 +81,10 @@ func (e *AccountStreamLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountStreamLimitExceededException) ErrorCode() string {
-	return "AccountStreamLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "AccountStreamLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AccountStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -77,6 +94,8 @@ func (e *AccountStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 // limit of allowed client calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -90,12 +109,19 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
+func (e *ClientLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClientLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Not implemented.
 type DeviceStreamLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -110,7 +136,10 @@ func (e *DeviceStreamLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeviceStreamLimitExceededException) ErrorCode() string {
-	return "DeviceStreamLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "DeviceStreamLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *DeviceStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -119,6 +148,8 @@ func (e *DeviceStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -132,12 +163,19 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Not implemented.
 type InvalidDeviceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -151,12 +189,19 @@ func (e *InvalidDeviceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDeviceException) ErrorCode() string             { return "InvalidDeviceException" }
+func (e *InvalidDeviceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidDeviceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidDeviceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of the StreamARN is invalid.
 type InvalidResourceFormatException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -170,12 +215,19 @@ func (e *InvalidResourceFormatException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceFormatException) ErrorCode() string             { return "InvalidResourceFormatException" }
+func (e *InvalidResourceFormatException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidResourceFormatException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidResourceFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Stream data retention in hours is equal to zero.
 type NoDataRetentionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -189,12 +241,19 @@ func (e *NoDataRetentionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoDataRetentionException) ErrorCode() string             { return "NoDataRetentionException" }
+func (e *NoDataRetentionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoDataRetentionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -208,7 +267,12 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
+func (e *NotAuthorizedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotAuthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // When the input StreamARN or ChannelARN in CLOUD_STORAGE_MODE is already mapped
@@ -227,6 +291,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceInUseException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -239,12 +305,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Kinesis Video Streams can't find the stream that you specified.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -258,13 +331,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Exception rendered when the Amazon Kinesis Video Stream can't find a
 // stream's edge configuration that you specified.
 type StreamEdgeConfigurationNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -279,7 +359,10 @@ func (e *StreamEdgeConfigurationNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StreamEdgeConfigurationNotFoundException) ErrorCode() string {
-	return "StreamEdgeConfigurationNotFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "StreamEdgeConfigurationNotFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *StreamEdgeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -289,6 +372,8 @@ func (e *StreamEdgeConfigurationNotFoundException) ErrorFault() smithy.ErrorFaul
 // Kinesis video stream can support up to 50 tags.
 type TagsPerResourceExceededLimitException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -303,7 +388,10 @@ func (e *TagsPerResourceExceededLimitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagsPerResourceExceededLimitException) ErrorCode() string {
-	return "TagsPerResourceExceededLimitException"
+	if e.ErrorCodeOverride == nil {
+		return "TagsPerResourceExceededLimitException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TagsPerResourceExceededLimitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -315,6 +403,8 @@ func (e *TagsPerResourceExceededLimitException) ErrorFault() smithy.ErrorFault {
 // API.
 type VersionMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -328,5 +418,10 @@ func (e *VersionMismatchException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *VersionMismatchException) ErrorCode() string             { return "VersionMismatchException" }
+func (e *VersionMismatchException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "VersionMismatchException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *VersionMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a custom log source from Security Lake.
+// Removes a custom log source from Amazon Security Lake.
 func (c *Client) DeleteCustomLogSource(ctx context.Context, params *DeleteCustomLogSourceInput, optFns ...func(*Options)) (*DeleteCustomLogSourceOutput, error) {
 	if params == nil {
 		params = &DeleteCustomLogSourceInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteCustomLogSource(ctx context.Context, params *DeleteCustom
 
 type DeleteCustomLogSourceInput struct {
 
-	// The custom source name for the custome log source.
+	// The custom source name for the custom log source.
 	//
 	// This member is required.
 	CustomSourceName *string
@@ -38,7 +38,7 @@ type DeleteCustomLogSourceInput struct {
 
 type DeleteCustomLogSourceOutput struct {
 
-	// The location of the partition in the Security Lake S3 bucket.
+	// The location of the partition in the Amazon S3 bucket for Security Lake.
 	//
 	// This member is required.
 	CustomDataLocation *string

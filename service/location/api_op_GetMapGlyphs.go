@@ -61,6 +61,13 @@ type GetMapGlyphsInput struct {
 	// Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK
 	// JP Light | Noto Sans CJK JP Regular
 	//
+	// Valid font stacks for GrabMaps
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
+	// styles:
+	//
+	// * VectorGrabStandardLight, VectorGrabStandardDark – Noto Sans Regular |
+	// Noto Sans Medium | Noto Sans Bold
+	//
 	// Valid font stacks for Open Data (Preview)
 	// (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
 	// styles:

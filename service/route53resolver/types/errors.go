@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,11 +26,18 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We encountered an unknown error. Try again in a few minutes.
 type InternalServiceErrorException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
+func (e *InternalServiceErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value that you specified for NextToken in a List request isn't valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameters in this request are not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	FieldName *string
 
@@ -101,12 +131,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified Resolver rule policy is invalid.
 type InvalidPolicyDocument struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -120,12 +157,19 @@ func (e *InvalidPolicyDocument) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPolicyDocument) ErrorCode() string             { return "InvalidPolicyDocument" }
+func (e *InvalidPolicyDocument) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPolicyDocument"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is invalid.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -139,12 +183,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified tag is invalid.
 type InvalidTagException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -158,12 +209,19 @@ func (e *InvalidTagException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
+func (e *InvalidTagException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTagException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request caused one or more limits to be exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -179,12 +237,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource that you tried to create already exists.
 type ResourceExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -200,12 +265,19 @@ func (e *ResourceExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
+func (e *ResourceExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource that you tried to update or delete is currently in use.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -221,12 +293,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -242,12 +321,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource isn't available.
 type ResourceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -263,12 +349,19 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
+func (e *ResourceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was throttled. Try again in a few minutes.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -282,12 +375,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource doesn't exist.
 type UnknownResourceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -301,11 +401,18 @@ func (e *UnknownResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnknownResourceException) ErrorCode() string             { return "UnknownResourceException" }
+func (e *UnknownResourceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnknownResourceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -319,5 +426,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

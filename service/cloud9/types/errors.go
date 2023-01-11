@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	ClassName *string
 	Code      int32
 
@@ -26,12 +28,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A concurrent access issue occurred.
 type ConcurrentAccessException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -48,12 +57,19 @@ func (e *ConcurrentAccessException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentAccessException) ErrorCode() string             { return "ConcurrentAccessException" }
+func (e *ConcurrentAccessException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentAccessException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConcurrentAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A conflict occurred.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -70,12 +86,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An access permissions issue occurred.
 type ForbiddenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -92,12 +115,19 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ForbiddenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal server error occurred.
 type InternalServerErrorException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -114,12 +144,19 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A service limit was exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -136,12 +173,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target resource cannot be found.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -158,12 +202,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Too many service requests were made over the given time period.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClassName *string
 	Code      int32
@@ -180,5 +231,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

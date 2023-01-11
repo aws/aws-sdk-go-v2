@@ -209,7 +209,9 @@ type LogStream struct {
 	LastEventTimestamp *int64
 
 	// The ingestion time, expressed as the number of milliseconds after Jan 1, 1970
-	// 00:00:00 UTC.
+	// 00:00:00 UTC The lastIngestionTime value updates on an eventual consistency
+	// basis. It typically updates in less than an hour after ingestion, but in rare
+	// situations might take longer.
 	LastIngestionTime *int64
 
 	// The name of the log stream.
@@ -225,7 +227,10 @@ type LogStream struct {
 	// The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
 
-	// The sequence token.
+	// The sequence token. The sequence token is now ignored in PutLogEvents actions.
+	// PutLogEvents actions are always accepted regardless of receiving an invalid
+	// sequence token. You don't need to obtain uploadSequenceToken to use a
+	// PutLogEvents action.
 	UploadSequenceToken *string
 
 	noSmithyDocumentSerde

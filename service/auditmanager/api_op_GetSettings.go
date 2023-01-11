@@ -29,7 +29,7 @@ func (c *Client) GetSettings(ctx context.Context, params *GetSettingsInput, optF
 
 type GetSettingsInput struct {
 
-	// The list of SettingAttribute enum values.
+	// The list of setting attribute enum values.
 	//
 	// This member is required.
 	Attribute types.SettingAttribute

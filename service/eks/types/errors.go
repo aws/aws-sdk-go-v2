@@ -15,6 +15,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -27,13 +29,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown if the request contains a semantic error. The precise
 // meaning will depend on the API, and will be documented in the error message.
 type BadRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -47,7 +56,12 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // These errors are usually caused by a client action. Actions can include using an
@@ -55,6 +69,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // action or resource or specifying an identifier that is not valid.
 type ClientException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName   *string
 	NodegroupName *string
@@ -72,13 +88,20 @@ func (e *ClientException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientException) ErrorCode() string             { return "ClientException" }
+func (e *ClientException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClientException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified parameter is invalid. Review the available parameters for the API
 // request.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName        *string
 	NodegroupName      *string
@@ -97,13 +120,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is invalid given the state of the cluster. Check the state of the
 // cluster and the associated operations.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName   *string
 	NodegroupName *string
@@ -121,13 +151,20 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A service resource associated with the request could not be found. Clients
 // should not retry such requests.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -141,12 +178,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource is in use.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName   *string
 	NodegroupName *string
@@ -164,12 +208,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have encountered a service limit on the specified resource.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName   *string
 	NodegroupName *string
@@ -186,7 +237,12 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
+func (e *ResourceLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource could not be found. You can view your available clusters
@@ -194,6 +250,8 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // ListNodegroups. Amazon EKS clusters and node groups are Region-specific.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName        *string
 	NodegroupName      *string
@@ -212,13 +270,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Required resources (such as service-linked roles) were created and are still
 // propagating. Retry later.
 type ResourcePropagationDelayException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -233,13 +298,18 @@ func (e *ResourcePropagationDelayException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourcePropagationDelayException) ErrorCode() string {
-	return "ResourcePropagationDelayException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourcePropagationDelayException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourcePropagationDelayException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // These errors are usually caused by a server-side issue.
 type ServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName   *string
 	NodegroupName *string
@@ -257,12 +327,19 @@ func (e *ServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServerException) ErrorCode() string             { return "ServerException" }
+func (e *ServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The service is unavailable. Back off and retry the operation.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -276,7 +353,12 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // At least one of your specified cluster subnets is in an Availability Zone that
@@ -285,6 +367,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // cluster.
 type UnsupportedAvailabilityZoneException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ClusterName   *string
 	NodegroupName *string
@@ -303,7 +387,10 @@ func (e *UnsupportedAvailabilityZoneException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedAvailabilityZoneException) ErrorCode() string {
-	return "UnsupportedAvailabilityZoneException"
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedAvailabilityZoneException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedAvailabilityZoneException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

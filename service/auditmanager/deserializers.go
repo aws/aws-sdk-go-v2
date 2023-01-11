@@ -12971,6 +12971,46 @@ func awsRestjson1_deserializeDocumentDelegations(v *[]types.Delegation, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDeregistrationPolicy(v **types.DeregistrationPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeregistrationPolicy
+	if *v == nil {
+		sv = &types.DeregistrationPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deleteResources":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeleteResources to be of type string, got %T instead", value)
+				}
+				sv.DeleteResources = types.DeleteResources(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEvidence(v **types.Evidence, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14654,6 +14694,11 @@ func awsRestjson1_deserializeDocumentSettings(v **types.Settings, value interfac
 
 		case "defaultProcessOwners":
 			if err := awsRestjson1_deserializeDocumentRoles(&sv.DefaultProcessOwners, value); err != nil {
+				return err
+			}
+
+		case "deregistrationPolicy":
+			if err := awsRestjson1_deserializeDocumentDeregistrationPolicy(&sv.DeregistrationPolicy, value); err != nil {
 				return err
 			}
 

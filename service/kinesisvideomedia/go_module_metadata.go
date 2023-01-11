@@ -3,4 +3,4 @@
 package kinesisvideomedia
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.10.22"
+const goModuleVersion = "1.11.1"

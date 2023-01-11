@@ -161,7 +161,7 @@ type DescribeScalableTargetsInput struct {
 	// PostgreSQL-compatible edition.
 	//
 	// * sagemaker:variant:DesiredInstanceCount - The
-	// number of EC2 instances for an SageMaker model endpoint variant.
+	// number of EC2 instances for a SageMaker model endpoint variant.
 	//
 	// *
 	// custom-resource:ResourceType:Property - The scalable dimension for a custom

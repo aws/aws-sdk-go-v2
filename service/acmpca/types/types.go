@@ -44,8 +44,9 @@ type AccessMethod struct {
 // Contains X.509 certificate information to be placed in an issued certificate. An
 // APIPassthrough or APICSRPassthrough template variant must be selected, or else
 // this parameter is ignored. If conflicting or duplicate certificate information
-// is supplied from other sources, ACM Private CA applies order of operation rules
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations)
+// is supplied from other sources, Amazon Web Services Private CA applies order of
+// operation rules
+// (https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations)
 // to determine what information is used.
 type ApiPassthrough struct {
 
@@ -138,14 +139,14 @@ type ASN1Subject struct {
 // that the entity named in the certificate Subject field owns or controls the
 // public key contained in the Subject Public Key Info field. Call the
 // CreateCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action to create your private CA. You must then call the
 // GetCertificateAuthorityCertificate
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCertificate.html)
 // action to retrieve a private CA certificate signing request (CSR). Sign the CSR
-// with your ACM Private CA-hosted or on-premises root or subordinate CA
-// certificate. Call the ImportCertificateAuthorityCertificate
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
+// with your Amazon Web Services Private CA-hosted or on-premises root or
+// subordinate CA certificate. Call the ImportCertificateAuthorityCertificate
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
 // action to import the signed certificate into Certificate Manager (ACM).
 type CertificateAuthority struct {
 
@@ -186,7 +187,7 @@ type CertificateAuthority struct {
 	// The period during which a deleted CA can be restored. For more information, see
 	// the PermanentDeletionTimeInDays parameter of the
 	// DeleteCertificateAuthorityRequest
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html)
 	// action.
 	RestorableUntil *time.Time
 
@@ -218,7 +219,7 @@ type CertificateAuthority struct {
 // the signature algorithm that it uses when issuing certificates, and its X.500
 // distinguished name. You must specify this information when you call the
 // CreateCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action.
 type CertificateAuthorityConfiguration struct {
 
@@ -256,77 +257,79 @@ type CertificateAuthorityConfiguration struct {
 // you specify in the S3BucketName parameter. You can hide the name of your bucket
 // by specifying a value for the CustomCname parameter. Your private CA copies the
 // CNAME or the S3 bucket name to the CRL Distribution Points extension of each
-// certificate it issues. Your S3 bucket policy must give write permission to ACM
-// Private CA. ACM Private CA assets that are stored in Amazon S3 can be protected
-// with encryption. For more information, see Encrypting Your CRLs
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption).
+// certificate it issues. Your S3 bucket policy must give write permission to
+// Amazon Web Services Private CA. Amazon Web Services Private CA assets that are
+// stored in Amazon S3 can be protected with encryption. For more information, see
+// Encrypting Your CRLs
+// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption).
 // Your private CA uses the value in the ExpirationInDays parameter to calculate
 // the nextUpdate field in the CRL. The CRL is refreshed prior to a certificate's
 // expiration date or when a certificate is revoked. When a certificate is revoked,
 // it appears in the CRL until the certificate expires, and then in one additional
 // CRL after expiration, and it always appears in the audit report. A CRL is
 // typically updated approximately 30 minutes after a certificate is revoked. If
-// for any reason a CRL update fails, ACM Private CA makes further attempts every
-// 15 minutes. CRLs contain the following fields:
+// for any reason a CRL update fails, Amazon Web Services Private CA makes further
+// attempts every 15 minutes. CRLs contain the following fields:
 //
-// * Version: The current version
-// number defined in RFC 5280 is V2. The integer value is 0x1.
+// * Version: The
+// current version number defined in RFC 5280 is V2. The integer value is 0x1.
 //
-// * Signature
-// Algorithm: The name of the algorithm used to sign the CRL.
+// *
+// Signature Algorithm: The name of the algorithm used to sign the CRL.
 //
-// * Issuer: The X.500
-// distinguished name of your private CA that issued the CRL.
+// * Issuer:
+// The X.500 distinguished name of your private CA that issued the CRL.
 //
-// * Last Update: The
-// issue date and time of this CRL.
+// * Last
+// Update: The issue date and time of this CRL.
 //
-// * Next Update: The day and time by which the
-// next CRL will be issued.
+// * Next Update: The day and time by
+// which the next CRL will be issued.
 //
-// * Revoked Certificates: List of revoked certificates.
-// Each list item contains the following information.
+// * Revoked Certificates: List of revoked
+// certificates. Each list item contains the following information.
 //
-// * Serial Number: The serial
-// number, in hexadecimal format, of the revoked certificate.
+// * Serial
+// Number: The serial number, in hexadecimal format, of the revoked certificate.
 //
-// * Revocation Date:
-// Date and time the certificate was revoked.
+// *
+// Revocation Date: Date and time the certificate was revoked.
 //
-// * CRL Entry Extensions: Optional
-// extensions for the CRL entry.
+// * CRL Entry
+// Extensions: Optional extensions for the CRL entry.
 //
-// * X509v3 CRL Reason Code: Reason the certificate
-// was revoked.
+// * X509v3 CRL Reason Code:
+// Reason the certificate was revoked.
 //
-// * CRL Extensions: Optional extensions for the CRL.
-//
-// * X509v3
-// Authority Key Identifier: Identifies the public key associated with the private
-// key used to sign the certificate.
-//
-// * X509v3 CRL Number:: Decimal sequence number
-// for the CRL.
-//
-// * Signature Algorithm: Algorithm used by your private CA to sign
+// * CRL Extensions: Optional extensions for
 // the CRL.
 //
-// * Signature Value: Signature computed over the CRL.
+// * X509v3 Authority Key Identifier: Identifies the public key
+// associated with the private key used to sign the certificate.
 //
-// Certificate
-// revocation lists created by ACM Private CA are DER-encoded. You can use the
-// following OpenSSL command to list a CRL. openssl crl -inform DER -text -in
-// crl_path -noout For more information, see Planning a certificate revocation list
-// (CRL) (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html)
-// in the Private Certificate Authority (PCA) User Guide
+// * X509v3 CRL
+// Number:: Decimal sequence number for the CRL.
+//
+// * Signature Algorithm: Algorithm
+// used by your private CA to sign the CRL.
+//
+// * Signature Value: Signature computed
+// over the CRL.
+//
+// Certificate revocation lists created by Amazon Web Services
+// Private CA are DER-encoded. You can use the following OpenSSL command to list a
+// CRL. openssl crl -inform DER -text -in crl_path -noout For more information, see
+// Planning a certificate revocation list (CRL)
+// (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html) in
+// the Amazon Web Services Private Certificate Authority User Guide
 type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are
 	// enabled. You can use this value to enable certificate revocation for a new CA
 	// when you call the CreateCertificateAuthority
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 	// action or for an existing CA when you call the UpdateCertificateAuthority
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html)
 	// action.
 	//
 	// This member is required.
@@ -334,7 +337,11 @@ type CrlConfiguration struct {
 
 	// Name inserted into the certificate CRL Distribution Points extension that
 	// enables the use of an alias for the CRL distribution point. Use this value if
-	// you don't want the name of your S3 bucket to be public.
+	// you don't want the name of your S3 bucket to be public. The content of a
+	// Canonical Name (CNAME) record must conform to RFC2396
+	// (https://www.ietf.org/rfc/rfc2396.txt) restrictions on the use of special
+	// characters in URIs. Additionally, the value of the CNAME must not include a
+	// protocol prefix such as "http://" or "https://".
 	CustomCname *string
 
 	// Validity period of the CRL in days.
@@ -344,10 +351,12 @@ type CrlConfiguration struct {
 	// the CustomCname argument, the name of your S3 bucket is placed into the CRL
 	// Distribution Points extension of the issued certificate. You can change the name
 	// of your bucket by calling the UpdateCertificateAuthority
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html)
 	// operation. You must specify a bucket policy
-	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies)
-	// that allows ACM Private CA to write the CRL to your bucket.
+	// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-policies)
+	// that allows Amazon Web Services Private CA to write the CRL to your bucket. The
+	// S3BucketName parameter must conform to the S3 bucket naming rules
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
 	S3BucketName *string
 
 	// Determines whether the CRL will be publicly readable or privately held in the
@@ -362,7 +371,7 @@ type CrlConfiguration struct {
 	// disabled BPA in S3, then you can specify either BUCKET_OWNER_FULL_CONTROL or
 	// PUBLIC_READ as the value. For more information, see Blocking public access to
 	// the S3 bucket
-	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa).
+	// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa).
 	S3ObjectAcl S3ObjectAcl
 
 	noSmithyDocumentSerde
@@ -404,7 +413,7 @@ type CustomAttribute struct {
 
 // Specifies the X.509 extension information for a certificate. Extensions present
 // in CustomExtensions follow the ApiPassthroughtemplate rules
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations).
+// (https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations).
 type CustomExtension struct {
 
 	// Specifies the object identifier (OID) of the X.509 extension. For more
@@ -572,14 +581,16 @@ type OcspConfiguration struct {
 	// This member is required.
 	Enabled *bool
 
-	// By default, ACM Private CA injects an Amazon Web Services domain into
-	// certificates being validated by the Online Certificate Status Protocol (OCSP). A
-	// customer can alternatively use this object to define a CNAME specifying a
-	// customized OCSP domain. Note: The value of the CNAME must not include a protocol
-	// prefix such as "http://" or "https://". For more information, see Customizing
-	// Online Certificate Status Protocol (OCSP)
-	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html) in
-	// the Private Certificate Authority (PCA) User Guide.
+	// By default, Amazon Web Services Private CA injects an Amazon Web Services domain
+	// into certificates being validated by the Online Certificate Status Protocol
+	// (OCSP). A customer can alternatively use this object to define a CNAME
+	// specifying a customized OCSP domain. The content of a Canonical Name (CNAME)
+	// record must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt)
+	// restrictions on the use of special characters in URIs. Additionally, the value
+	// of the CNAME must not include a protocol prefix such as "http://" or "https://".
+	// For more information, see Customizing Online Certificate Status Protocol (OCSP)
+	// (https://docs.aws.amazon.com/privateca/latest/userguide/ocsp-customize.html) in
+	// the Amazon Web Services Private Certificate Authority User Guide.
 	OcspCustomCname *string
 
 	noSmithyDocumentSerde
@@ -609,11 +620,11 @@ type OtherName struct {
 // certificates, you must give the ACM service principal all available permissions
 // (IssueCertificate, GetCertificate, and ListPermissions). Permissions can be
 // assigned with the CreatePermission
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
 // action, removed with the DeletePermission
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html)
 // action, and listed with the ListPermissions
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html)
 // action.
 type Permission struct {
 
@@ -651,15 +662,16 @@ type PolicyInformation struct {
 	// This member is required.
 	CertPolicyId *string
 
-	// Modifies the given CertPolicyId with a qualifier. ACM Private CA supports the
-	// certification practice statement (CPS) qualifier.
+	// Modifies the given CertPolicyId with a qualifier. Amazon Web Services Private CA
+	// supports the certification practice statement (CPS) qualifier.
 	PolicyQualifiers []PolicyQualifierInfo
 
 	noSmithyDocumentSerde
 }
 
-// Modifies the CertPolicyId of a PolicyInformation object with a qualifier. ACM
-// Private CA supports the certification practice statement (CPS) qualifier.
+// Modifies the CertPolicyId of a PolicyInformation object with a qualifier. Amazon
+// Web Services Private CA supports the certification practice statement (CPS)
+// qualifier.
 type PolicyQualifierInfo struct {
 
 	// Identifies the qualifier modifying a CertPolicyId.
@@ -667,8 +679,8 @@ type PolicyQualifierInfo struct {
 	// This member is required.
 	PolicyQualifierId PolicyQualifierId
 
-	// Defines the qualifier type. ACM Private CA supports the use of a URI for a CPS
-	// qualifier in this field.
+	// Defines the qualifier type. Amazon Web Services Private CA supports the use of a
+	// URI for a CPS qualifier in this field.
 	//
 	// This member is required.
 	Qualifier *Qualifier
@@ -676,8 +688,8 @@ type PolicyQualifierInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a PolicyInformation qualifier. ACM Private CA supports the certification
-// practice statement (CPS) qualifier
+// Defines a PolicyInformation qualifier. Amazon Web Services Private CA supports
+// the certification practice statement (CPS) qualifier
 // (https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4) defined in RFC
 // 5280.
 type Qualifier struct {
@@ -692,24 +704,24 @@ type Qualifier struct {
 }
 
 // Certificate revocation information used by the CreateCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // and UpdateCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html)
 // actions. Your private certificate authority (CA) can configure Online
 // Certificate Status Protocol (OCSP) support and/or maintain a certificate
 // revocation list (CRL). OCSP returns validation information about certificates as
 // requested by clients, and a CRL contains an updated list of certificates revoked
 // by your CA. For more information, see RevokeCertificate
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
 // and Setting up a certificate revocation method
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html) in
-// the Private Certificate Authority (PCA) User Guide.
+// (https://docs.aws.amazon.com/privateca/latest/userguide/revocation-setup.html)
+// in the Amazon Web Services Private Certificate Authority User Guide.
 type RevocationConfiguration struct {
 
 	// Configuration of the certificate revocation list (CRL), if any, maintained by
 	// your private CA. A CRL is typically updated approximately 30 minutes after a
-	// certificate is revoked. If for any reason a CRL update fails, ACM Private CA
-	// makes further attempts every 15 minutes.
+	// certificate is revoked. If for any reason a CRL update fails, Amazon Web
+	// Services Private CA makes further attempts every 15 minutes.
 	CrlConfiguration *CrlConfiguration
 
 	// Configuration of Online Certificate Status Protocol (OCSP) support, if any,
@@ -724,9 +736,9 @@ type RevocationConfiguration struct {
 // tag consists of a key and an optional value. You can associate up to 50 tags
 // with a private CA. To add one or more tags to a private CA, call the
 // TagCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html)
 // action. To remove a tag, call the UntagCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html)
 // action.
 type Tag struct {
 
@@ -745,17 +757,17 @@ type Tag struct {
 // Validity can be expressed as an explicit date and time when the validity of a
 // certificate starts or expires, or as a span of time after issuance, stated in
 // days, months, or years. For more information, see Validity
-// (https://tools.ietf.org/html/rfc5280#section-4.1.2.5) in RFC 5280. ACM Private
-// CA API consumes the Validity data type differently in two distinct parameters of
-// the IssueCertificate action. The required parameter IssueCertificate:Validity
-// specifies the end of a certificate's validity period. The optional parameter
-// IssueCertificate:ValidityNotBefore specifies a customized starting time for the
-// validity period.
+// (https://tools.ietf.org/html/rfc5280#section-4.1.2.5) in RFC 5280. Amazon Web
+// Services Private CA API consumes the Validity data type differently in two
+// distinct parameters of the IssueCertificate action. The required parameter
+// IssueCertificate:Validity specifies the end of a certificate's validity period.
+// The optional parameter IssueCertificate:ValidityNotBefore specifies a customized
+// starting time for the validity period.
 type Validity struct {
 
-	// Determines how ACM Private CA interprets the Value parameter, an integer.
-	// Supported validity types include those listed below. Type definitions with
-	// values include a sample input value and the resulting output. END_DATE: The
+	// Determines how Amazon Web Services Private CA interprets the Value parameter, an
+	// integer. Supported validity types include those listed below. Type definitions
+	// with values include a sample input value and the resulting output. END_DATE: The
 	// specific date and time when the certificate will expire, expressed using UTCTime
 	// (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used,
 	// if the year field (YY) is greater than or equal to 50, the year is interpreted

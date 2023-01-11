@@ -1,3 +1,7 @@
+# v1.16.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.15.28 (2022-12-29)
 
 * **Documentation**: Documentation updates for Amazon API Gateway

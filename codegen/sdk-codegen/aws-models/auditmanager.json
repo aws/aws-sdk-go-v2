@@ -258,7 +258,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An entity that defines the scope of audit evidence collected by Audit Manager.\n         An Audit Manager assessment is an implementation of an Audit Manager\n         framework. </p>"
+                "smithy.api#documentation": "<p> An entity that defines the scope of audit evidence collected by Audit Manager.\n         An Audit Manager assessment is an implementation of an Audit Manager framework. </p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentControl": {
@@ -310,7 +310,7 @@
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The amount of evidence that's generated for the control. </p>"
+                        "smithy.api#documentation": "<p> The amount of evidence that's collected for the control. </p>"
                     }
                 },
                 "assessmentReportEvidenceCount": {
@@ -343,7 +343,7 @@
                 "status": {
                     "target": "com.amazonaws.auditmanager#ControlSetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the current status of the control set. </p>"
+                        "smithy.api#documentation": "<p> The current status of the control set. </p>"
                     }
                 },
                 "roles": {
@@ -647,13 +647,13 @@
                 "createdAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the framework was created. </p>"
+                        "smithy.api#documentation": "<p> The time when the framework was created. </p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the framework was most recently updated. </p>"
+                        "smithy.api#documentation": "<p> The time when the framework was most recently updated. </p>"
                     }
                 }
             },
@@ -1175,7 +1175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Associates an evidence folder to an assessment report in a Audit Manager\n         assessment. </p>",
+                "smithy.api#documentation": "<p> Associates an evidence folder to an assessment report in an Audit Manager\n         assessment. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/associateToAssessmentReport",
@@ -1584,7 +1584,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads one or more pieces of evidence to a control in an Audit Manager assessment. You can upload manual evidence from any Amazon Simple Storage Service (Amazon S3) bucket by specifying\n         the S3 URI of the evidence. </p>\n         <p>You must upload manual evidence to your S3 bucket before you can upload it to your\n         assessment. For instructions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">CreateBucket</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> in\n         the <i>Amazon Simple Storage Service API Reference.</i>\n         </p>\n         <p>The following restrictions apply to this action:</p>\n         <ul>\n            <li>\n               <p>Maximum size of an individual evidence file: 100 MB</p>\n            </li>\n            <li>\n               <p>Number of daily manual evidence uploads per control: 100</p>\n            </li>\n            <li>\n               <p>Supported file formats: See <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files\">Supported file types for manual evidence</a> in the <i>Audit Manager User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about Audit Manager service restrictions, see <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html\">Quotas and\n            restrictions for Audit Manager</a>.</p>",
+                "smithy.api#documentation": "<p>Uploads one or more pieces of evidence to a control in an Audit Manager assessment.\n         You can upload manual evidence from any Amazon Simple Storage Service (Amazon S3) bucket by\n         specifying the S3 URI of the evidence. </p>\n         <p>You must upload manual evidence to your S3 bucket before you can upload it to your\n         assessment. For instructions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">CreateBucket</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> in\n         the <i>Amazon Simple Storage Service API Reference.</i>\n         </p>\n         <p>The following restrictions apply to this action:</p>\n         <ul>\n            <li>\n               <p>Maximum size of an individual evidence file: 100 MB</p>\n            </li>\n            <li>\n               <p>Number of daily manual evidence uploads per control: 100</p>\n            </li>\n            <li>\n               <p>Supported file formats: See <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files\">Supported file types for manual evidence</a> in the <i>Audit Manager User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about Audit Manager service restrictions, see <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html\">Quotas and\n            restrictions for Audit Manager</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}/evidence",
@@ -1871,14 +1871,14 @@
                     "name": "auditmanager"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who\n         need detailed information about the Audit Manager API operations, data types, and\n         errors. </p>\n         <p>Audit Manager is a service that provides automated evidence collection so that\n         you can continually audit your Amazon Web Services usage. You can use it to assess the\n         effectiveness of your controls, manage risk, and simplify compliance.</p>\n         <p>Audit Manager provides prebuilt frameworks that structure and automate\n         assessments for a given compliance standard. Frameworks include a prebuilt collection of\n         controls with descriptions and testing procedures. These controls are grouped according to\n         the requirements of the specified compliance standard or regulation. You can also customize\n         frameworks and controls to support internal audits with specific requirements. </p>\n         <p>Use the following links to get started with the Audit Manager API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An\n               alphabetical list of all Audit Manager API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data\n               types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common\n                  parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>:\n               Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\">\n            Audit Manager User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who\n         need detailed information about the Audit Manager API operations, data types, and\n         errors. </p>\n         <p>Audit Manager is a service that provides automated evidence collection so that you\n         can continually audit your Amazon Web Services usage. You can use it to assess the\n         effectiveness of your controls, manage risk, and simplify compliance.</p>\n         <p>Audit Manager provides prebuilt frameworks that structure and automate assessments\n         for a given compliance standard. Frameworks include a prebuilt collection of controls with\n         descriptions and testing procedures. These controls are grouped according to the\n         requirements of the specified compliance standard or regulation. You can also customize\n         frameworks and controls to support internal audits with specific requirements. </p>\n         <p>Use the following links to get started with the Audit Manager API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An\n               alphabetical list of all Audit Manager API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data\n               types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common\n                  parameters</a>: Parameters that all operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>:\n               Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\">\n            Audit Manager User Guide</a>.</p>",
                 "smithy.api#title": "AWS Audit Manager",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -1927,15 +1927,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -2198,9 +2189,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2211,9 +2202,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2224,9 +2215,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2237,9 +2228,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2250,9 +2241,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2263,9 +2254,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2276,9 +2267,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2289,9 +2280,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2302,9 +2293,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2315,9 +2306,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2328,9 +2319,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2341,9 +2332,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2354,9 +2345,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-west-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2367,9 +2358,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-west-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2380,9 +2371,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-west-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2393,9 +2384,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-west-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2406,9 +2397,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2419,9 +2410,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2432,9 +2423,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2445,9 +2436,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2458,9 +2449,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2471,9 +2462,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2484,9 +2475,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2497,9 +2488,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2510,9 +2501,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2523,9 +2514,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2536,9 +2527,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2549,9 +2540,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2562,9 +2553,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2575,9 +2566,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2588,9 +2579,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2601,9 +2592,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2614,9 +2605,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2627,9 +2618,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2640,9 +2631,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2653,9 +2644,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2666,9 +2657,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2679,9 +2670,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2692,9 +2683,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2705,9 +2696,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2718,9 +2709,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2731,9 +2722,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2744,9 +2735,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2757,9 +2748,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2770,9 +2761,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2783,9 +2774,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2796,9 +2787,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2809,9 +2800,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2822,9 +2813,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2834,9 +2825,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2846,9 +2837,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2978,7 +2969,7 @@
                 "controlSources": {
                     "target": "com.amazonaws.auditmanager#ControlSources",
                     "traits": {
-                        "smithy.api#documentation": "<p> The data source types that determine where Audit Manager collects evidence from\n         for the control. </p>"
+                        "smithy.api#documentation": "<p> The data source types that determine where Audit Manager collects evidence from for\n         the control. </p>"
                     }
                 },
                 "controlMappingSources": {
@@ -2990,13 +2981,13 @@
                 "createdAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the control was created. </p>"
+                        "smithy.api#documentation": "<p> The time when the control was created. </p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the control was most recently updated. </p>"
+                        "smithy.api#documentation": "<p> The time when the control was most recently updated. </p>"
                     }
                 },
                 "createdBy": {
@@ -3236,7 +3227,7 @@
                 "sourceType": {
                     "target": "com.amazonaws.auditmanager#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies one of the five types of data sources for evidence collection. </p>"
+                        "smithy.api#documentation": "<p> Specifies one of the five data source types for evidence collection. </p>"
                     }
                 },
                 "sourceKeyword": {
@@ -3294,19 +3285,19 @@
                 "controlSources": {
                     "target": "com.amazonaws.auditmanager#ControlSources",
                     "traits": {
-                        "smithy.api#documentation": "<p> The data source that determines where Audit Manager collects evidence from for\n         the control. </p>"
+                        "smithy.api#documentation": "<p> The data source that determines where Audit Manager collects evidence from for the\n         control. </p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the control was created. </p>"
+                        "smithy.api#documentation": "<p> The time when the control was created. </p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the control was most recently updated. </p>"
+                        "smithy.api#documentation": "<p> The time when the control was most recently updated. </p>"
                     }
                 }
             },
@@ -3744,7 +3735,7 @@
                 "queryStatement": {
                     "target": "com.amazonaws.auditmanager#QueryStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A SQL statement that represents an evidence finder query.</p>\n         <p>Provide this parameter when you want to generate an assessment report from the results\n         of an evidence finder search query. When you use this parameter, Audit Manager\n         generates a one-time report using only the evidence from the query output. This report does\n         not include any assessment evidence that was manually <a href=\"https://docs.aws.amazon.com/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence\">added to a report using the console</a>, or <a href=\"https://docs.aws.amazon.com/APIReference-evidenceFinder/API_BatchAssociateAssessmentReportEvidence.html\">associated with a report using the API</a>. </p>\n         <p>To use this parameter, the <a href=\"https://docs.aws.amazon.com/APIReference-evidenceFinder/API_EvidenceFinderSetup.html#auditmanager-Type-EvidenceFinderSetup-enablementStatus\">enablementStatus</a> of evidence finder must be <code>ENABLED</code>. </p>\n         <p> For examples and help resolving <code>queryStatement</code> validation exceptions, see\n            <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions\">Troubleshooting evidence finder issues</a> in the AWS Audit\n         Manager User Guide. </p>"
+                        "smithy.api#documentation": "<p>A SQL statement that represents an evidence finder query.</p>\n         <p>Provide this parameter when you want to generate an assessment report from the results\n         of an evidence finder search query. When you use this parameter, Audit Manager\n         generates a one-time report using only the evidence from the query output. This report does\n         not include any assessment evidence that was manually <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence\">added to a report using the console</a>, or <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_BatchAssociateAssessmentReportEvidence.html\">associated with a report using the API</a>. </p>\n         <p>To use this parameter, the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_EvidenceFinderEnablement.html#auditmanager-Type-EvidenceFinderEnablement-enablementStatus\">enablementStatus</a> of evidence finder must be <code>ENABLED</code>. </p>\n         <p> For examples and help resolving <code>queryStatement</code> validation exceptions, see\n            <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions\">Troubleshooting evidence finder issues</a> in the\n               <i>Audit Manager User Guide.</i>\n         </p>"
                     }
                 }
             }
@@ -4462,6 +4453,23 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.auditmanager#DeleteResources": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.auditmanager#DeregisterAccount": {
             "type": "operation",
             "input": {
@@ -4485,7 +4493,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deregisters an account in Audit Manager. </p>\n         <note>\n            <p>When you deregister your account from Audit Manager, your data isn’t deleted. If\n            you want to delete your resource data, you must perform that task separately before you\n            deregister your account. Either, you can do this in the Audit Manager console. Or,\n            you can use one of the delete API operations that are provided by Audit Manager. </p>\n            <p>To delete your Audit Manager resource data, see the following instructions: </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html\">DeleteAssessment</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html\">Deleting an\n                     assessment</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html\">DeleteAssessmentFramework</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html\">Deleting a\n                     custom framework</a> in the <i>Audit Manager User\n                     Guide</i>)</p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html\">DeleteAssessmentFrameworkShare</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html\">Deleting a share request</a> in the <i>Audit Manager User\n                     Guide</i>)</p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html\">DeleteAssessmentReport</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps\">Deleting an assessment report</a> in the <i>Audit Manager\n                     User Guide</i>)</p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html\">DeleteControl</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html\">Deleting a custom\n                     control</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n               </li>\n            </ul>\n            <p>At this time, Audit Manager doesn't provide an option to delete evidence. All\n            available delete operations are listed above.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Deregisters an account in Audit Manager. </p>\n         <note>\n            <p>Before you deregister, you can use the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_UpdateSettings.html\">UpdateSettings</a> API operation to set your preferred data retention policy. By\n            default, Audit Manager retains your data. If you want to delete your data, you can\n            use the <code>DeregistrationPolicy</code> attribute to request the deletion of your\n            data. </p>\n            <p>For more information about data retention, see <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html\">Data\n               Protection</a> in the <i>Audit Manager User Guide</i>.\n         </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/deregisterAccount",
@@ -4531,7 +4539,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified Amazon Web Services account as a delegated administrator for\n            Audit Manager. </p>\n     \n         <p>When you remove a delegated administrator from your Audit Manager settings, you\n            continue to have access to the evidence that you previously collected under that\n            account. This is also the case when you deregister a delegated administrator from\n               Organizations. However, Audit Manager will stop collecting and attaching\n            evidence to that delegated administrator account moving forward.</p>\n         <important>\n            <p>Keep in mind the following cleanup task if you use evidence finder:</p>\n            <p>Before you use your management account to remove a delegated administrator, make sure\n            that the current delegated administrator account signs in to Audit Manager and\n            disables evidence finder first. Disabling evidence finder automatically deletes the\n            event data store that was created in their account when they enabled evidence finder. If\n            this task isn’t completed, the event data store remains in their account. In this case,\n            we recommend that the original delegated administrator goes to CloudTrail Lake\n            and manually <a href=\"https://docs.aws.amazon.com/userguide/awscloudtrail/latest/userguide/query-eds-disable-termination.html\">deletes the event data store</a>.</p>\n            <p>This cleanup task is necessary to ensure that you don't end up with multiple event\n            data stores. Audit Manager will ignore an unused event data store after you remove\n            or change a delegated administrator account. However, the unused event data store\n            continues to incur storage costs from CloudTrail Lake if you don't delete\n            it.</p>\n         </important>   \n   \n         <p>When you deregister a delegated administrator account for Audit Manager, the data\n            for that account isn’t deleted. If you want to delete resource data for a delegated\n            administrator account, you must perform that task separately before you deregister the\n            account. Either, you can do this in the Audit Manager console. Or, you can use one\n            of the delete API operations that are provided by Audit Manager. </p>\n         <p>To delete your Audit Manager resource data, see the following instructions: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html\">DeleteAssessment</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html\">Deleting an\n                     assessment</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html\">DeleteAssessmentFramework</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html\">Deleting a\n                     custom framework</a> in the <i>Audit Manager User\n                     Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html\">DeleteAssessmentFrameworkShare</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html\">Deleting a share request</a> in the <i>Audit Manager User\n                     Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html\">DeleteAssessmentReport</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps\">Deleting an assessment report</a> in the <i>Audit Manager\n                     User Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html\">DeleteControl</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html\">Deleting a custom\n                     control</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n            </li>\n         </ul>\n         <p>At this time, Audit Manager doesn't provide an option to delete evidence. All\n            available delete operations are listed above.</p>",
+                "smithy.api#documentation": "<p>Removes the specified Amazon Web Services account as a delegated administrator for\n            Audit Manager. </p>\n         <p>When you remove a delegated administrator from your Audit Manager settings, you\n         continue to have access to the evidence that you previously collected under that account.\n         This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager stops collecting and attaching evidence to\n         that delegated administrator account moving forward.</p>\n         <important>\n            <p>Keep in mind the following cleanup task if you use evidence finder:</p>\n            <p>Before you use your management account to remove a delegated administrator, make sure\n            that the current delegated administrator account signs in to Audit Manager and\n            disables evidence finder first. Disabling evidence finder automatically deletes the\n            event data store that was created in their account when they enabled evidence finder. If\n            this task isn’t completed, the event data store remains in their account. In this case,\n            we recommend that the original delegated administrator goes to CloudTrail Lake\n            and manually <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-eds-disable-termination.html\">deletes the\n               event data store</a>.</p>\n            <p>This cleanup task is necessary to ensure that you don't end up with multiple event\n            data stores. Audit Manager ignores an unused event data store after you remove or\n            change a delegated administrator account. However, the unused event data store continues\n            to incur storage costs from CloudTrail Lake if you don't delete it.</p>\n         </important>\n         <p>When you deregister a delegated administrator account for Audit Manager, the data\n         for that account isn’t deleted. If you want to delete resource data for a delegated\n         administrator account, you must perform that task separately before you deregister the\n         account. Either, you can do this in the Audit Manager console. Or, you can use one of\n         the delete API operations that are provided by Audit Manager. </p>\n         <p>To delete your Audit Manager resource data, see the following instructions: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html\">DeleteAssessment</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html\">Deleting an\n                  assessment</a> in the <i>Audit Manager User\n               Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html\">DeleteAssessmentFramework</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html\">Deleting a\n                  custom framework</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html\">DeleteAssessmentFrameworkShare</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html\">Deleting a share request</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html\">DeleteAssessmentReport</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps\">Deleting an assessment report</a> in the <i>Audit Manager User\n                  Guide</i>)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html\">DeleteControl</a> (see also: <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html\">Deleting a custom\n                  control</a> in the <i>Audit Manager User\n               Guide</i>)</p>\n            </li>\n         </ul>\n         <p>At this time, Audit Manager doesn't provide an option to delete evidence for a\n         specific delegated administrator. Instead, when your management account deregisters Audit Manager, we perform a cleanup for the current delegated administrator account at the\n         time of deregistration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/deregisterOrganizationAdminAccount",
@@ -4553,6 +4561,20 @@
         "com.amazonaws.auditmanager#DeregisterOrganizationAdminAccountResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.auditmanager#DeregistrationPolicy": {
+            "type": "structure",
+            "members": {
+                "deleteResources": {
+                    "target": "com.amazonaws.auditmanager#DeleteResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which Audit Manager data will be deleted when you deregister Audit Manager.</p>\n         <ul>\n            <li>\n               <p>If you set the value to <code>ALL</code>, all of your data is deleted within seven\n               days of deregistration.</p>\n            </li>\n            <li>\n               <p>If you set the value to <code>DEFAULT</code>, none of your data is deleted at the\n               time of deregistration. However, keep in mind that the Audit Manager data\n               retention policy still applies. As a result, any evidence data will be deleted two\n               years after its creation date. Your other Audit Manager resources will continue\n               to exist indefinitely.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deregistration policy for the data that's stored in Audit Manager. You can\n         use this attribute to determine how your data is handled when you <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html\">deregister Audit Manager</a>.</p>\n         <p>By default, Audit Manager retains evidence data for two years from the time of its\n         creation. Other Audit Manager resources (including assessments, custom controls, and\n         custom frameworks) remain in Audit Manager indefinitely, and are available if you\n            <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html\">re-register Audit Manager</a> in the future. For more\n         information about data retention, see <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html\">Data\n            Protection</a> in the <i>Audit Manager User Guide</i>.</p>\n         <important>\n            <p>If you choose to delete all data, this action permanently deletes all evidence data\n            in your account within seven days. It also deletes all of the Audit Manager\n            resources that you created, including assessments, custom controls, and custom\n            frameworks. Your data will not be available if you re-register Audit Manager in the\n            future.</p>\n         </important>"
+            }
         },
         "com.amazonaws.auditmanager#DisassociateAssessmentReportEvidenceFolder": {
             "type": "operation",
@@ -4744,7 +4766,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A record that contains the information needed to demonstrate compliance with the\n         requirements specified by a control. Examples of evidence include change activity triggered\n         by a user, or a system configuration snapshot. </p>"
+                "smithy.api#documentation": "<p> A record that contains the information needed to demonstrate compliance with the\n         requirements specified by a control. Examples of evidence include change activity invoked\n         by a user, or a system configuration snapshot. </p>"
             }
         },
         "com.amazonaws.auditmanager#EvidenceAttributeKey": {
@@ -4811,13 +4833,13 @@
                 "enablementStatus": {
                     "target": "com.amazonaws.auditmanager#EvidenceFinderEnablementStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the evidence finder feature and the related event data store. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLE_IN_PROGRESS</code> means that you requested to enable evidence\n               finder. An event data store is currently being created to support evidence finder\n               queries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> means that an event data store was successfully created and\n               evidence finder is enabled. We recommend that you wait 24 hours until the event data\n               store is backfilled with your past evidence data. You can use evidence finder in the\n               meantime, but not all data might be available until the backfill is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLE_IN_PROGRESS</code> means that you requested to disable evidence finder, and your\n               request is pending the deletion of the event data store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> means that you have permanently disabled evidence finder and the event\n               data store has been deleted. You can't re-enable evidence finder after this\n               point.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the evidence finder feature and the related event data store. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLE_IN_PROGRESS</code> means that you requested to enable evidence\n               finder. An event data store is currently being created to support evidence finder\n               queries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> means that an event data store was successfully created and\n               evidence finder is enabled. We recommend that you wait 7 days until the event data\n               store is backfilled with your past two years’ worth of evidence data. You can use\n               evidence finder in the meantime, but not all data might be available until the\n               backfill is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLE_IN_PROGRESS</code> means that you requested to disable evidence finder, and your\n               request is pending the deletion of the event data store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> means that you have permanently disabled evidence finder and the event\n               data store has been deleted. You can't re-enable evidence finder after this\n               point.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "backfillStatus": {
                     "target": "com.amazonaws.auditmanager#EvidenceFinderBackfillStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the evidence data backfill process. </p>\n         <p>The backfill starts after you enable evidence finder. During this task, Audit Manager populates an event data store with your past evidence data so that your evidence can be\n         queried.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code> means that the backfill hasn’t started yet. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> means that the backfill is in progress. This can take up to 24 hours\n               to complete, depending on the amount of evidence data. </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> means that the backfill is complete. All of your past\n               evidence is now queryable. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the evidence data backfill process. </p>\n         <p>The backfill starts after you enable evidence finder. During this task, Audit Manager populates an event data store with your past two years’ worth of evidence data so that\n         your evidence can be queried.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code> means that the backfill hasn’t started yet. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> means that the backfill is in progress. This can take up\n               to 7 days to complete, depending on the amount of evidence data. </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> means that the backfill is complete. All of your past\n               evidence is now queryable. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "error": {
@@ -4980,13 +5002,13 @@
                 "createdAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the framework was created. </p>"
+                        "smithy.api#documentation": "<p> The time when the framework was created. </p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.auditmanager#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies when the framework was most recently updated. </p>"
+                        "smithy.api#documentation": "<p> The time when the framework was most recently updated. </p>"
                     }
                 },
                 "createdBy": {
@@ -5779,7 +5801,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of evidence folders that are associated with a specified control of an\n         assessment in Audit Manager. </p>",
+                "smithy.api#documentation": "<p> Returns a list of evidence folders that are associated with a specified control in an\n            Audit Manager assessment. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/evidenceFolders-by-assessment-control/{controlSetId}/{controlId}",
@@ -5939,7 +5961,7 @@
                 "evidence": {
                     "target": "com.amazonaws.auditmanager#Evidence",
                     "traits": {
-                        "smithy.api#documentation": "<p> The evidence that the <code>GetEvidenceResponse</code> API returned. </p>"
+                        "smithy.api#documentation": "<p> The evidence that the <code>GetEvidence</code> API returned. </p>"
                     }
                 }
             }
@@ -6165,7 +6187,7 @@
                 "attribute": {
                     "target": "com.amazonaws.auditmanager#SettingAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of <code>SettingAttribute</code> enum values. </p>",
+                        "smithy.api#documentation": "<p> The list of setting attribute enum values. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6551,7 +6573,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of the frameworks that are available in the Audit Manager\n         framework library. </p>",
+                "smithy.api#documentation": "<p> Returns a list of the frameworks that are available in the Audit Manager framework\n         library. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessmentFrameworks",
@@ -7631,7 +7653,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The wrapper that contains the Audit Manager role information of the current\n         user. This includes the role type and IAM Amazon Resource Name (ARN).\n      </p>"
+                "smithy.api#documentation": "<p> The wrapper that contains the Audit Manager role information of the current user.\n         This includes the role type and IAM Amazon Resource Name (ARN). </p>"
             }
         },
         "com.amazonaws.auditmanager#RoleType": {
@@ -7789,6 +7811,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EVIDENCE_FINDER_ENABLEMENT"
                     }
+                },
+                "DEREGISTRATION_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTRATION_POLICY"
+                    }
                 }
             }
         },
@@ -7829,6 +7857,12 @@
                     "target": "com.amazonaws.auditmanager#EvidenceFinderEnablement",
                     "traits": {
                         "smithy.api#documentation": "<p>The current evidence finder status and event data store details.</p>"
+                    }
+                },
+                "deregistrationPolicy": {
+                    "target": "com.amazonaws.auditmanager#DeregistrationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deregistration policy for your Audit Manager data. You can\n      use this attribute to determine how your data is handled when you deregister Audit Manager.</p>"
                     }
                 }
             },
@@ -8819,7 +8853,7 @@
                 "assessment": {
                     "target": "com.amazonaws.auditmanager#Assessment",
                     "traits": {
-                        "smithy.api#documentation": "<p> The response object for the <code>UpdateAssessmentRequest</code> API. This is the name\n         of the updated assessment.</p>"
+                        "smithy.api#documentation": "<p> The response object for the <code>UpdateAssessment</code> API. This is the name of the\n         updated assessment.</p>"
                     }
                 }
             }
@@ -9040,7 +9074,13 @@
                 "evidenceFinderEnabled": {
                     "target": "com.amazonaws.auditmanager#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the evidence finder feature is enabled. Change this attribute to\n         enable or disable evidence finder.</p>\n         <important>\n            <p>When you use this attribute to disable evidence finder, Audit Manager deletes the\n            event data store that’s used to query your evidence data. As a result, you can’t\n            re-enable evidence finder and use the feature again. Your only alternative is to <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html\">deregister</a> and then <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html\">re-register</a>\n            Audit Manager. </p>\n            <p>Disabling evidence finder is permanent, so consider this decision carefully before\n            you proceed. If you’re using Audit Manager as a delegated administrator, keep in\n            mind that this action applies to all member accounts in your organization.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>Specifies whether the evidence finder feature is enabled. Change this attribute to\n         enable or disable evidence finder.</p>\n         <important>\n            <p>When you use this attribute to disable evidence finder, Audit Manager deletes the\n            event data store that’s used to query your evidence data. As a result, you can’t\n            re-enable evidence finder and use the feature again. Your only alternative is to <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html\">deregister</a> and then <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html\">re-register</a>\n            Audit Manager. </p>\n         </important>"
+                    }
+                },
+                "deregistrationPolicy": {
+                    "target": "com.amazonaws.auditmanager#DeregistrationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deregistration policy for your Audit Manager data. You can\n         use this attribute to determine how your data is handled when you deregister Audit Manager.</p>"
                     }
                 }
             }

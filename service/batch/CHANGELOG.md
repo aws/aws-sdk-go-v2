@@ -1,3 +1,11 @@
+# v1.21.1 (2023-01-09)
+
+* No change notes available for this release.
+
+# v1.21.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.20.0 (2022-12-20)
 
 * **Feature**: Adds isCancelled and isTerminated to DescribeJobs response.

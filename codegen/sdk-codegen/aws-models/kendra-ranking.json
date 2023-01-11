@@ -1,0 +1,1913 @@
+{
+    "smithy": "2.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.kendraranking#AWSKendraRerankingFrontendService": {
+            "type": "service",
+            "version": "2022-10-19",
+            "operations": [
+                {
+                    "target": "com.amazonaws.kendraranking#CreateRescoreExecutionPlan"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#DeleteRescoreExecutionPlan"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#DescribeRescoreExecutionPlan"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ListRescoreExecutionPlans"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#Rescore"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#UpdateRescoreExecutionPlan"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Kendra Ranking",
+                    "arnNamespace": "kendra-ranking",
+                    "cloudFormationName": "KendraRanking",
+                    "cloudTrailEventSource": "kendraranking.amazonaws.com",
+                    "endpointPrefix": "kendra-ranking"
+                },
+                "aws.auth#sigv4": {
+                    "name": "kendra-ranking"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Kendra Intelligent Ranking uses Amazon Kendra \n            semantic search capabilities to intelligently re-rank a search \n            service's results.</p>",
+                "smithy.api#title": "Amazon Kendra Intelligent Ranking",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://kendra-ranking-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://kendra-ranking.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://kendra-ranking-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://kendra-ranking.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-ranking.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don’t have sufficient access to perform this action. \n            Please ensure you have the required permission policies \n            and user accounts and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.kendraranking#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#BodyTokensList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#Tokens"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#CapacityUnitsConfiguration": {
+            "type": "structure",
+            "members": {
+                "RescoreCapacityUnits": {
+                    "target": "com.amazonaws.kendraranking#RescoreCapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of extra capacity for your rescore execution \n            plan.</p>\n         <p>A single extra capacity unit for a rescore execution \n            plan provides 0.01 rescore requests per second. You can add \n            up to 1000 extra capacity units.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sets additional capacity units configured for your \n            rescore execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API. You can add and \n            remove capacity units to fit your usage requirements.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#ClientTokenName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^$|[\\x00-\\x7F]+$"
+            }
+        },
+        "com.amazonaws.kendraranking#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A conflict occurred with the request. Please fix any \n            inconsistencies with your resources and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.kendraranking#CreateRescoreExecutionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#CreateRescoreExecutionPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#CreateRescoreExecutionPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a rescore execution plan. A rescore execution \n            plan is an Amazon Kendra Intelligent Ranking resource \n            used for provisioning the <code>Rescore</code> API. You set \n            the number of capacity units that you require for \n            Amazon Kendra Intelligent Ranking to rescore or re-rank \n            a search service's results.</p>\n         <p>For an example of using the \n            <code>CreateRescoreExecutionPlan</code> API, including using \n            the Python and Java SDKs, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html\">Semantically \n                ranking a search service's results</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/rescore-execution-plans",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#CreateRescoreExecutionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the rescore execution plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendraranking#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the rescore execution plan.</p>"
+                    }
+                },
+                "CapacityUnits": {
+                    "target": "com.amazonaws.kendraranking#CapacityUnitsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can set additional capacity units to meet the \n            needs of your rescore execution plan. You are given a single \n            capacity unit by default. If you want to use the default \n            capacity, you don't set additional capacity units. For more \n            information on the default capacity and additional capacity \n            units, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting \n                capacity</a>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kendraranking#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that identify or categorize your \n            rescore execution plan. You can also use tags to help control \n            access to the rescore execution plan. Tag keys and values can \n            consist of Unicode letters, digits, white space, and any of \n            the following symbols: _ . : / = + - @.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.kendraranking#ClientTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you provide to identify the request to create \n            a rescore execution plan. Multiple calls to the \n            <code>CreateRescoreExecutionPlanRequest</code> API with the \n            same client token will create only one rescore execution plan.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#CreateRescoreExecutionPlanResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rescore \n            execution plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DeleteRescoreExecutionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#DeleteRescoreExecutionPlanRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a rescore execution plan. A rescore execution \n            plan is an Amazon Kendra Intelligent Ranking resource \n            used for provisioning the <code>Rescore</code> API.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/rescore-execution-plans/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DeleteRescoreExecutionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan that you \n            want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DescribeRescoreExecutionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#DescribeRescoreExecutionPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#DescribeRescoreExecutionPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a rescore execution plan. A rescore \n            execution plan is an Amazon Kendra Intelligent Ranking \n            resource used for provisioning the <code>Rescore</code> API.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/rescore-execution-plans/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DescribeRescoreExecutionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan that you want \n            to get information on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DescribeRescoreExecutionPlanResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rescore execution \n            plan.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the rescore execution plan.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendraranking#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the rescore execution plan.</p>"
+                    }
+                },
+                "CapacityUnits": {
+                    "target": "com.amazonaws.kendraranking#CapacityUnitsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity units set for the rescore execution plan. \n            A capacity of zero indicates that the rescore execution \n            plan is using the default capacity. For more information on the \n            default capacity and additional capacity units, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting \n                capacity</a>.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendraranking#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp of when the rescore execution plan was \n            created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.kendraranking#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp of when the rescore execution plan was \n            last updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rescore execution plan. When the \n            value is <code>ACTIVE</code>, the rescore execution plan is \n            ready for use. If the <code>Status</code> field value is \n            <code>FAILED</code>, the <code>ErrorMessage</code> field \n            contains a message that explains why.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the <code>Status</code> field value is \n            <code>FAILED</code>, the <code>ErrorMessage</code> field \n            contains a message that explains why.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendraranking#Document": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#DocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the document from the search service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.kendraranking#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional group identifier of the document from the search \n            service. Documents with the same group identifier are grouped \n            together and processed as one document within the service.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.kendraranking#DocumentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the search service's document.</p>"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.kendraranking#DocumentBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body text of the search service's document.</p>"
+                    }
+                },
+                "TokenizedTitle": {
+                    "target": "com.amazonaws.kendraranking#TitleTokensList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the search service's document represented as \n            a list of tokens or words. You must choose to provide \n            <code>Title</code> or <code>TokenizedTitle</code>. You cannot\n            provide both.</p>"
+                    }
+                },
+                "TokenizedBody": {
+                    "target": "com.amazonaws.kendraranking#BodyTokensList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body text of the search service's document represented \n            as a list of tokens or words. You must choose to provide \n            <code>Body</code> or <code>TokenizedBody</code>. You cannot \n            provide both.</p>"
+                    }
+                },
+                "OriginalScore": {
+                    "target": "com.amazonaws.kendraranking#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original document score or rank from the search service. \n            Amazon Kendra Intelligent Ranking gives the document a new \n            score or rank based on its intelligent search algorithms.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a document from a search service such \n            as OpenSearch (self managed). Amazon Kendra Intelligent \n            Ranking uses this information to rank and score on.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#DocumentBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendraranking#DocumentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#Document"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#DocumentTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendraranking#Float": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -100000,
+                    "max": 100000
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#GroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An issue occurred with the internal server used for \n            your Amazon Kendra Intelligent Ranking service. \n            Please wait a few minutes and try again, or contact \n            <a href=\"http://aws.amazon.com/contact-us/\">Support</a> \n            for help.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.kendraranking#ListRescoreExecutionPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#ListRescoreExecutionPlansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#ListRescoreExecutionPlansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists your rescore execution plans. A rescore execution plan \n            is an Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/rescore-execution-plans",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ListRescoreExecutionPlansRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.kendraranking#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra Intelligent \n            Ranking returns a pagination token in the response. You can use \n            this pagination token to retrieve the next set of rescore \n            execution plans.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendraranking#MaxResultsIntegerForListRescoreExecutionPlansRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of rescore execution plans to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ListRescoreExecutionPlansResponse": {
+            "type": "structure",
+            "members": {
+                "SummaryItems": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of summary information for one or more rescore \n            execution plans.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendraranking#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra Intelligent \n            Ranking returns a pagination token in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of tags associated with a specified resource. \n            A rescore execution plan is an example of a resource that \n            can have tags associated with it.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.kendraranking#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rescore execution \n            plan to get a list of tags for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request information for listing tags associated with \n            a rescore execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.kendraranking#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the rescore execution \n            plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#MaxResultsIntegerForListRescoreExecutionPlansRequest": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 800
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendraranking#Rescore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#RescoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#RescoreResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Rescores or re-ranks search results from a search service \n            such as OpenSearch (self managed). You use the semantic search \n            capabilities of Amazon Kendra Intelligent Ranking to \n            improve the search service's results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/rescore-execution-plans/{RescoreExecutionPlanId}/rescore",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreCapacityUnit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreExecutionPlanArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreExecutionPlanId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreExecutionPlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreExecutionPlanStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreExecutionPlanSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rescore execution plan.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendraranking#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp when the rescore execution plan \n            was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.kendraranking#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp when the rescore execution plan \n            was last updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rescore execution plan. When \n            the value is <code>ACTIVE</code>, the rescore execution \n            plan is ready for use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for a rescore execution plan. A rescore \n            execution plan is an Amazon Kendra Intelligent Ranking \n            resource used for provisioning the <code>Rescore</code> API.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreExecutionPlanSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#RescoreExecutionPlanSummary"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]$"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreRequest": {
+            "type": "structure",
+            "members": {
+                "RescoreExecutionPlanId": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan. A rescore \n            execution plan is an Amazon Kendra Intelligent Ranking \n            resource used for provisioning the <code>Rescore</code> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SearchQuery": {
+                    "target": "com.amazonaws.kendraranking#SearchQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input query from the search service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Documents": {
+                    "target": "com.amazonaws.kendraranking#DocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of documents for Amazon Kendra Intelligent \n            Ranking to rescore or rank on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreResult": {
+            "type": "structure",
+            "members": {
+                "RescoreId": {
+                    "target": "com.amazonaws.kendraranking#RescoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier associated with the scores that \n            Amazon Kendra Intelligent Ranking gives to the \n            results. Amazon Kendra Intelligent Ranking \n            rescores or re-ranks the results for the search service.</p>"
+                    }
+                },
+                "ResultItems": {
+                    "target": "com.amazonaws.kendraranking#RescoreResultItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of result items for documents with new relevancy \n            scores. The results are in descending order.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreResultItem": {
+            "type": "structure",
+            "members": {
+                "DocumentId": {
+                    "target": "com.amazonaws.kendraranking#DocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the document from the search service.</p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.kendraranking#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relevancy score or rank that Amazon Kendra \n            Intelligent Ranking gives to the result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A result item for a document with a new relevancy score.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#RescoreResultItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#RescoreResultItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource you want to use doesn't exist. Please \n            check you have provided the correct resource and try \n            again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.kendraranking#ResourceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource you want to use is unavailable. Please \n            check you have provided the correct resource \n            information and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.kendraranking#SearchQuery": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have exceeded the set limits for your \n            Amazon Kendra Intelligent Ranking service. Please \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a> \n            for more information, or contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a> to inquire about \n            an increase of limits.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.kendraranking#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.kendraranking#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the tag. Keys are not case sensitive and must \n            be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.kendraranking#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with the tag. The value can be an \n            empty string but it can't be null.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key-value pair that identifies or categorizes a rescore \n            execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API. You can also use \n            a tag to help control access to a rescore execution plan. \n            A tag key and value can consist of Unicode letters, digits, \n            white space, and any of the following symbols: _ . : / = + - @.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a specified tag to a specified rescore execution \n            plan. A rescore execution plan is an Amazon Kendra \n            Intelligent Ranking resource used for provisioning the \n            <code>Rescore</code> API. If the tag already exists, \n            the existing value is replaced with the new value.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.kendraranking#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rescore execution \n            plan to tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kendraranking#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys to add to a rescore execution plan. \n            If a tag already exists, the existing value is replaced \n            with the new value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request information for tagging a rescore execution \n            plan. A rescore execution plan is an Amazon Kendra \n            Intelligent Ranking resource used for provisioning the \n            <code>Rescore</code> API.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response with an empty HTTP body.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. \n            Please reduce the number of requests and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.kendraranking#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.kendraranking#TitleTokensList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendraranking#Tokens"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#Tokens": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendraranking#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a tag from a rescore execution plan. A rescore \n            execution plan is an Amazon Kendra Intelligent \n            Ranking resource used for provisioning the \n            <code>Rescore</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.kendraranking#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rescore execution \n            plan to remove the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.kendraranking#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys to remove from the rescore execution \n            plan. If a tag key does not exist on the resource, it is \n            ignored.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request information to remove a tag from a rescore \n            execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for\n            provisioning the <code>Rescore</code> API.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response with an empty HTTP body.</p>"
+            }
+        },
+        "com.amazonaws.kendraranking#UpdateRescoreExecutionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendraranking#UpdateRescoreExecutionPlanRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendraranking#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendraranking#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a rescore execution plan. A rescore execution plan \n            is an Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API. You can update the \n            number of capacity units you require for Amazon Kendra \n            Intelligent Ranking to rescore or re-rank a search service's \n            results.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/rescore-execution-plans/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#UpdateRescoreExecutionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rescore execution plan that you want \n            to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendraranking#RescoreExecutionPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the rescore execution plan.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendraranking#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the rescore execution plan.</p>"
+                    }
+                },
+                "CapacityUnits": {
+                    "target": "com.amazonaws.kendraranking#CapacityUnitsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can set additional capacity units to meet the needs \n            of your rescore execution plan. You are given a single capacity \n            unit by default. If you want to use the default capacity, you \n            don't set additional capacity units. For more information on the\n            default capacity and additional capacity units, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting capacity</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendraranking#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendraranking#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints set by \n            the Amazon Kendra Intelligent Ranking service. \n            Please provide the correct input and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

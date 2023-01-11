@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of evidence folders that are associated with a specified control
-// of an assessment in Audit Manager.
+// in an Audit Manager assessment.
 func (c *Client) GetEvidenceFoldersByAssessmentControl(ctx context.Context, params *GetEvidenceFoldersByAssessmentControlInput, optFns ...func(*Options)) (*GetEvidenceFoldersByAssessmentControlOutput, error) {
 	if params == nil {
 		params = &GetEvidenceFoldersByAssessmentControlInput{}

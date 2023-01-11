@@ -134,7 +134,11 @@ type CalculateRouteMatrixInput struct {
 	// * If traveling by Truck use the TruckModeOptions
 	// parameter.
 	//
-	// Default Value: Car
+	// Bicycle or Motorcycle are only valid when using Grab as a data
+	// provider, and only within Southeast Asia. Truck is not available for Grab. For
+	// more information about using Grab as a data provider, see GrabMaps
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html) in the
+	// Amazon Location Service Developer Guide. Default Value: Car
 	TravelMode types.TravelMode
 
 	// Specifies route preferences when traveling by Truck, such as avoiding routes

@@ -1,3 +1,11 @@
+# v1.21.0 (2023-01-06)
+
+* **Feature**: Added revocation parameter validation: bucket names must match S3 bucket naming rules and CNAMEs conform to RFC2396 restrictions on the use of special characters in URIs.
+
+# v1.20.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.19.3 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

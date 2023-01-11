@@ -12,6 +12,8 @@ import (
 type CustomHealthNotFound struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *CustomHealthNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CustomHealthNotFound) ErrorCode() string             { return "CustomHealthNotFound" }
+func (e *CustomHealthNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CustomHealthNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CustomHealthNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation is already in progress.
 type DuplicateRequest struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	DuplicateOperationId *string
 
@@ -45,13 +54,20 @@ func (e *DuplicateRequest) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateRequest) ErrorCode() string             { return "DuplicateRequest" }
+func (e *DuplicateRequest) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateRequest"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No instance exists with the specified ID, or the instance was recently
 // registered, and information about the instance hasn't propagated yet.
 type InstanceNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -65,7 +81,12 @@ func (e *InstanceNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InstanceNotFound) ErrorCode() string             { return "InstanceNotFound" }
+func (e *InstanceNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InstanceNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InstanceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more specified values aren't valid. For example, a required value might
@@ -73,6 +94,8 @@ func (e *InstanceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // value might exceed length constraints.
 type InvalidInput struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,12 +109,19 @@ func (e *InvalidInput) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
+func (e *InvalidInput) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInput"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The namespace that you're trying to create already exists.
 type NamespaceAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	CreatorRequestId *string
 	NamespaceId      *string
@@ -108,12 +138,19 @@ func (e *NamespaceAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NamespaceAlreadyExists) ErrorCode() string             { return "NamespaceAlreadyExists" }
+func (e *NamespaceAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NamespaceAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NamespaceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No namespace exists with the specified ID.
 type NamespaceNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -127,12 +164,19 @@ func (e *NamespaceNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NamespaceNotFound) ErrorCode() string             { return "NamespaceNotFound" }
+func (e *NamespaceNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NamespaceNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NamespaceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No operation exists with the specified ID.
 type OperationNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -146,7 +190,12 @@ func (e *OperationNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotFound) ErrorCode() string             { return "OperationNotFound" }
+func (e *OperationNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation can't be completed because you've reached the quota for the number
@@ -155,6 +204,8 @@ func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Map Developer Guide.
 type RequestLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -168,13 +219,20 @@ func (e *RequestLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RequestLimitExceeded) ErrorCode() string             { return "RequestLimitExceeded" }
+func (e *RequestLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "RequestLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource can't be deleted because it contains other resources. For
 // example, you can't delete a service that contains any instances.
 type ResourceInUse struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -188,13 +246,20 @@ func (e *ResourceInUse) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUse) ErrorCode() string             { return "ResourceInUse" }
+func (e *ResourceInUse) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUse"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource can't be created because you've reached the quota on the number of
 // resources.
 type ResourceLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -208,12 +273,19 @@ func (e *ResourceLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceLimitExceeded) ErrorCode() string             { return "ResourceLimitExceeded" }
+func (e *ResourceLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation can't be completed because the resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -227,13 +299,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service can't be created because a service with the same name already
 // exists.
 type ServiceAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	CreatorRequestId *string
 	ServiceId        *string
@@ -250,12 +329,19 @@ func (e *ServiceAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceAlreadyExists) ErrorCode() string             { return "ServiceAlreadyExists" }
+func (e *ServiceAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No service exists with the specified ID.
 type ServiceNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -269,13 +355,20 @@ func (e *ServiceNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceNotFound) ErrorCode() string             { return "ServiceNotFound" }
+func (e *ServiceNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The list of tags on the resource is over the quota. The maximum number of tags
 // that can be applied to a resource is 50.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -291,5 +384,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

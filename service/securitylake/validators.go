@@ -796,6 +796,9 @@ func validateOpUpdateSubscriberInput(v *UpdateSubscriberInput) error {
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
+	if v.SourceTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceTypes"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

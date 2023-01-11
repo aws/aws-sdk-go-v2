@@ -1,3 +1,11 @@
+# v1.2.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.1.0 (2023-01-03)
+
+* **Feature**: Allow CreateSubscriber API to take string input that allows setting more descriptive SubscriberDescription field. Make souceTypes field required in model level for UpdateSubscriberRequest as it is required for every API call on the backend. Allow ListSubscribers take any String as nextToken param.
+
 # v1.0.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -16,9 +16,9 @@ import (
 // (ACM) service principal (acm.amazonaws.com). These permissions allow ACM to
 // issue and renew ACM certificates that reside in the same Amazon Web Services
 // account as the CA. Permissions can be granted with the CreatePermission
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
 // action and revoked with the DeletePermission
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html)
 // action. About Permissions
 //
 // * If the private CA and the certificates it issues
@@ -33,8 +33,8 @@ import (
 // certificates reside in different accounts, then permissions cannot be used to
 // enable automatic renewals. Instead, the ACM certificate owner must set up a
 // resource-based policy to enable cross-account issuance and renewals. For more
-// information, see Using a Resource Based Policy with ACM Private CA
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
+// information, see Using a Resource Based Policy with Amazon Web Services Private
+// CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html).
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -54,11 +54,11 @@ type ListPermissionsInput struct {
 
 	// The Amazon Resource Number (ARN) of the private CA to inspect. You can find the
 	// ARN by calling the ListCertificateAuthorities
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
 	// action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// You can get a private CA's ARN by running the ListCertificateAuthorities
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
 	// action.
 	//
 	// This member is required.

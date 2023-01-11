@@ -1,3 +1,7 @@
+# v1.28.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.27.0 (2022-12-27)
 
 * **Feature**: Add additional operations to throw ThrottlingExceptions

@@ -129,6 +129,9 @@ func awsAwsjson11_deserializeOpErrorBatchCheckLayerAvailability(response *smithy
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -245,6 +248,9 @@ func awsAwsjson11_deserializeOpErrorBatchDeleteImage(response *smithyhttp.Respon
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -510,6 +516,9 @@ func awsAwsjson11_deserializeOpErrorCreateRepository(response *smithyhttp.Respon
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -629,6 +638,9 @@ func awsAwsjson11_deserializeOpErrorDeleteRepository(response *smithyhttp.Respon
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -750,6 +762,9 @@ func awsAwsjson11_deserializeOpErrorDeleteRepositoryPolicy(response *smithyhttp.
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -870,6 +885,9 @@ func awsAwsjson11_deserializeOpErrorDescribeImages(response *smithyhttp.Response
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -986,6 +1004,9 @@ func awsAwsjson11_deserializeOpErrorDescribeImageTags(response *smithyhttp.Respo
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1221,6 +1242,9 @@ func awsAwsjson11_deserializeOpErrorDescribeRepositories(response *smithyhttp.Re
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1334,6 +1358,9 @@ func awsAwsjson11_deserializeOpErrorGetAuthorizationToken(response *smithyhttp.R
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1560,11 +1587,17 @@ func awsAwsjson11_deserializeOpErrorGetRepositoryCatalogData(response *smithyhtt
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("RepositoryCatalogDataNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorRepositoryCatalogDataNotFoundException(response, errorBody)
+
 	case strings.EqualFold("RepositoryNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorRepositoryNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1685,6 +1718,9 @@ func awsAwsjson11_deserializeOpErrorGetRepositoryPolicy(response *smithyhttp.Res
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1925,6 +1961,9 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2301,6 +2340,9 @@ func awsAwsjson11_deserializeOpErrorPutRepositoryCatalogData(response *smithyhtt
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2417,6 +2459,9 @@ func awsAwsjson11_deserializeOpErrorSetRepositoryPolicy(response *smithyhttp.Res
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2541,6 +2586,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2663,6 +2711,9 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedCommandException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedCommandException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3351,6 +3402,41 @@ func awsAwsjson11_deserializeErrorRepositoryAlreadyExistsException(response *smi
 
 	output := &types.RepositoryAlreadyExistsException{}
 	err := awsAwsjson11_deserializeDocumentRepositoryAlreadyExistsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorRepositoryCatalogDataNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.RepositoryCatalogDataNotFoundException{}
+	err := awsAwsjson11_deserializeDocumentRepositoryCatalogDataNotFoundException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -5626,6 +5712,46 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogData(v **types.RepositoryC
 					return fmt.Errorf("expected UsageText to be of type string, got %T instead", value)
 				}
 				sv.UsageText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRepositoryCatalogDataNotFoundException(v **types.RepositoryCatalogDataNotFoundException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RepositoryCatalogDataNotFoundException
+	if *v == nil {
+		sv = &types.RepositoryCatalogDataNotFoundException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

@@ -56,7 +56,9 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 
 type PutScalingPolicyInput struct {
 
-	// The name of the scaling policy.
+	// The name of the scaling policy. You cannot change the name of a scaling policy,
+	// but you can delete the original scaling policy and create a new scaling policy
+	// with the same settings and a different name.
 	//
 	// This member is required.
 	PolicyName *string
@@ -173,7 +175,7 @@ type PutScalingPolicyInput struct {
 	// edition and Aurora PostgreSQL-compatible edition.
 	//
 	// *
-	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	// SageMaker model endpoint variant.
 	//
 	// * custom-resource:ResourceType:Property - The
@@ -222,11 +224,12 @@ type PutScalingPolicyInput struct {
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
 
-	// The policy type. This parameter is required if you are creating a scaling
-	// policy. The following policy types are supported: TargetTrackingScaling—Not
-	// supported for Amazon EMR StepScaling—Not supported for DynamoDB, Amazon
-	// Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or
-	// Neptune. For more information, see Target tracking scaling policies
+	// The scaling policy type. This parameter is required if you are creating a
+	// scaling policy. The following policy types are supported:
+	// TargetTrackingScaling—Not supported for Amazon EMR StepScaling—Not supported for
+	// DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon
+	// ElastiCache, or Neptune. For more information, see Target tracking scaling
+	// policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// and Step scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)

@@ -15,6 +15,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -29,13 +31,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource is already in a state that indicates an operation is happening that
 // must complete before a new update can be applied.
 type ConcurrentUpdatingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -51,12 +60,19 @@ func (e *ConcurrentUpdatingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentUpdatingException) ErrorCode() string             { return "ConcurrentUpdatingException" }
+func (e *ConcurrentUpdatingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentUpdatingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConcurrentUpdatingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Updating or deleting a resource can cause an inconsistent state.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -72,13 +88,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The domain specified isn't on the allow list. All domains for embedded
 // dashboards must be added to the approved list by an Amazon QuickSight admin.
 type DomainNotWhitelistedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -94,13 +117,20 @@ func (e *DomainNotWhitelistedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DomainNotWhitelistedException) ErrorCode() string             { return "DomainNotWhitelistedException" }
+func (e *DomainNotWhitelistedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DomainNotWhitelistedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DomainNotWhitelistedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The identity type specified isn't supported. Supported identity types include
 // IAM and QUICKSIGHT.
 type IdentityTypeNotSupportedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -117,13 +147,18 @@ func (e *IdentityTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdentityTypeNotSupportedException) ErrorCode() string {
-	return "IdentityTypeNotSupportedException"
+	if e.ErrorCodeOverride == nil {
+		return "IdentityTypeNotSupportedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *IdentityTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal failure occurred.
 type InternalFailureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -139,12 +174,19 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The NextToken value isn't valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -160,12 +202,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameters has a value that isn't valid.
 type InvalidParameterValueException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -181,13 +230,20 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterValueException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You don't have this feature activated for your account. To fix this issue,
 // contact Amazon Web Services support.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -203,12 +259,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A limit is exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
@@ -225,12 +288,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more preconditions aren't met.
 type PreconditionNotMetException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -246,7 +316,12 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PreconditionNotMetException) ErrorCode() string             { return "PreconditionNotMetException" }
+func (e *PreconditionNotMetException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PreconditionNotMetException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user with the provided name isn't found. This error can happen in any
@@ -254,6 +329,8 @@ func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return sm
 // DeleteUser, DescribeUser, and so on.
 type QuickSightUserNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -270,13 +347,18 @@ func (e *QuickSightUserNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QuickSightUserNotFoundException) ErrorCode() string {
-	return "QuickSightUserNotFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "QuickSightUserNotFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *QuickSightUserNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified already exists.
 type ResourceExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
@@ -293,12 +375,19 @@ func (e *ResourceExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
+func (e *ResourceExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more resources can't be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
@@ -315,12 +404,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This resource is currently unavailable.
 type ResourceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
@@ -337,13 +433,20 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
+func (e *ResourceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The number of minutes specified for the lifetime of a session isn't valid. The
 // session lifetime must be 15-600 minutes.
 type SessionLifetimeInMinutesInvalidException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -360,7 +463,10 @@ func (e *SessionLifetimeInMinutesInvalidException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SessionLifetimeInMinutesInvalidException) ErrorCode() string {
-	return "SessionLifetimeInMinutesInvalidException"
+	if e.ErrorCodeOverride == nil {
+		return "SessionLifetimeInMinutesInvalidException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *SessionLifetimeInMinutesInvalidException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -369,6 +475,8 @@ func (e *SessionLifetimeInMinutesInvalidException) ErrorFault() smithy.ErrorFaul
 // Access is throttled.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -384,7 +492,12 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This error indicates that you are calling an embedding operation in Amazon
@@ -397,6 +510,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // API operation with the --identity-type ANONYMOUS option.
 type UnsupportedPricingPlanException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -413,7 +528,10 @@ func (e *UnsupportedPricingPlanException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedPricingPlanException) ErrorCode() string {
-	return "UnsupportedPricingPlanException"
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedPricingPlanException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedPricingPlanException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -423,6 +541,8 @@ func (e *UnsupportedPricingPlanException) ErrorFault() smithy.ErrorFault { retur
 // Not every operation and capability is available in every edition.
 type UnsupportedUserEditionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RequestId *string
 
@@ -439,6 +559,9 @@ func (e *UnsupportedUserEditionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedUserEditionException) ErrorCode() string {
-	return "UnsupportedUserEditionException"
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedUserEditionException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedUserEditionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

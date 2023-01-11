@@ -89,6 +89,12 @@ type CreateDBInstanceReadReplicaInput struct {
 	// This member is required.
 	SourceDBInstanceIdentifier *string
 
+	// The amount of storage (in gibibytes) to allocate initially for the read replica.
+	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
+	// enough memory for your read replica so that the create operation can succeed.
+	// You can also allocate additional memory for future growth.
+	AllocatedStorage *int32
+
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the read replica during the maintenance window. This setting doesn't apply to
 	// RDS Custom. Default: Inherits from the source DB instance

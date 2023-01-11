@@ -10,6 +10,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -22,13 +24,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Non-retryable exception. Attempted to create already existing object or chunk.
 // This message contains a checksum of already presented data.
 type DataAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Checksum          *string
 	ChecksumAlgorithm *string
@@ -45,13 +54,20 @@ func (e *DataAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DataAlreadyExistsException) ErrorCode() string             { return "DataAlreadyExistsException" }
+func (e *DataAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DataAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DataAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Non-retryable exception, indicates client error (wrong argument passed to API).
 // See exception message for details.
 type IllegalArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -65,13 +81,20 @@ func (e *IllegalArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IllegalArgumentException) ErrorCode() string             { return "IllegalArgumentException" }
+func (e *IllegalArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IllegalArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Non-retryable exception. Indicates the KMS key usage is incorrect. See exception
 // message for details.
 type KMSInvalidKeyUsageException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -85,13 +108,20 @@ func (e *KMSInvalidKeyUsageException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSInvalidKeyUsageException) ErrorCode() string             { return "KMSInvalidKeyUsageException" }
+func (e *KMSInvalidKeyUsageException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KMSInvalidKeyUsageException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KMSInvalidKeyUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Retryalble exception. Indicated issues while reading an input stream due to the
 // networking issues or connection drop on the client side.
 type NotReadableInputStreamException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -106,7 +136,10 @@ func (e *NotReadableInputStreamException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotReadableInputStreamException) ErrorCode() string {
-	return "NotReadableInputStreamException"
+	if e.ErrorCodeOverride == nil {
+		return "NotReadableInputStreamException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *NotReadableInputStreamException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -114,6 +147,8 @@ func (e *NotReadableInputStreamException) ErrorFault() smithy.ErrorFault { retur
 // expired resource.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -127,13 +162,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Retryable exception. In general indicates internal failure that can be fixed by
 // retry.
 type RetryableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -147,12 +189,19 @@ func (e *RetryableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RetryableException) ErrorCode() string             { return "RetryableException" }
+func (e *RetryableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "RetryableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *RetryableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Deprecated. To be removed from the model.
 type ServiceInternalException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -166,12 +215,19 @@ func (e *ServiceInternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceInternalException) ErrorCode() string             { return "ServiceInternalException" }
+func (e *ServiceInternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceInternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Retryable exception, indicates internal server error.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -185,12 +241,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Increased rate over throttling limits. Can be retried with exponential backoff.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -204,5 +267,10 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

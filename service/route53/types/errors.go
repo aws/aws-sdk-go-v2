@@ -11,6 +11,8 @@ import (
 type CidrBlockInUseException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *CidrBlockInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CidrBlockInUseException) ErrorCode() string             { return "CidrBlockInUseException" }
+func (e *CidrBlockInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CidrBlockInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CidrBlockInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A CIDR collection with this name and a different caller reference already exists
 // in this account.
 type CidrCollectionAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,7 +53,10 @@ func (e *CidrCollectionAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CidrCollectionAlreadyExistsException) ErrorCode() string {
-	return "CidrCollectionAlreadyExistsException"
+	if e.ErrorCodeOverride == nil {
+		return "CidrCollectionAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CidrCollectionAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -53,6 +65,8 @@ func (e *CidrCollectionAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // This CIDR collection is in use, and isn't empty.
 type CidrCollectionInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -66,13 +80,20 @@ func (e *CidrCollectionInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CidrCollectionInUseException) ErrorCode() string             { return "CidrCollectionInUseException" }
+func (e *CidrCollectionInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CidrCollectionInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CidrCollectionInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CIDR collection version you provided, doesn't match the one in the
 // ListCidrCollections operation.
 type CidrCollectionVersionMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -87,7 +108,10 @@ func (e *CidrCollectionVersionMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CidrCollectionVersionMismatchException) ErrorCode() string {
-	return "CidrCollectionVersionMismatchException"
+	if e.ErrorCodeOverride == nil {
+		return "CidrCollectionVersionMismatchException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CidrCollectionVersionMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -97,6 +121,8 @@ func (e *CidrCollectionVersionMismatchException) ErrorFault() smithy.ErrorFault 
 // same time that you did. Retry the request.
 type ConcurrentModification struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -110,7 +136,12 @@ func (e *ConcurrentModification) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentModification) ErrorCode() string             { return "ConcurrentModification" }
+func (e *ConcurrentModification) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModification"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cause of this error depends on the operation that you're performing:
@@ -135,6 +166,8 @@ func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.
 type ConflictingDomainExists struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -147,7 +180,12 @@ func (e *ConflictingDomainExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictingDomainExists) ErrorCode() string             { return "ConflictingDomainExists" }
+func (e *ConflictingDomainExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictingDomainExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictingDomainExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You tried to update a traffic policy instance by using a traffic policy version
@@ -156,6 +194,8 @@ func (e *ConflictingDomainExists) ErrorFault() smithy.ErrorFault { return smithy
 // CreateTrafficPolicyVersionrequest.
 type ConflictingTypes struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -169,13 +209,20 @@ func (e *ConflictingTypes) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictingTypes) ErrorCode() string             { return "ConflictingTypes" }
+func (e *ConflictingTypes) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictingTypes"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictingTypes) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A delegation set with the same owner and caller reference combination has
 // already been created.
 type DelegationSetAlreadyCreated struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -189,12 +236,19 @@ func (e *DelegationSetAlreadyCreated) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DelegationSetAlreadyCreated) ErrorCode() string             { return "DelegationSetAlreadyCreated" }
+func (e *DelegationSetAlreadyCreated) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DelegationSetAlreadyCreated"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DelegationSetAlreadyCreated) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified delegation set has already been marked as reusable.
 type DelegationSetAlreadyReusable struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -208,13 +262,20 @@ func (e *DelegationSetAlreadyReusable) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DelegationSetAlreadyReusable) ErrorCode() string             { return "DelegationSetAlreadyReusable" }
+func (e *DelegationSetAlreadyReusable) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DelegationSetAlreadyReusable"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DelegationSetAlreadyReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified delegation contains associated hosted zones which must be deleted
 // before the reusable delegation set can be deleted.
 type DelegationSetInUse struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -228,7 +289,12 @@ func (e *DelegationSetInUse) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DelegationSetInUse) ErrorCode() string             { return "DelegationSetInUse" }
+func (e *DelegationSetInUse) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DelegationSetInUse"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DelegationSetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can create a hosted zone that has the same name as an existing hosted zone
@@ -238,6 +304,8 @@ func (e *DelegationSetInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Customer Support.
 type DelegationSetNotAvailable struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -251,12 +319,19 @@ func (e *DelegationSetNotAvailable) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DelegationSetNotAvailable) ErrorCode() string             { return "DelegationSetNotAvailable" }
+func (e *DelegationSetNotAvailable) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DelegationSetNotAvailable"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DelegationSetNotAvailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A reusable delegation set with the specified ID does not exist.
 type DelegationSetNotReusable struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -270,12 +345,19 @@ func (e *DelegationSetNotReusable) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DelegationSetNotReusable) ErrorCode() string             { return "DelegationSetNotReusable" }
+func (e *DelegationSetNotReusable) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DelegationSetNotReusable"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DelegationSetNotReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The hosted zone doesn't have any DNSSEC resources.
 type DNSSECNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -289,7 +371,12 @@ func (e *DNSSECNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DNSSECNotFound) ErrorCode() string             { return "DNSSECNotFound" }
+func (e *DNSSECNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DNSSECNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DNSSECNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The health check you're attempting to create already exists. Amazon Route 53
@@ -305,6 +392,8 @@ func (e *DNSSECNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 type HealthCheckAlreadyExists struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -317,12 +406,19 @@ func (e *HealthCheckAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HealthCheckAlreadyExists) ErrorCode() string             { return "HealthCheckAlreadyExists" }
+func (e *HealthCheckAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HealthCheckAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HealthCheckAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This error code is not in use.
 type HealthCheckInUse struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -336,13 +432,20 @@ func (e *HealthCheckInUse) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HealthCheckInUse) ErrorCode() string             { return "HealthCheckInUse" }
+func (e *HealthCheckInUse) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HealthCheckInUse"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HealthCheckInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of HealthCheckVersion in the request doesn't match the value of
 // HealthCheckVersion in the health check.
 type HealthCheckVersionMismatch struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -356,7 +459,12 @@ func (e *HealthCheckVersionMismatch) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HealthCheckVersionMismatch) ErrorCode() string             { return "HealthCheckVersionMismatch" }
+func (e *HealthCheckVersionMismatch) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HealthCheckVersionMismatch"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HealthCheckVersionMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The hosted zone you're trying to create already exists. Amazon Route 53 returns
@@ -364,6 +472,8 @@ func (e *HealthCheckVersionMismatch) ErrorFault() smithy.ErrorFault { return smi
 // CallerReference.
 type HostedZoneAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -377,12 +487,19 @@ func (e *HostedZoneAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HostedZoneAlreadyExists) ErrorCode() string             { return "HostedZoneAlreadyExists" }
+func (e *HostedZoneAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HostedZoneAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HostedZoneAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The hosted zone contains resource records that are not SOA or NS records.
 type HostedZoneNotEmpty struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -396,12 +513,19 @@ func (e *HostedZoneNotEmpty) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HostedZoneNotEmpty) ErrorCode() string             { return "HostedZoneNotEmpty" }
+func (e *HostedZoneNotEmpty) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HostedZoneNotEmpty"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HostedZoneNotEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified HostedZone can't be found.
 type HostedZoneNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -415,12 +539,19 @@ func (e *HostedZoneNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HostedZoneNotFound) ErrorCode() string             { return "HostedZoneNotFound" }
+func (e *HostedZoneNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HostedZoneNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HostedZoneNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified hosted zone is a public hosted zone, not a private hosted zone.
 type HostedZoneNotPrivate struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -434,13 +565,20 @@ func (e *HostedZoneNotPrivate) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HostedZoneNotPrivate) ErrorCode() string             { return "HostedZoneNotPrivate" }
+func (e *HostedZoneNotPrivate) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HostedZoneNotPrivate"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HostedZoneNotPrivate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The hosted zone nameservers don't match the parent nameservers. The hosted zone
 // and parent must have the same nameservers.
 type HostedZonePartiallyDelegated struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -454,13 +592,20 @@ func (e *HostedZonePartiallyDelegated) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HostedZonePartiallyDelegated) ErrorCode() string             { return "HostedZonePartiallyDelegated" }
+func (e *HostedZonePartiallyDelegated) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "HostedZonePartiallyDelegated"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *HostedZonePartiallyDelegated) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource you're trying to access is unsupported on this Amazon Route 53
 // endpoint.
 type IncompatibleVersion struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -474,7 +619,12 @@ func (e *IncompatibleVersion) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IncompatibleVersion) ErrorCode() string             { return "IncompatibleVersion" }
+func (e *IncompatibleVersion) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IncompatibleVersion"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Route 53 doesn't have the permissions required to create log streams and
@@ -501,6 +651,8 @@ func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InsufficientCloudWatchLogsResourcePolicy struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -514,7 +666,10 @@ func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorCode() string {
-	return "InsufficientCloudWatchLogsResourcePolicy"
+	if e.ErrorCodeOverride == nil {
+		return "InsufficientCloudWatchLogsResourcePolicy"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -523,6 +678,8 @@ func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorFault() smithy.ErrorFaul
 // Parameter name is not valid.
 type InvalidArgument struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -536,13 +693,20 @@ func (e *InvalidArgument) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgument) ErrorCode() string             { return "InvalidArgument" }
+func (e *InvalidArgument) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgument"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception contains a list of messages that might contain one or more error
 // messages. Each error message indicates one error in the change batch.
 type InvalidChangeBatch struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Messages []string
 
@@ -558,12 +722,19 @@ func (e *InvalidChangeBatch) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidChangeBatch) ErrorCode() string             { return "InvalidChangeBatch" }
+func (e *InvalidChangeBatch) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidChangeBatch"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidChangeBatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified domain name is not valid.
 type InvalidDomainName struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -577,12 +748,19 @@ func (e *InvalidDomainName) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDomainName) ErrorCode() string             { return "InvalidDomainName" }
+func (e *InvalidDomainName) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidDomainName"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidDomainName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input is not valid.
 type InvalidInput struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -596,12 +774,19 @@ func (e *InvalidInput) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
+func (e *InvalidInput) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInput"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The key-signing key (KSK) name that you specified isn't a valid name.
 type InvalidKeySigningKeyName struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -615,13 +800,20 @@ func (e *InvalidKeySigningKeyName) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidKeySigningKeyName) ErrorCode() string             { return "InvalidKeySigningKeyName" }
+func (e *InvalidKeySigningKeyName) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidKeySigningKeyName"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidKeySigningKeyName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The key-signing key (KSK) status isn't valid or another KSK has the status
 // INTERNAL_FAILURE.
 type InvalidKeySigningKeyStatus struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -635,13 +827,20 @@ func (e *InvalidKeySigningKeyStatus) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidKeySigningKeyStatus) ErrorCode() string             { return "InvalidKeySigningKeyStatus" }
+func (e *InvalidKeySigningKeyStatus) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidKeySigningKeyStatus"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidKeySigningKeyStatus) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The KeyManagementServiceArn that you specified isn't valid to use with DNSSEC
 // signing.
 type InvalidKMSArn struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -655,13 +854,20 @@ func (e *InvalidKMSArn) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidKMSArn) ErrorCode() string             { return "InvalidKMSArn" }
+func (e *InvalidKMSArn) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidKMSArn"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidKMSArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value that you specified to get the second or subsequent page of results is
 // invalid.
 type InvalidPaginationToken struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -675,13 +881,20 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPaginationToken) ErrorCode() string             { return "InvalidPaginationToken" }
+func (e *InvalidPaginationToken) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPaginationToken"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your hosted zone status isn't valid for this operation. In the hosted zone,
 // change the status to enable DNSSEC or disable DNSSEC.
 type InvalidSigningStatus struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -695,13 +908,20 @@ func (e *InvalidSigningStatus) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSigningStatus) ErrorCode() string             { return "InvalidSigningStatus" }
+func (e *InvalidSigningStatus) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidSigningStatus"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidSigningStatus) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of the traffic policy document that you specified in the Document
 // element is not valid.
 type InvalidTrafficPolicyDocument struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -715,13 +935,20 @@ func (e *InvalidTrafficPolicyDocument) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTrafficPolicyDocument) ErrorCode() string             { return "InvalidTrafficPolicyDocument" }
+func (e *InvalidTrafficPolicyDocument) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTrafficPolicyDocument"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTrafficPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The VPC ID that you specified either isn't a valid ID or the current account is
 // not authorized to access this VPC.
 type InvalidVPCId struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -735,13 +962,20 @@ func (e *InvalidVPCId) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidVPCId) ErrorCode() string             { return "InvalidVPCId" }
+func (e *InvalidVPCId) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidVPCId"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidVPCId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've already created a key-signing key (KSK) with this name or with the same
 // customer managed key ARN.
 type KeySigningKeyAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -755,12 +989,19 @@ func (e *KeySigningKeyAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KeySigningKeyAlreadyExists) ErrorCode() string             { return "KeySigningKeyAlreadyExists" }
+func (e *KeySigningKeyAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KeySigningKeyAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KeySigningKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The key-signing key (KSK) is specified in a parent DS record.
 type KeySigningKeyInParentDSRecord struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -774,7 +1015,12 @@ func (e *KeySigningKeyInParentDSRecord) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KeySigningKeyInParentDSRecord) ErrorCode() string             { return "KeySigningKeyInParentDSRecord" }
+func (e *KeySigningKeyInParentDSRecord) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KeySigningKeyInParentDSRecord"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KeySigningKeyInParentDSRecord) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The key-signing key (KSK) that you specified can't be deactivated because it's
@@ -782,6 +1028,8 @@ func (e *KeySigningKeyInParentDSRecord) ErrorFault() smithy.ErrorFault { return 
 // enable another KSK.
 type KeySigningKeyInUse struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -795,12 +1043,19 @@ func (e *KeySigningKeyInUse) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KeySigningKeyInUse) ErrorCode() string             { return "KeySigningKeyInUse" }
+func (e *KeySigningKeyInUse) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KeySigningKeyInUse"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KeySigningKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A key-signing key (KSK) with ACTIVE status wasn't found.
 type KeySigningKeyWithActiveStatusNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -815,7 +1070,10 @@ func (e *KeySigningKeyWithActiveStatusNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeySigningKeyWithActiveStatusNotFound) ErrorCode() string {
-	return "KeySigningKeyWithActiveStatusNotFound"
+	if e.ErrorCodeOverride == nil {
+		return "KeySigningKeyWithActiveStatusNotFound"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *KeySigningKeyWithActiveStatusNotFound) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -826,6 +1084,8 @@ func (e *KeySigningKeyWithActiveStatusNotFound) ErrorFault() smithy.ErrorFault {
 // support disassociating the last VPC from a hosted zone.
 type LastVPCAssociation struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -839,7 +1099,12 @@ func (e *LastVPCAssociation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LastVPCAssociation) ErrorCode() string             { return "LastVPCAssociation" }
+func (e *LastVPCAssociation) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LastVPCAssociation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This operation can't be completed because the current account has reached the
@@ -848,6 +1113,8 @@ func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Services Support Center.
 type LimitsExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -861,12 +1128,19 @@ func (e *LimitsExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitsExceeded) ErrorCode() string             { return "LimitsExceeded" }
+func (e *LimitsExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitsExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitsExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A change with the specified change ID does not exist.
 type NoSuchChange struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -880,12 +1154,19 @@ func (e *NoSuchChange) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchChange) ErrorCode() string             { return "NoSuchChange" }
+func (e *NoSuchChange) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchChange"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchChange) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CIDR collection you specified, doesn't exist.
 type NoSuchCidrCollectionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -899,12 +1180,19 @@ func (e *NoSuchCidrCollectionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchCidrCollectionException) ErrorCode() string             { return "NoSuchCidrCollectionException" }
+func (e *NoSuchCidrCollectionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchCidrCollectionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchCidrCollectionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CIDR collection location doesn't match any locations in your account.
 type NoSuchCidrLocationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -918,12 +1206,19 @@ func (e *NoSuchCidrLocationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchCidrLocationException) ErrorCode() string             { return "NoSuchCidrLocationException" }
+func (e *NoSuchCidrLocationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchCidrLocationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchCidrLocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There is no CloudWatch Logs log group with the specified ARN.
 type NoSuchCloudWatchLogsLogGroup struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -937,12 +1232,19 @@ func (e *NoSuchCloudWatchLogsLogGroup) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchCloudWatchLogsLogGroup) ErrorCode() string             { return "NoSuchCloudWatchLogsLogGroup" }
+func (e *NoSuchCloudWatchLogsLogGroup) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchCloudWatchLogsLogGroup"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchCloudWatchLogsLogGroup) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A reusable delegation set with the specified ID does not exist.
 type NoSuchDelegationSet struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -956,7 +1258,12 @@ func (e *NoSuchDelegationSet) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchDelegationSet) ErrorCode() string             { return "NoSuchDelegationSet" }
+func (e *NoSuchDelegationSet) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchDelegationSet"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchDelegationSet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Route 53 doesn't support the specified geographic location. For a list of
@@ -965,6 +1272,8 @@ func (e *NoSuchDelegationSet) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // data type.
 type NoSuchGeoLocation struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -978,12 +1287,19 @@ func (e *NoSuchGeoLocation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchGeoLocation) ErrorCode() string             { return "NoSuchGeoLocation" }
+func (e *NoSuchGeoLocation) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchGeoLocation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchGeoLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No health check exists with the specified ID.
 type NoSuchHealthCheck struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -997,12 +1313,19 @@ func (e *NoSuchHealthCheck) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchHealthCheck) ErrorCode() string             { return "NoSuchHealthCheck" }
+func (e *NoSuchHealthCheck) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchHealthCheck"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchHealthCheck) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No hosted zone exists with the ID that you specified.
 type NoSuchHostedZone struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1016,12 +1339,19 @@ func (e *NoSuchHostedZone) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchHostedZone) ErrorCode() string             { return "NoSuchHostedZone" }
+func (e *NoSuchHostedZone) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchHostedZone"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchHostedZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified key-signing key (KSK) doesn't exist.
 type NoSuchKeySigningKey struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1035,12 +1365,19 @@ func (e *NoSuchKeySigningKey) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchKeySigningKey) ErrorCode() string             { return "NoSuchKeySigningKey" }
+func (e *NoSuchKeySigningKey) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchKeySigningKey"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchKeySigningKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There is no DNS query logging configuration with the specified ID.
 type NoSuchQueryLoggingConfig struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1054,12 +1391,19 @@ func (e *NoSuchQueryLoggingConfig) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchQueryLoggingConfig) ErrorCode() string             { return "NoSuchQueryLoggingConfig" }
+func (e *NoSuchQueryLoggingConfig) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchQueryLoggingConfig"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchQueryLoggingConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No traffic policy exists with the specified ID.
 type NoSuchTrafficPolicy struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1073,12 +1417,19 @@ func (e *NoSuchTrafficPolicy) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchTrafficPolicy) ErrorCode() string             { return "NoSuchTrafficPolicy" }
+func (e *NoSuchTrafficPolicy) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchTrafficPolicy"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchTrafficPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No traffic policy instance exists with the specified ID.
 type NoSuchTrafficPolicyInstance struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1092,13 +1443,20 @@ func (e *NoSuchTrafficPolicyInstance) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchTrafficPolicyInstance) ErrorCode() string             { return "NoSuchTrafficPolicyInstance" }
+func (e *NoSuchTrafficPolicyInstance) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchTrafficPolicyInstance"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchTrafficPolicyInstance) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Associating the specified VPC with the specified hosted zone has not been
 // authorized.
 type NotAuthorizedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1112,7 +1470,12 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
+func (e *NotAuthorizedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotAuthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // If Amazon Route 53 can't process a request before the next request arrives, it
@@ -1122,6 +1485,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // you try the request again.
 type PriorRequestNotComplete struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1135,13 +1500,20 @@ func (e *PriorRequestNotComplete) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PriorRequestNotComplete) ErrorCode() string             { return "PriorRequestNotComplete" }
+func (e *PriorRequestNotComplete) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PriorRequestNotComplete"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PriorRequestNotComplete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You're trying to associate a VPC with a public hosted zone. Amazon Route 53
 // doesn't support associating a VPC with a public hosted zone.
 type PublicZoneVPCAssociation struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1155,13 +1527,20 @@ func (e *PublicZoneVPCAssociation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PublicZoneVPCAssociation) ErrorCode() string             { return "PublicZoneVPCAssociation" }
+func (e *PublicZoneVPCAssociation) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PublicZoneVPCAssociation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PublicZoneVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can create only one query logging configuration for a hosted zone, and a
 // query logging configuration already exists for this hosted zone.
 type QueryLoggingConfigAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1176,13 +1555,18 @@ func (e *QueryLoggingConfigAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueryLoggingConfigAlreadyExists) ErrorCode() string {
-	return "QueryLoggingConfigAlreadyExists"
+	if e.ErrorCodeOverride == nil {
+		return "QueryLoggingConfigAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *QueryLoggingConfigAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1196,7 +1580,12 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This health check can't be created because the current account has reached the
@@ -1214,6 +1603,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type TooManyHealthChecks struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1226,7 +1617,12 @@ func (e *TooManyHealthChecks) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyHealthChecks) ErrorCode() string             { return "TooManyHealthChecks" }
+func (e *TooManyHealthChecks) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyHealthChecks"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This operation can't be completed either because the current account has reached
@@ -1245,6 +1641,8 @@ func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type TooManyHostedZones struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1257,13 +1655,20 @@ func (e *TooManyHostedZones) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyHostedZones) ErrorCode() string             { return "TooManyHostedZones" }
+func (e *TooManyHostedZones) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyHostedZones"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyHostedZones) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit for the number of key-signing keys (KSKs). Remove at
 // least one KSK, and then try again.
 type TooManyKeySigningKeys struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1277,7 +1682,12 @@ func (e *TooManyKeySigningKeys) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyKeySigningKeys) ErrorCode() string             { return "TooManyKeySigningKeys" }
+func (e *TooManyKeySigningKeys) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyKeySigningKeys"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyKeySigningKeys) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This traffic policy can't be created because the current account has reached the
@@ -1292,6 +1702,8 @@ func (e *TooManyKeySigningKeys) ErrorFault() smithy.ErrorFault { return smithy.F
 type TooManyTrafficPolicies struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1304,7 +1716,12 @@ func (e *TooManyTrafficPolicies) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTrafficPolicies) ErrorCode() string             { return "TooManyTrafficPolicies" }
+func (e *TooManyTrafficPolicies) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTrafficPolicies"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This traffic policy instance can't be created because the current account has
@@ -1319,6 +1736,8 @@ func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.
 type TooManyTrafficPolicyInstances struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1331,7 +1750,12 @@ func (e *TooManyTrafficPolicyInstances) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTrafficPolicyInstances) ErrorCode() string             { return "TooManyTrafficPolicyInstances" }
+func (e *TooManyTrafficPolicyInstances) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTrafficPolicyInstances"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTrafficPolicyInstances) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This traffic policy version can't be created because you've reached the limit of
@@ -1344,6 +1768,8 @@ func (e *TooManyTrafficPolicyInstances) ErrorFault() smithy.ErrorFault { return 
 // to create a new traffic policy using the traffic policy document.
 type TooManyTrafficPolicyVersionsForCurrentPolicy struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1358,7 +1784,10 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorCode() string {
-	return "TooManyTrafficPolicyVersionsForCurrentPolicy"
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTrafficPolicyVersionsForCurrentPolicy"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1371,6 +1800,8 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorFault() smithy.Error
 // ListVPCAssociationAuthorizations request.
 type TooManyVPCAssociationAuthorizations struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1385,7 +1816,10 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyVPCAssociationAuthorizations) ErrorCode() string {
-	return "TooManyVPCAssociationAuthorizations"
+	if e.ErrorCodeOverride == nil {
+		return "TooManyVPCAssociationAuthorizations"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TooManyVPCAssociationAuthorizations) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1394,6 +1828,8 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorFault() smithy.ErrorFault {
 // A traffic policy that has the same value for Name already exists.
 type TrafficPolicyAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1407,12 +1843,19 @@ func (e *TrafficPolicyAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TrafficPolicyAlreadyExists) ErrorCode() string             { return "TrafficPolicyAlreadyExists" }
+func (e *TrafficPolicyAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TrafficPolicyAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TrafficPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There is already a traffic policy instance with the specified ID.
 type TrafficPolicyInstanceAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1427,7 +1870,10 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrafficPolicyInstanceAlreadyExists) ErrorCode() string {
-	return "TrafficPolicyInstanceAlreadyExists"
+	if e.ErrorCodeOverride == nil {
+		return "TrafficPolicyInstanceAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TrafficPolicyInstanceAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1437,6 +1883,8 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorFault() smithy.ErrorFault {
 // policy.
 type TrafficPolicyInUse struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1450,13 +1898,20 @@ func (e *TrafficPolicyInUse) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TrafficPolicyInUse) ErrorCode() string             { return "TrafficPolicyInUse" }
+func (e *TrafficPolicyInUse) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TrafficPolicyInUse"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TrafficPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The VPC that you specified is not authorized to be associated with the hosted
 // zone.
 type VPCAssociationAuthorizationNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1471,7 +1926,10 @@ func (e *VPCAssociationAuthorizationNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VPCAssociationAuthorizationNotFound) ErrorCode() string {
-	return "VPCAssociationAuthorizationNotFound"
+	if e.ErrorCodeOverride == nil {
+		return "VPCAssociationAuthorizationNotFound"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *VPCAssociationAuthorizationNotFound) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1480,6 +1938,8 @@ func (e *VPCAssociationAuthorizationNotFound) ErrorFault() smithy.ErrorFault {
 // The specified VPC and hosted zone are not currently associated.
 type VPCAssociationNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1493,5 +1953,10 @@ func (e *VPCAssociationNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *VPCAssociationNotFound) ErrorCode() string             { return "VPCAssociationNotFound" }
+func (e *VPCAssociationNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "VPCAssociationNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *VPCAssociationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

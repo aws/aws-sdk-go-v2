@@ -320,7 +320,7 @@ type ModifyDBClusterInput struct {
 	// Can't end with a hyphen or contain two consecutive hyphens
 	//
 	// Example: my-cluster2
-	// Valid for: Aurora DB clusters only
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	NewDBClusterIdentifier *string
 
 	// A value that indicates that the DB cluster should be associated with the

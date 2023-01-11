@@ -12,9 +12,9 @@ import (
 )
 
 // Associates the specified tags to a resource with the specified resourceArn. If
-// existing tags on a resource are not specified in the request parameters, they
-// are not changed. When a resource is deleted, the tags associated with that
-// resource are deleted as well.
+// existing tags on a resource aren't specified in the request parameters, they
+// aren't changed. When a resource is deleted, the tags associated with that
+// resource are also deleted.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -32,8 +32,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to which to add tags. Currently,
-	// the supported resource is an Amazon ECR Public repository.
+	// The Amazon Resource Name (ARN) of the resource to add tags to. Currently, the
+	// supported resource is an Amazon ECR Public repository.
 	//
 	// This member is required.
 	ResourceArn *string

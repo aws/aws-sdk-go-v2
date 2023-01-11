@@ -3,4 +3,4 @@
 package finspace
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.8.21"
+const goModuleVersion = "1.9.0"

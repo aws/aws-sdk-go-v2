@@ -13,6 +13,8 @@ import (
 type ClusterLimitExceededException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,13 +27,20 @@ func (e *ClusterLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterLimitExceededException) ErrorCode() string             { return "ClusterLimitExceededException" }
+func (e *ClusterLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClusterLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClusterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You get this exception when you call CreateReturnShippingLabel more than once
 // when other requests are not completed.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ConflictResource *string
 
@@ -47,13 +56,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your IAM user lacks the necessary Amazon EC2 permissions to perform the
 // attempted action.
 type Ec2RequestFailedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,13 +83,20 @@ func (e *Ec2RequestFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *Ec2RequestFailedException) ErrorCode() string             { return "Ec2RequestFailedException" }
+func (e *Ec2RequestFailedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "Ec2RequestFailedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *Ec2RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The address provided was invalid. Check the address with your region's carrier,
 // and try again.
 type InvalidAddressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -87,7 +110,12 @@ func (e *InvalidAddressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAddressException) ErrorCode() string             { return "InvalidAddressException" }
+func (e *InvalidAddressException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidAddressException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Job or cluster creation failed. One or more inputs were invalid. Confirm that
@@ -95,6 +123,8 @@ func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy
 // CreateJobRequest$JobType, and try again.
 type InvalidInputCombinationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -109,7 +139,10 @@ func (e *InvalidInputCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputCombinationException) ErrorCode() string {
-	return "InvalidInputCombinationException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputCombinationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -117,6 +150,8 @@ func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { retu
 // action to be performed.
 type InvalidJobStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -130,13 +165,20 @@ func (e *InvalidJobStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidJobStateException) ErrorCode() string             { return "InvalidJobStateException" }
+func (e *InvalidJobStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidJobStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The NextToken string was altered unexpectedly, and the operation has stopped.
 // Run the operation without changing the NextToken string, and try again.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -150,13 +192,20 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource can't be found. Check the information you provided in
 // your last request, and try again.
 type InvalidResourceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -172,13 +221,20 @@ func (e *InvalidResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceException) ErrorCode() string             { return "InvalidResourceException" }
+func (e *InvalidResourceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidResourceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The provided Key Management Service key lacks the permissions to perform the
 // specified CreateJob or UpdateJob action.
 type KMSRequestFailedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -192,7 +248,12 @@ func (e *KMSRequestFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSRequestFailedException) ErrorCode() string             { return "KMSRequestFailedException" }
+func (e *KMSRequestFailedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KMSRequestFailedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You get this exception if you call CreateReturnShippingLabel and a valid return
@@ -200,6 +261,8 @@ func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smit
 // get the URL.
 type ReturnShippingLabelAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -214,7 +277,10 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReturnShippingLabelAlreadyExistsException) ErrorCode() string {
-	return "ReturnShippingLabelAlreadyExistsException"
+	if e.ErrorCodeOverride == nil {
+		return "ReturnShippingLabelAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -225,6 +291,8 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFau
 // issue persists, contact Amazon Web Services Support.
 type UnsupportedAddressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -238,5 +306,10 @@ func (e *UnsupportedAddressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedAddressException) ErrorCode() string             { return "UnsupportedAddressException" }
+func (e *UnsupportedAddressException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedAddressException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
