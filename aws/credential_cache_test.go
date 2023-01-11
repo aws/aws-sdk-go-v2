@@ -211,6 +211,121 @@ func TestCredentialsCache_ExpireTime(t *testing.T) {
 	}
 }
 
+func TestCredentialsCache_AsyncRefresh(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	var mockTime time.Time
+	sdk.NowTime = func() time.Time { return mockTime }
+
+	cases := []struct {
+		Creds  func() Credentials
+		Called int32
+	}{
+		{
+			Called: 6,
+			Creds: func() Credentials {
+				return Credentials{
+					AccessKeyID:     "key",
+					SecretAccessKey: "secret",
+					CanExpire:       true,
+					Expires:         mockTime.Add(5),
+				}
+			},
+		},
+	}
+
+	for _, c := range cases {
+		var called int32
+		p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+			atomic.AddInt32(&called, 1)
+			return c.Creds(), nil
+		}), func(options *CredentialsCacheOptions) {
+			options.EnableAsyncRefresh = true
+		})
+
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+
+		mockTime = mockTime.Add(10)
+
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+
+		if e, a := c.Called, called; e != a {
+			t.Errorf("expect %v called, got %v", e, a)
+		}
+	}
+}
+
+func TestCredentialsCache_AsyncRefreshWithMinimumDelay(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	var mockTime time.Time
+	sdk.NowTime = func() time.Time { return mockTime }
+
+	cases := []struct {
+		Creds  func() Credentials
+		Called int32
+	}{
+		{
+			Called: 4,
+			Creds: func() Credentials {
+				return Credentials{
+					AccessKeyID:     "key",
+					SecretAccessKey: "secret",
+					CanExpire:       true,
+					Expires:         mockTime.Add(5),
+				}
+			},
+		},
+	}
+
+	for _, c := range cases {
+		var called int32
+		p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+			atomic.AddInt32(&called, 1)
+			return c.Creds(), nil
+		}), func(options *CredentialsCacheOptions) {
+			options.EnableAsyncRefresh = true
+			options.AsyncRefreshMinimumDelay = 2 * time.Nanosecond
+		})
+
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+
+		mockTime = mockTime.Add(3)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+
+		mockTime = mockTime.Add(10)
+
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+		p.Retrieve(context.Background())
+		testWaitAsyncRefreshDone(p)
+
+		if e, a := c.Called, called; e != a {
+			t.Errorf("expect %v called, got %v", e, a)
+		}
+	}
+}
+
 func TestCredentialsCache_Error(t *testing.T) {
 	p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
 		return Credentials{}, fmt.Errorf("failed")
@@ -660,3 +775,10 @@ func TestCredentialsCache_IsCredentialsProvider(t *testing.T) {
 }
 
 var _ isCredentialsProvider = (*CredentialsCache)(nil)
+
+func testWaitAsyncRefreshDone(provider *CredentialsCache) {
+	asyncResCh := provider.sf.DoChan("async-refresh", func() (interface{}, error) {
+		return nil, nil
+	})
+	<-asyncResCh
+}

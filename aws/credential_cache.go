@@ -3,6 +3,7 @@ package aws
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"sync/atomic"
 	"time"
 
@@ -38,6 +39,31 @@ type CredentialsCacheOptions struct {
 	// If ExpiryWindowJitterFrac < 0 the value will be treated as 0.
 	// If ExpiryWindowJitterFrac > 1 the value will be treated as 1.
 	ExpiryWindowJitterFrac float64
+
+	// Sets if the CredentialsCache will attempt to refresh the token in the
+	// background asynchronously instead of blocking for credentials to be
+	// refreshed. If falsy token refresh will be blocking.
+	//
+	// The first call to Retrieve will always be blocking, because
+	// there is no cached token.
+	EnableAsyncRefresh bool
+
+	// The minimum duration between asynchronous refresh attempts. If the next
+	// asynchronous recent refresh attempt was within the minimum delay
+	// duration, the call to retrieve will return the current cached token, if
+	// not expired.
+	//
+	// The asynchronous retrieve is deduplicated across multiple calls when
+	// Retrieve is called. The asynchronous retrieve is not a
+	// periodic task. It is only performed when the token has not yet expired,
+	// and the current item is within the RefreshBeforeExpires window, and the
+	// TokenCache's Retrieve method is called.
+	//
+	// If 0, (default) there will be no minimum delay between asynchronous
+	// refresh attempts.
+	//
+	// If EnableAsyncRefresh is false, this option is ignored.
+	AsyncRefreshMinimumDelay time.Duration
 }
 
 // CredentialsCache provides caching and concurrency safe credentials retrieval
@@ -57,9 +83,10 @@ type CredentialsCacheOptions struct {
 type CredentialsCache struct {
 	provider CredentialsProvider
 
-	options CredentialsCacheOptions
-	creds   atomic.Value
-	sf      singleflight.Group
+	options                CredentialsCacheOptions
+	creds                  atomic.Value
+	lastRefreshAttemptTime atomic.Value
+	sf                     singleflight.Group
 }
 
 // NewCredentialsCache returns a CredentialsCache that wraps provider. Provider
@@ -97,6 +124,9 @@ func NewCredentialsCache(provider CredentialsProvider, optFns ...func(options *C
 // Returns and error if the provider's retrieve method returns an error.
 func (p *CredentialsCache) Retrieve(ctx context.Context) (Credentials, error) {
 	if creds, ok := p.getCreds(); ok && !creds.Expired() {
+		if p.options.EnableAsyncRefresh {
+			p.tryAsyncRefresh(ctx)
+		}
 		return creds, nil
 	}
 
@@ -111,18 +141,42 @@ func (p *CredentialsCache) Retrieve(ctx context.Context) (Credentials, error) {
 	}
 }
 
-func (p *CredentialsCache) singleRetrieve(ctx context.Context) (interface{}, error) {
-	currCreds, ok := p.getCreds()
-	if ok && !currCreds.Expired() {
-		return currCreds, nil
+func (p *CredentialsCache) tryAsyncRefresh(ctx context.Context) {
+	if p.options.AsyncRefreshMinimumDelay != 0 {
+		var lastRefreshAttempt time.Time
+		if v := p.lastRefreshAttemptTime.Load(); v != nil {
+			lastRefreshAttempt = v.(time.Time)
+		}
+
+		if !lastRefreshAttempt.Add(p.options.AsyncRefreshMinimumDelay).After(sdk.NowTime().Round(0)) {
+			return
+		}
 	}
 
+	// Ignore the returned channel so this won't be blocking, and limit the
+	// number of additional goroutines created.
+	p.sf.DoChan("async-refresh", func() (interface{}, error) {
+		res, err := p.singleRetrieve(ctx)
+		if p.options.AsyncRefreshMinimumDelay != 0 {
+			var refreshAttempt time.Time
+			if err != nil {
+				refreshAttempt = sdk.NowTime()
+			}
+			p.lastRefreshAttemptTime.Store(refreshAttempt)
+		}
+
+		return res, err
+	})
+}
+
+func (p *CredentialsCache) singleRetrieve(ctx context.Context) (interface{}, error) {
 	newCreds, err := p.provider.Retrieve(ctx)
 	if err != nil {
 		handleFailToRefresh := defaultHandleFailToRefresh
 		if cs, ok := p.provider.(HandleFailRefreshCredentialsCacheStrategy); ok {
 			handleFailToRefresh = cs.HandleFailToRefresh
 		}
+		currCreds, _ := p.getCreds()
 		newCreds, err = handleFailToRefresh(ctx, currCreds, err)
 		if err != nil {
 			return Credentials{}, fmt.Errorf("failed to refresh cached credentials, %w", err)
