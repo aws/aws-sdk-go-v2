@@ -1,3 +1,9 @@
+# Release (2023-01-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.38.0](service/kendra/CHANGELOG.md#v1380-2023-01-11)
+  * **Feature**: This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD
+
 # Release (2023-01-10)
 
 ## Module Highlights
