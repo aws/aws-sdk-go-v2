@@ -1,8 +1,0 @@
-{
-    "id": "599adaa6-b0ce-4abb-9b41-328b7a3d6517",
-    "type": "feature",
-    "description": "The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

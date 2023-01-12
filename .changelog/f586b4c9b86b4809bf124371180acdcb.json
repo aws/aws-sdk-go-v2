@@ -1,8 +1,0 @@
-{
-    "id": "f586b4c9-b86b-4809-bf12-4371180acdcb",
-    "type": "feature",
-    "description": "Initial release of AWS Clean Rooms",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

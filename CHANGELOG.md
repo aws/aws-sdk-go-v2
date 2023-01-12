@@ -1,3 +1,18 @@
+# Release (2023-01-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.0.0](service/cleanrooms/CHANGELOG.md#v100-2023-01-12)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Clean Rooms
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.19.0](service/cloudwatchlogs/CHANGELOG.md#v1190-2023-01-12)
+  * **Feature**: Bug fix: logGroupName is now not a required field in GetLogEvents, FilterLogEvents, GetLogGroupFields, and DescribeLogStreams APIs as logGroupIdentifier can be provided instead
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.28.0](service/lambda/CHANGELOG.md#v1280-2023-01-12)
+  * **Feature**: Add support for MaximumConcurrency parameter for SQS event source. Customers can now limit the maximum concurrent invocations for their SQS Event Source Mapping.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.30.0](service/mediaconvert/CHANGELOG.md#v1300-2023-01-12)
+  * **Feature**: The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.18.1](service/secretsmanager/CHANGELOG.md#v1181-2023-01-12)
+  * **Documentation**: Update documentation for new ListSecrets and DescribeSecret parameters
+
 # Release (2023-01-11)
 
 ## Module Highlights

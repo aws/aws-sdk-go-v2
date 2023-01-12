@@ -1,8 +1,0 @@
-{
-    "id": "e98f2d84-f4b8-49ef-8990-5a0b4403d957",
-    "type": "documentation",
-    "description": "Update documentation for new ListSecrets and DescribeSecret parameters",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}
