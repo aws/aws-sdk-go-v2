@@ -118,6 +118,11 @@ type GetEventSourceMappingOutput struct {
 	// (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
+	// (Amazon SQS only) The scaling configuration for the event source. For more
+	// information, see Configuring maximum concurrency for Amazon SQS event sources
+	// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency).
+	ScalingConfig *types.ScalingConfig
+
 	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *types.SelfManagedEventSource
 

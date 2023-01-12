@@ -552,6 +552,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-me-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "waf-regional-fips.me-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-me-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "waf-regional-fips.me-south-1.amazonaws.com",
@@ -604,6 +613,23 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-west-2",
 				},
 				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "waf-regional.me-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "waf-regional-fips.me-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
+				},
 			},
 			endpoints.EndpointKey{
 				Region: "me-south-1",

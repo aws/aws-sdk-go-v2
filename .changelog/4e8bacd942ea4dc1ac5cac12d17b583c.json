@@ -1,0 +1,8 @@
+{
+    "id": "4e8bacd9-42ea-4dc1-ac5c-ac12d17b583c",
+    "type": "feature",
+    "description": "Add support for MaximumConcurrency parameter for SQS event source. Customers can now limit the maximum concurrent invocations for their SQS Event Source Mapping.",
+    "modules": [
+        "service/lambda"
+    ]
+}

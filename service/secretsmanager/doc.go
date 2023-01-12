@@ -9,9 +9,11 @@
 // using this service, see the Amazon Web Services Secrets Manager User Guide
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/introduction.html).
 // API Version This version of the Secrets Manager API Reference documents the
-// Secrets Manager API version 2017-10-17. Support and Feedback for Amazon Web
-// Services Secrets Manager We welcome your feedback. Send your comments to
-// awssecretsmanager-feedback@amazon.com
+// Secrets Manager API version 2017-10-17. For a list of endpoints, see Amazon Web
+// Services Secrets Manager endpoints
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/asm_access.html#endpoints).
+// Support and Feedback for Amazon Web Services Secrets Manager We welcome your
+// feedback. Send your comments to awssecretsmanager-feedback@amazon.com
 // (mailto:awssecretsmanager-feedback@amazon.com), or post your feedback and
 // questions in the Amazon Web Services Secrets Manager Discussion Forum
 // (http://forums.aws.amazon.com/forum.jspa?forumID=296). For more information

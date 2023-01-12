@@ -238,7 +238,7 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Reducing startup time with Lambda SnapStart
+	// see Improving startup performance with Lambda SnapStart
 	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
 	SnapStart *types.SnapStartResponse
 

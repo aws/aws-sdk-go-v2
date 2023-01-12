@@ -22,6 +22,9 @@ import (
 // from the linked source accounts. For more information, see CloudWatch
 // cross-account observability
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
+// You can specify the log group to search by using either logGroupIdentifier or
+// logGroupName. You must include one of these two parameters, but you can't
+// include both.
 func (c *Client) GetLogEvents(ctx context.Context, params *GetLogEventsInput, optFns ...func(*Options)) (*GetLogEventsOutput, error) {
 	if params == nil {
 		params = &GetLogEventsInput{}
@@ -38,12 +41,6 @@ func (c *Client) GetLogEvents(ctx context.Context, params *GetLogEventsInput, op
 }
 
 type GetLogEventsInput struct {
-
-	// The name of the log group. If you specify values for both logGroupName and
-	// logGroupIdentifier, the action returns an InvalidParameterException error.
-	//
-	// This member is required.
-	LogGroupName *string
 
 	// The name of the log stream.
 	//
@@ -65,6 +62,10 @@ type GetLogEventsInput struct {
 	// use the log group ARN. If you specify values for both logGroupName and
 	// logGroupIdentifier, the action returns an InvalidParameterException error.
 	LogGroupIdentifier *string
+
+	// The name of the log group. If you specify values for both logGroupName and
+	// logGroupIdentifier, the action returns an InvalidParameterException error.
+	LogGroupName *string
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)

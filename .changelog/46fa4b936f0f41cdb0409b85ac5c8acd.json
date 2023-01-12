@@ -1,0 +1,8 @@
+{
+    "id": "46fa4b93-6f0f-41cd-b040-9b85ac5c8acd",
+    "type": "feature",
+    "description": "Bug fix: logGroupName is now not a required field in GetLogEvents, FilterLogEvents, GetLogGroupFields, and DescribeLogStreams APIs as logGroupIdentifier can be provided instead",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

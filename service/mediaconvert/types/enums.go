@@ -2216,6 +2216,26 @@ func (DashIsoWriteSegmentTimelineInRepresentation) Values() []DashIsoWriteSegmen
 	}
 }
 
+type DashManifestStyle string
+
+// Enum values for DashManifestStyle
+const (
+	DashManifestStyleBasic    DashManifestStyle = "BASIC"
+	DashManifestStyleCompact  DashManifestStyle = "COMPACT"
+	DashManifestStyleDistinct DashManifestStyle = "DISTINCT"
+)
+
+// Values returns all known values for DashManifestStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashManifestStyle) Values() []DashManifestStyle {
+	return []DashManifestStyle{
+		"BASIC",
+		"COMPACT",
+		"DISTINCT",
+	}
+}
+
 type DecryptionMode string
 
 // Enum values for DecryptionMode
@@ -7257,6 +7277,7 @@ type SampleRangeConversion string
 const (
 	SampleRangeConversionLimitedRangeSqueeze SampleRangeConversion = "LIMITED_RANGE_SQUEEZE"
 	SampleRangeConversionNone                SampleRangeConversion = "NONE"
+	SampleRangeConversionLimitedRangeClip    SampleRangeConversion = "LIMITED_RANGE_CLIP"
 )
 
 // Values returns all known values for SampleRangeConversion. Note that this can be
@@ -7266,6 +7287,7 @@ func (SampleRangeConversion) Values() []SampleRangeConversion {
 	return []SampleRangeConversion{
 		"LIMITED_RANGE_SQUEEZE",
 		"NONE",
+		"LIMITED_RANGE_CLIP",
 	}
 }
 

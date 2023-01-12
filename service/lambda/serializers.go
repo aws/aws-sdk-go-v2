@@ -567,6 +567,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		}
 	}
 
+	if v.ScalingConfig != nil {
+		ok := object.Key("ScalingConfig")
+		if err := awsRestjson1_serializeDocumentScalingConfig(v.ScalingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SelfManagedEventSource != nil {
 		ok := object.Key("SelfManagedEventSource")
 		if err := awsRestjson1_serializeDocumentSelfManagedEventSource(v.SelfManagedEventSource, ok); err != nil {
@@ -4535,6 +4542,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.Integer(*v.ParallelizationFactor)
 	}
 
+	if v.ScalingConfig != nil {
+		ok := object.Key("ScalingConfig")
+		if err := awsRestjson1_serializeDocumentScalingConfig(v.ScalingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceAccessConfigurations != nil {
 		ok := object.Key("SourceAccessConfigurations")
 		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
@@ -5533,6 +5547,18 @@ func awsRestjson1_serializeDocumentQueues(v []string, value smithyjson.Value) er
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScalingConfig(v *types.ScalingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumConcurrency != nil {
+		ok := object.Key("MaximumConcurrency")
+		ok.Integer(*v.MaximumConcurrency)
+	}
+
 	return nil
 }
 

@@ -15,17 +15,19 @@ import (
 // Lists log events from the specified log group. You can list all the log events
 // or filter the results using a filter pattern, a time range, and the name of the
 // log stream. You must have the logs;FilterLogEvents permission to perform this
-// operation. By default, this operation returns as many log events as can fit in 1
-// MB (up to 10,000 log events) or all the events found within the specified time
-// range. If the results include a token, that means there are more log events
-// available. You can get additional results by specifying the token in a
-// subsequent call. This operation can return empty results while there are more
-// log events available through the token. The returned log events are sorted by
-// event timestamp, the timestamp when the event was ingested by CloudWatch Logs,
-// and the ID of the PutLogEvents request. If you are using CloudWatch
-// cross-account observability, you can use this operation in a monitoring account
-// and view data from the linked source accounts. For more information, see
-// CloudWatch cross-account observability
+// operation. You can specify the log group to search by using either
+// logGroupIdentifier or logGroupName. You must include one of these two
+// parameters, but you can't include both. By default, this operation returns as
+// many log events as can fit in 1 MB (up to 10,000 log events) or all the events
+// found within the specified time range. If the results include a token, that
+// means there are more log events available. You can get additional results by
+// specifying the token in a subsequent call. This operation can return empty
+// results while there are more log events available through the token. The
+// returned log events are sorted by event timestamp, the timestamp when the event
+// was ingested by CloudWatch Logs, and the ID of the PutLogEvents request. If you
+// are using CloudWatch cross-account observability, you can use this operation in
+// a monitoring account and view data from the linked source accounts. For more
+// information, see CloudWatch cross-account observability
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
 func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInput, optFns ...func(*Options)) (*FilterLogEventsOutput, error) {
 	if params == nil {
@@ -43,12 +45,6 @@ func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInp
 }
 
 type FilterLogEventsInput struct {
-
-	// The name of the log group to search. If you specify values for both logGroupName
-	// and logGroupIdentifier, the action returns an InvalidParameterException error.
-	//
-	// This member is required.
-	LogGroupName *string
 
 	// The end of the time range, expressed as the number of milliseconds after Jan 1,
 	// 1970 00:00:00 UTC. Events with a timestamp later than this time are not
@@ -81,6 +77,10 @@ type FilterLogEventsInput struct {
 	// must use the log group ARN. If you specify values for both logGroupName and
 	// logGroupIdentifier, the action returns an InvalidParameterException error.
 	LogGroupIdentifier *string
+
+	// The name of the log group to search. If you specify values for both logGroupName
+	// and logGroupIdentifier, the action returns an InvalidParameterException error.
+	LogGroupName *string
 
 	// Filters the results to include only events from log streams that have names
 	// starting with this prefix. If you specify a value for both logStreamNamePrefix
@@ -173,9 +173,6 @@ func (c *Client) addOperationFilterLogEventsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpFilterLogEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFilterLogEvents(options.Region), middleware.Before); err != nil {
