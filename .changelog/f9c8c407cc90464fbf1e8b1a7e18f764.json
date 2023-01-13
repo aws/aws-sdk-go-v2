@@ -1,0 +1,8 @@
+{
+    "id": "f9c8c407-cc90-464f-bf1e-8b1a7e18f764",
+    "type": "feature",
+    "description": "This release adds POWER_30_KVA as an option for PowerDrawKva. PowerDrawKva is part of the RackPhysicalProperties structure in the CreateSite request.",
+    "modules": [
+        "service/outposts"
+    ]
+}

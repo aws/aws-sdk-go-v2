@@ -1,0 +1,8 @@
+{
+    "id": "fca0c577-14db-473d-aa10-7c9f377995d1",
+    "type": "feature",
+    "description": "AWS Resource Groups customers can now turn on Group Lifecycle Events in their AWS account. When you turn this on, Resource Groups monitors your groups for changes to group state or membership. Those changes are sent to Amazon EventBridge as events that you can respond to using rules you create.",
+    "modules": [
+        "service/resourcegroups"
+    ]
+}

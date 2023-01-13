@@ -34,8 +34,8 @@ func (c *Client) CreateVpcEndpointConnectionNotification(ctx context.Context, pa
 
 type CreateVpcEndpointConnectionNotificationInput struct {
 
-	// One or more endpoint events for which to receive notifications. Valid values are
-	// Accept, Connect, Delete, and Reject.
+	// The endpoint events for which to receive notifications. Valid values are Accept,
+	// Connect, Delete, and Reject.
 	//
 	// This member is required.
 	ConnectionEvents []string

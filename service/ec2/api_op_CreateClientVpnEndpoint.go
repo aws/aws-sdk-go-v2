@@ -41,7 +41,8 @@ type CreateClientVpnEndpointInput struct {
 	// addresses. The address range cannot overlap with the local CIDR of the VPC in
 	// which the associated subnet is located, or the routes that you add manually. The
 	// address range cannot be changed after the Client VPN endpoint has been created.
-	// The CIDR block should be /22 or greater.
+	// Client CIDR range must have a size of at least /22 and must not be greater than
+	// /12.
 	//
 	// This member is required.
 	ClientCidrBlock *string

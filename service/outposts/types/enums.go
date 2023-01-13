@@ -341,6 +341,7 @@ const (
 	PowerDrawKvaPower5Kva  PowerDrawKva = "POWER_5_KVA"
 	PowerDrawKvaPower10Kva PowerDrawKva = "POWER_10_KVA"
 	PowerDrawKvaPower15Kva PowerDrawKva = "POWER_15_KVA"
+	PowerDrawKvaPower30Kva PowerDrawKva = "POWER_30_KVA"
 )
 
 // Values returns all known values for PowerDrawKva. Note that this can be expanded
@@ -351,6 +352,7 @@ func (PowerDrawKva) Values() []PowerDrawKva {
 		"POWER_5_KVA",
 		"POWER_10_KVA",
 		"POWER_15_KVA",
+		"POWER_30_KVA",
 	}
 }
 

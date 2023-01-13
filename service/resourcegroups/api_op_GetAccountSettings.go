@@ -11,45 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the service configuration associated with the specified resource
-// group. For details about the service configuration syntax, see Service
-// configurations for Resource Groups
-// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). Minimum
-// permissions To run this command, you must have the following permissions:
-//
-// *
-// resource-groups:GetGroupConfiguration
-func (c *Client) GetGroupConfiguration(ctx context.Context, params *GetGroupConfigurationInput, optFns ...func(*Options)) (*GetGroupConfigurationOutput, error) {
+// Retrieves the current status of optional features in Resource Groups.
+func (c *Client) GetAccountSettings(ctx context.Context, params *GetAccountSettingsInput, optFns ...func(*Options)) (*GetAccountSettingsOutput, error) {
 	if params == nil {
-		params = &GetGroupConfigurationInput{}
+		params = &GetAccountSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGroupConfiguration", params, optFns, c.addOperationGetGroupConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountSettings", params, optFns, c.addOperationGetAccountSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetGroupConfigurationOutput)
+	out := result.(*GetAccountSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetGroupConfigurationInput struct {
-
-	// The name or the ARN of the resource group for which you want to retrive the
-	// service configuration.
-	Group *string
-
+type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-type GetGroupConfigurationOutput struct {
+type GetAccountSettingsOutput struct {
 
-	// A structure that describes the service configuration attached with the specified
-	// group. For details about the service configuration syntax, see Service
-	// configurations for Resource Groups
-	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
-	GroupConfiguration *types.GroupConfiguration
+	// The current settings for the optional features in Resource Groups.
+	AccountSettings *types.AccountSettings
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,12 +42,12 @@ type GetGroupConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupConfiguration{}, middleware.After)
+func (c *Client) addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -102,7 +87,7 @@ func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -117,11 +102,11 @@ func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetGroupConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "resource-groups",
-		OperationName: "GetGroupConfiguration",
+		OperationName: "GetAccountSettings",
 	}
 }

@@ -51,7 +51,7 @@ type ListGroupResourcesInput struct {
 	// For example, AWS::EC2::Instance, or AWS::S3::Bucket.
 	//
 	// When you specify a
-	// resource-type filter for ListGroupResources, AWS Resource Groups validates your
+	// resource-type filter for ListGroupResources, Resource Groups validates your
 	// filter resource types against the types that are defined in the query associated
 	// with the group. For example, if a group contains only S3 buckets because its
 	// query specifies only that resource type, but your resource-type filter includes
@@ -62,7 +62,7 @@ type ListGroupResourcesInput struct {
 	// the validation because they are not part of the query associated with the group.
 	// This validation doesn't occur when the group query specifies AWS::AllSupported,
 	// because a group based on such a query can contain any of the allowed resource
-	// types for the query type (tag-based or AWS CloudFormation stack-based queries).
+	// types for the query type (tag-based or Amazon CloudFront stack-based queries).
 	Filters []types.ResourceFilter
 
 	// The name or the ARN of the resource group

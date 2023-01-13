@@ -35,10 +35,10 @@ func (c *Client) PutGroupConfiguration(ctx context.Context, params *PutGroupConf
 type PutGroupConfigurationInput struct {
 
 	// The new configuration to associate with the specified group. A configuration
-	// associates the resource group with an AWS service and specifies how the service
-	// can interact with the resources in the group. A configuration is an array of
-	// GroupConfigurationItem elements. For information about the syntax of a service
-	// configuration, see Service configurations for resource groups
+	// associates the resource group with an Amazon Web Services service and specifies
+	// how the service can interact with the resources in the group. A configuration is
+	// an array of GroupConfigurationItem elements. For information about the syntax of
+	// a service configuration, see Service configurations for Resource Groups
 	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). A resource
 	// group can contain either a Configuration or a ResourceQuery, but not both.
 	Configuration []types.GroupConfigurationItem

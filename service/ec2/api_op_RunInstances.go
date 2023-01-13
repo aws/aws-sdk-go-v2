@@ -315,9 +315,8 @@ type RunInstancesInput struct {
 	// of the network interface.
 	SecurityGroupIds []string
 
-	// [EC2-Classic, default VPC] The names of the security groups. For a nondefault
-	// VPC, you must use security group IDs instead. If you specify a network
-	// interface, you must specify any security groups as part of the network
+	// [EC2-Classic, default VPC] The names of the security groups. If you specify a
+	// network interface, you must specify any security groups as part of the network
 	// interface. Default: Amazon EC2 uses the default security group.
 	SecurityGroups []string
 

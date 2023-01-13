@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more VPC endpoint connection notifications.
+// Deletes the specified VPC endpoint connection notifications.
 func (c *Client) DeleteVpcEndpointConnectionNotifications(ctx context.Context, params *DeleteVpcEndpointConnectionNotificationsInput, optFns ...func(*Options)) (*DeleteVpcEndpointConnectionNotificationsOutput, error) {
 	if params == nil {
 		params = &DeleteVpcEndpointConnectionNotificationsInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteVpcEndpointConnectionNotifications(ctx context.Context, p
 
 type DeleteVpcEndpointConnectionNotificationsInput struct {
 
-	// One or more notification IDs.
+	// The IDs of the notifications.
 	//
 	// This member is required.
 	ConnectionNotificationIds []string

@@ -11,45 +11,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the service configuration associated with the specified resource
-// group. For details about the service configuration syntax, see Service
-// configurations for Resource Groups
-// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). Minimum
-// permissions To run this command, you must have the following permissions:
-//
-// *
-// resource-groups:GetGroupConfiguration
-func (c *Client) GetGroupConfiguration(ctx context.Context, params *GetGroupConfigurationInput, optFns ...func(*Options)) (*GetGroupConfigurationOutput, error) {
+// Turns on or turns off optional features in Resource Groups. The preceding
+// example shows that the request to turn on group lifecycle events is IN_PROGRESS.
+// You can call the GetAccountSettings operation to check for completion by looking
+// for GroupLifecycleEventsStatus to change to ACTIVE.
+func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
-		params = &GetGroupConfigurationInput{}
+		params = &UpdateAccountSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGroupConfiguration", params, optFns, c.addOperationGetGroupConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountSettings", params, optFns, c.addOperationUpdateAccountSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetGroupConfigurationOutput)
+	out := result.(*UpdateAccountSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetGroupConfigurationInput struct {
+type UpdateAccountSettingsInput struct {
 
-	// The name or the ARN of the resource group for which you want to retrive the
-	// service configuration.
-	Group *string
+	// Specifies whether you want to turn group lifecycle events
+	// (https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html) on or
+	// off.
+	GroupLifecycleEventsDesiredStatus types.GroupLifecycleEventsDesiredStatus
 
 	noSmithyDocumentSerde
 }
 
-type GetGroupConfigurationOutput struct {
+type UpdateAccountSettingsOutput struct {
 
-	// A structure that describes the service configuration attached with the specified
-	// group. For details about the service configuration syntax, see Service
-	// configurations for Resource Groups
-	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
-	GroupConfiguration *types.GroupConfiguration
+	// A structure that displays the status of the optional features in the account.
+	AccountSettings *types.AccountSettings
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,12 +51,12 @@ type GetGroupConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupConfiguration{}, middleware.After)
+func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -102,7 +96,7 @@ func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -117,11 +111,11 @@ func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetGroupConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "resource-groups",
-		OperationName: "GetGroupConfiguration",
+		OperationName: "UpdateAccountSettings",
 	}
 }

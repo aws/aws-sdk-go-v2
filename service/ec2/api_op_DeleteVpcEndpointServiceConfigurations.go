@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more VPC endpoint service configurations in your account. Before
-// you delete the endpoint service configuration, you must reject any Available or
+// Deletes the specified VPC endpoint service configurations. Before you can delete
+// an endpoint service configuration, you must reject any Available or
 // PendingAcceptance interface endpoint connections that are attached to the
 // service.
 func (c *Client) DeleteVpcEndpointServiceConfigurations(ctx context.Context, params *DeleteVpcEndpointServiceConfigurationsInput, optFns ...func(*Options)) (*DeleteVpcEndpointServiceConfigurationsOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) DeleteVpcEndpointServiceConfigurations(ctx context.Context, par
 
 type DeleteVpcEndpointServiceConfigurationsInput struct {
 
-	// The IDs of one or more services.
+	// The IDs of the services.
 	//
 	// This member is required.
 	ServiceIds []string

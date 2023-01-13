@@ -4415,12 +4415,6 @@ func (m *awsRestjson1_deserializeOpDeleteContactFlow) HandleDeserialize(ctx cont
 	output := &DeleteContactFlowOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
-
 	return out, metadata, err
 }
 
@@ -20119,12 +20113,6 @@ func (m *awsRestjson1_deserializeOpUpdateContactFlowContent) HandleDeserialize(c
 	output := &UpdateContactFlowContentOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
-
 	return out, metadata, err
 }
 
@@ -20222,12 +20210,6 @@ func (m *awsRestjson1_deserializeOpUpdateContactFlowMetadata) HandleDeserialize(
 	}
 	output := &UpdateContactFlowMetadataOutput{}
 	out.Result = output
-
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
 
 	return out, metadata, err
 }
@@ -20525,12 +20507,6 @@ func (m *awsRestjson1_deserializeOpUpdateContactFlowName) HandleDeserialize(ctx 
 	}
 	output := &UpdateContactFlowNameOutput{}
 	out.Result = output
-
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
 
 	return out, metadata, err
 }

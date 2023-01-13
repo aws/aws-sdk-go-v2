@@ -2323,8 +2323,8 @@ type DataQuery struct {
 	// MyQuery01in the query, the dataResponse identifies the query as MyQuery01.
 	Id *string
 
-	// The aggregation metric used for the data query. Currently only
-	// aggregation-latency is supported, indicating network latency.
+	// The metric, aggregation-latency, indicating that network latency is aggregated
+	// for the query. This is the only supported metric.
 	Metric MetricType
 
 	// The aggregation period used for the data query.
@@ -2334,13 +2334,9 @@ type DataQuery struct {
 	// example, us-east-1.
 	Source *string
 
-	// Metric data aggregations over specified periods of time. The following are the
-	// supported Infrastructure Performance statistics:
-	//
-	// * p50 - The median value of
-	// the metric aggregated over a specified start and end time. For example, a metric
-	// of five_minutes is the median of all the data points gathered within those five
-	// minutes.
+	// The metric data aggregation period, p50, between the specified startDate and
+	// endDate. For example, a metric of five_minutes is the median of all the data
+	// points gathered within those five minutes. p50 is the only supported metric.
 	Statistic StatisticType
 
 	noSmithyDocumentSerde
@@ -2356,9 +2352,8 @@ type DataResponse struct {
 	// The ID passed in the DataQuery.
 	Id *string
 
-	// The metric used for the network performance request. Currently only
-	// aggregate-latency is supported, showing network latency during a specified
-	// period.
+	// The metric used for the network performance request. Only aggregate-latency is
+	// supported, which shows network latency during a specified period.
 	Metric MetricType
 
 	// A list of MetricPoint objects.
@@ -4440,6 +4435,7 @@ type FpgaImage struct {
 	// The FPGA image identifier (AFI ID).
 	FpgaImageId *string
 
+	// The instance types supported by the AFI.
 	InstanceTypes []string
 
 	// The name of the AFI.
@@ -5875,15 +5871,23 @@ type InstanceMetadataOptionsRequest struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a session
-	// token on your request. If you retrieve the IAM role credentials without a token,
-	// the version 1.0 role credentials are returned. If you retrieve the IAM role
-	// credentials using a valid session token, the version 2.0 role credentials are
-	// returned. If the state is required, you must send a session token with any
-	// instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available. Default: optional
+	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
+	// other words, set the use of IMDSv2 to optional) or required (in other words, set
+	// the use of IMDSv2 to required).
+	//
+	// * optional - When IMDSv2 is optional, you can
+	// choose to retrieve instance metadata with or without a session token in your
+	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
+	// role credentials are returned. If you retrieve the IAM role credentials using a
+	// valid session token, the IMDSv2 role credentials are returned.
+	//
+	// * required -
+	// When IMDSv2 is required, you must send a session token with any instance
+	// metadata retrieval requests. In this state, retrieving the IAM role credentials
+	// always returns IMDSv2 credentials; IMDSv1 credentials are not
+	// available.
+	//
+	// Default: optional
 	HttpTokens HttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -5912,15 +5916,23 @@ type InstanceMetadataOptionsResponse struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a session
-	// token on your request. If you retrieve the IAM role credentials without a token,
-	// the version 1.0 role credentials are returned. If you retrieve the IAM role
-	// credentials using a valid session token, the version 2.0 role credentials are
-	// returned. If the state is required, you must send a session token with any
-	// instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available. Default: optional
+	// IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is
+	// optional (in other words, indicates whether the use of IMDSv2 is optional) or
+	// required (in other words, indicates whether the use of IMDSv2 is required).
+	//
+	// *
+	// optional - When IMDSv2 is optional, you can choose to retrieve instance metadata
+	// with or without a session token in your request. If you retrieve the IAM role
+	// credentials without a token, the IMDSv1 role credentials are returned. If you
+	// retrieve the IAM role credentials using a valid session token, the IMDSv2 role
+	// credentials are returned.
+	//
+	// * required - When IMDSv2 is required, you must send a
+	// session token with any instance metadata retrieval requests. In this state,
+	// retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1
+	// credentials are not available.
+	//
+	// Default: optional
 	HttpTokens HttpTokensState
 
 	// Indicates whether access to instance tags from the instance metadata is enabled
@@ -7561,9 +7573,10 @@ type IpamScope struct {
 // Describes a set of permissions for a security group rule.
 type IpPermission struct {
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type
-	// number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
-	// ICMP/ICMPv6 types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	FromPort *int32
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
@@ -7584,9 +7597,10 @@ type IpPermission struct {
 	// [VPC only] The prefix list IDs.
 	PrefixListIds []PrefixListId
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
-	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all
+	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	ToPort *int32
 
 	// The security group and Amazon Web Services account ID pairs.
@@ -8302,16 +8316,15 @@ type LaunchTemplateInstanceMetadataOptions struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the parameter
-	// is not specified in the request, the default state is optional. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a signed
-	// token header on your request. If you retrieve the IAM role credentials without a
-	// token, the version 1.0 role credentials are returned. If you retrieve the IAM
-	// role credentials using a valid signed token, the version 2.0 role credentials
-	// are returned. If the state is required, you must send a signed token header with
+	// Indicates whether IMDSv2 is optional or required. optional - When IMDSv2 is
+	// optional, you can choose to retrieve instance metadata with or without a session
+	// token in your request. If you retrieve the IAM role credentials without a token,
+	// the IMDSv1 role credentials are returned. If you retrieve the IAM role
+	// credentials using a valid session token, the IMDSv2 role credentials are
+	// returned. required - When IMDSv2 is required, you must send a session token with
 	// any instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available.
+	// credentials always returns IMDSv2 credentials; IMDSv1 credentials are not
+	// available. Default: optional
 	HttpTokens LaunchTemplateHttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -8350,16 +8363,23 @@ type LaunchTemplateInstanceMetadataOptionsRequest struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the parameter
-	// is not specified in the request, the default state is optional. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a signed
-	// token header on your request. If you retrieve the IAM role credentials without a
-	// token, the version 1.0 role credentials are returned. If you retrieve the IAM
-	// role credentials using a valid signed token, the version 2.0 role credentials
-	// are returned. If the state is required, you must send a signed token header with
-	// any instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available.
+	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
+	// other words, set the use of IMDSv2 to optional) or required (in other words, set
+	// the use of IMDSv2 to required).
+	//
+	// * optional - When IMDSv2 is optional, you can
+	// choose to retrieve instance metadata with or without a session token in your
+	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
+	// role credentials are returned. If you retrieve the IAM role credentials using a
+	// valid session token, the IMDSv2 role credentials are returned.
+	//
+	// * required -
+	// When IMDSv2 is required, you must send a session token with any instance
+	// metadata retrieval requests. In this state, retrieving the IAM role credentials
+	// always returns IMDSv2 credentials; IMDSv1 credentials are not
+	// available.
+	//
+	// Default: optional
 	HttpTokens LaunchTemplateHttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -9248,8 +9268,8 @@ type MemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether the network was healthy or unhealthy at a particular point.
-// The value is aggregated from the startDate to the endDate. Currently only
+// Indicates whether the network was healthy or degraded at a particular point. The
+// value is aggregated from the startDate to the endDate. Currently only
 // five_minutes is supported.
 type MetricPoint struct {
 
@@ -11391,8 +11411,9 @@ type RequestLaunchTemplateData struct {
 	CreditSpecification *CreditSpecificationRequest
 
 	// Indicates whether to enable the instance for stop protection. For more
-	// information, see Stop Protection
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection).
+	// information, see Stop protection
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	DisableApiStop *bool
 
 	// If you set this parameter to true, you can't terminate the instance using the
@@ -12032,8 +12053,9 @@ type ResponseLaunchTemplateData struct {
 	CreditSpecification *CreditSpecification
 
 	// Indicates whether the instance is enabled for stop protection. For more
-	// information, see Stop Protection
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection).
+	// information, see Stop protection
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	DisableApiStop *bool
 
 	// If set to true, indicates that the instance cannot be terminated using the
@@ -12754,9 +12776,10 @@ type SecurityGroupRule struct {
 	// The security group rule description.
 	Description *string
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A
-	// value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	FromPort *int32
 
 	// The ID of the security group.
@@ -12785,9 +12808,10 @@ type SecurityGroupRule struct {
 	// The tags applied to the security group rule.
 	Tags []Tag
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
-	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	ToPort *int32
 
 	noSmithyDocumentSerde
@@ -12835,9 +12859,10 @@ type SecurityGroupRuleRequest struct {
 	// The description of the security group rule.
 	Description *string
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A
-	// value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	FromPort *int32
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
@@ -12851,9 +12876,10 @@ type SecurityGroupRuleRequest struct {
 	// The ID of the security group that is referenced in the security group rule.
 	ReferencedGroupId *string
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
-	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all
+	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	ToPort *int32
 
 	noSmithyDocumentSerde
@@ -12918,7 +12944,7 @@ type ServiceConfiguration struct {
 	// The supported IP address types.
 	SupportedIpAddressTypes []ServiceConnectivityType
 
-	// Any tags assigned to the service.
+	// The tags assigned to the service.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -12969,7 +12995,7 @@ type ServiceDetail struct {
 	// The supported IP address types.
 	SupportedIpAddressTypes []ServiceConnectivityType
 
-	// Any tags assigned to the service.
+	// The tags assigned to the service.
 	Tags []Tag
 
 	// Indicates whether the service supports endpoint policies.
@@ -13660,7 +13686,8 @@ type SpotFleetRequestConfigData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
 	TagSpecifications []TagSpecification
 
-	// The unit for the target capacity. Default: units (translates to number of
+	// The unit for the target capacity. TargetCapacityUnitType can only be specified
+	// when InstanceRequirements is specified. Default: units (translates to number of
 	// instances)
 	TargetCapacityUnitType TargetCapacityUnitType
 
@@ -14518,7 +14545,8 @@ type TargetCapacitySpecification struct {
 	// On-Demand units, you cannot specify a target capacity for Spot units.
 	SpotTargetCapacity *int32
 
-	// The unit for the target capacity. Default: units (translates to number of
+	// The unit for the target capacity. TargetCapacityUnitType can only be specified
+	// when InstanceRequirements is specified. Default: units (translates to number of
 	// instances)
 	TargetCapacityUnitType TargetCapacityUnitType
 
@@ -14559,7 +14587,8 @@ type TargetCapacitySpecificationRequest struct {
 	// The number of Spot units to request.
 	SpotTargetCapacity *int32
 
-	// The unit for the target capacity. Default: units (translates to number of
+	// The unit for the target capacity. TargetCapacityUnitType can only be specified
+	// when InstanceRequirements is specified. Default: units (translates to number of
 	// instances)
 	TargetCapacityUnitType TargetCapacityUnitType
 
@@ -16891,7 +16920,7 @@ type VpcEndpoint struct {
 	// The last error that occurred for endpoint.
 	LastError *LastError
 
-	// (Interface endpoint) One or more network interfaces for the endpoint.
+	// (Interface endpoint) The network interfaces for the endpoint.
 	NetworkInterfaceIds []string
 
 	// The ID of the Amazon Web Services account that owns the endpoint.
@@ -16907,7 +16936,7 @@ type VpcEndpoint struct {
 	// Indicates whether the endpoint is being managed by its service.
 	RequesterManaged *bool
 
-	// (Gateway endpoint) One or more route tables associated with the endpoint.
+	// (Gateway endpoint) The IDs of the route tables associated with the endpoint.
 	RouteTableIds []string
 
 	// The name of the service to which the endpoint is associated.
@@ -16919,7 +16948,7 @@ type VpcEndpoint struct {
 	// (Interface endpoint) The subnets for the endpoint.
 	SubnetIds []string
 
-	// Any tags assigned to the endpoint.
+	// The tags assigned to the endpoint.
 	Tags []Tag
 
 	// The ID of the endpoint.

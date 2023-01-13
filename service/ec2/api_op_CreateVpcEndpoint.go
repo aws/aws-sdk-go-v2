@@ -32,16 +32,14 @@ func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpoin
 	return out, nil
 }
 
-// Contains the parameters for CreateVpcEndpoint.
 type CreateVpcEndpointInput struct {
 
-	// The service name. To get a list of available services, use the
-	// DescribeVpcEndpointServices request, or get the name from the service provider.
+	// The service name.
 	//
 	// This member is required.
 	ServiceName *string
 
-	// The ID of the VPC in which the endpoint will be used.
+	// The ID of the VPC for the endpoint.
 	//
 	// This member is required.
 	VpcId *string
@@ -81,16 +79,17 @@ type CreateVpcEndpointInput struct {
 	// true
 	PrivateDnsEnabled *bool
 
-	// (Gateway endpoint) One or more route table IDs.
+	// (Gateway endpoint) The route table IDs.
 	RouteTableIds []string
 
-	// (Interface endpoint) The ID of one or more security groups to associate with the
-	// endpoint network interface.
+	// (Interface endpoint) The IDs of the security groups to associate with the
+	// endpoint network interface. If this parameter is not specified, we use the
+	// default security group for the VPC.
 	SecurityGroupIds []string
 
-	// (Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in
-	// which to create an endpoint network interface. For a Gateway Load Balancer
-	// endpoint, you can specify one subnet only.
+	// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which
+	// to create an endpoint network interface. For a Gateway Load Balancer endpoint,
+	// you can specify only one subnet.
 	SubnetIds []string
 
 	// The tags to associate with the endpoint.
@@ -102,7 +101,6 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of CreateVpcEndpoint.
 type CreateVpcEndpointOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

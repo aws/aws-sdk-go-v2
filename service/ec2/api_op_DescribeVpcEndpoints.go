@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your VPC endpoints.
+// Describes your VPC endpoints.
 func (c *Client) DescribeVpcEndpoints(ctx context.Context, params *DescribeVpcEndpointsInput, optFns ...func(*Options)) (*DescribeVpcEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcEndpointsInput{}
@@ -28,7 +28,6 @@ func (c *Client) DescribeVpcEndpoints(ctx context.Context, params *DescribeVpcEn
 	return out, nil
 }
 
-// Contains the parameters for DescribeVpcEndpoints.
 type DescribeVpcEndpointsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
@@ -37,7 +36,7 @@ type DescribeVpcEndpointsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//
 	// * ip-address-type - The IP address type (ipv4 | ipv6).
 	//
@@ -76,13 +75,12 @@ type DescribeVpcEndpointsInput struct {
 	// prior call.)
 	NextToken *string
 
-	// One or more endpoint IDs.
+	// The IDs of the VPC endpoints.
 	VpcEndpointIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the output of DescribeVpcEndpoints.
 type DescribeVpcEndpointsOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

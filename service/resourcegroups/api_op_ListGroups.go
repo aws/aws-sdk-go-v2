@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of existing resource groups in your account. Minimum permissions
+// Returns a list of existing Resource Groups in your account. Minimum permissions
 // To run this command, you must have the following permissions:
 //
 // *
@@ -46,10 +46,10 @@ type ListGroupsInput struct {
 	// those groups that have the specified configuration types attached. The current
 	// supported values are:
 	//
-	// * AWS:EC2::CapacityReservationPool
+	// * AWS::EC2::CapacityReservationPool
 	//
 	// *
-	// AWS:EC2::HostManagement
+	// AWS::EC2::HostManagement
 	Filters []types.GroupFilter
 
 	// The total number of results that you want included on each page of the response.
