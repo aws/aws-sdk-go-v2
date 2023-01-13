@@ -1,8 +1,0 @@
-{
-    "id": "36bb797f-dc1e-4d1d-8729-64e5032c6df0",
-    "type": "feature",
-    "description": "This release updates the responses of UpdateContactFlowContent, UpdateContactFlowMetadata, UpdateContactFlowName and DeleteContactFlow API with empty responses.",
-    "modules": [
-        "service/connect"
-    ]
-}

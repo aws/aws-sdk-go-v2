@@ -1,8 +1,0 @@
-{
-    "id": "b455648d-48f3-4866-a5ef-bf88a3964655",
-    "type": "feature",
-    "description": "Documentation updates for EC2.",
-    "modules": [
-        "service/ec2"
-    ]
-}

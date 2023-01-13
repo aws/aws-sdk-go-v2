@@ -1,3 +1,15 @@
+# Release (2023-01-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.44.0](service/connect/CHANGELOG.md#v1440-2023-01-13)
+  * **Feature**: This release updates the responses of UpdateContactFlowContent, UpdateContactFlowMetadata, UpdateContactFlowName and DeleteContactFlow API with empty responses.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.78.0](service/ec2/CHANGELOG.md#v1780-2023-01-13)
+  * **Feature**: Documentation updates for EC2.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.25.0](service/outposts/CHANGELOG.md#v1250-2023-01-13)
+  * **Feature**: This release adds POWER_30_KVA as an option for PowerDrawKva. PowerDrawKva is part of the RackPhysicalProperties structure in the CreateSite request.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.14.0](service/resourcegroups/CHANGELOG.md#v1140-2023-01-13)
+  * **Feature**: AWS Resource Groups customers can now turn on Group Lifecycle Events in their AWS account. When you turn this on, Resource Groups monitors your groups for changes to group state or membership. Those changes are sent to Amazon EventBridge as events that you can respond to using rules you create.
+
 # Release (2023-01-12)
 
 ## Module Highlights
