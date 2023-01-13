@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -29,6 +29,32 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.resourcegroups#AccountSettings": {
+            "type": "structure",
+            "members": {
+                "GroupLifecycleEventsDesiredStatus": {
+                    "target": "com.amazonaws.resourcegroups#GroupLifecycleEventsDesiredStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired target status of the group lifecycle events feature. If</p>"
+                    }
+                },
+                "GroupLifecycleEventsStatus": {
+                    "target": "com.amazonaws.resourcegroups#GroupLifecycleEventsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the group lifecycle events feature.</p>"
+                    }
+                },
+                "GroupLifecycleEventsStatusMessage": {
+                    "target": "com.amazonaws.resourcegroups#GroupLifecycleEventsStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of any error message occurs during an attempt to turn group lifecycle events on or off.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Resource Groups settings for this Amazon Web Services account.</p>"
+            }
+        },
         "com.amazonaws.resourcegroups#Ardi": {
             "type": "service",
             "version": "2017-11-27",
@@ -38,6 +64,9 @@
                 },
                 {
                     "target": "com.amazonaws.resourcegroups#DeleteGroup"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#GetAccountSettings"
                 },
                 {
                     "target": "com.amazonaws.resourcegroups#GetGroup"
@@ -76,6 +105,9 @@
                     "target": "com.amazonaws.resourcegroups#Untag"
                 },
                 {
+                    "target": "com.amazonaws.resourcegroups#UpdateAccountSettings"
+                },
+                {
                     "target": "com.amazonaws.resourcegroups#UpdateGroup"
                 },
                 {
@@ -94,8 +126,1834 @@
                     "name": "resource-groups"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>AWS Resource Groups</fullname>\n\n        <p>AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances, Amazon Relational Database Service\n            databases, and Amazon S3 buckets into groups using criteria that you define as tags. A\n            resource group is a collection of resources that match the resource types specified in a\n            query, and share one or more tags or portions of tags. You can create a group of\n            resources based on their roles in your cloud infrastructure, lifecycle stages, regions,\n            application layers, or virtually any criteria. Resource Groups enable you to automate management\n            tasks, such as those in AWS Systems Manager Automation documents, on tag-related resources in\n            AWS Systems Manager. Groups of tagged resources also let you quickly view a custom console in\n            AWS Systems Manager that shows AWS Config compliance and other monitoring data about member\n            resources.</p>\n        <p>To create a resource group, build a resource query, and specify tags that identify the\n            criteria that members of the group have in common. Tags are key-value pairs.</p>\n        <p>For more information about Resource Groups, see the <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html\">AWS Resource Groups User Guide</a>.</p>\n        <p>AWS Resource Groups uses a REST-compliant API that you can use to perform the following types of\n            operations.</p>\n        <ul>\n            <li>\n                <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and\n                    resource query entities</p>\n            </li>\n            <li>\n                <p>Applying, editing, and removing tags from resource groups</p>\n            </li>\n            <li>\n                <p>Resolving resource group member ARNs so they can be returned as search\n                    results</p>\n            </li>\n            <li>\n                <p>Getting data about resources that are members of a group</p>\n            </li>\n            <li>\n                <p>Searching AWS resources based on a resource query</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "AWS Resource Groups"
+                "smithy.api#documentation": "<p>Resource Groups lets you organize Amazon Web Services resources such as Amazon Elastic Compute Cloud instances, Amazon Relational Database Service\n            databases, and Amazon Simple Storage Service buckets into groups using criteria that you define as tags. A\n            resource group is a collection of resources that match the resource types specified in a\n            query, and share one or more tags or portions of tags. You can create a group of\n            resources based on their roles in your cloud infrastructure, lifecycle stages, regions,\n            application layers, or virtually any criteria. Resource Groups enable you to automate management\n            tasks, such as those in Amazon Web Services Systems Manager Automation documents, on tag-related resources in\n            Amazon Web Services Systems Manager. Groups of tagged resources also let you quickly view a custom console in\n            Amazon Web Services Systems Manager that shows Config compliance and other monitoring data about member\n            resources.</p>\n         <p>To create a resource group, build a resource query, and specify tags that identify the\n            criteria that members of the group have in common. Tags are key-value pairs.</p>\n         <p>For more information about Resource Groups, see the <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html\">Resource Groups User Guide</a>.</p>\n         <p>Resource Groups uses a REST-compliant API that you can use to perform the following types of\n            operations.</p>\n         <ul>\n            <li>\n               <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and\n                    resource query entities</p>\n            </li>\n            <li>\n               <p>Applying, editing, and removing tags from resource groups</p>\n            </li>\n            <li>\n               <p>Resolving resource group member ARNs so they can be returned as search\n                    results</p>\n            </li>\n            <li>\n               <p>Getting data about resources that are members of a group</p>\n            </li>\n            <li>\n               <p>Searching Amazon Web Services resources based on a resource query</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Resource Groups",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://resource-groups-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://resource-groups.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://resource-groups-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://resource-groups.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://resource-groups.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-groups.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.resourcegroups#BadRequestException": {
@@ -137,7 +1995,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource group with the specified name and description. You can optionally\n            include a resource query, or a service configuration. For more information about\n            constructing a resource query, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>. For more\n            information about service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:CreateGroup</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a resource group with the specified name and description. You can optionally\n            include either a resource query or a service configuration. For more information about\n            constructing a resource query, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/getting_started-query.html\">Build queries and groups in\n                Resource Groups</a> in the <i>Resource Groups User Guide</i>. For more information\n            about service-linked groups and service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for Resource Groups</a>.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:CreateGroup</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/groups",
@@ -151,7 +2009,7 @@
                 "Name": {
                     "target": "com.amazonaws.resourcegroups#GroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the group, which is the identifier of the group in other operations. You\n            can't change the name of a resource group after you create it. A resource group name can\n            consist of letters, numbers, hyphens, periods, and underscores. The name cannot start\n            with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name\n            must be unique within each AWS Region in your AWS account.</p>",
+                        "smithy.api#documentation": "<p>The name of the group, which is the identifier of the group in other operations. You\n            can't change the name of a resource group after you create it. A resource group name can\n            consist of letters, numbers, hyphens, periods, and underscores. The name cannot start\n            with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name\n            must be unique within each Amazon Web Services Region in your Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -164,7 +2022,7 @@
                 "ResourceQuery": {
                     "target": "com.amazonaws.resourcegroups#ResourceQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource query that determines which AWS resources are members of this group.\n            For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create\n                a tag-based group in Resource Groups</a>. </p>\n        <note>\n            <p>A resource group can contain either a <code>ResourceQuery</code> or a\n                    <code>Configuration</code>, but not both.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The resource query that determines which Amazon Web Services resources are members of this group.\n            For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create\n                a tag-based group in Resource Groups</a>. </p>\n         <note>\n            <p>A resource group can contain either a <code>ResourceQuery</code> or a\n                    <code>Configuration</code>, but not both.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -176,7 +2034,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.resourcegroups#GroupConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A configuration associates the resource group with an AWS service and specifies how\n            the service can interact with the resources in the group. A configuration is an array of\n                <a>GroupConfigurationItem</a> elements. For details about the syntax of\n            service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>\n        <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A configuration associates the resource group with an Amazon Web Services service and specifies how\n            the service can interact with the resources in the group. A configuration is an array of\n                <a>GroupConfigurationItem</a> elements. For details about the syntax of\n            service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for Resource Groups</a>.</p>\n         <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n         </note>"
                     }
                 }
             }
@@ -205,7 +2063,7 @@
                 "GroupConfiguration": {
                     "target": "com.amazonaws.resourcegroups#GroupConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service configuration associated with the resource group. For details about the\n            syntax of a service configuration, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>"
+                        "smithy.api#documentation": "<p>The service configuration associated with the resource group. For details about the\n            syntax of a service configuration, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for Resource Groups</a>.</p>"
                     }
                 }
             }
@@ -239,7 +2097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified resource group. Deleting a resource group does not delete any\n            resources that are members of the group; it only deletes the group structure.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:DeleteGroup</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes the specified resource group. Deleting a resource group does not delete any\n            resources that are members of the group; it only deletes the group structure.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:DeleteGroup</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-group",
@@ -283,7 +2141,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 1024
                 },
                 "smithy.api#pattern": "^[\\sa-zA-Z0-9_\\.-]*$"
             }
@@ -351,6 +2209,51 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.resourcegroups#GetAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroups#GetAccountSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current status of optional features in Resource Groups.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-account-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#GetAccountSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "AccountSettings": {
+                    "target": "com.amazonaws.resourcegroups#AccountSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current settings for the optional features in Resource Groups.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.resourcegroups#GetGroup": {
             "type": "operation",
             "input": {
@@ -380,7 +2283,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specified resource group.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:GetGroup</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns information about a specified resource group.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetGroup</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/get-group",
@@ -417,7 +2320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the service configuration associated with the specified resource group. For\n            details about the service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:GetGroupConfiguration</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Retrieves the service configuration associated with the specified resource group. For\n            details about the service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for Resource Groups</a>.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetGroupConfiguration</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/get-group-configuration",
@@ -431,7 +2334,7 @@
                 "Group": {
                     "target": "com.amazonaws.resourcegroups#GroupString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group.</p>"
+                        "smithy.api#documentation": "<p>The name or the ARN of the resource group for which you want to retrive the service\n            configuration.</p>"
                     }
                 }
             }
@@ -442,7 +2345,7 @@
                 "GroupConfiguration": {
                     "target": "com.amazonaws.resourcegroups#GroupConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service configuration associated with the specified group. For details about the\n            service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>"
+                        "smithy.api#documentation": "<p>A structure that describes the service configuration attached with the specified\n            group. For details about the service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for\n                Resource Groups</a>.</p>"
                     }
                 }
             }
@@ -473,7 +2376,7 @@
                 "Group": {
                     "target": "com.amazonaws.resourcegroups#Group",
                     "traits": {
-                        "smithy.api#documentation": "<p>A full description of the resource group.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the metadata details for the specified resource group. Use\n                <a>GetGroupQuery</a> and <a>GetGroupConfiguration</a> to get\n            those additional details of the resource group.</p>"
                     }
                 }
             }
@@ -507,7 +2410,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the resource query associated with the specified resource group. For more\n            information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create\n                a tag-based group in Resource Groups</a>.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:GetGroupQuery</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Retrieves the resource query associated with the specified resource group. For more\n            information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create\n                a tag-based group in Resource Groups</a>.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetGroupQuery</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/get-group-query",
@@ -575,7 +2478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an\n            ARN.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:GetTags</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an\n            ARN.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetTags</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resources/{Arn}/tags",
@@ -638,7 +2541,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A resource group that contains AWS resources. You can assign resources to the group\n            by associating either of the following elements with the group:</p>\n        <ul>\n            <li>\n                <p>\n                  <a>ResourceQuery</a> - Use a resource query to specify a set of tag\n                    keys and values. All resources in the same AWS Region and AWS account that\n                    have those keys with the same values are included in the group. You can add a\n                    resource query when you create the group, or later by using the <a>PutGroupConfiguration</a> operation.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GroupConfiguration</a> - Use a service configuration to\n                    associate the group with an AWS service. The configuration specifies which\n                    resource types can be included in the group.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A resource group that contains Amazon Web Services resources. You can assign resources to the group\n            by associating either of the following elements with the group:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>ResourceQuery</a> - Use a resource query to specify a set of tag\n                    keys and values. All resources in the same Amazon Web Services Region and Amazon Web Services account that\n                    have those keys with the same values are included in the group. You can add a\n                    resource query when you create the group, or later by using the <a>PutGroupConfiguration</a> operation.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GroupConfiguration</a> - Use a service configuration to\n                    associate the group with an Amazon Web Services service. The configuration specifies which\n                    resource types can be included in the group.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.resourcegroups#GroupArn": {
@@ -648,7 +2551,7 @@
                     "min": 12,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,128}$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,300}$"
             }
         },
         "com.amazonaws.resourcegroups#GroupConfiguration": {
@@ -680,7 +2583,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A service configuration associated with a resource group. The configuration options\n            are determined by the AWS service that defines the <code>Type</code>, and specifies\n            which resources can be included in the group. You can add a service configuration when\n            you create the group by using <a>CreateGroup</a>, or later by using the <a>PutGroupConfiguration</a> operation. For details about group service\n            configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>"
+                "smithy.api#documentation": "<p>A service configuration associated with a resource group. The configuration options\n            are determined by the Amazon Web Services service that defines the <code>Type</code>, and specifies\n            which resources can be included in the group. You can add a service configuration when\n            you create the group by using <a>CreateGroup</a>, or later by using the <a>PutGroupConfiguration</a> operation. For details about group service\n            configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource\n                groups</a>.</p>"
             }
         },
         "com.amazonaws.resourcegroups#GroupConfigurationFailureReason": {
@@ -757,7 +2660,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9:\\/\\._-]+$"
             }
         },
         "com.amazonaws.resourcegroups#GroupConfigurationParameterValueList": {
@@ -767,22 +2670,26 @@
             }
         },
         "com.amazonaws.resourcegroups#GroupConfigurationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "UPDATE_COMPLETE",
-                        "name": "UPDATE_COMPLETE"
-                    },
-                    {
-                        "value": "UPDATE_FAILED",
-                        "name": "UPDATE_FAILED"
+            "type": "enum",
+            "members": {
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
                     }
-                ]
+                },
+                "UPDATE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_COMPLETE"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroups#GroupConfigurationType": {
@@ -824,18 +2731,20 @@
             }
         },
         "com.amazonaws.resourcegroups#GroupFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "resource-type",
-                        "name": "ResourceType"
-                    },
-                    {
-                        "value": "configuration-type",
-                        "name": "ConfigurationType"
+            "type": "enum",
+            "members": {
+                "ResourceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-type"
                     }
-                ]
+                },
+                "ConfigurationType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "configuration-type"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroups#GroupFilterValue": {
@@ -886,6 +2795,61 @@
                 "target": "com.amazonaws.resourcegroups#GroupIdentifier"
             }
         },
+        "com.amazonaws.resourcegroups#GroupLifecycleEventsDesiredStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupLifecycleEventsStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupLifecycleEventsStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.resourcegroups#GroupList": {
             "type": "list",
             "member": {
@@ -897,7 +2861,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 128
+                    "max": 300
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]+$"
             }
@@ -921,13 +2885,13 @@
                 "ResourceQuery": {
                     "target": "com.amazonaws.resourcegroups#ResourceQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource query that determines which AWS resources are members of the associated\n            resource group.</p>",
+                        "smithy.api#documentation": "<p>The resource query that determines which Amazon Web Services resources are members of the associated\n            resource group.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A mapping of a query attached to a resource group that determines the AWS resources\n            that are members of the group.</p>"
+                "smithy.api#documentation": "<p>A mapping of a query attached to a resource group that determines the Amazon Web Services resources\n            that are members of the group.</p>"
             }
         },
         "com.amazonaws.resourcegroups#GroupResources": {
@@ -959,7 +2923,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified resources to the specified group.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:GroupResources</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Adds the specified resources to the specified group.</p>\n         <important>\n            <p>You can use this operation with only resource groups that are configured with the\n                following types:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::EC2::HostManagement</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::EC2::CapacityReservationPool</code>\n                  </p>\n               </li>\n            </ul>\n            <p>Other resource group type and resource types aren't currently supported by this\n                operation.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GroupResources</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/group-resources",
@@ -980,7 +2944,7 @@
                 "ResourceArns": {
                     "target": "com.amazonaws.resourcegroups#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of ARNs for resources to be added to the group. </p>",
+                        "smithy.api#documentation": "<p>The list of ARNs of the resources to be added to the group. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -992,19 +2956,19 @@
                 "Succeeded": {
                     "target": "com.amazonaws.resourcegroups#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs of resources that were successfully added to the group by this\n            operation.</p>"
+                        "smithy.api#documentation": "<p>A list of ARNs of the resources that this operation successfully added to the\n            group.</p>"
                     }
                 },
                 "Failed": {
                     "target": "com.amazonaws.resourcegroups#FailedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs of any resources that failed to be added to the group by this\n            operation.</p>"
+                        "smithy.api#documentation": "<p>A list of ARNs of any resources that this operation failed to add to the group.</p>"
                     }
                 },
                 "Pending": {
                     "target": "com.amazonaws.resourcegroups#PendingResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs of any resources that are still in the process of being added to the\n            group by this operation. These pending additions continue asynchronously. You can check\n            the status of pending additions by using the <code>\n               <a>ListGroupResources</a>\n            </code> operation, and checking the <code>Resources</code> array in the response\n            and the <code>Status</code> field of each object in that array. </p>"
+                        "smithy.api#documentation": "<p>A list of ARNs of any resources that this operation is still in the process adding to\n            the group. These pending additions continue asynchronously. You can check the status of\n            pending additions by using the <code>\n               <a>ListGroupResources</a>\n            </code>\n            operation, and checking the <code>Resources</code> array in the response and the\n                <code>Status</code> field of each object in that array. </p>"
                     }
                 }
             }
@@ -1016,7 +2980,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/)?[a-zA-Z0-9_\\.-]{1,128}$"
+                "smithy.api#pattern": "^(arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/)?[a-zA-Z0-9_\\.-]{1,300}$"
             }
         },
         "com.amazonaws.resourcegroups#InternalServerErrorException": {
@@ -1064,7 +3028,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of ARNs of the resources that are members of a specified resource\n            group.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:ListGroupResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>cloudformation:ListStackResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns a list of ARNs of the resources that are members of a specified resource\n            group.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:ListGroupResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:ListStackResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-group-resources",
@@ -1073,6 +3037,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ResourceIdentifiers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1086,7 +3051,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use Group instead."
                         },
-                        "smithy.api#documentation": "<important>\n            <p>\n               <i>\n                  <b>Deprecated - don't use this parameter. Use the\n                            <code>Group</code> request field instead.</b>\n               </i>\n            </p>\n        </important>"
+                        "smithy.api#documentation": "<important>\n            <p>\n               <i>\n                  <b>Deprecated - don't use this parameter. Use the\n                            <code>Group</code> request field instead.</b>\n               </i>\n            </p>\n         </important>"
                     }
                 },
                 "Group": {
@@ -1098,7 +3063,7 @@
                 "Filters": {
                     "target": "com.amazonaws.resourcegroups#ResourceFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply\n            to a <code>ListGroupResources</code> operation. Filters the results to include only\n            those of the specified resource types.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-type</code> - Filter resources by their type. Specify up to\n                    five resource types in the format <code>AWS::ServiceCode::ResourceType</code>.\n                    For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.\n                </p>\n            </li>\n         </ul>\n        <p>When you specify a <code>resource-type</code> filter for\n                <code>ListGroupResources</code>, AWS Resource Groups validates your filter resource types\n            against the types that are defined in the query associated with the group. For example,\n            if a group contains only S3 buckets because its query specifies only that resource type,\n            but your <code>resource-type</code> filter includes EC2 instances, AWS Resource Groups\n            does not filter for EC2 instances. In this case, a <code>ListGroupResources</code>\n            request returns a <code>BadRequestException</code> error with a message similar to the\n            following:</p>\n        <p>\n            <code>The resource types specified as filters in the request are not\n            valid.</code>\n         </p>\n        <p>The error includes a list of resource types that failed the validation because they\n            are not part of the query associated with the group. This validation doesn't occur when\n            the group query specifies <code>AWS::AllSupported</code>, because a group based on such\n            a query can contain any of the allowed resource types for the query type (tag-based or\n            AWS CloudFormation stack-based queries).</p>"
+                        "smithy.api#documentation": "<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply\n            to a <code>ListGroupResources</code> operation. Filters the results to include only\n            those of the specified resource types.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-type</code> - Filter resources by their type. Specify up to\n                    five resource types in the format <code>AWS::ServiceCode::ResourceType</code>.\n                    For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.\n                </p>\n            </li>\n         </ul>\n         <p>When you specify a <code>resource-type</code> filter for\n                <code>ListGroupResources</code>, Resource Groups validates your filter resource types\n            against the types that are defined in the query associated with the group. For example,\n            if a group contains only S3 buckets because its query specifies only that resource type,\n            but your <code>resource-type</code> filter includes EC2 instances, AWS Resource Groups does not\n            filter for EC2 instances. In this case, a <code>ListGroupResources</code> request\n            returns a <code>BadRequestException</code> error with a message similar to the\n            following:</p>\n         <p>\n            <code>The resource types specified as filters in the request are not\n            valid.</code>\n         </p>\n         <p>The error includes a list of resource types that failed the validation because they\n            are not part of the query associated with the group. This validation doesn't occur when\n            the group query specifies <code>AWS::AllSupported</code>, because a group based on such\n            a query can contain any of the allowed resource types for the query type (tag-based or\n            Amazon CloudFront stack-based queries).</p>"
                     }
                 },
                 "MaxResults": {
@@ -1124,7 +3089,7 @@
                 "Status": {
                     "target": "com.amazonaws.resourcegroups#ResourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the status of this resource's membership in the\n            group.</p>\n        <note>\n            <p>This field is present in the response only if the group is of type\n                    <code>AWS::EC2::HostManagement</code>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A structure that contains the status of this resource's membership in the\n            group.</p>\n         <note>\n            <p>This field is present in the response only if the group is of type\n                    <code>AWS::EC2::HostManagement</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -1153,7 +3118,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use Resources instead."
                         },
-                        "smithy.api#documentation": "<important>\n            <p>\n               <b>\n                  <i>Deprecated - don't use this parameter. Use the\n                            <code>Resources</code> response field\n                instead.</i>\n               </b>\n            </p>\n        </important>"
+                        "smithy.api#documentation": "<important>\n            <p>\n               <b>\n                  <i>Deprecated - don't use this parameter. Use the\n                            <code>Resources</code> response field\n                instead.</i>\n               </b>\n            </p>\n         </important>"
                     }
                 },
                 "NextToken": {
@@ -1196,7 +3161,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of existing resource groups in your account.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:ListGroups</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns a list of existing Resource Groups in your account.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:ListGroups</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/groups-list",
@@ -1205,6 +3170,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GroupIdentifiers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1215,7 +3181,7 @@
                 "Filters": {
                     "target": "com.amazonaws.resourcegroups#GroupFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to\n            a <code>ListGroups</code> operation.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-type</code> - Filter the results to include only those of the\n                    specified resource types. Specify up to five resource types in the format\n                            <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i>\n                  </code>.\n                    For example, <code>AWS::EC2::Instance</code>, or\n                    <code>AWS::S3::Bucket</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>configuration-type</code> - Filter the results to include only those\n                    groups that have the specified configuration types attached. The current\n                    supported values are:</p>\n                <ul>\n                  <li>\n                        <p>\n                        <code>AWS:EC2::CapacityReservationPool</code>\n                     </p>\n                    </li>\n                  <li>\n                        <p>\n                        <code>AWS:EC2::HostManagement</code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to\n            a <code>ListGroups</code> operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-type</code> - Filter the results to include only those of the\n                    specified resource types. Specify up to five resource types in the format\n                            <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i>\n                  </code>.\n                    For example, <code>AWS::EC2::Instance</code>, or\n                    <code>AWS::S3::Bucket</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>configuration-type</code> - Filter the results to include only those\n                    groups that have the specified configuration types attached. The current\n                    supported values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::CapacityReservationPool</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::HostManagement</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
@@ -1249,7 +3215,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use GroupIdentifiers instead."
                         },
-                        "smithy.api#documentation": "<important>\n            <p>\n               <i>\n                  <b>Deprecated - don't use this field. Use the\n                            <code>GroupIdentifiers</code> response field\n                    instead.</b>\n               </i>\n            </p>\n        </important>"
+                        "smithy.api#documentation": "<important>\n            <p>\n               <i>\n                  <b>Deprecated - don't use this field. Use the\n                            <code>GroupIdentifiers</code> response field\n                    instead.</b>\n               </i>\n            </p>\n         </important>"
                     }
                 },
                 "NextToken": {
@@ -1263,7 +3229,6 @@
         "com.amazonaws.resourcegroups#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -1355,7 +3320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a service configuration to the specified group. This occurs asynchronously,\n            and can take time to complete. You can use <a>GetGroupConfiguration</a> to\n            check the status of the update.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:PutGroupConfiguration</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Attaches a service configuration to the specified group. This occurs asynchronously,\n            and can take time to complete. You can use <a>GetGroupConfiguration</a> to\n            check the status of the update.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:PutGroupConfiguration</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/put-group-configuration",
@@ -1375,7 +3340,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.resourcegroups#GroupConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new configuration to associate with the specified group. A configuration\n            associates the resource group with an AWS service and specifies how the service can\n            interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p>\n        <p>For information about the syntax of a service configuration, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for\n                resource groups</a>.</p>\n        <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The new configuration to associate with the specified group. A configuration\n            associates the resource group with an Amazon Web Services service and specifies how the service can\n            interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p>\n         <p>For information about the syntax of a service configuration, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for\n                Resource Groups</a>.</p>\n         <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n         </note>"
                     }
                 }
             }
@@ -1400,33 +3365,41 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.resourcegroups#QueryErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Possible values are <code>CLOUDFORMATION_STACK_INACTIVE</code> and\n                <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the error code that was raised.</p>"
                     }
                 },
                 "Message": {
                     "target": "com.amazonaws.resourcegroups#QueryErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message that explains the <code>ErrorCode</code> value. Messages might state that\n            the specified CloudFormation stack does not exist (or no longer exists). For\n                <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the\n            CloudFormation stack has a status that is not (or no longer) active, such as\n                <code>CREATE_FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>A message that explains the <code>ErrorCode</code> value. Messages might state that\n            the specified CloudFront stack does not exist (or no longer exists). For\n                <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the\n            CloudFront stack has a status that is not (or no longer) active, such as\n                <code>CREATE_FAILED</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A two-part error structure that can occur in <code>ListGroupResources</code> or\n                <code>SearchResources</code> operations on CloudFormation stack-based queries. The error\n            occurs if the CloudFormation stack on which the query is based either does not exist, or has a\n            status that renders the stack inactive. A <code>QueryError</code> occurrence does not\n            necessarily mean that AWS Resource Groups could not complete the operation, but the resulting\n            group might have no member resources.</p>"
+                "smithy.api#documentation": "<p>A two-part error structure that can occur in <code>ListGroupResources</code> or\n                <code>SearchResources</code> operations on CloudFront stack-based queries. The error\n            occurs if the CloudFront stack on which the query is based either does not exist, or has a\n            status that renders the stack inactive. A <code>QueryError</code> occurrence does not\n            necessarily mean that Resource Groups could not complete the operation, but the resulting\n            group might have no member resources.</p>"
             }
         },
         "com.amazonaws.resourcegroups#QueryErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLOUDFORMATION_STACK_INACTIVE",
-                        "name": "CLOUDFORMATION_STACK_INACTIVE"
-                    },
-                    {
-                        "value": "CLOUDFORMATION_STACK_NOT_EXISTING",
-                        "name": "CLOUDFORMATION_STACK_NOT_EXISTING"
+            "type": "enum",
+            "members": {
+                "CLOUDFORMATION_STACK_INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION_STACK_INACTIVE"
                     }
-                ]
+                },
+                "CLOUDFORMATION_STACK_NOT_EXISTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION_STACK_NOT_EXISTING"
+                    }
+                },
+                "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroups#QueryErrorList": {
@@ -1439,18 +3412,22 @@
             "type": "string"
         },
         "com.amazonaws.resourcegroups#QueryType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAG_FILTERS_1_0",
-                        "name": "TAG_FILTERS_1_0"
-                    },
-                    {
-                        "value": "CLOUDFORMATION_STACK_1_0",
-                        "name": "CLOUDFORMATION_STACK_1_0"
+            "type": "enum",
+            "members": {
+                "TAG_FILTERS_1_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG_FILTERS_1_0"
                     }
-                ],
+                },
+                "CLOUDFORMATION_STACK_1_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION_STACK_1_0"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
@@ -1505,14 +3482,14 @@
             }
         },
         "com.amazonaws.resourcegroups#ResourceFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "resource-type",
-                        "name": "ResourceType"
+            "type": "enum",
+            "members": {
+                "ResourceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-type"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.resourcegroups#ResourceFilterValue": {
@@ -1569,20 +3546,20 @@
                 "Type": {
                     "target": "com.amazonaws.resourcegroups#QueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the query. You can use the following values:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>\n                     <code>CLOUDFORMATION_STACK_1_0:</code>\n                  </i>Specifies that the\n                        <code>Query</code> contains an ARN for a CloudFormation stack.</p>\n            </li>\n            <li>\n                <p>\n                  <i>\n                     <code>TAG_FILTERS_1_0:</code>\n                  </i>Specifies that the\n                        <code>Query</code> parameter contains a JSON string that represents a\n                    collection of simple tag filters for resource types and tags. The JSON string\n                    uses a syntax similar to the <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a>\n                  </code> operation, but uses only the <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters\"> ResourceTypeFilters</a>\n                  </code> and <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters\">TagFilters</a>\n                  </code> fields. If you specify more than one tag key,\n                    only resources that match all tag keys, and at least one value of each specified\n                    tag key, are returned in your query. If you specify more than one value for a\n                    tag key, a resource matches the filter if it has a tag key value that matches\n                        <i>any</i> of the specified values.</p>\n                <p>For example, consider the following sample query for resources that have two\n                    tags, <code>Stage</code> and <code>Version</code>, with two values each:</p>\n                <p>\n                  <code>[{\"Stage\":[\"Test\",\"Deploy\"]},{\"Version\":[\"1\",\"2\"]}]</code>\n               </p>\n                <p>The results of this query could include the following.</p>\n                <ul>\n                  <li>\n                        <p>An EC2 instance that has the following two tags:\n                                <code>{\"Stage\":\"Deploy\"}</code>, and\n                            <code>{\"Version\":\"2\"}</code>\n                     </p>\n                    </li>\n                  <li>\n                        <p>An S3 bucket that has the following two tags:\n                                <code>{\"Stage\":\"Test\"}</code>, and\n                            <code>{\"Version\":\"1\"}</code>\n                     </p>\n                    </li>\n               </ul>\n                <p>The query would not include the following items in the results, however. </p>\n                <ul>\n                  <li>\n                        <p>An EC2 instance that has only the following tag:\n                                <code>{\"Stage\":\"Deploy\"}</code>.</p>\n                        <p>The instance does not have <b>all</b> of the\n                            tag keys specified in the filter, so it is excluded from the\n                            results.</p>\n                    </li>\n                  <li>\n                        <p>An RDS database that has the following two tags:\n                                <code>{\"Stage\":\"Archived\"}</code> and\n                            <code>{\"Version\":\"4\"}</code>\n                     </p>\n                        <p>The database has all of the tag keys, but none of those keys has an\n                            associated value that matches at least one of the specified values in\n                            the filter.</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of the query to perform. This can have one of two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>\n                     <code>CLOUDFORMATION_STACK_1_0:</code>\n                  </i> Specifies that you\n                    want the group to contain the members of an CloudFormation stack. The <code>Query</code>\n                    contains a <code>StackIdentifier</code> element with an ARN for a CloudFormation\n                    stack.</p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <code>TAG_FILTERS_1_0:</code>\n                  </i> Specifies that you want the\n                    group to include resource that have tags that match the query. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Query": {
                     "target": "com.amazonaws.resourcegroups#Query",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query that defines a group or a search.</p>",
+                        "smithy.api#documentation": "<p>The query that defines a group or a search. The contents depends on the value of the\n                <code>Type</code> element.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceTypeFilters</code> – Applies to all\n                        <code>ResourceQuery</code> objects of either <code>Type</code>. This element\n                    contains one of the following two items:</p>\n               <ul>\n                  <li>\n                     <p>The value <code>AWS::AllSupported</code>. This causes the\n                            ResourceQuery to match resources of any resource type that also match\n                            the query.</p>\n                  </li>\n                  <li>\n                     <p>A list (a JSON array) of resource type identifiers that limit the\n                            query to only resources of the specified types. For the complete list of\n                            resource types that you can use in the array value for\n                                <code>ResourceTypeFilters</code>, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html\">Resources you can use with Resource Groups and Tag\n                                Editor</a> in the <i>Resource Groups User Guide</i>.</p>\n                  </li>\n               </ul>\n               <p>Example: <code>\"ResourceTypeFilters\": [\"AWS::AllSupported\"]</code> or\n                        <code>\"ResourceTypeFilters\": [\"AWS::EC2::Instance\",\n                        \"AWS::S3::Bucket\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TagFilters</code> – applicable only if <code>Type</code> =\n                        <code>TAG_FILTERS_1_0</code>. The <code>Query</code> contains a JSON string\n                    that represents a collection of simple tag filters. The JSON string uses a\n                    syntax similar to the <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a>\n                  </code> operation, but uses only the <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters\"> ResourceTypeFilters</a>\n                  </code> and <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters\">TagFilters</a>\n                  </code> fields. If you specify more than one tag key,\n                    only resources that match all tag keys, and at least one value of each specified\n                    tag key, are returned in your query. If you specify more than one value for a\n                    tag key, a resource matches the filter if it has a tag key value that matches\n                        <i>any</i> of the specified values.</p>\n               <p>For example, consider the following sample query for resources that have two\n                    tags, <code>Stage</code> and <code>Version</code>, with two values each:</p>\n               <p>\n                  <code>[{\"Stage\":[\"Test\",\"Deploy\"]},{\"Version\":[\"1\",\"2\"]}]</code>\n               </p>\n               <p>The results of this resource query could include the following.</p>\n               <ul>\n                  <li>\n                     <p>An Amazon EC2 instance that has the following two tags:\n                                <code>{\"Stage\":\"Deploy\"}</code>, and\n                            <code>{\"Version\":\"2\"}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>An S3 bucket that has the following two tags:\n                                <code>{\"Stage\":\"Test\"}</code>, and\n                            <code>{\"Version\":\"1\"}</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>The resource query results would <i>not</i> include the\n                    following items in the results, however. </p>\n               <ul>\n                  <li>\n                     <p>An Amazon EC2 instance that has only the following tag:\n                                <code>{\"Stage\":\"Deploy\"}</code>.</p>\n                     <p>The instance does not have <b>all</b> of the\n                            tag keys specified in the filter, so it is excluded from the\n                            results.</p>\n                  </li>\n                  <li>\n                     <p>An RDS database that has the following two tags:\n                                <code>{\"Stage\":\"Archived\"}</code> and\n                            <code>{\"Version\":\"4\"}</code>\n                     </p>\n                     <p>The database has all of the tag keys, but none of those keys has an\n                            associated value that matches at least one of the specified values in\n                            the filter.</p>\n                  </li>\n               </ul>\n               <p>Example: <code>\"TagFilters\": [ { \"Key\": \"Stage\", \"Values\": [ \"Gamma\", \"Beta\" ]\n                        }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StackIdentifier</code> – applicable only if <code>Type</code> =\n                        <code>CLOUDFORMATION_STACK_1_0</code>. The value of this parameter is the\n                    Amazon Resource Name (ARN) of the CloudFormation stack whose resources you want included\n                    in the group.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The query that is used to define a resource group or a search for resources. A query\n            specifies both a query type and a query string as a JSON object. See the examples\n            section for example JSON strings.</p>\n        <p>The examples that follow are shown as standard JSON strings. If you include such a\n            string as a parameter to the AWS CLI or an SDK API, you might need to 'escape' the\n            string into a single line. For example, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html\">Quoting\n                strings</a> in the <i>AWS CLI User Guide</i>.</p>\n        <p>\n            <b>Example 1</b>\n         </p>\n        <p>The following generic example shows a resource query JSON string that includes only\n            resources that meet the following criteria:</p>\n        <ul>\n            <li>\n                <p>The resource type must be either <code>resource_type1</code> or\n                        <code>resource_type2</code>.</p>\n            </li>\n            <li>\n                <p>The resource must have a tag <code>Key1</code> with a value of either\n                        <code>ValueA</code> or <code>ValueB</code>.</p>\n            </li>\n            <li>\n                <p>The resource must have a tag <code>Key2</code> with a value of either\n                        <code>ValueC</code> or <code>ValueD</code>.</p>\n            </li>\n         </ul>\n        <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": [ \"resource_type1\", \"resource_type2\"],\n        \"TagFilters\": [\n            {\n                \"Key\": \"Key1\",\n                \"Values\": [\"ValueA\",\"ValueB\"]\n            },\n            {\n                \"Key\":\"Key2\",\n                \"Values\":[\"ValueC\",\"ValueD\"]\n            }\n        ]\n    }\n}</code>\n         </p>\n        <p>This has the equivalent \"shortcut\" syntax of the following:</p>\n        <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": [ \"resource_type1\", \"resource_type2\"],\n        \"TagFilters\": [\n            { \"Key1\": [\"ValueA\",\"ValueB\"] },\n            { \"Key2\": [\"ValueC\",\"ValueD\"]\n            }\n        ]\n    }\n}</code>\n         </p>\n        <p>\n            <b>Example 2</b>\n         </p>\n        <p>The following example shows a resource query JSON string that includes only Amazon EC2\n            instances that are tagged <code>Stage</code> with a value of <code>Test</code>.</p>\n        <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": \"{\n        \"ResourceTypeFilters\": \"AWS::EC2::Instance\",\n        \"TagFilters\": { \"Stage\": \"Test\" }\n    }\n}</code>\n         </p>\n        <p>\n            <b>Example 3</b>\n         </p>\n        <p>The following example shows a resource query JSON string that includes resource of any\n            supported type as long as it is tagged <code>Stage</code> with a value of\n                <code>Prod</code>.</p>\n        <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": \"AWS::AllSupported\",\n        \"TagFilters\": { \"Stage\": \"Prod\" }\n    }\n}</code>\n         </p>\n        <p>\n            <b>Example 4</b>\n         </p>\n        <p>The following example shows a resource query JSON string that includes only Amazon EC2\n            instances and Amazon S3 buckets that are part of the specified AWS CloudFormation stack.</p>\n        <p>\n            <code>{\n    \"Type\": \"CLOUDFORMATION_STACK_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": [ \"AWS::EC2::Instance\", \"AWS::S3::Bucket\" ],\n        \"StackIdentifier\": \"arn:aws:cloudformation:us-west-2:123456789012:stack/AWStestuseraccount/fb0d5000-aba8-00e8-aa9e-50d5cEXAMPLE\"\n    }\n}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The query you can use to define a resource group or a search for resources. A\n                <code>ResourceQuery</code> specifies both a query <code>Type</code> and a\n                <code>Query</code> string as JSON string objects. See the examples section for\n            example JSON strings. For more information about creating a resource group with a\n            resource query, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html\">Build queries and groups in\n                Resource Groups</a> in the <i>Resource Groups User Guide</i>\n         </p>\n         <p>When you combine all of the elements together into a single string, any double quotes\n            that are embedded inside another double quote pair must be escaped by preceding the\n            embedded double quote with a backslash character (\\). For example, a complete\n                <code>ResourceQuery</code> parameter must be formatted like the following CLI\n            parameter example:</p>\n         <p>\n            <code>--resource-query\n                '{\"Type\":\"TAG_FILTERS_1_0\",\"Query\":\"{\\\"ResourceTypeFilters\\\":[\\\"AWS::AllSupported\\\"],\\\"TagFilters\\\":[{\\\"Key\\\":\\\"Stage\\\",\\\"Values\\\":[\\\"Test\\\"]}]}\"}'</code>\n         </p>\n         <p>In the preceding example, all of the double quote characters in the value part of the\n                <code>Query</code> element must be escaped because the value itself is surrounded by\n            double quotes. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html\">Quoting\n                strings</a> in the <i>Command Line Interface User Guide</i>.</p>\n         <p>For the complete list of resource types that you can use in the array value for\n                <code>ResourceTypeFilters</code>, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html\">Resources\n                you can use with Resource Groups and Tag Editor</a> in the\n                <i>Resource Groups User Guide</i>. For example:</p>\n         <p>\n            <code>\"ResourceTypeFilters\":[\"AWS::S3::Bucket\", \"AWS::EC2::Instance\"]</code>\n         </p>"
             }
         },
         "com.amazonaws.resourcegroups#ResourceStatus": {
@@ -1600,14 +3577,14 @@
             }
         },
         "com.amazonaws.resourcegroups#ResourceStatusValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "Pending"
+            "type": "enum",
+            "members": {
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.resourcegroups#ResourceType": {
@@ -1645,7 +3622,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of AWS resource identifiers that matches the specified query. The\n            query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery\n            operation.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:SearchResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>cloudformation:ListStackResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns a list of Amazon Web Services resource identifiers that matches the specified query. The\n            query uses the same format as a resource query in a <a>CreateGroup</a> or\n                <a>UpdateGroupQuery</a> operation.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:SearchResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:ListStackResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resources/search",
@@ -1654,6 +3631,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ResourceIdentifiers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1700,7 +3678,7 @@
                 "QueryErrors": {
                     "target": "com.amazonaws.resourcegroups#QueryErrorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>QueryError</code> objects. Each error is an object that contains\n                <code>ErrorCode</code> and <code>Message</code> structures. Possible values for\n                <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and\n                <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>QueryError</code> objects. Each error is an object that contains\n                <code>ErrorCode</code> and <code>Message</code> structures.</p>\n         <p>Possible values for <code>ErrorCode</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLOUDFORMATION_STACK_INACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1734,7 +3712,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource\n            group are not changed if they are not specified in the request parameters.</p>\n        <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n        </important>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:Tag</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource\n            group are not changed if they are not specified in the request parameters.</p>\n         <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:Tag</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/resources/{Arn}/tags",
@@ -1869,7 +3847,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified resources from the specified group.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:UngroupResources</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Removes the specified resources from the specified group. This operation works only\n            with static groups that you populated using the <a>GroupResources</a>\n            operation. It doesn't work with any resource groups that are automatically populated by\n            tag-based or CloudFormation stack-based queries.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:UngroupResources</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ungroup-resources",
@@ -1948,7 +3926,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes tags from a specified resource group.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:Untag</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes tags from a specified resource group.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:Untag</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/resources/{Arn}/tags",
@@ -1993,6 +3971,62 @@
                 }
             }
         },
+        "com.amazonaws.resourcegroups#UpdateAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroups#UpdateAccountSettingsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroups#UpdateAccountSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Turns on or turns off optional features in Resource Groups.</p>\n         <p>The preceding example shows that the request to turn on group lifecycle events is\n                <code>IN_PROGRESS</code>. You can call the <a>GetAccountSettings</a>\n            operation to check for completion by looking for <code>GroupLifecycleEventsStatus</code>\n            to change to <code>ACTIVE</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-account-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#UpdateAccountSettingsInput": {
+            "type": "structure",
+            "members": {
+                "GroupLifecycleEventsDesiredStatus": {
+                    "target": "com.amazonaws.resourcegroups#GroupLifecycleEventsDesiredStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you want to turn <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html\">group lifecycle events</a> on or off.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#UpdateAccountSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "AccountSettings": {
+                    "target": "com.amazonaws.resourcegroups#AccountSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that displays the status of the optional features in the account.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.resourcegroups#UpdateGroup": {
             "type": "operation",
             "input": {
@@ -2022,7 +4056,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the description for an existing group. You cannot update the name of a\n            resource group.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:UpdateGroup</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Updates the description for an existing group. You cannot update the name of a\n            resource group.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:UpdateGroup</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/update-group",
@@ -2096,7 +4130,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the resource query of a group. For more information about resource queries,\n            see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>.</p>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-groups:UpdateGroupQuery</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Updates the resource query of a group. For more information about resource queries,\n            see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:UpdateGroupQuery</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/update-group-query",
@@ -2125,7 +4159,7 @@
                 "ResourceQuery": {
                     "target": "com.amazonaws.resourcegroups#ResourceQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource query to determine which AWS resources are members of this resource\n            group.</p>\n        <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The resource query to determine which Amazon Web Services resources are members of this resource\n            group.</p>\n         <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
