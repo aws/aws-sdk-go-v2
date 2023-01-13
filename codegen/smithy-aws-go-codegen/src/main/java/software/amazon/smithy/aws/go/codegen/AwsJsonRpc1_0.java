@@ -21,6 +21,7 @@ import software.amazon.smithy.aws.traits.protocols.AwsJson1_0Trait;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryCompatibleTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.shapes.OperationShape;
@@ -87,6 +88,8 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
     public void generateSharedDeserializerComponents(GenerationContext context) {
         super.generateSharedDeserializerComponents(context);
         if (isAwsQueryCompatibleTraitFound(context)) {
+            writer.addUseImports(SmithyGoDependency.STRINGS);
+            writer.addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
             GoWriter writer = context.getWriter().get();
             writer.openBlock("func getAwsQueryErrorCode(response *smithyhttp.Response) string {", "}", () -> {
                 writer.write("queryCodeHeader := response.Header.Get(\"x-amzn-query-error\")");
