@@ -88,9 +88,9 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
     public void generateSharedDeserializerComponents(GenerationContext context) {
         super.generateSharedDeserializerComponents(context);
         if (isAwsQueryCompatibleTraitFound(context)) {
+            GoWriter writer = context.getWriter().get();
             writer.addUseImports(SmithyGoDependency.STRINGS);
             writer.addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
-            GoWriter writer = context.getWriter().get();
             writer.openBlock("func getAwsQueryErrorCode(response *smithyhttp.Response) string {", "}", () -> {
                 writer.write("queryCodeHeader := response.Header.Get(\"x-amzn-query-error\")");
                 writer.openBlock("if queryCodeHeader != \"\" {", "}", () -> {
