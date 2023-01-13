@@ -92,7 +92,7 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
                 writer.write("queryCodeHeader := response.Header.Get(\"x-amzn-query-error\")");
                 writer.openBlock("if queryCodeHeader != \"\" {", "}", () -> {
                     writer.write("queryCodeParts := strings.Split(queryCodeHeader, \";\")");
-                    writer.openBlock("if queryCodeParts != nil && len(queryCodeParts) == 2 {", "}", () -> {
+                    writer.openBlock("if len(queryCodeParts) == 2 {", "}", () -> {
                         writer.write("return queryCodeParts[0]");
                     });
                 });
