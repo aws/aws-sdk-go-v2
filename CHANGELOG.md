@@ -1,3 +1,13 @@
+# Release (2023-01-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.5.0](service/billingconductor/CHANGELOG.md#v150-2023-01-17)
+  * **Feature**: This release adds support for SKU Scope for pricing plans.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.22.0](service/imagebuilder/CHANGELOG.md#v1220-2023-01-17)
+  * **Feature**: Add support for AWS Marketplace product IDs as input during CreateImageRecipe for the parent-image parameter. Add support for listing third-party components.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.24.0](service/networkfirewall/CHANGELOG.md#v1240-2023-01-17)
+  * **Feature**: Network Firewall now allows creation of dual stack endpoints, enabling inspection of IPv6 traffic.
+
 # Release (2023-01-13)
 
 ## Module Highlights

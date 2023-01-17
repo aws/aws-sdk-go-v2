@@ -1,3 +1,7 @@
+# v1.5.0 (2023-01-17)
+
+* **Feature**: This release adds support for SKU Scope for pricing plans.
+
 # v1.4.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

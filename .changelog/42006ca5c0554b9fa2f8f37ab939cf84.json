@@ -1,8 +1,0 @@
-{
-    "id": "42006ca5-c055-4b9f-a2f8-f37ab939cf84",
-    "type": "feature",
-    "description": "Add support for AWS Marketplace product IDs as input during CreateImageRecipe for the parent-image parameter. Add support for listing third-party components.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}
