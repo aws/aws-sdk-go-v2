@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -59,12 +59,12 @@
                 "userDataOverride": {
                     "target": "com.amazonaws.imagebuilder#UserDataOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n\t\t       <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\tthat Systems Manager is installed on your Linux build instance. If you override the user data,\n\t\t\tmake sure that you add commands to install Systems Manager, if it is not pre-installed on your\n\t\t\tbase image.</p>\n\t\t       <note>\n\t\t\t         <p>The user data is always base 64 encoded. For example, the \n\t\t\t\tfollowing commands are encoded as <code>IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$</code>:</p>\n\t\t\t\n\t\t\t         <p>\n               <i>#!/bin/bash</i>\n            </p>\n\t\t\t         <p>mkdir -p /var/bb/</p>\n\t\t\t         <p>touch /var</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n         <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\tthat Systems Manager is installed on your Linux build instance. If you override the user data,\n\t\t\tmake sure that you add commands to install Systems Manager, if it is not pre-installed on your\n\t\t\tbase image.</p>\n         <note>\n            <p>The user data is always base 64 encoded. For example, the \n\t\t\t\tfollowing commands are encoded as <code>IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$</code>:</p>\n            <p>\n               <i>#!/bin/bash</i>\n            </p>\n            <p>mkdir -p /var/bb/</p>\n            <p>touch /var</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>In addition to your infrastruction configuration, these settings provide an extra layer of\n\t\t\tcontrol over your build instances. For instances where Image Builder installs the Systems Manager agent,\n\t\t\tyou can choose whether to keep it for the AMI that you create. You can also specify commands \n\t\t\tto run on launch for all of your build instances.</p>"
+                "smithy.api#documentation": "<p>In addition to your infrastructure configuration, these settings provide an extra layer of\n\t\t\tcontrol over your build instances. You can also specify commands to run on launch for all of \n\t\t\tyour build instances.</p>\n         <p>Image Builder does not automatically install the Systems Manager agent on Windows instances. If your  \n\t\t\tbase image includes the Systems Manager agent, then the AMI that you create will also include the \n\t\t\tagent. For Linux instances, if the base image does not already include the Systems Manager agent, Image Builder \t\t\t\t\n\t\t\tinstalls it. For Linux instances where Image Builder installs the Systems Manager agent, you can choose \n\t\t\twhether to keep it for the AMI that you create.</p>"
             }
         },
         "com.amazonaws.imagebuilder#Ami": {
@@ -172,25 +172,32 @@
             "type": "string"
         },
         "com.amazonaws.imagebuilder#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.imagebuilder#BuildType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER_INITIATED",
-                        "name": "USER_INITIATED"
-                    },
-                    {
-                        "value": "SCHEDULED",
-                        "name": "SCHEDULED"
-                    },
-                    {
-                        "value": "IMPORT",
-                        "name": "IMPORT"
+            "type": "enum",
+            "members": {
+                "USER_INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_INITIATED"
                     }
-                ]
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                },
+                "IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#CallRateLimitExceededException": {
@@ -350,19 +357,19 @@
                 "type": {
                     "target": "com.amazonaws.imagebuilder#ComponentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the component denotes whether the component is used to build the image or only\n\t\t\tto test it.</p>"
+                        "smithy.api#documentation": "<p>The component type specifies whether Image Builder uses the component to build the image or only\n\t\t\tto test it.</p>"
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the component.</p>"
+                        "smithy.api#documentation": "<p>The operating system platform of the component.</p>"
                     }
                 },
                 "supportedOsVersions": {
                     "target": "com.amazonaws.imagebuilder#OsVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the base image OS version during image recipe\n\t\t\tcreation.</p>"
+                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, Image Builder performs a prefix match against the base image OS version during image recipe\n\t\t\tcreation.</p>"
                     }
                 },
                 "state": {
@@ -374,7 +381,7 @@
                 "parameters": {
                     "target": "com.amazonaws.imagebuilder#ComponentParameterDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains parameter details for each of the parameters that are defined for the component.</p>"
+                        "smithy.api#documentation": "<p>Contains parameter details for each of the parameters that the component document \n\t\t\tdefined for the component.</p>"
                     }
                 },
                 "owner": {
@@ -404,13 +411,26 @@
                 "dateCreated": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date that the component was created.</p>"
+                        "smithy.api#documentation": "<p>The date that Image Builder created the component.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the component.</p>"
+                        "smithy.api#documentation": "<p>The tags that apply to the component.</p>"
+                    }
+                },
+                "publisher": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the name of the publisher if this is a third-party component. Otherwise, \n\t\t\tthis property is empty.</p>"
+                    }
+                },
+                "obfuscate": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, \n\t\t\tand from component detail results for API, CLI, or SDK operations.</p>"
                     }
                 }
             },
@@ -437,7 +457,7 @@
                 "parameters": {
                     "target": "com.amazonaws.imagebuilder#ComponentParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A group of parameter settings that are used to configure the component for a specific recipe.</p>"
+                        "smithy.api#documentation": "<p>A group of parameter settings that Image Builder uses to configure the component for a specific recipe.</p>"
                     }
                 }
             },
@@ -460,14 +480,14 @@
             "type": "string"
         },
         "com.amazonaws.imagebuilder#ComponentFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SHELL",
-                        "name": "SHELL"
+            "type": "enum",
+            "members": {
+                "SHELL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHELL"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.imagebuilder#ComponentParameter": {
@@ -609,14 +629,14 @@
             }
         },
         "com.amazonaws.imagebuilder#ComponentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEPRECATED",
-                        "name": "DEPRECATED"
+            "type": "enum",
+            "members": {
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.imagebuilder#ComponentSummary": {
@@ -643,13 +663,13 @@
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the component.</p>"
+                        "smithy.api#documentation": "<p>The operating system platform of the component.</p>"
                     }
                 },
                 "supportedOsVersions": {
                     "target": "com.amazonaws.imagebuilder#OsVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the base image OS version during image recipe\n\t\t\tcreation.</p>"
+                        "smithy.api#documentation": "<p>The operating system (OS) version that the component supports. If the OS information is\n\t\t\tavailable, Image Builder performs a prefix match against the base image OS version during image recipe\n\t\t\tcreation.</p>"
                     }
                 },
                 "state": {
@@ -661,7 +681,7 @@
                 "type": {
                     "target": "com.amazonaws.imagebuilder#ComponentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the component denotes whether the component is used to build the image or only\n\t\t\tto test it.</p>"
+                        "smithy.api#documentation": "<p>The component type specifies whether Image Builder uses the component to build the image or only\n\t\t\tto test it.</p>"
                     }
                 },
                 "owner": {
@@ -679,19 +699,32 @@
                 "changeDescription": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The change description of the component.</p>"
+                        "smithy.api#documentation": "<p>The change description for the current version of the component.</p>"
                     }
                 },
                 "dateCreated": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date that the component was created.</p>"
+                        "smithy.api#documentation": "<p>The original creation date of the component.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the component.</p>"
+                        "smithy.api#documentation": "<p>The tags that apply to the component.</p>"
+                    }
+                },
+                "publisher": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the name of the publisher if this is a third-party component. Otherwise, \n\t\t\tthis property is empty.</p>"
+                    }
+                },
+                "obfuscate": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, \n\t\t\tand from component detail results for API, CLI, or SDK operations.</p>"
                     }
                 }
             },
@@ -706,18 +739,20 @@
             }
         },
         "com.amazonaws.imagebuilder#ComponentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BUILD",
-                        "name": "BUILD"
-                    },
-                    {
-                        "value": "TEST",
-                        "name": "TEST"
+            "type": "enum",
+            "members": {
+                "BUILD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILD"
                     }
-                ]
+                },
+                "TEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#ComponentVersion": {
@@ -726,7 +761,7 @@
                 "arn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>\n\t\t       <note>\n\t\t\t         <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p> \n\t           <ol>\n               <li>\n\t\t\t               <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n\t\t             </li>\n            </ol>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>\n         <note>\n            <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p>\n            <ol>\n               <li>\n                  <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n               </li>\n               <li>\n                  <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n               </li>\n               <li>\n                  <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n               </li>\n            </ol>\n         </note>"
                     }
                 },
                 "name": {
@@ -738,7 +773,7 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the component.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The semantic version of the component.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>"
                     }
                 },
                 "description": {
@@ -859,7 +894,7 @@
                 "arn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>\n\t\t       <note>\n\t\t\t         <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p> \n\t           <ol>\n               <li>\n\t\t\t               <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n\t\t             </li>\n            </ol>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>\n         <note>\n            <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p>\n            <ol>\n               <li>\n                  <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n               </li>\n               <li>\n                  <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n               </li>\n               <li>\n                  <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n               </li>\n            </ol>\n         </note>"
                     }
                 },
                 "containerType": {
@@ -895,13 +930,13 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the container recipe.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The semantic version of the container recipe.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>"
                     }
                 },
                 "components": {
                     "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Components for build and test that are included in the container recipe.</p>"
+                        "smithy.api#documentation": "<p>Build and test components that are included in the container recipe. Recipes require a minimum of one build component, and can \n\t\t\thave a maximum of 20 build and test components in any combination.</p>"
                     }
                 },
                 "instanceConfiguration": {
@@ -1032,25 +1067,25 @@
             }
         },
         "com.amazonaws.imagebuilder#ContainerRepositoryService": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ECR",
-                        "name": "ECR"
+            "type": "enum",
+            "members": {
+                "ECR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECR"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.imagebuilder#ContainerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DOCKER",
-                        "name": "DOCKER"
+            "type": "enum",
+            "members": {
+                "DOCKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCKER"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.imagebuilder#CreateComponent": {
@@ -1097,7 +1132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new component that can be used to build, validate, test, and assess your\n\t\t\timage. The component is based on a YAML document that you specify using exactly one \n\t\t\tof the following methods:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Inline, using the <code>data</code> property in the request body.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>A URL that points to a YAML document file stored in Amazon S3, using the \n\t\t\t\t\t<code>uri</code> property in the request body.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a new component that can be used to build, validate, test, and assess your\n\t\t\timage. The component is based on a YAML document that you specify using exactly one \n\t\t\tof the following methods:</p>\n         <ul>\n            <li>\n               <p>Inline, using the <code>data</code> property in the request body.</p>\n            </li>\n            <li>\n               <p>A URL that points to a YAML document file stored in Amazon S3, using the \n\t\t\t\t\t<code>uri</code> property in the request body.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/CreateComponent",
@@ -1118,14 +1153,14 @@
                 "semanticVersion": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t       </note>",
+                        "smithy.api#documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the component. Describes the contents of the component.</p>"
+                        "smithy.api#documentation": "<p>Describes the contents of the component.</p>"
                     }
                 },
                 "changeDescription": {
@@ -1137,7 +1172,7 @@
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the component.</p>",
+                        "smithy.api#documentation": "<p>The operating system platform of the component.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1156,19 +1191,19 @@
                 "uri": {
                     "target": "com.amazonaws.imagebuilder#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>uri</code> of a YAML component document file. This must be an S3 URL \n\t\t\t(<code>s3://bucket/key</code>), and the requester must have permission to access \n\t\t\tthe S3 bucket it points to. If you use Amazon S3, you can specify component content \n\t\t\tup to your service quota.</p>\n\t\t       <p>Alternatively, you can specify the YAML document inline, using the component \n\t\t\t<code>data</code> property. You cannot specify both properties.</p>"
+                        "smithy.api#documentation": "<p>The <code>uri</code> of a YAML component document file. This must be an S3 URL \n\t\t\t(<code>s3://bucket/key</code>), and the requester must have permission to access \n\t\t\tthe S3 bucket it points to. If you use Amazon S3, you can specify component content \n\t\t\tup to your service quota.</p>\n         <p>Alternatively, you can specify the YAML document inline, using the component \n\t\t\t<code>data</code> property. You cannot specify both properties.</p>"
                     }
                 },
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key that should be used to encrypt this component.</p>"
+                        "smithy.api#documentation": "<p>The ID of the KMS key that is used to encrypt this component.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags of the component.</p>"
+                        "smithy.api#documentation": "<p>The tags that apply to the component.</p>"
                     }
                 },
                 "clientToken": {
@@ -1282,14 +1317,14 @@
                 "semanticVersion": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the container recipe. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t       </note>",
+                        "smithy.api#documentation": "<p>The semantic version of the container recipe. This version follows the semantic version syntax.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "components": {
                     "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Components for build and test that are included in the container recipe.</p>",
+                        "smithy.api#documentation": "<p>Components for build and test that are included in the container recipe. Recipes require a minimum of one build component, and can \n\t\t\thave a maximum of 20 build and test components in any combination.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1772,14 +1807,14 @@
                 "semanticVersion": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the image recipe. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t       </note>",
+                        "smithy.api#documentation": "<p>The semantic version of the image recipe. This version follows the semantic version syntax.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "components": {
                     "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The components of the image recipe.</p>",
+                        "smithy.api#documentation": "<p>The components included in the image recipe.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2037,7 +2072,7 @@
                 "snsTopicArn": {
                     "target": "com.amazonaws.imagebuilder#SnsTopicArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p>\n\t\t       <note>\n\t\t\t         <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p>\n         <note>\n            <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n         </note>"
                     }
                 },
                 "resourceTags": {
@@ -2336,7 +2371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Image Builder image resource. This does not delete any EC2 AMIs or ECR container images\n\t\t\tthat are created during the image build process. You must clean those up separately,\n\t\t\tusing the appropriate Amazon EC2 or Amazon ECR console actions, or API or CLI commands.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>To deregister an EC2 Linux AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Linux AMI</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>To deregister an EC2 Windows AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Windows AMI</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>To delete a container image from Amazon ECR, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html\">Deleting \n\t\t\t\t\t\tan image</a> in the <i>Amazon ECR User Guide</i>.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes an Image Builder image resource. This does not delete any EC2 AMIs or ECR container images\n\t\t\tthat are created during the image build process. You must clean those up separately,\n\t\t\tusing the appropriate Amazon EC2 or Amazon ECR console actions, or API or CLI commands.</p>\n         <ul>\n            <li>\n               <p>To deregister an EC2 Linux AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Linux AMI</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>To deregister an EC2 Windows AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Windows AMI</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>To delete a container image from Amazon ECR, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html\">Deleting \n\t\t\t\t\t\tan image</a> in the <i>Amazon ECR User Guide</i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/DeleteImage",
@@ -2585,22 +2620,26 @@
             }
         },
         "com.amazonaws.imagebuilder#DiskImageFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VMDK",
-                        "name": "VMDK"
-                    },
-                    {
-                        "value": "RAW",
-                        "name": "RAW"
-                    },
-                    {
-                        "value": "VHD",
-                        "name": "VHD"
+            "type": "enum",
+            "members": {
+                "VMDK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VMDK"
                     }
-                ]
+                },
+                "RAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RAW"
+                    }
+                },
+                "VHD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VHD"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#Distribution": {
@@ -2782,7 +2821,6 @@
         "com.amazonaws.imagebuilder#DistributionTimeoutMinutes": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 30,
                     "max": 720
@@ -2851,7 +2889,6 @@
         "com.amazonaws.imagebuilder#EbsIopsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 100,
                     "max": 64000
@@ -2861,7 +2898,6 @@
         "com.amazonaws.imagebuilder#EbsVolumeSizeInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 16000
@@ -2871,7 +2907,6 @@
         "com.amazonaws.imagebuilder#EbsVolumeThroughput": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 125,
                     "max": 1000
@@ -2879,38 +2914,50 @@
             }
         },
         "com.amazonaws.imagebuilder#EbsVolumeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "standard",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "io1",
-                        "name": "IO1"
-                    },
-                    {
-                        "value": "io2",
-                        "name": "IO2"
-                    },
-                    {
-                        "value": "gp2",
-                        "name": "GP2"
-                    },
-                    {
-                        "value": "gp3",
-                        "name": "GP3"
-                    },
-                    {
-                        "value": "sc1",
-                        "name": "SC1"
-                    },
-                    {
-                        "value": "st1",
-                        "name": "ST1"
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
                     }
-                ]
+                },
+                "IO1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "io1"
+                    }
+                },
+                "IO2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "io2"
+                    }
+                },
+                "GP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gp2"
+                    }
+                },
+                "GP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gp3"
+                    }
+                },
+                "SC1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sc1"
+                    }
+                },
+                "ST1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "st1"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#EmptyString": {
@@ -2931,6 +2978,7 @@
                 "enabled": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean that represents the current state of faster launching for the \n\t\t\tWindows AMI. Set to <code>true</code> to start using Windows faster launching, or \n\t\t\t<code>false</code> to stop using it.</p>",
                         "smithy.api#required": {}
                     }
@@ -2999,7 +3047,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies the launch template that the associated Windows AMI uses for \n\t\t\tlaunching an instance when faster launching is enabled.</p>\n\t\t       <note>\n\t\t\t         <p>You can specify either the <code>launchTemplateName</code> or the \n\t\t\t\t<code>launchTemplateId</code>, but not both.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Identifies the launch template that the associated Windows AMI uses for \n\t\t\tlaunching an instance when faster launching is enabled.</p>\n         <note>\n            <p>You can specify either the <code>launchTemplateName</code> or the \n\t\t\t\t<code>launchTemplateId</code>, but not both.</p>\n         </note>"
             }
         },
         "com.amazonaws.imagebuilder#FastLaunchSnapshotConfiguration": {
@@ -3831,7 +3879,6 @@
         "com.amazonaws.imagebuilder#HttpPutResponseHopLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 64
@@ -3863,13 +3910,13 @@
                 "arn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>\n\t\t       <note>\n\t\t\t         <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p> \n\t           <ol>\n               <li>\n\t\t\t               <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n\t\t             </li>\n            </ol>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>\n         <note>\n            <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p>\n            <ol>\n               <li>\n                  <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n               </li>\n               <li>\n                  <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n               </li>\n               <li>\n                  <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n               </li>\n            </ol>\n         </note>"
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.imagebuilder#ImageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this image produces an AMI or a container image.</p>"
                     }
                 },
                 "name": {
@@ -3881,25 +3928,25 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the image.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The semantic version of the image.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>"
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the image.</p>"
+                        "smithy.api#documentation": "<p>The image operating system platform, such as Linux or Windows.</p>"
                     }
                 },
                 "enhancedImageMetadataEnabled": {
                     "target": "com.amazonaws.imagebuilder#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Collects additional information about the image being created, including the operating\n\t\t\tsystem (OS) version and package list. This information is used to enhance the overall\n\t\t\texperience of using EC2 Image Builder. Enabled by default.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether Image Builder collects additional information about the image, such as the \n\t\t\toperating system (OS) version and package list.</p>"
                     }
                 },
                 "osVersion": {
                     "target": "com.amazonaws.imagebuilder#OsVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or\n\t\t\tMicrosoft Windows Server 2019.</p>"
+                        "smithy.api#documentation": "<p>The operating system version for instances that launch from this image. For example, \n\t\t\tAmazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
                     }
                 },
                 "state": {
@@ -3911,13 +3958,13 @@
                 "imageRecipe": {
                     "target": "com.amazonaws.imagebuilder#ImageRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image recipe used when creating the image.</p>"
+                        "smithy.api#documentation": "<p>For images that distribute an AMI, this is the image recipe that Image Builder used to \n\t\t\tcreate the image. For container images, this is empty.</p>"
                     }
                 },
                 "containerRecipe": {
                     "target": "com.amazonaws.imagebuilder#ContainerRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recipe that is used to create an Image Builder container image.</p>"
+                        "smithy.api#documentation": "<p>For container images, this is the container recipe that Image Builder used to create the \n\t\t\timage. For images that distribute an AMI, this is empty.</p>"
                     }
                 },
                 "sourcePipelineName": {
@@ -3935,43 +3982,49 @@
                 "infrastructureConfiguration": {
                     "target": "com.amazonaws.imagebuilder#InfrastructureConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The infrastructure used when creating this image.</p>"
+                        "smithy.api#documentation": "<p>The infrastructure that Image Builder used to create this image.</p>"
                     }
                 },
                 "distributionConfiguration": {
                     "target": "com.amazonaws.imagebuilder#DistributionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The distribution configuration used when creating this image.</p>"
+                        "smithy.api#documentation": "<p>The distribution configuration that Image Builder used to create this image.</p>"
                     }
                 },
                 "imageTestsConfiguration": {
                     "target": "com.amazonaws.imagebuilder#ImageTestsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image tests configuration used when creating this image.</p>"
+                        "smithy.api#documentation": "<p>The image tests that ran when that Image Builder created this image.</p>"
                     }
                 },
                 "dateCreated": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which this image was created.</p>"
+                        "smithy.api#documentation": "<p>The date on which Image Builder created this image.</p>"
                     }
                 },
                 "outputResources": {
                     "target": "com.amazonaws.imagebuilder#OutputResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output resources produced when creating this image.</p>"
+                        "smithy.api#documentation": "<p>The output resources that Image Builder produces for this image.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags of the image.</p>"
+                        "smithy.api#documentation": "<p>The tags that apply to this image.</p>"
                     }
                 },
                 "buildType": {
                     "target": "com.amazonaws.imagebuilder#BuildType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated  \n\t\t\tin the following ways:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated  \n\t\t\tin the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "imageSource": {
+                    "target": "com.amazonaws.imagebuilder#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the base image that Image Builder used to build this image.</p>"
                     }
                 }
             },
@@ -4107,13 +4160,13 @@
                 "dateLastRun": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which this image pipeline was last run.</p>"
+                        "smithy.api#documentation": "<p>This is no longer supported, and does not return a value.</p>"
                     }
                 },
                 "dateNextRun": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which this image pipeline will next be run.</p>"
+                        "smithy.api#documentation": "<p>This is no longer supported, and does not return a value.</p>"
                     }
                 },
                 "tags": {
@@ -4187,7 +4240,7 @@
                 "components": {
                     "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The components of the image recipe.</p>"
+                        "smithy.api#documentation": "<p>The components that are included in the image recipe. Recipes require a minimum of one build component, and can \n\t\t\thave a maximum of 20 build and test components in any combination.</p>"
                     }
                 },
                 "parentImage": {
@@ -4293,6 +4346,35 @@
                 "target": "com.amazonaws.imagebuilder#ImageRecipeSummary"
             }
         },
+        "com.amazonaws.imagebuilder#ImageSource": {
+            "type": "enum",
+            "members": {
+                "AMAZON_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_MANAGED"
+                    }
+                },
+                "AWS_MARKETPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MARKETPLACE"
+                    }
+                },
+                "IMPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORTED"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#ImageState": {
             "type": "structure",
             "members": {
@@ -4314,54 +4396,74 @@
             }
         },
         "com.amazonaws.imagebuilder#ImageStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "BUILDING",
-                        "name": "BUILDING"
-                    },
-                    {
-                        "value": "TESTING",
-                        "name": "TESTING"
-                    },
-                    {
-                        "value": "DISTRIBUTING",
-                        "name": "DISTRIBUTING"
-                    },
-                    {
-                        "value": "INTEGRATING",
-                        "name": "INTEGRATING"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "DEPRECATED",
-                        "name": "DEPRECATED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "BUILDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILDING"
+                    }
+                },
+                "TESTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TESTING"
+                    }
+                },
+                "DISTRIBUTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTRIBUTING"
+                    }
+                },
+                "INTEGRATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGRATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#ImageSummary": {
@@ -4382,7 +4484,7 @@
                 "type": {
                     "target": "com.amazonaws.imagebuilder#ImageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this image produces an AMI or a container image.</p>"
                     }
                 },
                 "version": {
@@ -4394,13 +4496,13 @@
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the image.</p>"
+                        "smithy.api#documentation": "<p>The image operating system platform, such as Linux or Windows.</p>"
                     }
                 },
                 "osVersion": {
                     "target": "com.amazonaws.imagebuilder#OsVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or\n\t\t\tMicrosoft Windows Server 2019.</p>"
+                        "smithy.api#documentation": "<p>The operating system version of the instances that launch from this image. For \n\t\t\texample, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
                     }
                 },
                 "state": {
@@ -4418,25 +4520,31 @@
                 "dateCreated": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which this image was created.</p>"
+                        "smithy.api#documentation": "<p>The date on which Image Builder created this image.</p>"
                     }
                 },
                 "outputResources": {
                     "target": "com.amazonaws.imagebuilder#OutputResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output resources produced when creating this image.</p>"
+                        "smithy.api#documentation": "<p>The output resources that Image Builder produced when it created this image.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags of the image.</p>"
+                        "smithy.api#documentation": "<p>The tags that apply to this image.</p>"
                     }
                 },
                 "buildType": {
                     "target": "com.amazonaws.imagebuilder#BuildType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated  \n\t\t\tin the following ways:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated  \n\t\t\tin the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "imageSource": {
+                    "target": "com.amazonaws.imagebuilder#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the base image that Image Builder used to build this image.</p>"
                     }
                 }
             },
@@ -4462,7 +4570,7 @@
                 "timeoutMinutes": {
                     "target": "com.amazonaws.imagebuilder#ImageTestsTimeoutMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time in minutes that tests are permitted to run.</p>"
+                        "smithy.api#documentation": "<p>The maximum time in minutes that tests are permitted to run.</p>\n         <note>\n            <p>The timeoutMinutes attribute is not currently active. This value is ignored.</p>\n         </note>"
                     }
                 }
             },
@@ -4473,7 +4581,6 @@
         "com.amazonaws.imagebuilder#ImageTestsTimeoutMinutes": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 60,
                     "max": 1440
@@ -4481,18 +4588,20 @@
             }
         },
         "com.amazonaws.imagebuilder#ImageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AMI",
-                        "name": "AMI"
-                    },
-                    {
-                        "value": "DOCKER",
-                        "name": "DOCKER"
+            "type": "enum",
+            "members": {
+                "AMI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMI"
                     }
-                ]
+                },
+                "DOCKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCKER"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#ImageVersion": {
@@ -4501,7 +4610,7 @@
                 "arn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a specific version of an Image Builder image.</p>\n\t\t       <note>\n\t\t\t         <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p> \n\t           <ol>\n               <li>\n\t\t\t               <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n\t\t             </li>\n               <li>\n\t\t\t               <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n\t\t             </li>\n            </ol>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a specific version of an Image Builder image.</p>\n         <note>\n            <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), \n\tat the level that applies to that object as follows:</p>\n            <ol>\n               <li>\n                  <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are \n\t\t\t\teither left off entirely, or they are specified as wildcards, for example: x.x.x.</p>\n               </li>\n               <li>\n                  <p>Version ARNs have only the first three nodes: <major>.<minor>.<patch></p>\n               </li>\n               <li>\n                  <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p>\n               </li>\n            </ol>\n         </note>"
                     }
                 },
                 "name": {
@@ -4513,19 +4622,19 @@
                 "type": {
                     "target": "com.amazonaws.imagebuilder#ImageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this image is an AMI or a container image.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this image produces an AMI or a container image.</p>"
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details for a specific version of an Image Builder image. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>Details for a specific version of an Image Builder image. This version follows the semantic version syntax.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>"
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform of the image version, for example \"Windows\" or \"Linux\".</p>"
+                        "smithy.api#documentation": "<p>The operating system platform of the image version, for example \"Windows\" or \"Linux\".</p>"
                     }
                 },
                 "osVersion": {
@@ -4549,7 +4658,13 @@
                 "buildType": {
                     "target": "com.amazonaws.imagebuilder#BuildType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated  \n\t\t\tin the following ways:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated  \n\t\t\tin the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "imageSource": {
+                    "target": "com.amazonaws.imagebuilder#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the base image that Image Builder used to build this image.</p>"
                     }
                 }
             },
@@ -4637,7 +4752,7 @@
                 "semanticVersion": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
+                        "smithy.api#documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4751,7 +4866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When you export your virtual machine (VM) from its virtualization environment, \n\t\t\tthat process creates a set of one or more disk container files that act as \n\t\t\tsnapshots of your VM’s environment, settings, and data. The Amazon EC2 API \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html\">ImportImage</a> \n\t\t\taction uses those files to import your VM and create an AMI. To import using the \n\t\t\tCLI command, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html\">import-image</a>\n\t\t       </p>\n\t\t       <p>You can reference the task ID from the VM import to pull in the AMI that \n\t\t\tthe import created as the base image for your Image Builder recipe.</p>",
+                "smithy.api#documentation": "<p>When you export your virtual machine (VM) from its virtualization environment, \n\t\t\tthat process creates a set of one or more disk container files that act as \n\t\t\tsnapshots of your VM’s environment, settings, and data. The Amazon EC2 API \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html\">ImportImage</a> \n\t\t\taction uses those files to import your VM and create an AMI. To import using the \n\t\t\tCLI command, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html\">import-image</a>\n         </p>\n         <p>You can reference the task ID from the VM import to pull in the AMI that \n\t\t\tthe import created as the base image for your Image Builder recipe.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/ImportVmImage",
@@ -4772,7 +4887,7 @@
                 "semanticVersion": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version to attach to the base image that was created during the \n\t\t\timport process. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t       </note>",
+                        "smithy.api#documentation": "<p>The semantic version to attach to the base image that was created during the \n\t\t\timport process. This version follows the semantic version syntax.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4907,7 +5022,7 @@
                 "snsTopicArn": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p>\n\t\t       <note>\n\t\t\t         <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p>\n         <note>\n            <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n         </note>"
                     }
                 },
                 "dateCreated": {
@@ -5103,13 +5218,13 @@
                 "httpTokens": {
                     "target": "com.amazonaws.imagebuilder#HttpTokens",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a signed token header is required for instance metadata retrieval requests. \n\t\t\tThe values affect the response as follows:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>required</b> – When you retrieve the \n\t\t\t\t\tIAM role credentials, version 2.0 credentials are returned in all cases.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>optional</b> – You can include a signed token header\n\t\t\t\t\tin your request to retrieve instance metadata, or you can leave it out. If you\n\t\t\t\t\tinclude it, version 2.0 credentials are returned for the IAM role. Otherwise,\n\t\t\t\t\tversion 1.0 credentials are returned.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>The default setting is <b>optional</b>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether a signed token header is required for instance metadata retrieval requests. \n\t\t\tThe values affect the response as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>required</b> – When you retrieve the \n\t\t\t\t\tIAM role credentials, version 2.0 credentials are returned in all cases.</p>\n            </li>\n            <li>\n               <p>\n                  <b>optional</b> – You can include a signed token header\n\t\t\t\t\tin your request to retrieve instance metadata, or you can leave it out. If you\n\t\t\t\t\tinclude it, version 2.0 credentials are returned for the IAM role. Otherwise,\n\t\t\t\t\tversion 1.0 credentials are returned.</p>\n            </li>\n         </ul>\n         <p>The default setting is <b>optional</b>.</p>"
                     }
                 },
                 "httpPutResponseHopLimit": {
                     "target": "com.amazonaws.imagebuilder#HttpPutResponseHopLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>Limit the number of hops that an instance metadata request can traverse to reach its\n\t\t\tdestination.</p>"
+                        "smithy.api#documentation": "<p>Limit the number of hops that an instance metadata request can traverse to reach its\n\t\t\tdestination. The default is one hop. However, if HTTP tokens are required, container \n\t\t\timage builds need a minimum of two hops.</p>"
                     }
                 }
             },
@@ -5265,6 +5380,7 @@
                 "setDefaultVersion": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set the specified Amazon EC2 launch template as the default launch template for the specified account.</p>"
                     }
                 }
@@ -5341,7 +5457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the list of component build versions for the specified semantic version.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
+                "smithy.api#documentation": "<p> Returns the list of component build versions for the specified semantic version.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListComponentBuildVersions",
@@ -5350,6 +5466,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "componentSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5367,7 +5484,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -5434,7 +5551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
+                "smithy.api#documentation": "<p>Returns the list of components that can be filtered by name, or by using \n\t\t\tthe listed <code>filters</code> to streamline results. Newly created components \n\t\t\tcan take up to two minutes to appear in the ListComponents API Results.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListComponents",
@@ -5443,6 +5560,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "componentVersionList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5453,25 +5571,26 @@
                 "owner": {
                     "target": "com.amazonaws.imagebuilder#Ownership",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner defines which components you want to list. By default, this request will only\n\t\t\tshow components owned by your account. You can use this field to specify if you want to view\n\t\t\tcomponents owned by yourself, by Amazon, or those components that have been shared with you by\n\t\t\tother customers.</p>"
+                        "smithy.api#documentation": "<p>Filters results based on the type of owner for the component. By default, this request \n\t\t\treturns a list of components that your account owns. To see results for other types of owners, \n\t\t\tyou can specify components that Amazon manages, third party components, or components that \n\t\t\tother accounts have shared with you.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>supportedOsVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>supportedOsVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "byName": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the list of component build versions for the specified name.</p>"
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Returns the list of components for the specified name.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -5495,7 +5614,7 @@
                 "componentVersionList": {
                     "target": "com.amazonaws.imagebuilder#ComponentVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of component semantic versions.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The list of component semantic versions.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n         </note>"
                     }
                 },
                 "nextToken": {
@@ -5547,6 +5666,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "containerRecipeSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5563,13 +5683,13 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>containerType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parentImage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>containerType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parentImage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return in the list.</p>"
                     }
                 },
@@ -5645,6 +5765,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "distributionConfigurationSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5661,7 +5782,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -5737,6 +5858,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "imageSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5754,13 +5876,13 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>osVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>osVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -5839,6 +5961,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "imagePackageList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5856,7 +5979,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maxiumum number of results to return from the ListImagePackages request.</p>"
                     }
                 },
@@ -5926,7 +6049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of images created by the specified pipeline.</p>",
+                "smithy.api#documentation": "<p>Returns a list of images created by the specified pipeline.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListImagePipelineImages",
@@ -5935,6 +6058,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "imageSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -5952,13 +6076,13 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -6034,6 +6158,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "imagePipelineList",
                     "pageSize": "maxResults"
                 }
             }
@@ -6044,13 +6169,13 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>distributionConfigurationArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>imageRecipeArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>infrastructureConfigurationArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>distributionConfigurationArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>imageRecipeArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>infrastructureConfigurationArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -6126,6 +6251,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "imageRecipeSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -6142,13 +6268,13 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parentImage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parentImage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -6215,7 +6341,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the list of images that you have access to.</p>",
+                "smithy.api#documentation": "<p>Returns the list of images that you have access to. Newly created images \n\t\t\tcan take up to two minutes to appear in the ListImages API Results.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListImages",
@@ -6224,6 +6350,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "imageVersionList",
                     "pageSize": "maxResults"
                 }
             }
@@ -6240,19 +6367,20 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>osVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>osVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "byName": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Requests a list of images with a specific recipe name.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -6282,7 +6410,7 @@
                 "imageVersionList": {
                     "target": "com.amazonaws.imagebuilder#ImageVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of image semantic versions.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The list of image semantic versions.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>"
                     }
                 },
                 "nextToken": {
@@ -6334,6 +6462,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "infrastructureConfigurationSummaryList",
                     "pageSize": "maxResults"
                 }
             }
@@ -6350,7 +6479,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
@@ -6454,7 +6583,6 @@
         "com.amazonaws.imagebuilder#MaxParallelLaunches": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10000
@@ -6471,10 +6599,7 @@
             }
         },
         "com.amazonaws.imagebuilder#NullableBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.imagebuilder#OrganizationArn": {
             "type": "string",
@@ -6553,22 +6678,32 @@
             }
         },
         "com.amazonaws.imagebuilder#Ownership": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Self",
-                        "name": "SELF"
-                    },
-                    {
-                        "value": "Shared",
-                        "name": "SHARED"
-                    },
-                    {
-                        "value": "Amazon",
-                        "name": "AMAZON"
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Self"
                     }
-                ]
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Shared"
+                    }
+                },
+                "AMAZON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Amazon"
+                    }
+                },
+                "THIRDPARTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThirdParty"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#PaginationToken": {
@@ -6581,48 +6716,54 @@
             }
         },
         "com.amazonaws.imagebuilder#PipelineExecutionStartCondition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EXPRESSION_MATCH_ONLY",
-                        "name": "EXPRESSION_MATCH_ONLY"
-                    },
-                    {
-                        "value": "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE",
-                        "name": "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
+            "type": "enum",
+            "members": {
+                "EXPRESSION_MATCH_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPRESSION_MATCH_ONLY"
                     }
-                ]
+                },
+                "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#PipelineStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#Platform": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Windows",
-                        "name": "WINDOWS"
-                    },
-                    {
-                        "value": "Linux",
-                        "name": "LINUX"
+            "type": "enum",
+            "members": {
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Windows"
                     }
-                ]
+                },
+                "LINUX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Linux"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#PutComponentPolicy": {
@@ -7032,6 +7173,7 @@
         "com.amazonaws.imagebuilder#RestrictedInteger": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25
@@ -7051,7 +7193,7 @@
                 "diskImageFormat": {
                     "target": "com.amazonaws.imagebuilder#DiskImageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Export the updated image to one of the following supported disk \n\t\t\timage formats:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Virtual Hard Disk (VHD)</b> – \n\t\t\t\t\tCompatible with Citrix Xen and Microsoft Hyper-V virtualization products.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Stream-optimized ESX Virtual Machine Disk \n\t\t\t\t\t(VMDK)</b> – Compatible with VMware ESX and \n\t\t\t\t\tVMware vSphere versions 4, 5, and 6.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Raw</b> – Raw format.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Export the updated image to one of the following supported disk \n\t\t\timage formats:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Virtual Hard Disk (VHD)</b> – \n\t\t\t\t\tCompatible with Citrix Xen and Microsoft Hyper-V virtualization products.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Stream-optimized ESX Virtual Machine Disk \n\t\t\t\t\t(VMDK)</b> – Compatible with VMware ESX and \n\t\t\t\t\tVMware vSphere versions 4, 5, and 6.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Raw</b> – Raw format.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7099,7 +7241,7 @@
                 "scheduleExpression": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cron expression determines how often EC2 Image Builder evaluates your\n\t\t\t<code>pipelineExecutionStartCondition</code>.</p>\n\t\t       <p>For information on how to format a cron expression in Image Builder, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html\">Use cron\n\t\t\texpressions in EC2 Image Builder</a>.</p>"
+                        "smithy.api#documentation": "<p>The cron expression determines how often EC2 Image Builder evaluates your\n\t\t\t<code>pipelineExecutionStartCondition</code>.</p>\n         <p>For information on how to format a cron expression in Image Builder, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html\">Use cron\n\t\t\texpressions in EC2 Image Builder</a>.</p>"
                     }
                 },
                 "timezone": {
@@ -7402,7 +7544,6 @@
         "com.amazonaws.imagebuilder#TargetResourceCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10000
@@ -7609,7 +7750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates an image pipeline. Image pipelines enable you to automate the creation and\n\t\t\tdistribution of images.</p>\n\t\t       <note>\n            <p>UpdateImagePipeline does not support selective updates for the pipeline. \n\t\t\tYou must specify all of the required properties in the update request, not just \n\t\t\tthe properties that have changed.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Updates an image pipeline. Image pipelines enable you to automate the creation and\n\t\t\tdistribution of images.</p>\n         <note>\n            <p>UpdateImagePipeline does not support selective updates for the pipeline. \n\t\t\tYou must specify all of the required properties in the update request, not just \n\t\t\tthe properties that have changed.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/UpdateImagePipeline",
@@ -7820,7 +7961,7 @@
                 "snsTopicArn": {
                     "target": "com.amazonaws.imagebuilder#SnsTopicArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p>\n\t\t       <note>\n\t\t\t         <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p>\n         <note>\n            <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
@@ -7840,7 +7981,7 @@
                 "instanceMetadataOptions": {
                     "target": "com.amazonaws.imagebuilder#InstanceMetadataOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance metadata options that you can set for the HTTP requests that pipeline builds\n\t\t\tuse to launch EC2 build and test instances. For more information about instance metadata\n\t\t\toptions, see one of the following links:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i> \n\t\t\t\t\tfor Linux instances.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i> \n\t\t\t\t\tfor Windows instances.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance metadata options that you can set for the HTTP requests that pipeline builds\n\t\t\tuse to launch EC2 build and test instances. For more information about instance metadata\n\t\t\toptions, see one of the following links:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i> \n\t\t\t\t\tfor Linux instances.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i> \n\t\t\t\t\tfor Windows instances.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -7889,21 +8030,6 @@
         },
         "com.amazonaws.imagebuilder#imagebuilder": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "imagebuilder",
-                    "arnNamespace": "imagebuilder",
-                    "cloudFormationName": "Imagebuilder",
-                    "cloudTrailEventSource": "imagebuilder.amazonaws.com",
-                    "endpointPrefix": "imagebuilder"
-                },
-                "aws.auth#sigv4": {
-                    "name": "imagebuilder"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the \n      creation, management, and deployment of customized, secure, and up-to-date \"golden\" server \n      images that are pre-installed and pre-configured with software and settings to meet specific\n      IT standards.</p>",
-                "smithy.api#title": "EC2 Image Builder"
-            },
             "version": "2019-12-02",
             "operations": [
                 {
@@ -8056,7 +8182,365 @@
                 {
                     "target": "com.amazonaws.imagebuilder#UpdateInfrastructureConfiguration"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "imagebuilder",
+                    "arnNamespace": "imagebuilder",
+                    "cloudFormationName": "Imagebuilder",
+                    "cloudTrailEventSource": "imagebuilder.amazonaws.com",
+                    "endpointPrefix": "imagebuilder"
+                },
+                "aws.auth#sigv4": {
+                    "name": "imagebuilder"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the \n      creation, management, and deployment of customized, secure, and up-to-date \"golden\" server \n      images that are pre-installed and pre-configured with software and settings to meet specific\n      IT standards.</p>",
+                "smithy.api#title": "EC2 Image Builder",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://imagebuilder-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://imagebuilder-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://imagebuilder.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://imagebuilder.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         }
     }
 }
