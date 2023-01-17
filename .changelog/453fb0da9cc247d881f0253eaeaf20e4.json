@@ -1,0 +1,8 @@
+{
+    "id": "453fb0da-9cc2-47d8-81f0-253eaeaf20e4",
+    "type": "feature",
+    "description": "This release adds support for SKU Scope for pricing plans.",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

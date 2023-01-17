@@ -7867,6 +7867,15 @@ func awsAwsjson10_deserializeDocumentSubnetMapping(v **types.SubnetMapping, valu
 
 	for key, value := range shape {
 		switch key {
+		case "IPAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IPAddressType to be of type string, got %T instead", value)
+				}
+				sv.IPAddressType = types.IPAddressType(jtv)
+			}
+
 		case "SubnetId":
 			if value != nil {
 				jtv, ok := value.(string)

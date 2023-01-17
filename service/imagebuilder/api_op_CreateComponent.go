@@ -48,7 +48,7 @@ type CreateComponentInput struct {
 	// This member is required.
 	Name *string
 
-	// The platform of the component.
+	// The operating system platform of the component.
 	//
 	// This member is required.
 	Platform types.Platform
@@ -76,10 +76,10 @@ type CreateComponentInput struct {
 	// S3. However, you cannot specify both properties.
 	Data *string
 
-	// The description of the component. Describes the contents of the component.
+	// Describes the contents of the component.
 	Description *string
 
-	// The ID of the KMS key that should be used to encrypt this component.
+	// The ID of the KMS key that is used to encrypt this component.
 	KmsKeyId *string
 
 	// The operating system (OS) version supported by the component. If the OS
@@ -87,7 +87,7 @@ type CreateComponentInput struct {
 	// version during image recipe creation.
 	SupportedOsVersions []string
 
-	// The tags of the component.
+	// The tags that apply to the component.
 	Tags map[string]string
 
 	// The uri of a YAML component document file. This must be an S3 URL

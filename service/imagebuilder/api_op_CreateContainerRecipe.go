@@ -36,7 +36,9 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Components for build and test that are included in the container recipe.
+	// Components for build and test that are included in the container recipe. Recipes
+	// require a minimum of one build component, and can have a maximum of 20 build and
+	// test components in any combination.
 	//
 	// This member is required.
 	Components []types.ComponentConfiguration

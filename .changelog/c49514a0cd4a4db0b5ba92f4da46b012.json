@@ -1,0 +1,8 @@
+{
+    "id": "c49514a0-cd4a-4db0-b5ba-92f4da46b012",
+    "type": "feature",
+    "description": "Network Firewall now allows creation of dual stack endpoints, enabling inspection of IPv6 traffic.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

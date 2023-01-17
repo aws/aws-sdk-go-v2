@@ -36,7 +36,7 @@ type CreateImageRecipeInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The components of the image recipe.
+	// The components included in the image recipe.
 	//
 	// This member is required.
 	Components []types.ComponentConfiguration

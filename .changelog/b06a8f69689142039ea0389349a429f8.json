@@ -1,0 +1,8 @@
+{
+    "id": "b06a8f69-6891-4203-9ea0-389349a429f8",
+    "type": "feature",
+    "description": "Added minimum value to AutomaticStopTimeMinutes parameter.",
+    "modules": [
+        "service/cloud9"
+    ]
+}

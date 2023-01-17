@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of images that you have access to.
+// Returns the list of images that you have access to. Newly created images can
+// take up to two minutes to appear in the ListImages API Results.
 func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns ...func(*Options)) (*ListImagesOutput, error) {
 	if params == nil {
 		params = &ListImagesInput{}

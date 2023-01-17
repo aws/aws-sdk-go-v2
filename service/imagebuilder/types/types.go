@@ -6,11 +6,15 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// In addition to your infrastruction configuration, these settings provide an
-// extra layer of control over your build instances. For instances where Image
-// Builder installs the Systems Manager agent, you can choose whether to keep it
-// for the AMI that you create. You can also specify commands to run on launch for
-// all of your build instances.
+// In addition to your infrastructure configuration, these settings provide an
+// extra layer of control over your build instances. You can also specify commands
+// to run on launch for all of your build instances. Image Builder does not
+// automatically install the Systems Manager agent on Windows instances. If your
+// base image includes the Systems Manager agent, then the AMI that you create will
+// also include the agent. For Linux instances, if the base image does not already
+// include the Systems Manager agent, Image Builder installs it. For Linux
+// instances where Image Builder installs the Systems Manager agent, you can choose
+// whether to keep it for the AMI that you create.
 type AdditionalInstanceConfiguration struct {
 
 	// Contains settings for the Systems Manager agent on your build instance.
@@ -92,7 +96,7 @@ type Component struct {
 	// Component data contains the YAML document content for the component.
 	Data *string
 
-	// The date that the component was created.
+	// The date that Image Builder created the component.
 	DateCreated *string
 
 	// The description of the component.
@@ -107,30 +111,38 @@ type Component struct {
 	// The name of the component.
 	Name *string
 
+	// Indicates whether component source is hidden from view in the console, and from
+	// component detail results for API, CLI, or SDK operations.
+	Obfuscate bool
+
 	// The owner of the component.
 	Owner *string
 
-	// Contains parameter details for each of the parameters that are defined for the
-	// component.
+	// Contains parameter details for each of the parameters that the component
+	// document defined for the component.
 	Parameters []ComponentParameterDetail
 
-	// The platform of the component.
+	// The operating system platform of the component.
 	Platform Platform
+
+	// Contains the name of the publisher if this is a third-party component.
+	// Otherwise, this property is empty.
+	Publisher *string
 
 	// Describes the current status of the component. This is used for components that
 	// are no longer active.
 	State *ComponentState
 
 	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the base image OS
-	// version during image recipe creation.
+	// information is available, Image Builder performs a prefix match against the base
+	// image OS version during image recipe creation.
 	SupportedOsVersions []string
 
-	// The tags associated with the component.
+	// The tags that apply to the component.
 	Tags map[string]string
 
-	// The type of the component denotes whether the component is used to build the
-	// image or only to test it.
+	// The component type specifies whether Image Builder uses the component to build
+	// the image or only to test it.
 	Type ComponentType
 
 	// The version of the component.
@@ -147,8 +159,8 @@ type ComponentConfiguration struct {
 	// This member is required.
 	ComponentArn *string
 
-	// A group of parameter settings that are used to configure the component for a
-	// specific recipe.
+	// A group of parameter settings that Image Builder uses to configure the component
+	// for a specific recipe.
 	Parameters []ComponentParameter
 
 	noSmithyDocumentSerde
@@ -213,10 +225,10 @@ type ComponentSummary struct {
 	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
 
-	// The change description of the component.
+	// The change description for the current version of the component.
 	ChangeDescription *string
 
-	// The date that the component was created.
+	// The original creation date of the component.
 	DateCreated *string
 
 	// The description of the component.
@@ -225,25 +237,33 @@ type ComponentSummary struct {
 	// The name of the component.
 	Name *string
 
+	// Indicates whether component source is hidden from view in the console, and from
+	// component detail results for API, CLI, or SDK operations.
+	Obfuscate bool
+
 	// The owner of the component.
 	Owner *string
 
-	// The platform of the component.
+	// The operating system platform of the component.
 	Platform Platform
+
+	// Contains the name of the publisher if this is a third-party component.
+	// Otherwise, this property is empty.
+	Publisher *string
 
 	// Describes the current status of the component.
 	State *ComponentState
 
-	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the base image OS
-	// version during image recipe creation.
+	// The operating system (OS) version that the component supports. If the OS
+	// information is available, Image Builder performs a prefix match against the base
+	// image OS version during image recipe creation.
 	SupportedOsVersions []string
 
-	// The tags associated with the component.
+	// The tags that apply to the component.
 	Tags map[string]string
 
-	// The type of the component denotes whether the component is used to build the
-	// image or only to test it.
+	// The component type specifies whether Image Builder uses the component to build
+	// the image or only to test it.
 	Type ComponentType
 
 	// The version of the component.
@@ -361,7 +381,9 @@ type ContainerRecipe struct {
 	// to a specific build for a specific version of an object.
 	Arn *string
 
-	// Components for build and test that are included in the container recipe.
+	// Build and test components that are included in the container recipe. Recipes
+	// require a minimum of one build component, and can have a maximum of 20 build and
+	// test components in any combination.
 	Components []ComponentConfiguration
 
 	// Specifies the type of container, such as Docker.
@@ -686,40 +708,44 @@ type Image struct {
 	// as the base image for the recipe.
 	BuildType BuildType
 
-	// The recipe that is used to create an Image Builder container image.
+	// For container images, this is the container recipe that Image Builder used to
+	// create the image. For images that distribute an AMI, this is empty.
 	ContainerRecipe *ContainerRecipe
 
-	// The date on which this image was created.
+	// The date on which Image Builder created this image.
 	DateCreated *string
 
-	// The distribution configuration used when creating this image.
+	// The distribution configuration that Image Builder used to create this image.
 	DistributionConfiguration *DistributionConfiguration
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Indicates whether Image Builder collects additional information about the image,
+	// such as the operating system (OS) version and package list.
 	EnhancedImageMetadataEnabled *bool
 
-	// The image recipe used when creating the image.
+	// For images that distribute an AMI, this is the image recipe that Image Builder
+	// used to create the image. For container images, this is empty.
 	ImageRecipe *ImageRecipe
 
-	// The image tests configuration used when creating this image.
+	// The origin of the base image that Image Builder used to build this image.
+	ImageSource ImageSource
+
+	// The image tests that ran when that Image Builder created this image.
 	ImageTestsConfiguration *ImageTestsConfiguration
 
-	// The infrastructure used when creating this image.
+	// The infrastructure that Image Builder used to create this image.
 	InfrastructureConfiguration *InfrastructureConfiguration
 
 	// The name of the image.
 	Name *string
 
-	// The operating system version of the instance. For example, Amazon Linux 2,
-	// Ubuntu 18, or Microsoft Windows Server 2019.
+	// The operating system version for instances that launch from this image. For
+	// example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
 	OsVersion *string
 
-	// The output resources produced when creating this image.
+	// The output resources that Image Builder produces for this image.
 	OutputResources *OutputResources
 
-	// The platform of the image.
+	// The image operating system platform, such as Linux or Windows.
 	Platform Platform
 
 	// The Amazon Resource Name (ARN) of the image pipeline that created this image.
@@ -731,10 +757,10 @@ type Image struct {
 	// The state of the image.
 	State *ImageState
 
-	// The tags of the image.
+	// The tags that apply to this image.
 	Tags map[string]string
 
-	// Specifies whether this is an AMI or container image.
+	// Specifies whether this image produces an AMI or a container image.
 	Type ImageType
 
 	// The semantic version of the image. The semantic version has four nodes: ../. You
@@ -779,10 +805,10 @@ type ImagePipeline struct {
 	// The date on which this image pipeline was created.
 	DateCreated *string
 
-	// The date on which this image pipeline was last run.
+	// This is no longer supported, and does not return a value.
 	DateLastRun *string
 
-	// The date on which this image pipeline will next be run.
+	// This is no longer supported, and does not return a value.
 	DateNextRun *string
 
 	// The date on which this image pipeline was last updated.
@@ -844,7 +870,9 @@ type ImageRecipe struct {
 	// The block device mappings to apply when creating images from this recipe.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The components of the image recipe.
+	// The components that are included in the image recipe. Recipes require a minimum
+	// of one build component, and can have a maximum of 20 build and test components
+	// in any combination.
 	Components []ComponentConfiguration
 
 	// The date on which this image recipe was created.
@@ -939,32 +967,35 @@ type ImageSummary struct {
 	// as the base image for the recipe.
 	BuildType BuildType
 
-	// The date on which this image was created.
+	// The date on which Image Builder created this image.
 	DateCreated *string
+
+	// The origin of the base image that Image Builder used to build this image.
+	ImageSource ImageSource
 
 	// The name of the image.
 	Name *string
 
-	// The operating system version of the instance. For example, Amazon Linux 2,
-	// Ubuntu 18, or Microsoft Windows Server 2019.
+	// The operating system version of the instances that launch from this image. For
+	// example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
 	OsVersion *string
 
-	// The output resources produced when creating this image.
+	// The output resources that Image Builder produced when it created this image.
 	OutputResources *OutputResources
 
 	// The owner of the image.
 	Owner *string
 
-	// The platform of the image.
+	// The image operating system platform, such as Linux or Windows.
 	Platform Platform
 
 	// The state of the image.
 	State *ImageState
 
-	// The tags of the image.
+	// The tags that apply to this image.
 	Tags map[string]string
 
-	// Specifies whether this is an AMI or container image.
+	// Specifies whether this image produces an AMI or a container image.
 	Type ImageType
 
 	// The version of the image.
@@ -982,7 +1013,8 @@ type ImageTestsConfiguration struct {
 	// to enable tests to run following the image build, before image distribution.
 	ImageTestsEnabled *bool
 
-	// The maximum time in minutes that tests are permitted to run.
+	// The maximum time in minutes that tests are permitted to run. The timeoutMinutes
+	// attribute is not currently active. This value is ignored.
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
@@ -1022,6 +1054,9 @@ type ImageVersion struct {
 	// The date on which this specific version of the Image Builder image was created.
 	DateCreated *string
 
+	// The origin of the base image that Image Builder used to build this image.
+	ImageSource ImageSource
+
 	// The name of this specific version of an Image Builder image.
 	Name *string
 
@@ -1032,10 +1067,11 @@ type ImageVersion struct {
 	// The owner of the image version.
 	Owner *string
 
-	// The platform of the image version, for example "Windows" or "Linux".
+	// The operating system platform of the image version, for example "Windows" or
+	// "Linux".
 	Platform Platform
 
-	// Specifies whether this image is an AMI or a container image.
+	// Specifies whether this image produces an AMI or a container image.
 	Type ImageType
 
 	// Details for a specific version of an Image Builder image. This version follows
@@ -1193,7 +1229,8 @@ type InstanceConfiguration struct {
 type InstanceMetadataOptions struct {
 
 	// Limit the number of hops that an instance metadata request can traverse to reach
-	// its destination.
+	// its destination. The default is one hop. However, if HTTP tokens are required,
+	// container image builds need a minimum of two hops.
 	HttpPutResponseHopLimit *int32
 
 	// Indicates whether a signed token header is required for instance metadata

@@ -9998,6 +9998,15 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "obfuscate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Obfuscate = jtv
+			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10019,6 +10028,15 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 					return fmt.Errorf("expected Platform to be of type string, got %T instead", value)
 				}
 				sv.Platform = types.Platform(jtv)
+			}
+
+		case "publisher":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Publisher = ptr.String(jtv)
 			}
 
 		case "state":
@@ -10470,6 +10488,15 @@ func awsRestjson1_deserializeDocumentComponentSummary(v **types.ComponentSummary
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "obfuscate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Obfuscate = jtv
+			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10486,6 +10513,15 @@ func awsRestjson1_deserializeDocumentComponentSummary(v **types.ComponentSummary
 					return fmt.Errorf("expected Platform to be of type string, got %T instead", value)
 				}
 				sv.Platform = types.Platform(jtv)
+			}
+
+		case "publisher":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Publisher = ptr.String(jtv)
 			}
 
 		case "state":
@@ -11935,6 +11971,15 @@ func awsRestjson1_deserializeDocumentImage(v **types.Image, value interface{}) e
 				return err
 			}
 
+		case "imageSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageSource to be of type string, got %T instead", value)
+				}
+				sv.ImageSource = types.ImageSource(jtv)
+			}
+
 		case "imageTestsConfiguration":
 			if err := awsRestjson1_deserializeDocumentImageTestsConfiguration(&sv.ImageTestsConfiguration, value); err != nil {
 				return err
@@ -12684,6 +12729,15 @@ func awsRestjson1_deserializeDocumentImageSummary(v **types.ImageSummary, value 
 				sv.DateCreated = ptr.String(jtv)
 			}
 
+		case "imageSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageSource to be of type string, got %T instead", value)
+				}
+				sv.ImageSource = types.ImageSource(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12896,6 +12950,15 @@ func awsRestjson1_deserializeDocumentImageVersion(v **types.ImageVersion, value 
 					return fmt.Errorf("expected DateTime to be of type string, got %T instead", value)
 				}
 				sv.DateCreated = ptr.String(jtv)
+			}
+
+		case "imageSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageSource to be of type string, got %T instead", value)
+				}
+				sv.ImageSource = types.ImageSource(jtv)
 			}
 
 		case "name":
