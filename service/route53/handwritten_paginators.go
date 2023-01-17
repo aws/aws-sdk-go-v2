@@ -6,6 +6,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
+// ListResourceRecordSetsAPIClient is a client that implements the ListResourceRecordSets
+// operation
 type ListResourceRecordSetsAPIClient interface {
 	ListResourceRecordSets(context.Context, *ListResourceRecordSetsInput, ...func(*Options)) (*ListResourceRecordSetsOutput, error)
 }
