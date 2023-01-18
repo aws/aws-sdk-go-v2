@@ -90,6 +90,10 @@ type Credentials struct {
 	// The time the credentials will expire at. Should be ignored if CanExpire
 	// is false.
 	Expires time.Time
+
+	// The time the credentials will really expire. Should be ignored if CanExpire
+	// is false.
+	RealExpiration time.Time
 }
 
 // Expired returns if the credentials have expired.

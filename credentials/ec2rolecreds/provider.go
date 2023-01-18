@@ -92,8 +92,9 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		SessionToken:    roleCreds.Token,
 		Source:          ProviderName,
 
-		CanExpire: true,
-		Expires:   roleCreds.Expiration,
+		CanExpire:      true,
+		Expires:        roleCreds.Expiration,
+		RealExpiration: roleCreds.Expiration,
 	}
 
 	// Cap role credentials Expires to 1 hour so they can be refreshed more

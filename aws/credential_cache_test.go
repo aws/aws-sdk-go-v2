@@ -222,7 +222,7 @@ func TestCredentialsCache_AsyncRefresh(t *testing.T) {
 		Called int32
 	}{
 		{
-			Called: 6,
+			Called: 2,
 			Creds: func() Credentials {
 				return Credentials{
 					AccessKeyID:     "key",
@@ -241,96 +241,31 @@ func TestCredentialsCache_AsyncRefresh(t *testing.T) {
 			return c.Creds(), nil
 		}), func(options *CredentialsCacheOptions) {
 			options.EnableAsyncRefresh = true
+			options.ExpiryWindow = 3
 		})
 
 		// first call - no async refresh - 1
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
-		// cached after call, async refresh - 2
+		// token valid no fetch
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
-		// cached after call, async refresh - 3
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-
-		mockTime = mockTime.Add(10)
-
-		// expired - refresh - 4
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-		// cached after call, async refresh - 5
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-		// cached after call, async refresh - 6
+		// token valid no fetch
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
-		if e, a := c.Called, called; e != a {
-			t.Errorf("expect %v called, got %v", e, a)
-		}
-	}
-}
+		mockTime = mockTime.Add(4)
 
-func TestCredentialsCache_AsyncRefreshWithMinimumDelay(t *testing.T) {
-	orig := sdk.NowTime
-	defer func() { sdk.NowTime = orig }()
-	var mockTime time.Time
-	sdk.NowTime = func() time.Time { return mockTime }
-
-	cases := []struct {
-		Creds  func() Credentials
-		Called int32
-	}{
-		{
-			Called: 3,
-			Creds: func() Credentials {
-				return Credentials{
-					AccessKeyID:     "key",
-					SecretAccessKey: "secret",
-					CanExpire:       true,
-					Expires:         mockTime.Add(5),
-				}
-			},
-		},
-	}
-
-	for _, c := range cases {
-		var called int32
-		p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
-			atomic.AddInt32(&called, 1)
-			return c.Creds(), nil
-		}), func(options *CredentialsCacheOptions) {
-			options.EnableAsyncRefresh = true
-			options.AsyncRefreshMinimumDelay = 2
-		})
-
-		// first call - blocking refresh - 1
+		// within expiry window - async refresh - 2
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
-		// within minimum delay, no refresh should happen
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-		// within minimum delay, no refresh should happen
+		// token valid no fetch
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
-		mockTime = mockTime.Add(3)
-		// token still valid, async refresh as minimum delay passed - 2
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-		// within minimum delay, no refresh should happen
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
+		mockTime = mockTime.Add(1)
 
-		mockTime = mockTime.Add(10)
-
-		// token expired - blocking refresh - 3
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-		// within minimum delay, no refresh should happen
-		p.Retrieve(context.Background())
-		testWaitAsyncRefreshDone(p)
-		// within minimum delay, no refresh should happen
+		// token valid no fetch
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
