@@ -1,3 +1,13 @@
+# Release (2023-01-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.25.0](service/cloudwatch/CHANGELOG.md#v1250-2023-01-18)
+  * **Feature**: Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.19.1](service/efs/CHANGELOG.md#v1191-2023-01-18)
+  * **Documentation**: Documentation updates for EFS access points limit increase
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.24.2](service/wafv2/CHANGELOG.md#v1242-2023-01-18)
+  * **Documentation**: Improved the visibility of the guidance for updating AWS WAF resources, such as web ACLs and rule groups.
+
 # Release (2023-01-17)
 
 ## Module Highlights

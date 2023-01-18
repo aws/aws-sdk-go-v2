@@ -1,8 +1,0 @@
-{
-    "id": "9878546c-b184-4916-9c94-98d0ea374665",
-    "type": "feature",
-    "description": "Updates the range for a Chat Room's maximumMessageRatePerSecond field.",
-    "modules": [
-        "service/ivschat"
-    ]
-}

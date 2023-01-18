@@ -1,3 +1,7 @@
+# v1.25.0 (2023-01-18)
+
+* **Feature**: Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.
+
 # v1.24.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
