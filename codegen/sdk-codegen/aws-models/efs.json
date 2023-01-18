@@ -321,7 +321,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an EFS access point. An access point is an application-specific view into an EFS\n      file system that applies an operating system user and group, and a file system path, to any\n      file system request made through the access point. The operating system user and group\n      override any identity information provided by the NFS client. The file system path is exposed\n      as the access point's root directory. Applications using the access point can only access data in\n      the application's own directory and any subdirectories. To learn more, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Mounting a file system using EFS access\n        points</a>.</p>\n         <note>\n            <p>If multiple requests to create access points on the same file system are sent in quick succession, and the file system is\n      near the limit of 120 access points, you may experience a throttling response for these requests. This \n      is to ensure that the file system does not exceed the stated access point limit.</p>\n         </note>\n         <p>This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.</p>",
+                "smithy.api#documentation": "<p>Creates an EFS access point. An access point is an application-specific view into an EFS\n      file system that applies an operating system user and group, and a file system path, to any\n      file system request made through the access point. The operating system user and group\n      override any identity information provided by the NFS client. The file system path is exposed\n      as the access point's root directory. Applications using the access point can only access data in\n      the application's own directory and any subdirectories. To learn more, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Mounting a file system using EFS access\n        points</a>.</p>\n         <note>\n            <p>If multiple requests to create access points on the same file system are sent in quick\n        succession, and the file system is near the limit of 1000 access points, you may experience\n        a throttling response for these requests. This is to ensure that the file system does not\n        exceed the stated access point limit.</p>\n         </note>\n         <p>This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/access-points",
@@ -399,7 +399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new, empty file system. The operation requires a creation token in the\n      request that Amazon EFS uses to ensure idempotent creation (calling the operation with same\n      creation token has no effect). If a file system does not currently exist that is owned by the\n      caller's Amazon Web Services account with the specified creation token, this operation does the\n      following:</p>\n         <ul>\n            <li>\n               <p>Creates a new, empty file system. The file system will have an Amazon EFS assigned\n          ID, and an initial lifecycle state <code>creating</code>.</p>\n            </li>\n            <li>\n               <p>Returns with the description of the created file system.</p>\n            </li>\n         </ul>\n         <p>Otherwise, this operation returns a <code>FileSystemAlreadyExists</code> error with the\n      ID of the existing file system.</p>\n         <note>\n            <p>For basic use cases, you can use a randomly generated UUID for the creation\n        token.</p>\n         </note>\n         <p> The idempotent operation allows you to retry a <code>CreateFileSystem</code> call without\n      risk of creating an extra file system. This can happen when an initial call fails in a way\n      that leaves it uncertain whether or not a file system was actually created. An example might\n      be that a transport level timeout occurred or your connection was reset. As long as you use\n      the same creation token, if the initial call had succeeded in creating a file system, the\n      client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p>\n         <p>For more information, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1\">Creating a file system</a>\n     in the <i>Amazon EFS User Guide</i>.</p>\n\n         <note>\n            <p>The <code>CreateFileSystem</code> call returns while the file system's lifecycle\n        state is still <code>creating</code>. You can check the file system creation status by\n        calling the <a>DescribeFileSystems</a> operation, which among other things returns the file\n        system state.</p>\n         </note>\n\n         <p>This operation accepts an optional <code>PerformanceMode</code> parameter that you\n      choose for your file system. We recommend <code>generalPurpose</code> performance mode for\n      most file systems. File systems using the <code>maxIO</code> performance mode can scale to\n      higher levels of aggregate throughput and operations per second with a tradeoff of slightly\n      higher latencies for most file operations. The performance mode can't be changed after\n      the file system has been created. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html\">Amazon EFS performance\n        modes</a>.</p>\n    \n         <p>You can set the throughput mode for the file system using the <code>ThroughputMode</code> parameter.</p>\n\n         <p>After the file system is fully created, Amazon EFS sets its lifecycle state to\n        <code>available</code>, at which point you can create one or more mount targets for the file\n      system in your VPC. For more information, see <a>CreateMountTarget</a>. You mount your Amazon EFS file system on an EC2 instances in\n      your VPC by using the mount target. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:CreateFileSystem</code> action. </p>",
+                "smithy.api#documentation": "<p>Creates a new, empty file system. The operation requires a creation token in the\n      request that Amazon EFS uses to ensure idempotent creation (calling the operation with same\n      creation token has no effect). If a file system does not currently exist that is owned by the\n      caller's Amazon Web Services account with the specified creation token, this operation does the\n      following:</p>\n         <ul>\n            <li>\n               <p>Creates a new, empty file system. The file system will have an Amazon EFS assigned\n          ID, and an initial lifecycle state <code>creating</code>.</p>\n            </li>\n            <li>\n               <p>Returns with the description of the created file system.</p>\n            </li>\n         </ul>\n         <p>Otherwise, this operation returns a <code>FileSystemAlreadyExists</code> error with the\n      ID of the existing file system.</p>\n         <note>\n            <p>For basic use cases, you can use a randomly generated UUID for the creation\n        token.</p>\n         </note>\n         <p> The idempotent operation allows you to retry a <code>CreateFileSystem</code> call without\n      risk of creating an extra file system. This can happen when an initial call fails in a way\n      that leaves it uncertain whether or not a file system was actually created. An example might\n      be that a transport level timeout occurred or your connection was reset. As long as you use\n      the same creation token, if the initial call had succeeded in creating a file system, the\n      client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p>\n         <p>For more information, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1\">Creating a file system</a>\n     in the <i>Amazon EFS User Guide</i>.</p>\n         <note>\n            <p>The <code>CreateFileSystem</code> call returns while the file system's lifecycle\n        state is still <code>creating</code>. You can check the file system creation status by\n        calling the <a>DescribeFileSystems</a> operation, which among other things returns the file\n        system state.</p>\n         </note>\n         <p>This operation accepts an optional <code>PerformanceMode</code> parameter that you\n      choose for your file system. We recommend <code>generalPurpose</code> performance mode for\n      most file systems. File systems using the <code>maxIO</code> performance mode can scale to\n      higher levels of aggregate throughput and operations per second with a tradeoff of slightly\n      higher latencies for most file operations. The performance mode can't be changed after\n      the file system has been created. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html\">Amazon EFS performance\n        modes</a>.</p>\n         <p>You can set the throughput mode for the file system using the <code>ThroughputMode</code> parameter.</p>\n         <p>After the file system is fully created, Amazon EFS sets its lifecycle state to\n        <code>available</code>, at which point you can create one or more mount targets for the file\n      system in your VPC. For more information, see <a>CreateMountTarget</a>. You mount your Amazon EFS file system on an EC2 instances in\n      your VPC by using the mount target. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:CreateFileSystem</code> action. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/file-systems",
@@ -518,7 +518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a mount target for a file system. You can then mount the file system on EC2\n      instances by using the mount target.</p>\n         <p>You can create one mount target in each Availability Zone in your VPC. All EC2\n      instances in a VPC within a given Availability Zone share a single mount target for a given\n      file system. If you have multiple subnets in an Availability Zone, you create a mount target\n      in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target\n      in order to access their file system.</p>\n         <p>You can create only one mount target for an EFS file system using One Zone storage\n      classes. You must create that mount target in the same Availability Zone in which the file\n      system is located. Use the <code>AvailabilityZoneName</code> and\n        <code>AvailabiltyZoneId</code> properties in the <a>DescribeFileSystems</a>\n      response object to get this information. Use the <code>subnetId</code> associated with the\n      file system's Availability Zone when creating the mount target.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n         <p>To create a mount target for a file system, the file system's lifecycle state must be\n        <code>available</code>. For more information, see <a>DescribeFileSystems</a>.</p>\n         <p>In the request, provide the following:</p>\n         <ul>\n            <li>\n               <p>The file system ID for which you are creating the mount\n        target.</p>\n            </li>\n            <li>\n               <p>A subnet ID, which determines the following:</p>\n               <ul>\n                  <li>\n                     <p>The VPC in which Amazon EFS creates the mount target</p>\n                  </li>\n                  <li>\n                     <p>The Availability Zone in which Amazon EFS creates the mount target</p>\n                  </li>\n                  <li>\n                     <p>The IP address range from which Amazon EFS selects the IP address of the mount target\n              (if you don't specify an IP address in the request)</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n         <p>After creating the mount target, Amazon EFS returns a response that includes, a\n        <code>MountTargetId</code> and an <code>IpAddress</code>. You use this IP address when\n      mounting the file system in an EC2 instance. You can also use the mount target's DNS name\n      when mounting the file system. The EC2 instance on which you mount the file system by using\n      the mount target can resolve the mount target's DNS name to its IP address. For more\n      information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation\">How it Works:\n        Implementation Overview</a>. </p>\n         <p>Note that you can create mount targets for a file system in only one VPC, and there can\n      be only one mount target per Availability Zone. That is, if the file system already has one or\n      more mount targets created for it, the subnet specified in the request to add another mount\n      target must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Must belong to the same VPC as the subnets of the existing mount targets</p>\n            </li>\n            <li>\n               <p>Must not be in the same Availability Zone as any of the subnets of the existing\n          mount targets</p>\n            </li>\n         </ul>\n\n         <p>If the request satisfies the requirements, Amazon EFS does the following:</p>\n         <ul>\n            <li>\n               <p>Creates a new mount target in the specified subnet.</p>\n            </li>\n            <li>\n               <p>Also creates a new network interface in the subnet as follows:</p>\n               <ul>\n                  <li>\n                     <p>If the request provides an <code>IpAddress</code>, Amazon EFS assigns that IP\n              address to the network interface. Otherwise, Amazon EFS assigns a free address in the\n              subnet (in the same way that the Amazon EC2 <code>CreateNetworkInterface</code> call\n              does when a request does not specify a primary private IP address).</p>\n                  </li>\n                  <li>\n                     <p>If the request provides <code>SecurityGroups</code>, this network interface is\n              associated with those security groups. Otherwise, it belongs to the default security\n              group for the subnet's VPC.</p>\n                  </li>\n                  <li>\n                     <p>Assigns the description <code>Mount target <i>fsmt-id</i> for\n                file system <i>fs-id</i>\n                        </code> where <code>\n                           <i>fsmt-id</i>\n                        </code> is the mount target ID, and <code>\n                           <i>fs-id</i>\n                        </code> is the <code>FileSystemId</code>.</p>\n                  </li>\n                  <li>\n                     <p>Sets the <code>requesterManaged</code> property of the network interface to\n                <code>true</code>, and the <code>requesterId</code> value to\n              <code>EFS</code>.</p>\n                  </li>\n               </ul>\n               <p>Each Amazon EFS mount target has one corresponding requester-managed EC2 network\n          interface. After the network interface is created, Amazon EFS sets the\n            <code>NetworkInterfaceId</code> field in the mount target's description to the\n          network interface ID, and the <code>IpAddress</code> field to its address. If network\n          interface creation fails, the entire <code>CreateMountTarget</code> operation\n          fails.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>CreateMountTarget</code> call returns only after creating the network\n        interface, but while the mount target state is still <code>creating</code>, you can check\n        the mount target creation status by calling the <a>DescribeMountTargets</a> operation, which among other things returns the mount\n        target state.</p>\n         </note>\n         <p>We recommend that you create a mount target in each of the Availability Zones. There\n      are cost considerations for using a file system in an Availability Zone through a mount target\n      created in another Availability Zone. For more information, see <a href=\"http://aws.amazon.com/efs/\">Amazon EFS</a>. In addition, by always using a mount target local to the\n      instance's Availability Zone, you eliminate a partial failure scenario. If the\n      Availability Zone in which your mount target is created goes down, then you can't access\n      your file system through that mount target. </p>\n         <p>This operation requires permissions for the following action on the file\n      system:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elasticfilesystem:CreateMountTarget</code>\n               </p>\n            </li>\n         </ul>\n         <p>This operation also requires permissions for the following Amazon EC2\n      actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a mount target for a file system. You can then mount the file system on EC2\n      instances by using the mount target.</p>\n         <p>You can create one mount target in each Availability Zone in your VPC. All EC2\n      instances in a VPC within a given Availability Zone share a single mount target for a given\n      file system. If you have multiple subnets in an Availability Zone, you create a mount target\n      in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target\n      in order to access their file system.</p>\n         <p>You can create only one mount target for an EFS file system using One Zone storage\n      classes. You must create that mount target in the same Availability Zone in which the file\n      system is located. Use the <code>AvailabilityZoneName</code> and\n        <code>AvailabiltyZoneId</code> properties in the <a>DescribeFileSystems</a>\n      response object to get this information. Use the <code>subnetId</code> associated with the\n      file system's Availability Zone when creating the mount target.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n         <p>To create a mount target for a file system, the file system's lifecycle state must be\n        <code>available</code>. For more information, see <a>DescribeFileSystems</a>.</p>\n         <p>In the request, provide the following:</p>\n         <ul>\n            <li>\n               <p>The file system ID for which you are creating the mount\n        target.</p>\n            </li>\n            <li>\n               <p>A subnet ID, which determines the following:</p>\n               <ul>\n                  <li>\n                     <p>The VPC in which Amazon EFS creates the mount target</p>\n                  </li>\n                  <li>\n                     <p>The Availability Zone in which Amazon EFS creates the mount target</p>\n                  </li>\n                  <li>\n                     <p>The IP address range from which Amazon EFS selects the IP address of the mount target\n              (if you don't specify an IP address in the request)</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>After creating the mount target, Amazon EFS returns a response that includes, a\n        <code>MountTargetId</code> and an <code>IpAddress</code>. You use this IP address when\n      mounting the file system in an EC2 instance. You can also use the mount target's DNS name\n      when mounting the file system. The EC2 instance on which you mount the file system by using\n      the mount target can resolve the mount target's DNS name to its IP address. For more\n      information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation\">How it Works:\n        Implementation Overview</a>. </p>\n         <p>Note that you can create mount targets for a file system in only one VPC, and there can\n      be only one mount target per Availability Zone. That is, if the file system already has one or\n      more mount targets created for it, the subnet specified in the request to add another mount\n      target must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Must belong to the same VPC as the subnets of the existing mount targets</p>\n            </li>\n            <li>\n               <p>Must not be in the same Availability Zone as any of the subnets of the existing\n          mount targets</p>\n            </li>\n         </ul>\n         <p>If the request satisfies the requirements, Amazon EFS does the following:</p>\n         <ul>\n            <li>\n               <p>Creates a new mount target in the specified subnet.</p>\n            </li>\n            <li>\n               <p>Also creates a new network interface in the subnet as follows:</p>\n               <ul>\n                  <li>\n                     <p>If the request provides an <code>IpAddress</code>, Amazon EFS assigns that IP\n              address to the network interface. Otherwise, Amazon EFS assigns a free address in the\n              subnet (in the same way that the Amazon EC2 <code>CreateNetworkInterface</code> call\n              does when a request does not specify a primary private IP address).</p>\n                  </li>\n                  <li>\n                     <p>If the request provides <code>SecurityGroups</code>, this network interface is\n              associated with those security groups. Otherwise, it belongs to the default security\n              group for the subnet's VPC.</p>\n                  </li>\n                  <li>\n                     <p>Assigns the description <code>Mount target <i>fsmt-id</i> for\n                file system <i>fs-id</i>\n                        </code> where <code>\n                           <i>fsmt-id</i>\n                        </code> is the mount target ID, and <code>\n                           <i>fs-id</i>\n                        </code> is the <code>FileSystemId</code>.</p>\n                  </li>\n                  <li>\n                     <p>Sets the <code>requesterManaged</code> property of the network interface to\n                <code>true</code>, and the <code>requesterId</code> value to\n              <code>EFS</code>.</p>\n                  </li>\n               </ul>\n               <p>Each Amazon EFS mount target has one corresponding requester-managed EC2 network\n          interface. After the network interface is created, Amazon EFS sets the\n            <code>NetworkInterfaceId</code> field in the mount target's description to the\n          network interface ID, and the <code>IpAddress</code> field to its address. If network\n          interface creation fails, the entire <code>CreateMountTarget</code> operation\n          fails.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>CreateMountTarget</code> call returns only after creating the network\n        interface, but while the mount target state is still <code>creating</code>, you can check\n        the mount target creation status by calling the <a>DescribeMountTargets</a> operation, which among other things returns the mount\n        target state.</p>\n         </note>\n         <p>We recommend that you create a mount target in each of the Availability Zones. There\n      are cost considerations for using a file system in an Availability Zone through a mount target\n      created in another Availability Zone. For more information, see <a href=\"http://aws.amazon.com/efs/\">Amazon EFS</a>. In addition, by always using a mount target local to the\n      instance's Availability Zone, you eliminate a partial failure scenario. If the\n      Availability Zone in which your mount target is created goes down, then you can't access\n      your file system through that mount target. </p>\n         <p>This operation requires permissions for the following action on the file\n      system:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elasticfilesystem:CreateMountTarget</code>\n               </p>\n            </li>\n         </ul>\n         <p>This operation also requires permissions for the following Amazon EC2\n      actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/mount-targets",
@@ -601,7 +601,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a replication configuration that replicates an existing EFS file system to a new,\n      read-only file system. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a> in the\n          <i>Amazon EFS User Guide</i>. The replication configuration\n      specifies the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Source file system</b> - An existing EFS file system that you\n          want replicated. The source file system cannot be a destination file system in an existing\n          replication configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Destination file system configuration</b> - The configuration of\n          the destination file system to which the source file system will be replicated. There can\n          only be one destination file system in a replication configuration. The destination file\n          system configuration consists of the following properties:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Amazon Web Services Region</b> - The Amazon Web Services Region in\n              which the destination file system is created. Amazon EFS replication is\n              available in all Amazon Web Services Regions that Amazon EFS is available in,\n              except Africa (Cape Town), Asia Pacific (Hong Kong), Asia Pacific (Jakarta), Europe\n              (Milan), and Middle East (Bahrain).</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Availability Zone</b> - If you want the destination file system\n              to use EFS One Zone availability and durability, you must specify the Availability\n              Zone to create the file system in. For more information about EFS storage classes, see\n                <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">\n                Amazon EFS storage classes</a> in the <i>Amazon EFS User\n                Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Encryption</b> - All destination file systems are created with\n              encryption at rest enabled. You can specify the Key Management Service (KMS) key that is used to encrypt the destination file system. If you don't\n              specify a KMS key, your service-managed KMS key for\n                Amazon EFS is used.  </p>\n                     <note>\n                        <p>After the file system is created, you cannot change the KMS key.</p>\n                     </note>\n                  </li>\n               </ul>       \n            </li>\n         </ul>\n    \n         <p>The following properties are set by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Performance mode</b> - The destination file system's performance\n          mode matches that of the source file system, unless the destination file system uses EFS\n          One Zone storage. In that case, the General Purpose performance mode is used. The\n          performance mode cannot be changed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Throughput mode</b> - The destination file system uses the\n          Bursting Throughput mode by default. After the file system is created, you can modify the\n          throughput mode.</p>\n            </li>\n         </ul>\n    \n         <p>The following properties are turned off by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Lifecycle management</b> - EFS lifecycle management and EFS\n          Intelligent-Tiering are not enabled on the destination file system. After the destination\n          file system is created, you can enable EFS lifecycle management and EFS\n          Intelligent-Tiering.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automatic backups</b> - Automatic daily backups not enabled on\n          the destination file system. After the file system is created, you can change this\n          setting.</p>\n            </li>\n         </ul>\n    \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a> in the\n          <i>Amazon EFS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a replication configuration that replicates an existing EFS file system to a new,\n      read-only file system. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a> in the\n          <i>Amazon EFS User Guide</i>. The replication configuration\n      specifies the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Source file system</b> - An existing EFS file system that you\n          want replicated. The source file system cannot be a destination file system in an existing\n          replication configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Destination file system configuration</b> - The configuration of\n          the destination file system to which the source file system will be replicated. There can\n          only be one destination file system in a replication configuration. The destination file\n          system configuration consists of the following properties:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Amazon Web Services Region</b> - The Amazon Web Services Region in\n              which the destination file system is created. Amazon EFS replication is\n              available in all Amazon Web Services Regions that Amazon EFS is available in,\n              except Africa (Cape Town), Asia Pacific (Hong Kong), Asia Pacific (Jakarta), Europe\n              (Milan), and Middle East (Bahrain).</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Availability Zone</b> - If you want the destination file system\n              to use EFS One Zone availability and durability, you must specify the Availability\n              Zone to create the file system in. For more information about EFS storage classes, see\n                <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">\n                Amazon EFS storage classes</a> in the <i>Amazon EFS User\n                Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Encryption</b> - All destination file systems are created with\n              encryption at rest enabled. You can specify the Key Management Service (KMS) key that is used to encrypt the destination file system. If you don't\n              specify a KMS key, your service-managed KMS key for\n                Amazon EFS is used.  </p>\n                     <note>\n                        <p>After the file system is created, you cannot change the KMS key.</p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following properties are set by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Performance mode</b> - The destination file system's performance\n          mode matches that of the source file system, unless the destination file system uses EFS\n          One Zone storage. In that case, the General Purpose performance mode is used. The\n          performance mode cannot be changed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Throughput mode</b> - The destination file system uses the\n          Bursting Throughput mode by default. After the file system is created, you can modify the\n          throughput mode.</p>\n            </li>\n         </ul>\n         <p>The following properties are turned off by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Lifecycle management</b> - EFS lifecycle management and EFS\n          Intelligent-Tiering are not enabled on the destination file system. After the destination\n          file system is created, you can enable EFS lifecycle management and EFS\n          Intelligent-Tiering.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automatic backups</b> - Automatic daily backups not enabled on\n          the destination file system. After the file system is created, you can change this\n          setting.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a> in the\n          <i>Amazon EFS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/file-systems/{SourceFileSystemId}/replication-configuration",
@@ -786,7 +786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a file system, permanently severing access to its contents. Upon return, the\n      file system no longer exists and you can't access any contents of the deleted file\n      system.</p>\n         <p>You need to manually delete mount targets attached to a file system before you can delete\n    an EFS file system. This step is performed for you when you use the Amazon Web Services console \n    to delete a file system.</p>\n         <note>\n            <p>You cannot delete a file system that is part of an EFS Replication configuration. \n      You need to delete the replication configuration first.</p>\n         </note>\n         <p> You can't delete a file system that is in use. That is, if the file system has\n      any mount targets, you must first delete them. For more information, see <a>DescribeMountTargets</a> and <a>DeleteMountTarget</a>. </p>\n\n         <note>\n            <p>The <code>DeleteFileSystem</code> call returns while the file system state is still\n          <code>deleting</code>. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> operation, which returns a list of file systems in your\n        account. If you pass file system ID or creation token for the deleted file system, the <a>DescribeFileSystems</a> returns a <code>404 FileSystemNotFound</code>\n        error.</p>\n         </note>\n\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DeleteFileSystem</code> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a file system, permanently severing access to its contents. Upon return, the\n      file system no longer exists and you can't access any contents of the deleted file\n      system.</p>\n         <p>You need to manually delete mount targets attached to a file system before you can delete\n    an EFS file system. This step is performed for you when you use the Amazon Web Services console \n    to delete a file system.</p>\n         <note>\n            <p>You cannot delete a file system that is part of an EFS Replication configuration. \n      You need to delete the replication configuration first.</p>\n         </note>\n         <p> You can't delete a file system that is in use. That is, if the file system has\n      any mount targets, you must first delete them. For more information, see <a>DescribeMountTargets</a> and <a>DeleteMountTarget</a>. </p>\n         <note>\n            <p>The <code>DeleteFileSystem</code> call returns while the file system state is still\n          <code>deleting</code>. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> operation, which returns a list of file systems in your\n        account. If you pass file system ID or creation token for the deleted file system, the <a>DescribeFileSystems</a> returns a <code>404 FileSystemNotFound</code>\n        error.</p>\n         </note>\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DeleteFileSystem</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-02-01/file-systems/{FileSystemId}",
@@ -877,7 +877,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified mount target.</p>\n\n         <p>This operation forcibly breaks any mounts of the file system by using the mount target\n      that is being deleted, which might disrupt instances or applications using those mounts. To\n      avoid applications getting cut off abruptly, you might consider unmounting any mounts of the\n      mount target, if feasible. The operation also deletes the associated network interface.\n      Uncommitted writes might be lost, but breaking a mount target using this operation does not\n      corrupt the file system itself. The file system you created remains. You can mount an EC2\n      instance in your VPC by using another mount target.</p>\n         <p>This operation requires permissions for the following action on the file\n      system:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elasticfilesystem:DeleteMountTarget</code>\n               </p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>DeleteMountTarget</code> call returns while the mount target state is still\n          <code>deleting</code>. You can check the mount target deletion by calling the <a>DescribeMountTargets</a> operation, which returns a list of mount target\n        descriptions for the given file system. </p>\n         </note>\n\n         <p>The operation also requires permissions for the following Amazon EC2 action on the\n      mount target's network interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes the specified mount target.</p>\n         <p>This operation forcibly breaks any mounts of the file system by using the mount target\n      that is being deleted, which might disrupt instances or applications using those mounts. To\n      avoid applications getting cut off abruptly, you might consider unmounting any mounts of the\n      mount target, if feasible. The operation also deletes the associated network interface.\n      Uncommitted writes might be lost, but breaking a mount target using this operation does not\n      corrupt the file system itself. The file system you created remains. You can mount an EC2\n      instance in your VPC by using another mount target.</p>\n         <p>This operation requires permissions for the following action on the file\n      system:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elasticfilesystem:DeleteMountTarget</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>DeleteMountTarget</code> call returns while the mount target state is still\n          <code>deleting</code>. You can check the mount target deletion by calling the <a>DescribeMountTargets</a> operation, which returns a list of mount target\n        descriptions for the given file system. </p>\n         </note>\n         <p>The operation also requires permissions for the following Amazon EC2 action on the\n      mount target's network interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-02-01/mount-targets/{MountTargetId}",
@@ -968,7 +968,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use UntagResource."
                 },
-                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - <code>DeleteTags</code> is deprecated and not maintained. To remove tags from EFS\n        resources, use the  API action.</p>\n         </note>\n         <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request\n      includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an\n      error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag restrictions</a> in the\n        <i>Billing and Cost Management User Guide</i>.</p>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code>\n      action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - <code>DeleteTags</code> is deprecated and not maintained. To remove tags from EFS\n        resources, use the  API action.</p>\n         </note>\n         <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request\n      includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an\n      error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag restrictions</a> in the\n        <i>Billing and Cost Management User Guide</i>.</p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code>\n      action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/delete-tags/{FileSystemId}",
@@ -1271,7 +1271,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the description of a specific Amazon EFS file system if either the file system\n        <code>CreationToken</code> or the <code>FileSystemId</code> is provided. Otherwise, it\n      returns descriptions of all file systems owned by the caller's Amazon Web Services account in the \n      Amazon Web Services Region of the endpoint that you're calling.</p>\n\n         <p>When retrieving all file system descriptions, you can optionally specify the\n        <code>MaxItems</code> parameter to limit the number of descriptions in a response.\n      Currently, this number is automatically set to 10. If more file system descriptions remain,\n      Amazon EFS returns a <code>NextMarker</code>, an opaque token, in the response. In this case,\n      you should send a subsequent request with the <code>Marker</code> request parameter set to the\n      value of <code>NextMarker</code>. </p>\n\n         <p>To retrieve a list of your file system descriptions, this operation is used in an\n      iterative process, where <code>DescribeFileSystems</code> is called first without the\n        <code>Marker</code> and then the operation continues to call it with the <code>Marker</code>\n      parameter set to the value of the <code>NextMarker</code> from the previous response until the\n      response has no <code>NextMarker</code>. </p>\n    \n         <p> The order of file systems returned in the response of one\n        <code>DescribeFileSystems</code> call and the order of file systems returned across the\n      responses of a multi-call iteration is unspecified. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:DescribeFileSystems</code> action. </p>",
+                "smithy.api#documentation": "<p>Returns the description of a specific Amazon EFS file system if either the file system\n        <code>CreationToken</code> or the <code>FileSystemId</code> is provided. Otherwise, it\n      returns descriptions of all file systems owned by the caller's Amazon Web Services account in the \n      Amazon Web Services Region of the endpoint that you're calling.</p>\n         <p>When retrieving all file system descriptions, you can optionally specify the\n        <code>MaxItems</code> parameter to limit the number of descriptions in a response.\n      This number is automatically set to 100. If more file system descriptions remain,\n      Amazon EFS returns a <code>NextMarker</code>, an opaque token, in the response. In this case,\n      you should send a subsequent request with the <code>Marker</code> request parameter set to the\n      value of <code>NextMarker</code>. </p>\n         <p>To retrieve a list of your file system descriptions, this operation is used in an\n      iterative process, where <code>DescribeFileSystems</code> is called first without the\n        <code>Marker</code> and then the operation continues to call it with the <code>Marker</code>\n      parameter set to the value of the <code>NextMarker</code> from the previous response until the\n      response has no <code>NextMarker</code>. </p>\n         <p> The order of file systems returned in the response of one\n        <code>DescribeFileSystems</code> call and the order of file systems returned across the\n      responses of a multi-call iteration is unspecified. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:DescribeFileSystems</code> action. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-02-01/file-systems",
@@ -1469,7 +1469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the descriptions of all the current mount targets, or a specific mount target,\n      for a file system. When requesting all of the current mount targets, the order of mount\n      targets returned in the response is unspecified.</p>\n\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DescribeMountTargets</code> action, on either the file system ID\n      that you specify in <code>FileSystemId</code>, or on the file system of the mount target that\n      you specify in <code>MountTargetId</code>.</p>",
+                "smithy.api#documentation": "<p>Returns the descriptions of all the current mount targets, or a specific mount target,\n      for a file system. When requesting all of the current mount targets, the order of mount\n      targets returned in the response is unspecified.</p>\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DescribeMountTargets</code> action, on either the file system ID\n      that you specify in <code>FileSystemId</code>, or on the file system of the mount target that\n      you specify in <code>MountTargetId</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-02-01/mount-targets",
@@ -2825,8 +2825,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-south-1"
                             }
                         },
@@ -2838,8 +2838,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-south-1"
                             }
                         },
@@ -2851,8 +2851,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-south-1"
                             }
                         },
@@ -2864,8 +2864,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-south-1"
                             }
                         },
@@ -2877,8 +2877,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-south-1"
                             }
                         },
@@ -2890,8 +2890,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-south-1"
                             }
                         },
@@ -2903,8 +2903,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-south-1"
                             }
                         },
@@ -2916,8 +2916,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-south-1"
                             }
                         },
@@ -2929,8 +2929,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-south-2"
                             }
                         },
@@ -2942,8 +2942,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-south-2"
                             }
                         },
@@ -2955,8 +2955,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-south-2"
                             }
                         },
@@ -2968,8 +2968,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-south-2"
                             }
                         },
@@ -2981,8 +2981,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -2994,8 +2994,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -3007,8 +3007,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -3020,8 +3020,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -3033,8 +3033,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "me-central-1"
                             }
                         },
@@ -3046,8 +3046,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "me-central-1"
                             }
                         },
@@ -3059,8 +3059,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "me-central-1"
                             }
                         },
@@ -3072,8 +3072,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "me-central-1"
                             }
                         },
@@ -3085,8 +3085,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ca-central-1"
                             }
                         },
@@ -3098,8 +3098,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ca-central-1"
                             }
                         },
@@ -3111,8 +3111,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ca-central-1"
                             }
                         },
@@ -3124,8 +3124,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ca-central-1"
                             }
                         },
@@ -3137,8 +3137,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-central-1"
                             }
                         },
@@ -3150,8 +3150,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-central-1"
                             }
                         },
@@ -3163,8 +3163,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-central-1"
                             }
                         },
@@ -3176,8 +3176,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-central-1"
                             }
                         },
@@ -3187,8 +3187,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-iso-west-1"
                             }
                         },
@@ -3200,8 +3200,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-iso-west-1"
                             }
                         },
@@ -3211,8 +3211,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-iso-west-1"
                             }
                         },
@@ -3224,8 +3224,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-iso-west-1"
                             }
                         },
@@ -3237,8 +3237,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-central-2"
                             }
                         },
@@ -3250,8 +3250,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-central-2"
                             }
                         },
@@ -3263,8 +3263,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-central-2"
                             }
                         },
@@ -3276,8 +3276,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-central-2"
                             }
                         },
@@ -3289,8 +3289,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-west-1"
                             }
                         },
@@ -3302,8 +3302,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-west-1"
                             }
                         },
@@ -3315,8 +3315,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-west-1"
                             }
                         },
@@ -3328,8 +3328,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-west-1"
                             }
                         },
@@ -3341,8 +3341,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-west-2"
                             }
                         },
@@ -3354,8 +3354,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-west-2"
                             }
                         },
@@ -3367,8 +3367,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-west-2"
                             }
                         },
@@ -3380,8 +3380,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-west-2"
                             }
                         },
@@ -3393,8 +3393,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "af-south-1"
                             }
                         },
@@ -3406,8 +3406,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "af-south-1"
                             }
                         },
@@ -3419,8 +3419,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "af-south-1"
                             }
                         },
@@ -3432,8 +3432,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "af-south-1"
                             }
                         },
@@ -3445,8 +3445,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-north-1"
                             }
                         },
@@ -3458,8 +3458,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-north-1"
                             }
                         },
@@ -3471,8 +3471,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-north-1"
                             }
                         },
@@ -3484,8 +3484,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-north-1"
                             }
                         },
@@ -3497,8 +3497,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-west-3"
                             }
                         },
@@ -3510,8 +3510,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-west-3"
                             }
                         },
@@ -3523,8 +3523,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-west-3"
                             }
                         },
@@ -3536,8 +3536,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-west-3"
                             }
                         },
@@ -3549,8 +3549,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-west-2"
                             }
                         },
@@ -3562,8 +3562,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-west-2"
                             }
                         },
@@ -3575,8 +3575,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-west-2"
                             }
                         },
@@ -3588,8 +3588,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-west-2"
                             }
                         },
@@ -3601,8 +3601,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "eu-west-1"
                             }
                         },
@@ -3614,8 +3614,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "eu-west-1"
                             }
                         },
@@ -3627,8 +3627,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "eu-west-1"
                             }
                         },
@@ -3640,8 +3640,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "eu-west-1"
                             }
                         },
@@ -3653,8 +3653,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-northeast-3"
                             }
                         },
@@ -3666,8 +3666,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-northeast-3"
                             }
                         },
@@ -3679,8 +3679,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-3"
                             }
                         },
@@ -3692,8 +3692,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-3"
                             }
                         },
@@ -3705,8 +3705,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-northeast-2"
                             }
                         },
@@ -3718,8 +3718,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-northeast-2"
                             }
                         },
@@ -3731,8 +3731,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-2"
                             }
                         },
@@ -3744,8 +3744,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-2"
                             }
                         },
@@ -3757,8 +3757,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-northeast-1"
                             }
                         },
@@ -3770,8 +3770,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-northeast-1"
                             }
                         },
@@ -3783,8 +3783,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-1"
                             }
                         },
@@ -3796,8 +3796,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-1"
                             }
                         },
@@ -3809,8 +3809,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "me-south-1"
                             }
                         },
@@ -3822,8 +3822,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "me-south-1"
                             }
                         },
@@ -3835,8 +3835,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "me-south-1"
                             }
                         },
@@ -3848,8 +3848,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "me-south-1"
                             }
                         },
@@ -3861,8 +3861,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "sa-east-1"
                             }
                         },
@@ -3874,8 +3874,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "sa-east-1"
                             }
                         },
@@ -3887,8 +3887,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "sa-east-1"
                             }
                         },
@@ -3900,8 +3900,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "sa-east-1"
                             }
                         },
@@ -3913,8 +3913,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-east-1"
                             }
                         },
@@ -3926,8 +3926,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-east-1"
                             }
                         },
@@ -3939,8 +3939,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-east-1"
                             }
                         },
@@ -3952,8 +3952,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-east-1"
                             }
                         },
@@ -3965,8 +3965,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -3978,8 +3978,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -3991,8 +3991,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -4004,8 +4004,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -4017,8 +4017,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-gov-west-1"
                             }
                         },
@@ -4030,8 +4030,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-gov-west-1"
                             }
                         },
@@ -4043,8 +4043,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-gov-west-1"
                             }
                         },
@@ -4056,8 +4056,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-gov-west-1"
                             }
                         },
@@ -4069,8 +4069,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-southeast-1"
                             }
                         },
@@ -4082,8 +4082,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-southeast-1"
                             }
                         },
@@ -4095,8 +4095,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-1"
                             }
                         },
@@ -4108,8 +4108,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-1"
                             }
                         },
@@ -4121,8 +4121,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-southeast-2"
                             }
                         },
@@ -4134,8 +4134,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-southeast-2"
                             }
                         },
@@ -4147,8 +4147,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-2"
                             }
                         },
@@ -4160,8 +4160,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-2"
                             }
                         },
@@ -4171,8 +4171,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4184,8 +4184,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4195,8 +4195,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4208,8 +4208,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4221,8 +4221,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "ap-southeast-3"
                             }
                         },
@@ -4234,8 +4234,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "ap-southeast-3"
                             }
                         },
@@ -4247,8 +4247,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-3"
                             }
                         },
@@ -4260,8 +4260,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-3"
                             }
                         },
@@ -4273,8 +4273,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4286,8 +4286,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4299,8 +4299,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4312,8 +4312,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4325,8 +4325,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-east-2"
                             }
                         },
@@ -4338,8 +4338,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-2"
                             }
                         },
@@ -4351,8 +4351,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-2"
                             }
                         },
@@ -4364,8 +4364,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-2"
                             }
                         },
@@ -4377,8 +4377,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "cn-northwest-1"
                             }
                         },
@@ -4390,8 +4390,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "cn-northwest-1"
                             }
                         },
@@ -4403,8 +4403,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "cn-northwest-1"
                             }
                         },
@@ -4416,8 +4416,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "cn-northwest-1"
                             }
                         },
@@ -4427,8 +4427,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4440,8 +4440,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4451,8 +4451,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4464,8 +4464,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4477,8 +4477,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -4489,8 +4489,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -4501,8 +4501,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -5077,7 +5077,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this action to manage EFS lifecycle management and EFS Intelligent-Tiering. A\n        <code>LifecycleConfiguration</code> consists of one or more <code>LifecyclePolicy</code>\n      objects that define the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>EFS Lifecycle management</b> - When Amazon EFS\n          automatically transitions files in a file system into the lower-cost EFS Infrequent Access\n          (IA) storage class.</p>\n               <p>To enable EFS Lifecycle management, set the value of <code>TransitionToIA</code> to one of the available options.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EFS Intelligent-Tiering</b> - When Amazon EFS\n          automatically transitions files from IA back into the file system's primary storage class\n          (EFS Standard or EFS One Zone Standard).</p>\n               <p>To enable EFS Intelligent-Tiering, set the value of\n            <code>TransitionToPrimaryStorageClass</code> to <code>AFTER_1_ACCESS</code>.</p>\n            </li>\n         </ul>\n    \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Lifecycle Management</a>.</p>      \n         <p>Each Amazon EFS file system supports one lifecycle configuration, which applies to\n      all files in the file system. If a <code>LifecycleConfiguration</code> object already exists\n      for the specified file system, a <code>PutLifecycleConfiguration</code> call modifies the\n      existing configuration. A <code>PutLifecycleConfiguration</code> call with an empty\n        <code>LifecyclePolicies</code> array in the request body deletes any existing\n        <code>LifecycleConfiguration</code> and turns off lifecycle management and EFS\n      Intelligent-Tiering for the file system.</p>    \n         <p>In the request, specify the following: </p>\n         <ul>\n            <li>\n               <p>The ID for the file system for which you are enabling, disabling, or modifying\n          lifecycle management and EFS Intelligent-Tiering.</p>\n            </li>\n            <li>\n               <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code> objects that\n          define when files are moved into IA storage, and when they are moved back to Standard storage.</p> \n               <note>\n                  <p>Amazon EFS requires that each <code>LifecyclePolicy</code> \n          object have only have a single transition, so the <code>LifecyclePolicies</code> array needs to be structured with separate \n          <code>LifecyclePolicy</code> objects. See the example requests in the following section for more information.</p>\n               </note>\n            </li>\n         </ul>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p>\n         <p>To apply a <code>LifecycleConfiguration</code> object to an encrypted file system, you\n      need the same Key Management Service permissions as when you created the encrypted file system.</p>",
+                "smithy.api#documentation": "<p>Use this action to manage EFS lifecycle management and EFS Intelligent-Tiering. A\n        <code>LifecycleConfiguration</code> consists of one or more <code>LifecyclePolicy</code>\n      objects that define the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>EFS Lifecycle management</b> - When Amazon EFS\n          automatically transitions files in a file system into the lower-cost EFS Infrequent Access\n          (IA) storage class.</p>\n               <p>To enable EFS Lifecycle management, set the value of <code>TransitionToIA</code> to one of the available options.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EFS Intelligent-Tiering</b> - When Amazon EFS\n          automatically transitions files from IA back into the file system's primary storage class\n          (EFS Standard or EFS One Zone Standard).</p>\n               <p>To enable EFS Intelligent-Tiering, set the value of\n            <code>TransitionToPrimaryStorageClass</code> to <code>AFTER_1_ACCESS</code>.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Lifecycle Management</a>.</p>\n         <p>Each Amazon EFS file system supports one lifecycle configuration, which applies to\n      all files in the file system. If a <code>LifecycleConfiguration</code> object already exists\n      for the specified file system, a <code>PutLifecycleConfiguration</code> call modifies the\n      existing configuration. A <code>PutLifecycleConfiguration</code> call with an empty\n        <code>LifecyclePolicies</code> array in the request body deletes any existing\n        <code>LifecycleConfiguration</code> and turns off lifecycle management and EFS\n      Intelligent-Tiering for the file system.</p>\n         <p>In the request, specify the following: </p>\n         <ul>\n            <li>\n               <p>The ID for the file system for which you are enabling, disabling, or modifying\n          lifecycle management and EFS Intelligent-Tiering.</p>\n            </li>\n            <li>\n               <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code> objects that\n          define when files are moved into IA storage, and when they are moved back to Standard storage.</p>\n               <note>\n                  <p>Amazon EFS requires that each <code>LifecyclePolicy</code> \n          object have only have a single transition, so the <code>LifecyclePolicies</code> array needs to be structured with separate \n          <code>LifecyclePolicy</code> objects. See the example requests in the following section for more information.</p>\n               </note>\n            </li>\n         </ul>\n         <p>This operation requires permissions for the <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p>\n         <p>To apply a <code>LifecycleConfiguration</code> object to an encrypted file system, you\n      need the same Key Management Service permissions as when you created the encrypted file system.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration",
