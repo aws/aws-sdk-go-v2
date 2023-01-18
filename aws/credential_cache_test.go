@@ -243,19 +243,25 @@ func TestCredentialsCache_AsyncRefresh(t *testing.T) {
 			options.EnableAsyncRefresh = true
 		})
 
+		// first call - no async refresh - 1
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// cached after call, async refresh - 2
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// cached after call, async refresh - 3
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
 		mockTime = mockTime.Add(10)
 
+		// expired - refresh - 4
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// cached after call, async refresh - 5
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// cached after call, async refresh - 6
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
@@ -276,7 +282,7 @@ func TestCredentialsCache_AsyncRefreshWithMinimumDelay(t *testing.T) {
 		Called int32
 	}{
 		{
-			Called: 4,
+			Called: 3,
 			Creds: func() Credentials {
 				return Credentials{
 					AccessKeyID:     "key",
@@ -295,28 +301,36 @@ func TestCredentialsCache_AsyncRefreshWithMinimumDelay(t *testing.T) {
 			return c.Creds(), nil
 		}), func(options *CredentialsCacheOptions) {
 			options.EnableAsyncRefresh = true
-			options.AsyncRefreshMinimumDelay = 2 * time.Nanosecond
+			options.AsyncRefreshMinimumDelay = 2
 		})
 
+		// first call - blocking refresh - 1
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// within minimum delay, no refresh should happen
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// within minimum delay, no refresh should happen
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
 		mockTime = mockTime.Add(3)
+		// token still valid, async refresh as minimum delay passed - 2
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// within minimum delay, no refresh should happen
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
 		mockTime = mockTime.Add(10)
 
+		// token expired - blocking refresh - 3
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// within minimum delay, no refresh should happen
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
+		// within minimum delay, no refresh should happen
 		p.Retrieve(context.Background())
 		testWaitAsyncRefreshDone(p)
 
