@@ -22,7 +22,7 @@ import (
 // a file system using EFS access points
 // (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html). If multiple
 // requests to create access points on the same file system are sent in quick
-// succession, and the file system is near the limit of 120 access points, you may
+// succession, and the file system is near the limit of 1000 access points, you may
 // experience a throttling response for these requests. This is to ensure that the
 // file system does not exceed the stated access point limit. This operation
 // requires permissions for the elasticfilesystem:CreateAccessPoint action.

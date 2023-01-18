@@ -1,0 +1,8 @@
+{
+    "id": "0d805a26-72db-41ff-bcab-26ee1a1db5a6",
+    "type": "documentation",
+    "description": "Improved the visibility of the guidance for updating AWS WAF resources, such as web ACLs and rule groups.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "ac99395c-b568-4be0-a100-ad0383925443",
+    "type": "documentation",
+    "description": "Documentation updates for EFS access points limit increase",
+    "modules": [
+        "service/efs"
+    ]
+}

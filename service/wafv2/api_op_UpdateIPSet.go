@@ -13,9 +13,17 @@ import (
 
 // Updates the specified IPSet. This operation completely replaces the mutable
 // specifications that you already have for the IP set with the ones that you
-// provide to this call. To modify the IP set, retrieve it by calling GetIPSet,
-// update the settings as needed, and then provide the complete IP set
-// specification to this call. When you make changes to web ACLs or web ACL
+// provide to this call. To modify an IP set, do the following:
+//
+// * Retrieve it by
+// calling GetIPSet
+//
+// * Update its settings as needed
+//
+// * Provide the complete IP set
+// specification to this call
+//
+// When you make changes to web ACLs or web ACL
 // components, like rules and rule groups, WAF propagates the changes everywhere
 // that the web ACL and its components are stored and used. Your changes are
 // applied within seconds, but there might be a brief period of inconsistency when

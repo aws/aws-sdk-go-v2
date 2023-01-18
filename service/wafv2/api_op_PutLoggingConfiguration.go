@@ -12,15 +12,28 @@ import (
 )
 
 // Enables the specified LoggingConfiguration, to start logging from a web ACL,
-// according to the configuration provided. You can define one logging destination
-// per web ACL. You can access information about the traffic that WAF inspects
-// using the following steps:
+// according to the configuration provided. This operation completely replaces any
+// mutable specifications that you already have for a logging configuration with
+// the ones that you provide to this call. To modify an existing logging
+// configuration, do the following:
 //
-// * Create your logging destination. You can use an
-// Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3)
-// bucket, or an Amazon Kinesis Data Firehose. The name that you give the
-// destination must start with aws-waf-logs-. Depending on the type of destination,
-// you might need to configure additional settings or permissions. For
+// * Retrieve it by calling
+// GetLoggingConfiguration
+//
+// * Update its settings as needed
+//
+// * Provide the complete
+// logging configuration specification to this call
+//
+// You can define one logging
+// destination per web ACL. You can access information about the traffic that WAF
+// inspects using the following steps:
+//
+// * Create your logging destination. You can
+// use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service
+// (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. The name that you give
+// the destination must start with aws-waf-logs-. Depending on the type of
+// destination, you might need to configure additional settings or permissions. For
 // configuration requirements and pricing information for each destination type,
 // see Logging web ACL traffic
 // (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
@@ -37,11 +50,7 @@ import (
 // creates a service-linked role. For additional information about web ACL logging,
 // see Logging web ACL traffic information
 // (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
-// Developer Guide. This operation completely replaces the mutable specifications
-// that you already have for the logging configuration with the ones that you
-// provide to this call. To modify the logging configuration, retrieve it by
-// calling GetLoggingConfiguration, update the settings as needed, and then provide
-// the complete logging configuration specification to this call.
+// Developer Guide.
 func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLoggingConfigurationInput, optFns ...func(*Options)) (*PutLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLoggingConfigurationInput{}

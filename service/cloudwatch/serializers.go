@@ -4296,6 +4296,11 @@ func awsAwsquery_serializeOpDocumentPutMetricStreamInput(v *PutMetricStreamInput
 		}
 	}
 
+	if v.IncludeLinkedAccountsMetrics != nil {
+		objectKey := object.Key("IncludeLinkedAccountsMetrics")
+		objectKey.Boolean(*v.IncludeLinkedAccountsMetrics)
+	}
+
 	if v.Name != nil {
 		objectKey := object.Key("Name")
 		objectKey.String(*v.Name)
