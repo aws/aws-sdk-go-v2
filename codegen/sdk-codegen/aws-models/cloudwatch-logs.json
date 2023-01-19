@@ -1025,13 +1025,13 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the log group.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "logGroupIdentifier": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view. If the log group is in a source account\n    and you are using a monitoring account, you must use the log group ARN.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view. If the log group is in a source account\n    and you are using a monitoring account, you must use the log group ARN.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "logStreamNamePrefix": {
@@ -1821,13 +1821,13 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group to search.</p>\n         <note>\n            <p>\n        If you specify values\n        for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the log group to search.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "logGroupIdentifier": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view log events from. If the log group is in a source account\n      and you are using a monitoring account, you must use the log group ARN.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view log events from. If the log group is in a source account\n      and you are using a monitoring account, you must use the log group ARN.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "logStreamNames": {
@@ -2076,13 +2076,13 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the log group.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "logGroupIdentifier": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view events from. If the log group is in a source account\n      and you are using a monitoring account, you must use the log group ARN.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view events from. If the log group is in a source account\n      and you are using a monitoring account, you must use the log group ARN.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "logStreamName": {
@@ -2186,7 +2186,7 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group to search.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the log group to search.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 },
                 "time": {
@@ -2198,7 +2198,7 @@
                 "logGroupIdentifier": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view. If the log group is in a source account and\n    you are using a monitoring account, you must specify the ARN.</p>\n         <note>\n            <p>\n        If you specify values for both <code>logGroupName</code> and <code>logGroupIdentifier</code>, \n        the action returns an <code>InvalidParameterException</code> error.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view. If the log group is in a source account and\n    you are using a monitoring account, you must specify the ARN.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 }
             }
@@ -6006,8 +6006,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
-                },
-                "smithy.api#pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$"
+                }
             }
         },
         "com.amazonaws.cloudwatchlogs#QueryDefinitionString": {

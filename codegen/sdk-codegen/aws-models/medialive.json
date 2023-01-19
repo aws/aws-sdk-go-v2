@@ -15428,6 +15428,14 @@
                         "smithy.api#documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).",
                         "smithy.api#jsonName": "videoPid"
                     }
+                },
+                "Scte35PrerollPullupMilliseconds": {
+                    "target": "com.amazonaws.medialive#__doubleMin0Max5000",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.",
+                        "smithy.api#jsonName": "scte35PrerollPullupMilliseconds"
+                    }
                 }
             },
             "traits": {
@@ -16355,9 +16363,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -16368,9 +16376,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -16379,9 +16387,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -16392,9 +16400,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -16403,9 +16411,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -16416,9 +16424,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -16427,9 +16435,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -16440,9 +16448,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -16453,9 +16461,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -16465,9 +16473,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -16477,9 +16485,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -23631,6 +23639,13 @@
             "traits": {
                 "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max100"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMin0Max5000": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max5000"
             }
         },
         "com.amazonaws.medialive#__doubleMin1": {
