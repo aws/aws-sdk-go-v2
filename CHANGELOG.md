@@ -1,3 +1,31 @@
+# Release (2023-01-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.24.0](service/appflow/CHANGELOG.md#v1240-2023-01-19)
+  * **Feature**: Adding support for Salesforce Pardot connector in Amazon AppFlow.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.20.0](service/cloudwatchlogs/CHANGELOG.md#v1200-2023-01-19)
+  * **Feature**: Bug fix - Removed the regex pattern validation from CoralModel to avoid potential security issue.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.15.0](service/codeartifact/CHANGELOG.md#v1150-2023-01-19)
+  * **Feature**: Documentation updates for CodeArtifact
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.45.0](service/connect/CHANGELOG.md#v1450-2023-01-19)
+  * **Feature**: Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.15.0](service/connectparticipant/CHANGELOG.md#v1150-2023-01-19)
+  * **Feature**: This release updates Amazon Connect Participant's GetTranscript api to provide transcripts of past chats on a persistent chat session.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.79.0](service/ec2/CHANGELOG.md#v1790-2023-01-19)
+  * **Feature**: Adds SSM Parameter Resource Aliasing support to EC2 Launch Templates. Launch Templates can now store parameter aliases in place of AMI Resource IDs. CreateLaunchTemplateVersion and DescribeLaunchTemplateVersions now support a convenience flag, ResolveAlias, to return the resolved parameter value.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.40.0](service/glue/CHANGELOG.md#v1400-2023-01-19)
+  * **Feature**: Release Glue Studio Hudi Data Lake Format for SDK/CLI
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.16.0](service/groundstation/CHANGELOG.md#v1160-2023-01-19)
+  * **Feature**: Add configurable prepass and postpass times for DataflowEndpointGroup. Add Waiter to allow customers to wait for a contact that was reserved through ReserveContact
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.29.0](service/medialive/CHANGELOG.md#v1290-2023-01-19)
+  * **Feature**: AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.13.0](service/opensearch/CHANGELOG.md#v1130-2023-01-19)
+  * **Feature**: This release adds the enhanced dry run option, that checks for validation errors that might occur when deploying configuration changes and provides a summary of these errors, if any. The feature will also indicate whether a blue/green deployment will be required to apply a change.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.11.0](service/panorama/CHANGELOG.md#v1110-2023-01-19)
+  * **Feature**: Added AllowMajorVersionUpdate option to OTAJobConfig to make appliance software major version updates opt-in.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.63.0](service/sagemaker/CHANGELOG.md#v1630-2023-01-19)
+  * **Feature**: HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
+
 # Release (2023-01-18)
 
 ## Module Highlights

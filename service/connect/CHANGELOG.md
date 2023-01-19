@@ -1,3 +1,7 @@
+# v1.45.0 (2023-01-19)
+
+* **Feature**: Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+
 # v1.44.0 (2023-01-13)
 
 * **Feature**: This release updates the responses of UpdateContactFlowContent, UpdateContactFlowMetadata, UpdateContactFlowName and DeleteContactFlow API with empty responses.

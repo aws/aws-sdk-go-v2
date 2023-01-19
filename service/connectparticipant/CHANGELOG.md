@@ -1,3 +1,7 @@
+# v1.15.0 (2023-01-19)
+
+* **Feature**: This release updates Amazon Connect Participant's GetTranscript api to provide transcripts of past chats on a persistent chat session.
+
 # v1.14.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

@@ -1,3 +1,7 @@
+# v1.24.0 (2023-01-19)
+
+* **Feature**: Adding support for Salesforce Pardot connector in Amazon AppFlow.
+
 # v1.23.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

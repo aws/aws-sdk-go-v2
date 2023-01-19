@@ -1,8 +1,0 @@
-{
-    "id": "c0b78afd-6568-4e09-8c23-9b2f6938d452",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.",
-    "modules": [
-        "service/medialive"
-    ]
-}

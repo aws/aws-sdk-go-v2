@@ -1,8 +1,0 @@
-{
-    "id": "cfd858ec-3f41-44c8-8729-42030eea4ad9",
-    "type": "feature",
-    "description": "HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

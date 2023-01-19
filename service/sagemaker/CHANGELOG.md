@@ -1,3 +1,7 @@
+# v1.63.0 (2023-01-19)
+
+* **Feature**: HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
+
 # v1.62.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

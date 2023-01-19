@@ -1,8 +1,0 @@
-{
-    "id": "d9562fcd-b655-4ccf-8c07-7eaf5b6ac795",
-    "type": "feature",
-    "description": "Adding support for Salesforce Pardot connector in Amazon AppFlow.",
-    "modules": [
-        "service/appflow"
-    ]
-}

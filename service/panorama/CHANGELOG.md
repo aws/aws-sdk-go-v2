@@ -1,3 +1,7 @@
+# v1.11.0 (2023-01-19)
+
+* **Feature**: Added AllowMajorVersionUpdate option to OTAJobConfig to make appliance software major version updates opt-in.
+
 # v1.10.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

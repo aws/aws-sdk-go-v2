@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.18.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.78.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.79.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.19.1
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.0
-	github.com/aws/aws-sdk-go-v2/service/glue v1.39.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.0

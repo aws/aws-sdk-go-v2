@@ -1,8 +1,0 @@
-{
-    "id": "0cd0bb6e-5e85-482c-991c-079448049be7",
-    "type": "feature",
-    "description": "This release adds the enhanced dry run option, that checks for validation errors that might occur when deploying configuration changes and provides a summary of these errors, if any. The feature will also indicate whether a blue/green deployment will be required to apply a change.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

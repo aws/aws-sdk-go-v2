@@ -1,3 +1,7 @@
+# v1.79.0 (2023-01-19)
+
+* **Feature**: Adds SSM Parameter Resource Aliasing support to EC2 Launch Templates. Launch Templates can now store parameter aliases in place of AMI Resource IDs. CreateLaunchTemplateVersion and DescribeLaunchTemplateVersions now support a convenience flag, ResolveAlias, to return the resolved parameter value.
+
 # v1.78.0 (2023-01-13)
 
 * **Feature**: Documentation updates for EC2.
