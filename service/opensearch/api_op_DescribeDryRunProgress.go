@@ -11,46 +11,52 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon OpenSearch Service-managed VPC endpoint.
-func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpointInput, optFns ...func(*Options)) (*CreateVpcEndpointOutput, error) {
+// Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch
+// Service domain. For more information, see Determining whether a change will
+// cause a blue/green deployment
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#dryrun).
+func (c *Client) DescribeDryRunProgress(ctx context.Context, params *DescribeDryRunProgressInput, optFns ...func(*Options)) (*DescribeDryRunProgressOutput, error) {
 	if params == nil {
-		params = &CreateVpcEndpointInput{}
+		params = &DescribeDryRunProgressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVpcEndpoint", params, optFns, c.addOperationCreateVpcEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDryRunProgress", params, optFns, c.addOperationDescribeDryRunProgressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateVpcEndpointOutput)
+	out := result.(*DescribeDryRunProgressOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateVpcEndpointInput struct {
+type DescribeDryRunProgressInput struct {
 
-	// The Amazon Resource Name (ARN) of the domain to create the endpoint for.
+	// The name of the domain.
 	//
 	// This member is required.
-	DomainArn *string
+	DomainName *string
 
-	// Options to specify the subnets and security groups for the endpoint.
-	//
-	// This member is required.
-	VpcOptions *types.VPCOptions
+	// The unique identifier of the dry run.
+	DryRunId *string
 
-	// Unique, case-sensitive identifier to ensure idempotency of the request.
-	ClientToken *string
+	// Whether to include the configuration of the dry run in the response. The
+	// configuration specifies the updates that you're planning to make on the domain.
+	LoadDryRunConfig *bool
 
 	noSmithyDocumentSerde
 }
 
-type CreateVpcEndpointOutput struct {
+type DescribeDryRunProgressOutput struct {
 
-	// Information about the newly created VPC endpoint.
-	//
-	// This member is required.
-	VpcEndpoint *types.VpcEndpoint
+	// Details about the changes you're planning to make on the domain.
+	DryRunConfig *types.DomainStatus
+
+	// The current status of the dry run, including any validation errors.
+	DryRunProgressStatus *types.DryRunProgressStatus
+
+	// The results of the dry run.
+	DryRunResults *types.DryRunResults
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,12 +64,12 @@ type CreateVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVpcEndpoint{}, middleware.After)
+func (c *Client) addOperationDescribeDryRunProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDryRunProgress{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVpcEndpoint{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDryRunProgress{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -103,10 +109,10 @@ func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateVpcEndpointValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeDryRunProgressValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcEndpoint(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDryRunProgress(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -121,11 +127,11 @@ func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateVpcEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeDryRunProgress(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "es",
-		OperationName: "CreateVpcEndpoint",
+		OperationName: "DescribeDryRunProgress",
 	}
 }

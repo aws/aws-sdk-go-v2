@@ -1,0 +1,8 @@
+{
+    "id": "8541a5b4-2196-4efb-8b27-62bfd5bb13b5",
+    "type": "feature",
+    "description": "This release updates Amazon Connect Participant's GetTranscript api to provide transcripts of past chats on a persistent chat session.",
+    "modules": [
+        "service/connectparticipant"
+    ]
+}

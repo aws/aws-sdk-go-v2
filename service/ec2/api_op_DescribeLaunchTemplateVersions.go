@@ -110,6 +110,15 @@ type DescribeLaunchTemplateVersionsInput struct {
 	// The token to request the next page of results.
 	NextToken *string
 
+	// If true, and if a Systems Manager parameter is specified for ImageId, the AMI ID
+	// is displayed in the response for imageId. If false, and if a Systems Manager
+	// parameter is specified for ImageId, the parameter is displayed in the response
+	// for imageId. For more information, see Use a Systems Manager parameter instead
+	// of an AMI ID
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// in the Amazon Elastic Compute Cloud User Guide. Default: false
+	ResolveAlias *bool
+
 	// One or more versions of the launch template. Valid values depend on whether you
 	// are describing a specified launch template (by ID or name) or all launch
 	// templates in your account. To describe one or more versions of a specified

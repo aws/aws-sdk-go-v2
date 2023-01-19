@@ -46,12 +46,11 @@ type GetLogGroupFieldsInput struct {
 
 	// Specify either the name or ARN of the log group to view. If the log group is in
 	// a source account and you are using a monitoring account, you must specify the
-	// ARN. If you specify values for both logGroupName and logGroupIdentifier, the
-	// action returns an InvalidParameterException error.
+	// ARN. You must include either logGroupIdentifier or logGroupName, but not both.
 	LogGroupIdentifier *string
 
-	// The name of the log group to search. If you specify values for both logGroupName
-	// and logGroupIdentifier, the action returns an InvalidParameterException error.
+	// The name of the log group to search. You must include either logGroupIdentifier
+	// or logGroupName, but not both.
 	LogGroupName *string
 
 	// The time to set as the center of the query. If you specify time, the 15 minutes

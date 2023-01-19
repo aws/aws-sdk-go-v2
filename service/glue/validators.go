@@ -4386,6 +4386,32 @@ func validateCatalogEntry(v *types.CatalogEntry) error {
 	}
 }
 
+func validateCatalogHudiSource(v *types.CatalogHudiSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogHudiSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCatalogKafkaSource(v *types.CatalogKafkaSource) error {
 	if v == nil {
 		return nil
@@ -4747,6 +4773,31 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 	if v.EvaluateDataQuality != nil {
 		if err := validateEvaluateDataQuality(v.EvaluateDataQuality); err != nil {
 			invalidParams.AddNested("EvaluateDataQuality", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3CatalogHudiSource != nil {
+		if err := validateS3CatalogHudiSource(v.S3CatalogHudiSource); err != nil {
+			invalidParams.AddNested("S3CatalogHudiSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogHudiSource != nil {
+		if err := validateCatalogHudiSource(v.CatalogHudiSource); err != nil {
+			invalidParams.AddNested("CatalogHudiSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3HudiSource != nil {
+		if err := validateS3HudiSource(v.S3HudiSource); err != nil {
+			invalidParams.AddNested("S3HudiSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3HudiCatalogTarget != nil {
+		if err := validateS3HudiCatalogTarget(v.S3HudiCatalogTarget); err != nil {
+			invalidParams.AddNested("S3HudiCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3HudiDirectTarget != nil {
+		if err := validateS3HudiDirectTarget(v.S3HudiDirectTarget); err != nil {
+			invalidParams.AddNested("S3HudiDirectTarget", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6505,6 +6556,32 @@ func validateRenameField(v *types.RenameField) error {
 	}
 }
 
+func validateS3CatalogHudiSource(v *types.S3CatalogHudiSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CatalogHudiSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3CatalogSource(v *types.S3CatalogSource) error {
 	if v == nil {
 		return nil
@@ -6616,6 +6693,86 @@ func validateS3GlueParquetTarget(v *types.S3GlueParquetTarget) error {
 	}
 	if v.Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3HudiCatalogTarget(v *types.S3HudiCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3HudiCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.AdditionalOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdditionalOptions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3HudiDirectTarget(v *types.S3HudiDirectTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3HudiDirectTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if len(v.Compression) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Compression"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.AdditionalOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdditionalOptions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3HudiSource(v *types.S3HudiSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3HudiSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

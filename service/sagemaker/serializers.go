@@ -19872,6 +19872,13 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(v *types.
 		ok.Boolean(v.EnableNetworkIsolation)
 	}
 
+	if v.Environment != nil {
+		ok := object.Key("Environment")
+		if err := awsAwsjson11_serializeDocumentHyperParameterTrainingJobEnvironmentMap(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HyperParameterRanges != nil {
 		ok := object.Key("HyperParameterRanges")
 		if err := awsAwsjson11_serializeDocumentParameterRanges(v.HyperParameterRanges, ok); err != nil {
@@ -19959,6 +19966,17 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinitions(v []type
 		if err := awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHyperParameterTrainingJobEnvironmentMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

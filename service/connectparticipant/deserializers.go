@@ -1740,6 +1740,15 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				return err
 			}
 
+		case "ContactId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactId to be of type string, got %T instead", value)
+				}
+				sv.ContactId = ptr.String(jtv)
+			}
+
 		case "Content":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1797,6 +1806,15 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 					return fmt.Errorf("expected ParticipantRole to be of type string, got %T instead", value)
 				}
 				sv.ParticipantRole = types.ParticipantRole(jtv)
+			}
+
+		case "RelatedContactId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactId to be of type string, got %T instead", value)
+				}
+				sv.RelatedContactId = ptr.String(jtv)
 			}
 
 		case "Type":

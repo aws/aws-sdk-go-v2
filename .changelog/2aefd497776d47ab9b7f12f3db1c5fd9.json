@@ -1,0 +1,8 @@
+{
+    "id": "2aefd497-776d-47ab-9b7f-12f3db1c5fd9",
+    "type": "feature",
+    "description": "Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.",
+    "modules": [
+        "service/connect"
+    ]
+}

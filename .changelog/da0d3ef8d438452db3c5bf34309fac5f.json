@@ -1,0 +1,8 @@
+{
+    "id": "da0d3ef8-d438-452d-b3c5-bf34309fac5f",
+    "type": "feature",
+    "description": "Bug fix - Removed the regex pattern validation from CoralModel to avoid potential security issue.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

@@ -46542,6 +46542,11 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(v **typ
 				sv.EnableNetworkIsolation = jtv
 			}
 
+		case "Environment":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTrainingJobEnvironmentMap(&sv.Environment, value); err != nil {
+				return err
+			}
+
 		case "HyperParameterRanges":
 			if err := awsAwsjson11_deserializeDocumentParameterRanges(&sv.HyperParameterRanges, value); err != nil {
 				return err
@@ -46641,6 +46646,42 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinitions(v *[]t
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobEnvironmentMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected HyperParameterTrainingJobEnvironmentValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

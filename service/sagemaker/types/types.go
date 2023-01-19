@@ -6706,6 +6706,19 @@ type HyperParameterTrainingJobDefinition struct {
 	// access.
 	EnableNetworkIsolation bool
 
+	// An environment variable that you can pass into the SageMaker CreateTrainingJob
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+	// API. You can use an existing environment variable from the training container
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
+	// or use your own. See Define metrics and variables
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html)
+	// for more information. The maximum number of items specified for Map Entries
+	// refers to the maximum number of environment variables for each
+	// TrainingJobDefinition and also the maximum for the hyperparameter tuning job
+	// itself. That is, the sum of the number of environment variables for all the
+	// training job definitions can't exceed the maximum number specified.
+	Environment map[string]string
+
 	// Specifies ranges of integer, continuous, and categorical hyperparameters that a
 	// hyperparameter tuning job searches. The hyperparameter tuning job launches
 	// training jobs with hyperparameter values within these ranges to find the
@@ -6839,7 +6852,7 @@ type HyperParameterTuningInstanceConfig struct {
 	// The number of instances of the type specified by InstanceType. Choose an
 	// instance count larger than 1 for distributed training algorithms. See SageMaker
 	// distributed training jobs
-	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more informcration.
+	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more information.
 	//
 	// This member is required.
 	InstanceCount int32

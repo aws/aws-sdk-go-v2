@@ -800,6 +800,35 @@ type DomainStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the progress of a pre-upgrade dry run analysis.
+type DryRunProgressStatus struct {
+
+	// The timestamp when the dry run was initiated.
+	//
+	// This member is required.
+	CreationDate *string
+
+	// The unique identifier of the dry run.
+	//
+	// This member is required.
+	DryRunId *string
+
+	// The current status of the dry run.
+	//
+	// This member is required.
+	DryRunStatus *string
+
+	// The timestamp when the dry run was last updated.
+	//
+	// This member is required.
+	UpdateDate *string
+
+	// Any validation failures that occurred as a result of the dry run.
+	ValidationFailures []ValidationFailure
+
+	noSmithyDocumentSerde
+}
+
 // Results of a dry run performed in an update domain request.
 type DryRunResults struct {
 
@@ -1666,6 +1695,19 @@ type UpgradeStepItem struct {
 	//
 	// * Failed
 	UpgradeStepStatus UpgradeStatus
+
+	noSmithyDocumentSerde
+}
+
+// A validation failure that occurred as the result of a pre-update validation
+// check (verbose dry run) on a domain.
+type ValidationFailure struct {
+
+	// The error code of the failure.
+	Code *string
+
+	// A message corresponding to the failure.
+	Message *string
 
 	noSmithyDocumentSerde
 }

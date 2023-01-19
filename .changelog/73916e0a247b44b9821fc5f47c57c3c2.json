@@ -1,0 +1,8 @@
+{
+    "id": "73916e0a-247b-44b9-821f-c5f47c57c3c2",
+    "type": "feature",
+    "description": "Release Glue Studio Hudi Data Lake Format for SDK/CLI",
+    "modules": [
+        "service/glue"
+    ]
+}

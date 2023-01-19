@@ -136,6 +136,24 @@ func (DomainPackageStatus) Values() []DomainPackageStatus {
 	}
 }
 
+type DryRunMode string
+
+// Enum values for DryRunMode
+const (
+	DryRunModeBasic   DryRunMode = "Basic"
+	DryRunModeVerbose DryRunMode = "Verbose"
+)
+
+// Values returns all known values for DryRunMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DryRunMode) Values() []DryRunMode {
+	return []DryRunMode{
+		"Basic",
+		"Verbose",
+	}
+}
+
 type EngineType string
 
 // Enum values for EngineType

@@ -5207,6 +5207,11 @@ func awsRestjson1_deserializeDocumentConnectorMetadata(v **types.ConnectorMetada
 				return err
 			}
 
+		case "Pardot":
+			if err := awsRestjson1_deserializeDocumentPardotMetadata(&sv.Pardot, value); err != nil {
+				return err
+			}
+
 		case "Redshift":
 			if err := awsRestjson1_deserializeDocumentRedshiftMetadata(&sv.Redshift, value); err != nil {
 				return err
@@ -5395,6 +5400,15 @@ func awsRestjson1_deserializeDocumentConnectorOperator(v **types.ConnectorOperat
 					return fmt.Errorf("expected MarketoConnectorOperator to be of type string, got %T instead", value)
 				}
 				sv.Marketo = types.MarketoConnectorOperator(jtv)
+			}
+
+		case "Pardot":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PardotConnectorOperator to be of type string, got %T instead", value)
+				}
+				sv.Pardot = types.PardotConnectorOperator(jtv)
 			}
 
 		case "S3":
@@ -5707,6 +5721,11 @@ func awsRestjson1_deserializeDocumentConnectorProfileProperties(v **types.Connec
 
 		case "Marketo":
 			if err := awsRestjson1_deserializeDocumentMarketoConnectorProfileProperties(&sv.Marketo, value); err != nil {
+				return err
+			}
+
+		case "Pardot":
+			if err := awsRestjson1_deserializeDocumentPardotConnectorProfileProperties(&sv.Pardot, value); err != nil {
 				return err
 			}
 
@@ -8942,6 +8961,135 @@ func awsRestjson1_deserializeDocumentOAuthScopeList(v *[]string, value interface
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPardotConnectorProfileProperties(v **types.PardotConnectorProfileProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PardotConnectorProfileProperties
+	if *v == nil {
+		sv = &types.PardotConnectorProfileProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "businessUnitId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BusinessUnitId to be of type string, got %T instead", value)
+				}
+				sv.BusinessUnitId = ptr.String(jtv)
+			}
+
+		case "instanceUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceUrl to be of type string, got %T instead", value)
+				}
+				sv.InstanceUrl = ptr.String(jtv)
+			}
+
+		case "isSandboxEnvironment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsSandboxEnvironment = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPardotMetadata(v **types.PardotMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PardotMetadata
+	if *v == nil {
+		sv = &types.PardotMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPardotSourceProperties(v **types.PardotSourceProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PardotSourceProperties
+	if *v == nil {
+		sv = &types.PardotSourceProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "object":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
+				}
+				sv.Object = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPathPrefixHierarchy(v *[]types.PathPrefix, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11077,6 +11225,11 @@ func awsRestjson1_deserializeDocumentSourceConnectorProperties(v **types.SourceC
 
 		case "Marketo":
 			if err := awsRestjson1_deserializeDocumentMarketoSourceProperties(&sv.Marketo, value); err != nil {
+				return err
+			}
+
+		case "Pardot":
+			if err := awsRestjson1_deserializeDocumentPardotSourceProperties(&sv.Pardot, value); err != nil {
 				return err
 			}
 

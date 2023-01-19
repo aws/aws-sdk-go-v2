@@ -59,12 +59,12 @@ type GetLogEventsInput struct {
 
 	// Specify either the name or ARN of the log group to view events from. If the log
 	// group is in a source account and you are using a monitoring account, you must
-	// use the log group ARN. If you specify values for both logGroupName and
-	// logGroupIdentifier, the action returns an InvalidParameterException error.
+	// use the log group ARN. You must include either logGroupIdentifier or
+	// logGroupName, but not both.
 	LogGroupIdentifier *string
 
-	// The name of the log group. If you specify values for both logGroupName and
-	// logGroupIdentifier, the action returns an InvalidParameterException error.
+	// The name of the log group. You must include either logGroupIdentifier or
+	// logGroupName, but not both.
 	LogGroupName *string
 
 	// The token for the next set of items to return. (You received this token from a

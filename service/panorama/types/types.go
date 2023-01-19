@@ -510,6 +510,9 @@ type OTAJobConfig struct {
 	// This member is required.
 	ImageVersion *string
 
+	// Whether to apply the update if it is a major version change.
+	AllowMajorVersionUpdate bool
+
 	noSmithyDocumentSerde
 }
 

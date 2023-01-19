@@ -48923,6 +48923,11 @@ func awsEc2query_serializeOpDocumentCreateLaunchTemplateVersionInput(v *CreateLa
 		objectKey.String(*v.LaunchTemplateName)
 	}
 
+	if v.ResolveAlias != nil {
+		objectKey := object.Key("ResolveAlias")
+		objectKey.Boolean(*v.ResolveAlias)
+	}
+
 	if v.SourceVersion != nil {
 		objectKey := object.Key("SourceVersion")
 		objectKey.String(*v.SourceVersion)
@@ -54722,6 +54727,11 @@ func awsEc2query_serializeOpDocumentDescribeLaunchTemplateVersionsInput(v *Descr
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
+	}
+
+	if v.ResolveAlias != nil {
+		objectKey := object.Key("ResolveAlias")
+		objectKey.Boolean(*v.ResolveAlias)
 	}
 
 	if v.Versions != nil {

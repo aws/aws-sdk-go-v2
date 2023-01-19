@@ -216,6 +216,16 @@ func awsRestjson1_serializeOpDocumentCreateDataflowEndpointGroupInput(v *CreateD
 	object := value.Object()
 	defer object.Close()
 
+	if v.ContactPostPassDurationSeconds != nil {
+		ok := object.Key("contactPostPassDurationSeconds")
+		ok.Integer(*v.ContactPostPassDurationSeconds)
+	}
+
+	if v.ContactPrePassDurationSeconds != nil {
+		ok := object.Key("contactPrePassDurationSeconds")
+		ok.Integer(*v.ContactPrePassDurationSeconds)
+	}
+
 	if v.EndpointDetails != nil {
 		ok := object.Key("endpointDetails")
 		if err := awsRestjson1_serializeDocumentEndpointDetailsList(v.EndpointDetails, ok); err != nil {

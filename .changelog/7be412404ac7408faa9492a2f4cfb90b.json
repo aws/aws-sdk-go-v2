@@ -1,0 +1,8 @@
+{
+    "id": "7be41240-4ac7-408f-aa94-92a2f4cfb90b",
+    "type": "feature",
+    "description": "Added AllowMajorVersionUpdate option to OTAJobConfig to make appliance software major version updates opt-in.",
+    "modules": [
+        "service/panorama"
+    ]
+}

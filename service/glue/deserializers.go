@@ -27159,6 +27159,74 @@ func awsAwsjson11_deserializeDocumentBoundedPartitionValueList(v *[]string, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCatalogHudiSource(v **types.CatalogHudiSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CatalogHudiSource
+	if *v == nil {
+		sv = &types.CatalogHudiSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalHudiOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalHudiOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCatalogImportStatus(v **types.CatalogImportStatus, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27860,6 +27928,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "CatalogHudiSource":
+			if err := awsAwsjson11_deserializeDocumentCatalogHudiSource(&sv.CatalogHudiSource, value); err != nil {
+				return err
+			}
+
 		case "CatalogKafkaSource":
 			if err := awsAwsjson11_deserializeDocumentCatalogKafkaSource(&sv.CatalogKafkaSource, value); err != nil {
 				return err
@@ -28030,6 +28103,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "S3CatalogHudiSource":
+			if err := awsAwsjson11_deserializeDocumentS3CatalogHudiSource(&sv.S3CatalogHudiSource, value); err != nil {
+				return err
+			}
+
 		case "S3CatalogSource":
 			if err := awsAwsjson11_deserializeDocumentS3CatalogSource(&sv.S3CatalogSource, value); err != nil {
 				return err
@@ -28052,6 +28130,21 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 
 		case "S3GlueParquetTarget":
 			if err := awsAwsjson11_deserializeDocumentS3GlueParquetTarget(&sv.S3GlueParquetTarget, value); err != nil {
+				return err
+			}
+
+		case "S3HudiCatalogTarget":
+			if err := awsAwsjson11_deserializeDocumentS3HudiCatalogTarget(&sv.S3HudiCatalogTarget, value); err != nil {
+				return err
+			}
+
+		case "S3HudiDirectTarget":
+			if err := awsAwsjson11_deserializeDocumentS3HudiDirectTarget(&sv.S3HudiDirectTarget, value); err != nil {
+				return err
+			}
+
+		case "S3HudiSource":
+			if err := awsAwsjson11_deserializeDocumentS3HudiSource(&sv.S3HudiSource, value); err != nil {
 				return err
 			}
 
@@ -42818,6 +42911,74 @@ func awsAwsjson11_deserializeDocumentRulesetNames(v *[]string, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3CatalogHudiSource(v **types.S3CatalogHudiSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3CatalogHudiSource
+	if *v == nil {
+		sv = &types.S3CatalogHudiSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalHudiOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalHudiOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3CatalogSource(v **types.S3CatalogSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43458,6 +43619,231 @@ func awsAwsjson11_deserializeDocumentS3GlueParquetTarget(v **types.S3GlueParquet
 
 		case "SchemaChangePolicy":
 			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3HudiCatalogTarget(v **types.S3HudiCatalogTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3HudiCatalogTarget
+	if *v == nil {
+		sv = &types.S3HudiCatalogTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentCatalogSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3HudiDirectTarget(v **types.S3HudiDirectTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3HudiDirectTarget
+	if *v == nil {
+		sv = &types.S3HudiDirectTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Compression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HudiTargetCompressionType to be of type string, got %T instead", value)
+				}
+				sv.Compression = types.HudiTargetCompressionType(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.TargetFormat(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3HudiSource(v **types.S3HudiSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3HudiSource
+	if *v == nil {
+		sv = &types.S3HudiSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalHudiOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalHudiOptions, value); err != nil {
+				return err
+			}
+
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentS3DirectSourceAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Paths":
+			if err := awsAwsjson11_deserializeDocumentEnclosedInStringProperties(&sv.Paths, value); err != nil {
 				return err
 			}
 

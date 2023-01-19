@@ -11455,7 +11455,24 @@ type RequestLaunchTemplateData struct {
 	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
 	IamInstanceProfile *LaunchTemplateIamInstanceProfileSpecificationRequest
 
-	// The ID of the AMI.
+	// The ID of the AMI. Alternatively, you can specify a Systems Manager parameter,
+	// which will resolve to an AMI ID on launch. Valid formats:
+	//
+	// *
+	// ami-17characters00000
+	//
+	// * resolve:ssm:parameter-name
+	//
+	// *
+	// resolve:ssm:parameter-name:version-number
+	//
+	// *
+	// resolve:ssm:parameter-name:label
+	//
+	// For more information, see Use a Systems
+	// Manager parameter instead of an AMI ID
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
@@ -12084,7 +12101,25 @@ type ResponseLaunchTemplateData struct {
 	// The IAM instance profile.
 	IamInstanceProfile *LaunchTemplateIamInstanceProfileSpecification
 
-	// The ID of the AMI that was used to launch the instance.
+	// The ID of the AMI or a Systems Manager parameter. The Systems Manager parameter
+	// will resolve to the ID of the AMI at instance launch. The value depends on what
+	// you specified in the request. The possible values are:
+	//
+	// * If an AMI ID was
+	// specified in the request, then this is the AMI ID.
+	//
+	// * If a Systems Manager
+	// parameter was specified in the request, and ResolveAlias was configured as true,
+	// then this is the AMI ID that the parameter is mapped to in the Parameter
+	// Store.
+	//
+	// * If a Systems Manager parameter was specified in the request, and
+	// ResolveAlias was configured as false, then this is the parameter value.
+	//
+	// For
+	// more information, see Use a Systems Manager parameter instead of an AMI ID
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown

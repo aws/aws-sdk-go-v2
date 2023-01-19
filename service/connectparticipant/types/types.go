@@ -51,6 +51,10 @@ type Item struct {
 	// Provides information about the attachments.
 	Attachments []AttachmentItem
 
+	// The contactId on which the transcript item was originally sent. This field is
+	// populated only when the transcript item is from the current chat session.
+	ContactId *string
+
 	// The content of the message or event.
 	Content *string
 
@@ -72,6 +76,12 @@ type Item struct {
 
 	// The role of the sender. For example, is it a customer, agent, or system.
 	ParticipantRole ParticipantRole
+
+	// The contactId on which the transcript item was originally sent. This field is
+	// only populated for persistent chats when the transcript item is from the past
+	// chat session. For more information, see Enable persistent chat
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
+	RelatedContactId *string
 
 	// Type of the item: message or event.
 	Type ChatItemType

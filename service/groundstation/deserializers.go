@@ -2336,6 +2336,32 @@ func awsRestjson1_deserializeOpDocumentGetDataflowEndpointGroupOutput(v **GetDat
 
 	for key, value := range shape {
 		switch key {
+		case "contactPostPassDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DataflowEndpointGroupDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ContactPostPassDurationSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "contactPrePassDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DataflowEndpointGroupDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ContactPrePassDurationSeconds = ptr.Int32(int32(i64))
+			}
+
 		case "dataflowEndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
