@@ -1,3 +1,13 @@
+# Release (2023-01-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.80.0](service/ec2/CHANGELOG.md#v1800-2023-01-20)
+  * **Feature**: C6in, M6in, M6idn, R6in and R6idn instances are powered by 3rd Generation Intel Xeon Scalable processors (code named Ice Lake) with an all-core turbo frequency of 3.5 GHz.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.20.0](service/ivs/CHANGELOG.md#v1200-2023-01-20)
+  * **Feature**: API and Doc update. Update to arns field in BatchGetStreamKey. Also updates to operations and structures.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.30.0](service/quicksight/CHANGELOG.md#v1300-2023-01-20)
+  * **Feature**: This release adds support for data bars in QuickSight table and increases pivot table field well limit.
+
 # Release (2023-01-19)
 
 ## Module Highlights

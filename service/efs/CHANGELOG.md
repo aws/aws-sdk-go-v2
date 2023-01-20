@@ -1,3 +1,7 @@
+# v1.19.2 (2023-01-20)
+
+* No change notes available for this release.
+
 # v1.19.1 (2023-01-18)
 
 * **Documentation**: Documentation updates for EFS access points limit increase
