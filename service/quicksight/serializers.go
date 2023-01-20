@@ -14225,6 +14225,28 @@ func awsRestjson1_serializeDocumentDashboardVisualPublishOptions(v *types.Dashbo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataBarsOptions(v *types.DataBarsOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldId != nil {
+		ok := object.Key("FieldId")
+		ok.String(*v.FieldId)
+	}
+
+	if v.NegativeColor != nil {
+		ok := object.Key("NegativeColor")
+		ok.String(*v.NegativeColor)
+	}
+
+	if v.PositiveColor != nil {
+		ok := object.Key("PositiveColor")
+		ok.String(*v.PositiveColor)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDatabricksParameters(v *types.DatabricksParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24720,6 +24742,13 @@ func awsRestjson1_serializeDocumentTableConfiguration(v *types.TableConfiguratio
 		}
 	}
 
+	if v.TableInlineVisualizations != nil {
+		ok := object.Key("TableInlineVisualizations")
+		if err := awsRestjson1_serializeDocumentTableInlineVisualizationList(v.TableInlineVisualizations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TableOptions != nil {
 		ok := object.Key("TableOptions")
 		if err := awsRestjson1_serializeDocumentTableOptions(v.TableOptions, ok); err != nil {
@@ -24929,6 +24958,33 @@ func awsRestjson1_serializeDocumentTableFieldWells(v *types.TableFieldWells, val
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableInlineVisualization(v *types.TableInlineVisualization, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataBars != nil {
+		ok := object.Key("DataBars")
+		if err := awsRestjson1_serializeDocumentDataBarsOptions(v.DataBars, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableInlineVisualizationList(v []types.TableInlineVisualization, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTableInlineVisualization(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

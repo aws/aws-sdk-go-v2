@@ -3276,6 +3276,51 @@ const (
 	InstanceTypeTrn12xlarge     InstanceType = "trn1.2xlarge"
 	InstanceTypeTrn132xlarge    InstanceType = "trn1.32xlarge"
 	InstanceTypeHpc6id32xlarge  InstanceType = "hpc6id.32xlarge"
+	InstanceTypeC6inLarge       InstanceType = "c6in.large"
+	InstanceTypeC6inXlarge      InstanceType = "c6in.xlarge"
+	InstanceTypeC6in2xlarge     InstanceType = "c6in.2xlarge"
+	InstanceTypeC6in4xlarge     InstanceType = "c6in.4xlarge"
+	InstanceTypeC6in8xlarge     InstanceType = "c6in.8xlarge"
+	InstanceTypeC6in12xlarge    InstanceType = "c6in.12xlarge"
+	InstanceTypeC6in16xlarge    InstanceType = "c6in.16xlarge"
+	InstanceTypeC6in24xlarge    InstanceType = "c6in.24xlarge"
+	InstanceTypeC6in32xlarge    InstanceType = "c6in.32xlarge"
+	InstanceTypeM6inLarge       InstanceType = "m6in.large"
+	InstanceTypeM6inXlarge      InstanceType = "m6in.xlarge"
+	InstanceTypeM6in2xlarge     InstanceType = "m6in.2xlarge"
+	InstanceTypeM6in4xlarge     InstanceType = "m6in.4xlarge"
+	InstanceTypeM6in8xlarge     InstanceType = "m6in.8xlarge"
+	InstanceTypeM6in12xlarge    InstanceType = "m6in.12xlarge"
+	InstanceTypeM6in16xlarge    InstanceType = "m6in.16xlarge"
+	InstanceTypeM6in24xlarge    InstanceType = "m6in.24xlarge"
+	InstanceTypeM6in32xlarge    InstanceType = "m6in.32xlarge"
+	InstanceTypeM6idnLarge      InstanceType = "m6idn.large"
+	InstanceTypeM6idnXlarge     InstanceType = "m6idn.xlarge"
+	InstanceTypeM6idn2xlarge    InstanceType = "m6idn.2xlarge"
+	InstanceTypeM6idn4xlarge    InstanceType = "m6idn.4xlarge"
+	InstanceTypeM6idn8xlarge    InstanceType = "m6idn.8xlarge"
+	InstanceTypeM6idn12xlarge   InstanceType = "m6idn.12xlarge"
+	InstanceTypeM6idn16xlarge   InstanceType = "m6idn.16xlarge"
+	InstanceTypeM6idn24xlarge   InstanceType = "m6idn.24xlarge"
+	InstanceTypeM6idn32xlarge   InstanceType = "m6idn.32xlarge"
+	InstanceTypeR6inLarge       InstanceType = "r6in.large"
+	InstanceTypeR6inXlarge      InstanceType = "r6in.xlarge"
+	InstanceTypeR6in2xlarge     InstanceType = "r6in.2xlarge"
+	InstanceTypeR6in4xlarge     InstanceType = "r6in.4xlarge"
+	InstanceTypeR6in8xlarge     InstanceType = "r6in.8xlarge"
+	InstanceTypeR6in12xlarge    InstanceType = "r6in.12xlarge"
+	InstanceTypeR6in16xlarge    InstanceType = "r6in.16xlarge"
+	InstanceTypeR6in24xlarge    InstanceType = "r6in.24xlarge"
+	InstanceTypeR6in32xlarge    InstanceType = "r6in.32xlarge"
+	InstanceTypeR6idnLarge      InstanceType = "r6idn.large"
+	InstanceTypeR6idnXlarge     InstanceType = "r6idn.xlarge"
+	InstanceTypeR6idn2xlarge    InstanceType = "r6idn.2xlarge"
+	InstanceTypeR6idn4xlarge    InstanceType = "r6idn.4xlarge"
+	InstanceTypeR6idn8xlarge    InstanceType = "r6idn.8xlarge"
+	InstanceTypeR6idn12xlarge   InstanceType = "r6idn.12xlarge"
+	InstanceTypeR6idn16xlarge   InstanceType = "r6idn.16xlarge"
+	InstanceTypeR6idn24xlarge   InstanceType = "r6idn.24xlarge"
+	InstanceTypeR6idn32xlarge   InstanceType = "r6idn.32xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3857,6 +3902,51 @@ func (InstanceType) Values() []InstanceType {
 		"trn1.2xlarge",
 		"trn1.32xlarge",
 		"hpc6id.32xlarge",
+		"c6in.large",
+		"c6in.xlarge",
+		"c6in.2xlarge",
+		"c6in.4xlarge",
+		"c6in.8xlarge",
+		"c6in.12xlarge",
+		"c6in.16xlarge",
+		"c6in.24xlarge",
+		"c6in.32xlarge",
+		"m6in.large",
+		"m6in.xlarge",
+		"m6in.2xlarge",
+		"m6in.4xlarge",
+		"m6in.8xlarge",
+		"m6in.12xlarge",
+		"m6in.16xlarge",
+		"m6in.24xlarge",
+		"m6in.32xlarge",
+		"m6idn.large",
+		"m6idn.xlarge",
+		"m6idn.2xlarge",
+		"m6idn.4xlarge",
+		"m6idn.8xlarge",
+		"m6idn.12xlarge",
+		"m6idn.16xlarge",
+		"m6idn.24xlarge",
+		"m6idn.32xlarge",
+		"r6in.large",
+		"r6in.xlarge",
+		"r6in.2xlarge",
+		"r6in.4xlarge",
+		"r6in.8xlarge",
+		"r6in.12xlarge",
+		"r6in.16xlarge",
+		"r6in.24xlarge",
+		"r6in.32xlarge",
+		"r6idn.large",
+		"r6idn.xlarge",
+		"r6idn.2xlarge",
+		"r6idn.4xlarge",
+		"r6idn.8xlarge",
+		"r6idn.12xlarge",
+		"r6idn.16xlarge",
+		"r6idn.24xlarge",
+		"r6idn.32xlarge",
 	}
 }
 

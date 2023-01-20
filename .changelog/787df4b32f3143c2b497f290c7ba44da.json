@@ -1,0 +1,8 @@
+{
+    "id": "787df4b3-2f31-43c2-b497-f290c7ba44da",
+    "type": "feature",
+    "description": "API and Doc update. Update to arns field in BatchGetStreamKey. Also updates to operations and structures.",
+    "modules": [
+        "service/ivs"
+    ]
+}
