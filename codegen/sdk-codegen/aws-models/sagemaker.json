@@ -20835,7 +20835,7 @@
                 "ShadowProductionVariants": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the shadow variants hosted on the endpoint. Each shadow variant is a model\n            in shadow mode with production traffic replicated from the proudction variant.</p>"
+                        "smithy.api#documentation": "<p>A list of the shadow variants hosted on the endpoint. Each shadow variant is a model\n            in shadow mode with production traffic replicated from the production variant.</p>"
                     }
                 }
             },
@@ -41443,7 +41443,7 @@
                 "VolumeSizeInGB": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantVolumeSizeInGB",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in GB, of the ML storage volume attached to individual inference instance\n            associated with the production variant. Currenly only Amazon EBS gp2 storage volumes are\n            supported.</p>"
+                        "smithy.api#documentation": "<p>The size, in GB, of the ML storage volume attached to individual inference instance\n            associated with the production variant. Currently only Amazon EBS gp2 storage volumes are\n            supported.</p>"
                     }
                 },
                 "ModelDataDownloadTimeoutInSeconds": {
@@ -42375,6 +42375,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.r6gd.16xlarge"
+                    }
+                },
+                "ML_P4DE_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p4de.24xlarge"
                     }
                 }
             }
@@ -54054,7 +54060,7 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n            <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n            <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
                     }
                 }
             }
