@@ -1,3 +1,7 @@
+# v1.80.1 (2023-01-23)
+
+* No change notes available for this release.
+
 # v1.80.0 (2023-01-20)
 
 * **Feature**: C6in, M6in, M6idn, R6in and R6idn instances are powered by 3rd Generation Intel Xeon Scalable processors (code named Ice Lake) with an all-core turbo frequency of 3.5 GHz.

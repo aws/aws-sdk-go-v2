@@ -1,3 +1,14 @@
+# Release (2023-01-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.29.0](service/lambda/CHANGELOG.md#v1290-2023-01-23)
+  * **Feature**: Release Lambda RuntimeManagementConfig, enabling customers to better manage runtime updates to their Lambda functions. This release adds two new APIs, GetRuntimeManagementConfig and PutRuntimeManagementConfig, as well as support on existing Create/Get/Update function APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.64.0](service/sagemaker/CHANGELOG.md#v1640-2023-01-23)
+  * **Feature**: Amazon SageMaker Inference now supports P4de instance types.
+
 # Release (2023-01-20)
 
 ## Module Highlights

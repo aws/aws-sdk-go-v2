@@ -1,3 +1,7 @@
+# v1.18.2 (2023-01-23)
+
+* No change notes available for this release.
+
 # v1.18.1 (2023-01-12)
 
 * **Documentation**: Update documentation for new ListSecrets and DescribeSecret parameters

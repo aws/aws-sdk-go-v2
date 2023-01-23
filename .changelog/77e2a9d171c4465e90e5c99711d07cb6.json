@@ -1,8 +1,0 @@
-{
-    "id": "77e2a9d1-71c4-465e-90e5-c99711d07cb6",
-    "type": "feature",
-    "description": "Amazon SageMaker Inference now supports P4de instance types.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.25.1 (2023-01-23)
+
+* No change notes available for this release.
+
 # v1.25.0 (2023-01-18)
 
 * **Feature**: Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.

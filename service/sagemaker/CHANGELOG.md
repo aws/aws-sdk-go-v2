@@ -1,3 +1,7 @@
+# v1.64.0 (2023-01-23)
+
+* **Feature**: Amazon SageMaker Inference now supports P4de instance types.
+
 # v1.63.0 (2023-01-19)
 
 * **Feature**: HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
