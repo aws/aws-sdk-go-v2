@@ -11,34 +11,38 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
-func (c *Client) GetAlias(ctx context.Context, params *GetAliasInput, optFns ...func(*Options)) (*GetAliasOutput, error) {
+// Retrieves the runtime management configuration for a function's version. If the
+// runtime update mode is Manual, this includes the ARN of the runtime version and
+// the runtime update mode. If the runtime update mode is Auto or Function update,
+// this includes the runtime update mode and null is returned for the ARN. For more
+// information, see Runtime updates
+// (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).
+func (c *Client) GetRuntimeManagementConfig(ctx context.Context, params *GetRuntimeManagementConfigInput, optFns ...func(*Options)) (*GetRuntimeManagementConfigOutput, error) {
 	if params == nil {
-		params = &GetAliasInput{}
+		params = &GetRuntimeManagementConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAlias", params, optFns, c.addOperationGetAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRuntimeManagementConfig", params, optFns, c.addOperationGetRuntimeManagementConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetAliasOutput)
+	out := result.(*GetRuntimeManagementConfigOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetAliasInput struct {
+type GetRuntimeManagementConfigInput struct {
 
 	// The name of the Lambda function. Name formats
 	//
-	// * Function name - MyFunction.
+	// * Function name – my-function.
 	//
 	// *
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
+	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
 	//
 	// *
-	// Partial ARN - 123456789012:function:MyFunction.
+	// Partial ARN – 123456789012:function:my-function.
 	//
 	// The length constraint applies
 	// only to the full ARN. If you specify only the function name, it is limited to 64
@@ -47,37 +51,22 @@ type GetAliasInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The name of the alias.
-	//
-	// This member is required.
-	Name *string
+	// Specify a version of the function. This can be $LATEST or a published version
+	// number. If no value is specified, the configuration for the $LATEST version is
+	// returned.
+	Qualifier *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
-type GetAliasOutput struct {
+type GetRuntimeManagementConfigOutput struct {
 
-	// The Amazon Resource Name (ARN) of the alias.
-	AliasArn *string
+	// The ARN of the runtime the function is configured to use. If the runtime update
+	// mode is Manual, the ARN is returned, otherwise null is returned.
+	RuntimeVersionArn *string
 
-	// A description of the alias.
-	Description *string
-
-	// The function version that the alias invokes.
-	FunctionVersion *string
-
-	// The name of the alias.
-	Name *string
-
-	// A unique identifier that changes when you update the alias.
-	RevisionId *string
-
-	// The routing configuration
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
-	// of the alias.
-	RoutingConfig *types.AliasRoutingConfiguration
+	// The current runtime update mode of the function.
+	UpdateRuntimeOn types.UpdateRuntimeOn
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,12 +74,12 @@ type GetAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAlias{}, middleware.After)
+func (c *Client) addOperationGetRuntimeManagementConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRuntimeManagementConfig{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAlias{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRuntimeManagementConfig{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -130,10 +119,10 @@ func (c *Client) addOperationGetAliasMiddlewares(stack *middleware.Stack, option
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetAliasValidationMiddleware(stack); err != nil {
+	if err = addOpGetRuntimeManagementConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAlias(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRuntimeManagementConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,11 +137,11 @@ func (c *Client) addOperationGetAliasMiddlewares(stack *middleware.Stack, option
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetAlias(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetRuntimeManagementConfig(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "lambda",
-		OperationName: "GetAlias",
+		OperationName: "GetRuntimeManagementConfig",
 	}
 }

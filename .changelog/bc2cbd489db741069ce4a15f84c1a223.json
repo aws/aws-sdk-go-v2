@@ -1,0 +1,8 @@
+{
+    "id": "bc2cbd48-9db7-4106-9ce4-a15f84c1a223",
+    "type": "feature",
+    "description": "Release Lambda RuntimeManagementConfig, enabling customers to better manage runtime updates to their Lambda functions. This release adds two new APIs, GetRuntimeManagementConfig and PutRuntimeManagementConfig, as well as support on existing Create/Get/Update function APIs.",
+    "modules": [
+        "service/lambda"
+    ]
+}

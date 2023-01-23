@@ -148,6 +148,9 @@ type GetFunctionConfigurationOutput struct {
 	// The runtime environment for the Lambda function.
 	Runtime types.Runtime
 
+	// The ARN of the runtime and any errors that occured.
+	RuntimeVersionConfig *types.RuntimeVersionConfig
+
 	// The ARN of the signing job.
 	SigningJobArn *string
 

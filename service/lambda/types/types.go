@@ -47,7 +47,7 @@ type AccountUsage struct {
 }
 
 // Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 type AliasConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the alias.
@@ -578,6 +578,9 @@ type FunctionConfiguration struct {
 	// The runtime environment for the Lambda function.
 	Runtime Runtime
 
+	// The ARN of the runtime and any errors that occured.
+	RuntimeVersionConfig *RuntimeVersionConfig
+
 	// The ARN of the signing job.
 	SigningJobArn *string
 
@@ -886,6 +889,32 @@ type ProvisionedConcurrencyConfigListItem struct {
 	// For failed allocations, the reason that provisioned concurrency could not be
 	// allocated.
 	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The ARN of the runtime and any errors that occured.
+type RuntimeVersionConfig struct {
+
+	// Error response when Lambda is unable to retrieve the runtime version for a
+	// function.
+	Error *RuntimeVersionError
+
+	// The ARN of the runtime version you want the function to use.
+	RuntimeVersionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Any error returned when the runtime version information for the function could
+// not be retrieved.
+type RuntimeVersionError struct {
+
+	// The error code.
+	ErrorCode *string
+
+	// The error message.
+	Message *string
 
 	noSmithyDocumentSerde
 }

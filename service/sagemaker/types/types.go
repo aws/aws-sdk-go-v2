@@ -4207,7 +4207,7 @@ type Endpoint struct {
 	ProductionVariants []ProductionVariantSummary
 
 	// A list of the shadow variants hosted on the endpoint. Each shadow variant is a
-	// model in shadow mode with production traffic replicated from the proudction
+	// model in shadow mode with production traffic replicated from the production
 	// variant.
 	ShadowProductionVariants []ProductionVariantSummary
 
@@ -11898,7 +11898,7 @@ type ProductionVariant struct {
 	ServerlessConfig *ProductionVariantServerlessConfig
 
 	// The size, in GB, of the ML storage volume attached to individual inference
-	// instance associated with the production variant. Currenly only Amazon EBS gp2
+	// instance associated with the production variant. Currently only Amazon EBS gp2
 	// storage volumes are supported.
 	VolumeSizeInGB *int32
 
