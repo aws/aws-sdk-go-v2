@@ -1,8 +1,0 @@
-{
-    "id": "dcedf0ea-2bc3-4195-9da2-f24f9f578295",
-    "type": "feature",
-    "description": "This release provides updates to documentation and support for listing operations performed by AWS Systems Manager for SAP.",
-    "modules": [
-        "service/ssmsap"
-    ]
-}

@@ -1,3 +1,11 @@
+# Release (2023-01-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.27.0](service/route53/CHANGELOG.md#v1270-2023-01-24)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Melbourne) Region (ap-southeast-4) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.2.0](service/ssmsap/CHANGELOG.md#v120-2023-01-24)
+  * **Feature**: This release provides updates to documentation and support for listing operations performed by AWS Systems Manager for SAP.
+
 # Release (2023-01-23)
 
 ## General Highlights
