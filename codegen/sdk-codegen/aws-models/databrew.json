@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.databrew#AWSGlueDataBrew": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "DataBrew",
-                    "arnNamespace": "databrew",
-                    "cloudFormationName": "DataBrew",
-                    "cloudTrailEventSource": "databrew.amazonaws.com",
-                    "endpointPrefix": "databrew"
-                },
-                "aws.auth#sigv4": {
-                    "name": "databrew"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
-                "smithy.api#title": "AWS Glue DataBrew"
-            },
             "version": "2017-07-25",
             "operations": [
                 {
@@ -180,7 +165,889 @@
                 {
                     "target": "com.amazonaws.databrew#UpdateSchedule"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DataBrew",
+                    "arnNamespace": "databrew",
+                    "cloudFormationName": "DataBrew",
+                    "cloudTrailEventSource": "databrew.amazonaws.com",
+                    "endpointPrefix": "databrew"
+                },
+                "aws.auth#sigv4": {
+                    "name": "databrew"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
+                "smithy.api#title": "AWS Glue DataBrew",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://databrew-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://databrew.us-gov-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://databrew-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://databrew.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://databrew.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://databrew.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.databrew#AccessDeniedException": {
             "type": "structure",
@@ -205,10 +1072,7 @@
             }
         },
         "com.amazonaws.databrew#ActionId": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.databrew#AllowedStatisticList": {
             "type": "list",
@@ -237,18 +1101,20 @@
             }
         },
         "com.amazonaws.databrew#AnalyticsMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLE",
-                        "name": "ENABLE"
-                    },
-                    {
-                        "value": "DISABLE",
-                        "name": "DISABLE"
+            "type": "enum",
+            "members": {
+                "ENABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE"
                     }
-                ]
+                },
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#Arn": {
@@ -261,10 +1127,16 @@
             }
         },
         "com.amazonaws.databrew#AssumeControl": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.databrew#Attempt": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.databrew#BatchDeleteRecipeVersion": {
             "type": "operation",
@@ -286,7 +1158,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes one or more versions of a recipe at a time.</p>\n\n        <p>The entire request will be rejected if:</p>\n        <ul>\n            <li>\n                <p>The recipe does not exist.</p>\n            </li>\n            <li>\n                <p>There is an invalid version identifier in the list of versions.</p>\n            </li>\n            <li>\n                <p>The version list is empty.</p>\n            </li>\n            <li>\n                <p>The version list size exceeds 50.</p>\n            </li>\n            <li>\n                <p>The version list contains duplicate entries.</p>\n            </li>\n         </ul>\n\n        <p>The request will complete successfully, but with partial failures, if:</p>\n        <ul>\n            <li>\n                <p>A version does not exist.</p>\n            </li>\n            <li>\n                <p>A version is being used by a job.</p>\n            </li>\n            <li>\n                <p>You specify <code>LATEST_WORKING</code>, but it's being used by a\n                    project.</p>\n            </li>\n            <li>\n                <p>The version fails to be deleted.</p>\n            </li>\n         </ul>\n        <p>The <code>LATEST_WORKING</code> version will only be deleted if the recipe has no\n            other versions. If you try to delete <code>LATEST_WORKING</code> while other versions\n            exist (or if they can't be deleted), then <code>LATEST_WORKING</code> will be listed as\n            partial failure in the response.</p>",
+                "smithy.api#documentation": "<p>Deletes one or more versions of a recipe at a time.</p>\n         <p>The entire request will be rejected if:</p>\n         <ul>\n            <li>\n               <p>The recipe does not exist.</p>\n            </li>\n            <li>\n               <p>There is an invalid version identifier in the list of versions.</p>\n            </li>\n            <li>\n               <p>The version list is empty.</p>\n            </li>\n            <li>\n               <p>The version list size exceeds 50.</p>\n            </li>\n            <li>\n               <p>The version list contains duplicate entries.</p>\n            </li>\n         </ul>\n         <p>The request will complete successfully, but with partial failures, if:</p>\n         <ul>\n            <li>\n               <p>A version does not exist.</p>\n            </li>\n            <li>\n               <p>A version is being used by a job.</p>\n            </li>\n            <li>\n               <p>You specify <code>LATEST_WORKING</code>, but it's being used by a\n                    project.</p>\n            </li>\n            <li>\n               <p>The version fails to be deleted.</p>\n            </li>\n         </ul>\n         <p>The <code>LATEST_WORKING</code> version will only be deleted if the recipe has no\n            other versions. If you try to delete <code>LATEST_WORKING</code> while other versions\n            exist (or if they can't be deleted), then <code>LATEST_WORKING</code> will be listed as\n            partial failure in the response.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/recipes/{Name}/batchDeleteRecipeVersion",
@@ -395,7 +1267,6 @@
         "com.amazonaws.databrew#ColumnRange": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 20
@@ -466,46 +1337,62 @@
             }
         },
         "com.amazonaws.databrew#CompressionFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GZIP",
-                        "name": "GZIP"
-                    },
-                    {
-                        "value": "LZ4",
-                        "name": "LZ4"
-                    },
-                    {
-                        "value": "SNAPPY",
-                        "name": "SNAPPY"
-                    },
-                    {
-                        "value": "BZIP2",
-                        "name": "BZIP2"
-                    },
-                    {
-                        "value": "DEFLATE",
-                        "name": "DEFLATE"
-                    },
-                    {
-                        "value": "LZO",
-                        "name": "LZO"
-                    },
-                    {
-                        "value": "BROTLI",
-                        "name": "BROTLI"
-                    },
-                    {
-                        "value": "ZSTD",
-                        "name": "ZSTD"
-                    },
-                    {
-                        "value": "ZLIB",
-                        "name": "ZLIB"
+            "type": "enum",
+            "members": {
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
                     }
-                ]
+                },
+                "LZ4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LZ4"
+                    }
+                },
+                "SNAPPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPPY"
+                    }
+                },
+                "BZIP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BZIP2"
+                    }
+                },
+                "DEFLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFLATE"
+                    }
+                },
+                "LZO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LZO"
+                    }
+                },
+                "BROTLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BROTLI"
+                    }
+                },
+                "ZSTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZSTD"
+                    }
+                },
+                "ZLIB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZLIB"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#Condition": {
@@ -543,7 +1430,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n        <p>Conditions are used with recipe actions. The action is only performed for column values where the \n            condition evaluates to true.</p>\n        <p>If a recipe requires more than one condition, then the recipe must specify multiple \n            <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before \n            the recipe action is performed.</p>"
+                "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n         <p>Conditions are used with recipe actions. The action is only performed for column values where the \n            condition evaluates to true.</p>\n         <p>If a recipe requires more than one condition, then the recipe must specify multiple \n            <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before \n            the recipe action is performed.</p>"
             }
         },
         "com.amazonaws.databrew#ConditionExpressionList": {
@@ -575,7 +1462,10 @@
             }
         },
         "com.amazonaws.databrew#CreateColumn": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.databrew#CreateDataset": {
             "type": "operation",
@@ -712,7 +1602,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with \n                    KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with \n                    KMS-managed keys.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -731,12 +1621,14 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.databrew#MaxCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew can use when the job processes data.</p>"
                     }
                 },
                 "MaxRetries": {
                     "target": "com.amazonaws.databrew#MaxRetries",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
                     }
                 },
@@ -774,6 +1666,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.databrew#Timeout",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
                     }
                 },
@@ -962,7 +1855,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -981,12 +1874,14 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.databrew#MaxCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew can consume when the job processes\n            data.</p>"
                     }
                 },
                 "MaxRetries": {
                     "target": "com.amazonaws.databrew#MaxRetries",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
                     }
                 },
@@ -1033,6 +1928,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.databrew#Timeout",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
                     }
                 }
@@ -1360,6 +2256,7 @@
                 "Overwrite": {
                     "target": "com.amazonaws.databrew#OverwriteOutput",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that, if true, means that any data in the location specified for output \n            is overwritten with new output. Not supported with DatabaseOptions.</p>"
                     }
                 }
@@ -1458,14 +2355,14 @@
             }
         },
         "com.amazonaws.databrew#DatabaseOutputMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NEW_TABLE",
-                        "name": "NEW_TABLE"
+            "type": "enum",
+            "members": {
+                "NEW_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_TABLE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.databrew#DatabaseTableName": {
@@ -1627,6 +2524,7 @@
                 "CreateColumn": {
                     "target": "com.amazonaws.databrew#CreateColumn",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Optional boolean value that defines whether the captured value of this parameter \n            should be used to create a new column in a dataset.</p>"
                     }
                 },
@@ -2200,7 +3098,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -2213,7 +3111,7 @@
                 "Type": {
                     "target": "com.amazonaws.databrew#JobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job type, which must be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PROFILE</code> - The job analyzes the dataset to determine its size,\n                    data types, data distribution, and more.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RECIPE</code> - The job applies one or more transformations to a\n                    dataset.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The job type, which must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROFILE</code> - The job analyzes the dataset to determine its size,\n                    data types, data distribution, and more.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RECIPE</code> - The job applies one or more transformations to a\n                    dataset.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LastModifiedBy": {
@@ -2237,12 +3135,14 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.databrew#MaxCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of compute nodes that DataBrew can consume when the job processes\n            data.</p>"
                     }
                 },
                 "MaxRetries": {
                     "target": "com.amazonaws.databrew#MaxRetries",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
                     }
                 },
@@ -2306,6 +3206,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.databrew#Timeout",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
                     }
                 },
@@ -2369,6 +3270,7 @@
                 "Attempt": {
                     "target": "com.amazonaws.databrew#Attempt",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of times that DataBrew has attempted to run the job.</p>"
                     }
                 },
@@ -2393,6 +3295,7 @@
                 "ExecutionTime": {
                     "target": "com.amazonaws.databrew#ExecutionTime",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, during which the job run consumed resources.</p>"
                     }
                 },
@@ -2588,7 +3491,7 @@
                 "SessionStatus": {
                     "target": "com.amazonaws.databrew#SessionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the current state of the session:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PROVISIONING</code> - allocating resources for the session.</p>\n            </li>\n            <li>\n                <p>\n                  <code>INITIALIZING</code> - getting the session ready for first use.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ASSIGNED</code> - the session is ready for use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Describes the current state of the session:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> - allocating resources for the session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INITIALIZING</code> - getting the session ready for first use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSIGNED</code> - the session is ready for use.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OpenedBy": {
@@ -2937,7 +3840,10 @@
             }
         },
         "com.amazonaws.databrew#Disabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.databrew#EncryptionKeyArn": {
             "type": "string",
@@ -2949,18 +3855,20 @@
             }
         },
         "com.amazonaws.databrew#EncryptionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SSE-KMS",
-                        "name": "SSEKMS"
-                    },
-                    {
-                        "value": "SSE-S3",
-                        "name": "SSES3"
+            "type": "enum",
+            "members": {
+                "SSEKMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE-KMS"
                     }
-                ]
+                },
+                "SSES3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE-S3"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#EntityDetectorConfiguration": {
@@ -2969,7 +3877,7 @@
                 "EntityTypes": {
                     "target": "com.amazonaws.databrew#EntityTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Entity types to detect. Can be any of the following:</p>\n        <ul>\n            <li>\n               <p>USA_SSN</p>\n            </li>\n            <li>\n               <p>EMAIL</p>\n            </li>\n            <li>\n               <p>USA_ITIN</p>\n            </li>\n            <li>\n               <p>USA_PASSPORT_NUMBER</p>\n            </li>\n            <li>\n               <p>PHONE_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_DRIVING_LICENSE</p>\n            </li>\n            <li>\n               <p>BANK_ACCOUNT</p>\n            </li>\n            <li>\n               <p>CREDIT_CARD</p>\n            </li>\n            <li>\n               <p>IP_ADDRESS</p>\n            </li>\n            <li>\n               <p>MAC_ADDRESS</p>\n            </li>\n            <li>\n               <p>USA_DEA_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_HCPCS_CODE</p>\n            </li>\n            <li>\n               <p>USA_NATIONAL_PROVIDER_IDENTIFIER</p>\n            </li>\n            <li>\n               <p>USA_NATIONAL_DRUG_CODE</p>\n            </li>\n            <li>\n               <p>USA_HEALTH_INSURANCE_CLAIM_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_MEDICARE_BENEFICIARY_IDENTIFIER</p>\n            </li>\n            <li>\n               <p>USA_CPT_CODE</p>\n            </li>\n            <li>\n               <p>PERSON_NAME</p>\n            </li>\n            <li>\n               <p>DATE</p>\n            </li>\n         </ul>\n        <p>The Entity type group USA_ALL is also supported, and includes all of the \n            above entity types except PERSON_NAME and DATE.</p>",
+                        "smithy.api#documentation": "<p>Entity types to detect. Can be any of the following:</p>\n         <ul>\n            <li>\n               <p>USA_SSN</p>\n            </li>\n            <li>\n               <p>EMAIL</p>\n            </li>\n            <li>\n               <p>USA_ITIN</p>\n            </li>\n            <li>\n               <p>USA_PASSPORT_NUMBER</p>\n            </li>\n            <li>\n               <p>PHONE_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_DRIVING_LICENSE</p>\n            </li>\n            <li>\n               <p>BANK_ACCOUNT</p>\n            </li>\n            <li>\n               <p>CREDIT_CARD</p>\n            </li>\n            <li>\n               <p>IP_ADDRESS</p>\n            </li>\n            <li>\n               <p>MAC_ADDRESS</p>\n            </li>\n            <li>\n               <p>USA_DEA_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_HCPCS_CODE</p>\n            </li>\n            <li>\n               <p>USA_NATIONAL_PROVIDER_IDENTIFIER</p>\n            </li>\n            <li>\n               <p>USA_NATIONAL_DRUG_CODE</p>\n            </li>\n            <li>\n               <p>USA_HEALTH_INSURANCE_CLAIM_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_MEDICARE_BENEFICIARY_IDENTIFIER</p>\n            </li>\n            <li>\n               <p>USA_CPT_CODE</p>\n            </li>\n            <li>\n               <p>PERSON_NAME</p>\n            </li>\n            <li>\n               <p>DATE</p>\n            </li>\n         </ul>\n         <p>The Entity type group USA_ALL is also supported, and includes all of the \n            above entity types except PERSON_NAME and DATE.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3038,7 +3946,10 @@
             }
         },
         "com.amazonaws.databrew#ExecutionTime": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.databrew#Expression": {
             "type": "string",
@@ -3056,6 +3967,7 @@
                 "MaxFiles": {
                     "target": "com.amazonaws.databrew#MaxFiles",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of Amazon S3 files to select.</p>",
                         "smithy.api#required": {}
                     }
@@ -3135,10 +4047,7 @@
             }
         },
         "com.amazonaws.databrew#HeaderRow": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.databrew#HiddenColumnList": {
             "type": "list",
@@ -3179,30 +4088,38 @@
             }
         },
         "com.amazonaws.databrew#InputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
-                    },
-                    {
-                        "value": "EXCEL",
-                        "name": "EXCEL"
-                    },
-                    {
-                        "value": "ORC",
-                        "name": "ORC"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                },
+                "EXCEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCEL"
+                    }
+                },
+                "ORC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORC"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#InternalServerException": {
@@ -3254,7 +4171,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -3267,7 +4184,7 @@
                 "Type": {
                     "target": "com.amazonaws.databrew#JobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job type of the job, which must be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PROFILE</code> - A job to analyze a dataset, to determine its size, data\n                    types, data distribution, and more.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RECIPE</code> - A job to apply one or more transformations to a\n                    dataset.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The job type of the job, which must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROFILE</code> - A job to analyze a dataset, to determine its size, data\n                    types, data distribution, and more.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RECIPE</code> - A job to apply one or more transformations to a\n                    dataset.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LastModifiedBy": {
@@ -3291,12 +4208,14 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.databrew#MaxCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of nodes that can be consumed when the job processes data.</p>"
                     }
                 },
                 "MaxRetries": {
                     "target": "com.amazonaws.databrew#MaxRetries",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
                     }
                 },
@@ -3345,6 +4264,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.databrew#Timeout",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
                     }
                 },
@@ -3404,6 +4324,7 @@
                 "Attempt": {
                     "target": "com.amazonaws.databrew#Attempt",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of times that DataBrew has attempted to run the job.</p>"
                     }
                 },
@@ -3428,6 +4349,7 @@
                 "ExecutionTime": {
                     "target": "com.amazonaws.databrew#ExecutionTime",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, during which a job run consumed resources.</p>"
                     }
                 },
@@ -3533,38 +4455,50 @@
             }
         },
         "com.amazonaws.databrew#JobRunState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "TIMEOUT",
-                        "name": "TIMEOUT"
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
                     }
-                ]
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMEOUT"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#JobSample": {
@@ -3573,13 +4507,13 @@
                 "Mode": {
                     "target": "com.amazonaws.databrew#SampleMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether the profile job is run on the entire dataset or a\n            specified number of rows. This value must be one of the following:</p>\n        <ul>\n            <li>\n                <p>FULL_DATASET - The profile job is run on the entire dataset.</p>\n            </li>\n            <li>\n                <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the\n                    <code>Size</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A value that determines whether the profile job is run on the entire dataset or a\n            specified number of rows. This value must be one of the following:</p>\n         <ul>\n            <li>\n               <p>FULL_DATASET - The profile job is run on the entire dataset.</p>\n            </li>\n            <li>\n               <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the\n                    <code>Size</code> parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Size": {
                     "target": "com.amazonaws.databrew#JobSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The\n            profile job is run on the specified number of rows. The maximum value for size is\n            Long.MAX_VALUE.</p>\n        <p>Long.MAX_VALUE = 9223372036854775807</p>"
+                        "smithy.api#documentation": "<p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The\n            profile job is run on the specified number of rows. The maximum value for size is\n            Long.MAX_VALUE.</p>\n         <p>Long.MAX_VALUE = 9223372036854775807</p>"
                     }
                 }
             },
@@ -3588,24 +4522,23 @@
             }
         },
         "com.amazonaws.databrew#JobSize": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.databrew#JobType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROFILE",
-                        "name": "PROFILE"
-                    },
-                    {
-                        "value": "RECIPE",
-                        "name": "RECIPE"
+            "type": "enum",
+            "members": {
+                "PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE"
                     }
-                ]
+                },
+                "RECIPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECIPE"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#JsonOptions": {
@@ -3614,6 +4547,7 @@
                 "MultiLine": {
                     "target": "com.amazonaws.databrew#MultiLine",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that specifies whether JSON input contains embedded new line\n            characters.</p>"
                     }
                 }
@@ -4040,7 +4974,7 @@
                 "RecipeVersion": {
                     "target": "com.amazonaws.databrew#RecipeVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Return only those recipes with a version identifier of <code>LATEST_WORKING</code> or\n                <code>LATEST_PUBLISHED</code>. If <code>RecipeVersion</code> is omitted,\n                <code>ListRecipes</code> returns all of the <code>LATEST_PUBLISHED</code> recipe\n            versions.</p>\n        <p>Valid values: <code>LATEST_WORKING</code> | <code>LATEST_PUBLISHED</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Return only those recipes with a version identifier of <code>LATEST_WORKING</code> or\n                <code>LATEST_PUBLISHED</code>. If <code>RecipeVersion</code> is omitted,\n                <code>ListRecipes</code> returns all of the <code>LATEST_PUBLISHED</code> recipe\n            versions.</p>\n         <p>Valid values: <code>LATEST_WORKING</code> | <code>LATEST_PUBLISHED</code>\n         </p>",
                         "smithy.api#httpQuery": "recipeVersion"
                     }
                 }
@@ -4283,26 +5217,32 @@
             }
         },
         "com.amazonaws.databrew#LogSubscription": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLE",
-                        "name": "ENABLE"
-                    },
-                    {
-                        "value": "DISABLE",
-                        "name": "DISABLE"
+            "type": "enum",
+            "members": {
+                "ENABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE"
                     }
-                ]
+                },
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#MaxCapacity": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.databrew#MaxFiles": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4311,7 +5251,6 @@
         "com.amazonaws.databrew#MaxOutputFiles": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 999
@@ -4321,7 +5260,6 @@
         "com.amazonaws.databrew#MaxResults100": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4331,6 +5269,7 @@
         "com.amazonaws.databrew#MaxRetries": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -4354,7 +5293,10 @@
             }
         },
         "com.amazonaws.databrew#MultiLine": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.databrew#NextToken": {
             "type": "string",
@@ -4379,29 +5321,31 @@
             }
         },
         "com.amazonaws.databrew#Order": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DESCENDING",
-                        "name": "DESCENDING"
-                    },
-                    {
-                        "value": "ASCENDING",
-                        "name": "ASCENDING"
+            "type": "enum",
+            "members": {
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
                     }
-                ]
+                },
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#OrderedBy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LAST_MODIFIED_DATE",
-                        "name": "LAST_MODIFIED_DATE"
+            "type": "enum",
+            "members": {
+                "LAST_MODIFIED_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_MODIFIED_DATE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.databrew#Output": {
@@ -4435,6 +5379,7 @@
                 "Overwrite": {
                     "target": "com.amazonaws.databrew#OverwriteOutput",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that, if true, means that any data in the location specified for output is\n            overwritten with new output.</p>"
                     }
                 },
@@ -4456,42 +5401,56 @@
             }
         },
         "com.amazonaws.databrew#OutputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
-                    },
-                    {
-                        "value": "GLUEPARQUET",
-                        "name": "GLUEPARQUET"
-                    },
-                    {
-                        "value": "AVRO",
-                        "name": "AVRO"
-                    },
-                    {
-                        "value": "ORC",
-                        "name": "ORC"
-                    },
-                    {
-                        "value": "XML",
-                        "name": "XML"
-                    },
-                    {
-                        "value": "TABLEAUHYPER",
-                        "name": "TABLEAUHYPER"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                },
+                "GLUEPARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLUEPARQUET"
+                    }
+                },
+                "AVRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVRO"
+                    }
+                },
+                "ORC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORC"
+                    }
+                },
+                "XML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XML"
+                    }
+                },
+                "TABLEAUHYPER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLEAUHYPER"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#OutputFormatOptions": {
@@ -4520,7 +5479,10 @@
             }
         },
         "com.amazonaws.databrew#OverwriteOutput": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.databrew#ParameterMap": {
             "type": "map",
@@ -4542,22 +5504,26 @@
             }
         },
         "com.amazonaws.databrew#ParameterType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Datetime",
-                        "name": "Datetime"
-                    },
-                    {
-                        "value": "Number",
-                        "name": "Number"
-                    },
-                    {
-                        "value": "String",
-                        "name": "String"
+            "type": "enum",
+            "members": {
+                "Datetime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Datetime"
                     }
-                ]
+                },
+                "Number": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Number"
+                    }
+                },
+                "String": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "String"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#ParameterValue": {
@@ -4621,7 +5587,10 @@
             }
         },
         "com.amazonaws.databrew#Preview": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.databrew#ProfileConfiguration": {
             "type": "structure",
@@ -4914,7 +5883,7 @@
                 "RecipeVersion": {
                     "target": "com.amazonaws.databrew#RecipeVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the version for the recipe. Must be one of the following:</p>\n        <ul>\n            <li>\n                <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand\n                    for major and minor version numbers. The maximum length of each is 6 digits, and\n                    neither can be negative values. Both <code>X</code> and <code>Y</code> are\n                    required, and \"0.0\" isn't a valid version.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LATEST_WORKING</code> - the most recent valid version being developed in\n                    a DataBrew project.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LATEST_PUBLISHED</code> - the most recent published version.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier for the version for the recipe. Must be one of the following:</p>\n         <ul>\n            <li>\n               <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand\n                    for major and minor version numbers. The maximum length of each is 6 digits, and\n                    neither can be negative values. Both <code>X</code> and <code>Y</code> are\n                    required, and \"0.0\" isn't a valid version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LATEST_WORKING</code> - the most recent valid version being developed in\n                    a DataBrew project.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LATEST_PUBLISHED</code> - the most recent published version.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5010,7 +5979,7 @@
                 "ConditionExpressions": {
                     "target": "com.amazonaws.databrew#ConditionExpressionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more conditions that must be met for the recipe step to succeed.</p>\n        <note>\n            <p>All of the conditions in the array must be met. In other words, all of the\n                conditions must be combined using a logical AND operation.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>One or more conditions that must be met for the recipe step to succeed.</p>\n         <note>\n            <p>All of the conditions in the array must be met. In other words, all of the\n                conditions must be combined using a logical AND operation.</p>\n         </note>"
                     }
                 }
             },
@@ -5088,10 +6057,7 @@
             "type": "string"
         },
         "com.amazonaws.databrew#RowRange": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.databrew#Rule": {
             "type": "structure",
@@ -5106,13 +6072,14 @@
                 "Disabled": {
                     "target": "com.amazonaws.databrew#Disabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that specifies whether the rule is disabled. Once a rule is \n            disabled, a profile job will not validate it during a job run. Default \n            value is false.</p>"
                     }
                 },
                 "CheckExpression": {
                     "target": "com.amazonaws.databrew#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expression which includes column references, condition names followed by variable\n            references, possibly grouped and combined with other conditions. For example,\n                <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1\n                ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value references\n            are substitution variables that should start with the ':' symbol. Depending on the\n            context, substitution variables' values can be either an actual value or a column name.\n            These values are defined in the SubstitutionMap. If a CheckExpression starts with a\n            column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors\n            has been defined, then there should be no column reference in the left side of a\n            condition, for example, <code>is_between :val1 and :val2</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html\">Available checks</a>\n         </p>",
+                        "smithy.api#documentation": "<p>The expression which includes column references, condition names followed by variable\n            references, possibly grouped and combined with other conditions. For example,\n                <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1\n                ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value references\n            are substitution variables that should start with the ':' symbol. Depending on the\n            context, substitution variables' values can be either an actual value or a column name.\n            These values are defined in the SubstitutionMap. If a CheckExpression starts with a\n            column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors\n            has been defined, then there should be no column reference in the left side of a\n            condition, for example, <code>is_between :val1 and :val2</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html\">Available checks</a>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5142,6 +6109,7 @@
         "com.amazonaws.databrew#RuleCount": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5231,6 +6199,7 @@
                 "RuleCount": {
                     "target": "com.amazonaws.databrew#RuleCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of rules that are defined in the ruleset.</p>"
                     }
                 },
@@ -5331,24 +6300,25 @@
             }
         },
         "com.amazonaws.databrew#SampleMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FULL_DATASET",
-                        "name": "FULL_DATASET"
-                    },
-                    {
-                        "value": "CUSTOM_ROWS",
-                        "name": "CUSTOM_ROWS"
+            "type": "enum",
+            "members": {
+                "FULL_DATASET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_DATASET"
                     }
-                ]
+                },
+                "CUSTOM_ROWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_ROWS"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#SampleSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5000
@@ -5356,22 +6326,26 @@
             }
         },
         "com.amazonaws.databrew#SampleType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIRST_N",
-                        "name": "FIRST_N"
-                    },
-                    {
-                        "value": "LAST_N",
-                        "name": "LAST_N"
-                    },
-                    {
-                        "value": "RANDOM",
-                        "name": "RANDOM"
+            "type": "enum",
+            "members": {
+                "FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST_N"
                     }
-                ]
+                },
+                "LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_N"
+                    }
+                },
+                "RANDOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RANDOM"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#Schedule": {
@@ -5492,6 +6466,7 @@
                 "Preview": {
                     "target": "com.amazonaws.databrew#Preview",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, the result of the recipe step will be returned, but not applied.</p>"
                     }
                 },
@@ -5561,56 +6536,73 @@
             }
         },
         "com.amazonaws.databrew#SessionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSIGNED",
-                        "name": "ASSIGNED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "INITIALIZING",
-                        "name": "INITIALIZING"
-                    },
-                    {
-                        "value": "PROVISIONING",
-                        "name": "PROVISIONING"
-                    },
-                    {
-                        "value": "READY",
-                        "name": "READY"
-                    },
-                    {
-                        "value": "RECYCLING",
-                        "name": "RECYCLING"
-                    },
-                    {
-                        "value": "ROTATING",
-                        "name": "ROTATING"
-                    },
-                    {
-                        "value": "TERMINATED",
-                        "name": "TERMINATED"
-                    },
-                    {
-                        "value": "TERMINATING",
-                        "name": "TERMINATING"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
+            "type": "enum",
+            "members": {
+                "ASSIGNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSIGNED"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "RECYCLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECYCLING"
+                    }
+                },
+                "ROTATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROTATING"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#SheetIndex": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 200
@@ -5651,28 +6643,31 @@
             }
         },
         "com.amazonaws.databrew#Source": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "S3",
-                        "name": "S3"
-                    },
-                    {
-                        "value": "DATA-CATALOG",
-                        "name": "DATACATALOG"
-                    },
-                    {
-                        "value": "DATABASE",
-                        "name": "DATABASE"
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
                     }
-                ]
+                },
+                "DATACATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA-CATALOG"
+                    }
+                },
+                "DATABASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABASE"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#StartColumnIndex": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5779,6 +6774,7 @@
                 "AssumeControl": {
                     "target": "com.amazonaws.databrew#AssumeControl",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that, if true, enables you to take control of a session, even if a different\n            client is currently accessing the project.</p>"
                     }
                 }
@@ -5805,7 +6801,6 @@
         "com.amazonaws.databrew#StartRowIndex": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5891,7 +6886,6 @@
         "com.amazonaws.databrew#StepIndex": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6076,6 +7070,7 @@
                 "Value": {
                     "target": "com.amazonaws.databrew#ThresholdValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value of a threshold.</p>",
                         "smithy.api#required": {}
                     }
@@ -6098,46 +7093,55 @@
             }
         },
         "com.amazonaws.databrew#ThresholdType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL",
-                        "name": "GREATER_THAN_OR_EQUAL"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL",
-                        "name": "LESS_THAN_OR_EQUAL"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
+            "type": "enum",
+            "members": {
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
                     }
-                ]
+                },
+                "LESS_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#ThresholdUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COUNT",
-                        "name": "COUNT"
-                    },
-                    {
-                        "value": "PERCENTAGE",
-                        "name": "PERCENTAGE"
+            "type": "enum",
+            "members": {
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
                     }
-                ]
+                },
+                "PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENTAGE"
+                    }
+                }
             }
         },
         "com.amazonaws.databrew#ThresholdValue": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6146,6 +7150,7 @@
         "com.amazonaws.databrew#Timeout": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6334,7 +7339,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -6354,12 +7359,14 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.databrew#MaxCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of compute nodes that DataBrew can use when the job processes\n            data.</p>"
                     }
                 },
                 "MaxRetries": {
                     "target": "com.amazonaws.databrew#MaxRetries",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
                     }
                 },
@@ -6385,6 +7392,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.databrew#Timeout",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
                     }
                 },
@@ -6539,7 +7547,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -6559,12 +7567,14 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.databrew#MaxCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew can consume when the job processes\n            data.</p>"
                     }
                 },
                 "MaxRetries": {
                     "target": "com.amazonaws.databrew#MaxRetries",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
                     }
                 },
@@ -6596,6 +7606,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.databrew#Timeout",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
                     }
                 }
@@ -6825,14 +7836,14 @@
             }
         },
         "com.amazonaws.databrew#ValidationMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CHECK_ALL",
-                        "name": "CHECK_ALL"
+            "type": "enum",
+            "members": {
+                "CHECK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHECK_ALL"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.databrew#ValueReference": {
