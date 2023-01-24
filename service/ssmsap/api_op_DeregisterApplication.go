@@ -29,7 +29,7 @@ func (c *Client) DeregisterApplication(ctx context.Context, params *DeregisterAp
 
 type DeregisterApplicationInput struct {
 
-	//
+	// The ID of the application.
 	//
 	// This member is required.
 	ApplicationId *string

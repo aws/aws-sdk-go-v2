@@ -138,6 +138,26 @@ func (DatabaseType) Values() []DatabaseType {
 	}
 }
 
+type FilterOperator string
+
+// Enum values for FilterOperator
+const (
+	FilterOperatorEquals              FilterOperator = "Equals"
+	FilterOperatorGreaterThanOrEquals FilterOperator = "GreaterThanOrEquals"
+	FilterOperatorLessThanOrEquals    FilterOperator = "LessThanOrEquals"
+)
+
+// Values returns all known values for FilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperator) Values() []FilterOperator {
+	return []FilterOperator{
+		"Equals",
+		"GreaterThanOrEquals",
+		"LessThanOrEquals",
+	}
+}
+
 type HostRole string
 
 // Enum values for HostRole

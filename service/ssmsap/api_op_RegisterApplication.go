@@ -34,33 +34,33 @@ func (c *Client) RegisterApplication(ctx context.Context, params *RegisterApplic
 
 type RegisterApplicationInput struct {
 
-	//
+	// The ID of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	//
+	// The type of the application.
 	//
 	// This member is required.
 	ApplicationType types.ApplicationType
 
-	//
+	// The credentials of the SAP application.
 	//
 	// This member is required.
 	Credentials []types.ApplicationCredential
 
-	//
+	// The Amazon EC2 instances on which your SAP application is running.
 	//
 	// This member is required.
 	Instances []string
 
-	//
+	// The SAP instance number of the application.
 	SapInstanceNumber *string
 
-	//
+	// The System ID of the application.
 	Sid *string
 
-	//
+	// The tags to be attached to the SAP application.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -68,10 +68,10 @@ type RegisterApplicationInput struct {
 
 type RegisterApplicationOutput struct {
 
-	//
+	// The application registered with AWS Systems Manager for SAP.
 	Application *types.Application
 
-	//
+	// The ID of the operation.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

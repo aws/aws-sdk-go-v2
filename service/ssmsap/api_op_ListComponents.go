@@ -30,13 +30,16 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 
 type ListComponentsInput struct {
 
-	//
+	// The ID of the application.
 	ApplicationId *string
 
-	//
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value. If you
+	// do not specify a value for MaxResults, the request returns 50 items per page by
+	// default.
 	MaxResults *int32
 
-	//
+	// The token for the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +47,11 @@ type ListComponentsInput struct {
 
 type ListComponentsOutput struct {
 
-	//
+	// List of components registered with AWS System Manager for SAP.
 	Components []types.ComponentSummary
 
-	//
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -126,7 +130,10 @@ var _ ListComponentsAPIClient = (*Client)(nil)
 
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
-	//
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value. If you
+	// do not specify a value for MaxResults, the request returns 50 items per page by
+	// default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

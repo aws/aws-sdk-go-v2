@@ -1,0 +1,8 @@
+{
+    "id": "32cc6130-b970-40ff-8834-59da52b593af",
+    "type": "feature",
+    "description": "Enabled FIPS us-gov-west-1 endpoints in SDK.",
+    "modules": [
+        "service/databrew"
+    ]
+}

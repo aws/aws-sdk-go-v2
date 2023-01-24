@@ -30,16 +30,16 @@ func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optF
 
 type GetDatabaseInput struct {
 
-	//
+	// The ID of the application.
 	ApplicationId *string
 
-	//
+	// The ID of the component.
 	ComponentId *string
 
-	//
+	// The Amazon Resource Name (ARN) of the database.
 	DatabaseArn *string
 
-	//
+	// The ID of the database.
 	DatabaseId *string
 
 	noSmithyDocumentSerde
@@ -47,10 +47,11 @@ type GetDatabaseInput struct {
 
 type GetDatabaseOutput struct {
 
-	//
+	// The SAP HANA database of an application registered with AWS Systems Manager for
+	// SAP.
 	Database *types.Database
 
-	//
+	// The tags of a database.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

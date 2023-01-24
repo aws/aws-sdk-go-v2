@@ -29,7 +29,7 @@ func (c *Client) GetOperation(ctx context.Context, params *GetOperationInput, op
 
 type GetOperationInput struct {
 
-	//
+	// The ID of the operation.
 	//
 	// This member is required.
 	OperationId *string
@@ -39,7 +39,7 @@ type GetOperationInput struct {
 
 type GetOperationOutput struct {
 
-	//
+	// Returns the details of an operation.
 	Operation *types.Operation
 
 	// Metadata pertaining to the operation's result.

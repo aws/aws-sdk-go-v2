@@ -12,26 +12,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the applications registered with AWS Systems Manager for SAP.
-func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
+// Lists the operations performed by AWS Systems Manager for SAP.
+func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
-		params = &ListApplicationsInput{}
+		params = &ListOperationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApplications", params, optFns, c.addOperationListApplicationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOperations", params, optFns, c.addOperationListOperationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListApplicationsOutput)
+	out := result.(*ListOperationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListApplicationsInput struct {
+type ListOperationsInput struct {
+
+	// The ID of the application.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The filters of an operation.
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken value. If you
+	// do not specify a value for MaxResults, the request returns 50 items per page by
+	// default.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -40,14 +50,14 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
-type ListApplicationsOutput struct {
-
-	// The applications registered with AWS Systems Manager for SAP.
-	Applications []types.ApplicationSummary
+type ListOperationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// List of operations performed by AWS Systems Manager for SAP.
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,12 +65,12 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplications{}, middleware.After)
+func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOperations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplications{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOperations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -100,7 +110,10 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplications(options.Region), middleware.Before); err != nil {
+	if err = addOpListOperationsValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -115,18 +128,20 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-// ListApplicationsAPIClient is a client that implements the ListApplications
+// ListOperationsAPIClient is a client that implements the ListOperations
 // operation.
-type ListApplicationsAPIClient interface {
-	ListApplications(context.Context, *ListApplicationsInput, ...func(*Options)) (*ListApplicationsOutput, error)
+type ListOperationsAPIClient interface {
+	ListOperations(context.Context, *ListOperationsInput, ...func(*Options)) (*ListOperationsOutput, error)
 }
 
-var _ ListApplicationsAPIClient = (*Client)(nil)
+var _ ListOperationsAPIClient = (*Client)(nil)
 
-// ListApplicationsPaginatorOptions is the paginator options for ListApplications
-type ListApplicationsPaginatorOptions struct {
+// ListOperationsPaginatorOptions is the paginator options for ListOperations
+type ListOperationsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken value. If you
+	// do not specify a value for MaxResults, the request returns 50 items per page by
+	// default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -134,22 +149,22 @@ type ListApplicationsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListApplicationsPaginator is a paginator for ListApplications
-type ListApplicationsPaginator struct {
-	options   ListApplicationsPaginatorOptions
-	client    ListApplicationsAPIClient
-	params    *ListApplicationsInput
+// ListOperationsPaginator is a paginator for ListOperations
+type ListOperationsPaginator struct {
+	options   ListOperationsPaginatorOptions
+	client    ListOperationsAPIClient
+	params    *ListOperationsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListApplicationsPaginator returns a new ListApplicationsPaginator
-func NewListApplicationsPaginator(client ListApplicationsAPIClient, params *ListApplicationsInput, optFns ...func(*ListApplicationsPaginatorOptions)) *ListApplicationsPaginator {
+// NewListOperationsPaginator returns a new ListOperationsPaginator
+func NewListOperationsPaginator(client ListOperationsAPIClient, params *ListOperationsInput, optFns ...func(*ListOperationsPaginatorOptions)) *ListOperationsPaginator {
 	if params == nil {
-		params = &ListApplicationsInput{}
+		params = &ListOperationsInput{}
 	}
 
-	options := ListApplicationsPaginatorOptions{}
+	options := ListOperationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -158,7 +173,7 @@ func NewListApplicationsPaginator(client ListApplicationsAPIClient, params *List
 		fn(&options)
 	}
 
-	return &ListApplicationsPaginator{
+	return &ListOperationsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -168,12 +183,12 @@ func NewListApplicationsPaginator(client ListApplicationsAPIClient, params *List
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListApplicationsPaginator) HasMorePages() bool {
+func (p *ListOperationsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListApplications page.
-func (p *ListApplicationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
+// NextPage retrieves the next ListOperations page.
+func (p *ListOperationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -187,7 +202,7 @@ func (p *ListApplicationsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListApplications(ctx, &params, optFns...)
+	result, err := p.client.ListOperations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -206,11 +221,11 @@ func (p *ListApplicationsPaginator) NextPage(ctx context.Context, optFns ...func
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListApplications(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ssm-sap",
-		OperationName: "ListApplications",
+		OperationName: "ListOperations",
 	}
 }
