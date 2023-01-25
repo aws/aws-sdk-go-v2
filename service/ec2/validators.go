@@ -310,6 +310,26 @@ func (m *validateOpAssociateInstanceEventWindow) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateIpamResourceDiscovery struct {
+}
+
+func (*validateOpAssociateIpamResourceDiscovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateIpamResourceDiscovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateIpamResourceDiscoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateIpamResourceDiscoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateRouteTable struct {
 }
 
@@ -2510,6 +2530,26 @@ func (m *validateOpDeleteIpamPool) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIpamResourceDiscovery struct {
+}
+
+func (*validateOpDeleteIpamResourceDiscovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIpamResourceDiscovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIpamResourceDiscoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIpamResourceDiscoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteIpamScope struct {
 }
 
@@ -4410,6 +4450,26 @@ func (m *validateOpDisassociateInstanceEventWindow) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateIpamResourceDiscovery struct {
+}
+
+func (*validateOpDisassociateIpamResourceDiscovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateIpamResourceDiscovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateIpamResourceDiscoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateIpamResourceDiscoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateRouteTable struct {
 }
 
@@ -5025,6 +5085,46 @@ func (m *validateOpGetIpamAddressHistory) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIpamAddressHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIpamDiscoveredAccounts struct {
+}
+
+func (*validateOpGetIpamDiscoveredAccounts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIpamDiscoveredAccounts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIpamDiscoveredAccountsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIpamDiscoveredAccountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIpamDiscoveredResourceCidrs struct {
+}
+
+func (*validateOpGetIpamDiscoveredResourceCidrs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIpamDiscoveredResourceCidrs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIpamDiscoveredResourceCidrsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIpamDiscoveredResourceCidrsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6005,6 +6105,26 @@ func (m *validateOpModifyIpamResourceCidr) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyIpamResourceCidrInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyIpamResourceDiscovery struct {
+}
+
+func (*validateOpModifyIpamResourceDiscovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyIpamResourceDiscovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyIpamResourceDiscoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyIpamResourceDiscoveryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7910,6 +8030,10 @@ func addOpAssociateInstanceEventWindowValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpAssociateInstanceEventWindow{}, middleware.After)
 }
 
+func addOpAssociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateIpamResourceDiscovery{}, middleware.After)
+}
+
 func addOpAssociateRouteTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateRouteTable{}, middleware.After)
 }
@@ -8350,6 +8474,10 @@ func addOpDeleteIpamPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIpamPool{}, middleware.After)
 }
 
+func addOpDeleteIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIpamResourceDiscovery{}, middleware.After)
+}
+
 func addOpDeleteIpamScopeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIpamScope{}, middleware.After)
 }
@@ -8730,6 +8858,10 @@ func addOpDisassociateInstanceEventWindowValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDisassociateInstanceEventWindow{}, middleware.After)
 }
 
+func addOpDisassociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateIpamResourceDiscovery{}, middleware.After)
+}
+
 func addOpDisassociateRouteTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateRouteTable{}, middleware.After)
 }
@@ -8852,6 +8984,14 @@ func addOpGetInstanceUefiDataValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetIpamAddressHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIpamAddressHistory{}, middleware.After)
+}
+
+func addOpGetIpamDiscoveredAccountsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIpamDiscoveredAccounts{}, middleware.After)
+}
+
+func addOpGetIpamDiscoveredResourceCidrsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIpamDiscoveredResourceCidrs{}, middleware.After)
 }
 
 func addOpGetIpamPoolAllocationsValidationMiddleware(stack *middleware.Stack) error {
@@ -9048,6 +9188,10 @@ func addOpModifyIpamPoolValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpModifyIpamResourceCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyIpamResourceCidr{}, middleware.After)
+}
+
+func addOpModifyIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyIpamResourceDiscovery{}, middleware.After)
 }
 
 func addOpModifyIpamScopeValidationMiddleware(stack *middleware.Stack) error {
@@ -10456,6 +10600,24 @@ func validateOpAssociateInstanceEventWindowInput(v *AssociateInstanceEventWindow
 	}
 	if v.AssociationTarget == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateIpamResourceDiscoveryInput(v *AssociateIpamResourceDiscoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateIpamResourceDiscoveryInput"}
+	if v.IpamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamId"))
+	}
+	if v.IpamResourceDiscoveryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12415,6 +12577,21 @@ func validateOpDeleteIpamPoolInput(v *DeleteIpamPoolInput) error {
 	}
 }
 
+func validateOpDeleteIpamResourceDiscoveryInput(v *DeleteIpamResourceDiscoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIpamResourceDiscoveryInput"}
+	if v.IpamResourceDiscoveryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteIpamScopeInput(v *DeleteIpamScopeInput) error {
 	if v == nil {
 		return nil
@@ -13916,6 +14093,21 @@ func validateOpDisassociateInstanceEventWindowInput(v *DisassociateInstanceEvent
 	}
 }
 
+func validateOpDisassociateIpamResourceDiscoveryInput(v *DisassociateIpamResourceDiscoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIpamResourceDiscoveryInput"}
+	if v.IpamResourceDiscoveryAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateRouteTableInput(v *DisassociateRouteTableInput) error {
 	if v == nil {
 		return nil
@@ -14435,6 +14627,42 @@ func validateOpGetIpamAddressHistoryInput(v *GetIpamAddressHistoryInput) error {
 	}
 	if v.IpamScopeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamScopeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIpamDiscoveredAccountsInput(v *GetIpamDiscoveredAccountsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIpamDiscoveredAccountsInput"}
+	if v.IpamResourceDiscoveryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
+	}
+	if v.DiscoveryRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIpamDiscoveredResourceCidrsInput(v *GetIpamDiscoveredResourceCidrsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIpamDiscoveredResourceCidrsInput"}
+	if v.IpamResourceDiscoveryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
+	}
+	if v.ResourceRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15254,6 +15482,21 @@ func validateOpModifyIpamResourceCidrInput(v *ModifyIpamResourceCidrInput) error
 	}
 	if v.Monitored == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Monitored"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyIpamResourceDiscoveryInput(v *ModifyIpamResourceDiscoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyIpamResourceDiscoveryInput"}
+	if v.IpamResourceDiscoveryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

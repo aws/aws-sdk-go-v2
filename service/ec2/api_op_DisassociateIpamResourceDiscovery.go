@@ -11,43 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Move a BYOIPv4 CIDR to IPAM from a public IPv4 pool. If you already have a
-// BYOIPv4 CIDR with Amazon Web Services, you can move the CIDR to IPAM from a
-// public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a
-// new IP address to Amazon Web Services for the first time, complete the steps in
-// Tutorial: BYOIP address CIDRs to IPAM
-// (https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-ipam.html).
-func (c *Client) MoveByoipCidrToIpam(ctx context.Context, params *MoveByoipCidrToIpamInput, optFns ...func(*Options)) (*MoveByoipCidrToIpamOutput, error) {
+// Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery
+// is an IPAM component that enables IPAM Service to manage and monitor resources
+// that belong to the owning account.
+func (c *Client) DisassociateIpamResourceDiscovery(ctx context.Context, params *DisassociateIpamResourceDiscoveryInput, optFns ...func(*Options)) (*DisassociateIpamResourceDiscoveryOutput, error) {
 	if params == nil {
-		params = &MoveByoipCidrToIpamInput{}
+		params = &DisassociateIpamResourceDiscoveryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MoveByoipCidrToIpam", params, optFns, c.addOperationMoveByoipCidrToIpamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateIpamResourceDiscovery", params, optFns, c.addOperationDisassociateIpamResourceDiscoveryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*MoveByoipCidrToIpamOutput)
+	out := result.(*DisassociateIpamResourceDiscoveryOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type MoveByoipCidrToIpamInput struct {
+type DisassociateIpamResourceDiscoveryInput struct {
 
-	// The BYOIP CIDR.
+	// A resource discovery association ID.
 	//
 	// This member is required.
-	Cidr *string
-
-	// The IPAM pool ID.
-	//
-	// This member is required.
-	IpamPoolId *string
-
-	// The Amazon Web Services account ID of the owner of the IPAM pool.
-	//
-	// This member is required.
-	IpamPoolOwner *string
+	IpamResourceDiscoveryAssociationId *string
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
@@ -58,10 +45,10 @@ type MoveByoipCidrToIpamInput struct {
 	noSmithyDocumentSerde
 }
 
-type MoveByoipCidrToIpamOutput struct {
+type DisassociateIpamResourceDiscoveryOutput struct {
 
-	// The BYOIP CIDR.
-	ByoipCidr *types.ByoipCidr
+	// A resource discovery association.
+	IpamResourceDiscoveryAssociation *types.IpamResourceDiscoveryAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,12 +56,12 @@ type MoveByoipCidrToIpamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationMoveByoipCidrToIpamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsEc2query_serializeOpMoveByoipCidrToIpam{}, middleware.After)
+func (c *Client) addOperationDisassociateIpamResourceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateIpamResourceDiscovery{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpMoveByoipCidrToIpam{}, middleware.After)
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDisassociateIpamResourceDiscovery{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -114,10 +101,10 @@ func (c *Client) addOperationMoveByoipCidrToIpamMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpMoveByoipCidrToIpamValidationMiddleware(stack); err != nil {
+	if err = addOpDisassociateIpamResourceDiscoveryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMoveByoipCidrToIpam(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateIpamResourceDiscovery(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,11 +119,11 @@ func (c *Client) addOperationMoveByoipCidrToIpamMiddlewares(stack *middleware.St
 	return nil
 }
 
-func newServiceMetadataMiddleware_opMoveByoipCidrToIpam(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDisassociateIpamResourceDiscovery(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ec2",
-		OperationName: "MoveByoipCidrToIpam",
+		OperationName: "DisassociateIpamResourceDiscovery",
 	}
 }

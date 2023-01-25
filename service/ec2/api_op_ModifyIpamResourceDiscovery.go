@@ -11,43 +11,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Move a BYOIPv4 CIDR to IPAM from a public IPv4 pool. If you already have a
-// BYOIPv4 CIDR with Amazon Web Services, you can move the CIDR to IPAM from a
-// public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a
-// new IP address to Amazon Web Services for the first time, complete the steps in
-// Tutorial: BYOIP address CIDRs to IPAM
-// (https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-ipam.html).
-func (c *Client) MoveByoipCidrToIpam(ctx context.Context, params *MoveByoipCidrToIpamInput, optFns ...func(*Options)) (*MoveByoipCidrToIpamOutput, error) {
+// Modifies a resource discovery. A resource discovery is an IPAM component that
+// enables IPAM Service to manage and monitor resources that belong to the owning
+// account.
+func (c *Client) ModifyIpamResourceDiscovery(ctx context.Context, params *ModifyIpamResourceDiscoveryInput, optFns ...func(*Options)) (*ModifyIpamResourceDiscoveryOutput, error) {
 	if params == nil {
-		params = &MoveByoipCidrToIpamInput{}
+		params = &ModifyIpamResourceDiscoveryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MoveByoipCidrToIpam", params, optFns, c.addOperationMoveByoipCidrToIpamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyIpamResourceDiscovery", params, optFns, c.addOperationModifyIpamResourceDiscoveryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*MoveByoipCidrToIpamOutput)
+	out := result.(*ModifyIpamResourceDiscoveryOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type MoveByoipCidrToIpamInput struct {
+type ModifyIpamResourceDiscoveryInput struct {
 
-	// The BYOIP CIDR.
+	// A resource discovery ID.
 	//
 	// This member is required.
-	Cidr *string
+	IpamResourceDiscoveryId *string
 
-	// The IPAM pool ID.
-	//
-	// This member is required.
-	IpamPoolId *string
+	// Add operating Regions to the resource discovery. Operating Regions are Amazon
+	// Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM
+	// only discovers and monitors resources in the Amazon Web Services Regions you
+	// select as operating Regions.
+	AddOperatingRegions []types.AddIpamOperatingRegion
 
-	// The Amazon Web Services account ID of the owner of the IPAM pool.
-	//
-	// This member is required.
-	IpamPoolOwner *string
+	// A resource discovery description.
+	Description *string
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
@@ -55,13 +51,16 @@ type MoveByoipCidrToIpamInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// Remove operating Regions.
+	RemoveOperatingRegions []types.RemoveIpamOperatingRegion
+
 	noSmithyDocumentSerde
 }
 
-type MoveByoipCidrToIpamOutput struct {
+type ModifyIpamResourceDiscoveryOutput struct {
 
-	// The BYOIP CIDR.
-	ByoipCidr *types.ByoipCidr
+	// A resource discovery.
+	IpamResourceDiscovery *types.IpamResourceDiscovery
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,12 +68,12 @@ type MoveByoipCidrToIpamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationMoveByoipCidrToIpamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsEc2query_serializeOpMoveByoipCidrToIpam{}, middleware.After)
+func (c *Client) addOperationModifyIpamResourceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyIpamResourceDiscovery{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpMoveByoipCidrToIpam{}, middleware.After)
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpModifyIpamResourceDiscovery{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -114,10 +113,10 @@ func (c *Client) addOperationMoveByoipCidrToIpamMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpMoveByoipCidrToIpamValidationMiddleware(stack); err != nil {
+	if err = addOpModifyIpamResourceDiscoveryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMoveByoipCidrToIpam(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyIpamResourceDiscovery(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,11 +131,11 @@ func (c *Client) addOperationMoveByoipCidrToIpamMiddlewares(stack *middleware.St
 	return nil
 }
 
-func newServiceMetadataMiddleware_opMoveByoipCidrToIpam(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opModifyIpamResourceDiscovery(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ec2",
-		OperationName: "MoveByoipCidrToIpam",
+		OperationName: "ModifyIpamResourceDiscovery",
 	}
 }

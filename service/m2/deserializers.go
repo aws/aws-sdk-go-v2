@@ -1791,6 +1791,11 @@ func awsRestjson1_deserializeOpDocumentGetBatchJobExecutionOutput(v **GetBatchJo
 				sv.ApplicationId = ptr.String(jtv)
 			}
 
+		case "batchJobIdentifier":
+			if err := awsRestjson1_deserializeDocumentBatchJobIdentifier(&sv.BatchJobIdentifier, value); err != nil {
+				return err
+			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1850,6 +1855,15 @@ func awsRestjson1_deserializeOpDocumentGetBatchJobExecutionOutput(v **GetBatchJo
 					return fmt.Errorf("expected String100 to be of type string, got %T instead", value)
 				}
 				sv.JobUser = ptr.String(jtv)
+			}
+
+		case "returnCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReturnCode = ptr.String(jtv)
 			}
 
 		case "startTime":
@@ -6339,6 +6353,11 @@ func awsRestjson1_deserializeDocumentBatchJobExecutionSummary(v **types.BatchJob
 				sv.ApplicationId = ptr.String(jtv)
 			}
 
+		case "batchJobIdentifier":
+			if err := awsRestjson1_deserializeDocumentBatchJobIdentifier(&sv.BatchJobIdentifier, value); err != nil {
+				return err
+			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6389,6 +6408,15 @@ func awsRestjson1_deserializeDocumentBatchJobExecutionSummary(v **types.BatchJob
 					return fmt.Errorf("expected BatchJobType to be of type string, got %T instead", value)
 				}
 				sv.JobType = types.BatchJobType(jtv)
+			}
+
+		case "returnCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReturnCode = ptr.String(jtv)
 			}
 
 		case "startTime":
@@ -6456,6 +6484,56 @@ func awsRestjson1_deserializeDocumentBatchJobExecutionSummaryList(v *[]types.Bat
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchJobIdentifier(v *types.BatchJobIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.BatchJobIdentifier
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "fileBatchJobIdentifier":
+			var mv types.FileBatchJobIdentifier
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFileBatchJobIdentifier(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.BatchJobIdentifierMemberFileBatchJobIdentifier{Value: mv}
+			break loop
+
+		case "scriptBatchJobIdentifier":
+			var mv types.ScriptBatchJobIdentifier
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentScriptBatchJobIdentifier(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.BatchJobIdentifierMemberScriptBatchJobIdentifier{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -7417,6 +7495,55 @@ func awsRestjson1_deserializeDocumentFileBatchJobDefinition(v **types.FileBatchJ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFileBatchJobIdentifier(v **types.FileBatchJobIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileBatchJobIdentifier
+	if *v == nil {
+		sv = &types.FileBatchJobIdentifier{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fileName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileName = ptr.String(jtv)
+			}
+
+		case "folderPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FolderPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFsxStorageConfiguration(v **types.FsxStorageConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7987,6 +8114,46 @@ func awsRestjson1_deserializeDocumentScriptBatchJobDefinition(v **types.ScriptBa
 	var sv *types.ScriptBatchJobDefinition
 	if *v == nil {
 		sv = &types.ScriptBatchJobDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scriptName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ScriptName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScriptBatchJobIdentifier(v **types.ScriptBatchJobIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScriptBatchJobIdentifier
+	if *v == nil {
+		sv = &types.ScriptBatchJobIdentifier{}
 	} else {
 		sv = *v
 	}

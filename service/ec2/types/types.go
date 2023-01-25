@@ -7126,10 +7126,16 @@ type InternetGatewayAttachment struct {
 // VPC IPAM User Guide.
 type Ipam struct {
 
+	// The IPAM's default resource discovery association ID.
+	DefaultResourceDiscoveryAssociationId *string
+
+	// The IPAM's default resource discovery ID.
+	DefaultResourceDiscoveryId *string
+
 	// The description for the IPAM.
 	Description *string
 
-	// The ARN of the IPAM.
+	// The Amazon Resource Name (ARN) of the IPAM.
 	IpamArn *string
 
 	// The ID of the IPAM.
@@ -7154,6 +7160,9 @@ type Ipam struct {
 
 	// The ID of the IPAM's default public scope.
 	PublicDefaultScopeId *string
+
+	// The IPAM's resource discovery association count.
+	ResourceDiscoveryAssociationCount *int32
 
 	// The number of scopes in the IPAM. The scope quota is 5. For more information on
 	// quotas, see Quotas in IPAM
@@ -7239,6 +7248,121 @@ type IpamCidrAuthorizationContext struct {
 	noSmithyDocumentSerde
 }
 
+// An IPAM discovered account. A discovered account is an Amazon Web Services
+// account that is monitored under a resource discovery. If you have integrated
+// IPAM with Amazon Web Services Organizations, all accounts in the organization
+// are discovered accounts.
+type IpamDiscoveredAccount struct {
+
+	// The account ID.
+	AccountId *string
+
+	// The Amazon Web Services Region that the account information is returned from. An
+	// account can be discovered in multiple regions and will have a separate
+	// discovered account for each Region.
+	DiscoveryRegion *string
+
+	// The resource discovery failure reason.
+	FailureReason *IpamDiscoveryFailureReason
+
+	// The last attempted resource discovery time.
+	LastAttemptedDiscoveryTime *time.Time
+
+	// The last successful resource discovery time.
+	LastSuccessfulDiscoveryTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An IPAM discovered resource CIDR. A discovered resource is a resource CIDR
+// monitored under a resource discovery. The following resources can be discovered:
+// VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. The discovered
+// resource CIDR is the IP address range in CIDR notation that is associated with
+// the resource.
+type IpamDiscoveredResourceCidr struct {
+
+	// The percentage of IP address space in use. To convert the decimal to a
+	// percentage, multiply the decimal by 100. Note the following:
+	//
+	// * For resources
+	// that are VPCs, this is the percentage of IP address space in the VPC that's
+	// taken up by subnet CIDRs.
+	//
+	// * For resources that are subnets, if the subnet has
+	// an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in
+	// the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the
+	// percentage of IPv6 address space in use is not represented. The percentage of
+	// IPv6 address space in use cannot currently be calculated.
+	//
+	// * For resources that
+	// are public IPv4 pools, this is the percentage of IP address space in the pool
+	// that's been allocated to Elastic IP addresses (EIPs).
+	IpUsage *float64
+
+	// The resource discovery ID.
+	IpamResourceDiscoveryId *string
+
+	// The resource CIDR.
+	ResourceCidr *string
+
+	// The resource ID.
+	ResourceId *string
+
+	// The resource owner ID.
+	ResourceOwnerId *string
+
+	// The resource Region.
+	ResourceRegion *string
+
+	// The resource tags.
+	ResourceTags []IpamResourceTag
+
+	// The resource type.
+	ResourceType IpamResourceType
+
+	// The last successful resource discovery time.
+	SampleTime *time.Time
+
+	// The VPC ID.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The discovery failure reason.
+type IpamDiscoveryFailureReason struct {
+
+	// The discovery failure code.
+	//
+	// * assume-role-failure - IPAM could not assume the
+	// Amazon Web Services IAM service-linked role. This could be because of any of the
+	// following:
+	//
+	// * SLR has not been created yet and IPAM is still creating it.
+	//
+	// * You
+	// have opted-out of the IPAM home Region.
+	//
+	// * Account you are using as your IPAM
+	// account has been suspended.
+	//
+	// * throttling-failure - IPAM account is already
+	// using the allotted transactions per second and IPAM is receiving a throttling
+	// error when assuming the Amazon Web Services IAM SLR.
+	//
+	// * unauthorized-failure -
+	// Amazon Web Services account making the request is not authorized. For more
+	// information, see AuthFailure
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html) in
+	// the Amazon Elastic Compute Cloud API Reference.
+	Code IpamDiscoveryFailureCode
+
+	// The discovery failure message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The operating Regions for an IPAM. Operating Regions are Amazon Web Services
 // Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
 // discovers and monitors resources in the Amazon Web Services Regions you select
@@ -7307,7 +7431,7 @@ type IpamPool struct {
 	// The ARN of the IPAM.
 	IpamArn *string
 
-	// The ARN of the IPAM pool.
+	// The Amazon Resource Name (ARN) of the IPAM pool.
 	IpamPoolArn *string
 
 	// The ID of the IPAM pool.
@@ -7346,6 +7470,17 @@ type IpamPool struct {
 	// IPAM User Guide.
 	PoolDepth *int32
 
+	// The IP address source for pools in the public scope. Only used for provisioning
+	// IP address CIDRs to pools in the public scope. Default is BYOIP. For more
+	// information, see Create IPv6 pools
+	// (https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html) in
+	// the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided
+	// IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the
+	// default limit, see  Quotas for your IPAM
+	// (https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in the Amazon VPC
+	// IPAM User Guide.
+	PublicIpSource IpamPoolPublicIpSource
+
 	// Determines if a pool is publicly advertisable. This option is not available for
 	// pools with AddressFamily set to ipv4.
 	PubliclyAdvertisable *bool
@@ -7369,8 +7504,8 @@ type IpamPool struct {
 	noSmithyDocumentSerde
 }
 
-// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another
-// resource or IPAM pool.
+// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM
+// pool or to a resource.
 type IpamPoolAllocation struct {
 
 	// The CIDR for the allocation. A CIDR is a representation of an IP address and its
@@ -7411,6 +7546,15 @@ type IpamPoolCidr struct {
 	// Details related to why an IPAM pool CIDR failed to be provisioned.
 	FailureReason *IpamPoolCidrFailureReason
 
+	// The IPAM pool CIDR ID.
+	IpamPoolCidrId *string
+
+	// The netmask length of the CIDR you'd like to provision to a pool. Can be used
+	// for provisioning Amazon-provided IPv6 CIDRs to top-level pools and for
+	// provisioning CIDRs to pools with source pools. Cannot be used to provision BYOIP
+	// CIDRs to top-level pools. "NetmaskLength" or "Cidr" is required.
+	NetmaskLength *int32
+
 	// The state of the CIDR.
 	State IpamPoolCidrState
 
@@ -7441,7 +7585,7 @@ type IpamResourceCidr struct {
 	// The percentage of IP address space in use. To convert the decimal to a
 	// percentage, multiply the decimal by 100. Note the following:
 	//
-	// * For a resources
+	// * For resources
 	// that are VPCs, this is the percentage of IP address space in the VPC that's
 	// taken up by subnet CIDRs.
 	//
@@ -7505,6 +7649,163 @@ type IpamResourceCidr struct {
 	noSmithyDocumentSerde
 }
 
+// A resource discovery is an IPAM component that enables IPAM Service to manage
+// and monitor resources that belong to the owning account.
+type IpamResourceDiscovery struct {
+
+	// The resource discovery description.
+	Description *string
+
+	// The resource discovery Amazon Resource Name (ARN).
+	IpamResourceDiscoveryArn *string
+
+	// The resource discovery ID.
+	IpamResourceDiscoveryId *string
+
+	// The resource discovery Region.
+	IpamResourceDiscoveryRegion *string
+
+	// Defines if the resource discovery is the default. The default resource discovery
+	// is the resource discovery automatically created when you create an IPAM.
+	IsDefault *bool
+
+	// The operating Regions for the resource discovery. Operating Regions are Amazon
+	// Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM
+	// only discovers and monitors resources in the Amazon Web Services Regions you
+	// select as operating Regions.
+	OperatingRegions []IpamOperatingRegion
+
+	// The ID of the owner.
+	OwnerId *string
+
+	// The lifecycle state of the resource discovery.
+	//
+	// * create-in-progress - Resource
+	// discovery is being created.
+	//
+	// * create-complete - Resource discovery creation is
+	// complete.
+	//
+	// * create-failed - Resource discovery creation has failed.
+	//
+	// *
+	// modify-in-progress - Resource discovery is being modified.
+	//
+	// * modify-complete -
+	// Resource discovery modification is complete.
+	//
+	// * modify-failed - Resource
+	// discovery modification has failed.
+	//
+	// * delete-in-progress - Resource discovery is
+	// being deleted.
+	//
+	// * delete-complete - Resource discovery deletion is complete.
+	//
+	// *
+	// delete-failed - Resource discovery deletion has failed.
+	//
+	// * isolate-in-progress -
+	// Amazon Web Services account that created the resource discovery has been removed
+	// and the resource discovery is being isolated.
+	//
+	// * isolate-complete - Resource
+	// discovery isolation is complete.
+	//
+	// * restore-in-progress - Amazon Web Services
+	// account that created the resource discovery and was isolated has been restored.
+	State IpamResourceDiscoveryState
+
+	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+	// consists of a key and an optional value. You can use tags to search and filter
+	// your resources or track your Amazon Web Services costs.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// An IPAM resource discovery association. An associated resource discovery is a
+// resource discovery that has been associated with an IPAM. IPAM aggregates the
+// resource CIDRs discovered by the associated resource discovery.
+type IpamResourceDiscoveryAssociation struct {
+
+	// The IPAM ARN.
+	IpamArn *string
+
+	// The IPAM ID.
+	IpamId *string
+
+	// The IPAM home Region.
+	IpamRegion *string
+
+	// The resource discovery association Amazon Resource Name (ARN).
+	IpamResourceDiscoveryAssociationArn *string
+
+	// The resource discovery association ID.
+	IpamResourceDiscoveryAssociationId *string
+
+	// The resource discovery ID.
+	IpamResourceDiscoveryId *string
+
+	// Defines if the resource discovery is the default. When you create an IPAM, a
+	// default resource discovery is created for your IPAM and it's associated with
+	// your IPAM.
+	IsDefault *bool
+
+	// The Amazon Web Services account ID of the resource discovery owner.
+	OwnerId *string
+
+	// The resource discovery status.
+	//
+	// * active - Connection or permissions required to
+	// read the results of the resource discovery are intact.
+	//
+	// * not-found - Connection
+	// or permissions required to read the results of the resource discovery are
+	// broken. This may happen if the owner of the resource discovery stopped sharing
+	// it or deleted the resource discovery. Verify the resource discovery still exists
+	// and the Amazon Web Services RAM resource share is still intact.
+	ResourceDiscoveryStatus IpamAssociatedResourceDiscoveryStatus
+
+	// The lifecycle state of the association when you associate or disassociate a
+	// resource discovery.
+	//
+	// * associate-in-progress - Resource discovery is being
+	// associated.
+	//
+	// * associate-complete - Resource discovery association is
+	// complete.
+	//
+	// * associate-failed - Resource discovery association has failed.
+	//
+	// *
+	// disassociate-in-progress - Resource discovery is being disassociated.
+	//
+	// *
+	// disassociate-complete - Resource discovery disassociation is complete.
+	//
+	// *
+	// disassociate-failed  - Resource discovery disassociation has failed.
+	//
+	// *
+	// isolate-in-progress - Amazon Web Services account that created the resource
+	// discovery association has been removed and the resource discovery associatation
+	// is being isolated.
+	//
+	// * isolate-complete - Resource discovery isolation is
+	// complete..
+	//
+	// * restore-in-progress - Resource discovery is being restored.
+	State IpamResourceDiscoveryAssociationState
+
+	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+	// consists of a key and an optional value. You can use tags to search and filter
+	// your resources or track your Amazon Web Services costs.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // The key/value combination of a tag assigned to the resource. Use the tag key in
 // the filter name and the tag value as the filter value. For example, to find all
 // resources that have a tag with the key Owner and the value TeamA, specify
@@ -7540,7 +7841,7 @@ type IpamScope struct {
 	// The Amazon Web Services Region of the IPAM scope.
 	IpamRegion *string
 
-	// The ARN of the scope.
+	// The Amazon Resource Name (ARN) of the scope.
 	IpamScopeArn *string
 
 	// The ID of the scope.

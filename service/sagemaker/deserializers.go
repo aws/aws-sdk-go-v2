@@ -21683,6 +21683,9 @@ func awsAwsjson11_deserializeOpErrorListInferenceRecommendationsJobSteps(respons
 	}
 
 	switch {
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -48400,6 +48403,15 @@ func awsAwsjson11_deserializeDocumentInferenceRecommendation(v **types.Inference
 				return err
 			}
 
+		case "RecommendationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RecommendationId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -52249,6 +52261,15 @@ func awsAwsjson11_deserializeDocumentModelConfiguration(v **types.ModelConfigura
 
 	for key, value := range shape {
 		switch key {
+		case "CompilationJobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationJobCompilationJobName to be of type string, got %T instead", value)
+				}
+				sv.CompilationJobName = ptr.String(jtv)
+			}
+
 		case "EnvironmentParameters":
 			if err := awsAwsjson11_deserializeDocumentEnvironmentParameters(&sv.EnvironmentParameters, value); err != nil {
 				return err
@@ -62476,6 +62497,15 @@ func awsAwsjson11_deserializeDocumentRecommendationJobContainerConfig(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "DataInputConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationJobDataInputConfig to be of type string, got %T instead", value)
+				}
+				sv.DataInputConfig = ptr.String(jtv)
+			}
+
 		case "Domain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -62643,6 +62673,15 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInputConfig(v **types.Reco
 					return err
 				}
 				sv.JobDurationInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "ModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
+				}
+				sv.ModelName = ptr.String(jtv)
 			}
 
 		case "ModelPackageVersionArn":
@@ -63113,6 +63152,40 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 				}
 			}
 
+		case "CpuUtilization":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CpuUtilization = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.CpuUtilization = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected UtilizationMetric to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "MaxInvocations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -63124,6 +63197,40 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 					return err
 				}
 				sv.MaxInvocations = int32(i64)
+			}
+
+		case "MemoryUtilization":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MemoryUtilization = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MemoryUtilization = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected UtilizationMetric to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "ModelLatency":

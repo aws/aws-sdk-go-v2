@@ -1,0 +1,8 @@
+{
+    "id": "414237f0-7e23-4a4f-b915-0af8a4728c6b",
+    "type": "feature",
+    "description": "Add 5 new neural voices - Sergio (es-ES), Andres (es-MX), Remi (fr-FR), Adriano (it-IT) and Thiago (pt-BR).",
+    "modules": [
+        "service/polly"
+    ]
+}

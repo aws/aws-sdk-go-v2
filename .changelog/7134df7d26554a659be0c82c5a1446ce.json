@@ -1,0 +1,8 @@
+{
+    "id": "7134df7d-2655-4a65-9be0-c82c5a1446ce",
+    "type": "documentation",
+    "description": "Doc only change to update wording in a key topic",
+    "modules": [
+        "service/sts"
+    ]
+}

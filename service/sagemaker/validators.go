@@ -9924,9 +9924,6 @@ func validateRecommendationJobInputConfig(v *types.RecommendationJobInputConfig)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecommendationJobInputConfig"}
-	if v.ModelPackageVersionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageVersionArn"))
-	}
 	if v.EndpointConfigurations != nil {
 		if err := validateEndpointInputConfigurations(v.EndpointConfigurations); err != nil {
 			invalidParams.AddNested("EndpointConfigurations", err.(smithy.InvalidParamsError))

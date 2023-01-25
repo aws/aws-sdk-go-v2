@@ -11,9 +11,12 @@ import (
 // Serverless.
 type ConfigParameter struct {
 
-	// The key of the parameter. The options are datestyle,
-	// enable_user_activity_logging, query_group, search_path, and
-	// max_query_execution_time.
+	// The key of the parameter. The options are auto_mv, datestyle,
+	// enable_case_sensitivity_identifier, enable_user_activity_logging, query_group,
+	// search_path, and query monitoring metrics that let you define performance
+	// boundaries. For more information about query monitoring rules and available
+	// metrics, see Query monitoring metrics for Amazon Redshift Serverless
+	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
 	ParameterKey *string
 
 	// The value of the parameter to set.
@@ -385,9 +388,13 @@ type Workgroup struct {
 	// (RPUs).
 	BaseCapacity *int32
 
-	// An array of parameters to set for finer control over a database. The options are
-	// datestyle, enable_user_activity_logging, query_group, search_path, and
-	// max_query_execution_time.
+	// An array of parameters to set for advanced control over a database. The options
+	// are auto_mv, datestyle, enable_case_sensitivity_identifier,
+	// enable_user_activity_logging, query_group, , search_path, and query monitoring
+	// metrics that let you define performance boundaries. For more information about
+	// query monitoring rules and available metrics, see  Query monitoring metrics for
+	// Amazon Redshift Serverless
+	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
 	ConfigParameters []ConfigParameter
 
 	// The creation date of the workgroup.

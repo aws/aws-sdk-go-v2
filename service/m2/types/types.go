@@ -166,6 +166,9 @@ type BatchJobExecutionSummary struct {
 	// This member is required.
 	Status BatchJobExecutionStatus
 
+	// Identifies a specific batch job.
+	BatchJobIdentifier BatchJobIdentifier
+
 	// The timestamp when this batch job execution ended.
 	EndTime *time.Time
 
@@ -177,6 +180,9 @@ type BatchJobExecutionSummary struct {
 
 	// The type of a particular batch job execution.
 	JobType BatchJobType
+
+	//
+	ReturnCode *string
 
 	noSmithyDocumentSerde
 }

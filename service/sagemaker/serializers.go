@@ -23254,6 +23254,11 @@ func awsAwsjson11_serializeDocumentRecommendationJobContainerConfig(v *types.Rec
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataInputConfig != nil {
+		ok := object.Key("DataInputConfig")
+		ok.String(*v.DataInputConfig)
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
@@ -23324,6 +23329,11 @@ func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.Recomme
 	if v.JobDurationInSeconds != nil {
 		ok := object.Key("JobDurationInSeconds")
 		ok.Integer(*v.JobDurationInSeconds)
+	}
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
 	}
 
 	if v.ModelPackageVersionArn != nil {

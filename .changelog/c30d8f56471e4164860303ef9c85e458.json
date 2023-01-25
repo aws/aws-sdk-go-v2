@@ -1,0 +1,8 @@
+{
+    "id": "c30d8f56-471e-4164-8603-03ef9c85e458",
+    "type": "feature",
+    "description": "This release adds new functionality that allows customers to provision IPv6 CIDR blocks through Amazon VPC IP Address Manager (IPAM) as well as allowing customers to utilize IPAM Resource Discovery APIs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

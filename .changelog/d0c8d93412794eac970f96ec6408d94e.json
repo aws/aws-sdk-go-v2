@@ -1,0 +1,8 @@
+{
+    "id": "d0c8d934-1279-4eac-970f-96ec6408d94e",
+    "type": "feature",
+    "description": "SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

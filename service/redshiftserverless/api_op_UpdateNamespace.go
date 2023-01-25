@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a namespace with the specified settings.
+// Updates a namespace with the specified settings. Unless required, you can't
+// update multiple parameters in one request. For example, you must specify both
+// adminUsername and adminUserPassword to update either field, but you can't update
+// both kmsKeyId and logExports in a single request.
 func (c *Client) UpdateNamespace(ctx context.Context, params *UpdateNamespaceInput, optFns ...func(*Options)) (*UpdateNamespaceOutput, error) {
 	if params == nil {
 		params = &UpdateNamespaceInput{}
@@ -29,24 +32,26 @@ func (c *Client) UpdateNamespace(ctx context.Context, params *UpdateNamespaceInp
 
 type UpdateNamespaceInput struct {
 
-	// The name of the namespace.
+	// The name of the namespace to update. You can't update the name of a namespace
+	// once it is created.
 	//
 	// This member is required.
 	NamespaceName *string
 
 	// The password of the administrator for the first database created in the
-	// namespace.
+	// namespace. This parameter must be updated together with adminUsername.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the
-	// namespace.
+	// namespace. This parameter must be updated together with adminUserPassword.
 	AdminUsername *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to set as a default in the
-	// namespace.
+	// namespace. This parameter must be updated together with iamRoles.
 	DefaultIamRoleArn *string
 
-	// A list of IAM roles to associate with the namespace.
+	// A list of IAM roles to associate with the namespace. This parameter must be
+	// updated together with defaultIamRoleArn.
 	IamRoles []string
 
 	// The ID of the Amazon Web Services Key Management Service key used to encrypt

@@ -4049,6 +4049,25 @@ func (IpamAddressHistoryResourceType) Values() []IpamAddressHistoryResourceType 
 	}
 }
 
+type IpamAssociatedResourceDiscoveryStatus string
+
+// Enum values for IpamAssociatedResourceDiscoveryStatus
+const (
+	IpamAssociatedResourceDiscoveryStatusActive   IpamAssociatedResourceDiscoveryStatus = "active"
+	IpamAssociatedResourceDiscoveryStatusNotFound IpamAssociatedResourceDiscoveryStatus = "not-found"
+)
+
+// Values returns all known values for IpamAssociatedResourceDiscoveryStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (IpamAssociatedResourceDiscoveryStatus) Values() []IpamAssociatedResourceDiscoveryStatus {
+	return []IpamAssociatedResourceDiscoveryStatus{
+		"active",
+		"not-found",
+	}
+}
+
 type IpamComplianceStatus string
 
 // Enum values for IpamComplianceStatus
@@ -4068,6 +4087,26 @@ func (IpamComplianceStatus) Values() []IpamComplianceStatus {
 		"noncompliant",
 		"unmanaged",
 		"ignored",
+	}
+}
+
+type IpamDiscoveryFailureCode string
+
+// Enum values for IpamDiscoveryFailureCode
+const (
+	IpamDiscoveryFailureCodeAssumeRoleFailure   IpamDiscoveryFailureCode = "assume-role-failure"
+	IpamDiscoveryFailureCodeThrottlingFailure   IpamDiscoveryFailureCode = "throttling-failure"
+	IpamDiscoveryFailureCodeUnauthorizedFailure IpamDiscoveryFailureCode = "unauthorized-failure"
+)
+
+// Values returns all known values for IpamDiscoveryFailureCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamDiscoveryFailureCode) Values() []IpamDiscoveryFailureCode {
+	return []IpamDiscoveryFailureCode{
+		"assume-role-failure",
+		"throttling-failure",
+		"unauthorized-failure",
 	}
 }
 
@@ -4155,6 +4194,7 @@ type IpamPoolCidrFailureCode string
 // Enum values for IpamPoolCidrFailureCode
 const (
 	IpamPoolCidrFailureCodeCidrNotAvailable IpamPoolCidrFailureCode = "cidr-not-available"
+	IpamPoolCidrFailureCodeLimitExceeded    IpamPoolCidrFailureCode = "limit-exceeded"
 )
 
 // Values returns all known values for IpamPoolCidrFailureCode. Note that this can
@@ -4163,6 +4203,7 @@ const (
 func (IpamPoolCidrFailureCode) Values() []IpamPoolCidrFailureCode {
 	return []IpamPoolCidrFailureCode{
 		"cidr-not-available",
+		"limit-exceeded",
 	}
 }
 
@@ -4196,6 +4237,24 @@ func (IpamPoolCidrState) Values() []IpamPoolCidrState {
 	}
 }
 
+type IpamPoolPublicIpSource string
+
+// Enum values for IpamPoolPublicIpSource
+const (
+	IpamPoolPublicIpSourceAmazon IpamPoolPublicIpSource = "amazon"
+	IpamPoolPublicIpSourceByoip  IpamPoolPublicIpSource = "byoip"
+)
+
+// Values returns all known values for IpamPoolPublicIpSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPoolPublicIpSource) Values() []IpamPoolPublicIpSource {
+	return []IpamPoolPublicIpSource{
+		"amazon",
+		"byoip",
+	}
+}
+
 type IpamPoolState string
 
 // Enum values for IpamPoolState
@@ -4219,6 +4278,77 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolState) Values() []IpamPoolState {
 	return []IpamPoolState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"modify-in-progress",
+		"modify-complete",
+		"modify-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
+		"isolate-in-progress",
+		"isolate-complete",
+		"restore-in-progress",
+	}
+}
+
+type IpamResourceDiscoveryAssociationState string
+
+// Enum values for IpamResourceDiscoveryAssociationState
+const (
+	IpamResourceDiscoveryAssociationStateAssociateInProgress    IpamResourceDiscoveryAssociationState = "associate-in-progress"
+	IpamResourceDiscoveryAssociationStateAssociateComplete      IpamResourceDiscoveryAssociationState = "associate-complete"
+	IpamResourceDiscoveryAssociationStateAssociateFailed        IpamResourceDiscoveryAssociationState = "associate-failed"
+	IpamResourceDiscoveryAssociationStateDisassociateInProgress IpamResourceDiscoveryAssociationState = "disassociate-in-progress"
+	IpamResourceDiscoveryAssociationStateDisassociateComplete   IpamResourceDiscoveryAssociationState = "disassociate-complete"
+	IpamResourceDiscoveryAssociationStateDisassociateFailed     IpamResourceDiscoveryAssociationState = "disassociate-failed"
+	IpamResourceDiscoveryAssociationStateIsolateInProgress      IpamResourceDiscoveryAssociationState = "isolate-in-progress"
+	IpamResourceDiscoveryAssociationStateIsolateComplete        IpamResourceDiscoveryAssociationState = "isolate-complete"
+	IpamResourceDiscoveryAssociationStateRestoreInProgress      IpamResourceDiscoveryAssociationState = "restore-in-progress"
+)
+
+// Values returns all known values for IpamResourceDiscoveryAssociationState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (IpamResourceDiscoveryAssociationState) Values() []IpamResourceDiscoveryAssociationState {
+	return []IpamResourceDiscoveryAssociationState{
+		"associate-in-progress",
+		"associate-complete",
+		"associate-failed",
+		"disassociate-in-progress",
+		"disassociate-complete",
+		"disassociate-failed",
+		"isolate-in-progress",
+		"isolate-complete",
+		"restore-in-progress",
+	}
+}
+
+type IpamResourceDiscoveryState string
+
+// Enum values for IpamResourceDiscoveryState
+const (
+	IpamResourceDiscoveryStateCreateInProgress  IpamResourceDiscoveryState = "create-in-progress"
+	IpamResourceDiscoveryStateCreateComplete    IpamResourceDiscoveryState = "create-complete"
+	IpamResourceDiscoveryStateCreateFailed      IpamResourceDiscoveryState = "create-failed"
+	IpamResourceDiscoveryStateModifyInProgress  IpamResourceDiscoveryState = "modify-in-progress"
+	IpamResourceDiscoveryStateModifyComplete    IpamResourceDiscoveryState = "modify-complete"
+	IpamResourceDiscoveryStateModifyFailed      IpamResourceDiscoveryState = "modify-failed"
+	IpamResourceDiscoveryStateDeleteInProgress  IpamResourceDiscoveryState = "delete-in-progress"
+	IpamResourceDiscoveryStateDeleteComplete    IpamResourceDiscoveryState = "delete-complete"
+	IpamResourceDiscoveryStateDeleteFailed      IpamResourceDiscoveryState = "delete-failed"
+	IpamResourceDiscoveryStateIsolateInProgress IpamResourceDiscoveryState = "isolate-in-progress"
+	IpamResourceDiscoveryStateIsolateComplete   IpamResourceDiscoveryState = "isolate-complete"
+	IpamResourceDiscoveryStateRestoreInProgress IpamResourceDiscoveryState = "restore-in-progress"
+)
+
+// Values returns all known values for IpamResourceDiscoveryState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpamResourceDiscoveryState) Values() []IpamResourceDiscoveryState {
+	return []IpamResourceDiscoveryState{
 		"create-in-progress",
 		"create-complete",
 		"create-failed",
@@ -5667,6 +5797,8 @@ const (
 	ResourceTypeVerifiedAccessTrustProvider                            ResourceType = "verified-access-trust-provider"
 	ResourceTypeVpnConnectionDeviceType                                ResourceType = "vpn-connection-device-type"
 	ResourceTypeVpcBlockPublicAccessExclusion                          ResourceType = "vpc-block-public-access-exclusion"
+	ResourceTypeIpamResourceDiscovery                                  ResourceType = "ipam-resource-discovery"
+	ResourceTypeIpamResourceDiscoveryAssociation                       ResourceType = "ipam-resource-discovery-association"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -5757,6 +5889,8 @@ func (ResourceType) Values() []ResourceType {
 		"verified-access-trust-provider",
 		"vpn-connection-device-type",
 		"vpc-block-public-access-exclusion",
+		"ipam-resource-discovery",
+		"ipam-resource-discovery-association",
 	}
 }
 

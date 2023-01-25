@@ -7454,6 +7454,9 @@ type InferenceRecommendation struct {
 	// This member is required.
 	ModelConfiguration *ModelConfiguration
 
+	// The recommendation ID which uniquely identifies each recommendation.
+	RecommendationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -8834,6 +8837,9 @@ type ModelClientConfig struct {
 // Defines the model configuration. Includes the specification name and environment
 // parameters.
 type ModelConfiguration struct {
+
+	// The name of the compilation job used to create the recommended model artifacts.
+	CompilationJobName *string
 
 	// Defines the environment parameters that includes key, value types, and values.
 	EnvironmentParameters []EnvironmentParameter
@@ -12620,6 +12626,12 @@ type RecommendationJobCompiledOutputConfig struct {
 // for the recommendation job but don't want to edit them in your model package.
 type RecommendationJobContainerConfig struct {
 
+	// Specifies the name and shape of the expected data inputs for your trained model
+	// with a JSON dictionary form. This field is used for optimizing your model using
+	// SageMaker Neo. For more information, see DataInputConfig
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig).
+	DataInputConfig *string
+
 	// The machine learning domain of the model and its components. Valid Values:
 	// COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING | MACHINE_LEARNING
 	Domain *string
@@ -12678,11 +12690,6 @@ type RecommendationJobInferenceBenchmark struct {
 // The input configuration of the recommendation job.
 type RecommendationJobInputConfig struct {
 
-	// The Amazon Resource Name (ARN) of a versioned model package.
-	//
-	// This member is required.
-	ModelPackageVersionArn *string
-
 	// Specifies mandatory fields for running an Inference Recommender job. The fields
 	// specified in ContainerConfig override the corresponding fields in the model
 	// package.
@@ -12696,6 +12703,12 @@ type RecommendationJobInputConfig struct {
 
 	// Specifies the maximum duration of the job, in seconds.>
 	JobDurationInSeconds *int32
+
+	// The name of the created model.
+	ModelName *string
+
+	// The Amazon Resource Name (ARN) of a versioned model package.
+	ModelPackageVersionArn *string
 
 	// Defines the resource limit of the job.
 	ResourceLimit *RecommendationJobResourceLimit
@@ -12854,6 +12867,14 @@ type RecommendationMetrics struct {
 	//
 	// This member is required.
 	ModelLatency int32
+
+	// The expected CPU utilization at maximum invocations per minute for the instance.
+	// NaN indicates that the value is not available.
+	CpuUtilization *float32
+
+	// The expected memory utilization at maximum invocations per minute for the
+	// instance. NaN indicates that the value is not available.
+	MemoryUtilization *float32
 
 	noSmithyDocumentSerde
 }
