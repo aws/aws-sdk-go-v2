@@ -547,9 +547,9 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "signingRegion": "{Region}",
+                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
                                                                                                                                         },
@@ -575,9 +575,9 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "signingRegion": "{Region}",
+                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
                                                                                                                                         },
@@ -593,9 +593,9 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "signingRegion": "{Region}",
+                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
                                                                                                                                         },
@@ -1064,9 +1064,9 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}",
+                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                                                                         },
@@ -1107,9 +1107,9 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}",
+                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                                                                         },
@@ -1132,9 +1132,9 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}",
+                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                                                                         },
@@ -1696,9 +1696,9 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}",
+                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                                                                         },
@@ -1739,9 +1739,9 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}",
+                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                                                                         },
@@ -1764,9 +1764,9 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}",
+                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
                                                                                                                                                                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts"
+                                                                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                                                                         },
@@ -2118,9 +2118,9 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "signingRegion": "{Region}",
+                                                                                                                                                    "signingName": "s3",
                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                    "signingName": "s3"
+                                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
                                                                                                                                         },
@@ -2136,9 +2136,9 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "signingRegion": "{Region}",
+                                                                                                                                                    "signingName": "s3",
                                                                                                                                                     "disableDoubleEncoding": true,
-                                                                                                                                                    "signingName": "s3"
+                                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
                                                                                                                                         },
@@ -2206,9 +2206,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2243,9 +2243,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2305,9 +2305,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2342,9 +2342,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2404,9 +2404,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2441,9 +2441,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2503,9 +2503,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2540,9 +2540,9 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "signingRegion": "{Region}",
+                                                                                                                                            "signingName": "s3",
                                                                                                                                             "disableDoubleEncoding": true,
-                                                                                                                                            "signingName": "s3"
+                                                                                                                                            "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                                 },
@@ -2635,7 +2635,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -2690,7 +2691,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -2745,7 +2747,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -2800,7 +2803,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -2855,7 +2859,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -2912,7 +2917,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -2969,7 +2975,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -3024,7 +3031,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -3081,7 +3089,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -3138,7 +3147,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -3193,7 +3203,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -3250,7 +3261,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -3307,7 +3319,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -4129,8 +4142,7 @@
                                 "Region": "us-west-2",
                                 "RequiresAccountId": true,
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "__name": "apname"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4366,8 +4378,7 @@
                                 "Region": "cn-north-1",
                                 "RequiresAccountId": true,
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "__name": "apname"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4603,8 +4614,7 @@
                                 "Region": "af-south-1",
                                 "RequiresAccountId": true,
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "__name": "apname"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -5759,7 +5769,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -5844,7 +5855,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -5952,7 +5964,8 @@
                                     },
                                     "operationName": "DeleteAccessPoint",
                                     "operationParams": {
-                                        "Name": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                                        "Name": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                                        "AccountId": "123456789012"
                                     }
                                 }
                             ],
@@ -5978,6 +5991,64 @@
                                 "RequiresAccountId": true,
                                 "UseDualStack": false,
                                 "UseArnRegion": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "outpost bucket arn@us-west-2",
+                            "expect": {
+                                "endpoint": {
+                                    "headers": {
+                                        "x-amz-account-id": [
+                                            "123456789012"
+                                        ],
+                                        "x-amz-outpost-id": [
+                                            "op-01234567890123456"
+                                        ]
+                                    },
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3-outposts",
+                                                "signingRegion": "us-west-2",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3-outposts.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2"
+                                    },
+                                    "operationName": "GetBucketVersioning",
+                                    "operationParams": {
+                                        "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                                        "AccountId": "123456789012"
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2"
+                                    },
+                                    "operationName": "PutBucketVersioning",
+                                    "operationParams": {
+                                        "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                                        "AccountId": "123456789012",
+                                        "VersioningConfiguration": {
+                                            "Status": "Enabled"
+                                        }
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                                "Region": "us-west-2",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         }
@@ -6148,7 +6219,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens advanced cost-optimization metrics. Advanced\n         cost-optimization metrics provide insights that you can use to manage and optimize your\n         storage costs, for example, lifecycle rule counts for transitions, expirations, and\n         incomplete multipart uploads.</p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens advanced cost-optimization metrics. Advanced\n         cost-optimization metrics provide insights that you can use to manage and optimize your\n         storage costs, for example, lifecycle rule counts for transitions, expirations, and\n         incomplete multipart uploads.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#AdvancedDataProtectionMetrics": {
@@ -6163,7 +6234,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens advanced data-protection metrics. Advanced\n         data-protection metrics provide insights that you can use to perform audits and protect\n         your data, for example replication rule counts within and across Regions.</p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens advanced data-protection metrics. Advanced\n         data-protection metrics provide insights that you can use to perform audits and protect\n         your data, for example replication rule counts within and across Regions.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#Alias": {
@@ -6469,7 +6540,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container for the bucket-level configuration for Amazon S3 Storage Lens.</p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A container for the bucket-level configuration for Amazon S3 Storage Lens.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#BucketLocationConstraint": {
@@ -6738,7 +6809,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the bucket that you want to associate this access point with.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>The name of the bucket that you want to associate this access point with.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
                             "name": "Bucket"
@@ -6799,7 +6870,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">Create\n               Bucket</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To\n         create an Outposts bucket, you must have S3 on Outposts. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p>\n         <p>Not every string is an acceptable bucket name. For information on bucket naming\n         restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules\">Working with\n            Amazon S3 Buckets</a>.</p>\n         <p>S3 on Outposts buckets support:</p>\n         <ul>\n            <li>\n               <p>Tags</p>\n            </li>\n            <li>\n               <p>LifecycleConfigurations for deleting expired objects</p>\n            </li>\n         </ul>\n         <p>For a complete list of restrictions and Amazon S3 feature limitations on S3 on Outposts, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html\">\n            Amazon S3 on Outposts Restrictions and Limitations</a>.</p>\n         <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts\n         endpoint hostname prefix and <code>x-amz-outpost-id</code> in your API request, see the\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>CreateBucket</code> for\n         Amazon S3 on Outposts:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html\">GetBucket</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">Create\n               Bucket</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To\n         create an Outposts bucket, you must have S3 on Outposts. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p>\n         <p>Not every string is an acceptable bucket name. For information on bucket naming\n         restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules\">Working with\n            Amazon S3 Buckets</a>.</p>\n         <p>S3 on Outposts buckets support:</p>\n         <ul>\n            <li>\n               <p>Tags</p>\n            </li>\n            <li>\n               <p>LifecycleConfigurations for deleting expired objects</p>\n            </li>\n         </ul>\n         <p>For a complete list of restrictions and Amazon S3 feature limitations on S3 on Outposts, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html\">\n            Amazon S3 on Outposts Restrictions and Limitations</a>.</p>\n         <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts\n         endpoint hostname prefix and <code>x-amz-outpost-id</code> in your API request, see the\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>CreateBucket</code> for\n         Amazon S3 on Outposts:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html\">GetBucket</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v20180820/bucket/{Bucket}",
@@ -6897,7 +6968,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.s3control#NonEmptyMaxLength64String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Outposts where the bucket is being created.</p>\n         <note>\n            <p>This ID is required by Amazon S3 on Outposts buckets.</p> \n         </note>",
+                        "smithy.api#documentation": "<p>The ID of the Outposts where the bucket is being created.</p>\n         <note>\n            <p>This ID is required by Amazon S3 on Outposts buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-outpost-id",
                         "smithy.rules#contextParam": {
                             "name": "OutpostId"
@@ -6919,7 +6990,7 @@
                 "BucketArn": {
                     "target": "com.amazonaws.s3control#S3RegionalBucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>"
                     }
                 }
             }
@@ -7183,7 +7254,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified access point.</p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes the specified access point.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -7342,7 +7413,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the access point whose policy you want to delete.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
+                        "smithy.api#documentation": "<p>The name of the access point whose policy you want to delete.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -7370,7 +7441,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the access point you want to delete.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
+                        "smithy.api#documentation": "<p>The name of the access point you want to delete.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -7414,7 +7485,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete\n            an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Deletes the lifecycle configuration from the specified Outposts bucket.\n         Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource\n         associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer\n         automatically deletes any objects on the basis of rules contained in the deleted lifecycle\n         configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket\n         owner has this permission and the Outposts bucket owner can grant this permission to\n         others.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p>\n\n         <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete\n            an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Deletes the lifecycle configuration from the specified Outposts bucket.\n         Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource\n         associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer\n         automatically deletes any objects on the basis of rules contained in the deleted lifecycle\n         configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket\n         owner has this permission and the Outposts bucket owner can grant this permission to\n         others.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p>\n         <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -7448,7 +7519,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -7467,7 +7538,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy,\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>This implementation of the DELETE action uses the policy subresource to delete the\n         policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the\n         root user of the Amazon Web Services account that owns the bucket, the calling identity must have the\n            <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket\n         and belong to the bucket owner's account to use this action. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p>\n\n         <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403\n            Access Denied</code> error. If you have the correct permissions, but you're not using an\n         identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not\n            Allowed</code> error. </p>\n\n\n         <important>\n            <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can\n            always use this action, even if the policy explicitly denies the root user the ability\n            to perform this action.</p>\n         </important>\n\n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User\n            Policies</a>. </p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy,\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>This implementation of the DELETE action uses the policy subresource to delete the\n         policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the\n         root user of the Amazon Web Services account that owns the bucket, the calling identity must have the\n            <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket\n         and belong to the bucket owner's account to use this action. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p>\n         <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403\n            Access Denied</code> error. If you have the correct permissions, but you're not using an\n         identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not\n            Allowed</code> error. </p>\n         <important>\n            <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can\n            always use this action, even if the policy explicitly denies the root user the ability\n            to perform this action.</p>\n         </important>\n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User\n            Policies</a>. </p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -7501,7 +7572,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -7529,7 +7600,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket being deleted.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket being deleted.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -7548,7 +7619,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket's tags. To delete an S3 bucket tags,\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html\">DeleteBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Deletes the tags from the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p>\n\n         <p>To use this action, you must have permission to perform the\n            <code>PutBucketTagging</code> action. By default, the bucket owner has this permission\n         and can grant this permission to others. </p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>DeleteBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket's tags. To delete an S3 bucket tags,\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html\">DeleteBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Deletes the tags from the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>PutBucketTagging</code> action. By default, the bucket owner has this permission\n         and can grant this permission to others. </p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>DeleteBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -7582,7 +7653,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bucket ARN that has the tag set to be removed.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>The bucket ARN that has the tag set to be removed.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8036,7 +8107,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens detailed status code metrics. Detailed status\n         code metrics generate metrics for HTTP status codes, such as <code>200 OK</code>, <code>403\n            Forbidden</code>, <code>503 Service Unavailable</code> and others. </p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens detailed status code metrics. Detailed status\n         code metrics generate metrics for HTTP status codes, such as <code>200 OK</code>, <code>403\n            Forbidden</code>, <code>503 Service Unavailable</code> and others. </p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#Endpoints": {
@@ -8183,7 +8254,7 @@
                 "target": "com.amazonaws.s3control#GetAccessPointResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns configuration information about the specified access point.</p>\n         <p></p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>GetAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns configuration information about the specified access point.</p>\n         <p></p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>GetAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8437,7 +8508,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the access point whose policy you want to retrieve.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
+                        "smithy.api#documentation": "<p>The name of the access point whose policy you want to retrieve.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8598,7 +8669,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the access point whose configuration information you want to retrieve.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
+                        "smithy.api#documentation": "<p>The name of the access point whose configuration information you want to retrieve.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8704,7 +8775,7 @@
                 "target": "com.amazonaws.s3control#GetBucketLifecycleConfigurationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action gets an Amazon S3 on Outposts bucket's lifecycle configuration. To get an S3\n            bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> in the <i>Amazon S3 API Reference</i>.\n         </p>\n         </note>\n         <p>Returns the lifecycle configuration information set on the Outposts bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> and for\n         information about lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html\"> Object Lifecycle\n            Management</a> in <i>Amazon S3 User Guide</i>.</p>\n\n         <p>To use this action, you must have permission to perform the\n            <code>s3-outposts:GetLifecycleConfiguration</code> action. The Outposts bucket owner\n         has this permission, by default. The bucket owner can grant this permission to others. For\n         more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing\n            Access Permissions to Your Amazon S3 Resources</a>.</p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples\">Examples</a> section.</p>\n\n         <p>\n            <code>GetBucketLifecycleConfiguration</code> has the following special error:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>NoSuchLifecycleConfiguration</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The lifecycle configuration does not exist.</p>\n                  </li>\n                  <li>\n                     <p>HTTP Status Code: 404 Not Found</p>\n                  </li>\n                  <li>\n                     <p>SOAP Fault Code Prefix: Client</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following actions are related to\n         <code>GetBucketLifecycleConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html\">DeleteBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action gets an Amazon S3 on Outposts bucket's lifecycle configuration. To get an S3\n            bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> in the <i>Amazon S3 API Reference</i>.\n         </p>\n         </note>\n         <p>Returns the lifecycle configuration information set on the Outposts bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> and for\n         information about lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html\"> Object Lifecycle\n            Management</a> in <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>s3-outposts:GetLifecycleConfiguration</code> action. The Outposts bucket owner\n         has this permission, by default. The bucket owner can grant this permission to others. For\n         more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing\n            Access Permissions to Your Amazon S3 Resources</a>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples\">Examples</a> section.</p>\n         <p>\n            <code>GetBucketLifecycleConfiguration</code> has the following special error:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>NoSuchLifecycleConfiguration</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The lifecycle configuration does not exist.</p>\n                  </li>\n                  <li>\n                     <p>HTTP Status Code: 404 Not Found</p>\n                  </li>\n                  <li>\n                     <p>SOAP Fault Code Prefix: Client</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following actions are related to\n         <code>GetBucketLifecycleConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html\">DeleteBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8738,7 +8809,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8768,7 +8839,7 @@
                 "target": "com.amazonaws.s3control#GetBucketPolicyResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for\n            an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the\n               <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the\n         bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the\n         specified bucket and belong to the bucket owner's account in order to use this\n         action.</p>\n\n         <p>Only users from Outposts bucket owner account with the right permissions can perform\n         actions on an Outposts bucket. If you don't have <code>s3-outposts:GetBucketPolicy</code>\n         permissions or you're not using an identity that belongs to the bucket owner's account,\n         Amazon S3 returns a <code>403 Access Denied</code> error.</p>\n\n         <important>\n            <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can\n            always use this action, even if the policy explicitly denies the root user the ability\n            to perform this action.</p>\n         </important>\n\n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User\n            Policies</a>.</p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>GetBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for\n            an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the\n               <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the\n         bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the\n         specified bucket and belong to the bucket owner's account in order to use this\n         action.</p>\n         <p>Only users from Outposts bucket owner account with the right permissions can perform\n         actions on an Outposts bucket. If you don't have <code>s3-outposts:GetBucketPolicy</code>\n         permissions or you're not using an identity that belongs to the bucket owner's account,\n         Amazon S3 returns a <code>403 Access Denied</code> error.</p>\n         <important>\n            <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can\n            always use this action, even if the policy explicitly denies the root user the ability\n            to perform this action.</p>\n         </important>\n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User\n            Policies</a>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>GetBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8802,7 +8873,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8841,7 +8912,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8884,7 +8955,7 @@
                 "target": "com.amazonaws.s3control#GetBucketTaggingResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action gets an Amazon S3 on Outposts bucket's tags. To get an S3 bucket tags, see\n               <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html\">GetBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the tag set associated with the Outposts bucket. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>GetBucketTagging</code> action. By default, the bucket owner has this permission\n         and can grant this permission to others.</p>\n\n         <p>\n            <code>GetBucketTagging</code> has the following special error:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>NoSuchTagSetError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: There is no tag set associated with the bucket.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>GetBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action gets an Amazon S3 on Outposts bucket's tags. To get an S3 bucket tags, see\n               <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html\">GetBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the tag set associated with the Outposts bucket. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>GetBucketTagging</code> action. By default, the bucket owner has this permission\n         and can grant this permission to others.</p>\n         <p>\n            <code>GetBucketTagging</code> has the following special error:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>NoSuchTagSetError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: There is no tag set associated with the bucket.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>GetBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8918,7 +8989,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -8957,6 +9028,11 @@
                     "method": "GET",
                     "uri": "/v20180820/bucket/{Bucket}/versioning",
                     "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
                 }
             }
         },
@@ -8969,7 +9045,10 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID of the S3 on Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
                     }
                 },
                 "Bucket": {
@@ -8977,7 +9056,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 on Outposts bucket to return the versioning state for.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
                     }
                 }
             }
@@ -10700,7 +10782,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the bucket whose associated access points you want to list.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>The name of the bucket whose associated access points you want to list.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpQuery": "bucket",
                         "smithy.rules#contextParam": {
                             "name": "Bucket"
@@ -10981,7 +11063,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.s3control#NonEmptyMaxLength64String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Outposts resource.</p>\n         <note>\n            <p>This ID is required by Amazon S3 on Outposts buckets.</p> \n         </note>",
+                        "smithy.api#documentation": "<p>The ID of the Outposts resource.</p>\n         <note>\n            <p>This ID is required by Amazon S3 on Outposts buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-outpost-id",
                         "smithy.rules#contextParam": {
                             "name": "OutpostId"
@@ -12134,7 +12216,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#AccessPointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the access point that you want to associate with the specified policy.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
+                        "smithy.api#documentation": "<p>The name of the access point that you want to associate with the specified policy.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -12222,7 +12304,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an\n            S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the\n               <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the\n         Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code>\n         permissions on the specified Outposts bucket and belong to the bucket owner's account in\n         order to use this action.</p>\n\n         <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403\n            Access Denied</code> error. If you have the correct permissions, but you're not using an\n         identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not\n            Allowed</code> error.</p>\n\n         <important>\n            <p> As a security precaution, the root user of the Amazon Web Services account that owns a bucket can\n            always use this action, even if the policy explicitly denies the root user the ability\n            to perform this action. </p>\n         </important>\n\n\n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User\n            Policies</a>.</p>\n\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>PutBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an\n            S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the\n               <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the\n         Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code>\n         permissions on the specified Outposts bucket and belong to the bucket owner's account in\n         order to use this action.</p>\n         <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403\n            Access Denied</code> error. If you have the correct permissions, but you're not using an\n         identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not\n            Allowed</code> error.</p>\n         <important>\n            <p> As a security precaution, the root user of the Amazon Web Services account that owns a bucket can\n            always use this action, even if the policy explicitly denies the root user the ability\n            to perform this action. </p>\n         </important>\n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User\n            Policies</a>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>PutBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -12257,7 +12339,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>Specifies the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -12291,7 +12373,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see\n               <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this,\n         sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost\n         of combined resources, organize your billing information according to resources with the\n         same tag key values. For example, you can tag several resources with a specific application\n         name, and then organize your billing information to see the total cost of that application\n         across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost allocation and\n            tagging</a>.</p>\n\n         <note>\n            <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new\n            value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\"> Using cost allocation in Amazon S3\n               bucket tags</a>.</p>\n         </note>\n         <p>To use this action, you must have permissions to perform the\n            <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this\n         permission by default and can grant this permission to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing\n            access permissions to your Amazon S3 resources</a>.</p>\n\n         <p>\n            <code>PutBucketTagging</code> has the following special errors:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>InvalidTagError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The tag provided was not a valid tag. This error can occur if\n                     the tag did not pass input validation. For information about tag restrictions,\n                     see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">\n                        User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\">\n                        Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>MalformedXMLError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The XML provided does not match the schema.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>OperationAbortedError </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: A conflicting conditional action is currently in progress\n                     against this resource. Try again.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>InternalError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The service was unable to apply the provided tag to the\n                     bucket.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p>\n\n         <p>The following actions are related to <code>PutBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see\n               <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using\n            Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this,\n         sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost\n         of combined resources, organize your billing information according to resources with the\n         same tag key values. For example, you can tag several resources with a specific application\n         name, and then organize your billing information to see the total cost of that application\n         across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost allocation and\n            tagging</a>.</p>\n         <note>\n            <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new\n            value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\"> Using cost allocation in Amazon S3\n               bucket tags</a>.</p>\n         </note>\n         <p>To use this action, you must have permissions to perform the\n            <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this\n         permission by default and can grant this permission to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing\n            access permissions to your Amazon S3 resources</a>.</p>\n         <p>\n            <code>PutBucketTagging</code> has the following special errors:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>InvalidTagError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The tag provided was not a valid tag. This error can occur if\n                     the tag did not pass input validation. For information about tag restrictions,\n                     see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">\n                        User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\">\n                        Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>MalformedXMLError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The XML provided does not match the schema.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>OperationAbortedError </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: A conflicting conditional action is currently in progress\n                     against this resource. Try again.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>InternalError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The service was unable to apply the provided tag to the\n                     bucket.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p>\n         <p>The following actions are related to <code>PutBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -12326,7 +12408,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3control#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> \n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>\n         <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p>\n         <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.rules#contextParam": {
@@ -12363,7 +12445,12 @@
                     "uri": "/v20180820/bucket/{Bucket}/versioning",
                     "code": 200
                 },
-                "smithy.api#httpChecksumRequired": {}
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
             }
         },
         "com.amazonaws.s3control#PutBucketVersioningRequest": {
@@ -12375,7 +12462,10 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID of the S3 on Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
                     }
                 },
                 "Bucket": {
@@ -12383,7 +12473,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 on Outposts bucket to set the versioning state for.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
                     }
                 },
                 "MFA": {

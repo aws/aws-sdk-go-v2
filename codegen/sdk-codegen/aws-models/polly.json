@@ -103,7 +103,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of voices that are available for use when\n      requesting speech synthesis. Each voice speaks a specified language, is\n      either male or female, and is identified by an ID, which is the ASCII\n      version of the voice name. </p>\n\n         <p>When synthesizing speech ( <code>SynthesizeSpeech</code> ), you\n      provide the voice ID for the voice you want from the list of voices\n      returned by <code>DescribeVoices</code>.</p>\n\n         <p>For example, you want your news reader application to read news in\n      a specific language, but giving a user the option to choose the voice.\n      Using the <code>DescribeVoices</code> operation you can provide the user\n      with a list of available voices to select from.</p>\n\n         <p> You can optionally specify a language code to filter the available\n      voices. For example, if you specify <code>en-US</code>, the operation\n      returns a list of all available US English voices. </p>\n         <p>This operation requires permissions to perform the\n        <code>polly:DescribeVoices</code> action.</p>",
+                "smithy.api#documentation": "<p>Returns the list of voices that are available for use when\n      requesting speech synthesis. Each voice speaks a specified language, is\n      either male or female, and is identified by an ID, which is the ASCII\n      version of the voice name. </p>\n         <p>When synthesizing speech ( <code>SynthesizeSpeech</code> ), you\n      provide the voice ID for the voice you want from the list of voices\n      returned by <code>DescribeVoices</code>.</p>\n         <p>For example, you want your news reader application to read news in\n      a specific language, but giving a user the option to choose the voice.\n      Using the <code>DescribeVoices</code> operation you can provide the user\n      with a list of available voices to select from.</p>\n         <p> You can optionally specify a language code to filter the available\n      voices. For example, if you specify <code>en-US</code>, the operation\n      returns a list of all available US English voices. </p>\n         <p>This operation requires permissions to perform the\n        <code>polly:DescribeVoices</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/voices",
@@ -1163,15 +1163,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -3030,7 +3021,7 @@
                 "Engine": {
                     "target": "com.amazonaws.polly#Engine",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>)\n      for Amazon Polly to use when processing input text for speech synthesis. For\n      information on Amazon Polly voices and which voices are available in\n      standard-only, NTTS-only, and both standard and NTTS formats, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p>\n         <p>\n            <b>NTTS-only voices</b>\n         </p>\n         <p>When using NTTS-only voices such as Kevin (en-US), this parameter is\n      required and must be set to <code>neural</code>. If the engine is not\n      specified, or is set to <code>standard</code>, this will result in an\n      error. </p>\n         <p>Type: String</p>\n         <p>Valid Values: <code>standard</code> | <code>neural</code>\n         </p>\n         <p>Required: Yes</p>\n\n         <p>\n            <b>Standard voices</b>\n         </p>\n         <p>For standard voices, this is not required; the engine parameter\n      defaults to <code>standard</code>. If the engine is not specified, or is\n      set to <code>standard</code> and an NTTS-only voice is selected, this will\n      result in an error. </p>"
+                        "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>)\n      for Amazon Polly to use when processing input text for speech synthesis. For\n      information on Amazon Polly voices and which voices are available in\n      standard-only, NTTS-only, and both standard and NTTS formats, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p>\n         <p>\n            <b>NTTS-only voices</b>\n         </p>\n         <p>When using NTTS-only voices such as Kevin (en-US), this parameter is\n      required and must be set to <code>neural</code>. If the engine is not\n      specified, or is set to <code>standard</code>, this will result in an\n      error. </p>\n         <p>Type: String</p>\n         <p>Valid Values: <code>standard</code> | <code>neural</code>\n         </p>\n         <p>Required: Yes</p>\n         <p>\n            <b>Standard voices</b>\n         </p>\n         <p>For standard voices, this is not required; the engine parameter\n      defaults to <code>standard</code>. If the engine is not specified, or is\n      set to <code>standard</code> and an NTTS-only voice is selected, this will\n      result in an error. </p>"
                     }
                 },
                 "LanguageCode": {
@@ -3736,6 +3727,36 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Hala"
+                    }
+                },
+                "Andres": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Andres"
+                    }
+                },
+                "Sergio": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sergio"
+                    }
+                },
+                "Remi": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Remi"
+                    }
+                },
+                "Adriano": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Adriano"
+                    }
+                },
+                "Thiago": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Thiago"
                     }
                 }
             }

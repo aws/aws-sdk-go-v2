@@ -25785,6 +25785,12 @@
                         "smithy.api#documentation": "<p>Defines the model configuration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "RecommendationId": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation ID which uniquely identifies each recommendation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30562,6 +30568,11 @@
             "output": {
                 "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobStepsResponse"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the subtasks for an Inference Recommender job.</p>\n         <p>The supported subtasks are benchmarks, which evaluate the performance of your model on different instance types.</p>",
                 "smithy.api#paginated": {
@@ -35347,6 +35358,12 @@
                     "target": "com.amazonaws.sagemaker#EnvironmentParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>Defines the environment parameters that includes key, value types, and values.</p>"
+                    }
+                },
+                "CompilationJobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobCompilationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the compilation job used to create the recommended model artifacts.</p>"
                     }
                 }
             },
@@ -43645,6 +43662,16 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:inference-recommendations-job/"
             }
         },
+        "com.amazonaws.sagemaker#RecommendationJobCompilationJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
         "com.amazonaws.sagemaker#RecommendationJobCompiledOutputConfig": {
             "type": "structure",
             "members": {
@@ -43703,10 +43730,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the instance types that are used to generate inferences in real-time.</p>"
                     }
+                },
+                "DataInputConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobDataInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form.\n         This field is used for optimizing your model using SageMaker Neo. For more information, see\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig\">DataInputConfig</a>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies mandatory fields for running an Inference Recommender job directly in the\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJob</a>\n         API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use\n      <code>ContainerConfig</code> if you want to specify these fields for the recommendation job but don't want to edit them in your model package.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobDataInputConfig": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#RecommendationJobDescription": {
@@ -43750,8 +43793,7 @@
                 "ModelPackageVersionArn": {
                     "target": "com.amazonaws.sagemaker#ModelPackageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a versioned model package.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a versioned model package.</p>"
                     }
                 },
                 "JobDurationInSeconds": {
@@ -43800,6 +43842,12 @@
                     "target": "com.amazonaws.sagemaker#RecommendationJobVpcConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Inference Recommender provisions SageMaker endpoints with access to VPC in the inference recommendation job.</p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.sagemaker#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the created model.</p>"
                     }
                 }
             },
@@ -44067,6 +44115,18 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The expected model latency at maximum invocation per minute for the instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CpuUtilization": {
+                    "target": "com.amazonaws.sagemaker#UtilizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected CPU utilization at maximum invocations per minute for the instance.</p>\n         <p>\n            <code>NaN</code> indicates that the value is not available.</p>"
+                    }
+                },
+                "MemoryUtilization": {
+                    "target": "com.amazonaws.sagemaker#UtilizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected memory utilization at maximum invocations per minute for the instance.</p>\n         <p>\n            <code>NaN</code> indicates that the value is not available.</p>"
                     }
                 }
             },
@@ -55930,6 +55990,14 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A collection of settings that apply to users of Amazon SageMaker Studio. These settings are\n      specified when the <code>CreateUserProfile</code> API is called, and as <code>DefaultUserSettings</code>\n      when the <code>CreateDomain</code> API is called.</p>\n         <p>\n            <code>SecurityGroups</code> is aggregated when specified in both calls. For all other\n     settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code>\n     take precedence over those specified in <code>CreateDomain</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UtilizationMetric": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0
+                }
             }
         },
         "com.amazonaws.sagemaker#ValidationFraction": {
