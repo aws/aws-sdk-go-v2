@@ -1,3 +1,7 @@
+# v1.18.2 (2023-01-25)
+
+* **Documentation**: Doc only change to update wording in a key topic
+
 # v1.18.1 (2023-01-23)
 
 * No change notes available for this release.

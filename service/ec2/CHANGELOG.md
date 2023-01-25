@@ -1,3 +1,7 @@
+# v1.81.0 (2023-01-25)
+
+* **Feature**: This release adds new functionality that allows customers to provision IPv6 CIDR blocks through Amazon VPC IP Address Manager (IPAM) as well as allowing customers to utilize IPAM Resource Discovery APIs.
+
 # v1.80.1 (2023-01-23)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "486b2eb6-f9f6-41ff-94ae-ba4f59f2c741",
-    "type": "feature",
-    "description": "Add returnCode, batchJobIdentifier in GetBatchJobExecution response, for user to view the batch job execution result \u0026 unique identifier from engine. Also removed unused headers from REST APIs",
-    "modules": [
-        "service/m2"
-    ]
-}

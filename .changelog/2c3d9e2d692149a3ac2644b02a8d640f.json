@@ -1,8 +1,0 @@
-{
-    "id": "2c3d9e2d-6921-49a3-ac26-44b02a8d640f",
-    "type": "feature",
-    "description": "Add additional endpoint tests for S3 Control. Fix missing endpoint parameters for PutBucketVersioning and GetBucketVersioning. Prior to this fix, those operations may have resulted in an invalid endpoint being resolved.",
-    "modules": [
-        "service/s3control"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "eb2e97ae-7b50-4975-a1cc-2c13820f4bda",
-    "type": "documentation",
-    "description": "Added query monitoring rules as possible parameters for create and update workgroup operations.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

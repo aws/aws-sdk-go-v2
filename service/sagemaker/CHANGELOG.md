@@ -1,3 +1,7 @@
+# v1.65.0 (2023-01-25)
+
+* **Feature**: SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.
+
 # v1.64.0 (2023-01-23)
 
 * **Feature**: Amazon SageMaker Inference now supports P4de instance types.

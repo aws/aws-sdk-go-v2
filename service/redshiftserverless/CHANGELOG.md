@@ -1,3 +1,7 @@
+# v1.4.1 (2023-01-25)
+
+* **Documentation**: Added query monitoring rules as possible parameters for create and update workgroup operations.
+
 # v1.4.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

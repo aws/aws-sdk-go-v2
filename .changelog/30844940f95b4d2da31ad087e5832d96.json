@@ -1,8 +1,0 @@
-{
-    "id": "30844940-f95b-4d2d-a31a-d087e5832d96",
-    "type": "feature",
-    "description": "Enabled FIPS aws-us-gov endpoints in SDK.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}
