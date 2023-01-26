@@ -1,8 +1,0 @@
-{
-    "id": "3ef9d0fb-1e30-4af6-8d46-1c226edfb5ac",
-    "type": "feature",
-    "description": "Add model validation to BatchCreateVehicle and BatchUpdateVehicle operations that invalidate requests with an empty vehicles list.",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

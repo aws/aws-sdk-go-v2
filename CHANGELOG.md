@@ -1,3 +1,9 @@
+# Release (2023-01-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.18.0](service/eventbridge/CHANGELOG.md#v1180-2023-01-26)
+  * **Feature**: Minor comments for Redshift Serverless workgroup target support.
+
 # Release (2023-01-25)
 
 ## General Highlights
