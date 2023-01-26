@@ -1,0 +1,8 @@
+{
+    "id": "ed89f636-7f42-4a60-8200-9fc190818a67",
+    "type": "feature",
+    "description": "Allow FIPS to be used with path-style URLs.",
+    "modules": [
+        "service/s3"
+    ]
+}

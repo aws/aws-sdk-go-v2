@@ -1,0 +1,8 @@
+{
+    "id": "367c65e2-d60b-499d-b9d7-f7c4a14868e0",
+    "type": "feature",
+    "description": "Minor comments for Redshift Serverless workgroup target support.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

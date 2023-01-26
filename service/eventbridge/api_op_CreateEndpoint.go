@@ -55,7 +55,9 @@ type CreateEndpointInput struct {
 	// A description of the global endpoint.
 	Description *string
 
-	// Enable or disable event replication.
+	// Enable or disable event replication. The default state is ENABLED which means
+	// you must supply a RoleArn. If you don't have a RoleArn or you don't want event
+	// replication enabled, set the state to DISABLED.
 	ReplicationConfig *types.ReplicationConfig
 
 	// The ARN of the role used for replication.
