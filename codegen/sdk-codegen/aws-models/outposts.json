@@ -2497,6 +2497,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The fulfillment date of the order.</p>"
                     }
+                },
+                "PaymentTerm": {
+                    "target": "com.amazonaws.outposts#PaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment term.</p>"
+                    }
                 }
             },
             "traits": {
