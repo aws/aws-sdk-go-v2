@@ -1,3 +1,7 @@
+# v1.20.0 (2023-01-27)
+
+* **Feature**: Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.
+
 # v1.19.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

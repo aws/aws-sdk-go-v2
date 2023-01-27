@@ -1,8 +1,0 @@
-{
-    "id": "d250b93f-7053-4029-93cf-a74fb8f6d466",
-    "type": "feature",
-    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
-    "modules": [
-        "service/elasticbeanstalk"
-    ]
-}

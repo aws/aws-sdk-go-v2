@@ -1,3 +1,7 @@
+# v1.26.0 (2023-01-27)
+
+* **Feature**: Adding support for payment term in GetOrder, CreateOrder responses.
+
 # v1.25.0 (2023-01-13)
 
 * **Feature**: This release adds POWER_30_KVA as an option for PowerDrawKva. PowerDrawKva is part of the RackPhysicalProperties structure in the CreateSite request.

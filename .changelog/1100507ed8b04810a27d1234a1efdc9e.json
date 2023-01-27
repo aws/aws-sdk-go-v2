@@ -1,8 +1,0 @@
-{
-    "id": "1100507e-d8b0-4810-a27d-1234a1efdc9e",
-    "type": "feature",
-    "description": "This release introduces the As Run logging type, along with API and documentation updates.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

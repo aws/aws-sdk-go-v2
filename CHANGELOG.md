@@ -1,3 +1,17 @@
+# Release (2023-01-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.20.0](service/appstream/CHANGELOG.md#v1200-2023-01-27)
+  * **Feature**: Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.21.0](service/mediatailor/CHANGELOG.md#v1210-2023-01-27)
+  * **Feature**: This release introduces the As Run logging type, along with API and documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.26.0](service/outposts/CHANGELOG.md#v1260-2023-01-27)
+  * **Feature**: Adding support for payment term in GetOrder, CreateOrder responses.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.66.0](service/sagemaker/CHANGELOG.md#v1660-2023-01-27)
+  * **Feature**: This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.18.0](service/sagemakerruntime/CHANGELOG.md#v1180-2023-01-27)
+  * **Feature**: Amazon SageMaker Runtime which supports InvokeEndpointAsync asynchronously can now invoke endpoints with custom timeout values. Asynchronous invocations support longer processing times.
+
 # Release (2023-01-26)
 
 ## Module Highlights

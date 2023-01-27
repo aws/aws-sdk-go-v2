@@ -1,8 +1,0 @@
-{
-    "id": "d9c75432-a306-4915-912f-9cde326a873f",
-    "type": "feature",
-    "description": "Amazon SageMaker Runtime which supports InvokeEndpointAsync asynchronously can now invoke endpoints with custom timeout values. Asynchronous invocations support longer processing times.",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

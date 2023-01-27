@@ -1,8 +1,0 @@
-{
-    "id": "6193204e-a12c-462c-ba53-4fde89b1efc6",
-    "type": "feature",
-    "description": "Adding support for payment term in GetOrder, CreateOrder responses.",
-    "modules": [
-        "service/outposts"
-    ]
-}

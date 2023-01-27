@@ -1,8 +1,0 @@
-{
-    "id": "e95dfe98-01cd-43ac-bcf3-18553814c33a",
-    "type": "feature",
-    "description": "Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.",
-    "modules": [
-        "service/appstream"
-    ]
-}

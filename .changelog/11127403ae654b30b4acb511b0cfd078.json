@@ -1,8 +1,0 @@
-{
-    "id": "11127403-ae65-4b30-b4ac-b511b0cfd078",
-    "type": "feature",
-    "description": "This release supports running SageMaker Training jobs with container images that are in a private Docker registry.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

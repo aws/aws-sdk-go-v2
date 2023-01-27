@@ -1,3 +1,7 @@
+# v1.66.0 (2023-01-27)
+
+* **Feature**: This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+
 # v1.65.0 (2023-01-25)
 
 * **Feature**: SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.
