@@ -1,0 +1,8 @@
+{
+    "id": "b4d5a050-d3c0-48c6-8a0c-b20d77e2ea12",
+    "type": "feature",
+    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
+    "modules": [
+        "service/serverlessapplicationrepository"
+    ]
+}

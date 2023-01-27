@@ -14,7 +14,7 @@ import (
 // services, your client applications use this API to get inferences from the model
 // hosted at the specified endpoint in an asynchronous manner. Inference requests
 // sent to this API are enqueued for asynchronous processing. The processing of the
-// inference request may or may not complete before the you receive a response from
+// inference request may or may not complete before you receive a response from
 // this API. The response from this API will not contain the result of the
 // inference request but contain information about where you can locate it. Amazon
 // SageMaker strips all POST headers except those supported by the API. Amazon
@@ -23,7 +23,7 @@ import (
 // InvokeEndpointAsync are authenticated by using Amazon Web Services Signature
 // Version 4. For information, see Authenticating Requests (Amazon Web Services
 // Signature Version 4)
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon S3 API Reference.
 func (c *Client) InvokeEndpointAsync(ctx context.Context, params *InvokeEndpointAsyncInput, optFns ...func(*Options)) (*InvokeEndpointAsyncOutput, error) {
 	if params == nil {
@@ -80,6 +80,10 @@ type InvokeEndpointAsyncInput struct {
 	// The identifier for the inference request. Amazon SageMaker will generate an
 	// identifier for you if none is specified.
 	InferenceId *string
+
+	// Maximum amount of time in seconds a request can be processed before it is marked
+	// as expired.
+	InvocationTimeoutSeconds *int32
 
 	// Maximum age in seconds a request can be in the queue before it is marked as
 	// expired.

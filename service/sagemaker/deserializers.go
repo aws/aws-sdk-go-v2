@@ -32828,6 +32828,11 @@ func awsAwsjson11_deserializeDocumentAlgorithmSpecification(v **types.AlgorithmS
 				sv.TrainingImage = ptr.String(jtv)
 			}
 
+		case "TrainingImageConfig":
+			if err := awsAwsjson11_deserializeDocumentTrainingImageConfig(&sv.TrainingImageConfig, value); err != nil {
+				return err
+			}
+
 		case "TrainingInputMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -66199,6 +66204,51 @@ func awsAwsjson11_deserializeDocumentTrainingEnvironmentMap(v *map[string]string
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTrainingImageConfig(v **types.TrainingImageConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrainingImageConfig
+	if *v == nil {
+		sv = &types.TrainingImageConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TrainingRepositoryAccessMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingRepositoryAccessMode to be of type string, got %T instead", value)
+				}
+				sv.TrainingRepositoryAccessMode = types.TrainingRepositoryAccessMode(jtv)
+			}
+
+		case "TrainingRepositoryAuthConfig":
+			if err := awsAwsjson11_deserializeDocumentTrainingRepositoryAuthConfig(&sv.TrainingRepositoryAuthConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrainingInstanceTypes(v *[]types.TrainingInstanceType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -66894,6 +66944,46 @@ func awsAwsjson11_deserializeDocumentTrainingJobSummary(v **types.TrainingJobSum
 		case "WarmPoolStatus":
 			if err := awsAwsjson11_deserializeDocumentWarmPoolStatus(&sv.WarmPoolStatus, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTrainingRepositoryAuthConfig(v **types.TrainingRepositoryAuthConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrainingRepositoryAuthConfig
+	if *v == nil {
+		sv = &types.TrainingRepositoryAuthConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TrainingRepositoryCredentialsProviderArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingRepositoryCredentialsProviderArn to be of type string, got %T instead", value)
+				}
+				sv.TrainingRepositoryCredentialsProviderArn = ptr.String(jtv)
 			}
 
 		default:

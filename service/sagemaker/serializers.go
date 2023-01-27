@@ -16679,6 +16679,13 @@ func awsAwsjson11_serializeDocumentAlgorithmSpecification(v *types.AlgorithmSpec
 		ok.String(*v.TrainingImage)
 	}
 
+	if v.TrainingImageConfig != nil {
+		ok := object.Key("TrainingImageConfig")
+		if err := awsAwsjson11_serializeDocumentTrainingImageConfig(v.TrainingImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TrainingInputMode) > 0 {
 		ok := object.Key("TrainingInputMode")
 		ok.String(string(v.TrainingInputMode))
@@ -24417,6 +24424,25 @@ func awsAwsjson11_serializeDocumentTrainingEnvironmentMap(v map[string]string, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTrainingImageConfig(v *types.TrainingImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TrainingRepositoryAccessMode) > 0 {
+		ok := object.Key("TrainingRepositoryAccessMode")
+		ok.String(string(v.TrainingRepositoryAccessMode))
+	}
+
+	if v.TrainingRepositoryAuthConfig != nil {
+		ok := object.Key("TrainingRepositoryAuthConfig")
+		if err := awsAwsjson11_serializeDocumentTrainingRepositoryAuthConfig(v.TrainingRepositoryAuthConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrainingInstanceTypes(v []types.TrainingInstanceType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -24470,6 +24496,18 @@ func awsAwsjson11_serializeDocumentTrainingJobDefinition(v *types.TrainingJobDef
 	if len(v.TrainingInputMode) > 0 {
 		ok := object.Key("TrainingInputMode")
 		ok.String(string(v.TrainingInputMode))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrainingRepositoryAuthConfig(v *types.TrainingRepositoryAuthConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrainingRepositoryCredentialsProviderArn != nil {
+		ok := object.Key("TrainingRepositoryCredentialsProviderArn")
+		ok.String(*v.TrainingRepositoryCredentialsProviderArn)
 	}
 
 	return nil

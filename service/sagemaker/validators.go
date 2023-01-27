@@ -5861,6 +5861,11 @@ func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
 			invalidParams.AddNested("MetricDefinitions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TrainingImageConfig != nil {
+		if err := validateTrainingImageConfig(v.TrainingImageConfig); err != nil {
+			invalidParams.AddNested("TrainingImageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10504,6 +10509,26 @@ func validateTrafficRoutingConfig(v *types.TrafficRoutingConfig) error {
 	}
 }
 
+func validateTrainingImageConfig(v *types.TrainingImageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingImageConfig"}
+	if len(v.TrainingRepositoryAccessMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingRepositoryAccessMode"))
+	}
+	if v.TrainingRepositoryAuthConfig != nil {
+		if err := validateTrainingRepositoryAuthConfig(v.TrainingRepositoryAuthConfig); err != nil {
+			invalidParams.AddNested("TrainingRepositoryAuthConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrainingJobDefinition(v *types.TrainingJobDefinition) error {
 	if v == nil {
 		return nil
@@ -10535,6 +10560,21 @@ func validateTrainingJobDefinition(v *types.TrainingJobDefinition) error {
 	}
 	if v.StoppingCondition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingRepositoryAuthConfig(v *types.TrainingRepositoryAuthConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingRepositoryAuthConfig"}
+	if v.TrainingRepositoryCredentialsProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingRepositoryCredentialsProviderArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

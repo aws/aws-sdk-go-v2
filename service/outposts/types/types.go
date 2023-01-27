@@ -254,6 +254,9 @@ type Order struct {
 	// The payment option for the order.
 	PaymentOption PaymentOption
 
+	// The payment term.
+	PaymentTerm PaymentTerm
+
 	// The status of the order.
 	//
 	// * PREPARING - Order is received and being prepared.

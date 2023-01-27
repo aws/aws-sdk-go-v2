@@ -214,6 +214,10 @@ type AlgorithmSpecification struct {
 	// information, see the note in the AlgorithmName parameter description.
 	TrainingImage *string
 
+	// The configuration to use an image from a private Docker registry for a training
+	// job.
+	TrainingImageConfig *TrainingImageConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -14086,6 +14090,24 @@ type TrafficRoutingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration to use an image from a private Docker registry for a training
+// job.
+type TrainingImageConfig struct {
+
+	// The method that your training job will use to gain access to the images in your
+	// private Docker registry. For access to an image in a private Docker registry,
+	// set to Vpc.
+	//
+	// This member is required.
+	TrainingRepositoryAccessMode TrainingRepositoryAccessMode
+
+	// An object containing authentication information for a private Docker registry
+	// containing your training images.
+	TrainingRepositoryAuthConfig *TrainingRepositoryAuthConfig
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a training job.
 type TrainingJob struct {
 
@@ -14449,6 +14471,18 @@ type TrainingJobSummary struct {
 
 	// The status of the warm pool associated with the training job.
 	WarmPoolStatus *WarmPoolStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object containing authentication information for a private Docker registry.
+type TrainingRepositoryAuthConfig struct {
+
+	// The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used to
+	// give SageMaker access credentials to your private Docker registry.
+	//
+	// This member is required.
+	TrainingRepositoryCredentialsProviderArn *string
 
 	noSmithyDocumentSerde
 }

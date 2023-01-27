@@ -1,0 +1,8 @@
+{
+    "id": "a252bc96-d215-456f-ad7e-328e0ae08b8f",
+    "type": "feature",
+    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
+    "modules": [
+        "service/greengrass"
+    ]
+}
