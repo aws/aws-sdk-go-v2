@@ -214,6 +214,10 @@ type AlgorithmSpecification struct {
 	// information, see the note in the AlgorithmName parameter description.
 	TrainingImage *string
 
+	// The configuration to use an image from a private Docker registry for a training
+	// job.
+	TrainingImageConfig *TrainingImageConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -4207,7 +4211,7 @@ type Endpoint struct {
 	ProductionVariants []ProductionVariantSummary
 
 	// A list of the shadow variants hosted on the endpoint. Each shadow variant is a
-	// model in shadow mode with production traffic replicated from the proudction
+	// model in shadow mode with production traffic replicated from the production
 	// variant.
 	ShadowProductionVariants []ProductionVariantSummary
 
@@ -6706,6 +6710,19 @@ type HyperParameterTrainingJobDefinition struct {
 	// access.
 	EnableNetworkIsolation bool
 
+	// An environment variable that you can pass into the SageMaker CreateTrainingJob
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+	// API. You can use an existing environment variable from the training container
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
+	// or use your own. See Define metrics and variables
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html)
+	// for more information. The maximum number of items specified for Map Entries
+	// refers to the maximum number of environment variables for each
+	// TrainingJobDefinition and also the maximum for the hyperparameter tuning job
+	// itself. That is, the sum of the number of environment variables for all the
+	// training job definitions can't exceed the maximum number specified.
+	Environment map[string]string
+
 	// Specifies ranges of integer, continuous, and categorical hyperparameters that a
 	// hyperparameter tuning job searches. The hyperparameter tuning job launches
 	// training jobs with hyperparameter values within these ranges to find the
@@ -6839,7 +6856,7 @@ type HyperParameterTuningInstanceConfig struct {
 	// The number of instances of the type specified by InstanceType. Choose an
 	// instance count larger than 1 for distributed training algorithms. See SageMaker
 	// distributed training jobs
-	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more informcration.
+	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more information.
 	//
 	// This member is required.
 	InstanceCount int32
@@ -7440,6 +7457,9 @@ type InferenceRecommendation struct {
 	//
 	// This member is required.
 	ModelConfiguration *ModelConfiguration
+
+	// The recommendation ID which uniquely identifies each recommendation.
+	RecommendationId *string
 
 	noSmithyDocumentSerde
 }
@@ -8821,6 +8841,9 @@ type ModelClientConfig struct {
 // Defines the model configuration. Includes the specification name and environment
 // parameters.
 type ModelConfiguration struct {
+
+	// The name of the compilation job used to create the recommended model artifacts.
+	CompilationJobName *string
 
 	// Defines the environment parameters that includes key, value types, and values.
 	EnvironmentParameters []EnvironmentParameter
@@ -11885,7 +11908,7 @@ type ProductionVariant struct {
 	ServerlessConfig *ProductionVariantServerlessConfig
 
 	// The size, in GB, of the ML storage volume attached to individual inference
-	// instance associated with the production variant. Currenly only Amazon EBS gp2
+	// instance associated with the production variant. Currently only Amazon EBS gp2
 	// storage volumes are supported.
 	VolumeSizeInGB *int32
 
@@ -12607,6 +12630,12 @@ type RecommendationJobCompiledOutputConfig struct {
 // for the recommendation job but don't want to edit them in your model package.
 type RecommendationJobContainerConfig struct {
 
+	// Specifies the name and shape of the expected data inputs for your trained model
+	// with a JSON dictionary form. This field is used for optimizing your model using
+	// SageMaker Neo. For more information, see DataInputConfig
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig).
+	DataInputConfig *string
+
 	// The machine learning domain of the model and its components. Valid Values:
 	// COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING | MACHINE_LEARNING
 	Domain *string
@@ -12665,11 +12694,6 @@ type RecommendationJobInferenceBenchmark struct {
 // The input configuration of the recommendation job.
 type RecommendationJobInputConfig struct {
 
-	// The Amazon Resource Name (ARN) of a versioned model package.
-	//
-	// This member is required.
-	ModelPackageVersionArn *string
-
 	// Specifies mandatory fields for running an Inference Recommender job. The fields
 	// specified in ContainerConfig override the corresponding fields in the model
 	// package.
@@ -12683,6 +12707,12 @@ type RecommendationJobInputConfig struct {
 
 	// Specifies the maximum duration of the job, in seconds.>
 	JobDurationInSeconds *int32
+
+	// The name of the created model.
+	ModelName *string
+
+	// The Amazon Resource Name (ARN) of a versioned model package.
+	ModelPackageVersionArn *string
 
 	// Defines the resource limit of the job.
 	ResourceLimit *RecommendationJobResourceLimit
@@ -12841,6 +12871,14 @@ type RecommendationMetrics struct {
 	//
 	// This member is required.
 	ModelLatency int32
+
+	// The expected CPU utilization at maximum invocations per minute for the instance.
+	// NaN indicates that the value is not available.
+	CpuUtilization *float32
+
+	// The expected memory utilization at maximum invocations per minute for the
+	// instance. NaN indicates that the value is not available.
+	MemoryUtilization *float32
 
 	noSmithyDocumentSerde
 }
@@ -14052,6 +14090,24 @@ type TrafficRoutingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration to use an image from a private Docker registry for a training
+// job.
+type TrainingImageConfig struct {
+
+	// The method that your training job will use to gain access to the images in your
+	// private Docker registry. For access to an image in a private Docker registry,
+	// set to Vpc.
+	//
+	// This member is required.
+	TrainingRepositoryAccessMode TrainingRepositoryAccessMode
+
+	// An object containing authentication information for a private Docker registry
+	// containing your training images.
+	TrainingRepositoryAuthConfig *TrainingRepositoryAuthConfig
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a training job.
 type TrainingJob struct {
 
@@ -14415,6 +14471,18 @@ type TrainingJobSummary struct {
 
 	// The status of the warm pool associated with the training job.
 	WarmPoolStatus *WarmPoolStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object containing authentication information for a private Docker registry.
+type TrainingRepositoryAuthConfig struct {
+
+	// The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used to
+	// give SageMaker access credentials to your private Docker registry.
+	//
+	// This member is required.
+	TrainingRepositoryCredentialsProviderArn *string
 
 	noSmithyDocumentSerde
 }

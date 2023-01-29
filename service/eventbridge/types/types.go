@@ -208,7 +208,8 @@ type Condition struct {
 // Contains information about a connection.
 type Connection struct {
 
-	// The authorization type specified for the connection.
+	// The authorization type specified for the connection. OAUTH tokens are refreshed
+	// when a 401 or 407 response is returned.
 	AuthorizationType ConnectionAuthorizationType
 
 	// The ARN of the connection.
@@ -561,11 +562,11 @@ type EcsParameters struct {
 	noSmithyDocumentSerde
 }
 
-// An global endpoint used to improve your application's availability by making it
+// A global endpoint used to improve your application's availability by making it
 // regional-fault tolerant. For more information about global endpoints, see Making
 // applications Regional-fault tolerant with global endpoints and event replication
 // (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
-// in the Amazon EventBridge User Guide..
+// in the Amazon EventBridge User Guide.
 type Endpoint struct {
 
 	// The ARN of the endpoint.
@@ -578,7 +579,8 @@ type Endpoint struct {
 	Description *string
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
-	// abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
+	// abcde.veo.
 	EndpointId *string
 
 	// The URL of the endpoint.
@@ -593,7 +595,9 @@ type Endpoint struct {
 	// The name of the endpoint.
 	Name *string
 
-	// Whether event replication was enabled or disabled for this endpoint.
+	// Whether event replication was enabled or disabled for this endpoint. The default
+	// state is ENABLED which means you must supply a RoleArn. If you don't have a
+	// RoleArn or you don't want event replication enabled, set the state to DISABLED.
 	ReplicationConfig *ReplicationConfig
 
 	// The ARN of the role used by event replication for the endpoint.
@@ -622,12 +626,13 @@ type EndpointEventBus struct {
 	noSmithyDocumentSerde
 }
 
-// An event bus receives events from a source and routes them to rules associated
-// with that event bus. Your account's default event bus receives events from
-// Amazon Web Services services. A custom event bus can receive events from your
-// custom applications and services. A partner event bus receives events from an
-// event source created by an SaaS partner. These events come from the partners
-// services or applications.
+// An event bus receives events from a source, uses rules to evaluate them, applies
+// any configured input transformation, and routes them to the appropriate
+// target(s). Your account's default event bus receives events from Amazon Web
+// Services services. A custom event bus can receive events from your custom
+// applications and services. A partner event bus receives events from an event
+// source created by an SaaS partner. These events come from the partners services
+// or applications.
 type EventBus struct {
 
 	// The ARN of the event bus.
@@ -692,22 +697,22 @@ type FailoverConfig struct {
 	noSmithyDocumentSerde
 }
 
-// These are custom parameter to be used when the target is an API Gateway REST
-// APIs or EventBridge ApiDestinations. In the latter case, these are merged with
-// any InvocationParameters specified on the Connection, with any values from the
+// These are custom parameter to be used when the target is an API Gateway APIs or
+// EventBridge ApiDestinations. In the latter case, these are merged with any
+// InvocationParameters specified on the Connection, with any values from the
 // Connection taking precedence.
 type HttpParameters struct {
 
-	// The headers that need to be sent as part of request invoking the API Gateway
-	// REST API or EventBridge ApiDestination.
+	// The headers that need to be sent as part of request invoking the API Gateway API
+	// or EventBridge ApiDestination.
 	HeaderParameters map[string]string
 
-	// The path parameter values to be used to populate API Gateway REST API or
-	// EventBridge ApiDestination path wildcards ("*").
+	// The path parameter values to be used to populate API Gateway API or EventBridge
+	// ApiDestination path wildcards ("*").
 	PathParameterValues []string
 
 	// The query string keys/values that need to be sent as part of request invoking
-	// the API Gateway REST API or EventBridge ApiDestination.
+	// the API Gateway API or EventBridge ApiDestination.
 	QueryStringParameters map[string]string
 
 	noSmithyDocumentSerde
@@ -719,44 +724,43 @@ type InputTransformer struct {
 
 	// Input template where you specify placeholders that will be filled with the
 	// values of the keys from InputPathsMap to customize the data sent to the target.
-	// Enclose each InputPathsMaps value in brackets: <value> The InputTemplate must be
-	// valid JSON. If InputTemplate is a JSON object (surrounded by curly braces), the
-	// following restrictions apply:
+	// Enclose each InputPathsMaps value in brackets: <value> If InputTemplate is a
+	// JSON object (surrounded by curly braces), the following restrictions apply:
 	//
-	// * The placeholder cannot be used as an object
-	// key.
+	// *
+	// The placeholder cannot be used as an object key.
 	//
-	// The following example shows the syntax for using InputPathsMap and
-	// InputTemplate.  "InputTransformer":
-	//     {
+	// The following example shows
+	// the syntax for using InputPathsMap and InputTemplate.  "InputTransformer":
 	//
-	//     "InputPathsMap": {"instance":
-	// "$.detail.instance","status": "$.detail.status"},
+	// {
 	//
-	//     "InputTemplate": " is in
-	// state "
+	//     "InputPathsMap": {"instance": "$.detail.instance","status":
+	// "$.detail.status"},
 	//
-	// } To have the InputTemplate include quote marks within a JSON string,
-	// escape each quote marks with a slash, as in the following example:
-	// "InputTransformer":
-	//     {
+	//     "InputTemplate": " is in state "
 	//
-	//     "InputPathsMap": {"instance":
-	// "$.detail.instance","status": "$.detail.status"},
-	//
-	//     "InputTemplate": " is in
-	// state """
-	//
-	// } The InputTemplate can also be valid JSON with varibles in quotes or
-	// out, as in the following example:  "InputTransformer":
+	// } To have the
+	// InputTemplate include quote marks within a JSON string, escape each quote marks
+	// with a slash, as in the following example:  "InputTransformer":
 	//     {
 	//
 	//
 	// "InputPathsMap": {"instance": "$.detail.instance","status":
 	// "$.detail.status"},
 	//
-	//     "InputTemplate": '{"myInstance": ,"myStatus": " is in
-	// state """}'
+	//     "InputTemplate": " is in state \"\""
+	//
+	// } The
+	// InputTemplate can also be valid JSON with varibles in quotes or out, as in the
+	// following example:  "InputTransformer":
+	//     {
+	//
+	//     "InputPathsMap": {"instance":
+	// "$.detail.instance","status": "$.detail.status"},
+	//
+	//     "InputTemplate":
+	// '{"myInstance": ,"myStatus": " is in state \"\""}'
 	//
 	//     }
 	//
@@ -905,7 +909,8 @@ type PutEventsRequestEntry struct {
 	// contain fields and nested subobjects.
 	Detail *string
 
-	// Free-form string used to decide what fields to expect in the event detail.
+	// Free-form string, with a maximum of 128 characters, used to decide what fields
+	// to expect in the event detail.
 	DetailType *string
 
 	// The name or ARN of the event bus to receive the event. Only the rules that are
@@ -964,7 +969,8 @@ type PutPartnerEventsRequestEntry struct {
 	// contain fields and nested subobjects.
 	Detail *string
 
-	// A free-form string used to decide what fields to expect in the event detail.
+	// A free-form string, with a maximum of 128 characters, used to decide what fields
+	// to expect in the event detail.
 	DetailType *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
@@ -1012,8 +1018,8 @@ type PutTargetsResultEntry struct {
 }
 
 // These are custom parameters to be used when the target is a Amazon Redshift
-// cluster to invoke the Amazon Redshift Data API ExecuteStatement based on
-// EventBridge events.
+// cluster or Redshift Serverless workgroup to invoke the Amazon Redshift Data API
+// ExecuteStatement based on EventBridge events.
 type RedshiftDataParameters struct {
 
 	// The name of the database. Required when authenticating using temporary
@@ -1028,7 +1034,8 @@ type RedshiftDataParameters struct {
 	Sql *string
 
 	// The database user name. Required when authenticating using temporary
-	// credentials.
+	// credentials. Do not provide this parameter when connecting to a Redshift
+	// Serverless workgroup.
 	DbUser *string
 
 	// The name or ARN of the secret that enables access to the database. Required when
@@ -1334,13 +1341,13 @@ type Target struct {
 	// in the Amazon EC2 Container Service Developer Guide.
 	EcsParameters *EcsParameters
 
-	// Contains the HTTP parameters to use when the target is a API Gateway REST
-	// endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API
-	// or EventBridge ApiDestination as a target, you can use this parameter to specify
-	// headers, path parameters, and query string keys/values as part of your target
-	// invoking request. If you're using ApiDestinations, the corresponding Connection
-	// can also have these values configured. In case of any conflicting keys, values
-	// from the Connection take precedence.
+	// Contains the HTTP parameters to use when the target is a API Gateway endpoint or
+	// EventBridge ApiDestination. If you specify an API Gateway API or EventBridge
+	// ApiDestination as a target, you can use this parameter to specify headers, path
+	// parameters, and query string keys/values as part of your target invoking
+	// request. If you're using ApiDestinations, the corresponding Connection can also
+	// have these values configured. In case of any conflicting keys, values from the
+	// Connection take precedence.
 	HttpParameters *HttpParameters
 
 	// Valid JSON text passed to the target. In this case, nothing from the event
@@ -1350,7 +1357,7 @@ type Target struct {
 	Input *string
 
 	// The value of the JSONPath that is used for extracting part of the matched event
-	// when passing it to the target. You must use JSON dot notation, not bracket
+	// when passing it to the target. You may use JSON dot notation or bracket
 	// notation. For more information about JSON paths, see JSONPath
 	// (http://goessner.net/articles/JsonPath/).
 	InputPath *string

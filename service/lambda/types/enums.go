@@ -540,3 +540,23 @@ func (TracingMode) Values() []TracingMode {
 		"PassThrough",
 	}
 }
+
+type UpdateRuntimeOn string
+
+// Enum values for UpdateRuntimeOn
+const (
+	UpdateRuntimeOnAuto           UpdateRuntimeOn = "Auto"
+	UpdateRuntimeOnManual         UpdateRuntimeOn = "Manual"
+	UpdateRuntimeOnFunctionUpdate UpdateRuntimeOn = "FunctionUpdate"
+)
+
+// Values returns all known values for UpdateRuntimeOn. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateRuntimeOn) Values() []UpdateRuntimeOn {
+	return []UpdateRuntimeOn{
+		"Auto",
+		"Manual",
+		"FunctionUpdate",
+	}
+}

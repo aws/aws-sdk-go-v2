@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of aliases
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) for a
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a
 // Lambda function.
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {

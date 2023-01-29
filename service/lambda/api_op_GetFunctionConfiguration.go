@@ -148,6 +148,9 @@ type GetFunctionConfigurationOutput struct {
 	// The runtime environment for the Lambda function.
 	Runtime types.Runtime
 
+	// The ARN of the runtime and any errors that occured.
+	RuntimeVersionConfig *types.RuntimeVersionConfig
+
 	// The ARN of the signing job.
 	SigningJobArn *string
 
@@ -156,7 +159,7 @@ type GetFunctionConfigurationOutput struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Reducing startup time with Lambda SnapStart
+	// see Improving startup performance with Lambda SnapStart
 	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
 	SnapStart *types.SnapStartResponse
 

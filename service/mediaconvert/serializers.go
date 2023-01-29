@@ -2932,6 +2932,24 @@ func awsRestjson1_serializeDocumentAudioNormalizationSettings(v *types.AudioNorm
 		}
 	}
 
+	if v.TruePeakLimiterThreshold != 0 {
+		ok := object.Key("truePeakLimiterThreshold")
+		switch {
+		case math.IsNaN(v.TruePeakLimiterThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.TruePeakLimiterThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.TruePeakLimiterThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.TruePeakLimiterThreshold)
+
+		}
+	}
+
 	return nil
 }
 
@@ -3673,6 +3691,33 @@ func awsRestjson1_serializeDocumentChannelMapping(v *types.ChannelMapping, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentClipLimits(v *types.ClipLimits, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumRGBTolerance != 0 {
+		ok := object.Key("maximumRGBTolerance")
+		ok.Integer(v.MaximumRGBTolerance)
+	}
+
+	if v.MaximumYUV != 0 {
+		ok := object.Key("maximumYUV")
+		ok.Integer(v.MaximumYUV)
+	}
+
+	if v.MinimumRGBTolerance != 0 {
+		ok := object.Key("minimumRGBTolerance")
+		ok.Integer(v.MinimumRGBTolerance)
+	}
+
+	if v.MinimumYUV != 0 {
+		ok := object.Key("minimumYUV")
+		ok.Integer(v.MinimumYUV)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCmafAdditionalManifest(v *types.CmafAdditionalManifest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3757,6 +3802,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 	if len(v.CodecSpecification) > 0 {
 		ok := object.Key("codecSpecification")
 		ok.String(string(v.CodecSpecification))
+	}
+
+	if len(v.DashManifestStyle) > 0 {
+		ok := object.Key("dashManifestStyle")
+		ok.String(string(v.DashManifestStyle))
 	}
 
 	if v.Destination != nil {
@@ -4027,6 +4077,13 @@ func awsRestjson1_serializeDocumentColorCorrector(v *types.ColorCorrector, value
 		ok.Integer(v.Brightness)
 	}
 
+	if v.ClipLimits != nil {
+		ok := object.Key("clipLimits")
+		if err := awsRestjson1_serializeDocumentClipLimits(v.ClipLimits, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ColorSpaceConversion) > 0 {
 		ok := object.Key("colorSpaceConversion")
 		ok.String(string(v.ColorSpaceConversion))
@@ -4192,6 +4249,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if v.BaseUrl != nil {
 		ok := object.Key("baseUrl")
 		ok.String(*v.BaseUrl)
+	}
+
+	if len(v.DashManifestStyle) > 0 {
+		ok := object.Key("dashManifestStyle")
+		ok.String(string(v.DashManifestStyle))
 	}
 
 	if v.Destination != nil {

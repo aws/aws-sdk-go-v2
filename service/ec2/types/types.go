@@ -2323,8 +2323,8 @@ type DataQuery struct {
 	// MyQuery01in the query, the dataResponse identifies the query as MyQuery01.
 	Id *string
 
-	// The aggregation metric used for the data query. Currently only
-	// aggregation-latency is supported, indicating network latency.
+	// The metric, aggregation-latency, indicating that network latency is aggregated
+	// for the query. This is the only supported metric.
 	Metric MetricType
 
 	// The aggregation period used for the data query.
@@ -2334,13 +2334,9 @@ type DataQuery struct {
 	// example, us-east-1.
 	Source *string
 
-	// Metric data aggregations over specified periods of time. The following are the
-	// supported Infrastructure Performance statistics:
-	//
-	// * p50 - The median value of
-	// the metric aggregated over a specified start and end time. For example, a metric
-	// of five_minutes is the median of all the data points gathered within those five
-	// minutes.
+	// The metric data aggregation period, p50, between the specified startDate and
+	// endDate. For example, a metric of five_minutes is the median of all the data
+	// points gathered within those five minutes. p50 is the only supported metric.
 	Statistic StatisticType
 
 	noSmithyDocumentSerde
@@ -2356,9 +2352,8 @@ type DataResponse struct {
 	// The ID passed in the DataQuery.
 	Id *string
 
-	// The metric used for the network performance request. Currently only
-	// aggregate-latency is supported, showing network latency during a specified
-	// period.
+	// The metric used for the network performance request. Only aggregate-latency is
+	// supported, which shows network latency during a specified period.
 	Metric MetricType
 
 	// A list of MetricPoint objects.
@@ -4440,6 +4435,7 @@ type FpgaImage struct {
 	// The FPGA image identifier (AFI ID).
 	FpgaImageId *string
 
+	// The instance types supported by the AFI.
 	InstanceTypes []string
 
 	// The name of the AFI.
@@ -5875,15 +5871,23 @@ type InstanceMetadataOptionsRequest struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a session
-	// token on your request. If you retrieve the IAM role credentials without a token,
-	// the version 1.0 role credentials are returned. If you retrieve the IAM role
-	// credentials using a valid session token, the version 2.0 role credentials are
-	// returned. If the state is required, you must send a session token with any
-	// instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available. Default: optional
+	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
+	// other words, set the use of IMDSv2 to optional) or required (in other words, set
+	// the use of IMDSv2 to required).
+	//
+	// * optional - When IMDSv2 is optional, you can
+	// choose to retrieve instance metadata with or without a session token in your
+	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
+	// role credentials are returned. If you retrieve the IAM role credentials using a
+	// valid session token, the IMDSv2 role credentials are returned.
+	//
+	// * required -
+	// When IMDSv2 is required, you must send a session token with any instance
+	// metadata retrieval requests. In this state, retrieving the IAM role credentials
+	// always returns IMDSv2 credentials; IMDSv1 credentials are not
+	// available.
+	//
+	// Default: optional
 	HttpTokens HttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -5912,15 +5916,23 @@ type InstanceMetadataOptionsResponse struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a session
-	// token on your request. If you retrieve the IAM role credentials without a token,
-	// the version 1.0 role credentials are returned. If you retrieve the IAM role
-	// credentials using a valid session token, the version 2.0 role credentials are
-	// returned. If the state is required, you must send a session token with any
-	// instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available. Default: optional
+	// IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is
+	// optional (in other words, indicates whether the use of IMDSv2 is optional) or
+	// required (in other words, indicates whether the use of IMDSv2 is required).
+	//
+	// *
+	// optional - When IMDSv2 is optional, you can choose to retrieve instance metadata
+	// with or without a session token in your request. If you retrieve the IAM role
+	// credentials without a token, the IMDSv1 role credentials are returned. If you
+	// retrieve the IAM role credentials using a valid session token, the IMDSv2 role
+	// credentials are returned.
+	//
+	// * required - When IMDSv2 is required, you must send a
+	// session token with any instance metadata retrieval requests. In this state,
+	// retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1
+	// credentials are not available.
+	//
+	// Default: optional
 	HttpTokens HttpTokensState
 
 	// Indicates whether access to instance tags from the instance metadata is enabled
@@ -7114,10 +7126,16 @@ type InternetGatewayAttachment struct {
 // VPC IPAM User Guide.
 type Ipam struct {
 
+	// The IPAM's default resource discovery association ID.
+	DefaultResourceDiscoveryAssociationId *string
+
+	// The IPAM's default resource discovery ID.
+	DefaultResourceDiscoveryId *string
+
 	// The description for the IPAM.
 	Description *string
 
-	// The ARN of the IPAM.
+	// The Amazon Resource Name (ARN) of the IPAM.
 	IpamArn *string
 
 	// The ID of the IPAM.
@@ -7142,6 +7160,9 @@ type Ipam struct {
 
 	// The ID of the IPAM's default public scope.
 	PublicDefaultScopeId *string
+
+	// The IPAM's resource discovery association count.
+	ResourceDiscoveryAssociationCount *int32
 
 	// The number of scopes in the IPAM. The scope quota is 5. For more information on
 	// quotas, see Quotas in IPAM
@@ -7227,6 +7248,121 @@ type IpamCidrAuthorizationContext struct {
 	noSmithyDocumentSerde
 }
 
+// An IPAM discovered account. A discovered account is an Amazon Web Services
+// account that is monitored under a resource discovery. If you have integrated
+// IPAM with Amazon Web Services Organizations, all accounts in the organization
+// are discovered accounts.
+type IpamDiscoveredAccount struct {
+
+	// The account ID.
+	AccountId *string
+
+	// The Amazon Web Services Region that the account information is returned from. An
+	// account can be discovered in multiple regions and will have a separate
+	// discovered account for each Region.
+	DiscoveryRegion *string
+
+	// The resource discovery failure reason.
+	FailureReason *IpamDiscoveryFailureReason
+
+	// The last attempted resource discovery time.
+	LastAttemptedDiscoveryTime *time.Time
+
+	// The last successful resource discovery time.
+	LastSuccessfulDiscoveryTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An IPAM discovered resource CIDR. A discovered resource is a resource CIDR
+// monitored under a resource discovery. The following resources can be discovered:
+// VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. The discovered
+// resource CIDR is the IP address range in CIDR notation that is associated with
+// the resource.
+type IpamDiscoveredResourceCidr struct {
+
+	// The percentage of IP address space in use. To convert the decimal to a
+	// percentage, multiply the decimal by 100. Note the following:
+	//
+	// * For resources
+	// that are VPCs, this is the percentage of IP address space in the VPC that's
+	// taken up by subnet CIDRs.
+	//
+	// * For resources that are subnets, if the subnet has
+	// an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in
+	// the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the
+	// percentage of IPv6 address space in use is not represented. The percentage of
+	// IPv6 address space in use cannot currently be calculated.
+	//
+	// * For resources that
+	// are public IPv4 pools, this is the percentage of IP address space in the pool
+	// that's been allocated to Elastic IP addresses (EIPs).
+	IpUsage *float64
+
+	// The resource discovery ID.
+	IpamResourceDiscoveryId *string
+
+	// The resource CIDR.
+	ResourceCidr *string
+
+	// The resource ID.
+	ResourceId *string
+
+	// The resource owner ID.
+	ResourceOwnerId *string
+
+	// The resource Region.
+	ResourceRegion *string
+
+	// The resource tags.
+	ResourceTags []IpamResourceTag
+
+	// The resource type.
+	ResourceType IpamResourceType
+
+	// The last successful resource discovery time.
+	SampleTime *time.Time
+
+	// The VPC ID.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The discovery failure reason.
+type IpamDiscoveryFailureReason struct {
+
+	// The discovery failure code.
+	//
+	// * assume-role-failure - IPAM could not assume the
+	// Amazon Web Services IAM service-linked role. This could be because of any of the
+	// following:
+	//
+	// * SLR has not been created yet and IPAM is still creating it.
+	//
+	// * You
+	// have opted-out of the IPAM home Region.
+	//
+	// * Account you are using as your IPAM
+	// account has been suspended.
+	//
+	// * throttling-failure - IPAM account is already
+	// using the allotted transactions per second and IPAM is receiving a throttling
+	// error when assuming the Amazon Web Services IAM SLR.
+	//
+	// * unauthorized-failure -
+	// Amazon Web Services account making the request is not authorized. For more
+	// information, see AuthFailure
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html) in
+	// the Amazon Elastic Compute Cloud API Reference.
+	Code IpamDiscoveryFailureCode
+
+	// The discovery failure message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The operating Regions for an IPAM. Operating Regions are Amazon Web Services
 // Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
 // discovers and monitors resources in the Amazon Web Services Regions you select
@@ -7295,7 +7431,7 @@ type IpamPool struct {
 	// The ARN of the IPAM.
 	IpamArn *string
 
-	// The ARN of the IPAM pool.
+	// The Amazon Resource Name (ARN) of the IPAM pool.
 	IpamPoolArn *string
 
 	// The ID of the IPAM pool.
@@ -7334,6 +7470,17 @@ type IpamPool struct {
 	// IPAM User Guide.
 	PoolDepth *int32
 
+	// The IP address source for pools in the public scope. Only used for provisioning
+	// IP address CIDRs to pools in the public scope. Default is BYOIP. For more
+	// information, see Create IPv6 pools
+	// (https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html) in
+	// the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided
+	// IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the
+	// default limit, see  Quotas for your IPAM
+	// (https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in the Amazon VPC
+	// IPAM User Guide.
+	PublicIpSource IpamPoolPublicIpSource
+
 	// Determines if a pool is publicly advertisable. This option is not available for
 	// pools with AddressFamily set to ipv4.
 	PubliclyAdvertisable *bool
@@ -7357,8 +7504,8 @@ type IpamPool struct {
 	noSmithyDocumentSerde
 }
 
-// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another
-// resource or IPAM pool.
+// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM
+// pool or to a resource.
 type IpamPoolAllocation struct {
 
 	// The CIDR for the allocation. A CIDR is a representation of an IP address and its
@@ -7399,6 +7546,15 @@ type IpamPoolCidr struct {
 	// Details related to why an IPAM pool CIDR failed to be provisioned.
 	FailureReason *IpamPoolCidrFailureReason
 
+	// The IPAM pool CIDR ID.
+	IpamPoolCidrId *string
+
+	// The netmask length of the CIDR you'd like to provision to a pool. Can be used
+	// for provisioning Amazon-provided IPv6 CIDRs to top-level pools and for
+	// provisioning CIDRs to pools with source pools. Cannot be used to provision BYOIP
+	// CIDRs to top-level pools. "NetmaskLength" or "Cidr" is required.
+	NetmaskLength *int32
+
 	// The state of the CIDR.
 	State IpamPoolCidrState
 
@@ -7429,7 +7585,7 @@ type IpamResourceCidr struct {
 	// The percentage of IP address space in use. To convert the decimal to a
 	// percentage, multiply the decimal by 100. Note the following:
 	//
-	// * For a resources
+	// * For resources
 	// that are VPCs, this is the percentage of IP address space in the VPC that's
 	// taken up by subnet CIDRs.
 	//
@@ -7493,6 +7649,163 @@ type IpamResourceCidr struct {
 	noSmithyDocumentSerde
 }
 
+// A resource discovery is an IPAM component that enables IPAM Service to manage
+// and monitor resources that belong to the owning account.
+type IpamResourceDiscovery struct {
+
+	// The resource discovery description.
+	Description *string
+
+	// The resource discovery Amazon Resource Name (ARN).
+	IpamResourceDiscoveryArn *string
+
+	// The resource discovery ID.
+	IpamResourceDiscoveryId *string
+
+	// The resource discovery Region.
+	IpamResourceDiscoveryRegion *string
+
+	// Defines if the resource discovery is the default. The default resource discovery
+	// is the resource discovery automatically created when you create an IPAM.
+	IsDefault *bool
+
+	// The operating Regions for the resource discovery. Operating Regions are Amazon
+	// Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM
+	// only discovers and monitors resources in the Amazon Web Services Regions you
+	// select as operating Regions.
+	OperatingRegions []IpamOperatingRegion
+
+	// The ID of the owner.
+	OwnerId *string
+
+	// The lifecycle state of the resource discovery.
+	//
+	// * create-in-progress - Resource
+	// discovery is being created.
+	//
+	// * create-complete - Resource discovery creation is
+	// complete.
+	//
+	// * create-failed - Resource discovery creation has failed.
+	//
+	// *
+	// modify-in-progress - Resource discovery is being modified.
+	//
+	// * modify-complete -
+	// Resource discovery modification is complete.
+	//
+	// * modify-failed - Resource
+	// discovery modification has failed.
+	//
+	// * delete-in-progress - Resource discovery is
+	// being deleted.
+	//
+	// * delete-complete - Resource discovery deletion is complete.
+	//
+	// *
+	// delete-failed - Resource discovery deletion has failed.
+	//
+	// * isolate-in-progress -
+	// Amazon Web Services account that created the resource discovery has been removed
+	// and the resource discovery is being isolated.
+	//
+	// * isolate-complete - Resource
+	// discovery isolation is complete.
+	//
+	// * restore-in-progress - Amazon Web Services
+	// account that created the resource discovery and was isolated has been restored.
+	State IpamResourceDiscoveryState
+
+	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+	// consists of a key and an optional value. You can use tags to search and filter
+	// your resources or track your Amazon Web Services costs.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// An IPAM resource discovery association. An associated resource discovery is a
+// resource discovery that has been associated with an IPAM. IPAM aggregates the
+// resource CIDRs discovered by the associated resource discovery.
+type IpamResourceDiscoveryAssociation struct {
+
+	// The IPAM ARN.
+	IpamArn *string
+
+	// The IPAM ID.
+	IpamId *string
+
+	// The IPAM home Region.
+	IpamRegion *string
+
+	// The resource discovery association Amazon Resource Name (ARN).
+	IpamResourceDiscoveryAssociationArn *string
+
+	// The resource discovery association ID.
+	IpamResourceDiscoveryAssociationId *string
+
+	// The resource discovery ID.
+	IpamResourceDiscoveryId *string
+
+	// Defines if the resource discovery is the default. When you create an IPAM, a
+	// default resource discovery is created for your IPAM and it's associated with
+	// your IPAM.
+	IsDefault *bool
+
+	// The Amazon Web Services account ID of the resource discovery owner.
+	OwnerId *string
+
+	// The resource discovery status.
+	//
+	// * active - Connection or permissions required to
+	// read the results of the resource discovery are intact.
+	//
+	// * not-found - Connection
+	// or permissions required to read the results of the resource discovery are
+	// broken. This may happen if the owner of the resource discovery stopped sharing
+	// it or deleted the resource discovery. Verify the resource discovery still exists
+	// and the Amazon Web Services RAM resource share is still intact.
+	ResourceDiscoveryStatus IpamAssociatedResourceDiscoveryStatus
+
+	// The lifecycle state of the association when you associate or disassociate a
+	// resource discovery.
+	//
+	// * associate-in-progress - Resource discovery is being
+	// associated.
+	//
+	// * associate-complete - Resource discovery association is
+	// complete.
+	//
+	// * associate-failed - Resource discovery association has failed.
+	//
+	// *
+	// disassociate-in-progress - Resource discovery is being disassociated.
+	//
+	// *
+	// disassociate-complete - Resource discovery disassociation is complete.
+	//
+	// *
+	// disassociate-failed  - Resource discovery disassociation has failed.
+	//
+	// *
+	// isolate-in-progress - Amazon Web Services account that created the resource
+	// discovery association has been removed and the resource discovery associatation
+	// is being isolated.
+	//
+	// * isolate-complete - Resource discovery isolation is
+	// complete..
+	//
+	// * restore-in-progress - Resource discovery is being restored.
+	State IpamResourceDiscoveryAssociationState
+
+	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+	// consists of a key and an optional value. You can use tags to search and filter
+	// your resources or track your Amazon Web Services costs.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // The key/value combination of a tag assigned to the resource. Use the tag key in
 // the filter name and the tag value as the filter value. For example, to find all
 // resources that have a tag with the key Owner and the value TeamA, specify
@@ -7528,7 +7841,7 @@ type IpamScope struct {
 	// The Amazon Web Services Region of the IPAM scope.
 	IpamRegion *string
 
-	// The ARN of the scope.
+	// The Amazon Resource Name (ARN) of the scope.
 	IpamScopeArn *string
 
 	// The ID of the scope.
@@ -7561,9 +7874,10 @@ type IpamScope struct {
 // Describes a set of permissions for a security group rule.
 type IpPermission struct {
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type
-	// number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
-	// ICMP/ICMPv6 types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	FromPort *int32
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
@@ -7584,9 +7898,10 @@ type IpPermission struct {
 	// [VPC only] The prefix list IDs.
 	PrefixListIds []PrefixListId
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
-	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all
+	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	ToPort *int32
 
 	// The security group and Amazon Web Services account ID pairs.
@@ -8302,16 +8617,15 @@ type LaunchTemplateInstanceMetadataOptions struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the parameter
-	// is not specified in the request, the default state is optional. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a signed
-	// token header on your request. If you retrieve the IAM role credentials without a
-	// token, the version 1.0 role credentials are returned. If you retrieve the IAM
-	// role credentials using a valid signed token, the version 2.0 role credentials
-	// are returned. If the state is required, you must send a signed token header with
+	// Indicates whether IMDSv2 is optional or required. optional - When IMDSv2 is
+	// optional, you can choose to retrieve instance metadata with or without a session
+	// token in your request. If you retrieve the IAM role credentials without a token,
+	// the IMDSv1 role credentials are returned. If you retrieve the IAM role
+	// credentials using a valid session token, the IMDSv2 role credentials are
+	// returned. required - When IMDSv2 is required, you must send a session token with
 	// any instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available.
+	// credentials always returns IMDSv2 credentials; IMDSv1 credentials are not
+	// available. Default: optional
 	HttpTokens LaunchTemplateHttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -8350,16 +8664,23 @@ type LaunchTemplateInstanceMetadataOptionsRequest struct {
 	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests. If the parameter
-	// is not specified in the request, the default state is optional. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a signed
-	// token header on your request. If you retrieve the IAM role credentials without a
-	// token, the version 1.0 role credentials are returned. If you retrieve the IAM
-	// role credentials using a valid signed token, the version 2.0 role credentials
-	// are returned. If the state is required, you must send a signed token header with
-	// any instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credentials always returns the version 2.0 credentials; the version 1.0
-	// credentials are not available.
+	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
+	// other words, set the use of IMDSv2 to optional) or required (in other words, set
+	// the use of IMDSv2 to required).
+	//
+	// * optional - When IMDSv2 is optional, you can
+	// choose to retrieve instance metadata with or without a session token in your
+	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
+	// role credentials are returned. If you retrieve the IAM role credentials using a
+	// valid session token, the IMDSv2 role credentials are returned.
+	//
+	// * required -
+	// When IMDSv2 is required, you must send a session token with any instance
+	// metadata retrieval requests. In this state, retrieving the IAM role credentials
+	// always returns IMDSv2 credentials; IMDSv1 credentials are not
+	// available.
+	//
+	// Default: optional
 	HttpTokens LaunchTemplateHttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -9248,8 +9569,8 @@ type MemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether the network was healthy or unhealthy at a particular point.
-// The value is aggregated from the startDate to the endDate. Currently only
+// Indicates whether the network was healthy or degraded at a particular point. The
+// value is aggregated from the startDate to the endDate. Currently only
 // five_minutes is supported.
 type MetricPoint struct {
 
@@ -11391,8 +11712,9 @@ type RequestLaunchTemplateData struct {
 	CreditSpecification *CreditSpecificationRequest
 
 	// Indicates whether to enable the instance for stop protection. For more
-	// information, see Stop Protection
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection).
+	// information, see Stop protection
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	DisableApiStop *bool
 
 	// If you set this parameter to true, you can't terminate the instance using the
@@ -11434,7 +11756,24 @@ type RequestLaunchTemplateData struct {
 	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
 	IamInstanceProfile *LaunchTemplateIamInstanceProfileSpecificationRequest
 
-	// The ID of the AMI.
+	// The ID of the AMI. Alternatively, you can specify a Systems Manager parameter,
+	// which will resolve to an AMI ID on launch. Valid formats:
+	//
+	// *
+	// ami-17characters00000
+	//
+	// * resolve:ssm:parameter-name
+	//
+	// *
+	// resolve:ssm:parameter-name:version-number
+	//
+	// *
+	// resolve:ssm:parameter-name:label
+	//
+	// For more information, see Use a Systems
+	// Manager parameter instead of an AMI ID
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
@@ -12032,8 +12371,9 @@ type ResponseLaunchTemplateData struct {
 	CreditSpecification *CreditSpecification
 
 	// Indicates whether the instance is enabled for stop protection. For more
-	// information, see Stop Protection
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection).
+	// information, see Stop protection
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	DisableApiStop *bool
 
 	// If set to true, indicates that the instance cannot be terminated using the
@@ -12062,7 +12402,25 @@ type ResponseLaunchTemplateData struct {
 	// The IAM instance profile.
 	IamInstanceProfile *LaunchTemplateIamInstanceProfileSpecification
 
-	// The ID of the AMI that was used to launch the instance.
+	// The ID of the AMI or a Systems Manager parameter. The Systems Manager parameter
+	// will resolve to the ID of the AMI at instance launch. The value depends on what
+	// you specified in the request. The possible values are:
+	//
+	// * If an AMI ID was
+	// specified in the request, then this is the AMI ID.
+	//
+	// * If a Systems Manager
+	// parameter was specified in the request, and ResolveAlias was configured as true,
+	// then this is the AMI ID that the parameter is mapped to in the Parameter
+	// Store.
+	//
+	// * If a Systems Manager parameter was specified in the request, and
+	// ResolveAlias was configured as false, then this is the parameter value.
+	//
+	// For
+	// more information, see Use a Systems Manager parameter instead of an AMI ID
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
@@ -12754,9 +13112,10 @@ type SecurityGroupRule struct {
 	// The security group rule description.
 	Description *string
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A
-	// value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	FromPort *int32
 
 	// The ID of the security group.
@@ -12785,9 +13144,10 @@ type SecurityGroupRule struct {
 	// The tags applied to the security group rule.
 	Tags []Tag
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
-	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	ToPort *int32
 
 	noSmithyDocumentSerde
@@ -12835,9 +13195,10 @@ type SecurityGroupRuleRequest struct {
 	// The description of the security group rule.
 	Description *string
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A
-	// value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
+	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	FromPort *int32
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
@@ -12851,9 +13212,10 @@ type SecurityGroupRuleRequest struct {
 	// The ID of the security group that is referenced in the security group rule.
 	ReferencedGroupId *string
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
-	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-	// types, you must specify all codes.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all
+	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
+	// ICMP/ICMPv6 codes.
 	ToPort *int32
 
 	noSmithyDocumentSerde
@@ -12918,7 +13280,7 @@ type ServiceConfiguration struct {
 	// The supported IP address types.
 	SupportedIpAddressTypes []ServiceConnectivityType
 
-	// Any tags assigned to the service.
+	// The tags assigned to the service.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -12969,7 +13331,7 @@ type ServiceDetail struct {
 	// The supported IP address types.
 	SupportedIpAddressTypes []ServiceConnectivityType
 
-	// Any tags assigned to the service.
+	// The tags assigned to the service.
 	Tags []Tag
 
 	// Indicates whether the service supports endpoint policies.
@@ -13660,7 +14022,8 @@ type SpotFleetRequestConfigData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
 	TagSpecifications []TagSpecification
 
-	// The unit for the target capacity. Default: units (translates to number of
+	// The unit for the target capacity. TargetCapacityUnitType can only be specified
+	// when InstanceRequirements is specified. Default: units (translates to number of
 	// instances)
 	TargetCapacityUnitType TargetCapacityUnitType
 
@@ -14518,7 +14881,8 @@ type TargetCapacitySpecification struct {
 	// On-Demand units, you cannot specify a target capacity for Spot units.
 	SpotTargetCapacity *int32
 
-	// The unit for the target capacity. Default: units (translates to number of
+	// The unit for the target capacity. TargetCapacityUnitType can only be specified
+	// when InstanceRequirements is specified. Default: units (translates to number of
 	// instances)
 	TargetCapacityUnitType TargetCapacityUnitType
 
@@ -14559,7 +14923,8 @@ type TargetCapacitySpecificationRequest struct {
 	// The number of Spot units to request.
 	SpotTargetCapacity *int32
 
-	// The unit for the target capacity. Default: units (translates to number of
+	// The unit for the target capacity. TargetCapacityUnitType can only be specified
+	// when InstanceRequirements is specified. Default: units (translates to number of
 	// instances)
 	TargetCapacityUnitType TargetCapacityUnitType
 
@@ -16891,7 +17256,7 @@ type VpcEndpoint struct {
 	// The last error that occurred for endpoint.
 	LastError *LastError
 
-	// (Interface endpoint) One or more network interfaces for the endpoint.
+	// (Interface endpoint) The network interfaces for the endpoint.
 	NetworkInterfaceIds []string
 
 	// The ID of the Amazon Web Services account that owns the endpoint.
@@ -16907,7 +17272,7 @@ type VpcEndpoint struct {
 	// Indicates whether the endpoint is being managed by its service.
 	RequesterManaged *bool
 
-	// (Gateway endpoint) One or more route tables associated with the endpoint.
+	// (Gateway endpoint) The IDs of the route tables associated with the endpoint.
 	RouteTableIds []string
 
 	// The name of the service to which the endpoint is associated.
@@ -16919,7 +17284,7 @@ type VpcEndpoint struct {
 	// (Interface endpoint) The subnets for the endpoint.
 	SubnetIds []string
 
-	// Any tags assigned to the endpoint.
+	// The tags assigned to the endpoint.
 	Tags []Tag
 
 	// The ID of the endpoint.

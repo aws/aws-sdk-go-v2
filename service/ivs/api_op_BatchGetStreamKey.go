@@ -29,7 +29,7 @@ func (c *Client) BatchGetStreamKey(ctx context.Context, params *BatchGetStreamKe
 
 type BatchGetStreamKeyInput struct {
 
-	// Array of ARNs, one per channel.
+	// Array of ARNs, one per stream key.
 	//
 	// This member is required.
 	Arns []string

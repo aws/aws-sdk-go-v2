@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the settings of an application registered with AWS Systems Manager for
+// SAP.
 func (c *Client) UpdateApplicationSettings(ctx context.Context, params *UpdateApplicationSettingsInput, optFns ...func(*Options)) (*UpdateApplicationSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationSettingsInput{}
@@ -28,15 +30,15 @@ func (c *Client) UpdateApplicationSettings(ctx context.Context, params *UpdateAp
 
 type UpdateApplicationSettingsInput struct {
 
-	//
+	// The ID of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	//
+	// The credentials to be added or updated.
 	CredentialsToAddOrUpdate []types.ApplicationCredential
 
-	//
+	// The credentials to be removed.
 	CredentialsToRemove []types.ApplicationCredential
 
 	noSmithyDocumentSerde
@@ -44,10 +46,10 @@ type UpdateApplicationSettingsInput struct {
 
 type UpdateApplicationSettingsOutput struct {
 
-	//
+	// The update message.
 	Message *string
 
-	//
+	// The IDs of the operations.
 	OperationIds []string
 
 	// Metadata pertaining to the operation's result.

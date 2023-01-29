@@ -5413,6 +5413,15 @@ func awsRestjson1_deserializeDocumentOrder(v **types.Order, value interface{}) e
 				sv.PaymentOption = types.PaymentOption(jtv)
 			}
 
+		case "PaymentTerm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaymentTerm to be of type string, got %T instead", value)
+				}
+				sv.PaymentTerm = types.PaymentTerm(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

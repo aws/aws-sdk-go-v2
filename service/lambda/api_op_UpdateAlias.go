@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the configuration of a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}
@@ -71,7 +71,7 @@ type UpdateAliasInput struct {
 }
 
 // Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 type UpdateAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the alias.

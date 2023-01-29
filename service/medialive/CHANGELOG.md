@@ -1,3 +1,7 @@
+# v1.29.0 (2023-01-19)
+
+* **Feature**: AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.
+
 # v1.28.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

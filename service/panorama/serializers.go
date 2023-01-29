@@ -2626,6 +2626,11 @@ func awsRestjson1_serializeDocumentOTAJobConfig(v *types.OTAJobConfig, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowMajorVersionUpdate {
+		ok := object.Key("AllowMajorVersionUpdate")
+		ok.Boolean(v.AllowMajorVersionUpdate)
+	}
+
 	if v.ImageVersion != nil {
 		ok := object.Key("ImageVersion")
 		ok.String(*v.ImageVersion)

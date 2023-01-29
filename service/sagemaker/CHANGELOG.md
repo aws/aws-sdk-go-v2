@@ -1,3 +1,19 @@
+# v1.66.0 (2023-01-27)
+
+* **Feature**: This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+
+# v1.65.0 (2023-01-25)
+
+* **Feature**: SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.
+
+# v1.64.0 (2023-01-23)
+
+* **Feature**: Amazon SageMaker Inference now supports P4de instance types.
+
+# v1.63.0 (2023-01-19)
+
+* **Feature**: HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
+
 # v1.62.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

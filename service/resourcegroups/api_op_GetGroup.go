@@ -46,7 +46,9 @@ type GetGroupInput struct {
 
 type GetGroupOutput struct {
 
-	// A full description of the resource group.
+	// A structure that contains the metadata details for the specified resource group.
+	// Use GetGroupQuery and GetGroupConfiguration to get those additional details of
+	// the resource group.
 	Group *types.Group
 
 	// Metadata pertaining to the operation's result.

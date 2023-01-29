@@ -30,12 +30,12 @@ func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, op
 
 type GetComponentInput struct {
 
-	//
+	// The ID of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	//
+	// The ID of the component.
 	//
 	// This member is required.
 	ComponentId *string
@@ -45,7 +45,7 @@ type GetComponentInput struct {
 
 type GetComponentOutput struct {
 
-	//
+	// The component of an application registered with AWS Systems Manager for SAP.
 	Component *types.Component
 
 	// Metadata pertaining to the operation's result.

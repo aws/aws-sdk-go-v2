@@ -29,7 +29,7 @@ func (c *Client) GetResourcePermission(ctx context.Context, params *GetResourceP
 
 type GetResourcePermissionInput struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceArn *string

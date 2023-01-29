@@ -459,6 +459,33 @@ type CatalogEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a Hudi data source that is registered in the Glue Data Catalog.
+type CatalogHudiSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Hudi data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options.
+	AdditionalHudiOptions map[string]string
+
+	// Specifies the data schema for the Hudi source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing migration status information.
 type CatalogImportStatus struct {
 
@@ -655,6 +682,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a connector to an Amazon Athena data source.
 	AthenaConnectorSource *AthenaConnectorSource
 
+	// Specifies a Hudi data source that is registered in the Glue Data Catalog.
+	CatalogHudiSource *CatalogHudiSource
+
 	// Specifies an Apache Kafka data store in the Data Catalog.
 	CatalogKafkaSource *CatalogKafkaSource
 
@@ -770,6 +800,10 @@ type CodeGenConfigurationNode struct {
 	// Specifies a transform that renames a single data property key.
 	RenameField *RenameField
 
+	// Specifies a Hudi data source that is registered in the Glue Data Catalog. The
+	// Hudi data source must be stored in Amazon S3.
+	S3CatalogHudiSource *S3CatalogHudiSource
+
 	// Specifies an Amazon S3 data store in the Glue Data Catalog.
 	S3CatalogSource *S3CatalogSource
 
@@ -785,6 +819,15 @@ type CodeGenConfigurationNode struct {
 	// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
 	// storage.
 	S3GlueParquetTarget *S3GlueParquetTarget
+
+	// Specifies a target that writes to a Hudi data source in the Glue Data Catalog.
+	S3HudiCatalogTarget *S3HudiCatalogTarget
+
+	// Specifies a target that writes to a Hudi data source in Amazon S3.
+	S3HudiDirectTarget *S3HudiDirectTarget
+
+	// Specifies a Hudi data source stored in Amazon S3.
+	S3HudiSource *S3HudiSource
 
 	// Specifies a JSON data store stored in Amazon S3.
 	S3JsonSource *S3JsonSource
@@ -5241,6 +5284,34 @@ type ResourceUri struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a Hudi data source that is registered in the Glue Data Catalog. The
+// Hudi data source must be stored in Amazon S3.
+type S3CatalogHudiSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Hudi data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options.
+	AdditionalHudiOptions map[string]string
+
+	// Specifies the data schema for the Hudi source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Amazon S3 data store in the Glue Data Catalog.
 type S3CatalogSource struct {
 
@@ -5495,6 +5566,109 @@ type S3GlueParquetTarget struct {
 
 	// A policy that specifies update behavior for the crawler.
 	SchemaChangePolicy *DirectSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that writes to a Hudi data source in the Glue Data Catalog.
+type S3HudiCatalogTarget struct {
+
+	// Specifies additional connection options for the connector.
+	//
+	// This member is required.
+	AdditionalOptions map[string]string
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *CatalogSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that writes to a Hudi data source in Amazon S3.
+type S3HudiDirectTarget struct {
+
+	// This member is required.
+	AdditionalOptions map[string]string
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	//
+	// This member is required.
+	Compression HudiTargetCompressionType
+
+	// Specifies the data output format for the target.
+	//
+	// This member is required.
+	Format TargetFormat
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon S3 path of your Hudi data source to write to.
+	//
+	// This member is required.
+	Path *string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *DirectSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Hudi data source stored in Amazon S3.
+type S3HudiSource struct {
+
+	// The name of the Hudi source.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// This member is required.
+	Paths []string
+
+	// Specifies additional connection options.
+	AdditionalHudiOptions map[string]string
+
+	// Specifies additional connection options for the Amazon S3 data store.
+	AdditionalOptions *S3DirectSourceAdditionalOptions
+
+	// Specifies the data schema for the Hudi source.
+	OutputSchemas []GlueSchema
 
 	noSmithyDocumentSerde
 }

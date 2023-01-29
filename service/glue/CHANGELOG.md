@@ -1,3 +1,7 @@
+# v1.40.0 (2023-01-19)
+
+* **Feature**: Release Glue Studio Hudi Data Lake Format for SDK/CLI
+
 # v1.39.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

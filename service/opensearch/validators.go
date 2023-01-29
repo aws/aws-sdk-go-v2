@@ -390,6 +390,26 @@ func (m *validateOpDescribeDomains) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDryRunProgress struct {
+}
+
+func (*validateOpDescribeDryRunProgress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDryRunProgress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDryRunProgressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDryRunProgressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeInstanceTypeLimits struct {
 }
 
@@ -884,6 +904,10 @@ func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeDomainsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomains{}, middleware.After)
+}
+
+func addOpDescribeDryRunProgressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDryRunProgress{}, middleware.After)
 }
 
 func addOpDescribeInstanceTypeLimitsValidationMiddleware(stack *middleware.Stack) error {
@@ -1449,6 +1473,21 @@ func validateOpDescribeDomainsInput(v *DescribeDomainsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainsInput"}
 	if v.DomainNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDryRunProgressInput(v *DescribeDryRunProgressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDryRunProgressInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -3520,6 +3520,14 @@ type M2tsSettings struct {
 	// (or 0x1ff6).
 	Scte35Pid *string
 
+	// Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the
+	// output. Preroll is the amount of time between the presence of a SCTE-35
+	// indication in a transport stream and the PTS of the video frame it references.
+	// Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative
+	// pullup is not supported, which means that you can't make the preroll shorter. Be
+	// aware that latency in the output will increase by the pullup amount.
+	Scte35PrerollPullupMilliseconds float64
+
 	// Inserts segmentation markers at each segmentationTime period. raiSegstart sets
 	// the Random Access Indicator bit in the adaptation field. raiAdapt sets the RAI
 	// bit and adds the current timecode in the private data bytes. psiSegstart inserts

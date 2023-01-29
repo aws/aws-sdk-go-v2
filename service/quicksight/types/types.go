@@ -2545,6 +2545,23 @@ type DashboardVisualPublishOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The options for data bars.
+type DataBarsOptions struct {
+
+	// The field ID for the data bars options.
+	//
+	// This member is required.
+	FieldId *string
+
+	// The color of the negative data bar.
+	NegativeColor *string
+
+	// The color of the positive data bar.
+	PositiveColor *string
+
+	noSmithyDocumentSerde
+}
+
 // The required parameters that are needed to connect to a Databricks data source.
 type DatabricksParameters struct {
 
@@ -6696,7 +6713,8 @@ type LogicalTable struct {
 	// This member is required.
 	Source *LogicalTableSource
 
-	// Transform operations that act on this logical table.
+	// Transform operations that act on this logical table. For this structure to be
+	// valid, only one of the attributes can be non-null.
 	DataTransforms []TransformOperation
 
 	noSmithyDocumentSerde
@@ -9957,6 +9975,9 @@ type TableConfiguration struct {
 	// The sort configuration for a TableVisual.
 	SortConfiguration *TableSortConfiguration
 
+	// A collection of inline visualizations to display within a chart.
+	TableInlineVisualizations []TableInlineVisualization
+
 	// The table options for a table visual.
 	TableOptions *TableOptions
 
@@ -10085,6 +10106,15 @@ type TableFieldWells struct {
 
 	// The unaggregated field well for the table.
 	TableUnaggregatedFieldWells *TableUnaggregatedFieldWells
+
+	noSmithyDocumentSerde
+}
+
+// The inline visualization of a specific type to display within a chart.
+type TableInlineVisualization struct {
+
+	// The configuration of the inline visualization of the data bars within a chart.
+	DataBars *DataBarsOptions
 
 	noSmithyDocumentSerde
 }
@@ -10300,7 +10330,7 @@ type TemplateError struct {
 	// Type of error.
 	Type TemplateErrorType
 
-	//
+	// An error path that shows which entities caused the template error.
 	ViolatedEntities []Entity
 
 	noSmithyDocumentSerde
@@ -10396,7 +10426,23 @@ type TemplateVersion struct {
 	// create this template.
 	SourceEntityArn *string
 
-	// The HTTP status of the request.
+	// The status that is associated with the template.
+	//
+	// * CREATION_IN_PROGRESS
+	//
+	// *
+	// CREATION_SUCCESSFUL
+	//
+	// * CREATION_FAILED
+	//
+	// * UPDATE_IN_PROGRESS
+	//
+	// *
+	// UPDATE_SUCCESSFUL
+	//
+	// * UPDATE_FAILED
+	//
+	// * DELETED
 	Status ResourceStatus
 
 	// The ARN of the theme associated with this version of the template.

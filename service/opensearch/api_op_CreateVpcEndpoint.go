@@ -29,7 +29,7 @@ func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpoin
 
 type CreateVpcEndpointInput struct {
 
-	// The Amazon Resource Name (ARN) of the domain to grant access to.
+	// The Amazon Resource Name (ARN) of the domain to create the endpoint for.
 	//
 	// This member is required.
 	DomainArn *string

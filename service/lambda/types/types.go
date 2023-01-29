@@ -47,7 +47,7 @@ type AccountUsage struct {
 }
 
 // Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 type AliasConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the alias.
@@ -363,6 +363,11 @@ type EventSourceMappingConfiguration struct {
 	// (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
+	// (Amazon SQS only) The scaling configuration for the event source. For more
+	// information, see Configuring maximum concurrency for Amazon SQS event sources
+	// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency).
+	ScalingConfig *ScalingConfig
+
 	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *SelfManagedEventSource
 
@@ -573,6 +578,9 @@ type FunctionConfiguration struct {
 	// The runtime environment for the Lambda function.
 	Runtime Runtime
 
+	// The ARN of the runtime and any errors that occured.
+	RuntimeVersionConfig *RuntimeVersionConfig
+
 	// The ARN of the signing job.
 	SigningJobArn *string
 
@@ -581,7 +589,7 @@ type FunctionConfiguration struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Reducing startup time with Lambda SnapStart
+	// see Improving startup performance with Lambda SnapStart
 	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
 	SnapStart *SnapStartResponse
 
@@ -885,6 +893,43 @@ type ProvisionedConcurrencyConfigListItem struct {
 	noSmithyDocumentSerde
 }
 
+// The ARN of the runtime and any errors that occured.
+type RuntimeVersionConfig struct {
+
+	// Error response when Lambda is unable to retrieve the runtime version for a
+	// function.
+	Error *RuntimeVersionError
+
+	// The ARN of the runtime version you want the function to use.
+	RuntimeVersionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Any error returned when the runtime version information for the function could
+// not be retrieved.
+type RuntimeVersionError struct {
+
+	// The error code.
+	ErrorCode *string
+
+	// The error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// (Amazon SQS only) The scaling configuration for the event source. To remove the
+// configuration, pass an empty value.
+type ScalingConfig struct {
+
+	// Limits the number of concurrent instances that the Amazon SQS event source can
+	// invoke.
+	MaximumConcurrency *int32
+
+	noSmithyDocumentSerde
+}
+
 // The self-managed Apache Kafka cluster for your event source.
 type SelfManagedEventSource struct {
 
@@ -908,9 +953,10 @@ type SelfManagedKafkaEventSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The function's SnapStart setting. Set ApplyOn to PublishedVersions to create a
-// snapshot of the initialized execution environment when you publish a function
-// version. For more information, see Reducing startup time with Lambda SnapStart
+// The function's Lambda SnapStart setting. Set ApplyOn to PublishedVersions to
+// create a snapshot of the initialized execution environment when you publish a
+// function version. SnapStart is supported with the java11 runtime. For more
+// information, see Improving startup performance with Lambda SnapStart
 // (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
 type SnapStart struct {
 
@@ -945,43 +991,43 @@ type SourceAccessConfiguration struct {
 	// The type of authentication protocol, VPC components, or virtual host for your
 	// event source. For example: "Type":"SASL_SCRAM_512_AUTH".
 	//
-	// * BASIC_AUTH - (Amazon
+	// * BASIC_AUTH – (Amazon
 	// MQ) The Secrets Manager secret that stores your broker credentials.
 	//
 	// *
-	// BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret
+	// BASIC_AUTH – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret
 	// key used for SASL/PLAIN authentication of your Apache Kafka brokers.
 	//
 	// *
-	// VPC_SUBNET - (Self-managed Apache Kafka) The subnets associated with your VPC.
+	// VPC_SUBNET – (Self-managed Apache Kafka) The subnets associated with your VPC.
 	// Lambda connects to these subnets to fetch data from your self-managed Apache
 	// Kafka cluster.
 	//
-	// * VPC_SECURITY_GROUP - (Self-managed Apache Kafka) The VPC
+	// * VPC_SECURITY_GROUP – (Self-managed Apache Kafka) The VPC
 	// security group used to manage access to your self-managed Apache Kafka
 	// brokers.
 	//
-	// * SASL_SCRAM_256_AUTH - (Self-managed Apache Kafka) The Secrets
+	// * SASL_SCRAM_256_AUTH – (Self-managed Apache Kafka) The Secrets
 	// Manager ARN of your secret key used for SASL SCRAM-256 authentication of your
 	// self-managed Apache Kafka brokers.
 	//
-	// * SASL_SCRAM_512_AUTH - (Amazon MSK,
+	// * SASL_SCRAM_512_AUTH – (Amazon MSK,
 	// Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for
 	// SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.
 	//
 	// *
-	// VIRTUAL_HOST - (RabbitMQ) The name of the virtual host in your RabbitMQ broker.
+	// VIRTUAL_HOST –- (RabbitMQ) The name of the virtual host in your RabbitMQ broker.
 	// Lambda uses this RabbitMQ host as the event source. This property cannot be
 	// specified in an UpdateEventSourceMapping API call.
 	//
 	// *
-	// CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, self-managed Apache Kafka) The
+	// CLIENT_CERTIFICATE_TLS_AUTH – (Amazon MSK, self-managed Apache Kafka) The
 	// Secrets Manager ARN of your secret key containing the certificate chain (X.509
 	// PEM), private key (PKCS#8 PEM), and private key password (optional) used for
 	// mutual TLS authentication of your MSK/Apache Kafka brokers.
 	//
 	// *
-	// SERVER_ROOT_CA_CERTIFICATE - (Self-managed Apache Kafka) The Secrets Manager ARN
+	// SERVER_ROOT_CA_CERTIFICATE – (Self-managed Apache Kafka) The Secrets Manager ARN
 	// of your secret key containing the root CA certificate (X.509 PEM) used for TLS
 	// encryption of your Apache Kafka brokers.
 	Type SourceAccessType

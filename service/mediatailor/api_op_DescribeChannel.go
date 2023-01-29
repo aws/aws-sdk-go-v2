@@ -43,6 +43,11 @@ type DescribeChannelInput struct {
 
 type DescribeChannelOutput struct {
 
+	// The log configuration for the channel.
+	//
+	// This member is required.
+	LogConfiguration *types.LogConfigurationForChannel
+
 	// The ARN of the channel.
 	Arn *string
 

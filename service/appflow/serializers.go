@@ -1997,6 +1997,11 @@ func awsRestjson1_serializeDocumentConnectorOperator(v *types.ConnectorOperator,
 		ok.String(string(v.Marketo))
 	}
 
+	if len(v.Pardot) > 0 {
+		ok := object.Key("Pardot")
+		ok.String(string(v.Pardot))
+	}
+
 	if len(v.S3) > 0 {
 		ok := object.Key("S3")
 		ok.String(string(v.S3))
@@ -2122,6 +2127,13 @@ func awsRestjson1_serializeDocumentConnectorProfileCredentials(v *types.Connecto
 	if v.Marketo != nil {
 		ok := object.Key("Marketo")
 		if err := awsRestjson1_serializeDocumentMarketoConnectorProfileCredentials(v.Marketo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Pardot != nil {
+		ok := object.Key("Pardot")
+		if err := awsRestjson1_serializeDocumentPardotConnectorProfileCredentials(v.Pardot, ok); err != nil {
 			return err
 		}
 	}
@@ -2266,6 +2278,13 @@ func awsRestjson1_serializeDocumentConnectorProfileProperties(v *types.Connector
 	if v.Marketo != nil {
 		ok := object.Key("Marketo")
 		if err := awsRestjson1_serializeDocumentMarketoConnectorProfileProperties(v.Marketo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Pardot != nil {
+		ok := object.Key("Pardot")
+		if err := awsRestjson1_serializeDocumentPardotConnectorProfileProperties(v.Pardot, ok); err != nil {
 			return err
 		}
 	}
@@ -3233,6 +3252,69 @@ func awsRestjson1_serializeDocumentOAuthScopeList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPardotConnectorProfileCredentials(v *types.PardotConnectorProfileCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("accessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	if v.ClientCredentialsArn != nil {
+		ok := object.Key("clientCredentialsArn")
+		ok.String(*v.ClientCredentialsArn)
+	}
+
+	if v.OAuthRequest != nil {
+		ok := object.Key("oAuthRequest")
+		if err := awsRestjson1_serializeDocumentConnectorOAuthRequest(v.OAuthRequest, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RefreshToken != nil {
+		ok := object.Key("refreshToken")
+		ok.String(*v.RefreshToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPardotConnectorProfileProperties(v *types.PardotConnectorProfileProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BusinessUnitId != nil {
+		ok := object.Key("businessUnitId")
+		ok.String(*v.BusinessUnitId)
+	}
+
+	if v.InstanceUrl != nil {
+		ok := object.Key("instanceUrl")
+		ok.String(*v.InstanceUrl)
+	}
+
+	if v.IsSandboxEnvironment {
+		ok := object.Key("isSandboxEnvironment")
+		ok.Boolean(v.IsSandboxEnvironment)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPardotSourceProperties(v *types.PardotSourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Object != nil {
+		ok := object.Key("object")
+		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPathPrefixHierarchy(v []types.PathPrefix, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4001,6 +4083,13 @@ func awsRestjson1_serializeDocumentSourceConnectorProperties(v *types.SourceConn
 	if v.Marketo != nil {
 		ok := object.Key("Marketo")
 		if err := awsRestjson1_serializeDocumentMarketoSourceProperties(v.Marketo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Pardot != nil {
+		ok := object.Key("Pardot")
+		if err := awsRestjson1_serializeDocumentPardotSourceProperties(v.Pardot, ok); err != nil {
 			return err
 		}
 	}

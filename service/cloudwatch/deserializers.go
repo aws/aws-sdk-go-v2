@@ -11446,6 +11446,22 @@ func awsAwsquery_deserializeOpDocumentGetMetricStreamOutput(v **GetMetricStreamO
 				return err
 			}
 
+		case strings.EqualFold("IncludeLinkedAccountsMetrics", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IncludeLinkedAccountsMetrics to be of type *bool, got %T instead", val)
+				}
+				sv.IncludeLinkedAccountsMetrics = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("LastUpdateDate", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

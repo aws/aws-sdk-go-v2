@@ -1,3 +1,7 @@
+# v1.24.0 (2023-01-17)
+
+* **Feature**: Network Firewall now allows creation of dual stack endpoints, enabling inspection of IPv6 traffic.
+
 # v1.23.0 (2023-01-09)
 
 * **Feature**: Network Firewall now supports the Suricata rule action reject, in addition to the actions pass, drop, and alert.

@@ -73,8 +73,8 @@ type Channel struct {
 	// recording is enabled. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -125,8 +125,8 @@ type ChannelSummary struct {
 	// recording is enabled. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -172,8 +172,8 @@ type PlaybackKeyPair struct {
 	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -192,8 +192,8 @@ type PlaybackKeyPairSummary struct {
 	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -231,8 +231,8 @@ type RecordingConfiguration struct {
 	// Default: 0.
 	RecordingReconnectWindowSeconds int32
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -270,8 +270,8 @@ type RecordingConfigurationSummary struct {
 	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -360,8 +360,8 @@ type StreamKey struct {
 	// Channel ARN for the stream.
 	ChannelArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
@@ -383,8 +383,8 @@ type StreamKeySummary struct {
 	// Channel ARN for the stream.
 	ChannelArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value). See Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 	// information, including restrictions that apply to tags and "Tag naming limits
 	// and requirements"; Amazon IVS has no service-specific constraints beyond what is

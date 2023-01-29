@@ -30,10 +30,13 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the application registry.
+	AppRegistryArn *string
+
+	// The Amazon Resource Name (ARN) of the application.
 	ApplicationArn *string
 
-	//
+	// The ID of the application.
 	ApplicationId *string
 
 	noSmithyDocumentSerde
@@ -41,10 +44,11 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	//
+	// Returns all of the metadata of an application registered with AWS Systems
+	// Manager for SAP.
 	Application *types.Application
 
-	//
+	// The tags of a registered application.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -6,6 +6,22 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The Resource Groups settings for this Amazon Web Services account.
+type AccountSettings struct {
+
+	// The desired target status of the group lifecycle events feature. If
+	GroupLifecycleEventsDesiredStatus GroupLifecycleEventsDesiredStatus
+
+	// The current status of the group lifecycle events feature.
+	GroupLifecycleEventsStatus GroupLifecycleEventsStatus
+
+	// The text of any error message occurs during an attempt to turn group lifecycle
+	// events on or off.
+	GroupLifecycleEventsStatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // A resource that failed to be added to or removed from a group.
 type FailedResource struct {
 
@@ -21,19 +37,19 @@ type FailedResource struct {
 	noSmithyDocumentSerde
 }
 
-// A resource group that contains AWS resources. You can assign resources to the
-// group by associating either of the following elements with the group:
+// A resource group that contains Amazon Web Services resources. You can assign
+// resources to the group by associating either of the following elements with the
+// group:
 //
-// *
-// ResourceQuery - Use a resource query to specify a set of tag keys and values.
-// All resources in the same AWS Region and AWS account that have those keys with
-// the same values are included in the group. You can add a resource query when you
-// create the group, or later by using the PutGroupConfiguration operation.
+// * ResourceQuery - Use a resource query to specify a set of tag keys and
+// values. All resources in the same Amazon Web Services Region and Amazon Web
+// Services account that have those keys with the same values are included in the
+// group. You can add a resource query when you create the group, or later by using
+// the PutGroupConfiguration operation.
 //
-// *
-// GroupConfiguration - Use a service configuration to associate the group with an
-// AWS service. The configuration specifies which resource types can be included in
-// the group.
+// * GroupConfiguration - Use a service
+// configuration to associate the group with an Amazon Web Services service. The
+// configuration specifies which resource types can be included in the group.
 type Group struct {
 
 	// The ARN of the resource group.
@@ -53,10 +69,10 @@ type Group struct {
 }
 
 // A service configuration associated with a resource group. The configuration
-// options are determined by the AWS service that defines the Type, and specifies
-// which resources can be included in the group. You can add a service
-// configuration when you create the group by using CreateGroup, or later by using
-// the PutGroupConfiguration operation. For details about group service
+// options are determined by the Amazon Web Services service that defines the Type,
+// and specifies which resources can be included in the group. You can add a
+// service configuration when you create the group by using CreateGroup, or later
+// by using the PutGroupConfiguration operation. For details about group service
 // configuration syntax, see Service configurations for resource groups
 // (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 type GroupConfiguration struct {
@@ -152,8 +168,8 @@ type GroupIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// A mapping of a query attached to a resource group that determines the AWS
-// resources that are members of the group.
+// A mapping of a query attached to a resource group that determines the Amazon Web
+// Services resources that are members of the group.
 type GroupQuery struct {
 
 	// The name of the resource group that is associated with the specified resource
@@ -162,8 +178,8 @@ type GroupQuery struct {
 	// This member is required.
 	GroupName *string
 
-	// The resource query that determines which AWS resources are members of the
-	// associated resource group.
+	// The resource query that determines which Amazon Web Services resources are
+	// members of the associated resource group.
 	//
 	// This member is required.
 	ResourceQuery *ResourceQuery
@@ -198,22 +214,20 @@ type PendingResource struct {
 }
 
 // A two-part error structure that can occur in ListGroupResources or
-// SearchResources operations on CloudFormation stack-based queries. The error
-// occurs if the CloudFormation stack on which the query is based either does not
-// exist, or has a status that renders the stack inactive. A QueryError occurrence
-// does not necessarily mean that AWS Resource Groups could not complete the
-// operation, but the resulting group might have no member resources.
+// SearchResources operations on CloudFront stack-based queries. The error occurs
+// if the CloudFront stack on which the query is based either does not exist, or
+// has a status that renders the stack inactive. A QueryError occurrence does not
+// necessarily mean that Resource Groups could not complete the operation, but the
+// resulting group might have no member resources.
 type QueryError struct {
 
-	// Possible values are CLOUDFORMATION_STACK_INACTIVE and
-	// CLOUDFORMATION_STACK_NOT_EXISTING.
+	// Specifies the error code that was raised.
 	ErrorCode QueryErrorCode
 
 	// A message that explains the ErrorCode value. Messages might state that the
-	// specified CloudFormation stack does not exist (or no longer exists). For
-	// CLOUDFORMATION_STACK_INACTIVE, the message typically states that the
-	// CloudFormation stack has a status that is not (or no longer) active, such as
-	// CREATE_FAILED.
+	// specified CloudFront stack does not exist (or no longer exists). For
+	// CLOUDFORMATION_STACK_INACTIVE, the message typically states that the CloudFront
+	// stack has a status that is not (or no longer) active, such as CREATE_FAILED.
 	Message *string
 
 	noSmithyDocumentSerde
@@ -249,64 +263,55 @@ type ResourceIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// The query that is used to define a resource group or a search for resources. A
-// query specifies both a query type and a query string as a JSON object. See the
-// examples section for example JSON strings. The examples that follow are shown as
-// standard JSON strings. If you include such a string as a parameter to the AWS
-// CLI or an SDK API, you might need to 'escape' the string into a single line. For
-// example, see the Quoting strings
+// The query you can use to define a resource group or a search for resources. A
+// ResourceQuery specifies both a query Type and a Query string as JSON string
+// objects. See the examples section for example JSON strings. For more information
+// about creating a resource group with a resource query, see Build queries and
+// groups in Resource Groups
+// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html) in
+// the Resource Groups User Guide When you combine all of the elements together
+// into a single string, any double quotes that are embedded inside another double
+// quote pair must be escaped by preceding the embedded double quote with a
+// backslash character (\). For example, a complete ResourceQuery parameter must be
+// formatted like the following CLI parameter example: --resource-query
+// '{"Type":"TAG_FILTERS_1_0","Query":"{\"ResourceTypeFilters\":[\"AWS::AllSupported\"],\"TagFilters\":[{\"Key\":\"Stage\",\"Values\":[\"Test\"]}]}"}'
+// In the preceding example, all of the double quote characters in the value part
+// of the Query element must be escaped because the value itself is surrounded by
+// double quotes. For more information, see Quoting strings
 // (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html)
-// in the AWS CLI User Guide. Example 1 The following generic example shows a
-// resource query JSON string that includes only resources that meet the following
-// criteria:
-//
-// * The resource type must be either resource_type1 or
-// resource_type2.
-//
-// * The resource must have a tag Key1 with a value of either
-// ValueA or ValueB.
-//
-// * The resource must have a tag Key2 with a value of either
-// ValueC or ValueD.
-//
-// { "Type": "TAG_FILTERS_1_0", "Query": {
-// "ResourceTypeFilters": [ "resource_type1", "resource_type2"], "TagFilters": [ {
-// "Key": "Key1", "Values": ["ValueA","ValueB"] }, { "Key":"Key2",
-// "Values":["ValueC","ValueD"] } ] } } This has the equivalent "shortcut" syntax
-// of the following: { "Type": "TAG_FILTERS_1_0", "Query": { "ResourceTypeFilters":
-// [ "resource_type1", "resource_type2"], "TagFilters": [ { "Key1":
-// ["ValueA","ValueB"] }, { "Key2": ["ValueC","ValueD"] } ] } } Example 2 The
-// following example shows a resource query JSON string that includes only Amazon
-// EC2 instances that are tagged Stage with a value of Test. { "Type":
-// "TAG_FILTERS_1_0", "Query": "{ "ResourceTypeFilters": "AWS::EC2::Instance",
-// "TagFilters": { "Stage": "Test" } } } Example 3 The following example shows a
-// resource query JSON string that includes resource of any supported type as long
-// as it is tagged Stage with a value of Prod. { "Type": "TAG_FILTERS_1_0",
-// "Query": { "ResourceTypeFilters": "AWS::AllSupported", "TagFilters": { "Stage":
-// "Prod" } } } Example 4 The following example shows a resource query JSON string
-// that includes only Amazon EC2 instances and Amazon S3 buckets that are part of
-// the specified AWS CloudFormation stack. { "Type": "CLOUDFORMATION_STACK_1_0",
-// "Query": { "ResourceTypeFilters": [ "AWS::EC2::Instance", "AWS::S3::Bucket" ],
-// "StackIdentifier":
-// "arn:aws:cloudformation:us-west-2:123456789012:stack/AWStestuseraccount/fb0d5000-aba8-00e8-aa9e-50d5cEXAMPLE"
-// } }
+// in the Command Line Interface User Guide. For the complete list of resource
+// types that you can use in the array value for ResourceTypeFilters, see Resources
+// you can use with Resource Groups and Tag Editor
+// (https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html) in
+// the Resource Groups User Guide. For example:
+// "ResourceTypeFilters":["AWS::S3::Bucket", "AWS::EC2::Instance"]
 type ResourceQuery struct {
 
-	// The query that defines a group or a search.
+	// The query that defines a group or a search. The contents depends on the value of
+	// the Type element.
 	//
-	// This member is required.
-	Query *string
-
-	// The type of the query. You can use the following values:
+	// * ResourceTypeFilters – Applies to all ResourceQuery objects
+	// of either Type. This element contains one of the following two items:
 	//
-	// *
-	// CLOUDFORMATION_STACK_1_0: Specifies that the Query contains an ARN for a
-	// CloudFormation stack.
+	// * The
+	// value AWS::AllSupported. This causes the ResourceQuery to match resources of any
+	// resource type that also match the query.
 	//
-	// * TAG_FILTERS_1_0: Specifies that the Query parameter
-	// contains a JSON string that represents a collection of simple tag filters for
-	// resource types and tags. The JSON string uses a syntax similar to the
-	// GetResources
+	// * A list (a JSON array) of resource
+	// type identifiers that limit the query to only resources of the specified types.
+	// For the complete list of resource types that you can use in the array value for
+	// ResourceTypeFilters, see Resources you can use with Resource Groups and Tag
+	// Editor
+	// (https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html) in
+	// the Resource Groups User Guide.
+	//
+	// Example: "ResourceTypeFilters":
+	// ["AWS::AllSupported"] or "ResourceTypeFilters": ["AWS::EC2::Instance",
+	// "AWS::S3::Bucket"]
+	//
+	// * TagFilters – applicable only if Type = TAG_FILTERS_1_0.
+	// The Query contains a JSON string that represents a collection of simple tag
+	// filters. The JSON string uses a syntax similar to the GetResources
 	// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
 	// operation, but uses only the  ResourceTypeFilters
 	// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters)
@@ -318,27 +323,48 @@ type ResourceQuery struct {
 	// filter if it has a tag key value that matches any of the specified values. For
 	// example, consider the following sample query for resources that have two tags,
 	// Stage and Version, with two values each:
-	// [{"Stage":["Test","Deploy"]},{"Version":["1","2"]}] The results of this query
-	// could include the following.
+	// [{"Stage":["Test","Deploy"]},{"Version":["1","2"]}] The results of this resource
+	// query could include the following.
 	//
-	// * An EC2 instance that has the following two tags:
-	// {"Stage":"Deploy"}, and {"Version":"2"}
+	// * An Amazon EC2 instance that has the
+	// following two tags: {"Stage":"Deploy"}, and {"Version":"2"}
 	//
-	// * An S3 bucket that has the following
-	// two tags: {"Stage":"Test"}, and {"Version":"1"}
+	// * An S3 bucket that
+	// has the following two tags: {"Stage":"Test"}, and {"Version":"1"}
 	//
-	// The query would not include the
-	// following items in the results, however.
+	// The resource
+	// query results would not include the following items in the results, however.
 	//
-	// * An EC2 instance that has only the
-	// following tag: {"Stage":"Deploy"}. The instance does not have all of the tag
-	// keys specified in the filter, so it is excluded from the results.
+	// *
+	// An Amazon EC2 instance that has only the following tag: {"Stage":"Deploy"}. The
+	// instance does not have all of the tag keys specified in the filter, so it is
+	// excluded from the results.
 	//
-	// * An RDS
-	// database that has the following two tags: {"Stage":"Archived"} and
-	// {"Version":"4"} The database has all of the tag keys, but none of those keys has
-	// an associated value that matches at least one of the specified values in the
-	// filter.
+	// * An RDS database that has the following two tags:
+	// {"Stage":"Archived"} and {"Version":"4"} The database has all of the tag keys,
+	// but none of those keys has an associated value that matches at least one of the
+	// specified values in the filter.
+	//
+	// Example: "TagFilters": [ { "Key": "Stage",
+	// "Values": [ "Gamma", "Beta" ] }
+	//
+	// * StackIdentifier – applicable only if Type =
+	// CLOUDFORMATION_STACK_1_0. The value of this parameter is the Amazon Resource
+	// Name (ARN) of the CloudFormation stack whose resources you want included in the
+	// group.
+	//
+	// This member is required.
+	Query *string
+
+	// The type of the query to perform. This can have one of two values:
+	//
+	// *
+	// CLOUDFORMATION_STACK_1_0: Specifies that you want the group to contain the
+	// members of an CloudFormation stack. The Query contains a StackIdentifier element
+	// with an ARN for a CloudFormation stack.
+	//
+	// * TAG_FILTERS_1_0: Specifies that you
+	// want the group to include resource that have tags that match the query.
 	//
 	// This member is required.
 	Type QueryType

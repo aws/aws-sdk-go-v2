@@ -1009,6 +1009,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				return err
 			}
 
+		case "ScalingConfig":
+			if err := awsRestjson1_deserializeDocumentScalingConfig(&sv.ScalingConfig, value); err != nil {
+				return err
+			}
+
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
 				return err
@@ -1454,6 +1459,11 @@ func awsRestjson1_deserializeOpDocumentCreateFunctionOutput(v **CreateFunctionOu
 					return fmt.Errorf("expected Runtime to be of type string, got %T instead", value)
 				}
 				sv.Runtime = types.Runtime(jtv)
+			}
+
+		case "RuntimeVersionConfig":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionConfig(&sv.RuntimeVersionConfig, value); err != nil {
+				return err
 			}
 
 		case "SigningJobArn":
@@ -2216,6 +2226,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 
 		case "Queues":
 			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
+				return err
+			}
+
+		case "ScalingConfig":
+			if err := awsRestjson1_deserializeDocumentScalingConfig(&sv.ScalingConfig, value); err != nil {
 				return err
 			}
 
@@ -3804,6 +3819,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 				return err
 			}
 
+		case "ScalingConfig":
+			if err := awsRestjson1_deserializeDocumentScalingConfig(&sv.ScalingConfig, value); err != nil {
+				return err
+			}
+
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
 				return err
@@ -4738,6 +4758,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionConfigurationOutput(v **GetFun
 					return fmt.Errorf("expected Runtime to be of type string, got %T instead", value)
 				}
 				sv.Runtime = types.Runtime(jtv)
+			}
+
+		case "RuntimeVersionConfig":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionConfig(&sv.RuntimeVersionConfig, value); err != nil {
+				return err
 			}
 
 		case "SigningJobArn":
@@ -6234,6 +6259,175 @@ func awsRestjson1_deserializeOpDocumentGetProvisionedConcurrencyConfigOutput(v *
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetRuntimeManagementConfig struct {
+}
+
+func (*awsRestjson1_deserializeOpGetRuntimeManagementConfig) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetRuntimeManagementConfig) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetRuntimeManagementConfig(response, &metadata)
+	}
+	output := &GetRuntimeManagementConfigOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetRuntimeManagementConfigOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetRuntimeManagementConfig(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceException", errorCode):
+		return awsRestjson1_deserializeErrorServiceException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetRuntimeManagementConfigOutput(v **GetRuntimeManagementConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetRuntimeManagementConfigOutput
+	if *v == nil {
+		sv = &GetRuntimeManagementConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RuntimeVersionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeVersionArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeVersionArn = ptr.String(jtv)
+			}
+
+		case "UpdateRuntimeOn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateRuntimeOn to be of type string, got %T instead", value)
+				}
+				sv.UpdateRuntimeOn = types.UpdateRuntimeOn(jtv)
 			}
 
 		default:
@@ -9108,6 +9302,11 @@ func awsRestjson1_deserializeOpDocumentPublishVersionOutput(v **PublishVersionOu
 				sv.Runtime = types.Runtime(jtv)
 			}
 
+		case "RuntimeVersionConfig":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionConfig(&sv.RuntimeVersionConfig, value); err != nil {
+				return err
+			}
+
 		case "SigningJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9960,6 +10159,187 @@ func awsRestjson1_deserializeOpDocumentPutProvisionedConcurrencyConfigOutput(v *
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpPutRuntimeManagementConfig struct {
+}
+
+func (*awsRestjson1_deserializeOpPutRuntimeManagementConfig) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPutRuntimeManagementConfig) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPutRuntimeManagementConfig(response, &metadata)
+	}
+	output := &PutRuntimeManagementConfigOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentPutRuntimeManagementConfigOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorPutRuntimeManagementConfig(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceConflictException", errorCode):
+		return awsRestjson1_deserializeErrorResourceConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceException", errorCode):
+		return awsRestjson1_deserializeErrorServiceException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentPutRuntimeManagementConfigOutput(v **PutRuntimeManagementConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *PutRuntimeManagementConfigOutput
+	if *v == nil {
+		sv = &PutRuntimeManagementConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FunctionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FunctionArn to be of type string, got %T instead", value)
+				}
+				sv.FunctionArn = ptr.String(jtv)
+			}
+
+		case "RuntimeVersionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeVersionArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeVersionArn = ptr.String(jtv)
+			}
+
+		case "UpdateRuntimeOn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateRuntimeOn to be of type string, got %T instead", value)
+				}
+				sv.UpdateRuntimeOn = types.UpdateRuntimeOn(jtv)
 			}
 
 		default:
@@ -11025,6 +11405,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				return err
 			}
 
+		case "ScalingConfig":
+			if err := awsRestjson1_deserializeDocumentScalingConfig(&sv.ScalingConfig, value); err != nil {
+				return err
+			}
+
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
 				return err
@@ -11475,6 +11860,11 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionCodeOutput(v **UpdateFuncti
 				sv.Runtime = types.Runtime(jtv)
 			}
 
+		case "RuntimeVersionConfig":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionConfig(&sv.RuntimeVersionConfig, value); err != nil {
+				return err
+			}
+
 		case "SigningJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11917,6 +12307,11 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionConfigurationOutput(v **Upd
 					return fmt.Errorf("expected Runtime to be of type string, got %T instead", value)
 				}
 				sv.Runtime = types.Runtime(jtv)
+			}
+
+		case "RuntimeVersionConfig":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionConfig(&sv.RuntimeVersionConfig, value); err != nil {
+				return err
 			}
 
 		case "SigningJobArn":
@@ -15694,6 +16089,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				return err
 			}
 
+		case "ScalingConfig":
+			if err := awsRestjson1_deserializeDocumentScalingConfig(&sv.ScalingConfig, value); err != nil {
+				return err
+			}
+
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
 				return err
@@ -16334,6 +16734,11 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 					return fmt.Errorf("expected Runtime to be of type string, got %T instead", value)
 				}
 				sv.Runtime = types.Runtime(jtv)
+			}
+
+		case "RuntimeVersionConfig":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionConfig(&sv.RuntimeVersionConfig, value); err != nil {
+				return err
 			}
 
 		case "SigningJobArn":
@@ -18482,6 +18887,144 @@ func awsRestjson1_deserializeDocumentResourceNotReadyException(v **types.Resourc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimeVersionConfig(v **types.RuntimeVersionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimeVersionConfig
+	if *v == nil {
+		sv = &types.RuntimeVersionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Error":
+			if err := awsRestjson1_deserializeDocumentRuntimeVersionError(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "RuntimeVersionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeVersionArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeVersionArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimeVersionError(v **types.RuntimeVersionError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimeVersionError
+	if *v == nil {
+		sv = &types.RuntimeVersionError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScalingConfig(v **types.ScalingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScalingConfig
+	if *v == nil {
+		sv = &types.ScalingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumConcurrency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumConcurrency to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumConcurrency = ptr.Int32(int32(i64))
 			}
 
 		default:

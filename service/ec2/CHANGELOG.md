@@ -1,3 +1,23 @@
+# v1.81.0 (2023-01-25)
+
+* **Feature**: This release adds new functionality that allows customers to provision IPv6 CIDR blocks through Amazon VPC IP Address Manager (IPAM) as well as allowing customers to utilize IPAM Resource Discovery APIs.
+
+# v1.80.1 (2023-01-23)
+
+* No change notes available for this release.
+
+# v1.80.0 (2023-01-20)
+
+* **Feature**: C6in, M6in, M6idn, R6in and R6idn instances are powered by 3rd Generation Intel Xeon Scalable processors (code named Ice Lake) with an all-core turbo frequency of 3.5 GHz.
+
+# v1.79.0 (2023-01-19)
+
+* **Feature**: Adds SSM Parameter Resource Aliasing support to EC2 Launch Templates. Launch Templates can now store parameter aliases in place of AMI Resource IDs. CreateLaunchTemplateVersion and DescribeLaunchTemplateVersions now support a convenience flag, ResolveAlias, to return the resolved parameter value.
+
+# v1.78.0 (2023-01-13)
+
+* **Feature**: Documentation updates for EC2.
+
 # v1.77.0 (2022-12-20)
 
 * **Feature**: Adds support for pagination in the EC2 DescribeImages API.

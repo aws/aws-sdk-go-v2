@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Rejects one or more VPC endpoint connection requests to your VPC endpoint
-// service.
+// Rejects VPC endpoint connection requests to your VPC endpoint service.
 func (c *Client) RejectVpcEndpointConnections(ctx context.Context, params *RejectVpcEndpointConnectionsInput, optFns ...func(*Options)) (*RejectVpcEndpointConnectionsOutput, error) {
 	if params == nil {
 		params = &RejectVpcEndpointConnectionsInput{}
@@ -35,7 +34,7 @@ type RejectVpcEndpointConnectionsInput struct {
 	// This member is required.
 	ServiceId *string
 
-	// The IDs of one or more VPC endpoints.
+	// The IDs of the VPC endpoints.
 	//
 	// This member is required.
 	VpcEndpointIds []string

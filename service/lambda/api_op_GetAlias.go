@@ -12,7 +12,7 @@ import (
 )
 
 // Returns details about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 func (c *Client) GetAlias(ctx context.Context, params *GetAliasInput, optFns ...func(*Options)) (*GetAliasOutput, error) {
 	if params == nil {
 		params = &GetAliasInput{}
@@ -56,7 +56,7 @@ type GetAliasInput struct {
 }
 
 // Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 type GetAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the alias.

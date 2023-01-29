@@ -19,14 +19,12 @@
 // (http://aws.amazon.com/tools/). For a list of Region-specific endpoints that
 // Lambda supports, see Lambda endpoints and quotas
 // (https://docs.aws.amazon.com/general/latest/gr/lambda-service.html/) in the
-// Amazon Web Services General Reference..
-//
-// When making the API calls, you will
-// need to authenticate your request by providing a signature. Lambda supports
-// signature version 4. For more information, see Signature Version 4 signing
-// process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// in the Amazon Web Services General Reference.. CA certificates Because Amazon
-// Web Services SDKs use the CA certificates from your computer, changes to the
+// Amazon Web Services General Reference.. When making the API calls, you will need
+// to authenticate your request by providing a signature. Lambda supports signature
+// version 4. For more information, see Signature Version 4 signing process
+// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the
+// Amazon Web Services General Reference.. CA certificates Because Amazon Web
+// Services SDKs use the CA certificates from your computer, changes to the
 // certificates on the Amazon Web Services servers can cause connection failures
 // when you attempt to use an SDK. You can prevent these failures by keeping your
 // computer's CA certificates and operating system up-to-date. If you encounter

@@ -28,18 +28,14 @@ import (
 //
 // For more information, see
 // EFS Lifecycle Management
-// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html).
-//
-// Each
+// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html). Each
 // Amazon EFS file system supports one lifecycle configuration, which applies to
 // all files in the file system. If a LifecycleConfiguration object already exists
 // for the specified file system, a PutLifecycleConfiguration call modifies the
 // existing configuration. A PutLifecycleConfiguration call with an empty
 // LifecyclePolicies array in the request body deletes any existing
 // LifecycleConfiguration and turns off lifecycle management and EFS
-// Intelligent-Tiering for the file system.
-//
-// In the request, specify the
+// Intelligent-Tiering for the file system. In the request, specify the
 // following:
 //
 // * The ID for the file system for which you are enabling, disabling,

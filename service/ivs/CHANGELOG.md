@@ -1,3 +1,7 @@
+# v1.20.0 (2023-01-20)
+
+* **Feature**: API and Doc update. Update to arns field in BatchGetStreamKey. Also updates to operations and structures.
+
 # v1.19.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

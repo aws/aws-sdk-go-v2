@@ -65,6 +65,9 @@ type GetBatchJobExecutionOutput struct {
 	// This member is required.
 	Status types.BatchJobExecutionStatus
 
+	// Identifies a specific batch job.
+	BatchJobIdentifier types.BatchJobIdentifier
+
 	// The timestamp when the batch job execution ended.
 	EndTime *time.Time
 
@@ -79,6 +82,9 @@ type GetBatchJobExecutionOutput struct {
 
 	// The user for the job.
 	JobUser *string
+
+	//
+	ReturnCode *string
 
 	// The reason for the reported status.
 	StatusReason *string

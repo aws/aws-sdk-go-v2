@@ -37,7 +37,8 @@ type CreateConnectionInput struct {
 	// This member is required.
 	AuthParameters *types.CreateConnectionAuthRequestParameters
 
-	// The type of authorization to use for the connection.
+	// The type of authorization to use for the connection. OAUTH tokens are refreshed
+	// when a 401 or 407 response is returned.
 	//
 	// This member is required.
 	AuthorizationType types.ConnectionAuthorizationType

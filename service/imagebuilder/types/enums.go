@@ -152,6 +152,28 @@ func (EbsVolumeType) Values() []EbsVolumeType {
 	}
 }
 
+type ImageSource string
+
+// Enum values for ImageSource
+const (
+	ImageSourceAmazonManaged  ImageSource = "AMAZON_MANAGED"
+	ImageSourceAwsMarketplace ImageSource = "AWS_MARKETPLACE"
+	ImageSourceImported       ImageSource = "IMPORTED"
+	ImageSourceCustom         ImageSource = "CUSTOM"
+)
+
+// Values returns all known values for ImageSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImageSource) Values() []ImageSource {
+	return []ImageSource{
+		"AMAZON_MANAGED",
+		"AWS_MARKETPLACE",
+		"IMPORTED",
+		"CUSTOM",
+	}
+}
+
 type ImageStatus string
 
 // Enum values for ImageStatus
@@ -210,9 +232,10 @@ type Ownership string
 
 // Enum values for Ownership
 const (
-	OwnershipSelf   Ownership = "Self"
-	OwnershipShared Ownership = "Shared"
-	OwnershipAmazon Ownership = "Amazon"
+	OwnershipSelf       Ownership = "Self"
+	OwnershipShared     Ownership = "Shared"
+	OwnershipAmazon     Ownership = "Amazon"
+	OwnershipThirdparty Ownership = "ThirdParty"
 )
 
 // Values returns all known values for Ownership. Note that this can be expanded in
@@ -223,6 +246,7 @@ func (Ownership) Values() []Ownership {
 		"Self",
 		"Shared",
 		"Amazon",
+		"ThirdParty",
 	}
 }
 

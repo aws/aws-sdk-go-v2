@@ -42,12 +42,12 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//
 	// * principal - The ARN of the principal.
 	//
-	// * principal-type
-	// - The principal type (All | Service | OrganizationUnit | Account | User | Role).
+	// * principal-type - The
+	// principal type (All | Service | OrganizationUnit | Account | User | Role).
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
@@ -64,7 +64,7 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 
 type DescribeVpcEndpointServicePermissionsOutput struct {
 
-	// Information about one or more allowed principals.
+	// Information about the allowed principals.
 	AllowedPrincipals []types.AllowedPrincipal
 
 	// The token to use to retrieve the next page of results. This value is null when

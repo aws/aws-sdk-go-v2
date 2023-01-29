@@ -1,3 +1,11 @@
+# v1.21.0 (2023-01-27)
+
+* **Feature**: This release introduces the As Run logging type, along with API and documentation updates.
+
+# v1.20.1 (2023-01-19)
+
+* No change notes available for this release.
+
 # v1.20.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

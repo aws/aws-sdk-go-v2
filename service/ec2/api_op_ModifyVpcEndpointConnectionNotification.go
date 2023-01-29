@@ -35,8 +35,8 @@ type ModifyVpcEndpointConnectionNotificationInput struct {
 	// This member is required.
 	ConnectionNotificationId *string
 
-	// One or more events for the endpoint. Valid values are Accept, Connect, Delete,
-	// and Reject.
+	// The events for the endpoint. Valid values are Accept, Connect, Delete, and
+	// Reject.
 	ConnectionEvents []string
 
 	// The ARN for the SNS topic for the notification.

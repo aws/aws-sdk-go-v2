@@ -12,20 +12,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of AWS resource identifiers that matches the specified query. The
-// query uses the same format as a resource query in a CreateGroup or
-// UpdateGroupQuery operation. Minimum permissions To run this command, you must
-// have the following permissions:
-//
-// * resource-groups:SearchResources
+// Returns a list of Amazon Web Services resource identifiers that matches the
+// specified query. The query uses the same format as a resource query in a
+// CreateGroup or UpdateGroupQuery operation. Minimum permissions To run this
+// command, you must have the following permissions:
 //
 // *
-// cloudformation:DescribeStacks
+// resource-groups:SearchResources
 //
-// * cloudformation:ListStackResources
+// * cloudformation:DescribeStacks
 //
 // *
-// tag:GetResources
+// cloudformation:ListStackResources
+//
+// * tag:GetResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}
@@ -78,8 +78,12 @@ type SearchResourcesOutput struct {
 	NextToken *string
 
 	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode are
-	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
+	// and Message structures. Possible values for ErrorCode:
+	//
+	// *
+	// CLOUDFORMATION_STACK_INACTIVE
+	//
+	// * CLOUDFORMATION_STACK_NOT_EXISTING
 	QueryErrors []types.QueryError
 
 	// The ARNs and resource types of resources that are members of the group that you

@@ -111,6 +111,17 @@ type CreateIpamPoolInput struct {
 	// Web Services Region, such as us-east-1.
 	Locale *string
 
+	// The IP address source for pools in the public scope. Only used for provisioning
+	// IP address CIDRs to pools in the public scope. Default is byoip. For more
+	// information, see Create IPv6 pools
+	// (https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html) in
+	// the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided
+	// IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is amazon. For
+	// information on increasing the default limit, see  Quotas for your IPAM
+	// (https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in the Amazon VPC
+	// IPAM User Guide.
+	PublicIpSource types.IpamPoolPublicIpSource
+
 	// Determines if the pool is publicly advertisable. This option is not available
 	// for pools with AddressFamily set to ipv4.
 	PubliclyAdvertisable *bool

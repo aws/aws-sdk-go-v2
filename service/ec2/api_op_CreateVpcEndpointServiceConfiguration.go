@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a VPC endpoint service to which service consumers (Amazon Web Services
-// accounts, IAM users, and IAM roles) can connect. Before you create an endpoint
+// accounts, users, and IAM roles) can connect. Before you create an endpoint
 // service, you must create one of the following for your service:
 //
 // * A Network
@@ -60,11 +60,10 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
+	// The Amazon Resource Names (ARNs) of the Gateway Load Balancers.
 	GatewayLoadBalancerArns []string
 
-	// The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your
-	// service.
+	// The Amazon Resource Names (ARNs) of the Network Load Balancers.
 	NetworkLoadBalancerArns []string
 
 	// (Interface endpoint configuration) The private DNS name to assign to the VPC

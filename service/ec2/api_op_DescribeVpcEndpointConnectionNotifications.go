@@ -40,16 +40,16 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//
-	// * connection-notification-arn - The ARN of the SNS topic
-	// for the notification.
-	//
-	// * connection-notification-id - The ID of the
+	// * connection-notification-arn - The ARN of the SNS topic for the
 	// notification.
 	//
-	// * connection-notification-state - The state of the notification
-	// (Enabled | Disabled).
+	// * connection-notification-id - The ID of the notification.
+	//
+	// *
+	// connection-notification-state - The state of the notification (Enabled |
+	// Disabled).
 	//
 	// * connection-notification-type - The type of notification
 	// (Topic).
@@ -72,7 +72,7 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 
 type DescribeVpcEndpointConnectionNotificationsOutput struct {
 
-	// One or more notifications.
+	// The notifications.
 	ConnectionNotificationSet []types.ConnectionNotification
 
 	// The token to use to retrieve the next page of results. This value is null when

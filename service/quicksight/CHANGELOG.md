@@ -1,3 +1,7 @@
+# v1.30.0 (2023-01-20)
+
+* **Feature**: This release adds support for data bars in QuickSight table and increases pivot table field well limit.
+
 # v1.29.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

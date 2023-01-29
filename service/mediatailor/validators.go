@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpConfigureLogsForChannel struct {
+}
+
+func (*validateOpConfigureLogsForChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpConfigureLogsForChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ConfigureLogsForChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpConfigureLogsForChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpConfigureLogsForPlaybackConfiguration struct {
 }
 
@@ -790,6 +810,10 @@ func (m *validateOpUpdateVodSource) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpConfigureLogsForChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpConfigureLogsForChannel{}, middleware.After)
+}
+
 func addOpConfigureLogsForPlaybackConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpConfigureLogsForPlaybackConfiguration{}, middleware.After)
 }
@@ -1133,6 +1157,24 @@ func validateTransition(v *types.Transition) error {
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpConfigureLogsForChannelInput(v *ConfigureLogsForChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureLogsForChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.LogTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

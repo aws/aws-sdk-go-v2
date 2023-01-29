@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -38,18 +39,31 @@ type ProvisionIpamPoolCidrInput struct {
 	// This member is required.
 	IpamPoolId *string
 
-	// The CIDR you want to assign to the IPAM pool.
+	// The CIDR you want to assign to the IPAM pool. Either "NetmaskLength" or "Cidr"
+	// is required. This value will be null if you specify "NetmaskLength" and will be
+	// filled in during the provisioning process.
 	Cidr *string
 
 	// A signed document that proves that you are authorized to bring a specified IP
 	// address range to Amazon using BYOIP. This option applies to public pools only.
 	CidrAuthorizationContext *types.IpamCidrAuthorizationContext
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see Ensuring Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string
+
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The netmask length of the CIDR you'd like to provision to a pool. Can be used
+	// for provisioning Amazon-provided IPv6 CIDRs to top-level pools and for
+	// provisioning CIDRs to pools with source pools. Cannot be used to provision BYOIP
+	// CIDRs to top-level pools. Either "NetmaskLength" or "Cidr" is required.
+	NetmaskLength *int32
 
 	noSmithyDocumentSerde
 }
@@ -110,6 +124,9 @@ func (c *Client) addOperationProvisionIpamPoolCidrMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opProvisionIpamPoolCidrMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpProvisionIpamPoolCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -126,6 +143,39 @@ func (c *Client) addOperationProvisionIpamPoolCidrMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpProvisionIpamPoolCidr struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpProvisionIpamPoolCidr) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpProvisionIpamPoolCidr) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*ProvisionIpamPoolCidrInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *ProvisionIpamPoolCidrInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opProvisionIpamPoolCidrMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpProvisionIpamPoolCidr{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opProvisionIpamPoolCidr(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -1,3 +1,11 @@
+# v1.4.0 (2023-01-25)
+
+* **Feature**: Add returnCode, batchJobIdentifier in GetBatchJobExecution response, for user to view the batch job execution result & unique identifier from engine. Also removed unused headers from REST APIs
+
+# v1.3.1 (2023-01-19)
+
+* No change notes available for this release.
+
 # v1.3.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

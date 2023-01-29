@@ -224,6 +224,11 @@ type Channel struct {
 	// This member is required.
 	ChannelState *string
 
+	// The log configuration.
+	//
+	// This member is required.
+	LogConfiguration *LogConfigurationForChannel
+
 	// The channel's output properties.
 	//
 	// This member is required.
@@ -474,6 +479,15 @@ type LogConfiguration struct {
 	//
 	// This member is required.
 	PercentEnabled int32
+
+	noSmithyDocumentSerde
+}
+
+// The log configuration for the channel.
+type LogConfigurationForChannel struct {
+
+	// The log types.
+	LogTypes []LogType
 
 	noSmithyDocumentSerde
 }

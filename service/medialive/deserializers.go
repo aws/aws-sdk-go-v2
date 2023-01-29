@@ -22468,6 +22468,40 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				sv.Scte35Pid = ptr.String(jtv)
 			}
 
+		case "scte35PrerollPullupMilliseconds":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Scte35PrerollPullupMilliseconds = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Scte35PrerollPullupMilliseconds = f64
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max5000 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "segmentationMarkers":
 			if value != nil {
 				jtv, ok := value.(string)

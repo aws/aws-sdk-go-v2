@@ -40,12 +40,54 @@ func (GroupFilterName) Values() []GroupFilterName {
 	}
 }
 
+type GroupLifecycleEventsDesiredStatus string
+
+// Enum values for GroupLifecycleEventsDesiredStatus
+const (
+	GroupLifecycleEventsDesiredStatusActive   GroupLifecycleEventsDesiredStatus = "ACTIVE"
+	GroupLifecycleEventsDesiredStatusInactive GroupLifecycleEventsDesiredStatus = "INACTIVE"
+)
+
+// Values returns all known values for GroupLifecycleEventsDesiredStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (GroupLifecycleEventsDesiredStatus) Values() []GroupLifecycleEventsDesiredStatus {
+	return []GroupLifecycleEventsDesiredStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
+type GroupLifecycleEventsStatus string
+
+// Enum values for GroupLifecycleEventsStatus
+const (
+	GroupLifecycleEventsStatusActive     GroupLifecycleEventsStatus = "ACTIVE"
+	GroupLifecycleEventsStatusInactive   GroupLifecycleEventsStatus = "INACTIVE"
+	GroupLifecycleEventsStatusInProgress GroupLifecycleEventsStatus = "IN_PROGRESS"
+	GroupLifecycleEventsStatusError      GroupLifecycleEventsStatus = "ERROR"
+)
+
+// Values returns all known values for GroupLifecycleEventsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupLifecycleEventsStatus) Values() []GroupLifecycleEventsStatus {
+	return []GroupLifecycleEventsStatus{
+		"ACTIVE",
+		"INACTIVE",
+		"IN_PROGRESS",
+		"ERROR",
+	}
+}
+
 type QueryErrorCode string
 
 // Enum values for QueryErrorCode
 const (
-	QueryErrorCodeCloudformationStackInactive    QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"
-	QueryErrorCodeCloudformationStackNotExisting QueryErrorCode = "CLOUDFORMATION_STACK_NOT_EXISTING"
+	QueryErrorCodeCloudformationStackInactive        QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"
+	QueryErrorCodeCloudformationStackNotExisting     QueryErrorCode = "CLOUDFORMATION_STACK_NOT_EXISTING"
+	QueryErrorCodeCloudformationStackUnassumableRole QueryErrorCode = "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE"
 )
 
 // Values returns all known values for QueryErrorCode. Note that this can be
@@ -55,6 +97,7 @@ func (QueryErrorCode) Values() []QueryErrorCode {
 	return []QueryErrorCode{
 		"CLOUDFORMATION_STACK_INACTIVE",
 		"CLOUDFORMATION_STACK_NOT_EXISTING",
+		"CLOUDFORMATION_STACK_UNASSUMABLE_ROLE",
 	}
 }
 

@@ -1,3 +1,11 @@
+# v1.13.1 (2023-01-23)
+
+* No change notes available for this release.
+
+# v1.13.0 (2023-01-19)
+
+* **Feature**: This release adds the enhanced dry run option, that checks for validation errors that might occur when deploying configuration changes and provides a summary of these errors, if any. The feature will also indicate whether a blue/green deployment will be required to apply a change.
+
 # v1.12.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

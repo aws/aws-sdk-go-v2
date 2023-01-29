@@ -630,6 +630,26 @@ func (m *validateOpGetProvisionedConcurrencyConfig) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRuntimeManagementConfig struct {
+}
+
+func (*validateOpGetRuntimeManagementConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRuntimeManagementConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRuntimeManagementConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRuntimeManagementConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeAsync struct {
 }
 
@@ -945,6 +965,26 @@ func (m *validateOpPutProvisionedConcurrencyConfig) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutProvisionedConcurrencyConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutRuntimeManagementConfig struct {
+}
+
+func (*validateOpPutRuntimeManagementConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRuntimeManagementConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRuntimeManagementConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRuntimeManagementConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1294,6 +1334,10 @@ func addOpGetProvisionedConcurrencyConfigValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpGetProvisionedConcurrencyConfig{}, middleware.After)
 }
 
+func addOpGetRuntimeManagementConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRuntimeManagementConfig{}, middleware.After)
+}
+
 func addOpInvokeAsyncValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeAsync{}, middleware.After)
 }
@@ -1356,6 +1400,10 @@ func addOpPutFunctionEventInvokeConfigValidationMiddleware(stack *middleware.Sta
 
 func addOpPutProvisionedConcurrencyConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutProvisionedConcurrencyConfig{}, middleware.After)
+}
+
+func addOpPutRuntimeManagementConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRuntimeManagementConfig{}, middleware.After)
 }
 
 func addOpRemoveLayerVersionPermissionValidationMiddleware(stack *middleware.Stack) error {
@@ -1991,6 +2039,21 @@ func validateOpGetProvisionedConcurrencyConfigInput(v *GetProvisionedConcurrency
 	}
 }
 
+func validateOpGetRuntimeManagementConfigInput(v *GetRuntimeManagementConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRuntimeManagementConfigInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpInvokeAsyncInput(v *InvokeAsyncInput) error {
 	if v == nil {
 		return nil
@@ -2241,6 +2304,24 @@ func validateOpPutProvisionedConcurrencyConfigInput(v *PutProvisionedConcurrency
 	}
 	if v.ProvisionedConcurrentExecutions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedConcurrentExecutions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutRuntimeManagementConfigInput(v *PutRuntimeManagementConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRuntimeManagementConfigInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if len(v.UpdateRuntimeOn) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateRuntimeOn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

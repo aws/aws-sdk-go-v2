@@ -7,6 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// A conflict has occurred.
 type ConflictException struct {
 	Message *string
 
@@ -32,6 +33,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An internal error has occurred.
 type InternalServerException struct {
 	Message *string
 
@@ -57,6 +59,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The resource is not available.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -82,6 +85,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
 

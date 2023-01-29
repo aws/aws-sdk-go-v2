@@ -18,6 +18,7 @@
         "api_op_ListApplications.go",
         "api_op_ListComponents.go",
         "api_op_ListDatabases.go",
+        "api_op_ListOperations.go",
         "api_op_ListTagsForResource.go",
         "api_op_PutResourcePermission.go",
         "api_op_RegisterApplication.go",

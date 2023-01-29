@@ -743,6 +743,11 @@ func awsRestjson1_serializeOpDocumentCreatePricingRuleInput(v *CreatePricingRule
 		ok.String(*v.Name)
 	}
 
+	if v.Operation != nil {
+		ok := object.Key("Operation")
+		ok.String(*v.Operation)
+	}
+
 	if len(v.Scope) > 0 {
 		ok := object.Key("Scope")
 		ok.String(string(v.Scope))
@@ -770,6 +775,11 @@ func awsRestjson1_serializeOpDocumentCreatePricingRuleInput(v *CreatePricingRule
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	if v.UsageType != nil {
+		ok := object.Key("UsageType")
+		ok.String(*v.UsageType)
 	}
 
 	return nil

@@ -758,6 +758,28 @@ func (GlueRecordType) Values() []GlueRecordType {
 	}
 }
 
+type HudiTargetCompressionType string
+
+// Enum values for HudiTargetCompressionType
+const (
+	HudiTargetCompressionTypeGzip         HudiTargetCompressionType = "gzip"
+	HudiTargetCompressionTypeLzo          HudiTargetCompressionType = "lzo"
+	HudiTargetCompressionTypeUncompressed HudiTargetCompressionType = "uncompressed"
+	HudiTargetCompressionTypeSnappy       HudiTargetCompressionType = "snappy"
+)
+
+// Values returns all known values for HudiTargetCompressionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HudiTargetCompressionType) Values() []HudiTargetCompressionType {
+	return []HudiTargetCompressionType{
+		"gzip",
+		"lzo",
+		"uncompressed",
+		"snappy",
+	}
+}
+
 type JDBCDataType string
 
 // Enum values for JDBCDataType
@@ -1594,6 +1616,7 @@ const (
 	TargetFormatAvro    TargetFormat = "avro"
 	TargetFormatOrc     TargetFormat = "orc"
 	TargetFormatParquet TargetFormat = "parquet"
+	TargetFormatHudi    TargetFormat = "hudi"
 )
 
 // Values returns all known values for TargetFormat. Note that this can be expanded
@@ -1606,6 +1629,7 @@ func (TargetFormat) Values() []TargetFormat {
 		"avro",
 		"orc",
 		"parquet",
+		"hudi",
 	}
 }
 

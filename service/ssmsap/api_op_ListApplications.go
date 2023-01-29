@@ -30,10 +30,11 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
-	//
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
-	//
+	// The token for the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +42,11 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
-	//
+	// The applications registered with AWS Systems Manager for SAP.
 	Applications []types.ApplicationSummary
 
-	//
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -123,7 +125,8 @@ var _ ListApplicationsAPIClient = (*Client)(nil)
 
 // ListApplicationsPaginatorOptions is the paginator options for ListApplications
 type ListApplicationsPaginatorOptions struct {
-	//
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

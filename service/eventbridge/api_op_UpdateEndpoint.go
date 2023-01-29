@@ -50,7 +50,7 @@ type UpdateEndpointInput struct {
 	// The ARN of the role used by event replication for this request.
 	RoleArn *string
 
-	// Configure the routing policy, including the health check and secondary Region..
+	// Configure the routing policy, including the health check and secondary Region.
 	RoutingConfig *types.RoutingConfig
 
 	noSmithyDocumentSerde

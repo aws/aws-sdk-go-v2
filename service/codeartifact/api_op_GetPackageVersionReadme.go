@@ -11,11 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the readme file or descriptive text for a package version. For packages
-// that do not contain a readme file, CodeArtifact extracts a description from a
-// metadata file. For example, from the  element in the pom.xml file of a Maven
-// package. The returned text might contain formatting. For example, it might
-// contain formatting for Markdown or reStructuredText.
+// Gets the readme file or descriptive text for a package version. The returned
+// text might contain formatting. For example, it might contain formatting for
+// Markdown or reStructuredText.
 func (c *Client) GetPackageVersionReadme(ctx context.Context, params *GetPackageVersionReadmeInput, optFns ...func(*Options)) (*GetPackageVersionReadmeOutput, error) {
 	if params == nil {
 		params = &GetPackageVersionReadmeInput{}
@@ -40,7 +38,8 @@ type GetPackageVersionReadmeInput struct {
 	Domain *string
 
 	// A format that specifies the type of the package version with the requested
-	// readme file.
+	// readme file. Although maven is listed as a valid value, CodeArtifact does not
+	// support displaying readme files for Maven packages.
 	//
 	// This member is required.
 	Format types.PackageFormat

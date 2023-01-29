@@ -270,26 +270,6 @@ func (m *validateOpDeleteSubscriptionFilter) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeLogStreams struct {
-}
-
-func (*validateOpDescribeLogStreams) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeLogStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeLogStreamsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeLogStreamsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDescribeSubscriptionFilters struct {
 }
 
@@ -330,26 +310,6 @@ func (m *validateOpDisassociateKmsKey) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpFilterLogEvents struct {
-}
-
-func (*validateOpFilterLogEvents) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpFilterLogEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*FilterLogEventsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpFilterLogEventsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetDataProtectionPolicy struct {
 }
 
@@ -385,26 +345,6 @@ func (m *validateOpGetLogEvents) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLogEventsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpGetLogGroupFields struct {
-}
-
-func (*validateOpGetLogGroupFields) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetLogGroupFields) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetLogGroupFieldsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetLogGroupFieldsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -842,10 +782,6 @@ func addOpDeleteSubscriptionFilterValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteSubscriptionFilter{}, middleware.After)
 }
 
-func addOpDescribeLogStreamsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeLogStreams{}, middleware.After)
-}
-
 func addOpDescribeSubscriptionFiltersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSubscriptionFilters{}, middleware.After)
 }
@@ -854,20 +790,12 @@ func addOpDisassociateKmsKeyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDisassociateKmsKey{}, middleware.After)
 }
 
-func addOpFilterLogEventsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpFilterLogEvents{}, middleware.After)
-}
-
 func addOpGetDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataProtectionPolicy{}, middleware.After)
 }
 
 func addOpGetLogEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLogEvents{}, middleware.After)
-}
-
-func addOpGetLogGroupFieldsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetLogGroupFields{}, middleware.After)
 }
 
 func addOpGetLogRecordValidationMiddleware(stack *middleware.Stack) error {
@@ -1238,21 +1166,6 @@ func validateOpDeleteSubscriptionFilterInput(v *DeleteSubscriptionFilterInput) e
 	}
 }
 
-func validateOpDescribeLogStreamsInput(v *DescribeLogStreamsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeLogStreamsInput"}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDescribeSubscriptionFiltersInput(v *DescribeSubscriptionFiltersInput) error {
 	if v == nil {
 		return nil
@@ -1283,21 +1196,6 @@ func validateOpDisassociateKmsKeyInput(v *DisassociateKmsKeyInput) error {
 	}
 }
 
-func validateOpFilterLogEventsInput(v *FilterLogEventsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FilterLogEventsInput"}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetDataProtectionPolicyInput(v *GetDataProtectionPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1318,26 +1216,8 @@ func validateOpGetLogEventsInput(v *GetLogEventsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLogEventsInput"}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
 	if v.LogStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetLogGroupFieldsInput(v *GetLogGroupFieldsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetLogGroupFieldsInput"}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -97,6 +97,12 @@ type StartChatContactInput struct {
 	// The initial message to be sent to the newly created chat.
 	InitialMessage *types.ChatMessage
 
+	// Enable persistent chats. For more information about enabling persistent chat,
+	// and for example use cases and how to configure for them, see Enable persistent
+	// chat
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
+	PersistentChat *types.PersistentChat
+
 	// The supported chat message content types. Content types must always contain
 	// text/plain. You can then put any other supported type in the list. For example,
 	// all the following lists are valid because they contain text/plain: [text/plain,
@@ -111,6 +117,10 @@ type StartChatContactOutput struct {
 
 	// The identifier of this contact within the Amazon Connect instance.
 	ContactId *string
+
+	// The contactId from which a persistent chat session is started. This field is
+	// populated only for persistent chats.
+	ContinuedFromContactId *string
 
 	// The identifier for a chat participant. The participantId for a chat participant
 	// is the same throughout the chat lifecycle.

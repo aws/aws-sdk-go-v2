@@ -42,12 +42,15 @@ type AssociateExternalConnectionInput struct {
 	// * public:npmjs - for the npm public repository.
 	//
 	// *
-	// public:pypi - for the Python Package Index.
+	// public:nuget-org - for the NuGet Gallery.
 	//
-	// * public:maven-central - for Maven
-	// Central.
+	// * public:pypi - for the Python
+	// Package Index.
 	//
-	// * public:maven-googleandroid - for the Google Android repository.
+	// * public:maven-central - for Maven Central.
+	//
+	// *
+	// public:maven-googleandroid - for the Google Android repository.
 	//
 	// *
 	// public:maven-gradleplugins - for the Gradle plugins repository.

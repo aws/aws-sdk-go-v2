@@ -33389,6 +33389,64 @@ func awsRestjson1_deserializeDocumentDashboardVersionSummaryList(v *[]types.Dash
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataBarsOptions(v **types.DataBarsOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataBarsOptions
+	if *v == nil {
+		sv = &types.DataBarsOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldId to be of type string, got %T instead", value)
+				}
+				sv.FieldId = ptr.String(jtv)
+			}
+
+		case "NegativeColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.NegativeColor = ptr.String(jtv)
+			}
+
+		case "PositiveColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.PositiveColor = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDatabricksParameters(v **types.DatabricksParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56832,6 +56890,11 @@ func awsRestjson1_deserializeDocumentTableConfiguration(v **types.TableConfigura
 				return err
 			}
 
+		case "TableInlineVisualizations":
+			if err := awsRestjson1_deserializeDocumentTableInlineVisualizationList(&sv.TableInlineVisualizations, value); err != nil {
+				return err
+			}
+
 		case "TableOptions":
 			if err := awsRestjson1_deserializeDocumentTableOptions(&sv.TableOptions, value); err != nil {
 				return err
@@ -57284,6 +57347,76 @@ func awsRestjson1_deserializeDocumentTableFieldWells(v **types.TableFieldWells, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableInlineVisualization(v **types.TableInlineVisualization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableInlineVisualization
+	if *v == nil {
+		sv = &types.TableInlineVisualization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataBars":
+			if err := awsRestjson1_deserializeDocumentDataBarsOptions(&sv.DataBars, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableInlineVisualizationList(v *[]types.TableInlineVisualization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TableInlineVisualization
+	if *v == nil {
+		cv = []types.TableInlineVisualization{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TableInlineVisualization
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTableInlineVisualization(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

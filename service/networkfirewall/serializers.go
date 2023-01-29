@@ -2642,6 +2642,11 @@ func awsAwsjson10_serializeDocumentSubnetMapping(v *types.SubnetMapping, value s
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IPAddressType) > 0 {
+		ok := object.Key("IPAddressType")
+		ok.String(string(v.IPAddressType))
+	}
+
 	if v.SubnetId != nil {
 		ok := object.Key("SubnetId")
 		ok.String(*v.SubnetId)

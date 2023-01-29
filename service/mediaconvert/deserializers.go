@@ -6611,6 +6611,40 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				}
 			}
 
+		case "truePeakLimiterThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TruePeakLimiterThreshold = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TruePeakLimiterThreshold = f64
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative20Max0 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8172,6 +8206,89 @@ func awsRestjson1_deserializeDocumentChannelMapping(v **types.ChannelMapping, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentClipLimits(v **types.ClipLimits, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClipLimits
+	if *v == nil {
+		sv = &types.ClipLimits{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maximumRGBTolerance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin90Max105 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumRGBTolerance = int32(i64)
+			}
+
+		case "maximumYUV":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin920Max1023 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumYUV = int32(i64)
+			}
+
+		case "minimumRGBTolerance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMinNegative5Max10 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumRGBTolerance = int32(i64)
+			}
+
+		case "minimumYUV":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max128 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumYUV = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCmafAdditionalManifest(v **types.CmafAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8346,6 +8463,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 					return fmt.Errorf("expected CmafCodecSpecification to be of type string, got %T instead", value)
 				}
 				sv.CodecSpecification = types.CmafCodecSpecification(jtv)
+			}
+
+		case "dashManifestStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashManifestStyle to be of type string, got %T instead", value)
+				}
+				sv.DashManifestStyle = types.DashManifestStyle(jtv)
 			}
 
 		case "destination":
@@ -8898,6 +9024,11 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				sv.Brightness = int32(i64)
 			}
 
+		case "clipLimits":
+			if err := awsRestjson1_deserializeDocumentClipLimits(&sv.ClipLimits, value); err != nil {
+				return err
+			}
+
 		case "colorSpaceConversion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9235,6 +9366,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.BaseUrl = ptr.String(jtv)
+			}
+
+		case "dashManifestStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashManifestStyle to be of type string, got %T instead", value)
+				}
+				sv.DashManifestStyle = types.DashManifestStyle(jtv)
 			}
 
 		case "destination":

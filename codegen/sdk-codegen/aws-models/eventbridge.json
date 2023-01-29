@@ -224,7 +224,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -337,10 +337,10 @@
                                                                                     "authSchemes": [
                                                                                         {
                                                                                             "name": "sigv4a",
+                                                                                            "signingName": "events",
                                                                                             "signingRegionSet": [
                                                                                                 "*"
-                                                                                            ],
-                                                                                            "signingName": "events"
+                                                                                            ]
                                                                                         }
                                                                                     ]
                                                                                 },
@@ -390,10 +390,10 @@
                                                                                                     "authSchemes": [
                                                                                                         {
                                                                                                             "name": "sigv4a",
+                                                                                                            "signingName": "events",
                                                                                                             "signingRegionSet": [
                                                                                                                 "*"
-                                                                                                            ],
-                                                                                                            "signingName": "events"
+                                                                                                            ]
                                                                                                         }
                                                                                                     ]
                                                                                                 },
@@ -418,10 +418,10 @@
                                                                                     "authSchemes": [
                                                                                         {
                                                                                             "name": "sigv4a",
+                                                                                            "signingName": "events",
                                                                                             "signingRegionSet": [
                                                                                                 "*"
-                                                                                            ],
-                                                                                            "signingName": "events"
+                                                                                            ]
                                                                                         }
                                                                                     ]
                                                                                 },
@@ -458,15 +458,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -642,12 +633,12 @@
                                                                         {
                                                                             "ref": "Region"
                                                                         },
-                                                                        "us-gov-west-1"
+                                                                        "us-gov-east-1"
                                                                     ]
                                                                 }
                                                             ],
                                                             "endpoint": {
-                                                                "url": "https://events.us-gov-west-1.amazonaws.com",
+                                                                "url": "https://events.us-gov-east-1.amazonaws.com",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -661,12 +652,12 @@
                                                                         {
                                                                             "ref": "Region"
                                                                         },
-                                                                        "us-gov-east-1"
+                                                                        "us-gov-west-1"
                                                                     ]
                                                                 }
                                                             ],
                                                             "endpoint": {
-                                                                "url": "https://events.us-gov-east-1.amazonaws.com",
+                                                                "url": "https://events.us-gov-west-1.amazonaws.com",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -767,9 +758,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-south-2",
-                                "UseDualStack": true
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -780,9 +771,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-south-2",
-                                "UseDualStack": false
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -793,9 +784,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-2",
-                                "UseDualStack": true
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -806,9 +797,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-2",
-                                "UseDualStack": false
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -819,9 +810,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -832,9 +823,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -845,9 +836,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -858,9 +849,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -871,9 +862,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -884,9 +875,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -897,9 +888,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -910,9 +901,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -923,9 +914,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-south-2",
-                                "UseDualStack": true
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -936,9 +927,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-south-2",
-                                "UseDualStack": false
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -949,9 +940,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-south-2",
-                                "UseDualStack": true
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -962,9 +953,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-2",
-                                "UseDualStack": false
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -975,9 +966,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -988,9 +979,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1001,9 +992,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1014,9 +1005,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1027,9 +1018,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "me-central-1",
-                                "UseDualStack": true
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1040,9 +1031,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "me-central-1",
-                                "UseDualStack": false
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1053,9 +1044,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "me-central-1",
-                                "UseDualStack": true
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1066,9 +1057,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-central-1",
-                                "UseDualStack": false
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1079,9 +1070,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1092,9 +1083,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1105,9 +1096,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1118,9 +1109,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1131,9 +1122,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1144,9 +1135,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1157,9 +1148,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1170,9 +1161,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1181,9 +1172,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": true
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1194,9 +1185,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": false
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1205,9 +1196,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": true
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1218,9 +1209,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": false
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1231,9 +1222,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-2",
-                                "UseDualStack": true
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1244,9 +1235,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-2",
-                                "UseDualStack": false
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1257,9 +1248,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-2",
-                                "UseDualStack": true
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1270,9 +1261,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-2",
-                                "UseDualStack": false
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1283,9 +1274,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1296,9 +1287,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1309,9 +1300,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1322,9 +1313,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1335,9 +1326,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1348,9 +1339,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1361,9 +1352,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1374,9 +1365,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1387,9 +1378,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1400,9 +1391,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1413,9 +1404,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1426,9 +1417,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1439,9 +1430,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1452,9 +1443,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1465,9 +1456,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1478,9 +1469,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1491,9 +1482,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1504,9 +1495,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1517,9 +1508,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1530,9 +1521,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1543,9 +1534,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1556,9 +1547,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1569,9 +1560,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1582,9 +1573,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1595,9 +1586,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1608,9 +1599,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1621,9 +1612,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1634,9 +1625,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1647,9 +1638,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1660,9 +1651,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1673,9 +1664,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1686,9 +1677,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1699,9 +1690,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1712,9 +1703,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1725,9 +1716,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1738,9 +1729,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1751,9 +1742,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1764,9 +1755,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1777,9 +1768,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1790,9 +1781,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1803,9 +1794,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1816,9 +1807,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1829,9 +1820,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1842,9 +1833,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1855,9 +1846,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1868,9 +1859,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1881,9 +1872,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1894,9 +1885,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1907,9 +1898,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1920,9 +1911,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1933,9 +1924,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1946,9 +1937,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1959,9 +1950,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1972,9 +1963,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1985,9 +1976,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1998,9 +1989,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -2011,9 +2002,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2024,9 +2015,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2037,9 +2028,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2050,9 +2041,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2063,9 +2054,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2076,9 +2067,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2089,9 +2080,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2102,9 +2093,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2115,9 +2106,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2128,9 +2119,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2141,9 +2132,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2154,9 +2145,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2165,9 +2156,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2178,9 +2169,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2189,9 +2180,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2202,9 +2193,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2215,9 +2206,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2228,9 +2219,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2241,9 +2232,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2254,9 +2245,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2267,9 +2258,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2280,9 +2271,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2293,9 +2284,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2306,9 +2297,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2319,9 +2310,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2332,9 +2323,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2345,9 +2336,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2358,9 +2349,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2371,9 +2362,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2384,9 +2375,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2397,9 +2388,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2410,9 +2401,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2423,9 +2414,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2436,9 +2427,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2449,9 +2440,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2462,9 +2453,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2473,9 +2464,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2486,9 +2477,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2497,9 +2488,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2510,9 +2501,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2523,9 +2514,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2535,9 +2526,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2547,9 +2538,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3411,7 +3402,7 @@
                 "AuthorizationType": {
                     "target": "com.amazonaws.eventbridge#ConnectionAuthorizationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorization type specified for the connection.</p>"
+                        "smithy.api#documentation": "<p>The authorization type specified for the connection.</p>\n         <note>\n            <p>OAUTH tokens are refreshed when a 401 or 407 response is returned.</p>\n         </note>"
                     }
                 },
                 "CreationTime": {
@@ -4198,7 +4189,7 @@
                 "AuthorizationType": {
                     "target": "com.amazonaws.eventbridge#ConnectionAuthorizationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authorization to use for the connection.</p>",
+                        "smithy.api#documentation": "<p>The type of authorization to use for the connection.</p>\n         <note>\n            <p>OAUTH tokens are refreshed when a 401 or 407 response is returned.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4289,7 +4280,7 @@
                 "ReplicationConfig": {
                     "target": "com.amazonaws.eventbridge#ReplicationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable event replication.</p>"
+                        "smithy.api#documentation": "<p>Enable or disable event replication. The default state is <code>ENABLED</code> which means you must supply a <code>RoleArn</code>. If you don't have a \n      <code>RoleArn</code> or you don't want event replication enabled, set the state to <code>DISABLED</code>.</p>"
                     }
                 },
                 "EventBuses": {
@@ -4395,7 +4386,7 @@
                 "Name": {
                     "target": "com.amazonaws.eventbridge#EventBusName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new event bus. </p>\n         <p>Event bus names cannot contain the / character. You can't use the name\n        <code>default</code> for a custom event bus, as this name is already used for your account's\n      default event bus.</p>\n         <p>If this is a partner event bus, the name must exactly match the name of the partner event\n      source that this event bus is matched to.</p>",
+                        "smithy.api#documentation": "<p>The name of the new event bus. </p>\n         <p>Custom event bus names can't contain the <code>/</code> character, but you can use the <code>/</code> character in partner event bus names. In addition, for partner event buses, the name must exactly match the name of the partner event\n      source that this event bus is matched to.</p>\n         <p>You can't use the name <code>default</code> for a custom event bus, as this name is already used for your account's\n      default event bus.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4919,7 +4910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified rule.</p>\n         <p>Before you can delete the rule, you must remove all targets, using <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemoveTargets.html\">RemoveTargets</a>.</p>\n\n         <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow\n      a short period of time for changes to take effect.</p>\n\n         <p>If you call delete rule multiple times for the same rule, all calls will succeed. When you\n      call delete rule for a non-existent custom eventbus, <code>ResourceNotFoundException</code> is\n      returned.</p>\n\n         <p>Managed rules are rules created and managed by another Amazon Web Services service on your behalf. These\n      rules are created by those other Amazon Web Services services to support functionality in those services. You\n      can delete these rules using the <code>Force</code> option, but you should do so only if you\n      are sure the other service is not still using that rule.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified rule.</p>\n         <p>Before you can delete the rule, you must remove all targets, using <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemoveTargets.html\">RemoveTargets</a>.</p>\n         <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow\n      a short period of time for changes to take effect.</p>\n         <p>If you call delete rule multiple times for the same rule, all calls will succeed. When you\n      call delete rule for a non-existent custom eventbus, <code>ResourceNotFoundException</code> is\n      returned.</p>\n         <p>Managed rules are rules created and managed by another Amazon Web Services service on your behalf. These\n      rules are created by those other Amazon Web Services services to support functionality in those services. You\n      can delete these rules using the <code>Force</code> option, but you should do so only if you\n      are sure the other service is not still using that rule.</p>"
             }
         },
         "com.amazonaws.eventbridge#DeleteRuleRequest": {
@@ -5793,7 +5784,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the specified rule. A disabled rule won't match any events, and won't\n      self-trigger if it has a schedule expression.</p>\n\n         <p>When you disable a rule, incoming events might continue to match to the disabled rule.\n      Allow a short period of time for changes to take effect.</p>"
+                "smithy.api#documentation": "<p>Disables the specified rule. A disabled rule won't match any events, and won't\n      self-trigger if it has a schedule expression.</p>\n         <p>When you disable a rule, incoming events might continue to match to the disabled rule.\n      Allow a short period of time for changes to take effect.</p>"
             }
         },
         "com.amazonaws.eventbridge#DisableRuleRequest": {
@@ -5932,7 +5923,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the specified rule. If the rule does not exist, the operation fails.</p>\n\n         <p>When you enable a rule, incoming events might not immediately start matching to a newly\n      enabled rule. Allow a short period of time for changes to take effect.</p>"
+                "smithy.api#documentation": "<p>Enables the specified rule. If the rule does not exist, the operation fails.</p>\n         <p>When you enable a rule, incoming events might not immediately start matching to a newly\n      enabled rule. Allow a short period of time for changes to take effect.</p>"
             }
         },
         "com.amazonaws.eventbridge#EnableRuleRequest": {
@@ -5983,7 +5974,7 @@
                 "ReplicationConfig": {
                     "target": "com.amazonaws.eventbridge#ReplicationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether event replication was enabled or disabled for this endpoint.</p>"
+                        "smithy.api#documentation": "<p>Whether event replication was enabled or disabled for this endpoint. The default state is <code>ENABLED</code> which means you must supply a <code>RoleArn</code>. \n       If you don't have a <code>RoleArn</code> or you don't want event replication enabled, set the state to <code>DISABLED</code>.</p>"
                     }
                 },
                 "EventBuses": {
@@ -6001,7 +5992,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.eventbridge#EndpointId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p>"
+                        "smithy.api#documentation": "<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p>"
                     }
                 },
                 "EndpointUrl": {
@@ -6036,7 +6027,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An global endpoint used to improve your application's availability by making it regional-fault tolerant. For more information about global endpoints, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html\">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide..</p>"
+                "smithy.api#documentation": "<p>A global endpoint used to improve your application's availability by making it regional-fault tolerant. For more information about global endpoints, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html\">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide.</p>"
             }
         },
         "com.amazonaws.eventbridge#EndpointArn": {
@@ -6208,7 +6199,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An event bus receives events from a source and routes them to rules associated with that\n      event bus. Your account's default event bus receives events from Amazon Web Services services. A custom event\n      bus can receive events from your custom applications and services. A partner event bus\n      receives events from an event source created by an SaaS partner. These events come from the\n      partners services or applications.</p>"
+                "smithy.api#documentation": "<p>An event bus receives events from a source, uses rules to evaluate them, applies any configured input transformation, and routes them to the appropriate target(s).\n      Your account's default event bus receives events from Amazon Web Services services. A custom event\n      bus can receive events from your custom applications and services. A partner event bus\n      receives events from an event source created by an SaaS partner. These events come from the\n      partners services or applications.</p>"
             }
         },
         "com.amazonaws.eventbridge#EventBusList": {
@@ -6443,24 +6434,24 @@
                 "PathParameterValues": {
                     "target": "com.amazonaws.eventbridge#PathParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path parameter values to be used to populate API Gateway REST API or EventBridge\n      ApiDestination path wildcards (\"*\").</p>"
+                        "smithy.api#documentation": "<p>The path parameter values to be used to populate API Gateway API or EventBridge\n      ApiDestination path wildcards (\"*\").</p>"
                     }
                 },
                 "HeaderParameters": {
                     "target": "com.amazonaws.eventbridge#HeaderParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST API or\n      EventBridge ApiDestination.</p>"
+                        "smithy.api#documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway API or\n      EventBridge ApiDestination.</p>"
                     }
                 },
                 "QueryStringParameters": {
                     "target": "com.amazonaws.eventbridge#QueryStringParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query string keys/values that need to be sent as part of request invoking the API Gateway \n      REST API or EventBridge ApiDestination.</p>"
+                        "smithy.api#documentation": "<p>The query string keys/values that need to be sent as part of request invoking the API Gateway \n      API or EventBridge ApiDestination.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST APIs or\n      EventBridge ApiDestinations. In the latter case, these are merged with any\n      InvocationParameters specified on the Connection, with any values from the Connection taking\n      precedence.</p>"
+                "smithy.api#documentation": "<p>These are custom parameter to be used when the target is an API Gateway APIs or\n      EventBridge ApiDestinations. In the latter case, these are merged with any\n      InvocationParameters specified on the Connection, with any values from the Connection taking\n      precedence.</p>"
             }
         },
         "com.amazonaws.eventbridge#HttpsEndpoint": {
@@ -6507,7 +6498,7 @@
                 "InputTemplate": {
                     "target": "com.amazonaws.eventbridge#TransformerInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Input template where you specify placeholders that will be filled with the values of the\n      keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each\n        <code>InputPathsMaps</code> value in brackets: <<i>value</i>> The\n      InputTemplate must be valid JSON.</p>\n\n         <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following\n      restrictions apply:</p>\n         <ul>\n            <li>\n               <p>The placeholder cannot be used as an object key.</p>\n            </li>\n         </ul>\n         <p>The following example shows the syntax for using <code>InputPathsMap</code> and\n        <code>InputTemplate</code>.</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state <status>\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape\n      each quote marks with a slash, as in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state \\\"<status>\\\"\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as\n      in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": '{\"myInstance\": <instance>,\"myStatus\": \"<instance> is\n        in state \\\"<status>\\\"\"}'</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Input template where you specify placeholders that will be filled with the values of the\n      keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each\n        <code>InputPathsMaps</code> value in brackets: <<i>value</i>>\n    </p>\n         <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following\n      restrictions apply:</p>\n         <ul>\n            <li>\n               <p>The placeholder cannot be used as an object key.</p>\n            </li>\n         </ul>\n         <p>The following example shows the syntax for using <code>InputPathsMap</code> and\n        <code>InputTemplate</code>.</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state <status>\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape\n      each quote marks with a slash, as in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state \\\"<status>\\\"\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as\n      in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": '{\"myInstance\": <instance>,\"myStatus\": \"<instance> is\n        in state \\\"<status>\\\"\"}'</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6868,7 +6859,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.eventbridge#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of nextToken is a unique pagination token for each page. \n       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination \n       token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. \n       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination \n       token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>"
                     }
                 },
                 "MaxResults": {
@@ -6891,7 +6882,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.eventbridge#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of nextToken is a unique pagination token for each page. \n       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination \n       token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. \n       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination \n       token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>"
                     }
                 }
             }
@@ -7291,7 +7282,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists your Amazon EventBridge rules. You can either list all the rules or you can provide\n      a prefix to match to the rule names.</p>\n\n         <p>ListRules does not list the targets of a rule. To see the targets associated with a rule,\n      use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html\">ListTargetsByRule</a>.</p>"
+                "smithy.api#documentation": "<p>Lists your Amazon EventBridge rules. You can either list all the rules or you can provide\n      a prefix to match to the rule names.</p>\n         <p>ListRules does not list the targets of a rule. To see the targets associated with a rule,\n      use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html\">ListTargetsByRule</a>.</p>"
             }
         },
         "com.amazonaws.eventbridge#ListRulesRequest": {
@@ -7855,7 +7846,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.eventbridge#EndpointId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p>\n         <important>\n            <p>When using Java, you must include <code>auth-crt</code> on the class path.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p>\n         <important>\n            <p>When using Java, you must include <code>auth-crt</code> on the class path.</p>\n         </important>",
                         "smithy.rules#contextParam": {
                             "name": "EndpointId"
                         }
@@ -7887,7 +7878,7 @@
                 "DetailType": {
                     "target": "com.amazonaws.eventbridge#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Free-form string used to decide what fields to expect in the event detail.</p>"
+                        "smithy.api#documentation": "<p>Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.</p>"
                     }
                 },
                 "Detail": {
@@ -7938,7 +7929,7 @@
                 "Entries": {
                     "target": "com.amazonaws.eventbridge#PutEventsResultEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The successfully and unsuccessfully ingested events results. If the ingestion was\n      successful, the entry has the event ID in it. Otherwise, you can use the error code and error\n      message to identify the problem with the entry.</p>"
+                        "smithy.api#documentation": "<p>The successfully and unsuccessfully ingested events results. If the ingestion was\n      successful, the entry has the event ID in it. Otherwise, you can use the error code and error\n      message to identify the problem with the entry.</p>\n         <p>For each record, the index of the response element is the same as the index in the request array.</p>"
                     }
                 }
             }
@@ -8031,7 +8022,7 @@
                 "DetailType": {
                     "target": "com.amazonaws.eventbridge#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A free-form string used to decide what fields to expect in the event detail.</p>"
+                        "smithy.api#documentation": "<p>A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.</p>"
                     }
                 },
                 "Detail": {
@@ -8133,7 +8124,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Running <code>PutPermission</code> permits the specified Amazon Web Services account or Amazon Web Services organization\n      to put events to the specified <i>event bus</i>. Amazon EventBridge (CloudWatch\n      Events) rules in your account are triggered by these events arriving to an event bus in your\n      account. </p>\n         <p>For another account to send events to your account, that external account must have an\n      EventBridge rule with your account's event bus as a target.</p>\n\n         <p>To enable multiple Amazon Web Services accounts to put events to your event bus, run\n        <code>PutPermission</code> once for each of these accounts. Or, if all the accounts are\n      members of the same Amazon Web Services organization, you can run <code>PutPermission</code> once specifying\n        <code>Principal</code> as \"*\" and specifying the Amazon Web Services organization ID in\n        <code>Condition</code>, to grant permissions to all accounts in that organization.</p>\n\n         <p>If you grant permissions using an organization, then accounts in that organization must\n      specify a <code>RoleArn</code> with proper permissions when they use <code>PutTarget</code> to\n      add your account's event bus as a target. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n        Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n\n         <p>The permission policy on the event bus cannot exceed 10 KB in size.</p>"
+                "smithy.api#documentation": "<p>Running <code>PutPermission</code> permits the specified Amazon Web Services account or Amazon Web Services organization\n      to put events to the specified <i>event bus</i>. Amazon EventBridge (CloudWatch\n      Events) rules in your account are triggered by these events arriving to an event bus in your\n      account. </p>\n         <p>For another account to send events to your account, that external account must have an\n      EventBridge rule with your account's event bus as a target.</p>\n         <p>To enable multiple Amazon Web Services accounts to put events to your event bus, run\n        <code>PutPermission</code> once for each of these accounts. Or, if all the accounts are\n      members of the same Amazon Web Services organization, you can run <code>PutPermission</code> once specifying\n        <code>Principal</code> as \"*\" and specifying the Amazon Web Services organization ID in\n        <code>Condition</code>, to grant permissions to all accounts in that organization.</p>\n         <p>If you grant permissions using an organization, then accounts in that organization must\n      specify a <code>RoleArn</code> with proper permissions when they use <code>PutTarget</code> to\n      add your account's event bus as a target. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n        Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n         <p>The permission policy on the event bus cannot exceed 10 KB in size.</p>"
             }
         },
         "com.amazonaws.eventbridge#PutPermissionRequest": {
@@ -8154,7 +8145,7 @@
                 "Principal": {
                     "target": "com.amazonaws.eventbridge#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID that you are permitting to put events to your default event\n      bus. Specify \"*\" to permit any account to put events to your default event bus.</p>\n\n         <p>If you specify \"*\" without specifying <code>Condition</code>, avoid creating rules that\n      may match undesirable events. To create more secure rules, make sure that the event pattern\n      for each rule contains an <code>account</code> field with a specific account ID from which to\n      receive events. Rules with an account field do not match any events sent from other\n      accounts.</p>"
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID that you are permitting to put events to your default event\n      bus. Specify \"*\" to permit any account to put events to your default event bus.</p>\n         <p>If you specify \"*\" without specifying <code>Condition</code>, avoid creating rules that\n      may match undesirable events. To create more secure rules, make sure that the event pattern\n      for each rule contains an <code>account</code> field with a specific account ID from which to\n      receive events. Rules with an account field do not match any events sent from other\n      accounts.</p>"
                     }
                 },
                 "StatementId": {
@@ -8166,7 +8157,7 @@
                 "Condition": {
                     "target": "com.amazonaws.eventbridge#Condition",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter enables you to limit the permission to accounts that fulfill a certain\n      condition, such as being a member of a certain Amazon Web Services organization. For more information about\n      Amazon Web Services Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is Amazon Web Services \n        Organizations</a> in the <i>Amazon Web Services Organizations User Guide</i>.</p>\n         <p>If you specify <code>Condition</code> with an Amazon Web Services organization ID, and specify \"*\" as the\n      value for <code>Principal</code>, you grant permission to all the accounts in the named\n      organization.</p>\n\n         <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>,\n        <code>Key</code>, and <code>Value</code> fields.</p>"
+                        "smithy.api#documentation": "<p>This parameter enables you to limit the permission to accounts that fulfill a certain\n      condition, such as being a member of a certain Amazon Web Services organization. For more information about\n      Amazon Web Services Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is Amazon Web Services \n        Organizations</a> in the <i>Amazon Web Services Organizations User Guide</i>.</p>\n         <p>If you specify <code>Condition</code> with an Amazon Web Services organization ID, and specify \"*\" as the\n      value for <code>Principal</code>, you grant permission to all the accounts in the named\n      organization.</p>\n         <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>,\n        <code>Key</code>, and <code>Value</code> fields.</p>"
                     }
                 },
                 "Policy": {
@@ -8206,7 +8197,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the specified rule. Rules are enabled by default, or based on value of\n      the state. You can disable a rule using <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DisableRule.html\">DisableRule</a>.</p>\n\n         <p>A single rule watches for events from a single event bus. Events generated by Amazon Web Services services\n      go to your account's default event bus. Events generated by SaaS partner services or\n      applications go to the matching partner event bus. If you have custom applications or\n      services, you can specify whether their events go to your default event bus or a custom event\n      bus that you have created. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html\">CreateEventBus</a>.</p>\n\n         <p>If you are updating an existing rule, the rule is replaced with what you specify in this\n        <code>PutRule</code> command. If you omit arguments in <code>PutRule</code>, the old values\n      for those arguments are not kept. Instead, they are replaced with null values.</p>\n\n         <p>When you create or update a rule, incoming events might not immediately start matching to\n      new or updated rules. Allow a short period of time for changes to take effect.</p>\n\n         <p>A rule must contain at least an EventPattern or ScheduleExpression. Rules with\n      EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions\n      self-trigger based on the given schedule. A rule can have both an EventPattern and a\n      ScheduleExpression, in which case the rule triggers on matching events as well as on a\n      schedule.</p>\n\n         <p>When you initially create a rule, you can optionally assign one or more tags to the rule.\n      Tags can help you organize and categorize your resources. You can also use them to scope user\n      permissions, by granting a user permission to access or change only rules with certain tag\n      values. To use the <code>PutRule</code> operation and assign tags, you must have both the\n        <code>events:PutRule</code> and <code>events:TagResource</code> permissions.</p>\n         <p>If you are updating an existing rule, any tags you specify in the <code>PutRule</code>\n      operation are ignored. To update the tags of an existing rule, use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>\n\n         <p>Most services in Amazon Web Services treat : or / as the same character in Amazon Resource Names (ARNs).\n      However, EventBridge uses an exact match in event patterns and rules. Be sure to use the\n      correct ARN characters when creating event patterns so that they match the ARN syntax in the\n      event you want to match.</p>\n\n         <p>In EventBridge, it is possible to create rules that lead to infinite loops, where a rule\n      is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket,\n      and trigger software to change them to the desired state. If the rule is not written\n      carefully, the subsequent change to the ACLs fires the rule again, creating an infinite\n      loop.</p>\n         <p>To prevent this, write the rules so that the triggered actions do not re-fire the same\n      rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead\n      of after any change. </p>\n         <p>An infinite loop can quickly cause higher than expected charges. We recommend that you use\n      budgeting, which alerts you when charges exceed your specified limit. For more information,\n      see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html\">Managing Your Costs with\n        Budgets</a>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates the specified rule. Rules are enabled by default, or based on value of\n      the state. You can disable a rule using <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DisableRule.html\">DisableRule</a>.</p>\n         <p>A single rule watches for events from a single event bus. Events generated by Amazon Web Services services\n      go to your account's default event bus. Events generated by SaaS partner services or\n      applications go to the matching partner event bus. If you have custom applications or\n      services, you can specify whether their events go to your default event bus or a custom event\n      bus that you have created. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html\">CreateEventBus</a>.</p>\n         <p>If you are updating an existing rule, the rule is replaced with what you specify in this\n        <code>PutRule</code> command. If you omit arguments in <code>PutRule</code>, the old values\n      for those arguments are not kept. Instead, they are replaced with null values.</p>\n         <p>When you create or update a rule, incoming events might not immediately start matching to\n      new or updated rules. Allow a short period of time for changes to take effect.</p>\n         <p>A rule must contain at least an EventPattern or ScheduleExpression. Rules with\n      EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions\n      self-trigger based on the given schedule. A rule can have both an EventPattern and a\n      ScheduleExpression, in which case the rule triggers on matching events as well as on a\n      schedule.</p>\n         <p>When you initially create a rule, you can optionally assign one or more tags to the rule.\n      Tags can help you organize and categorize your resources. You can also use them to scope user\n      permissions, by granting a user permission to access or change only rules with certain tag\n      values. To use the <code>PutRule</code> operation and assign tags, you must have both the\n        <code>events:PutRule</code> and <code>events:TagResource</code> permissions.</p>\n         <p>If you are updating an existing rule, any tags you specify in the <code>PutRule</code>\n      operation are ignored. To update the tags of an existing rule, use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>\n         <p>Most services in Amazon Web Services treat : or / as the same character in Amazon Resource Names (ARNs).\n      However, EventBridge uses an exact match in event patterns and rules. Be sure to use the\n      correct ARN characters when creating event patterns so that they match the ARN syntax in the\n      event you want to match.</p>\n         <p>In EventBridge, it is possible to create rules that lead to infinite loops, where a rule\n      is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket,\n      and trigger software to change them to the desired state. If the rule is not written\n      carefully, the subsequent change to the ACLs fires the rule again, creating an infinite\n      loop.</p>\n         <p>To prevent this, write the rules so that the triggered actions do not re-fire the same\n      rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead\n      of after any change. </p>\n         <p>An infinite loop can quickly cause higher than expected charges. We recommend that you use\n      budgeting, which alerts you when charges exceed your specified limit. For more information,\n      see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html\">Managing Your Costs with\n        Budgets</a>.</p>"
             }
         },
         "com.amazonaws.eventbridge#PutRuleRequest": {
@@ -8228,7 +8219,7 @@
                 "EventPattern": {
                     "target": "com.amazonaws.eventbridge#EventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event pattern. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html.html\">EventBridge event\n        patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The event pattern. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event\n        patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "State": {
@@ -8300,7 +8291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <note>\n            <p>Each rule can have up to five (5) targets associated with it at one time.</p>\n         </note>\n         <p>You can configure the following as targets for Events:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html\">API destination</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html\">API Gateway</a>\n               </p>\n            </li>\n            <li>\n               <p>Batch job queue</p>\n            </li>\n            <li>\n               <p>CloudWatch group</p>\n            </li>\n            <li>\n               <p>CodeBuild project</p>\n            </li>\n            <li>\n               <p>CodePipeline</p>\n            </li>\n            <li>\n               <p>EC2 <code>CreateSnapshot</code> API call</p>\n            </li>\n            <li>\n               <p>EC2 Image Builder</p>\n            </li>\n            <li>\n               <p>EC2 <code>RebootInstances</code> API call</p>\n            </li>\n            <li>\n               <p>EC2 <code>StopInstances</code> API call</p>\n            </li>\n            <li>\n               <p>EC2 <code>TerminateInstances</code> API call</p>\n            </li>\n            <li>\n               <p>ECS task</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cross-account.html\">Event bus in a different account or \n          Region</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-bus-to-bus.html\">Event bus in the same account and\n          Region</a>\n               </p>\n            </li>\n            <li>\n               <p>Firehose delivery stream</p>\n            </li>\n            <li>\n               <p>Glue workflow</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-creation.html#incident-tracking-auto-eventbridge\">Incident Manager response plan</a>\n               </p>\n            </li>\n            <li>\n               <p>Inspector assessment template</p>\n            </li>\n            <li>\n               <p>Kinesis stream</p>\n            </li>\n            <li>\n               <p>Lambda function</p>\n            </li>\n            <li>\n               <p>Redshift cluster</p>\n            </li>\n            <li>\n               <p>SageMaker Pipeline</p>\n            </li>\n            <li>\n               <p>SNS topic</p>\n            </li>\n            <li>\n               <p>SQS queue</p>\n            </li>\n            <li>\n               <p>Step Functions state machine</p>\n            </li>\n            <li>\n               <p>Systems Manager Automation</p>\n            </li>\n            <li>\n               <p>Systems Manager OpsItem</p>\n            </li>\n            <li>\n               <p>Systems Manager Run Command</p>\n            </li>\n         </ul>\n\n         <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      needs the appropriate permissions. For Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, \n      Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n\n         <p>If another Amazon Web Services account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"http://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge\n        Pricing</a>.</p>\n\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services \n        account.</p>\n         </note>\n\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n\n         <p>For more information about enabling cross-account events, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html\">PutPermission</a>.</p>\n\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <note>\n            <p>Each rule can have up to five (5) targets associated with it at one time.</p>\n         </note>\n         <p>You can configure the following as targets for Events:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html\">API destination</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html\">API Gateway</a>\n               </p>\n            </li>\n            <li>\n               <p>Batch job queue</p>\n            </li>\n            <li>\n               <p>CloudWatch group</p>\n            </li>\n            <li>\n               <p>CodeBuild project</p>\n            </li>\n            <li>\n               <p>CodePipeline</p>\n            </li>\n            <li>\n               <p>EC2 <code>CreateSnapshot</code> API call</p>\n            </li>\n            <li>\n               <p>EC2 Image Builder</p>\n            </li>\n            <li>\n               <p>EC2 <code>RebootInstances</code> API call</p>\n            </li>\n            <li>\n               <p>EC2 <code>StopInstances</code> API call</p>\n            </li>\n            <li>\n               <p>EC2 <code>TerminateInstances</code> API call</p>\n            </li>\n            <li>\n               <p>ECS task</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cross-account.html\">Event bus in a different account or \n          Region</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-bus-to-bus.html\">Event bus in the same account and\n          Region</a>\n               </p>\n            </li>\n            <li>\n               <p>Firehose delivery stream</p>\n            </li>\n            <li>\n               <p>Glue workflow</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-creation.html#incident-tracking-auto-eventbridge\">Incident Manager response plan</a>\n               </p>\n            </li>\n            <li>\n               <p>Inspector assessment template</p>\n            </li>\n            <li>\n               <p>Kinesis stream</p>\n            </li>\n            <li>\n               <p>Lambda function</p>\n            </li>\n            <li>\n               <p>Redshift cluster</p>\n            </li>\n            <li>\n               <p>Redshift Serverless workgroup</p>\n            </li>\n            <li>\n               <p>SageMaker Pipeline</p>\n            </li>\n            <li>\n               <p>SNS topic</p>\n            </li>\n            <li>\n               <p>SQS queue</p>\n            </li>\n            <li>\n               <p>Step Functions state machine</p>\n            </li>\n            <li>\n               <p>Systems Manager Automation</p>\n            </li>\n            <li>\n               <p>Systems Manager OpsItem</p>\n            </li>\n            <li>\n               <p>Systems Manager Run Command</p>\n            </li>\n         </ul>\n         <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      needs the appropriate permissions. For Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, \n      Step Functions state machines and API Gateway APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         <p>If another Amazon Web Services account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"http://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge\n        Pricing</a>.</p>\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services \n        account.</p>\n         </note>\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n         <p>For more information about enabling cross-account events, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html\">PutPermission</a>.</p>\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
             }
         },
         "com.amazonaws.eventbridge#PutTargetsRequest": {
@@ -8426,7 +8417,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.eventbridge#DbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. Required when authenticating using temporary credentials.</p>"
+                        "smithy.api#documentation": "<p>The database user name. Required when authenticating using temporary credentials.</p>\n         <p>Do not provide this parameter when connecting to a Redshift Serverless workgroup.</p>"
                     }
                 },
                 "Sql": {
@@ -8451,7 +8442,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the\n      Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>"
+                "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Amazon Redshift cluster or Redshift Serverless workgroup to invoke the\n      Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>"
             }
         },
         "com.amazonaws.eventbridge#RedshiftSecretManagerArn": {
@@ -8546,7 +8537,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified targets from the specified rule. When the rule is triggered, those\n      targets are no longer be invoked.</p>\n    \n         <note>\n            <p>A successful execution of <code>RemoveTargets</code> doesn't guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.</p>\n         </note>\n\n         <p>When you remove a target, when the associated rule triggers, removed targets might\n      continue to be invoked. Allow a short period of time for changes to take effect.</p>\n\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+                "smithy.api#documentation": "<p>Removes the specified targets from the specified rule. When the rule is triggered, those\n      targets are no longer be invoked.</p>\n         <note>\n            <p>A successful execution of <code>RemoveTargets</code> doesn't guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.</p>\n         </note>\n         <p>When you remove a target, when the associated rule triggers, removed targets might\n      continue to be invoked. Allow a short period of time for changes to take effect.</p>\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
             }
         },
         "com.amazonaws.eventbridge#RemoveTargetsRequest": {
@@ -9521,7 +9512,7 @@
                 "InputPath": {
                     "target": "com.amazonaws.eventbridge#TargetInputPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the JSONPath that is used for extracting part of the matched event when\n      passing it to the target. You must use JSON dot notation, not bracket notation. For more\n      information about JSON paths, see <a href=\"http://goessner.net/articles/JsonPath/\">JSONPath</a>.</p>"
+                        "smithy.api#documentation": "<p>The value of the JSONPath that is used for extracting part of the matched event when\n      passing it to the target. You may use JSON dot notation or bracket notation. For more\n      information about JSON paths, see <a href=\"http://goessner.net/articles/JsonPath/\">JSONPath</a>.</p>"
                     }
                 },
                 "InputTransformer": {
@@ -9563,7 +9554,7 @@
                 "HttpParameters": {
                     "target": "com.amazonaws.eventbridge#HttpParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or\n      EventBridge ApiDestination.</p>\n         <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can\n      use this parameter to specify headers, path parameters, and query string keys/values as part\n      of your target invoking request. If you're using ApiDestinations, the corresponding Connection\n      can also have these values configured. In case of any conflicting keys, values from the\n      Connection take precedence.</p>"
+                        "smithy.api#documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway endpoint or\n      EventBridge ApiDestination.</p>\n         <p>If you specify an API Gateway API or EventBridge ApiDestination as a target, you can\n      use this parameter to specify headers, path parameters, and query string keys/values as part\n      of your target invoking request. If you're using ApiDestinations, the corresponding Connection\n      can also have these values configured. In case of any conflicting keys, values from the\n      Connection take precedence.</p>"
                     }
                 },
                 "RedshiftDataParameters": {
@@ -9592,7 +9583,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of\n      services and resources that can be set as a target, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html\">PutTargets</a>.</p>\n\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of\n      services and resources that can be set as a target, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html\">PutTargets</a>.</p>\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>"
             }
         },
         "com.amazonaws.eventbridge#TargetArn": {
@@ -10243,7 +10234,7 @@
                 "RoutingConfig": {
                     "target": "com.amazonaws.eventbridge#RoutingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configure the routing policy, including the health check and secondary Region..</p>"
+                        "smithy.api#documentation": "<p>Configure the routing policy, including the health check and secondary Region.</p>"
                     }
                 },
                 "ReplicationConfig": {

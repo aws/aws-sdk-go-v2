@@ -88,8 +88,20 @@ type UpdateDomainConfigInput struct {
 	DomainEndpointOptions *types.DomainEndpointOptions
 
 	// This flag, when set to True, specifies whether the UpdateDomain request should
-	// return the results of validation check without actually applying the change.
+	// return the results of a dry run analysis without actually applying the change. A
+	// dry run determines what type of deployment the update will cause.
 	DryRun *bool
+
+	// The type of dry run to perform.
+	//
+	// * Basic only returns the type of deployment
+	// (blue/green or dynamic) that the update will cause.
+	//
+	// * Verbose runs an
+	// additional check to validate the changes you're making. For more information,
+	// see Validating a domain update
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check).
+	DryRunMode types.DryRunMode
 
 	// The type and size of the EBS volume to attach to instances in the domain.
 	EBSOptions *types.EBSOptions
@@ -124,7 +136,10 @@ type UpdateDomainConfigOutput struct {
 	// This member is required.
 	DomainConfig *types.DomainConfig
 
-	// Results of a dry run performed in an update domain request.
+	// The status of the dry run being performed on the domain, if any.
+	DryRunProgressStatus *types.DryRunProgressStatus
+
+	// Results of the dry run performed in the update domain request.
 	DryRunResults *types.DryRunResults
 
 	// Metadata pertaining to the operation's result.

@@ -1,3 +1,11 @@
+# v1.18.0 (2023-01-26)
+
+* **Feature**: Minor comments for Redshift Serverless workgroup target support.
+
+# v1.17.1 (2023-01-23)
+
+* No change notes available for this release.
+
 # v1.17.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

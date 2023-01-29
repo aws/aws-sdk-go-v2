@@ -16679,6 +16679,13 @@ func awsAwsjson11_serializeDocumentAlgorithmSpecification(v *types.AlgorithmSpec
 		ok.String(*v.TrainingImage)
 	}
 
+	if v.TrainingImageConfig != nil {
+		ok := object.Key("TrainingImageConfig")
+		if err := awsAwsjson11_serializeDocumentTrainingImageConfig(v.TrainingImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TrainingInputMode) > 0 {
 		ok := object.Key("TrainingInputMode")
 		ok.String(string(v.TrainingInputMode))
@@ -19872,6 +19879,13 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(v *types.
 		ok.Boolean(v.EnableNetworkIsolation)
 	}
 
+	if v.Environment != nil {
+		ok := object.Key("Environment")
+		if err := awsAwsjson11_serializeDocumentHyperParameterTrainingJobEnvironmentMap(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HyperParameterRanges != nil {
 		ok := object.Key("HyperParameterRanges")
 		if err := awsAwsjson11_serializeDocumentParameterRanges(v.HyperParameterRanges, ok); err != nil {
@@ -19959,6 +19973,17 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinitions(v []type
 		if err := awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHyperParameterTrainingJobEnvironmentMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }
@@ -23236,6 +23261,11 @@ func awsAwsjson11_serializeDocumentRecommendationJobContainerConfig(v *types.Rec
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataInputConfig != nil {
+		ok := object.Key("DataInputConfig")
+		ok.String(*v.DataInputConfig)
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
@@ -23306,6 +23336,11 @@ func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.Recomme
 	if v.JobDurationInSeconds != nil {
 		ok := object.Key("JobDurationInSeconds")
 		ok.Integer(*v.JobDurationInSeconds)
+	}
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
 	}
 
 	if v.ModelPackageVersionArn != nil {
@@ -24389,6 +24424,25 @@ func awsAwsjson11_serializeDocumentTrainingEnvironmentMap(v map[string]string, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTrainingImageConfig(v *types.TrainingImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TrainingRepositoryAccessMode) > 0 {
+		ok := object.Key("TrainingRepositoryAccessMode")
+		ok.String(string(v.TrainingRepositoryAccessMode))
+	}
+
+	if v.TrainingRepositoryAuthConfig != nil {
+		ok := object.Key("TrainingRepositoryAuthConfig")
+		if err := awsAwsjson11_serializeDocumentTrainingRepositoryAuthConfig(v.TrainingRepositoryAuthConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrainingInstanceTypes(v []types.TrainingInstanceType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -24442,6 +24496,18 @@ func awsAwsjson11_serializeDocumentTrainingJobDefinition(v *types.TrainingJobDef
 	if len(v.TrainingInputMode) > 0 {
 		ok := object.Key("TrainingInputMode")
 		ok.String(string(v.TrainingInputMode))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrainingRepositoryAuthConfig(v *types.TrainingRepositoryAuthConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrainingRepositoryCredentialsProviderArn != nil {
+		ok := object.Key("TrainingRepositoryCredentialsProviderArn")
+		ok.String(*v.TrainingRepositoryCredentialsProviderArn)
 	}
 
 	return nil

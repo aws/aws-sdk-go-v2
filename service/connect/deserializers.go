@@ -4415,12 +4415,6 @@ func (m *awsRestjson1_deserializeOpDeleteContactFlow) HandleDeserialize(ctx cont
 	output := &DeleteContactFlowOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
-
 	return out, metadata, err
 }
 
@@ -18437,6 +18431,15 @@ func awsRestjson1_deserializeOpDocumentStartChatContactOutput(v **StartChatConta
 				sv.ContactId = ptr.String(jtv)
 			}
 
+		case "ContinuedFromContactId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactId to be of type string, got %T instead", value)
+				}
+				sv.ContinuedFromContactId = ptr.String(jtv)
+			}
+
 		case "ParticipantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20119,12 +20122,6 @@ func (m *awsRestjson1_deserializeOpUpdateContactFlowContent) HandleDeserialize(c
 	output := &UpdateContactFlowContentOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
-
 	return out, metadata, err
 }
 
@@ -20222,12 +20219,6 @@ func (m *awsRestjson1_deserializeOpUpdateContactFlowMetadata) HandleDeserialize(
 	}
 	output := &UpdateContactFlowMetadataOutput{}
 	out.Result = output
-
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
 
 	return out, metadata, err
 }
@@ -20525,12 +20516,6 @@ func (m *awsRestjson1_deserializeOpUpdateContactFlowName) HandleDeserialize(ctx 
 	}
 	output := &UpdateContactFlowNameOutput{}
 	out.Result = output
-
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
 
 	return out, metadata, err
 }
@@ -25647,6 +25632,15 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 		case "QueueInfo":
 			if err := awsRestjson1_deserializeDocumentQueueInfo(&sv.QueueInfo, value); err != nil {
 				return err
+			}
+
+		case "RelatedContactId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactId to be of type string, got %T instead", value)
+				}
+				sv.RelatedContactId = ptr.String(jtv)
 			}
 
 		case "ScheduledTimestamp":

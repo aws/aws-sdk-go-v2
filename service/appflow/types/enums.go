@@ -135,6 +135,7 @@ const (
 	ConnectorTypeCustomerprofiles ConnectorType = "CustomerProfiles"
 	ConnectorTypeSapodata         ConnectorType = "SAPOData"
 	ConnectorTypeCustomconnector  ConnectorType = "CustomConnector"
+	ConnectorTypePardot           ConnectorType = "Pardot"
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
@@ -165,6 +166,7 @@ func (ConnectorType) Values() []ConnectorType {
 		"CustomerProfiles",
 		"SAPOData",
 		"CustomConnector",
+		"Pardot",
 	}
 }
 
@@ -642,6 +644,48 @@ func (Operators) Values() []Operators {
 		"VALIDATE_NON_NEGATIVE",
 		"VALIDATE_NUMERIC",
 		"NO_OP",
+	}
+}
+
+type PardotConnectorOperator string
+
+// Enum values for PardotConnectorOperator
+const (
+	PardotConnectorOperatorProjection          PardotConnectorOperator = "PROJECTION"
+	PardotConnectorOperatorEqualTo             PardotConnectorOperator = "EQUAL_TO"
+	PardotConnectorOperatorNoOp                PardotConnectorOperator = "NO_OP"
+	PardotConnectorOperatorAddition            PardotConnectorOperator = "ADDITION"
+	PardotConnectorOperatorMultiplication      PardotConnectorOperator = "MULTIPLICATION"
+	PardotConnectorOperatorDivision            PardotConnectorOperator = "DIVISION"
+	PardotConnectorOperatorSubtraction         PardotConnectorOperator = "SUBTRACTION"
+	PardotConnectorOperatorMaskAll             PardotConnectorOperator = "MASK_ALL"
+	PardotConnectorOperatorMaskFirstN          PardotConnectorOperator = "MASK_FIRST_N"
+	PardotConnectorOperatorMaskLastN           PardotConnectorOperator = "MASK_LAST_N"
+	PardotConnectorOperatorValidateNonNull     PardotConnectorOperator = "VALIDATE_NON_NULL"
+	PardotConnectorOperatorValidateNonZero     PardotConnectorOperator = "VALIDATE_NON_ZERO"
+	PardotConnectorOperatorValidateNonNegative PardotConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	PardotConnectorOperatorValidateNumeric     PardotConnectorOperator = "VALIDATE_NUMERIC"
+)
+
+// Values returns all known values for PardotConnectorOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PardotConnectorOperator) Values() []PardotConnectorOperator {
+	return []PardotConnectorOperator{
+		"PROJECTION",
+		"EQUAL_TO",
+		"NO_OP",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
 	}
 }
 

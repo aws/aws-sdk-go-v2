@@ -14,7 +14,7 @@ const ecsResponse = `{
   "SecretAccessKey": "ecs-secret-key",
   "Token": "token",
   "Expiration": "2100-01-01T00:00:00Z",
-  "LastUpdated": "2009-11-23T0:00:00Z"
+  "LastUpdated": "2009-11-23T00:00:00Z"
 }`
 
 const ec2MetadataResponse = `{
@@ -24,7 +24,7 @@ const ec2MetadataResponse = `{
   "SecretAccessKey": "ec2-secret-key",
   "Token": "token",
   "Expiration": "2100-01-01T00:00:00Z",
-  "LastUpdated": "2009-11-23T0:00:00Z"
+  "LastUpdated": "2009-11-23T00:00:00Z"
 }`
 
 const assumeRoleRespMsg = `

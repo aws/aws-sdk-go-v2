@@ -17,8 +17,8 @@ import (
 // descriptions of all file systems owned by the caller's Amazon Web Services
 // account in the Amazon Web Services Region of the endpoint that you're calling.
 // When retrieving all file system descriptions, you can optionally specify the
-// MaxItems parameter to limit the number of descriptions in a response. Currently,
-// this number is automatically set to 10. If more file system descriptions remain,
+// MaxItems parameter to limit the number of descriptions in a response. This
+// number is automatically set to 100. If more file system descriptions remain,
 // Amazon EFS returns a NextMarker, an opaque token, in the response. In this case,
 // you should send a subsequent request with the Marker request parameter set to
 // the value of NextMarker. To retrieve a list of your file system descriptions,

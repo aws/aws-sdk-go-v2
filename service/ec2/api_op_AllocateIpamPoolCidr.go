@@ -13,8 +13,8 @@ import (
 )
 
 // Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment
-// from an IPAM pool to another resource or IPAM pool. For more information, see
-// Allocate CIDRs
+// from an IPAM pool to another IPAM pool or to a resource. For more information,
+// see Allocate CIDRs
 // (https://docs.aws.amazon.com/vpc/latest/ipam/allocate-cidrs-ipam.html) in the
 // Amazon VPC IPAM User Guide.
 func (c *Client) AllocateIpamPoolCidr(ctx context.Context, params *AllocateIpamPoolCidrInput, optFns ...func(*Options)) (*AllocateIpamPoolCidrOutput, error) {

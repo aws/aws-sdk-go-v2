@@ -9609,6 +9609,13 @@ func awsRestjson1_serializeOpDocumentStartChatContactInput(v *StartChatContactIn
 		}
 	}
 
+	if v.PersistentChat != nil {
+		ok := object.Key("PersistentChat")
+		if err := awsRestjson1_serializeDocumentPersistentChat(v.PersistentChat, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SupportedMessagingContentTypes != nil {
 		ok := object.Key("SupportedMessagingContentTypes")
 		if err := awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v.SupportedMessagingContentTypes, ok); err != nil {
@@ -14775,6 +14782,23 @@ func awsRestjson1_serializeDocumentPermissionsList(v []string, value smithyjson.
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPersistentChat(v *types.PersistentChat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RehydrationType) > 0 {
+		ok := object.Key("RehydrationType")
+		ok.String(string(v.RehydrationType))
+	}
+
+	if v.SourceContactId != nil {
+		ok := object.Key("SourceContactId")
+		ok.String(*v.SourceContactId)
+	}
+
 	return nil
 }
 

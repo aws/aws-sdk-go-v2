@@ -1404,6 +1404,72 @@ func awsRestjson1_serializeOpDocumentDescribeDomainsInput(v *DescribeDomainsInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeDryRunProgress struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeDryRunProgress) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeDryRunProgress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDryRunProgressInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2021-01-01/opensearch/domain/{DomainName}/dryRun")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeDryRunProgressInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeDryRunProgressInput(v *DescribeDryRunProgressInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.DryRunId != nil {
+		encoder.SetQuery("dryRunId").String(*v.DryRunId)
+	}
+
+	if v.LoadDryRunConfig != nil {
+		encoder.SetQuery("loadDryRunConfig").Boolean(*v.LoadDryRunConfig)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeInboundConnections struct {
 }
 
@@ -3242,6 +3308,11 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 	if v.DryRun != nil {
 		ok := object.Key("DryRun")
 		ok.Boolean(*v.DryRun)
+	}
+
+	if len(v.DryRunMode) > 0 {
+		ok := object.Key("DryRunMode")
+		ok.String(string(v.DryRunMode))
 	}
 
 	if v.EBSOptions != nil {

@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) for a
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a
 // Lambda function version. Use aliases to provide clients with a function
 // identifier that you can update to invoke a different version. You can also map
 // an alias to split invocation requests between two versions. Use the
@@ -74,7 +74,7 @@ type CreateAliasInput struct {
 }
 
 // Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 type CreateAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the alias.

@@ -1,3 +1,11 @@
+# v1.19.2 (2023-01-20)
+
+* No change notes available for this release.
+
+# v1.19.1 (2023-01-18)
+
+* **Documentation**: Documentation updates for EFS access points limit increase
+
 # v1.19.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

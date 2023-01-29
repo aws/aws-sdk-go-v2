@@ -1359,6 +1359,24 @@ func (ReferenceType) Values() []ReferenceType {
 	}
 }
 
+type RehydrationType string
+
+// Enum values for RehydrationType
+const (
+	RehydrationTypeEntirePastSession RehydrationType = "ENTIRE_PAST_SESSION"
+	RehydrationTypeFromSegment       RehydrationType = "FROM_SEGMENT"
+)
+
+// Values returns all known values for RehydrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RehydrationType) Values() []RehydrationType {
+	return []RehydrationType{
+		"ENTIRE_PAST_SESSION",
+		"FROM_SEGMENT",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType

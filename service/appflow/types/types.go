@@ -365,6 +365,9 @@ type ConnectorMetadata struct {
 	// The connector metadata specific to Marketo.
 	Marketo *MarketoMetadata
 
+	// The connector metadata specific to Salesforce Pardot.
+	Pardot *PardotMetadata
+
 	// The connector metadata specific to Amazon Redshift.
 	Redshift *RedshiftMetadata
 
@@ -442,6 +445,9 @@ type ConnectorOperator struct {
 
 	// The operation to be performed on the provided Marketo source fields.
 	Marketo MarketoConnectorOperator
+
+	// The operation to be performed on the provided Salesforce Pardot source fields.
+	Pardot PardotConnectorOperator
 
 	// The operation to be performed on the provided Amazon S3 source fields.
 	S3 S3ConnectorOperator
@@ -557,6 +563,9 @@ type ConnectorProfileCredentials struct {
 	// The connector-specific credentials required when using Marketo.
 	Marketo *MarketoConnectorProfileCredentials
 
+	// The connector-specific credentials required when using Salesforce Pardot.
+	Pardot *PardotConnectorProfileCredentials
+
 	// The connector-specific credentials required when using Amazon Redshift.
 	Redshift *RedshiftConnectorProfileCredentials
 
@@ -616,6 +625,9 @@ type ConnectorProfileProperties struct {
 
 	// The connector-specific properties required by Marketo.
 	Marketo *MarketoConnectorProfileProperties
+
+	// The connector-specific properties required by Salesforce Pardot.
+	Pardot *PardotConnectorProfileProperties
 
 	// The connector-specific properties required by Amazon Redshift.
 	Redshift *RedshiftConnectorProfileProperties
@@ -1686,6 +1698,60 @@ type OAuthProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The connector-specific profile credentials required when using Salesforce
+// Pardot.
+type PardotConnectorProfileCredentials struct {
+
+	// The credentials used to access protected Salesforce Pardot resources.
+	AccessToken *string
+
+	// The secret manager ARN, which contains the client ID and client secret of the
+	// connected app.
+	ClientCredentialsArn *string
+
+	// Used by select connectors for which the OAuth workflow is supported, such as
+	// Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+	OAuthRequest *ConnectorOAuthRequest
+
+	// The credentials used to acquire new access tokens.
+	RefreshToken *string
+
+	noSmithyDocumentSerde
+}
+
+// The connector-specific profile properties required when using Salesforce Pardot.
+type PardotConnectorProfileProperties struct {
+
+	// The business unit id of Salesforce Pardot instance.
+	BusinessUnitId *string
+
+	// The location of the Salesforce Pardot resource.
+	InstanceUrl *string
+
+	// Indicates whether the connector profile applies to a sandbox or production
+	// environment.
+	IsSandboxEnvironment bool
+
+	noSmithyDocumentSerde
+}
+
+// The connector metadata specific to Salesforce Pardot.
+type PardotMetadata struct {
+	noSmithyDocumentSerde
+}
+
+// The properties that are applied when Salesforce Pardot is being used as a
+// source.
+type PardotSourceProperties struct {
+
+	// The object specified in the Salesforce Pardot flow source.
+	//
+	// This member is required.
+	Object *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies elements that Amazon AppFlow includes in the file and folder names in
 // the flow destination.
 type PrefixConfig struct {
@@ -2465,6 +2531,9 @@ type SourceConnectorProperties struct {
 
 	// Specifies the information that is required for querying Marketo.
 	Marketo *MarketoSourceProperties
+
+	// Specifies the information that is required for querying Salesforce Pardot.
+	Pardot *PardotSourceProperties
 
 	// Specifies the information that is required for querying Amazon S3.
 	S3 *S3SourceProperties

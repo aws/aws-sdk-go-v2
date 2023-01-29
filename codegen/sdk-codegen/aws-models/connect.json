@@ -1310,8 +1310,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-south-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1323,8 +1323,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-south-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1336,8 +1336,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1349,8 +1349,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1362,8 +1362,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ca-central-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1375,8 +1375,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ca-central-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1388,8 +1388,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ca-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1401,8 +1401,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ca-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1414,8 +1414,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "eu-central-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1427,8 +1427,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "eu-central-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1440,8 +1440,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "eu-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1453,8 +1453,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "eu-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1466,8 +1466,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-west-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1479,8 +1479,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-west-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1492,8 +1492,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1505,8 +1505,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1518,8 +1518,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "af-south-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1531,8 +1531,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "af-south-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1544,8 +1544,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "af-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1557,8 +1557,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "af-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1570,8 +1570,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "eu-west-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1583,8 +1583,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "eu-west-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1596,8 +1596,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "eu-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1609,8 +1609,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "eu-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1622,8 +1622,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1635,8 +1635,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1648,8 +1648,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1661,8 +1661,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1674,8 +1674,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1687,8 +1687,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1700,8 +1700,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1713,8 +1713,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1726,8 +1726,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -1739,8 +1739,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -1752,8 +1752,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -1765,8 +1765,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -1778,8 +1778,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1791,8 +1791,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1804,8 +1804,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1817,8 +1817,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1830,8 +1830,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1843,8 +1843,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1856,8 +1856,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1869,8 +1869,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1882,8 +1882,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1895,8 +1895,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1908,8 +1908,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1921,8 +1921,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1934,8 +1934,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1946,8 +1946,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1958,8 +1958,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1997,7 +1997,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>This action must be set if <code>TriggerEventSource</code> is one of the following values:\n   <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n   <code>OnPostChatAnalysisAvailable</code>. Contact is categorized using the rule name.</p>\n         <p>\n            <code>RuleName</code> is used as <code>ContactCategory</code>.</p>"
+                "smithy.api#documentation": "<p>This action must be set if <code>TriggerEventSource</code> is one of the following values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code>. Contact is categorized using the rule name.</p>\n         <p>\n            <code>RuleName</code> is used as <code>ContactCategory</code>.</p>"
             }
         },
         "com.amazonaws.connect#AssociateApprovedOrigin": {
@@ -2887,7 +2887,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.connect#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, and <code>application/json</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n    <code>text/markdown</code>, and <code>application/json</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2971,7 +2971,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call\n    the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/claim",
@@ -3220,6 +3220,12 @@
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp, in Unix epoch time format, at which to start running the inbound flow.\n  </p>"
+                    }
+                },
+                "RelatedContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId that is <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid\">related</a> to this\n   contact.</p>"
                     }
                 }
             },
@@ -4801,7 +4807,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
+                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to\n   code conditions for the rule. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/rules/{InstanceId}",
@@ -4978,7 +4984,7 @@
                 "TagRestrictedResources": {
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> | <code>SecurityProfile</code> | <code>Queue</code> | \n   <code>RoutingProfile</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> |\n    <code>SecurityProfile</code> | <code>Queue</code> | <code>RoutingProfile</code>\n         </p>"
                     }
                 }
             }
@@ -5936,7 +5942,7 @@
                 "target": "com.amazonaws.connect#DeleteContactFlowRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.connect#DeleteContactFlowResponse"
             },
             "errors": [
                 {
@@ -6049,6 +6055,10 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#DeleteContactFlowResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#DeleteHoursOfOperation": {
             "type": "operation",
@@ -8629,7 +8639,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n   <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
+                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n    <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users/{InstanceId}/{UserId}/contact",
@@ -8995,14 +9005,14 @@
                 "Filters": {
                     "target": "com.amazonaws.connect#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters to apply to returned metrics. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Channels: 3 (VOICE, CHAT, and TASK channels are supported.)</p>\n            </li>\n         </ul>\n         <p>Metric data is retrieved only for the resources associated with the queues or routing\n   profiles, and by any channels included in the filter. (You cannot filter by both queue AND routing profile.) You can include both resource IDs and resource ARNs in the same request. </p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
+                        "smithy.api#documentation": "<p>The filters to apply to returned metrics. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Channels: 3 (VOICE, CHAT, and TASK channels are supported.)</p>\n            </li>\n         </ul>\n         <p>Metric data is retrieved only for the resources associated with the queues or routing\n   profiles, and by any channels included in the filter. (You cannot filter by both queue AND\n   routing profile.) You can include both resource IDs and resource ARNs in the same request. </p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Groupings": {
                     "target": "com.amazonaws.connect#Groupings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. </p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n     VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing\n     profile filter. In addition, a routing profile filter is \n     required for metrics <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and \n     <code> OLDEST_CONTACT_AGE</code>.</p>\n            </li>\n            <li>\n               <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n     returned.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. </p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n     VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing\n     profile filter. In addition, a routing profile filter is required for metrics\n      <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and <code>\n      OLDEST_CONTACT_AGE</code>.</p>\n            </li>\n            <li>\n               <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n     returned.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CurrentMetrics": {
@@ -9028,7 +9038,7 @@
                 "SortCriteria": {
                     "target": "com.amazonaws.connect#CurrentMetricSortCriteriaMaxOne",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way to sort the resulting response based on metrics. You can enter one sort criteria. By\n   default resources are sorted based on <code>AGENTS_ONLINE</code>, <code>DESCENDING</code>. The\n   metric collection is sorted based on the input metrics.</p>\n         <p>Note the following:</p>\n         <ul>\n            <li>\n               <p>Sorting on <code>SLOTS_ACTIVE</code> and <code>SLOTS_AVAILABLE</code> is not supported.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The way to sort the resulting response based on metrics. You can enter one sort criteria. By\n   default resources are sorted based on <code>AGENTS_ONLINE</code>, <code>DESCENDING</code>. The\n   metric collection is sorted based on the input metrics.</p>\n         <p>Note the following:</p>\n         <ul>\n            <li>\n               <p>Sorting on <code>SLOTS_ACTIVE</code> and <code>SLOTS_AVAILABLE</code> is not\n     supported.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -9115,7 +9125,7 @@
                 "Filters": {
                     "target": "com.amazonaws.connect#UserDataFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters to apply to returned user data. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Agents: 100</p>\n            </li>\n            <li>\n               <p>Contact states: 9</p>\n            </li>\n            <li>\n               <p>User hierarchy groups: 1</p>\n            </li>\n         </ul>\n         <p> The user data is retrieved for only the specified\n  values/resources in the filter. A maximum of one filter can be passed from queues, routing profiles,\n  agents, and user hierarchy groups. </p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
+                        "smithy.api#documentation": "<p>The filters to apply to returned user data. You can filter up to the following\n   limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Agents: 100</p>\n            </li>\n            <li>\n               <p>Contact states: 9</p>\n            </li>\n            <li>\n               <p>User hierarchy groups: 1</p>\n            </li>\n         </ul>\n         <p> The user data is retrieved for only the specified values/resources in the filter. A maximum\n   of one filter can be passed from queues, routing profiles, agents, and user hierarchy groups. </p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14548,7 +14558,7 @@
                 "TimerType": {
                     "target": "com.amazonaws.connect#ParticipantTimerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of timer. <code>IDLE</code> indicates the timer applies for considering a human chat participant as idle. \n   <code>DISCONNECT_NONCUSTOMER</code> indicates the timer applies to automatically disconnecting a chat participant due to\n   idleness.</p>",
+                        "smithy.api#documentation": "<p>The type of timer. <code>IDLE</code> indicates the timer applies for considering a human\n   chat participant as idle. <code>DISCONNECT_NONCUSTOMER</code> indicates the timer applies to\n   automatically disconnecting a chat participant due to idleness.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14596,7 +14606,7 @@
                 "ParticipantTimerAction": {
                     "target": "com.amazonaws.connect#ParticipantTimerAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timer action. Currently only one value is allowed: <code>Unset</code>. It deletes a timer.</p>"
+                        "smithy.api#documentation": "<p>The timer action. Currently only one value is allowed: <code>Unset</code>. It deletes a\n   timer.</p>"
                     }
                 },
                 "ParticipantTimerDurationInMinutes": {
@@ -14645,6 +14655,26 @@
                     "min": 0,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.connect#PersistentChat": {
+            "type": "structure",
+            "members": {
+                "RehydrationType": {
+                    "target": "com.amazonaws.connect#RehydrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId that is used for rehydration depends on the rehydration type. RehydrationType\n   is required for persistent chat. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past\n     chat contact of the specified past ended chat session. To use this type, provide the\n      <code>initialContactId</code> of the past ended chat session in the\n      <code>sourceContactId</code> field. In this type, Amazon Connect determines the most\n     recent chat contact on the specified chat session that has ended, and uses it to start a\n     persistent chat. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FROM_SEGMENT</code>: Rehydrates a chat from the past chat contact that is specified\n     in the <code>sourceContactId</code> field. </p>\n            </li>\n         </ul>\n         <p>The actual contactId used for rehydration is provided in the response of this API.    \n  </p>"
+                    }
+                },
+                "SourceContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId from which a persistent chat session must be started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enable persistent chats. For more\n   information about enabling persistent chat, and for example use cases and how to configure for them, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>.</p>"
             }
         },
         "com.amazonaws.connect#PhoneNumber": {
@@ -17203,6 +17233,23 @@
                 }
             }
         },
+        "com.amazonaws.connect#RehydrationType": {
+            "type": "enum",
+            "members": {
+                "ENTIRE_PAST_SESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTIRE_PAST_SESSION"
+                    }
+                },
+                "FROM_SEGMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FROM_SEGMENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#ReleasePhoneNumber": {
             "type": "operation",
             "input": {
@@ -17975,7 +18022,7 @@
                 "TaskAction": {
                     "target": "com.amazonaws.connect#TaskActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the task action. This field is required if <code>TriggerEventSource</code>\n   is one of the following values: <code>OnZendeskTicketCreate</code> |\n   <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Information about the task action. This field is required if <code>TriggerEventSource</code>\n   is one of the following values: <code>OnZendeskTicketCreate</code> |\n    <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>\n         </p>"
                     }
                 },
                 "EventBridgeAction": {
@@ -18134,7 +18181,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the\n   following values: <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> |\n   <code>OnSalesforceCaseCreate</code>\n         </p>"
+                "smithy.api#documentation": "<p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the\n   following values: <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> |\n    <code>OnSalesforceCaseCreate</code>\n         </p>"
             }
         },
         "com.amazonaws.connect#S3Config": {
@@ -19233,7 +19280,13 @@
                 "SupportedMessagingContentTypes": {
                     "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported chat message content types. Content types must always contain <code>text/plain</code>. You\n   can then put any other supported type in the list. For example, all the following lists are valid\n   because they contain <code>text/plain</code>: <code>[text/plain, text/markdown, application/json]</code>, <code>[text/markdown,\n   text/plain]</code>, <code>[text/plain, application/json]</code>.</p>"
+                        "smithy.api#documentation": "<p>The supported chat message content types. Content types must always contain\n    <code>text/plain</code>. You can then put any other supported type in the list. For example, all\n   the following lists are valid because they contain <code>text/plain</code>: <code>[text/plain,\n    text/markdown, application/json]</code>, <code>[text/markdown, text/plain]</code>,\n    <code>[text/plain, application/json]</code>.</p>"
+                    }
+                },
+                "PersistentChat": {
+                    "target": "com.amazonaws.connect#PersistentChat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable persistent chats. For more\n   information about enabling persistent chat, and for example use cases and how to configure for them, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>.</p>"
                     }
                 }
             }
@@ -19257,6 +19310,12 @@
                     "target": "com.amazonaws.connect#ParticipantToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token used by the chat participant to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat\n   participant.</p>"
+                    }
+                },
+                "ContinuedFromContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId from which a persistent chat session is started. This field is populated only\n   for persistent chats.</p>"
                     }
                 }
             }
@@ -21233,7 +21292,7 @@
                 "target": "com.amazonaws.connect#UpdateContactFlowContentRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.connect#UpdateContactFlowContentResponse"
             },
             "errors": [
                 {
@@ -21286,11 +21345,15 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example contact\n    flow in Amazon Connect Flow language</a>. </p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#UpdateContactFlowContentResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#UpdateContactFlowMetadata": {
             "type": "operation",
@@ -21298,7 +21361,7 @@
                 "target": "com.amazonaws.connect#UpdateContactFlowMetadataRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.connect#UpdateContactFlowMetadataResponse"
             },
             "errors": [
                 {
@@ -21367,6 +21430,10 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#UpdateContactFlowMetadataResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#UpdateContactFlowModuleContent": {
             "type": "operation",
@@ -21526,7 +21593,7 @@
                 "target": "com.amazonaws.connect#UpdateContactFlowNameRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.connect#UpdateContactFlowNameResponse"
             },
             "errors": [
                 {
@@ -21589,6 +21656,10 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#UpdateContactFlowNameResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#UpdateContactRequest": {
             "type": "structure",
@@ -22830,7 +22901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
+                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to\n   code conditions for the rule. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/rules/{InstanceId}/{RuleId}",

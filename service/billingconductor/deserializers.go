@@ -5347,6 +5347,15 @@ func awsRestjson1_deserializeOpDocumentUpdatePricingRuleOutput(v **UpdatePricing
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Operation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Operation to be of type string, got %T instead", value)
+				}
+				sv.Operation = ptr.String(jtv)
+			}
+
 		case "Scope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5377,6 +5386,15 @@ func awsRestjson1_deserializeOpDocumentUpdatePricingRuleOutput(v **UpdatePricing
 					return fmt.Errorf("expected PricingRuleType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.PricingRuleType(jtv)
+			}
+
+		case "UsageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UsageType to be of type string, got %T instead", value)
+				}
+				sv.UsageType = ptr.String(jtv)
 			}
 
 		default:

@@ -907,8 +907,9 @@ func (e *ServiceException) ErrorCode() string {
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The runtime restore hook encountered an error. For more information, check the
-// Amazon CloudWatch logs.
+// The afterRestore()runtime hook
+// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html)
+// encountered an error. For more information, check the Amazon CloudWatch logs.
 type SnapStartException struct {
 	Message *string
 
@@ -967,8 +968,7 @@ func (e *SnapStartNotReadyException) ErrorCode() string {
 }
 func (e *SnapStartNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The runtime restore hook failed to complete within the timeout limit (2
-// seconds).
+// Lambda couldn't restore the snapshot within the timeout limit.
 type SnapStartTimeoutException struct {
 	Message *string
 

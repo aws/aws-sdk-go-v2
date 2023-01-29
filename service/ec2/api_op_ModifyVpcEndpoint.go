@@ -30,7 +30,6 @@ func (c *Client) ModifyVpcEndpoint(ctx context.Context, params *ModifyVpcEndpoin
 	return out, nil
 }
 
-// Contains the parameters for ModifyVpcEndpoint.
 type ModifyVpcEndpointInput struct {
 
 	// The ID of the endpoint.
@@ -38,14 +37,14 @@ type ModifyVpcEndpointInput struct {
 	// This member is required.
 	VpcEndpointId *string
 
-	// (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
+	// (Gateway endpoint) The IDs of the route tables to associate with the endpoint.
 	AddRouteTableIds []string
 
-	// (Interface endpoint) One or more security group IDs to associate with the
+	// (Interface endpoint) The IDs of the security groups to associate with the
 	// network interface.
 	AddSecurityGroupIds []string
 
-	// (Interface and Gateway Load Balancer endpoints) One or more subnet IDs in which
+	// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which
 	// to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify
 	// only one subnet.
 	AddSubnetIds []string
@@ -70,15 +69,15 @@ type ModifyVpcEndpointInput struct {
 	// the VPC.
 	PrivateDnsEnabled *bool
 
-	// (Gateway endpoint) One or more route table IDs to disassociate from the
+	// (Gateway endpoint) The IDs of the route tables to disassociate from the
 	// endpoint.
 	RemoveRouteTableIds []string
 
-	// (Interface endpoint) One or more security group IDs to disassociate from the
+	// (Interface endpoint) The IDs of the security groups to disassociate from the
 	// network interface.
 	RemoveSecurityGroupIds []string
 
-	// (Interface endpoint) One or more subnets IDs in which to remove the endpoint.
+	// (Interface endpoint) The IDs of the subnets from which to remove the endpoint.
 	RemoveSubnetIds []string
 
 	// (Gateway endpoint) Specify true to reset the policy document to the default

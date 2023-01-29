@@ -5136,6 +5136,21 @@ func validateDashboardVisualId(v *types.DashboardVisualId) error {
 	}
 }
 
+func validateDataBarsOptions(v *types.DataBarsOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataBarsOptions"}
+	if v.FieldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatabricksParameters(v *types.DatabricksParameters) error {
 	if v == nil {
 		return nil
@@ -11877,6 +11892,11 @@ func validateTableConfiguration(v *types.TableConfiguration) error {
 			invalidParams.AddNested("FieldOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TableInlineVisualizations != nil {
+		if err := validateTableInlineVisualizationList(v.TableInlineVisualizations); err != nil {
+			invalidParams.AddNested("TableInlineVisualizations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12022,6 +12042,40 @@ func validateTableFieldWells(v *types.TableFieldWells) error {
 	if v.TableUnaggregatedFieldWells != nil {
 		if err := validateTableUnaggregatedFieldWells(v.TableUnaggregatedFieldWells); err != nil {
 			invalidParams.AddNested("TableUnaggregatedFieldWells", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableInlineVisualization(v *types.TableInlineVisualization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableInlineVisualization"}
+	if v.DataBars != nil {
+		if err := validateDataBarsOptions(v.DataBars); err != nil {
+			invalidParams.AddNested("DataBars", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableInlineVisualizationList(v []types.TableInlineVisualization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableInlineVisualizationList"}
+	for i := range v {
+		if err := validateTableInlineVisualization(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

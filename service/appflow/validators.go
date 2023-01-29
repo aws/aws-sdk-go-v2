@@ -1309,6 +1309,21 @@ func validateOAuthProperties(v *types.OAuthProperties) error {
 	}
 }
 
+func validatePardotSourceProperties(v *types.PardotSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PardotSourceProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftConnectorProfileProperties(v *types.RedshiftConnectorProfileProperties) error {
 	if v == nil {
 		return nil
@@ -1747,6 +1762,11 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 	if v.CustomConnector != nil {
 		if err := validateCustomConnectorSourceProperties(v.CustomConnector); err != nil {
 			invalidParams.AddNested("CustomConnector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Pardot != nil {
+		if err := validatePardotSourceProperties(v.Pardot); err != nil {
+			invalidParams.AddNested("Pardot", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -3966,6 +3966,7 @@ const (
 	ProductionVariantInstanceTypeMlR6gd8xlarge  ProductionVariantInstanceType = "ml.r6gd.8xlarge"
 	ProductionVariantInstanceTypeMlR6gd12xlarge ProductionVariantInstanceType = "ml.r6gd.12xlarge"
 	ProductionVariantInstanceTypeMlR6gd16xlarge ProductionVariantInstanceType = "ml.r6gd.16xlarge"
+	ProductionVariantInstanceTypeMlP4de24xlarge ProductionVariantInstanceType = "ml.p4de.24xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -4114,6 +4115,7 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.r6gd.8xlarge",
 		"ml.r6gd.12xlarge",
 		"ml.r6gd.16xlarge",
+		"ml.p4de.24xlarge",
 	}
 }
 
@@ -5422,6 +5424,24 @@ func (TrainingJobStatus) Values() []TrainingJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type TrainingRepositoryAccessMode string
+
+// Enum values for TrainingRepositoryAccessMode
+const (
+	TrainingRepositoryAccessModePlatform TrainingRepositoryAccessMode = "Platform"
+	TrainingRepositoryAccessModeVpc      TrainingRepositoryAccessMode = "Vpc"
+)
+
+// Values returns all known values for TrainingRepositoryAccessMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingRepositoryAccessMode) Values() []TrainingRepositoryAccessMode {
+	return []TrainingRepositoryAccessMode{
+		"Platform",
+		"Vpc",
 	}
 }
 

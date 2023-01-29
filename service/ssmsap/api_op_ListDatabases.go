@@ -31,16 +31,19 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 
 type ListDatabasesInput struct {
 
-	//
+	// The ID of the application.
 	ApplicationId *string
 
-	//
+	// The ID of the component.
 	ComponentId *string
 
-	//
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value. If you
+	// do not specify a value for MaxResults, the request returns 50 items per page by
+	// default.
 	MaxResults *int32
 
-	//
+	// The token for the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,10 +51,11 @@ type ListDatabasesInput struct {
 
 type ListDatabasesOutput struct {
 
-	//
+	// The SAP HANA databases of an application.
 	Databases []types.DatabaseSummary
 
-	//
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -129,7 +133,10 @@ var _ ListDatabasesAPIClient = (*Client)(nil)
 
 // ListDatabasesPaginatorOptions is the paginator options for ListDatabases
 type ListDatabasesPaginatorOptions struct {
-	//
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value. If you
+	// do not specify a value for MaxResults, the request returns 50 items per page by
+	// default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

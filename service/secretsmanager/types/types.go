@@ -27,8 +27,11 @@ type Filter struct {
 	// * primary-region:
 	// Prefix match, case-sensitive.
 	//
-	// * all: Breaks the filter value string into words
-	// and then searches all attributes for matches. Not case-sensitive.
+	// * owning-service: Prefix match,
+	// case-sensitive.
+	//
+	// * all: Breaks the filter value string into words and then
+	// searches all attributes for matches. Not case-sensitive.
 	Key FilterNameStringType
 
 	// The keyword to filter for. You can prefix your search value with an exclamation
@@ -78,10 +81,13 @@ type ReplicationStatusType struct {
 // A structure that defines the rotation configuration for the secret.
 type RotationRulesType struct {
 
-	// The number of days between automatic scheduled rotations of the secret. You can
-	// use this value to check that your secret meets your compliance guidelines for
-	// how often secrets must be rotated. In DescribeSecret and ListSecrets, this value
-	// is calculated from the rotation schedule after every successful rotation. In
+	// The number of days between rotations of the secret. You can use this value to
+	// check that your secret meets your compliance guidelines for how often secrets
+	// must be rotated. If you use this field to set the rotation schedule, Secrets
+	// Manager calculates the next rotation date based on the previous rotation.
+	// Manually updating the secret value by calling PutSecretValue or UpdateSecret is
+	// considered a valid rotation. In DescribeSecret and ListSecrets, this value is
+	// calculated from the rotation schedule after every successful rotation. In
 	// RotateSecret, you can set the rotation schedule in RotationRules with
 	// AutomaticallyAfterDays or ScheduleExpression, but not both. To set a rotation
 	// schedule in hours, use ScheduleExpression.
@@ -170,6 +176,9 @@ type SecretListEntry struct {
 	// folder prod.
 	Name *string
 
+	// The next date and time that Secrets Manager will attempt to rotate the secret,
+	// rounded to the nearest hour. This value is null if the secret is not set up for
+	// rotation.
 	NextRotationDate *time.Time
 
 	// Returns the name of the service that created the secret.

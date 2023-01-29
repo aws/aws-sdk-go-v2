@@ -58,7 +58,8 @@ type UpdateEndpointInput struct {
 	// UpdateEndpointInput$RetainAllVariantProperties, whose value is set to true,
 	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty to
 	// override with the values provided by EndpointConfig. If you don't specify a
-	// value for ExcludeAllVariantProperties, no variant properties are overridden.
+	// value for ExcludeRetainedVariantProperties, no variant properties are
+	// overridden.
 	ExcludeRetainedVariantProperties []types.VariantProperty
 
 	// When updating endpoint resources, enables or disables the retention of variant

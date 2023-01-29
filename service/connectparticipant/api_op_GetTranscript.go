@@ -13,6 +13,9 @@ import (
 )
 
 // Retrieves a transcript of the session, including details about any attachments.
+// For information about accessing past chat contact transcripts for a persistent
+// chat, see Enable persistent chat
+// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
 // ConnectionToken is used for invoking this API instead of ParticipantToken. The
 // Amazon Connect Participant Service APIs do not use Signature Version 4
 // authentication

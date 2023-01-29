@@ -39,6 +39,16 @@ type GetDataflowEndpointGroupInput struct {
 
 type GetDataflowEndpointGroupOutput struct {
 
+	// Amount of time, in seconds, after a contact ends for the contact to remain in a
+	// POSTPASS state. A CloudWatch event is emitted when the contact enters and exits
+	// the POSTPASS state.
+	ContactPostPassDurationSeconds *int32
+
+	// Amount of time, in seconds, prior to contact start for the contact to remain in
+	// a PREPASS state. A CloudWatch event is emitted when the contact enters and exits
+	// the PREPASS state.
+	ContactPrePassDurationSeconds *int32
+
 	// ARN of a dataflow endpoint group.
 	DataflowEndpointGroupArn *string
 

@@ -37,7 +37,7 @@ type DescribeVpcEndpointConnectionsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//
 	// * ip-address-type - The IP address type (ipv4 | ipv6).
 	//
@@ -72,7 +72,7 @@ type DescribeVpcEndpointConnectionsOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// Information about one or more VPC endpoint connections.
+	// Information about the VPC endpoint connections.
 	VpcEndpointConnections []types.VpcEndpointConnection
 
 	// Metadata pertaining to the operation's result.

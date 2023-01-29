@@ -39,8 +39,8 @@ type PutEventsInput struct {
 	Entries []types.PutEventsRequestEntry
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
-	// abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo. When
-	// using Java, you must include auth-crt on the class path.
+	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
+	// abcde.veo. When using Java, you must include auth-crt on the class path.
 	EndpointId *string
 
 	noSmithyDocumentSerde
@@ -50,7 +50,9 @@ type PutEventsOutput struct {
 
 	// The successfully and unsuccessfully ingested events results. If the ingestion
 	// was successful, the entry has the event ID in it. Otherwise, you can use the
-	// error code and error message to identify the problem with the entry.
+	// error code and error message to identify the problem with the entry. For each
+	// record, the index of the response element is the same as the index in the
+	// request array.
 	Entries []types.PutEventsResultEntry
 
 	// The number of failed entries.

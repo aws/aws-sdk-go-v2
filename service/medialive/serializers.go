@@ -8609,6 +8609,24 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 		ok.String(*v.Scte35Pid)
 	}
 
+	if v.Scte35PrerollPullupMilliseconds != 0 {
+		ok := object.Key("scte35PrerollPullupMilliseconds")
+		switch {
+		case math.IsNaN(v.Scte35PrerollPullupMilliseconds):
+			ok.String("NaN")
+
+		case math.IsInf(v.Scte35PrerollPullupMilliseconds, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Scte35PrerollPullupMilliseconds, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Scte35PrerollPullupMilliseconds)
+
+		}
+	}
+
 	if len(v.SegmentationMarkers) > 0 {
 		ok := object.Key("segmentationMarkers")
 		ok.String(string(v.SegmentationMarkers))

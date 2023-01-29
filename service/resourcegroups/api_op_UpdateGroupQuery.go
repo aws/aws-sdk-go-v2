@@ -35,9 +35,9 @@ func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryI
 
 type UpdateGroupQueryInput struct {
 
-	// The resource query to determine which AWS resources are members of this resource
-	// group. A resource group can contain either a Configuration or a ResourceQuery,
-	// but not both.
+	// The resource query to determine which Amazon Web Services resources are members
+	// of this resource group. A resource group can contain either a Configuration or a
+	// ResourceQuery, but not both.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery

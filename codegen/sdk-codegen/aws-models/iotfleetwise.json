@@ -7553,6 +7553,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iotfleetwise#CreateVehicleRequestItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.iotfleetwise#createVehicleResponses": {
@@ -7749,6 +7754,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iotfleetwise#UpdateVehicleRequestItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.iotfleetwise#updateVehicleResponseItems": {

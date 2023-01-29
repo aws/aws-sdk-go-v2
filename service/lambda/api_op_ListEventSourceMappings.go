@@ -33,33 +33,33 @@ type ListEventSourceMappingsInput struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
 	//
-	// * Amazon Kinesis - The ARN
+	// * Amazon Kinesis – The ARN
 	// of the data stream or a stream consumer.
 	//
-	// * Amazon DynamoDB Streams - The ARN of
+	// * Amazon DynamoDB Streams – The ARN of
 	// the stream.
 	//
-	// * Amazon Simple Queue Service - The ARN of the queue.
+	// * Amazon Simple Queue Service – The ARN of the queue.
 	//
 	// * Amazon
-	// Managed Streaming for Apache Kafka - The ARN of the cluster.
+	// Managed Streaming for Apache Kafka – The ARN of the cluster.
 	//
-	// * Amazon MQ - The
+	// * Amazon MQ – The
 	// ARN of the broker.
 	EventSourceArn *string
 
 	// The name of the Lambda function. Name formats
 	//
-	// * Function name - MyFunction.
+	// * Function name – MyFunction.
 	//
 	// *
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
+	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
 	//
 	// *
-	// Version or Alias ARN -
+	// Version or Alias ARN –
 	// arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.
 	//
-	// * Partial ARN -
+	// * Partial ARN –
 	// 123456789012:function:MyFunction.
 	//
 	// The length constraint applies only to the

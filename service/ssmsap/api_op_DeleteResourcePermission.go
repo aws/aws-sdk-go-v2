@@ -29,15 +29,15 @@ func (c *Client) DeleteResourcePermission(ctx context.Context, params *DeleteRes
 
 type DeleteResourcePermissionInput struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	//
+	// Delete or restore the permissions on the target database.
 	ActionType types.PermissionActionType
 
-	//
+	// The Amazon Resource Name (ARN) of the source resource.
 	SourceResourceArn *string
 
 	noSmithyDocumentSerde
@@ -45,7 +45,7 @@ type DeleteResourcePermissionInput struct {
 
 type DeleteResourcePermissionOutput struct {
 
-	//
+	// The policy that removes permissions on the target database.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

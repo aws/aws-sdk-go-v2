@@ -12,8 +12,8 @@ import (
 )
 
 // Modifies the permissions for your VPC endpoint service. You can add or remove
-// permissions for service consumers (IAM users, IAM roles, and Amazon Web Services
-// accounts) to connect to your endpoint service. If you grant permissions to all
+// permissions for service consumers (Amazon Web Services accounts, users, and IAM
+// roles) to connect to your endpoint service. If you grant permissions to all
 // principals, the service is public. Any users who know the name of a public
 // service can send a request to attach an endpoint. If the service does not
 // require manual approval, attachments are automatically approved.
@@ -39,9 +39,9 @@ type ModifyVpcEndpointServicePermissionsInput struct {
 	// This member is required.
 	ServiceId *string
 
-	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
-	// granted to the principals in this list. To grant permissions to all principals,
-	// specify an asterisk (*).
+	// The Amazon Resource Names (ARN) of the principals. Permissions are granted to
+	// the principals in this list. To grant permissions to all principals, specify an
+	// asterisk (*).
 	AddAllowedPrincipals []string
 
 	// Checks whether you have the required permissions for the action, without
@@ -50,8 +50,8 @@ type ModifyVpcEndpointServicePermissionsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
-	// revoked for principals in this list.
+	// The Amazon Resource Names (ARN) of the principals. Permissions are revoked for
+	// principals in this list.
 	RemoveAllowedPrincipals []string
 
 	noSmithyDocumentSerde
