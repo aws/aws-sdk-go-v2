@@ -6,8 +6,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-// DeleteObjectsAPIClient is an S3 API client that can invoke the DeleteObjects operation.
+// DeleteObjectsAPIClient is an S3 API client that can invoke DeleteObject, DeleteObjects operations.
 type DeleteObjectsAPIClient interface {
+	DeleteObject(context.Context, *s3.DeleteObjectInput, ...func(*s3.Options)) (*s3.DeleteObjectOutput, error)
 	DeleteObjects(context.Context, *s3.DeleteObjectsInput, ...func(*s3.Options)) (*s3.DeleteObjectsOutput, error)
 }
 
