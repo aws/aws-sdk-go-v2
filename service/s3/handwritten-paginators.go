@@ -15,7 +15,7 @@ var _ ListObjectVersionsAPIClient = (*Client)(nil)
 
 // ListObjectVersionsPaginatorOptions is the paginator options for ListObjectVersions
 type ListObjectVersionsPaginatorOptions struct {
-	// (Optional) The maximum number of ResourceRecordSets that you want Amazon Route 53 to
+	// (Optional) The maximum number of Object Versions that you want Amazon Route 53 to
 	// return.
 	Limit int32
 
@@ -70,7 +70,6 @@ func (p *ListObjectVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	params := *p.params
 	params.KeyMarker = p.KeyMarker
-
 	params.VersionIdMarker = p.VersionIdMarker
 
 	var limit int32
@@ -110,7 +109,7 @@ var _ ListMultipartUploadsAPIClient = (*Client)(nil)
 
 // ListMultipartUploadsPaginatorOptions is the paginator options for ListMultipartUploads
 type ListMultipartUploadsPaginatorOptions struct {
-	// (Optional) The maximum number of ResourceRecordSets that you want Amazon Route 53 to
+	// (Optional) The maximum number of Multipart Uploads that you want Amazon Route 53 to
 	// return.
 	Limit int32
 
