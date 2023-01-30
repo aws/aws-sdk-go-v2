@@ -49601,6 +49601,11 @@ func awsEc2query_serializeOpDocumentCreateLocalGatewayRouteInput(v *CreateLocalG
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
+	if v.DestinationPrefixListId != nil {
+		objectKey := object.Key("DestinationPrefixListId")
+		objectKey.String(*v.DestinationPrefixListId)
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
@@ -52312,6 +52317,11 @@ func awsEc2query_serializeOpDocumentDeleteLocalGatewayRouteInput(v *DeleteLocalG
 	if v.DestinationCidrBlock != nil {
 		objectKey := object.Key("DestinationCidrBlock")
 		objectKey.String(*v.DestinationCidrBlock)
+	}
+
+	if v.DestinationPrefixListId != nil {
+		objectKey := object.Key("DestinationPrefixListId")
+		objectKey.String(*v.DestinationPrefixListId)
 	}
 
 	if v.DryRun != nil {
@@ -62026,6 +62036,11 @@ func awsEc2query_serializeOpDocumentModifyLocalGatewayRouteInput(v *ModifyLocalG
 	if v.DestinationCidrBlock != nil {
 		objectKey := object.Key("DestinationCidrBlock")
 		objectKey.String(*v.DestinationCidrBlock)
+	}
+
+	if v.DestinationPrefixListId != nil {
+		objectKey := object.Key("DestinationPrefixListId")
+		objectKey.String(*v.DestinationPrefixListId)
 	}
 
 	if v.DryRun != nil {

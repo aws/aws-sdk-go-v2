@@ -1675,6 +1675,8 @@ type StackSet struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel PermissionModels
 
+	Regions []string
+
 	// The Amazon Resource Name (ARN) of the stack set.
 	StackSetARN *string
 

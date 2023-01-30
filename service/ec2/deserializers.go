@@ -91549,6 +91549,19 @@ func awsEc2query_deserializeDocumentLocalGatewayRoute(v **types.LocalGatewayRout
 				sv.DestinationCidrBlock = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("destinationPrefixListId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DestinationPrefixListId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("localGatewayRouteTableArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

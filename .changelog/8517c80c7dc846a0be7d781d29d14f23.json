@@ -1,0 +1,8 @@
+{
+    "id": "8517c80c-7dc8-46a0-be7d-781d29d14f23",
+    "type": "feature",
+    "description": "We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route.",
+    "modules": [
+        "service/ec2"
+    ]
+}
