@@ -274,6 +274,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CancelImageCreationResponse": {
@@ -297,6 +300,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image whose creation has been cancelled.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ClientException": {
@@ -1214,6 +1220,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateComponentResponse": {
@@ -1237,6 +1246,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component that was created by this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateContainerRecipe": {
@@ -1398,6 +1410,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateContainerRecipeResponse": {
@@ -1421,6 +1436,9 @@
                         "smithy.api#documentation": "<p>Returns the Amazon Resource Name (ARN) of the container recipe that the request created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateDistributionConfiguration": {
@@ -1512,6 +1530,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateDistributionConfigurationResponse": {
@@ -1535,6 +1556,9 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the distribution configuration that was created by this\n\t\t\trequest.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateImage": {
@@ -1711,6 +1735,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateImagePipelineResponse": {
@@ -1734,6 +1761,9 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the image pipeline that was created by this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateImageRecipe": {
@@ -1857,6 +1887,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateImageRecipeResponse": {
@@ -1880,6 +1913,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that was created by this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateImageRequest": {
@@ -1936,6 +1972,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateImageResponse": {
@@ -1959,6 +1998,9 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the image that was created by this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateInfrastructureConfiguration": {
@@ -2101,6 +2143,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#CreateInfrastructureConfigurationResponse": {
@@ -2124,6 +2169,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration that was created by\n\t\t\tthis request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DateTime": {
@@ -2180,6 +2228,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteComponentResponse": {
@@ -2197,6 +2248,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component build version that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteContainerRecipe": {
@@ -2250,6 +2304,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteContainerRecipeResponse": {
@@ -2267,6 +2324,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteDistributionConfiguration": {
@@ -2320,6 +2380,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteDistributionConfigurationResponse": {
@@ -2337,6 +2400,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the distribution configuration that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteImage": {
@@ -2430,6 +2496,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteImagePipelineResponse": {
@@ -2447,6 +2516,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image pipeline that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteImageRecipe": {
@@ -2500,6 +2572,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteImageRecipeResponse": {
@@ -2517,6 +2592,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteImageRequest": {
@@ -2530,6 +2608,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteImageResponse": {
@@ -2547,6 +2628,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Image Builder image resource that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteInfrastructureConfiguration": {
@@ -2600,6 +2684,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#DeleteInfrastructureConfigurationResponse": {
@@ -2617,6 +2704,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#DiskImageFormat": {
@@ -3218,6 +3308,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetComponentPolicyResponse": {
@@ -3235,6 +3328,9 @@
                         "smithy.api#documentation": "<p>The component policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetComponentRequest": {
@@ -3248,6 +3344,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetComponentResponse": {
@@ -3265,6 +3364,9 @@
                         "smithy.api#documentation": "<p>The component object associated with the specified ARN.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetContainerRecipe": {
@@ -3352,6 +3454,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetContainerRecipePolicyResponse": {
@@ -3369,6 +3474,9 @@
                         "smithy.api#documentation": "<p>The container recipe policy object that is returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetContainerRecipeRequest": {
@@ -3382,6 +3490,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetContainerRecipeResponse": {
@@ -3399,6 +3510,9 @@
                         "smithy.api#documentation": "<p>The container recipe object that is returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetDistributionConfiguration": {
@@ -3449,6 +3563,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetDistributionConfigurationResponse": {
@@ -3466,6 +3583,9 @@
                         "smithy.api#documentation": "<p>The distribution configuration object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImage": {
@@ -3553,6 +3673,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImagePipelineResponse": {
@@ -3570,6 +3693,9 @@
                         "smithy.api#documentation": "<p>The image pipeline object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImagePolicy": {
@@ -3620,6 +3746,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImagePolicyResponse": {
@@ -3637,6 +3766,9 @@
                         "smithy.api#documentation": "<p>The image policy object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImageRecipe": {
@@ -3724,6 +3856,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImageRecipePolicyResponse": {
@@ -3741,6 +3876,9 @@
                         "smithy.api#documentation": "<p>The image recipe policy object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImageRecipeRequest": {
@@ -3754,6 +3892,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImageRecipeResponse": {
@@ -3771,6 +3912,9 @@
                         "smithy.api#documentation": "<p>The image recipe object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImageRequest": {
@@ -3784,6 +3928,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetImageResponse": {
@@ -3801,6 +3948,9 @@
                         "smithy.api#documentation": "<p>The image object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#GetInfrastructureConfiguration": {
@@ -3853,7 +4003,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> GetInfrastructureConfiguration request object.</p>"
+                "smithy.api#documentation": "<p> GetInfrastructureConfiguration request object.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#GetInfrastructureConfigurationResponse": {
@@ -3873,7 +4024,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>GetInfrastructureConfiguration response object.</p>"
+                "smithy.api#documentation": "<p>GetInfrastructureConfiguration response object.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#HttpPutResponseHopLimit": {
@@ -4821,6 +4973,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ImportComponentResponse": {
@@ -4844,6 +4999,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported component.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ImportVmImage": {
@@ -4931,6 +5089,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ImportVmImageResponse": {
@@ -4954,6 +5115,9 @@
                         "smithy.api#documentation": "<p>The idempotency token that was used for this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#InfrastructureConfiguration": {
@@ -5494,6 +5658,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListComponentBuildVersionsResponse": {
@@ -5517,6 +5684,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListComponents": {
@@ -5600,6 +5770,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListComponentsResponse": {
@@ -5623,6 +5796,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListContainerRecipes": {
@@ -5699,6 +5875,9 @@
                         "smithy.api#documentation": "<p>Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListContainerRecipesResponse": {
@@ -5722,6 +5901,9 @@
                         "smithy.api#documentation": "<p>The next token field is used for paginated responses. When this is not empty, there are additional container recipes that the service has not included in this response. Use this token with the next request to retrieve additional list items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListDistributionConfigurations": {
@@ -5792,6 +5974,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListDistributionConfigurationsResponse": {
@@ -5815,6 +6000,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImageBuildVersions": {
@@ -5892,6 +6080,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImageBuildVersionsResponse": {
@@ -5915,6 +6106,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagePackages": {
@@ -5989,6 +6183,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagePackagesResponse": {
@@ -6012,6 +6209,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagePipelineImages": {
@@ -6092,6 +6292,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagePipelineImagesResponse": {
@@ -6115,6 +6318,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagePipelines": {
@@ -6185,6 +6391,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagePipelinesResponse": {
@@ -6208,6 +6417,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImageRecipes": {
@@ -6284,6 +6496,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImageRecipesResponse": {
@@ -6307,6 +6522,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImages": {
@@ -6396,6 +6614,9 @@
                         "smithy.api#documentation": "<p>Includes deprecated images in the response list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListImagesResponse": {
@@ -6419,6 +6640,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListInfrastructureConfigurations": {
@@ -6489,6 +6713,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n\t\t\ttruncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListInfrastructureConfigurationsResponse": {
@@ -6512,6 +6739,9 @@
                         "smithy.api#documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional\n\t\t\telements that the service has not included in this request. Use this token with the next\n\t\t\trequest to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ListTagsForResource": {
@@ -6553,6 +6783,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#ListTagsForResourceResponse": {
@@ -6564,6 +6797,9 @@
                         "smithy.api#documentation": "<p>The tags for the specified resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#Logging": {
@@ -6826,6 +7062,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#PutComponentPolicyResponse": {
@@ -6843,6 +7082,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component that this policy was applied to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#PutContainerRecipePolicy": {
@@ -6905,6 +7147,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#PutContainerRecipePolicyResponse": {
@@ -6922,6 +7167,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that this policy was applied to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#PutImagePolicy": {
@@ -6984,6 +7232,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#PutImagePolicyResponse": {
@@ -7001,6 +7252,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image that this policy was applied to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#PutImageRecipePolicy": {
@@ -7063,6 +7317,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#PutImageRecipePolicyResponse": {
@@ -7080,6 +7337,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that this policy was applied to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#RegionList": {
@@ -7376,6 +7636,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#StartImagePipelineExecutionResponse": {
@@ -7399,6 +7662,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image that was created by this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#StringList": {
@@ -7504,11 +7770,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.imagebuilder#TagValue": {
             "type": "string",
@@ -7607,11 +7879,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.imagebuilder#UpdateDistributionConfiguration": {
             "type": "operation",
@@ -7690,6 +7968,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#UpdateDistributionConfigurationResponse": {
@@ -7713,6 +7994,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the distribution configuration that was updated by this\n\t\t\trequest.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#UpdateImagePipeline": {
@@ -7831,6 +8115,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#UpdateImagePipelineResponse": {
@@ -7854,6 +8141,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image pipeline that was updated by this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#UpdateInfrastructureConfiguration": {
@@ -7984,6 +8274,9 @@
                         "smithy.api#documentation": "<p>The instance metadata options that you can set for the HTTP requests that pipeline builds\n\t\t\tuse to launch EC2 build and test instances. For more information about instance metadata\n\t\t\toptions, see one of the following links:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i> \n\t\t\t\t\tfor Linux instances.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i> \n\t\t\t\t\tfor Windows instances.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.imagebuilder#UpdateInfrastructureConfigurationResponse": {
@@ -8007,6 +8300,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by\n\t\t\tthis request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#Uri": {
@@ -8364,12 +8660,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://imagebuilder-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://imagebuilder-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -8416,12 +8718,43 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://imagebuilder-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://imagebuilder.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://imagebuilder-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -8468,12 +8801,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://imagebuilder.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://imagebuilder.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -8486,12 +8825,18 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://imagebuilder.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://imagebuilder.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -8499,6 +8844,240 @@
                 },
                 "smithy.rules#endpointTests": {
                     "testCases": [
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://imagebuilder.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
                         {
                             "documentation": "For custom endpoint with fips disabled and dualstack disabled",
                             "expect": {
