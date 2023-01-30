@@ -1,8 +1,0 @@
-{
-    "id": "0fd66fdd-3bc5-4d98-877b-ea87a9081514",
-    "type": "feature",
-    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
-    "modules": [
-        "service/kafka"
-    ]
-}

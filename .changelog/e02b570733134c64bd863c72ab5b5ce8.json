@@ -1,8 +1,0 @@
-{
-    "id": "e02b5707-3313-4c64-bd86-3c72ab5b5ce8",
-    "type": "feature",
-    "description": "This feature provides a method of obtaining which regions a stackset has stack instances deployed in.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

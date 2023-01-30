@@ -1,8 +1,0 @@
-{
-    "id": "b529ec04-1d8d-469f-ac6a-f3bff2526127",
-    "type": "feature",
-    "description": "Update ImportName validation to 255 from the current length of 100",
-    "modules": [
-        "service/applicationdiscoveryservice"
-    ]
-}

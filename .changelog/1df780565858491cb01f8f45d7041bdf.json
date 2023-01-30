@@ -1,8 +1,0 @@
-{
-    "id": "1df78056-5858-491c-b01f-8f45d7041bdf",
-    "type": "feature",
-    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
