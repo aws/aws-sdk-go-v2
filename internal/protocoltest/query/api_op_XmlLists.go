@@ -61,6 +61,8 @@ type XmlListsOutput struct {
 
 	FlattenedListWithNamespace []string
 
+	IntEnumList []types.IntegerEnum
+
 	IntegerList []int32
 
 	// A list of lists of strings.

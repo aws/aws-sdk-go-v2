@@ -20,6 +20,7 @@ type ComplexNestedErrorData struct {
 //	MyUnionMemberBlobValue
 //	MyUnionMemberBooleanValue
 //	MyUnionMemberEnumValue
+//	MyUnionMemberIntEnumValue
 //	MyUnionMemberListValue
 //	MyUnionMemberMapValue
 //	MyUnionMemberNumberValue
@@ -53,6 +54,14 @@ type MyUnionMemberEnumValue struct {
 }
 
 func (*MyUnionMemberEnumValue) isMyUnion() {}
+
+type MyUnionMemberIntEnumValue struct {
+	Value IntegerEnum
+
+	noSmithyDocumentSerde
+}
+
+func (*MyUnionMemberIntEnumValue) isMyUnion() {}
 
 type MyUnionMemberListValue struct {
 	Value []string

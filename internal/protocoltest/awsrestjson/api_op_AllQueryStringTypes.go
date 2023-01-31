@@ -46,6 +46,10 @@ type AllQueryStringTypesInput struct {
 
 	QueryInteger *int32
 
+	QueryIntegerEnum types.IntegerEnum
+
+	QueryIntegerEnumList []types.IntegerEnum
+
 	QueryIntegerList []int32
 
 	QueryIntegerSet []int32

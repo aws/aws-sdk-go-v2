@@ -63,6 +63,10 @@ func TestClient_XmlLists_awsEc2queryDeserialize(t *testing.T) {
 			        <member>Foo</member>
 			        <member>0</member>
 			    </enumList>
+			    <intEnumList>
+			        <member>1</member>
+			        <member>2</member>
+			    </intEnumList>
 			    <nestedStringList>
 			        <member>
 			            <member>foo</member>
@@ -122,6 +126,10 @@ func TestClient_XmlLists_awsEc2queryDeserialize(t *testing.T) {
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
+				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
 				},
 				NestedStringList: [][]string{
 					{

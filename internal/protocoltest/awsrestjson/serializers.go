@@ -112,6 +112,16 @@ func awsRestjson1_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStr
 		encoder.SetQuery("Integer").Integer(*v.QueryInteger)
 	}
 
+	if v.QueryIntegerEnum != 0 {
+		encoder.SetQuery("IntegerEnum").Integer(v.QueryIntegerEnum)
+	}
+
+	if v.QueryIntegerEnumList != nil {
+		for i := range v.QueryIntegerEnumList {
+			encoder.AddQuery("IntegerEnumList").Integer(v.QueryIntegerEnumList[i])
+		}
+	}
+
 	if v.QueryIntegerList != nil {
 		for i := range v.QueryIntegerList {
 			encoder.AddQuery("IntegerList").Integer(v.QueryIntegerList[i])
@@ -282,6 +292,51 @@ func awsRestjson1_serializeOpHttpBindingsConstantQueryStringInput(v *ConstantQue
 		if err := encoder.SetURI("hello").String(*v.Hello); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDatetimeOffsets struct {
+}
+
+func (*awsRestjson1_serializeOpDatetimeOffsets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDatetimeOffsets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DatetimeOffsetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DatetimeOffsets")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDatetimeOffsetsInput(v *DatetimeOffsetsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	return nil
@@ -1776,6 +1831,20 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 		encoder.SetHeader(locationName).Integer(*v.HeaderInteger)
 	}
 
+	if v.HeaderIntegerEnum != 0 {
+		locationName := "X-Integerenum"
+		encoder.SetHeader(locationName).Integer(v.HeaderIntegerEnum)
+	}
+
+	if v.HeaderIntegerEnumList != nil {
+		locationName := "X-Integerenumlist"
+		for i := range v.HeaderIntegerEnumList {
+			{
+				encoder.AddHeader(locationName).Integer(v.HeaderIntegerEnumList[i])
+			}
+		}
+	}
+
 	if v.HeaderIntegerList != nil {
 		locationName := "X-Integerlist"
 		for i := range v.HeaderIntegerList {
@@ -2012,6 +2081,105 @@ func awsRestjson1_serializeOpDocumentJsonEnumsInput(v *JsonEnumsInput, value smi
 	return nil
 }
 
+type awsRestjson1_serializeOpJsonIntEnums struct {
+}
+
+func (*awsRestjson1_serializeOpJsonIntEnums) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpJsonIntEnums) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonIntEnumsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/JsonIntEnums")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentJsonIntEnumsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsJsonIntEnumsInput(v *JsonIntEnumsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentJsonIntEnumsInput(v *JsonIntEnumsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntegerEnum1 != 0 {
+		ok := object.Key("integerEnum1")
+		ok.Integer(v.IntegerEnum1)
+	}
+
+	if v.IntegerEnum2 != 0 {
+		ok := object.Key("integerEnum2")
+		ok.Integer(v.IntegerEnum2)
+	}
+
+	if v.IntegerEnum3 != 0 {
+		ok := object.Key("integerEnum3")
+		ok.Integer(v.IntegerEnum3)
+	}
+
+	if v.IntegerEnumList != nil {
+		ok := object.Key("integerEnumList")
+		if err := awsRestjson1_serializeDocumentIntegerEnumList(v.IntegerEnumList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IntegerEnumMap != nil {
+		ok := object.Key("integerEnumMap")
+		if err := awsRestjson1_serializeDocumentIntegerEnumMap(v.IntegerEnumMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IntegerEnumSet != nil {
+		ok := object.Key("integerEnumSet")
+		if err := awsRestjson1_serializeDocumentIntegerEnumSet(v.IntegerEnumSet, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpJsonLists struct {
 }
 
@@ -2089,6 +2257,13 @@ func awsRestjson1_serializeOpDocumentJsonListsInput(v *JsonListsInput, value smi
 	if v.IntegerList != nil {
 		ok := object.Key("integerList")
 		if err := awsRestjson1_serializeDocumentIntegerList(v.IntegerList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IntEnumList != nil {
+		ok := object.Key("intEnumList")
+		if err := awsRestjson1_serializeDocumentIntegerEnumList(v.IntEnumList, ok); err != nil {
 			return err
 		}
 	}
@@ -2336,14 +2511,29 @@ func awsRestjson1_serializeOpDocumentJsonTimestampsInput(v *JsonTimestampsInput,
 		ok.String(smithytime.FormatDateTime(*v.DateTime))
 	}
 
+	if v.DateTimeOnTarget != nil {
+		ok := object.Key("dateTimeOnTarget")
+		ok.String(smithytime.FormatDateTime(*v.DateTimeOnTarget))
+	}
+
 	if v.EpochSeconds != nil {
 		ok := object.Key("epochSeconds")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EpochSeconds))
 	}
 
+	if v.EpochSecondsOnTarget != nil {
+		ok := object.Key("epochSecondsOnTarget")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EpochSecondsOnTarget))
+	}
+
 	if v.HttpDate != nil {
 		ok := object.Key("httpDate")
 		ok.String(smithytime.FormatHTTPDate(*v.HttpDate))
+	}
+
+	if v.HttpDateOnTarget != nil {
+		ok := object.Key("httpDateOnTarget")
+		ok.String(smithytime.FormatHTTPDate(*v.HttpDateOnTarget))
 	}
 
 	if v.Normal != nil {
@@ -6506,6 +6696,39 @@ func awsRestjson1_serializeDocumentGreetingStruct(v *types.GreetingStruct, value
 		ok.String(*v.Hi)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntegerEnumList(v []types.IntegerEnum, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntegerEnumMap(v map[string]types.IntegerEnum, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Integer(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntegerEnumSet(v []types.IntegerEnum, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
 	return nil
 }
 

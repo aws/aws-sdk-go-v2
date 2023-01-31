@@ -9,6 +9,8 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_DatetimeOffsets.go",
+        "api_op_DatetimeOffsets_test.go",
         "api_op_EmptyOperation.go",
         "api_op_EmptyOperation_test.go",
         "api_op_EndpointOperation.go",

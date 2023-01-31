@@ -369,6 +369,151 @@ func awsRestxml_deserializeOpErrorConstantQueryString(response *smithyhttp.Respo
 	}
 }
 
+type awsRestxml_deserializeOpDatetimeOffsets struct {
+}
+
+func (*awsRestxml_deserializeOpDatetimeOffsets) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpDatetimeOffsets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorDatetimeOffsets(response, &metadata)
+	}
+	output := &DatetimeOffsetsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeOpDocumentDatetimeOffsetsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorDatetimeOffsets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentDatetimeOffsetsOutput(v **DatetimeOffsetsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DatetimeOffsetsOutput
+	if *v == nil {
+		sv = &DatetimeOffsetsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("datetime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.Datetime = ptr.Time(t)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestxml_deserializeOpEmptyInputAndEmptyOutput struct {
 }
 
@@ -4948,6 +5093,12 @@ func awsRestxml_deserializeOpDocumentXmlEmptyListsOutput(v **XmlEmptyListsOutput
 				return err
 			}
 
+		case strings.EqualFold("intEnumList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntegerEnumList(&sv.IntEnumList, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("nestedStringList", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentNestedStringList(&sv.NestedStringList, nodeDecoder); err != nil {
@@ -5458,6 +5609,203 @@ func awsRestxml_deserializeOpDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder 
 	return nil
 }
 
+type awsRestxml_deserializeOpXmlIntEnums struct {
+}
+
+func (*awsRestxml_deserializeOpXmlIntEnums) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlIntEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorXmlIntEnums(response, &metadata)
+	}
+	output := &XmlIntEnumsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeOpDocumentXmlIntEnumsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorXmlIntEnums(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentXmlIntEnumsOutput(v **XmlIntEnumsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *XmlIntEnumsOutput
+	if *v == nil {
+		sv = &XmlIntEnumsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("intEnum1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.IntEnum1 = int32(i64)
+			}
+
+		case strings.EqualFold("intEnum2", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.IntEnum2 = int32(i64)
+			}
+
+		case strings.EqualFold("intEnum3", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.IntEnum3 = int32(i64)
+			}
+
+		case strings.EqualFold("intEnumList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntegerEnumList(&sv.IntEnumList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("intEnumMap", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntegerEnumMap(&sv.IntEnumMap, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("intEnumSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntegerEnumSet(&sv.IntEnumSet, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestxml_deserializeOpXmlLists struct {
 }
 
@@ -5617,6 +5965,12 @@ func awsRestxml_deserializeOpDocumentXmlListsOutput(v **XmlListsOutput, decoder 
 		case strings.EqualFold("integerList", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentIntegerList(&sv.IntegerList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("intEnumList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntegerEnumList(&sv.IntEnumList, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -6203,6 +6557,23 @@ func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput
 				sv.DateTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("dateTimeOnTarget", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.DateTimeOnTarget = ptr.Time(t)
+			}
+
 		case strings.EqualFold("epochSeconds", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -6220,6 +6591,23 @@ func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput
 				sv.EpochSeconds = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case strings.EqualFold("epochSecondsOnTarget", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.EpochSecondsOnTarget = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case strings.EqualFold("httpDate", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -6235,6 +6623,23 @@ func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput
 					return err
 				}
 				sv.HttpDate = ptr.Time(t)
+			}
+
+		case strings.EqualFold("httpDateOnTarget", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseHTTPDate(xtv)
+				if err != nil {
+					return err
+				}
+				sv.HttpDateOnTarget = ptr.Time(t)
 			}
 
 		case strings.EqualFold("normal", t.Name.Local):
@@ -8804,6 +9209,284 @@ func awsRestxml_deserializeDocumentGreetingStruct(v **types.GreetingStruct, deco
 	return nil
 }
 
+func awsRestxml_deserializeDocumentIntegerEnumList(v *[]types.IntegerEnum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.IntegerEnum
+	if *v == nil {
+		sv = make([]types.IntegerEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.IntegerEnum
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				col = int32(i64)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentIntegerEnumListUnwrapped(v *[]types.IntegerEnum, decoder smithyxml.NodeDecoder) error {
+	var sv []types.IntegerEnum
+	if *v == nil {
+		sv = make([]types.IntegerEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.IntegerEnum
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			i64, err := strconv.ParseInt(xtv, 10, 64)
+			if err != nil {
+				return err
+			}
+			mv = int32(i64)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentIntegerEnumMap(v *map[string]types.IntegerEnum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv map[string]types.IntegerEnum
+	if *v == nil {
+		sv = make(map[string]types.IntegerEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("entry", t.Name.Local):
+			entryDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntegerEnumMapUnwrapped(&sv, entryDecoder); err != nil {
+				return err
+			}
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentIntegerEnumMapUnwrapped(v *map[string]types.IntegerEnum, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.IntegerEnum
+	if *v == nil {
+		sv = make(map[string]types.IntegerEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	var ek string
+	var ev types.IntegerEnum
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			sv[ek] = ev
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("key", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				ek = xtv
+			}
+
+		case strings.EqualFold("value", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				ev = int32(i64)
+			}
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentIntegerEnumSet(v *[]types.IntegerEnum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.IntegerEnum
+	if *v == nil {
+		sv = make([]types.IntegerEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.IntegerEnum
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				col = int32(i64)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentIntegerEnumSetUnwrapped(v *[]types.IntegerEnum, decoder smithyxml.NodeDecoder) error {
+	var sv []types.IntegerEnum
+	if *v == nil {
+		sv = make([]types.IntegerEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.IntegerEnum
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			i64, err := strconv.ParseInt(xtv, 10, 64)
+			if err != nil {
+				return err
+			}
+			mv = int32(i64)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsRestxml_deserializeDocumentIntegerList(v *[]int32, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

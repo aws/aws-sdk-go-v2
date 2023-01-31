@@ -1237,6 +1237,22 @@ loop:
 			uv = &types.MyUnionMemberEnumValue{Value: mv}
 			break loop
 
+		case "intEnumValue":
+			var mv types.IntegerEnum
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerEnum to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				mv = int32(i64)
+			}
+			uv = &types.MyUnionMemberIntEnumValue{Value: mv}
+			break loop
+
 		case "listValue":
 			var mv []string
 			if err := awsAwsjson10_deserializeDocumentStringList(&mv, value); err != nil {

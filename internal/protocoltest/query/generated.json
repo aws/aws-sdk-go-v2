@@ -9,6 +9,8 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_DatetimeOffsets.go",
+        "api_op_DatetimeOffsets_test.go",
         "api_op_EmptyInputAndEmptyOutput.go",
         "api_op_EmptyInputAndEmptyOutput_test.go",
         "api_op_EndpointOperation.go",
@@ -57,6 +59,8 @@
         "api_op_XmlEmptyMaps_test.go",
         "api_op_XmlEnums.go",
         "api_op_XmlEnums_test.go",
+        "api_op_XmlIntEnums.go",
+        "api_op_XmlIntEnums_test.go",
         "api_op_XmlLists.go",
         "api_op_XmlLists_test.go",
         "api_op_XmlMaps.go",

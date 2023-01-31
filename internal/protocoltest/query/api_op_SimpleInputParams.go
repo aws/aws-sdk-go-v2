@@ -41,6 +41,8 @@ type SimpleInputParamsInput struct {
 
 	FooEnum types.FooEnum
 
+	IntegerEnum types.IntegerEnum
+
 	Qux []byte
 
 	noSmithyDocumentSerde

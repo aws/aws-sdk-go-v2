@@ -45,6 +45,10 @@ type InputAndOutputWithHeadersInput struct {
 
 	HeaderInteger *int32
 
+	HeaderIntegerEnum types.IntegerEnum
+
+	HeaderIntegerEnumList []types.IntegerEnum
+
 	HeaderIntegerList []int32
 
 	HeaderLong *int64
@@ -80,6 +84,10 @@ type InputAndOutputWithHeadersOutput struct {
 	HeaderFloat *float32
 
 	HeaderInteger *int32
+
+	HeaderIntegerEnum types.IntegerEnum
+
+	HeaderIntegerEnumList []types.IntegerEnum
 
 	HeaderIntegerList []int32
 
