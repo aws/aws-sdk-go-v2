@@ -80,11 +80,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#DeleteLexiconOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.polly#DescribeVoices": {
             "type": "operation",
@@ -143,6 +149,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#DescribeVoicesOutput": {
@@ -160,6 +169,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use in the next request to continue the\n      listing of voices. <code>NextToken</code> is returned only if the response\n      is truncated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#Engine": {
@@ -254,6 +266,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#GetLexiconOutput": {
@@ -271,6 +286,9 @@
                         "smithy.api#documentation": "<p>Metadata of the lexicon, including phonetic alphabetic used,\n      language code, lexicon ARN, number of lexemes defined in the lexicon, and\n      size of lexicon in bytes.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#GetSpeechSynthesisTask": {
@@ -312,6 +330,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#GetSpeechSynthesisTaskOutput": {
@@ -323,6 +344,9 @@
                         "smithy.api#documentation": "<p>SynthesisTask object that provides information from the requested\n      task, including output format, creation time, task status, and so\n      on.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#IncludeAdditionalLanguageCodes": {
@@ -867,6 +891,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#ListLexiconsOutput": {
@@ -884,6 +911,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use in the next request to continue the\n      listing of lexicons. <code>NextToken</code> is returned only if the\n      response is truncated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#ListSpeechSynthesisTasks": {
@@ -940,6 +970,9 @@
                         "smithy.api#httpQuery": "Status"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#ListSpeechSynthesisTasksOutput": {
@@ -957,6 +990,9 @@
                         "smithy.api#documentation": "<p>List of SynthesisTask objects that provides information from the\n      specified task in the list request, including output format, creation\n      time, task status, and so on.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#MarksNotSupportedForFormatException": {
@@ -2610,11 +2646,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#PutLexiconOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.polly#RequestCharacters": {
             "type": "integer",
@@ -2838,6 +2880,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#StartSpeechSynthesisTaskOutput": {
@@ -2849,6 +2894,9 @@
                         "smithy.api#documentation": "<p>SynthesisTask object that provides information and attributes about a\n      newly submitted speech synthesis task.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#SynthesisTask": {
@@ -3075,6 +3123,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.polly#SynthesizeSpeechOutput": {
@@ -3103,6 +3154,9 @@
                         "smithy.api#httpHeader": "x-amzn-RequestCharacters"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#TaskId": {
@@ -3757,6 +3811,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Thiago"
+                    }
+                },
+                "Ruth": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ruth"
+                    }
+                },
+                "Stephen": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stephen"
                     }
                 }
             }

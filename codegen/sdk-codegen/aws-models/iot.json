@@ -760,7 +760,7 @@
                     "name": "execute-api"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>IoT</fullname>\n        <p>IoT provides secure, bi-directional communication between Internet-connected\n            devices (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services\n            cloud. You can discover your custom IoT-Data endpoint to communicate with, configure\n            rules for data processing and integration with other services, organize resources\n            associated with each device (Registry), configure logging, and create and manage\n            policies and credentials to authenticate devices.</p>\n        <p>The service endpoints that expose this API are listed in\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">Amazon Web Services IoT Core Endpoints and Quotas</a>.\n            You must use the endpoint for the region that has the resources you want to access.</p>\n        <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web Services\n                Signature Version 4</a> to sign the request is:\n            <i>execute-api</i>.</p>\n        <p>For more information about how IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer\n            Guide</a>.</p>\n        <p>For information about how to use the credentials provider for IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to Amazon Web Services Services</a>.</p>",
+                "smithy.api#documentation": "<fullname>IoT</fullname>\n         <p>IoT provides secure, bi-directional communication between Internet-connected\n            devices (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services\n            cloud. You can discover your custom IoT-Data endpoint to communicate with, configure\n            rules for data processing and integration with other services, organize resources\n            associated with each device (Registry), configure logging, and create and manage\n            policies and credentials to authenticate devices.</p>\n         <p>The service endpoints that expose this API are listed in\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">Amazon Web Services IoT Core Endpoints and Quotas</a>.\n            You must use the endpoint for the region that has the resources you want to access.</p>\n         <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web Services\n                Signature Version 4</a> to sign the request is:\n            <i>execute-api</i>.</p>\n         <p>For more information about how IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer\n            Guide</a>.</p>\n         <p>For information about how to use the credentials provider for IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to Amazon Web Services Services</a>.</p>",
                 "smithy.api#title": "AWS IoT",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -816,15 +816,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -2460,7 +2451,7 @@
                 "thresholdPercentage": {
                     "target": "com.amazonaws.iot#AbortThresholdPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>\n        <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>",
+                        "smithy.api#documentation": "<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>\n         <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2647,7 +2638,7 @@
                 "elasticsearch": {
                     "target": "com.amazonaws.iot#ElasticsearchAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Write data to an Amazon OpenSearch Service domain.</p>   \n         <note>\n            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. \n            To create a new rule action or to update an existing rule action, use the\n            <code>OpenSearch</code> rule action instead. For more information, see \n            <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Write data to an Amazon OpenSearch Service domain.</p>\n         <note>\n            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. \n            To create a new rule action or to update an existing rule action, use the\n            <code>OpenSearch</code> rule action instead. For more information, see \n            <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>\n         </note>"
                     }
                 },
                 "salesforce": {
@@ -2853,7 +2844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a thing to a billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AddThingToBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Adds a thing to a billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AddThingToBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/billing-groups/addThingToBillingGroup",
@@ -2867,7 +2858,7 @@
                 "billingGroupName": {
                     "target": "com.amazonaws.iot#BillingGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the billing group.</p>\n\t\t       <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the billing group.</p>\n         <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>\n         </note>"
                     }
                 },
                 "billingGroupArn": {
@@ -2917,7 +2908,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a thing to a thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AddThingToThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Adds a thing to a thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AddThingToThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/thing-groups/addThingToThingGroup",
@@ -3323,7 +3314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a group with a continuous job. The following criteria must be met: </p>\n        <ul>\n            <li>\n                <p>The job must have been created with the <code>targetSelection</code> field set to\n                    \"CONTINUOUS\".</p>\n            </li>\n            <li>\n                <p>The job status must currently be \"IN_PROGRESS\".</p>\n            </li>\n            <li>\n                <p>The total number of targets associated with a job must not exceed 100.</p>\n            </li>\n         </ul>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateTargetsWithJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Associates a group with a continuous job. The following criteria must be met: </p>\n         <ul>\n            <li>\n               <p>The job must have been created with the <code>targetSelection</code> field set to\n                    \"CONTINUOUS\".</p>\n            </li>\n            <li>\n               <p>The job status must currently be \"IN_PROGRESS\".</p>\n            </li>\n            <li>\n               <p>The total number of targets associated with a job must not exceed 100.</p>\n            </li>\n         </ul>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateTargetsWithJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/jobs/{jobId}/targets",
@@ -3358,7 +3349,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -3603,7 +3594,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches the specified principal to the specified thing. A principal can be X.509\n\t\t\tcertificates, Amazon Cognito identities or federated identities.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachThingPrincipal</a> action.</p>",
+                "smithy.api#documentation": "<p>Attaches the specified principal to the specified thing. A principal can be X.509\n\t\t\tcertificates, Amazon Cognito identities or federated identities.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachThingPrincipal</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/things/{thingName}/principals",
@@ -3661,14 +3652,14 @@
                 "attributes": {
                     "target": "com.amazonaws.iot#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string containing up to three key-value pair in JSON format. For example:</p>\n\t\t       <p>\n\t\t\t         <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code>\n\t\t       </p>"
+                        "smithy.api#documentation": "<p>A JSON string containing up to three key-value pair in JSON format. For example:</p>\n         <p>\n            <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code>\n         </p>"
                     }
                 },
                 "merge": {
                     "target": "com.amazonaws.iot#Flag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with\n\t\t\tthe attributes stored in the registry, instead of overwriting them.</p>\n\t\t       <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p>\n\t\t       <note>\n\t\t\t         <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with\n\t\t\tthe attributes stored in the registry, instead of overwriting them.</p>\n         <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p>\n         <note>\n            <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -4849,7 +4840,7 @@
                 "rateIncreaseCriteria": {
                     "target": "com.amazonaws.iot#AwsJobRateIncreaseCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria to initiate the increase in rate of rollout for a job.</p>\n        <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>",
+                        "smithy.api#documentation": "<p>The criteria to initiate the increase in rate of rollout for a job.</p>\n         <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5620,7 +5611,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a job.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Cancels a job.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/jobs/{jobId}/cancel",
@@ -5688,7 +5679,7 @@
                     "target": "com.amazonaws.iot#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> the job execution will be canceled if it has status \n          IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has status \n          QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do not set \n          <code>force</code> to <code>true</code>, then an <code>InvalidStateTransitionException</code> \n          will be thrown. The default is <code>false</code>.</p>\n        <p>Canceling a job execution which is \"IN_PROGRESS\", will cause the device to be unable \n          to update the job execution status.  Use caution and ensure that the device is able to \n          recover to a valid state.</p>",
+                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> the job execution will be canceled if it has status \n          IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has status \n          QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do not set \n          <code>force</code> to <code>true</code>, then an <code>InvalidStateTransitionException</code> \n          will be thrown. The default is <code>false</code>.</p>\n         <p>Canceling a job execution which is \"IN_PROGRESS\", will cause the device to be unable \n          to update the job execution status.  Use caution and ensure that the device is able to \n          recover to a valid state.</p>",
                         "smithy.api#httpQuery": "force"
                     }
                 },
@@ -5733,7 +5724,7 @@
                     "target": "com.amazonaws.iot#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> job executions with status \"IN_PROGRESS\" and \"QUEUED\" \n          are canceled, otherwise only job executions with status \"QUEUED\" are canceled. The default \n          is <code>false</code>.</p>\n        <p>Canceling a job which is \"IN_PROGRESS\", will cause a device which is executing \n          the job to be unable to update the job execution status.  Use caution and ensure that each \n          device executing a job which is canceled is able to recover to a valid state.</p>",
+                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> job executions with status \"IN_PROGRESS\" and \"QUEUED\" \n          are canceled, otherwise only job executions with status \"QUEUED\" are canceled. The default \n          is <code>false</code>.</p>\n         <p>Canceling a job which is \"IN_PROGRESS\", will cause a device which is executing \n          the job to be unable to update the job execution status.  Use caution and ensure that each \n          device executing a job which is canceled is able to recover to a valid state.</p>",
                         "smithy.api#httpQuery": "force"
                     }
                 }
@@ -6266,6 +6257,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch log group to which the action sends data.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "batchMode": {
+                    "target": "com.amazonaws.iot#BatchMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether batches of log records will be extracted and uploaded into CloudWatch. Values include <code>true</code> or <code>false</code>\n            <i>(default)</i>.</p>"
                     }
                 }
             },
@@ -6855,7 +6852,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/billing-groups/{billingGroupName}",
@@ -6937,7 +6934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.</p>\n         <p>\n            <b>Note:</b> The CSR must include a public key that is either an\n         RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512\n         curves. For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n            Certificate signing algorithms supported by IoT</a>.</p>\n         <p>\n            <b>Note:</b> Reusing the same certificate signing request (CSR)\n         results in a distinct certificate.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.</p>\n      \n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple .csr files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs.</p>\n         <p>Assuming a set of CSRs are located inside of the directory\n         my-csr-directory:</p>\n\n         <p>On Linux and OS X, the command is:</p>\n\n         <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the\n         corresponding CSR.</p>\n         <p>The aws iot create-certificate-from-csr part of the command can also be run in\n         parallel to speed up the certificate creation process:</p>\n         <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/$_}</p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n         --certificate-signing-request file://@path\"</p>",
+                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.</p>\n         <p>\n            <b>Note:</b> The CSR must include a public key that is either an\n         RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512\n         curves. For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n            Certificate signing algorithms supported by IoT</a>.</p>\n         <p>\n            <b>Note:</b> Reusing the same certificate signing request (CSR)\n         results in a distinct certificate.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.</p>\n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple .csr files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs.</p>\n         <p>Assuming a set of CSRs are located inside of the directory\n         my-csr-directory:</p>\n         <p>On Linux and OS X, the command is:</p>\n         <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the\n         corresponding CSR.</p>\n         <p>The aws iot create-certificate-from-csr part of the command can also be run in\n         parallel to speed up the certificate creation process:</p>\n         <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/$_}</p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n         --certificate-signing-request file://@path\"</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/certificates",
@@ -7318,7 +7315,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a dynamic thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateDynamicThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a dynamic thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateDynamicThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dynamic-thing-groups/{thingGroupName}",
@@ -7346,20 +7343,20 @@
                 "indexName": {
                     "target": "com.amazonaws.iot#IndexName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dynamic thing group index name.</p>\n\t\t       <note>\n\t\t\t         <p>Currently one index is supported: <code>AWS_Things</code>.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The dynamic thing group index name.</p>\n         <note>\n            <p>Currently one index is supported: <code>AWS_Things</code>.</p>\n         </note>"
                     }
                 },
                 "queryString": {
                     "target": "com.amazonaws.iot#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dynamic thing group search query string.</p>\n\t\t       <p>See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query Syntax</a> for information about query string syntax.</p>",
+                        "smithy.api#documentation": "<p>The dynamic thing group search query string.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query Syntax</a> for information about query string syntax.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "queryVersion": {
                     "target": "com.amazonaws.iot#QueryVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dynamic thing group query version.</p>\n\t\t       <note>\n\t\t\t         <p>Currently one query version is supported: \"2017-09-30\". If not specified, the\n\t\t\t\tquery version defaults to this value.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The dynamic thing group query version.</p>\n         <note>\n            <p>Currently one query version is supported: \"2017-09-30\". If not specified, the\n\t\t\t\tquery version defaults to this value.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -7580,7 +7577,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a job.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/jobs/{jobId}",
@@ -7609,7 +7606,7 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p>\n        <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p>\n         <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n         </note>"
                     }
                 },
                 "document": {
@@ -7633,7 +7630,7 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group.</p>\n        <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group.</p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>"
                     }
                 },
                 "jobExecutionsRolloutConfig": {
@@ -7663,7 +7660,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
                     }
                 },
                 "jobTemplateArn": {
@@ -7681,7 +7678,7 @@
                 "documentParameters": {
                     "target": "com.amazonaws.iot#ParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameters of an Amazon Web Services managed template that you can specify to create the job document.</p>        \n        <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Parameters of an Amazon Web Services managed template that you can specify to create the job document.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
                     }
                 },
                 "schedulingConfig": {
@@ -7744,7 +7741,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job template.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateJobTemplate</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a job template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateJobTemplate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/job-templates/{jobTemplateId}",
@@ -7772,7 +7769,7 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link to the job document to use in the template. Required if you don't specify a value for <code>document</code>.</p>\n        <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>An S3 link to the job document to use in the template. Required if you don't specify a value for <code>document</code>.</p>\n         <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n         </note>"
                     }
                 },
                 "document": {
@@ -8032,7 +8029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an IoT OTA update on a target group of things or groups.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateOTAUpdate</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates an IoT OTA update on a target group of things or groups.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateOTAUpdate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/otaUpdates/{otaUpdateId}",
@@ -8979,7 +8976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data\n            bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files\n            associated with a stream.</p>\n    \t    <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateStream</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data\n            bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files\n            associated with a stream.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateStream</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/streams/{streamId}",
@@ -9087,7 +9084,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a thing record in the registry. If this call is made multiple times using\n\t\t\tthe same thing name and configuration, the call will succeed. If this call is made with\n\t\t\tthe same thing name but different configuration a\n\t\t\t\t<code>ResourceAlreadyExistsException</code> is thrown.</p>\n\t\t       <note>\n\t\t\t         <p>This is a control plane operation. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html\">Authorization</a> for\n\t\t\t\tinformation about authorizing control plane actions.</p>\n\t\t       </note>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThing</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a thing record in the registry. If this call is made multiple times using\n\t\t\tthe same thing name and configuration, the call will succeed. If this call is made with\n\t\t\tthe same thing name but different configuration a\n\t\t\t\t<code>ResourceAlreadyExistsException</code> is thrown.</p>\n         <note>\n            <p>This is a control plane operation. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html\">Authorization</a> for\n\t\t\t\tinformation about authorizing control plane actions.</p>\n         </note>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/things/{thingName}",
@@ -9118,7 +9115,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a thing group.</p>\n\t\t       <note>\n\t\t\t         <p>This is a control plane operation. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html\">Authorization</a> for\n\t\t\t\tinformation about authorizing control plane actions.</p>\n\t\t       </note>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Create a thing group.</p>\n         <note>\n            <p>This is a control plane operation. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html\">Authorization</a> for\n\t\t\t\tinformation about authorizing control plane actions.</p>\n         </note>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/thing-groups/{thingGroupName}",
@@ -9186,7 +9183,7 @@
                 "thingName": {
                     "target": "com.amazonaws.iot#ThingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the thing to create.</p>\n\t\t       <p>You can't change a thing's name after you create it. To change a thing's name, you must create a\n\t\t\tnew thing, give it the new name, and then delete the old thing.</p>",
+                        "smithy.api#documentation": "<p>The name of the thing to create.</p>\n         <p>You can't change a thing's name after you create it. To change a thing's name, you must create a\n\t\t\tnew thing, give it the new name, and then delete the old thing.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9200,7 +9197,7 @@
                 "attributePayload": {
                     "target": "com.amazonaws.iot#AttributePayload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attribute payload, which consists of up to three name/value pairs in a JSON\n\t\t\tdocument. For example:</p>\n\t\t       <p>\n\t\t\t         <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code>\n\t\t       </p>"
+                        "smithy.api#documentation": "<p>The attribute payload, which consists of up to three name/value pairs in a JSON\n\t\t\tdocument. For example:</p>\n         <p>\n            <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code>\n         </p>"
                     }
                 },
                 "billingGroupName": {
@@ -9269,7 +9266,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new thing type.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThingType</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a new thing type.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThingType</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/thing-types/{thingTypeName}",
@@ -9641,7 +9638,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores the default settings for Device Defender audits for this account. Any\n          configuration data you entered is deleted and all audit checks are reset to \n          disabled.  </p> \n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteAccountAuditConfiguration</a> action.</p>",
+                "smithy.api#documentation": "<p>Restores the default settings for Device Defender audits for this account. Any\n          configuration data you entered is deleted and all audit checks are reset to \n          disabled.  </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteAccountAuditConfiguration</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/audit/configuration",
@@ -9813,7 +9810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes the billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/billing-groups/{billingGroupName}",
@@ -10011,7 +10008,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Deletes a Device Defender detect custom metric.\n    </p> \n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteCustomMetric</a> action.</p>\n         <note>\n            <p>Before you can delete a custom metric, you must first remove the custom metric from all\n      security profiles it's a part of.\n      The\n      security\n      profile associated with the custom metric can be found using the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html\">ListSecurityProfiles</a>\n      API with <code>metricName</code> set to your custom metric name.</p>\n         </note>",
+                "smithy.api#documentation": "<p>\n      Deletes a Device Defender detect custom metric.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteCustomMetric</a> action.</p>\n         <note>\n            <p>Before you can delete a custom metric, you must first remove the custom metric from all\n      security profiles it's a part of.\n      The\n      security\n      profile associated with the custom metric can be found using the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html\">ListSecurityProfiles</a>\n      API with <code>metricName</code> set to your custom metric name.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/custom-metric/{metricName}",
@@ -10158,7 +10155,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a dynamic thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteDynamicThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a dynamic thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteDynamicThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/dynamic-thing-groups/{thingGroupName}",
@@ -10356,7 +10353,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -10384,7 +10381,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -10511,7 +10508,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete an OTA update.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteOTAUpdate</a> action.</p>",
+                "smithy.api#documentation": "<p>Delete an OTA update.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteOTAUpdate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/otaUpdates/{otaUpdateId}",
@@ -11040,7 +11037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a stream.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteStream</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a stream.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteStream</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/streams/{streamId}",
@@ -11103,7 +11100,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified thing. Returns successfully with no error if the deletion is\n\t\t\tsuccessful or you specify a thing that doesn't exist.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteThing</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified thing. Returns successfully with no error if the deletion is\n\t\t\tsuccessful or you specify a thing that doesn't exist.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/things/{thingName}",
@@ -11134,7 +11131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/thing-groups/{thingGroupName}",
@@ -11225,7 +11222,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified thing type. You cannot delete a thing type if it has things\n\t\t\tassociated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and\n\t\t\tfinally use <a>DeleteThingType</a> to delete the thing type.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteThingType</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified thing type. You cannot delete a thing type if it has things\n\t\t\tassociated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and\n\t\t\tfinally use <a>DeleteThingType</a> to delete the thing type.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteThingType</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/thing-types/{thingTypeName}",
@@ -11458,7 +11455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deprecates a thing type. You can not associate new things with deprecated thing\n\t\t\ttype.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeprecateThingType</a> action.</p>",
+                "smithy.api#documentation": "<p>Deprecates a thing type. You can not associate new things with deprecated thing\n\t\t\ttype.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeprecateThingType</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/thing-types/{thingTypeName}/deprecate",
@@ -11534,7 +11531,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants permission to IoT to access information\n            about your devices, policies, certificates, and other items as required when \n            performing an audit.</p>\n          <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,\n            this parameter is required.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role that grants permission to IoT to access information\n            about your devices, policies, certificates, and other items as required when \n            performing an audit.</p>\n         <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,\n            this parameter is required.</p>"
                     }
                 },
                 "auditNotificationTargetConfigurations": {
@@ -11794,7 +11791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a Device Defender audit.</p> \n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeAuditTask</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about a Device Defender audit.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeAuditTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/tasks/{taskId}",
@@ -11940,7 +11937,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Returns information about a billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/billing-groups/{billingGroupName}",
@@ -12606,7 +12603,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes event configurations.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeEventConfigurations</a> action.</p>",
+                "smithy.api#documentation": "<p>Describes event configurations.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeEventConfigurations</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/event-configurations",
@@ -12871,7 +12868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a job.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Describes a job.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/jobs/{jobId}",
@@ -12902,7 +12899,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a job execution.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeJobExecution</a> action.</p>",
+                "smithy.api#documentation": "<p>Describes a job execution.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeJobExecution</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/things/{thingName}/jobs/{jobId}",
@@ -13169,7 +13166,7 @@
                 "documentParameters": {
                     "target": "com.amazonaws.iot#DocumentParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating \n            a job from a managed template.</p>\n        <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating \n            a job from a managed template.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
                     }
                 },
                 "document": {
@@ -13769,7 +13766,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a stream.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeStream</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about a stream.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeStream</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/streams/{streamId}",
@@ -13830,7 +13827,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the specified thing.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThing</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about the specified thing.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/things/{thingName}",
@@ -13861,7 +13858,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe a thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Describe a thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-groups/{thingGroupName}",
@@ -13974,7 +13971,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a bulk thing provisioning task.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingRegistrationTask</a> action.</p>",
+                "smithy.api#documentation": "<p>Describes a bulk thing provisioning task.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingRegistrationTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-registration-tasks/{taskId}",
@@ -14097,7 +14094,7 @@
                 "defaultClientId": {
                     "target": "com.amazonaws.iot#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID.  \n\t\t\tAlthough we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or \n\t\t\tshadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service.</p>\n\t\t       <p>This lets you better organize your IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>"
+                        "smithy.api#documentation": "<p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID.  \n\t\t\tAlthough we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or \n\t\t\tshadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service.</p>\n         <p>This lets you better organize your IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>"
                     }
                 },
                 "thingName": {
@@ -14134,7 +14131,7 @@
                     "target": "com.amazonaws.iot#Version",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The current version of the thing record in the registry.</p>\n\t\t       <note>\n\t\t\t         <p>To avoid unintentional changes to the information in the registry, you can pass\n\t\t\t\tthe version information in the <code>expectedVersion</code> parameter of the\n\t\t\t\t\t<code>UpdateThing</code> and <code>DeleteThing</code> calls.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The current version of the thing record in the registry.</p>\n         <note>\n            <p>To avoid unintentional changes to the information in the registry, you can pass\n\t\t\t\tthe version information in the <code>expectedVersion</code> parameter of the\n\t\t\t\t\t<code>UpdateThing</code> and <code>DeleteThing</code> calls.</p>\n         </note>"
                     }
                 },
                 "billingGroupName": {
@@ -14177,7 +14174,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the specified thing type.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingType</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about the specified thing type.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingType</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-types/{thingTypeName}",
@@ -14460,7 +14457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches the specified principal from the specified thing. A principal can be X.509\n\t\t\tcertificates, IAM users, groups, and roles, Amazon Cognito identities or federated\n\t\t\tidentities.</p>\n\t\t       <note>\n\t\t\t         <p>This call is asynchronous. It might take several seconds for the detachment to\n\t\t\t\tpropagate.</p>\n\t\t       </note>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachThingPrincipal</a> action.</p>",
+                "smithy.api#documentation": "<p>Detaches the specified principal from the specified thing. A principal can be X.509\n\t\t\tcertificates, IAM users, groups, and roles, Amazon Cognito identities or federated\n\t\t\tidentities.</p>\n         <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to\n\t\t\t\tpropagate.</p>\n         </note>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachThingPrincipal</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/things/{thingName}/principals",
@@ -14996,7 +14993,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed\n            template job document schema. You can use the description of each key as a guidance to specify \n            the inputs during runtime when creating a job.</p>\n        <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n        </note>"
+                "smithy.api#documentation": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed\n            template job document schema. You can use the description of each key as a guidance to specify \n            the inputs during runtime when creating a job.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
             }
         },
         "com.amazonaws.iot#DocumentParameters": {
@@ -15312,7 +15309,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service\n         domain.</p>  \n         <note>\n            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. To create a\n         new rule action or to update an existing rule action, use the\n         <code>OpenSearch</code> rule action instead. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service\n         domain.</p>\n         <note>\n            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. To create a\n         new rule action or to update an existing rule action, use the\n         <code>OpenSearch</code> rule action instead. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.iot#ElasticsearchEndpoint": {
@@ -15612,7 +15609,7 @@
                     "target": "com.amazonaws.iot#IncrementFactor",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The exponential factor to increase the rate of rollout for a job.</p>\n        <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>",
+                        "smithy.api#documentation": "<p>The exponential factor to increase the rate of rollout for a job.</p>\n         <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16476,7 +16473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a job document.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetJobDocument</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets a job document.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetJobDocument</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/jobs/{jobId}/job-document",
@@ -16592,7 +16589,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets an OTA update.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetOTAUpdate</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets an OTA update.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetOTAUpdate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/otaUpdates/{otaUpdateId}",
@@ -17898,7 +17895,7 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a device when the thing representing\n            the device is added to a target group, even after the job was completed by all things originally in the \n            group. </p>\n        <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a device when the thing representing\n            the device is added to a target group, even after the job was completed by all things originally in the \n            group. </p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>"
                     }
                 },
                 "status": {
@@ -17988,7 +17985,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
                     }
                 },
                 "jobTemplateArn": {
@@ -18006,7 +18003,7 @@
                 "documentParameters": {
                     "target": "com.amazonaws.iot#ParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed \n            template job document schema. You can use the description of each key as a guidance \n            to specify the inputs during runtime when creating a job.</p>\n        <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed \n            template job document schema. You can use the description of each key as a guidance \n            to specify the inputs during runtime when creating a job.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
                     }
                 },
                 "isConcurrent": {
@@ -18513,7 +18510,7 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group.</p>\n        <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group.</p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>"
                     }
                 },
                 "status": {
@@ -19013,7 +19010,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the findings (results) of a Device Defender audit or of the audits\n        performed during a specified time period. (Findings are retained for 90 days.)</p> \n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditFindings</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the findings (results) of a Device Defender audit or of the audits\n        performed during a specified time period. (Findings are retained for 90 days.)</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditFindings</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/audit/findings",
@@ -19593,7 +19590,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the billing groups you have created.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListBillingGroups</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the billing groups you have created.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListBillingGroups</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/billing-groups",
@@ -20524,7 +20521,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the job executions for a job.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobExecutionsForJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the job executions for a job.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobExecutionsForJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/jobs/{jobId}/things",
@@ -20612,7 +20609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the job executions for the specified thing.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobExecutionsForThing</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the job executions for the specified thing.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobExecutionsForThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/things/{thingName}/jobs",
@@ -20647,7 +20644,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 },
@@ -20711,7 +20708,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of job templates.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobTemplates</a> action.</p>",
+                "smithy.api#documentation": "<p>Returns a list of job templates.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobTemplates</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/job-templates",
@@ -20784,7 +20781,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists jobs.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobs</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists jobs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListJobs</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/jobs",
@@ -20811,7 +20808,7 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group. </p>\n        <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group. </p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>",
                         "smithy.api#httpQuery": "targetSelection"
                     }
                 },
@@ -20846,7 +20843,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -21165,7 +21162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists OTA updates.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListOTAUpdates</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists OTA updates.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListOTAUpdates</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/otaUpdates",
@@ -21702,7 +21699,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the things associated with the specified principal. A principal can be X.509\n\t\t\tcertificates, IAM users, groups, and roles, Amazon Cognito identities or federated\n\t\t\tidentities. </p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalThings</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the things associated with the specified principal. A principal can be X.509\n\t\t\tcertificates, IAM users, groups, and roles, Amazon Cognito identities or federated\n\t\t\tidentities. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalThings</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/principals/things",
@@ -22212,7 +22209,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Device Defender security profiles attached to a target (thing group).</p> \n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListSecurityProfilesForTarget</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the Device Defender security profiles attached to a target (thing group).</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListSecurityProfilesForTarget</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles-for-target",
@@ -22354,7 +22351,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all of the streams in your Amazon Web Services account.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListStreams</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists all of the streams in your Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListStreams</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/streams",
@@ -22444,7 +22441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags (metadata) you have assigned to the resource.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListTagsForResource</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the tags (metadata) you have assigned to the resource.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListTagsForResource</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags",
@@ -22688,7 +22685,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the thing groups in your account.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingGroups</a> action.</p>",
+                "smithy.api#documentation": "<p>List the thing groups in your account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingGroups</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-groups",
@@ -22725,7 +22722,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the thing groups to which the specified thing belongs.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingGroupsForThing</a> action.</p>",
+                "smithy.api#documentation": "<p>List the thing groups to which the specified thing belongs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingGroupsForThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/things/{thingName}/thing-groups",
@@ -22869,7 +22866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the principals associated with the specified thing. A principal can be X.509\n\t\t\tcertificates, IAM users, groups, and roles, Amazon Cognito identities or federated\n\t\t\tidentities.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingPrincipals</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the principals associated with the specified thing. A principal can be X.509\n\t\t\tcertificates, IAM users, groups, and roles, Amazon Cognito identities or federated\n\t\t\tidentities.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingPrincipals</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/things/{thingName}/principals",
@@ -23051,7 +23048,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List bulk thing provisioning tasks.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingRegistrationTasks</a> action.</p>",
+                "smithy.api#documentation": "<p>List bulk thing provisioning tasks.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingRegistrationTasks</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-registration-tasks",
@@ -23134,7 +23131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the existing thing types.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingTypes</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the existing thing types.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingTypes</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-types",
@@ -23223,7 +23220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example,\n\t\t\tcalling <code>ListThings</code> with attributeName=Color and attributeValue=Red\n\t\t\tretrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things\">List Things</a> from the <i>Amazon Web Services IoT Core Developer\n\t\t\t\tGuide</i>.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThings</a> action.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>You will not be charged for calling this API if an <code>Access denied</code> error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned.</p>\n\t\t       </note>",
+                "smithy.api#documentation": "<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example,\n\t\t\tcalling <code>ListThings</code> with attributeName=Color and attributeValue=Red\n\t\t\tretrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things\">List Things</a> from the <i>Amazon Web Services IoT Core Developer\n\t\t\t\tGuide</i>.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThings</a> action.</p>\n         <note>\n            <p>You will not be charged for calling this API if an <code>Access denied</code> error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/things",
@@ -23260,7 +23257,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the things you have added to the given billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingsInBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the things you have added to the given billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingsInBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/billing-groups/{billingGroupName}/things",
@@ -23341,7 +23338,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the things in the specified group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingsInThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the things in the specified group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingsInThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/thing-groups/{thingGroupName}/things",
@@ -23449,7 +23446,7 @@
                     "target": "com.amazonaws.iot#usePrefixAttributeValue",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When <code>true</code>, the action returns the thing resources with attribute values\n                     that start with the <code>attributeValue</code> provided.</p>\n            <p>When <code>false</code>, or not present, the action returns only the thing\n\t\t\tresources with attribute values that match the entire <code>attributeValue</code>\n\t\t\tprovided. </p>",
+                        "smithy.api#documentation": "<p>When <code>true</code>, the action returns the thing resources with attribute values\n                     that start with the <code>attributeValue</code> provided.</p>\n         <p>When <code>false</code>, or not present, the action returns only the thing\n\t\t\tresources with attribute values that match the entire <code>attributeValue</code>\n\t\t\tprovided. </p>",
                         "smithy.api#httpQuery": "usePrefixAttributeValue"
                     }
                 }
@@ -24676,7 +24673,7 @@
                 "messageExpiry": {
                     "target": "com.amazonaws.iot#MessageExpiry",
                     "traits": {
-                        "smithy.api#documentation": "<p>A user-defined integer value that will persist a message at the message broker for a\n         specified amount of time to ensure that the message will expire if it's no longer relevant to\n         the subscriber. The value of <code>messageExpiry</code> represents the number of seconds\n         before it expires. For more information about the limits of <code>messageExpiry</code>, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html\">Amazon Web Services IoT Core message broker and protocol\n            limits and quotas </a> from the Amazon Web Services Reference Guide.</p>      \n         <p>Supports <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html\">substitution\n         templates</a>.</p>"
+                        "smithy.api#documentation": "<p>A user-defined integer value that will persist a message at the message broker for a\n         specified amount of time to ensure that the message will expire if it's no longer relevant to\n         the subscriber. The value of <code>messageExpiry</code> represents the number of seconds\n         before it expires. For more information about the limits of <code>messageExpiry</code>, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html\">Amazon Web Services IoT Core message broker and protocol\n            limits and quotas </a> from the Amazon Web Services Reference Guide.</p>\n         <p>Supports <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html\">substitution\n         templates</a>.</p>"
                     }
                 },
                 "userProperties": {
@@ -25485,7 +25482,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job\n            data/updates are stored. The role must also grant permission for IoT to download the files.</p>\n        <important>\n            <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service\n                confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job\n            data/updates are stored. The role must also grant permission for IoT to download the files.</p>\n         <important>\n            <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service\n                confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>\n         </important>"
                     }
                 },
                 "expiresInSec": {
@@ -26535,7 +26532,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the given thing from the billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RemoveThingFromBillingGroup</a> action.</p>\n\t\t       <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Removes the given thing from the billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RemoveThingFromBillingGroup</a> action.</p>\n         <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/billing-groups/removeThingFromBillingGroup",
@@ -26599,7 +26596,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove the specified thing from the specified group.</p>\n\t\t       <p>You must specify either a <code>thingGroupArn</code> or a\n\t\t\t<code>thingGroupName</code> to identify the thing group and\n\t\t\teither a <code>thingArn</code> or a <code>thingName</code> to\n\t\t\tidentify the thing to remove from the thing group.\n\t\t</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RemoveThingFromThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Remove the specified thing from the specified group.</p>\n         <p>You must specify either a <code>thingGroupArn</code> or a\n\t\t\t<code>thingGroupName</code> to identify the thing group and\n\t\t\teither a <code>thingArn</code> or a <code>thingName</code> to\n\t\t\tidentify the thing to remove from the thing group.\n\t\t</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RemoveThingFromThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/thing-groups/removeThingFromThingGroup",
@@ -28505,7 +28502,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a bulk thing provisioning task.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StartThingRegistrationTask</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a bulk thing provisioning task.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StartThingRegistrationTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/thing-registration-tasks",
@@ -28739,7 +28736,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a bulk thing provisioning task.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StopThingRegistrationTask</a> action.</p>",
+                "smithy.api#documentation": "<p>Cancels a bulk thing provisioning task.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StopThingRegistrationTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/thing-registration-tasks/{taskId}/cancel",
@@ -29080,7 +29077,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata which can be\n\t\t\tused to manage a resource.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">TagResource</a> action.</p>",
+                "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata which can be\n\t\t\tused to manage a resource.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">TagResource</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags",
@@ -29947,7 +29944,7 @@
                 "deviceDefenderIndexingMode": {
                     "target": "com.amazonaws.iot#DeviceDefenderIndexingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Device Defender indexing mode. Valid values are:</p>\n         <ul>\n            <li>\n               <p>VIOLATIONS – Your thing index contains Device Defender violations. To enable Device\n          Defender indexing, <i>deviceDefenderIndexingMode</i> must not be set to\n          OFF.</p>\n            </li>\n            <li>\n               <p>OFF - Device Defender indexing is disabled.</p>\n            </li>\n         </ul>\n        <p>For more information about Device Defender violations, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html\">Device Defender Detect.</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Device Defender indexing mode. Valid values are:</p>\n         <ul>\n            <li>\n               <p>VIOLATIONS – Your thing index contains Device Defender violations. To enable Device\n          Defender indexing, <i>deviceDefenderIndexingMode</i> must not be set to\n          OFF.</p>\n            </li>\n            <li>\n               <p>OFF - Device Defender indexing is disabled.</p>\n            </li>\n         </ul>\n         <p>For more information about Device Defender violations, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html\">Device Defender Detect.</a>\n         </p>"
                     }
                 },
                 "namedShadowIndexingMode": {
@@ -30725,7 +30722,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transfers the specified certificate to the specified Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">TransferCertificate</a> action.</p>\n      \n         <p>You can cancel the transfer until it is acknowledged by the recipient.</p>\n         <p>No notification is sent to the transfer destination's account. It is up to the caller\n         to notify the transfer target.</p>\n         <p>The certificate being transferred must not be in the ACTIVE state. You can use the\n         <a>UpdateCertificate</a> action to deactivate it.</p>\n         <p>The certificate must not have any policies attached to it. You can use the\n         <a>DetachPolicy</a> action to detach them.</p>",
+                "smithy.api#documentation": "<p>Transfers the specified certificate to the specified Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">TransferCertificate</a> action.</p>\n         <p>You can cancel the transfer until it is acknowledged by the recipient.</p>\n         <p>No notification is sent to the transfer destination's account. It is up to the caller\n         to notify the transfer target.</p>\n         <p>The certificate being transferred must not be in the ACTIVE state. You can use the\n         <a>UpdateCertificate</a> action to deactivate it.</p>\n         <p>The certificate must not have any policies attached to it. You can use the\n         <a>DetachPolicy</a> action to detach them.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/transfer-certificate/{certificateId}",
@@ -30884,7 +30881,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the given tags (metadata) from the resource.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UntagResource</a> action.</p>",
+                "smithy.api#documentation": "<p>Removes the given tags (metadata) from the resource.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UntagResource</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/untag",
@@ -30961,7 +30958,7 @@
                 "auditCheckConfigurations": {
                     "target": "com.amazonaws.iot#AuditCheckConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which audit checks are enabled and disabled for this account. Use \n            <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those \n            that are currently enabled.</p>\n          <p>Some data collection might start immediately when certain checks are enabled. \n            When a check is disabled, any data collected so far in relation to the check is deleted.</p>\n          <p>You\n      cannot\n      disable a check if\n      it's\n      used by any scheduled audit. You must first delete the check from the scheduled audit or\n      delete the scheduled audit itself.</p>\n          <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,\n            this parameter is required and must specify at least one enabled check.</p>"
+                        "smithy.api#documentation": "<p>Specifies which audit checks are enabled and disabled for this account. Use \n            <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those \n            that are currently enabled.</p>\n         <p>Some data collection might start immediately when certain checks are enabled. \n            When a check is disabled, any data collected so far in relation to the check is deleted.</p>\n         <p>You\n      cannot\n      disable a check if\n      it's\n      used by any scheduled audit. You must first delete the check from the scheduled audit or\n      delete the scheduled audit itself.</p>\n         <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,\n            this parameter is required and must specify at least one enabled check.</p>"
                     }
                 }
             }
@@ -31166,7 +31163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates information about the billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates information about the billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/billing-groups/{billingGroupName}",
@@ -31339,7 +31336,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the status of the specified certificate. This operation is\n         idempotent.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateCertificate</a> action.</p>\n      \n         <p>Certificates must be in the ACTIVE state to authenticate devices that use\n         a certificate to connect to IoT.</p>\n         <p>Within a few minutes of updating a certificate from the ACTIVE state to any other\n         state, IoT disconnects all devices that used that certificate to connect. Devices cannot\n         use a certificate that is not in the ACTIVE state to reconnect.</p>",
+                "smithy.api#documentation": "<p>Updates the status of the specified certificate. This operation is\n         idempotent.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateCertificate</a> action.</p>\n         <p>Certificates must be in the ACTIVE state to authenticate devices that use\n         a certificate to connect to IoT.</p>\n         <p>Within a few minutes of updating a certificate from the ACTIVE state to any other\n         state, IoT disconnects all devices that used that certificate to connect. Devices cannot\n         use a certificate that is not in the ACTIVE state to reconnect.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/certificates/{certificateId}",
@@ -31688,7 +31685,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a dynamic thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateDynamicThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates a dynamic thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateDynamicThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/dynamic-thing-groups/{thingGroupName}",
@@ -31723,7 +31720,7 @@
                 "indexName": {
                     "target": "com.amazonaws.iot#IndexName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dynamic thing group index to update.</p>\n\t\t       <note>\n\t\t\t         <p>Currently one index is supported: <code>AWS_Things</code>.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The dynamic thing group index to update.</p>\n         <note>\n            <p>Currently one index is supported: <code>AWS_Things</code>.</p>\n         </note>"
                     }
                 },
                 "queryString": {
@@ -31735,7 +31732,7 @@
                 "queryVersion": {
                     "target": "com.amazonaws.iot#QueryVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dynamic thing group query version to update.</p>\n\t\t       <note>\n\t\t\t         <p>Currently one query version is supported: \"2017-09-30\". If not specified, the\n\t\t\t\tquery version defaults to this value.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The dynamic thing group query version to update.</p>\n         <note>\n            <p>Currently one query version is supported: \"2017-09-30\". If not specified, the\n\t\t\t\tquery version defaults to this value.</p>\n         </note>"
                     }
                 }
             }
@@ -31772,7 +31769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the event configurations.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateEventConfigurations</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates the event configurations.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateEventConfigurations</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/event-configurations",
@@ -31990,7 +31987,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates supported fields of the specified job.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates supported fields of the specified job.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/jobs/{jobId}",
@@ -32042,7 +32039,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 },
@@ -32579,7 +32576,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing stream. The stream version will be incremented by one.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateStream</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates an existing stream. The stream version will be incremented by one.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateStream</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/streams/{streamId}",
@@ -32679,7 +32676,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the data for a thing.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateThing</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates the data for a thing.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/things/{thingName}",
@@ -32713,7 +32710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a thing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateThingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Update a thing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateThingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/thing-groups/{thingGroupName}",
@@ -32782,7 +32779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the groups to which the thing belongs.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateThingGroupsForThing</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates the groups to which the thing belongs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateThingGroupsForThing</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/thing-groups/updateThingGroupsForThing",
@@ -32830,7 +32827,7 @@
                 "thingName": {
                     "target": "com.amazonaws.iot#ThingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the thing to update.</p>\n\t\t       <p>You can't change a thing's name. To change a thing's name, you must create a\n\t\t\tnew thing, give it the new name, and then delete the old thing.</p>",
+                        "smithy.api#documentation": "<p>The name of the thing to update.</p>\n         <p>You can't change a thing's name. To change a thing's name, you must create a\n\t\t\tnew thing, give it the new name, and then delete the old thing.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -32844,7 +32841,7 @@
                 "attributePayload": {
                     "target": "com.amazonaws.iot#AttributePayload",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of thing attributes, a JSON string containing name-value pairs. For\n\t\t\texample:</p>\n\t\t       <p>\n\t\t\t         <code>{\\\"attributes\\\":{\\\"name1\\\":\\\"value2\\\"}}</code>\n\t\t       </p>\n\t\t       <p>This data is used to add new attributes or update existing attributes.</p>"
+                        "smithy.api#documentation": "<p>A list of thing attributes, a JSON string containing name-value pairs. For\n\t\t\texample:</p>\n         <p>\n            <code>{\\\"attributes\\\":{\\\"name1\\\":\\\"value2\\\"}}</code>\n         </p>\n         <p>This data is used to add new attributes or update existing attributes.</p>"
                     }
                 },
                 "expectedVersion": {

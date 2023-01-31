@@ -258,15 +258,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -2927,6 +2918,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Relational database settings.</p>"
                     }
+                },
+                "eventBridgeConfig": {
+                    "target": "com.amazonaws.appsync#EventBridgeDataSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon EventBridge settings.</p>"
+                    }
                 }
             }
         },
@@ -3454,7 +3451,7 @@
                 "type": {
                     "target": "com.amazonaws.appsync#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an Lambda\n               function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB\n               table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon OpenSearch Service\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_OPENSEARCH_SERVICE</b>: The data source is an Amazon OpenSearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. Use this type when you want to\n               invoke a GraphQL operation without connecting to a data source, such as when you're performing data\n               transformation with resolvers or invoking a subscription from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a relational\n               database.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an Lambda\n               function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB\n               table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon OpenSearch Service\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_OPENSEARCH_SERVICE</b>: The data source is an Amazon OpenSearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_EVENTBRIDGE</b>: The data source is an Amazon EventBridge configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. Use this type when you want to\n               invoke a GraphQL operation without connecting to a data source, such as when you're performing data\n               transformation with resolvers or invoking a subscription from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a relational\n               database.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "serviceRoleArn": {
@@ -3497,6 +3494,12 @@
                     "target": "com.amazonaws.appsync#RelationalDatabaseDataSourceConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Relational database settings.</p>"
+                    }
+                },
+                "eventBridgeConfig": {
+                    "target": "com.amazonaws.appsync#EventBridgeDataSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon EventBridge settings.</p>"
                     }
                 }
             },
@@ -3547,6 +3550,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AMAZON_OPENSEARCH_SERVICE"
+                    }
+                },
+                "AMAZON_EVENTBRIDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_EVENTBRIDGE"
                     }
                 }
             }
@@ -4438,6 +4447,21 @@
                     "max": 65536
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.appsync#EventBridgeDataSourceConfig": {
+            "type": "structure",
+            "members": {
+                "eventBusArn": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the event bus. For more information about event buses, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html\">Amazon EventBridge event\n            buses</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon EventBridge bus data source configuration.</p>"
             }
         },
         "com.amazonaws.appsync#FieldLogLevel": {
@@ -7196,6 +7220,12 @@
                     "target": "com.amazonaws.appsync#RelationalDatabaseDataSourceConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The new relational database configuration.</p>"
+                    }
+                },
+                "eventBridgeConfig": {
+                    "target": "com.amazonaws.appsync#EventBridgeDataSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new Amazon EventBridge settings.</p>"
                     }
                 }
             }
