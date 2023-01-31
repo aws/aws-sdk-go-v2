@@ -1,0 +1,31 @@
+{
+    "id": "2a85ab3e-a259-4aea-b920-f9d6d34c52a3",
+    "type": "feature",
+    "description": "Upgrade smithy to 1.27.x, updating query protocol serializers.",
+    "modules": [
+        "internal/protocoltest/awsrestjson",
+        "internal/protocoltest/ec2query",
+        "internal/protocoltest/jsonrpc",
+        "internal/protocoltest/jsonrpc10",
+        "internal/protocoltest/query",
+        "internal/protocoltest/restxml",
+        "service/autoscaling",
+        "service/cloudformation",
+        "service/cloudsearch",
+        "service/cloudwatch",
+        "service/docdb",
+        "service/ec2",
+        "service/elasticache",
+        "service/elasticbeanstalk",
+        "service/elasticloadbalancing",
+        "service/elasticloadbalancingv2",
+        "service/iam",
+        "service/neptune",
+        "service/rds",
+        "service/redshift",
+        "service/ses",
+        "service/sns",
+        "service/sqs",
+        "service/sts"
+    ]
+}
