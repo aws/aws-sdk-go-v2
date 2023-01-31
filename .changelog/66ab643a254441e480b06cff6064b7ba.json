@@ -1,8 +1,0 @@
-{
-    "id": "66ab643a-2544-41e4-80b0-6cff6064b7ba",
-    "type": "feature",
-    "description": "Add CloudTrail Data Service to enable users to ingest activity events from non-AWS sources into CloudTrail Lake.",
-    "modules": [
-        "service/cloudtraildata"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.14.0 (2023-01-31)
+
+* **Feature**: Amazon OpenSearch Service adds the option for a VPC endpoint connection between two domains when the local domain uses OpenSearch version 1.3 or 2.3. You can now use remote reindex to copy indices from one VPC domain to another without a reverse proxy.
+
 # v1.13.1 (2023-01-23)
 
 * No change notes available for this release.

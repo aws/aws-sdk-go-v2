@@ -1,3 +1,7 @@
+# v1.23.0 (2023-01-31)
+
+* **Feature**: Add new "Channel" APIs to enable users to manage channels used for CloudTrail Lake integrations, and "Resource Policy" APIs to enable users to manage the resource-based permissions policy attached to a channel.
+
 # v1.22.1 (2023-01-23)
 
 * No change notes available for this release.

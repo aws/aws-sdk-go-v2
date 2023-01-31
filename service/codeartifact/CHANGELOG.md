@@ -1,3 +1,7 @@
+# v1.16.0 (2023-01-31)
+
+* **Feature**: This release introduces a new DeletePackage API, which enables deletion of a package and all of its versions from a repository.
+
 # v1.15.0 (2023-01-19)
 
 * **Feature**: Documentation updates for CodeArtifact

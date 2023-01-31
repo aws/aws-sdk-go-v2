@@ -1,8 +1,0 @@
-{
-    "id": "263d6037-2c3f-4865-9c3b-e8b6030dae2b",
-    "type": "feature",
-    "description": "Added support for IoT Rules Engine Cloudwatch Logs action batch mode.",
-    "modules": [
-        "service/iot"
-    ]
-}

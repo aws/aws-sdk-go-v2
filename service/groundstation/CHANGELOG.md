@@ -1,3 +1,7 @@
+# v1.17.0 (2023-01-31)
+
+* **Feature**: DigIF Expansion changes to the Customer APIs.
+
 # v1.16.0 (2023-01-19)
 
 * **Feature**: Add configurable prepass and postpass times for DataflowEndpointGroup. Add Waiter to allow customers to wait for a contact that was reserved through ReserveContact

@@ -1,3 +1,7 @@
+# v1.34.0 (2023-01-31)
+
+* **Feature**: Added support for IoT Rules Engine Cloudwatch Logs action batch mode.
+
 # v1.33.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

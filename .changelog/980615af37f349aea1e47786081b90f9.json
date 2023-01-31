@@ -1,8 +1,0 @@
-{
-    "id": "980615af-37f3-49ae-a1e4-7786081b90f9",
-    "type": "feature",
-    "description": "Amazon Polly adds two new neural American English voices - Ruth, Stephen",
-    "modules": [
-        "service/polly"
-    ]
-}

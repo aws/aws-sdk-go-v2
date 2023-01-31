@@ -1,3 +1,30 @@
+# Release (2023-01-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.19.0](service/appsync/CHANGELOG.md#v1190-2023-01-31)
+  * **Feature**: This release introduces the feature to support EventBridge as AppSync data source.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.23.0](service/cloudtrail/CHANGELOG.md#v1230-2023-01-31)
+  * **Feature**: Add new "Channel" APIs to enable users to manage channels used for CloudTrail Lake integrations, and "Resource Policy" APIs to enable users to manage the resource-based permissions policy attached to a channel.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.0.0](service/cloudtraildata/CHANGELOG.md#v100-2023-01-31)
+  * **Release**: New AWS service client module
+  * **Feature**: Add CloudTrail Data Service to enable users to ingest activity events from non-AWS sources into CloudTrail Lake.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.16.0](service/codeartifact/CHANGELOG.md#v1160-2023-01-31)
+  * **Feature**: This release introduces a new DeletePackage API, which enables deletion of a package and all of its versions from a repository.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.83.0](service/ec2/CHANGELOG.md#v1830-2023-01-31)
+  * **Feature**: This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.17.0](service/groundstation/CHANGELOG.md#v1170-2023-01-31)
+  * **Feature**: DigIF Expansion changes to the Customer APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.34.0](service/iot/CHANGELOG.md#v1340-2023-01-31)
+  * **Feature**: Added support for IoT Rules Engine Cloudwatch Logs action batch mode.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.14.0](service/opensearch/CHANGELOG.md#v1140-2023-01-31)
+  * **Feature**: Amazon OpenSearch Service adds the option for a VPC endpoint connection between two domains when the local domain uses OpenSearch version 1.3 or 2.3. You can now use remote reindex to copy indices from one VPC domain to another without a reverse proxy.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.24.0](service/polly/CHANGELOG.md#v1240-2023-01-31)
+  * **Feature**: Amazon Polly adds two new neural American English voices - Ruth, Stephen
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.67.0](service/sagemaker/CHANGELOG.md#v1670-2023-01-31)
+  * **Feature**: Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.28.0](service/securityhub/CHANGELOG.md#v1280-2023-01-31)
+  * **Feature**: New fields have been added to the AWS Security Finding Format. Compliance.SecurityControlId is a unique identifier for a security control across standards. Compliance.AssociatedStandards contains all enabled standards in which a security control is enabled.
+
 # Release (2023-01-30)
 
 ## Module Highlights

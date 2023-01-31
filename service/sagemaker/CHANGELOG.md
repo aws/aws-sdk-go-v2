@@ -1,3 +1,7 @@
+# v1.67.0 (2023-01-31)
+
+* **Feature**: Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.
+
 # v1.66.0 (2023-01-27)
 
 * **Feature**: This release supports running SageMaker Training jobs with container images that are in a private Docker registry.

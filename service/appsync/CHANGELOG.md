@@ -1,3 +1,7 @@
+# v1.19.0 (2023-01-31)
+
+* **Feature**: This release introduces the feature to support EventBridge as AppSync data source.
+
 # v1.18.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

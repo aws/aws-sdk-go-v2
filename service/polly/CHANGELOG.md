@@ -1,3 +1,7 @@
+# v1.24.0 (2023-01-31)
+
+* **Feature**: Amazon Polly adds two new neural American English voices - Ruth, Stephen
+
 # v1.23.0 (2023-01-25)
 
 * **Feature**: Add 5 new neural voices - Sergio (es-ES), Andres (es-MX), Remi (fr-FR), Adriano (it-IT) and Thiago (pt-BR).

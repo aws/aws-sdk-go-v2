@@ -1,3 +1,7 @@
+# v1.40.1 (2023-01-31)
+
+* No change notes available for this release.
+
 # v1.40.0 (2023-01-19)
 
 * **Feature**: Release Glue Studio Hudi Data Lake Format for SDK/CLI

@@ -1,8 +1,0 @@
-{
-    "id": "7ebcde7b-f870-46c5-a31b-133d06f16cc4",
-    "type": "feature",
-    "description": "Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
