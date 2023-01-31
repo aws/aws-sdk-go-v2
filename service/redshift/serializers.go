@@ -7628,10 +7628,11 @@ func (m *awsAwsquery_serializeOpUpdatePartnerStatus) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 func awsAwsquery_serializeDocumentAttributeNameList(v []string, value query.Value) error {
+	array := value.Array("AttributeName")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("AttributeName")
 
 	for i := range v {
 		av := array.Value()
@@ -7641,10 +7642,11 @@ func awsAwsquery_serializeDocumentAttributeNameList(v []string, value query.Valu
 }
 
 func awsAwsquery_serializeDocumentClusterSecurityGroupNameList(v []string, value query.Value) error {
+	array := value.Array("ClusterSecurityGroupName")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("ClusterSecurityGroupName")
 
 	for i := range v {
 		av := array.Value()
@@ -7654,10 +7656,11 @@ func awsAwsquery_serializeDocumentClusterSecurityGroupNameList(v []string, value
 }
 
 func awsAwsquery_serializeDocumentDbGroupList(v []string, value query.Value) error {
+	array := value.Array("DbGroup")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("DbGroup")
 
 	for i := range v {
 		av := array.Value()
@@ -7684,10 +7687,11 @@ func awsAwsquery_serializeDocumentDeleteClusterSnapshotMessage(v *types.DeleteCl
 }
 
 func awsAwsquery_serializeDocumentDeleteClusterSnapshotMessageList(v []types.DeleteClusterSnapshotMessage, value query.Value) error {
+	array := value.Array("DeleteClusterSnapshotMessage")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("DeleteClusterSnapshotMessage")
 
 	for i := range v {
 		av := array.Value()
@@ -7699,10 +7703,11 @@ func awsAwsquery_serializeDocumentDeleteClusterSnapshotMessageList(v []types.Del
 }
 
 func awsAwsquery_serializeDocumentEventCategoriesList(v []string, value query.Value) error {
+	array := value.Array("EventCategory")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("EventCategory")
 
 	for i := range v {
 		av := array.Value()
@@ -7712,10 +7717,11 @@ func awsAwsquery_serializeDocumentEventCategoriesList(v []string, value query.Va
 }
 
 func awsAwsquery_serializeDocumentIamRoleArnList(v []string, value query.Value) error {
+	array := value.Array("IamRoleArn")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("IamRoleArn")
 
 	for i := range v {
 		av := array.Value()
@@ -7725,10 +7731,11 @@ func awsAwsquery_serializeDocumentIamRoleArnList(v []string, value query.Value) 
 }
 
 func awsAwsquery_serializeDocumentLogTypeList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -7762,10 +7769,11 @@ func awsAwsquery_serializeDocumentNodeConfigurationOptionsFilter(v *types.NodeCo
 }
 
 func awsAwsquery_serializeDocumentNodeConfigurationOptionsFilterList(v []types.NodeConfigurationOptionsFilter, value query.Value) error {
+	array := value.Array("NodeConfigurationOptionsFilter")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("NodeConfigurationOptionsFilter")
 
 	for i := range v {
 		av := array.Value()
@@ -7829,10 +7837,11 @@ func awsAwsquery_serializeDocumentParameter(v *types.Parameter, value query.Valu
 }
 
 func awsAwsquery_serializeDocumentParametersList(v []types.Parameter, value query.Value) error {
+	array := value.Array("Parameter")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("Parameter")
 
 	for i := range v {
 		av := array.Value()
@@ -7929,10 +7938,11 @@ func awsAwsquery_serializeDocumentScheduledActionFilter(v *types.ScheduledAction
 }
 
 func awsAwsquery_serializeDocumentScheduledActionFilterList(v []types.ScheduledActionFilter, value query.Value) error {
+	array := value.Array("ScheduledActionFilter")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("ScheduledActionFilter")
 
 	for i := range v {
 		av := array.Value()
@@ -7972,10 +7982,11 @@ func awsAwsquery_serializeDocumentScheduledActionType(v *types.ScheduledActionTy
 }
 
 func awsAwsquery_serializeDocumentScheduleDefinitionList(v []string, value query.Value) error {
+	array := value.Array("ScheduleDefinition")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("ScheduleDefinition")
 
 	for i := range v {
 		av := array.Value()
@@ -7985,10 +7996,11 @@ func awsAwsquery_serializeDocumentScheduleDefinitionList(v []string, value query
 }
 
 func awsAwsquery_serializeDocumentSnapshotIdentifierList(v []string, value query.Value) error {
+	array := value.Array("String")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("String")
 
 	for i := range v {
 		av := array.Value()
@@ -8015,10 +8027,11 @@ func awsAwsquery_serializeDocumentSnapshotSortingEntity(v *types.SnapshotSorting
 }
 
 func awsAwsquery_serializeDocumentSnapshotSortingEntityList(v []types.SnapshotSortingEntity, value query.Value) error {
+	array := value.Array("SnapshotSortingEntity")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("SnapshotSortingEntity")
 
 	for i := range v {
 		av := array.Value()
@@ -8030,10 +8043,11 @@ func awsAwsquery_serializeDocumentSnapshotSortingEntityList(v []types.SnapshotSo
 }
 
 func awsAwsquery_serializeDocumentSourceIdsList(v []string, value query.Value) error {
+	array := value.Array("SourceId")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("SourceId")
 
 	for i := range v {
 		av := array.Value()
@@ -8043,10 +8057,11 @@ func awsAwsquery_serializeDocumentSourceIdsList(v []string, value query.Value) e
 }
 
 func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.Value) error {
+	array := value.Array("SubnetIdentifier")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("SubnetIdentifier")
 
 	for i := range v {
 		av := array.Value()
@@ -8073,10 +8088,11 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 }
 
 func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
+	array := value.Array("TagKey")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("TagKey")
 
 	for i := range v {
 		av := array.Value()
@@ -8086,10 +8102,11 @@ func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) erro
 }
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
+	array := value.Array("Tag")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("Tag")
 
 	for i := range v {
 		av := array.Value()
@@ -8101,10 +8118,11 @@ func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) erro
 }
 
 func awsAwsquery_serializeDocumentTagValueList(v []string, value query.Value) error {
+	array := value.Array("TagValue")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("TagValue")
 
 	for i := range v {
 		av := array.Value()
@@ -8114,10 +8132,11 @@ func awsAwsquery_serializeDocumentTagValueList(v []string, value query.Value) er
 }
 
 func awsAwsquery_serializeDocumentValueStringList(v []string, value query.Value) error {
+	array := value.Array("item")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("item")
 
 	for i := range v {
 		av := array.Value()
@@ -8127,10 +8146,11 @@ func awsAwsquery_serializeDocumentValueStringList(v []string, value query.Value)
 }
 
 func awsAwsquery_serializeDocumentVpcIdentifierList(v []string, value query.Value) error {
+	array := value.Array("VpcIdentifier")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("VpcIdentifier")
 
 	for i := range v {
 		av := array.Value()
@@ -8140,10 +8160,11 @@ func awsAwsquery_serializeDocumentVpcIdentifierList(v []string, value query.Valu
 }
 
 func awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v []string, value query.Value) error {
+	array := value.Array("VpcSecurityGroupId")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("VpcSecurityGroupId")
 
 	for i := range v {
 		av := array.Value()

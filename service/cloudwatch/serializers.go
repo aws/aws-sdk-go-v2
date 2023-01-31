@@ -2449,10 +2449,11 @@ func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 func awsAwsquery_serializeDocumentAlarmNames(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2462,10 +2463,11 @@ func awsAwsquery_serializeDocumentAlarmNames(v []string, value query.Value) erro
 }
 
 func awsAwsquery_serializeDocumentAlarmTypes(v []types.AlarmType, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2494,10 +2496,11 @@ func awsAwsquery_serializeDocumentAnomalyDetectorConfiguration(v *types.AnomalyD
 }
 
 func awsAwsquery_serializeDocumentAnomalyDetectorExcludedTimeRanges(v []types.Range, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2509,10 +2512,11 @@ func awsAwsquery_serializeDocumentAnomalyDetectorExcludedTimeRanges(v []types.Ra
 }
 
 func awsAwsquery_serializeDocumentAnomalyDetectorTypes(v []types.AnomalyDetectorType, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2522,10 +2526,11 @@ func awsAwsquery_serializeDocumentAnomalyDetectorTypes(v []types.AnomalyDetector
 }
 
 func awsAwsquery_serializeDocumentCounts(v []float64, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2548,10 +2553,11 @@ func awsAwsquery_serializeDocumentCounts(v []float64, value query.Value) error {
 }
 
 func awsAwsquery_serializeDocumentDashboardNames(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2595,10 +2601,11 @@ func awsAwsquery_serializeDocumentDimensionFilter(v *types.DimensionFilter, valu
 }
 
 func awsAwsquery_serializeDocumentDimensionFilters(v []types.DimensionFilter, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2610,10 +2617,11 @@ func awsAwsquery_serializeDocumentDimensionFilters(v []types.DimensionFilter, va
 }
 
 func awsAwsquery_serializeDocumentDimensions(v []types.Dimension, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2625,10 +2633,11 @@ func awsAwsquery_serializeDocumentDimensions(v []types.Dimension, value query.Va
 }
 
 func awsAwsquery_serializeDocumentExtendedStatistics(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2638,10 +2647,11 @@ func awsAwsquery_serializeDocumentExtendedStatistics(v []string, value query.Val
 }
 
 func awsAwsquery_serializeDocumentInsightRuleMetricList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2651,10 +2661,11 @@ func awsAwsquery_serializeDocumentInsightRuleMetricList(v []string, value query.
 }
 
 func awsAwsquery_serializeDocumentInsightRuleNames(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2700,10 +2711,11 @@ func awsAwsquery_serializeDocumentManagedRule(v *types.ManagedRule, value query.
 }
 
 func awsAwsquery_serializeDocumentManagedRules(v []types.ManagedRule, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2739,10 +2751,11 @@ func awsAwsquery_serializeDocumentMetric(v *types.Metric, value query.Value) err
 }
 
 func awsAwsquery_serializeDocumentMetricData(v []types.MetricDatum, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2754,10 +2767,11 @@ func awsAwsquery_serializeDocumentMetricData(v []types.MetricDatum, value query.
 }
 
 func awsAwsquery_serializeDocumentMetricDataQueries(v []types.MetricDataQuery, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2941,10 +2955,11 @@ func awsAwsquery_serializeDocumentMetricStreamFilter(v *types.MetricStreamFilter
 }
 
 func awsAwsquery_serializeDocumentMetricStreamFilters(v []types.MetricStreamFilter, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2956,10 +2971,11 @@ func awsAwsquery_serializeDocumentMetricStreamFilters(v []types.MetricStreamFilt
 }
 
 func awsAwsquery_serializeDocumentMetricStreamNames(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -2969,10 +2985,11 @@ func awsAwsquery_serializeDocumentMetricStreamNames(v []string, value query.Valu
 }
 
 func awsAwsquery_serializeDocumentMetricStreamStatisticsAdditionalStatistics(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3003,10 +3020,11 @@ func awsAwsquery_serializeDocumentMetricStreamStatisticsConfiguration(v *types.M
 }
 
 func awsAwsquery_serializeDocumentMetricStreamStatisticsConfigurations(v []types.MetricStreamStatisticsConfiguration, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3018,10 +3036,11 @@ func awsAwsquery_serializeDocumentMetricStreamStatisticsConfigurations(v []types
 }
 
 func awsAwsquery_serializeDocumentMetricStreamStatisticsIncludeMetrics(v []types.MetricStreamStatisticsMetric, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3067,10 +3086,11 @@ func awsAwsquery_serializeDocumentRange(v *types.Range, value query.Value) error
 }
 
 func awsAwsquery_serializeDocumentResourceList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3109,10 +3129,11 @@ func awsAwsquery_serializeDocumentSingleMetricAnomalyDetector(v *types.SingleMet
 }
 
 func awsAwsquery_serializeDocumentStatistics(v []types.Statistic, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3218,10 +3239,11 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 }
 
 func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3231,10 +3253,11 @@ func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) erro
 }
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -3246,10 +3269,11 @@ func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) erro
 }
 
 func awsAwsquery_serializeDocumentValues(v []float64, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()

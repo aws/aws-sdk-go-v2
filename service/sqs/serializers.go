@@ -1296,10 +1296,11 @@ func (m *awsAwsquery_serializeOpUntagQueue) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 func awsAwsquery_serializeDocumentActionNameList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1309,10 +1310,11 @@ func awsAwsquery_serializeDocumentActionNameList(v []string, value query.Value) 
 }
 
 func awsAwsquery_serializeDocumentAttributeNameList(v []types.QueueAttributeName, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1322,10 +1324,11 @@ func awsAwsquery_serializeDocumentAttributeNameList(v []types.QueueAttributeName
 }
 
 func awsAwsquery_serializeDocumentAWSAccountIdList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1335,10 +1338,11 @@ func awsAwsquery_serializeDocumentAWSAccountIdList(v []string, value query.Value
 }
 
 func awsAwsquery_serializeDocumentBinaryList(v [][]byte, value query.Value) error {
+	array := value.Array("BinaryListValue")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("BinaryListValue")
 
 	for i := range v {
 		if vv := v[i]; vv == nil {
@@ -1373,10 +1377,11 @@ func awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntry(v *ty
 }
 
 func awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntryList(v []types.ChangeMessageVisibilityBatchRequestEntry, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1405,10 +1410,11 @@ func awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntry(v *types.Delete
 }
 
 func awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntryList(v []types.DeleteMessageBatchRequestEntry, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1420,10 +1426,11 @@ func awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntryList(v []types.D
 }
 
 func awsAwsquery_serializeDocumentMessageAttributeNameList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1614,10 +1621,11 @@ func awsAwsquery_serializeDocumentSendMessageBatchRequestEntry(v *types.SendMess
 }
 
 func awsAwsquery_serializeDocumentSendMessageBatchRequestEntryList(v []types.SendMessageBatchRequestEntry, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
@@ -1629,10 +1637,11 @@ func awsAwsquery_serializeDocumentSendMessageBatchRequestEntryList(v []types.Sen
 }
 
 func awsAwsquery_serializeDocumentStringList(v []string, value query.Value) error {
+	array := value.Array("StringListValue")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("StringListValue")
 
 	for i := range v {
 		av := array.Value()
@@ -1642,10 +1651,11 @@ func awsAwsquery_serializeDocumentStringList(v []string, value query.Value) erro
 }
 
 func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
+	array := value.Array("member")
 	if len(v) == 0 {
+		array.Empty()
 		return nil
 	}
-	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
