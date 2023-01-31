@@ -56,6 +56,9 @@ type CreateDataSourceInput struct {
 	// OpenSearch data source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
+	// Amazon EventBridge settings.
+	EventBridgeConfig *types.EventBridgeDataSourceConfig
+
 	// HTTP endpoint settings.
 	HttpConfig *types.HttpDataSourceConfig
 

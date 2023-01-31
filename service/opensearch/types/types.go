@@ -521,6 +521,15 @@ type CompatibleVersionsMap struct {
 	noSmithyDocumentSerde
 }
 
+// The connection properties of an outbound connection.
+type ConnectionProperties struct {
+
+	// The endpoint of the remote domain.
+	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // A filter to apply to the DescribePackage response.
 type DescribePackagesFilter struct {
 
@@ -975,6 +984,9 @@ type InboundConnection struct {
 	// The unique identifier of the connection.
 	ConnectionId *string
 
+	// The connection mode.
+	ConnectionMode ConnectionMode
+
 	// The current status of the connection.
 	ConnectionStatus *InboundConnectionStatus
 
@@ -1199,6 +1211,12 @@ type OutboundConnection struct {
 
 	// Unique identifier of the connection.
 	ConnectionId *string
+
+	// The connection mode.
+	ConnectionMode ConnectionMode
+
+	// Properties for the outbound connection.
+	ConnectionProperties *ConnectionProperties
 
 	// Status of the connection.
 	ConnectionStatus *OutboundConnectionStatus

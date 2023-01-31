@@ -68,6 +68,24 @@ func (AutoTuneType) Values() []AutoTuneType {
 	}
 }
 
+type ConnectionMode string
+
+// Enum values for ConnectionMode
+const (
+	ConnectionModeDirect      ConnectionMode = "DIRECT"
+	ConnectionModeVpcEndpoint ConnectionMode = "VPC_ENDPOINT"
+)
+
+// Values returns all known values for ConnectionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionMode) Values() []ConnectionMode {
+	return []ConnectionMode{
+		"DIRECT",
+		"VPC_ENDPOINT",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus

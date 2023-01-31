@@ -41872,6 +41872,15 @@ func awsRestjson1_deserializeDocumentCloudwatchLogsAction(v **types.CloudwatchLo
 
 	for key, value := range shape {
 		switch key {
+		case "batchMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BatchMode to be of type *bool, got %T instead", value)
+				}
+				sv.BatchMode = ptr.Bool(jtv)
+			}
+
 		case "logGroupName":
 			if value != nil {
 				jtv, ok := value.(string)

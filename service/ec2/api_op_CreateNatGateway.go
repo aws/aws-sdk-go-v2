@@ -41,7 +41,7 @@ func (c *Client) CreateNatGateway(ctx context.Context, params *CreateNatGatewayI
 
 type CreateNatGatewayInput struct {
 
-	// The subnet in which to create the NAT gateway.
+	// The ID of the subnet in which to create the NAT gateway.
 	//
 	// This member is required.
 	SubnetId *string
@@ -71,6 +71,25 @@ type CreateNatGatewayInput struct {
 	// The private IPv4 address to assign to the NAT gateway. If you don't provide an
 	// address, a private IPv4 address will be automatically assigned.
 	PrivateIpAddress *string
+
+	// Secondary EIP allocation IDs. For more information about secondary addresses,
+	// see Create a NAT gateway
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
+	// in the Amazon Virtual Private Cloud User Guide.
+	SecondaryAllocationIds []string
+
+	// [Private NAT gateway only] The number of secondary private IPv4 addresses you
+	// want to assign to the NAT gateway. For more information about secondary
+	// addresses, see Create a NAT gateway
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
+	// in the Amazon Virtual Private Cloud User Guide.
+	SecondaryPrivateIpAddressCount *int32
+
+	// Secondary private IPv4 addresses. For more information about secondary
+	// addresses, see Create a NAT gateway
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
+	// in the Amazon Virtual Private Cloud User Guide.
+	SecondaryPrivateIpAddresses []string
 
 	// The tags to assign to the NAT gateway.
 	TagSpecifications []types.TagSpecification

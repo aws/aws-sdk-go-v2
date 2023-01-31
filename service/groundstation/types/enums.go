@@ -2,6 +2,28 @@
 
 package types
 
+type AgentStatus string
+
+// Enum values for AgentStatus
+const (
+	AgentStatusSuccess  AgentStatus = "SUCCESS"
+	AgentStatusFailed   AgentStatus = "FAILED"
+	AgentStatusActive   AgentStatus = "ACTIVE"
+	AgentStatusInactive AgentStatus = "INACTIVE"
+)
+
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AgentStatus) Values() []AgentStatus {
+	return []AgentStatus{
+		"SUCCESS",
+		"FAILED",
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type AngleUnits string
 
 // Enum values for AngleUnits
@@ -17,6 +39,24 @@ func (AngleUnits) Values() []AngleUnits {
 	return []AngleUnits{
 		"DEGREE_ANGLE",
 		"RADIAN",
+	}
+}
+
+type AuditResults string
+
+// Enum values for AuditResults
+const (
+	AuditResultsHealthy   AuditResults = "HEALTHY"
+	AuditResultsUnhealthy AuditResults = "UNHEALTHY"
+)
+
+// Values returns all known values for AuditResults. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AuditResults) Values() []AuditResults {
+	return []AuditResults{
+		"HEALTHY",
+		"UNHEALTHY",
 	}
 }
 
@@ -37,6 +77,26 @@ func (BandwidthUnits) Values() []BandwidthUnits {
 		"GHz",
 		"MHz",
 		"kHz",
+	}
+}
+
+type ComponentType string
+
+// Enum values for ComponentType
+const (
+	ComponentTypeLaminarFlow ComponentType = "LAMINAR_FLOW"
+	ComponentTypePrism       ComponentType = "PRISM"
+	ComponentTypeDigitizer   ComponentType = "DIGITIZER"
+)
+
+// Values returns all known values for ComponentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComponentType) Values() []ComponentType {
+	return []ComponentType{
+		"LAMINAR_FLOW",
+		"PRISM",
+		"DIGITIZER",
 	}
 }
 

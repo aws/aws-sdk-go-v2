@@ -1,0 +1,8 @@
+{
+    "id": "25ab5508-70b6-4731-9098-a20d34fa5382",
+    "type": "feature",
+    "description": "This fixes incorrect endpoint construction when a customer is explicitly setting a region.",
+    "modules": [
+        "service/support"
+    ]
+}

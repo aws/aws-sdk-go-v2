@@ -17314,6 +17314,18 @@ func awsAwsjson11_serializeDocumentBatchTransformInput(v *types.BatchTransformIn
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBestObjectiveNotImproving(v *types.BestObjectiveNotImproving, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxNumberOfTrainingJobsNotImproving != nil {
+		ok := object.Key("MaxNumberOfTrainingJobsNotImproving")
+		ok.Integer(*v.MaxNumberOfTrainingJobsNotImproving)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBias(v *types.Bias, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18171,6 +18183,18 @@ func awsAwsjson11_serializeDocumentContinuousParameterRangeSpecification(v *type
 	if v.MinValue != nil {
 		ok := object.Key("MinValue")
 		ok.String(*v.MinValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConvergenceDetected(v *types.ConvergenceDetected, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CompleteOnConvergence) > 0 {
+		ok := object.Key("CompleteOnConvergence")
+		ok.String(string(v.CompleteOnConvergence))
 	}
 
 	return nil
@@ -23657,6 +23681,11 @@ func awsAwsjson11_serializeDocumentResourceLimits(v *types.ResourceLimits, value
 		ok.Integer(v.MaxParallelTrainingJobs)
 	}
 
+	if v.MaxRuntimeInSeconds != nil {
+		ok := object.Key("MaxRuntimeInSeconds")
+		ok.Integer(*v.MaxRuntimeInSeconds)
+	}
+
 	return nil
 }
 
@@ -24851,6 +24880,20 @@ func awsAwsjson11_serializeDocumentTrialComponentStatus(v *types.TrialComponentS
 func awsAwsjson11_serializeDocumentTuningJobCompletionCriteria(v *types.TuningJobCompletionCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BestObjectiveNotImproving != nil {
+		ok := object.Key("BestObjectiveNotImproving")
+		if err := awsAwsjson11_serializeDocumentBestObjectiveNotImproving(v.BestObjectiveNotImproving, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConvergenceDetected != nil {
+		ok := object.Key("ConvergenceDetected")
+		if err := awsAwsjson11_serializeDocumentConvergenceDetected(v.ConvergenceDetected, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.TargetObjectiveMetricValue != nil {
 		ok := object.Key("TargetObjectiveMetricValue")

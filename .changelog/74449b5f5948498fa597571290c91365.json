@@ -1,0 +1,8 @@
+{
+    "id": "74449b5f-5948-498f-a597-571290c91365",
+    "type": "feature",
+    "description": "DigIF Expansion changes to the Customer APIs.",
+    "modules": [
+        "service/groundstation"
+    ]
+}

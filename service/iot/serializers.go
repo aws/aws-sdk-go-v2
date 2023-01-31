@@ -18352,6 +18352,11 @@ func awsRestjson1_serializeDocumentCloudwatchLogsAction(v *types.CloudwatchLogsA
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchMode != nil {
+		ok := object.Key("batchMode")
+		ok.Boolean(*v.BatchMode)
+	}
+
 	if v.LogGroupName != nil {
 		ok := object.Key("logGroupName")
 		ok.String(*v.LogGroupName)

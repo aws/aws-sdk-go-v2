@@ -230,6 +230,26 @@ func (m *validateOpDescribeEphemeris) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAgentConfiguration struct {
+}
+
+func (*validateOpGetAgentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetConfig struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterAgent struct {
+}
+
+func (*validateOpRegisterAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReserveContact struct {
 }
 
@@ -445,6 +485,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentStatus struct {
+}
+
+func (*validateOpUpdateAgentStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -554,6 +614,10 @@ func addOpDescribeEphemerisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEphemeris{}, middleware.After)
 }
 
+func addOpGetAgentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentConfiguration{}, middleware.After)
+}
+
 func addOpGetConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfig{}, middleware.After)
 }
@@ -586,6 +650,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpRegisterAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterAgent{}, middleware.After)
+}
+
 func addOpReserveContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReserveContact{}, middleware.After)
 }
@@ -598,6 +666,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentStatus{}, middleware.After)
+}
+
 func addOpUpdateConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfig{}, middleware.After)
 }
@@ -608,6 +680,52 @@ func addOpUpdateEphemerisValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateMissionProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMissionProfile{}, middleware.After)
+}
+
+func validateAgentDetails(v *types.AgentDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentDetails"}
+	if v.AgentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.InstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.ReservedCpuCores == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservedCpuCores"))
+	}
+	if v.ComponentVersions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentVersions"))
+	} else if v.ComponentVersions != nil {
+		if err := validateComponentVersionList(v.ComponentVersions); err != nil {
+			invalidParams.AddNested("ComponentVersions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregateStatus(v *types.AggregateStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregateStatus"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAntennaDownlinkConfig(v *types.AntennaDownlinkConfig) error {
@@ -688,6 +806,111 @@ func validateAntennaUplinkConfig(v *types.AntennaUplinkConfig) error {
 	}
 }
 
+func validateAwsGroundStationAgentEndpoint(v *types.AwsGroundStationAgentEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsGroundStationAgentEndpoint"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EgressAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EgressAddress"))
+	} else if v.EgressAddress != nil {
+		if err := validateConnectionDetails(v.EgressAddress); err != nil {
+			invalidParams.AddNested("EgressAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IngressAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngressAddress"))
+	} else if v.IngressAddress != nil {
+		if err := validateRangedConnectionDetails(v.IngressAddress); err != nil {
+			invalidParams.AddNested("IngressAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentStatusData(v *types.ComponentStatusData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentStatusData"}
+	if len(v.ComponentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentType"))
+	}
+	if v.CapabilityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityArn"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.DataflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentStatusList(v []types.ComponentStatusData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentStatusList"}
+	for i := range v {
+		if err := validateComponentStatusData(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentVersion(v *types.ComponentVersion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentVersion"}
+	if len(v.ComponentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentType"))
+	}
+	if v.Versions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentVersionList(v []types.ComponentVersion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentVersionList"}
+	for i := range v {
+		if err := validateComponentVersion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfigTypeData(v types.ConfigTypeData) error {
 	if v == nil {
 		return nil
@@ -729,6 +952,25 @@ func validateConfigTypeData(v types.ConfigTypeData) error {
 			invalidParams.AddNested("[uplinkEchoConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectionDetails(v *types.ConnectionDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectionDetails"}
+	if v.SocketAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SocketAddress"))
+	} else if v.SocketAddress != nil {
+		if err := validateSocketAddress(v.SocketAddress); err != nil {
+			invalidParams.AddNested("SocketAddress", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -799,6 +1041,27 @@ func validateDemodulationConfig(v *types.DemodulationConfig) error {
 	}
 }
 
+func validateDiscoveryData(v *types.DiscoveryData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DiscoveryData"}
+	if v.PublicIpAddresses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicIpAddresses"))
+	}
+	if v.PrivateIpAddresses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateIpAddresses"))
+	}
+	if v.CapabilityArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEirp(v *types.Eirp) error {
 	if v == nil {
 		return nil
@@ -830,6 +1093,11 @@ func validateEndpointDetails(v *types.EndpointDetails) error {
 	if v.Endpoint != nil {
 		if err := validateDataflowEndpoint(v.Endpoint); err != nil {
 			invalidParams.AddNested("Endpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AwsGroundStationAgentEndpoint != nil {
+		if err := validateAwsGroundStationAgentEndpoint(v.AwsGroundStationAgentEndpoint); err != nil {
+			invalidParams.AddNested("AwsGroundStationAgentEndpoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -903,6 +1171,65 @@ func validateFrequencyBandwidth(v *types.FrequencyBandwidth) error {
 	}
 	if len(v.Units) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Units"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntegerRange(v *types.IntegerRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntegerRange"}
+	if v.Minimum == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Minimum"))
+	}
+	if v.Maximum == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Maximum"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRangedConnectionDetails(v *types.RangedConnectionDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RangedConnectionDetails"}
+	if v.SocketAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SocketAddress"))
+	} else if v.SocketAddress != nil {
+		if err := validateRangedSocketAddress(v.SocketAddress); err != nil {
+			invalidParams.AddNested("SocketAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRangedSocketAddress(v *types.RangedSocketAddress) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RangedSocketAddress"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PortRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortRange"))
+	} else if v.PortRange != nil {
+		if err := validateIntegerRange(v.PortRange); err != nil {
+			invalidParams.AddNested("PortRange", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1319,6 +1646,21 @@ func validateOpDescribeEphemerisInput(v *DescribeEphemerisInput) error {
 	}
 }
 
+func validateOpGetAgentConfigurationInput(v *GetAgentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentConfigurationInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetConfigInput(v *GetConfigInput) error {
 	if v == nil {
 		return nil
@@ -1457,6 +1799,32 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpRegisterAgentInput(v *RegisterAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterAgentInput"}
+	if v.DiscoveryData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryData"))
+	} else if v.DiscoveryData != nil {
+		if err := validateDiscoveryData(v.DiscoveryData); err != nil {
+			invalidParams.AddNested("DiscoveryData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentDetails"))
+	} else if v.AgentDetails != nil {
+		if err := validateAgentDetails(v.AgentDetails); err != nil {
+			invalidParams.AddNested("AgentDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpReserveContactInput(v *ReserveContactInput) error {
 	if v == nil {
 		return nil
@@ -1512,6 +1880,38 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentStatusInput(v *UpdateAgentStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentStatusInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if v.AggregateStatus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregateStatus"))
+	} else if v.AggregateStatus != nil {
+		if err := validateAggregateStatus(v.AggregateStatus); err != nil {
+			invalidParams.AddNested("AggregateStatus", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComponentStatuses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentStatuses"))
+	} else if v.ComponentStatuses != nil {
+		if err := validateComponentStatusList(v.ComponentStatuses); err != nil {
+			invalidParams.AddNested("ComponentStatuses", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

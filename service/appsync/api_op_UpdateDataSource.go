@@ -56,6 +56,9 @@ type UpdateDataSourceInput struct {
 	// source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
+	// The new Amazon EventBridge settings.
+	EventBridgeConfig *types.EventBridgeDataSourceConfig
+
 	// The new HTTP endpoint configuration.
 	HttpConfig *types.HttpDataSourceConfig
 

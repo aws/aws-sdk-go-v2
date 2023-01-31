@@ -2155,6 +2155,18 @@ type BatchTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that keeps track of which training jobs launched by your
+// hyperparameter tuning job are not improving model performance as evaluated
+// against an objective function.
+type BestObjectiveNotImproving struct {
+
+	// The number of training jobs that have failed to improve model performance by 1%
+	// or greater over prior training jobs as evaluated against an objective function.
+	MaxNumberOfTrainingJobsNotImproving *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains bias metrics for a model.
 type Bias struct {
 
@@ -3047,6 +3059,17 @@ type ContinuousParameterRangeSpecification struct {
 	//
 	// This member is required.
 	MinValue *string
+
+	noSmithyDocumentSerde
+}
+
+// A flag to indicating that automatic model tuning (AMT) has detected model
+// convergence, defined as a lack of significant improvement (1% or less) against
+// an objective metric.
+type ConvergenceDetected struct {
+
+	// A flag to stop a tuning job once AMT has detected that the job has converged.
+	CompleteOnConvergence CompleteOnConvergence
 
 	noSmithyDocumentSerde
 }
@@ -6880,6 +6903,23 @@ type HyperParameterTuningInstanceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains runtime information about both current and completed
+// hyperparameter tuning jobs.
+type HyperParameterTuningJobCompletionDetails struct {
+
+	// The time in timestamp format that AMT detected model convergence, as defined by
+	// a lack of significant improvement over time based on criteria developed over a
+	// wide range of diverse benchmarking tests.
+	ConvergenceDetectedTime *time.Time
+
+	// The number of training jobs launched by a tuning job that are not improving (1%
+	// or less) as measured by model performance evaluated against an objective
+	// function.
+	NumberOfTrainingJobsObjectiveNotImproving int32
+
+	noSmithyDocumentSerde
+}
+
 // Configures a hyperparameter tuning job.
 type HyperParameterTuningJobConfig struct {
 
@@ -6935,6 +6975,15 @@ type HyperParameterTuningJobConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The total resources consumed by your hyperparameter tuning job.
+type HyperParameterTuningJobConsumedResources struct {
+
+	// The wall clock runtime in seconds used by your hyperparameter tuning job.
+	RuntimeInSeconds int32
+
+	noSmithyDocumentSerde
+}
+
 // Defines the objective metric for a hyperparameter tuning job. Hyperparameter
 // tuning uses the value of this metric to evaluate the training jobs it launches,
 // and returns the training job that results in either the highest or lowest value
@@ -6961,6 +7010,9 @@ type HyperParameterTuningJobSearchEntity struct {
 
 	// The container for the summary information about a training job.
 	BestTrainingJob *HyperParameterTrainingJobSummary
+
+	// The total amount of resources consumed by a hyperparameter tuning job.
+	ConsumedResources *HyperParameterTuningJobConsumedResources
 
 	// The time that a hyperparameter tuning job was created.
 	CreationTime *time.Time
@@ -7009,6 +7061,9 @@ type HyperParameterTuningJobSearchEntity struct {
 	// The numbers of training jobs launched by a hyperparameter tuning job,
 	// categorized by status.
 	TrainingJobStatusCounters *TrainingJobStatusCounters
+
+	// Information about either a current or completed hyperparameter tuning job.
+	TuningJobCompletionDetails *HyperParameterTuningJobCompletionDetails
 
 	// Specifies the configuration for a hyperparameter tuning job that uses one or
 	// more previous hyperparameter tuning jobs as a starting point. The results of
@@ -13115,6 +13170,10 @@ type ResourceLimits struct {
 	// The maximum number of training jobs that a hyperparameter tuning job can launch.
 	MaxNumberOfTrainingJobs *int32
 
+	// The maximum time in seconds that a training job launched by a hyperparameter
+	// tuning job can run.
+	MaxRuntimeInSeconds *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -15317,9 +15376,16 @@ type TrialSummary struct {
 // The job completion criteria.
 type TuningJobCompletionCriteria struct {
 
+	// A flag to stop your hyperparameter tuning job if model performance fails to
+	// improve as evaluated against an objective function.
+	BestObjectiveNotImproving *BestObjectiveNotImproving
+
+	// A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has
+	// detected that your model has converged as evaluated against your objective
+	// function.
+	ConvergenceDetected *ConvergenceDetected
+
 	// The value of the objective metric.
-	//
-	// This member is required.
 	TargetObjectiveMetricValue *float32
 
 	noSmithyDocumentSerde

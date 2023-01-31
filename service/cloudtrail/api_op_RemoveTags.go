@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from a trail or event data store.
+// Removes the specified tags from a trail, event data store, or channel.
 func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns ...func(*Options)) (*RemoveTagsOutput, error) {
 	if params == nil {
 		params = &RemoveTagsInput{}
@@ -27,14 +27,16 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 	return out, nil
 }
 
-// Specifies the tags to remove from a trail or event data store.
+// Specifies the tags to remove from a trail, event data store, or channel.
 type RemoveTagsInput struct {
 
-	// Specifies the ARN of the trail or event data store from which tags should be
-	// removed. Example trail ARN format:
+	// Specifies the ARN of the trail, event data store, or channel from which tags
+	// should be removed. Example trail ARN format:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail Example event data store
 	// ARN format:
 	// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	// Example channel ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	//
 	// This member is required.
 	ResourceId *string

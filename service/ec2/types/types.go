@@ -9930,6 +9930,16 @@ type NatGatewayAddress struct {
 	// associated with the NAT gateway.
 	AllocationId *string
 
+	// [Public NAT gateway only] The association ID of the Elastic IP address that's
+	// associated with the NAT gateway.
+	AssociationId *string
+
+	// The address failure message.
+	FailureMessage *string
+
+	// Defines if the IP address is the primary address.
+	IsPrimary *bool
+
 	// The ID of the network interface associated with the NAT gateway.
 	NetworkInterfaceId *string
 
@@ -9939,6 +9949,9 @@ type NatGatewayAddress struct {
 	// [Public NAT gateway only] The Elastic IP address associated with the NAT
 	// gateway.
 	PublicIp *string
+
+	// The address status.
+	Status NatGatewayAddressStatus
 
 	noSmithyDocumentSerde
 }

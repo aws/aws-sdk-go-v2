@@ -84,6 +84,9 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// the best current HyperParameterTuningJobObjective.
 	BestTrainingJob *types.HyperParameterTrainingJobSummary
 
+	// The total resources consumed by your hyperparameter tuning job.
+	ConsumedResources *types.HyperParameterTuningJobConsumedResources
+
 	// If the tuning job failed, the reason it failed.
 	FailureReason *string
 
@@ -107,6 +110,12 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// A list of the HyperParameterTrainingJobDefinition objects launched for this
 	// tuning job.
 	TrainingJobDefinitions []types.HyperParameterTrainingJobDefinition
+
+	// Tuning job completion information returned as the response from a hyperparameter
+	// tuning job. This information tells if your tuning job has or has not converged.
+	// It also includes the number of training jobs that have not improved model
+	// performance as evaluated against the objective function.
+	TuningJobCompletionDetails *types.HyperParameterTuningJobCompletionDetails
 
 	// The configuration for starting the hyperparameter parameter tuning job using one
 	// or more previous tuning jobs as a starting point. The results of previous tuning

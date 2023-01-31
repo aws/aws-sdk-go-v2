@@ -1,0 +1,8 @@
+{
+    "id": "a2eaf595-5f30-4ed1-a8d3-1752dab0a047",
+    "type": "feature",
+    "description": "This release introduces the feature to support EventBridge as AppSync data source.",
+    "modules": [
+        "service/appsync"
+    ]
+}

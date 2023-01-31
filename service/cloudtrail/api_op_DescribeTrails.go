@@ -54,9 +54,9 @@ type DescribeTrailsInput struct {
 	// returned.
 	//
 	// If one or more trail names are specified, information is returned
-	// only if the names match the names of trails belonging only to the current
-	// region. To return information about a trail in another region, you must specify
-	// its trail ARN.
+	// only if the names match the names of trails belonging only to the current region
+	// and current account. To return information about a trail in another region, you
+	// must specify its trail ARN.
 	TrailNameList []string
 
 	noSmithyDocumentSerde

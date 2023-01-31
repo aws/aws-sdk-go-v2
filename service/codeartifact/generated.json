@@ -14,6 +14,7 @@
         "api_op_CreateRepository.go",
         "api_op_DeleteDomain.go",
         "api_op_DeleteDomainPermissionsPolicy.go",
+        "api_op_DeletePackage.go",
         "api_op_DeletePackageVersions.go",
         "api_op_DeleteRepository.go",
         "api_op_DeleteRepositoryPermissionsPolicy.go",

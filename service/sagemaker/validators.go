@@ -7916,11 +7916,6 @@ func validateHyperParameterTuningJobConfig(v *types.HyperParameterTuningJobConfi
 			invalidParams.AddNested("ParameterRanges", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TuningJobCompletionCriteria != nil {
-		if err := validateTuningJobCompletionCriteria(v.TuningJobCompletionCriteria); err != nil {
-			invalidParams.AddNested("TuningJobCompletionCriteria", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10770,21 +10765,6 @@ func validateTrialComponentArtifacts(v map[string]types.TrialComponentArtifact) 
 		if err := validateTrialComponentArtifact(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTuningJobCompletionCriteria(v *types.TuningJobCompletionCriteria) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TuningJobCompletionCriteria"}
-	if v.TargetObjectiveMetricValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetObjectiveMetricValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

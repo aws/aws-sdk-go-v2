@@ -215,6 +215,7 @@ const (
 	DataSourceTypeHttp                    DataSourceType = "HTTP"
 	DataSourceTypeRelationalDatabase      DataSourceType = "RELATIONAL_DATABASE"
 	DataSourceTypeAmazonOpensearchService DataSourceType = "AMAZON_OPENSEARCH_SERVICE"
+	DataSourceTypeAmazonEventbridge       DataSourceType = "AMAZON_EVENTBRIDGE"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -229,6 +230,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"HTTP",
 		"RELATIONAL_DATABASE",
 		"AMAZON_OPENSEARCH_SERVICE",
+		"AMAZON_EVENTBRIDGE",
 	}
 }
 

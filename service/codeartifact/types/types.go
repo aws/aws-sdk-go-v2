@@ -120,19 +120,8 @@ type LicenseInfo struct {
 type PackageDependency struct {
 
 	// The type of a package dependency. The possible values depend on the package
-	// type.
-	//
-	// * npm: regular, dev, peer, optional
-	//
-	// * maven: optional, parent, compile,
-	// runtime, test, system, provided. Note that parent is not a regular Maven
-	// dependency type; instead this is extracted from the  element if one is defined
-	// in the package version's POM file.
-	//
-	// * nuget: The dependencyType field is never
-	// set for NuGet packages.
-	//
-	// * pypi: Requires-Dist
+	// type. Example types are compile, runtime, and test for Maven packages, and dev,
+	// prod, and optional for npm packages.
 	DependencyType *string
 
 	// The namespace of the package that this package depends on. The package component
@@ -217,10 +206,7 @@ type PackageOriginRestrictions struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a package, including its format, namespace, and name. The
-// ListPackages
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html)
-// operation returns a list of PackageSummary objects.
+// Details about a package, including its format, namespace, and name.
 type PackageSummary struct {
 
 	// The format of the package.

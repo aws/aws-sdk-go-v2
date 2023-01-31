@@ -1118,6 +1118,10 @@ type CloudwatchLogsAction struct {
 	// This member is required.
 	RoleArn *string
 
+	// Indicates whether batches of log records will be extracted and uploaded into
+	// CloudWatch. Values include true or false (default).
+	BatchMode *bool
+
 	noSmithyDocumentSerde
 }
 

@@ -15,6 +15,8 @@ import (
 // Returns a list of PackageVersionSummary
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 // objects for package versions in a repository that match the request parameters.
+// Package versions of all statuses will be returned by default when calling
+// list-package-versions with no --status parameter.
 func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVersionsInput, optFns ...func(*Options)) (*ListPackageVersionsOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionsInput{}

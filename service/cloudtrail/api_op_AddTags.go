@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to a trail or event data store, up to a limit of 50.
-// Overwrites an existing tag's value when a new value is specified for an existing
-// tag key. Tag key names must be unique for a trail; you cannot have two keys with
+// Adds one or more tags to a trail, event data store, or channel, up to a limit of
+// 50. Overwrites an existing tag's value when a new value is specified for an
+// existing tag key. Tag key names must be unique; you cannot have two keys with
 // the same name but different values. If you specify a key without a value, the
 // tag will be created with the specified key and a value of null. You can tag a
 // trail or event data store that applies to all Amazon Web Services Regions only
@@ -34,12 +34,16 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 	return out, nil
 }
 
-// Specifies the tags to add to a trail or event data store.
+// Specifies the tags to add to a trail, event data store, or channel.
 type AddTagsInput struct {
 
-	// Specifies the ARN of the trail or event data store to which one or more tags
-	// will be added. The format of a trail ARN is:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// Specifies the ARN of the trail, event data store, or channel to which one or
+	// more tags will be added. The format of a trail ARN is:
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail The format of an event
+	// data store ARN is:
+	// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	// The format of a channel ARN is:
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	//
 	// This member is required.
 	ResourceId *string

@@ -35957,6 +35957,50 @@ func awsAwsjson11_deserializeDocumentBatchTransformInput(v **types.BatchTransfor
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBestObjectiveNotImproving(v **types.BestObjectiveNotImproving, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BestObjectiveNotImproving
+	if *v == nil {
+		sv = &types.BestObjectiveNotImproving{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxNumberOfTrainingJobsNotImproving":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxNumberOfTrainingJobsNotImproving to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxNumberOfTrainingJobsNotImproving = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBias(v **types.Bias, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38901,6 +38945,46 @@ func awsAwsjson11_deserializeDocumentContinuousParameterRangeSpecification(v **t
 					return fmt.Errorf("expected ParameterValue to be of type string, got %T instead", value)
 				}
 				sv.MinValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConvergenceDetected(v **types.ConvergenceDetected, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConvergenceDetected
+	if *v == nil {
+		sv = &types.ConvergenceDetected{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CompleteOnConvergence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CompleteOnConvergence to be of type string, got %T instead", value)
+				}
+				sv.CompleteOnConvergence = types.CompleteOnConvergence(jtv)
 			}
 
 		default:
@@ -46979,6 +47063,66 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfigs(v *[]ty
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentHyperParameterTuningJobCompletionDetails(v **types.HyperParameterTuningJobCompletionDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperParameterTuningJobCompletionDetails
+	if *v == nil {
+		sv = &types.HyperParameterTuningJobCompletionDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConvergenceDetectedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ConvergenceDetectedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "NumberOfTrainingJobsObjectiveNotImproving":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfTrainingJobsObjectiveNotImproving = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentHyperParameterTuningJobConfig(v **types.HyperParameterTuningJobConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -47055,6 +47199,50 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobConfig(v **types.Hyp
 		case "TuningJobCompletionCriteria":
 			if err := awsAwsjson11_deserializeDocumentTuningJobCompletionCriteria(&sv.TuningJobCompletionCriteria, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTuningJobConsumedResources(v **types.HyperParameterTuningJobConsumedResources, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperParameterTuningJobConsumedResources
+	if *v == nil {
+		sv = &types.HyperParameterTuningJobConsumedResources{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RuntimeInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RuntimeInSeconds = int32(i64)
 			}
 
 		default:
@@ -47176,6 +47364,11 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobSearchEntity(v **typ
 				return err
 			}
 
+		case "ConsumedResources":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobConsumedResources(&sv.ConsumedResources, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -47292,6 +47485,11 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobSearchEntity(v **typ
 
 		case "TrainingJobStatusCounters":
 			if err := awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(&sv.TrainingJobStatusCounters, value); err != nil {
+				return err
+			}
+
+		case "TuningJobCompletionDetails":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobCompletionDetails(&sv.TuningJobCompletionDetails, value); err != nil {
 				return err
 			}
 
@@ -63806,6 +64004,19 @@ func awsAwsjson11_deserializeDocumentResourceLimits(v **types.ResourceLimits, va
 				sv.MaxParallelTrainingJobs = int32(i64)
 			}
 
+		case "MaxRuntimeInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected HyperParameterTuningMaxRuntimeInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRuntimeInSeconds = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 
@@ -69399,6 +69610,16 @@ func awsAwsjson11_deserializeDocumentTuningJobCompletionCriteria(v **types.Tunin
 
 	for key, value := range shape {
 		switch key {
+		case "BestObjectiveNotImproving":
+			if err := awsAwsjson11_deserializeDocumentBestObjectiveNotImproving(&sv.BestObjectiveNotImproving, value); err != nil {
+				return err
+			}
+
+		case "ConvergenceDetected":
+			if err := awsAwsjson11_deserializeDocumentConvergenceDetected(&sv.ConvergenceDetected, value); err != nil {
+				return err
+			}
+
 		case "TargetObjectiveMetricValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -76687,6 +76908,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeHyperParameterTuningJobOutput(v *
 				return err
 			}
 
+		case "ConsumedResources":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobConsumedResources(&sv.ConsumedResources, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -76798,6 +77024,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeHyperParameterTuningJobOutput(v *
 
 		case "TrainingJobStatusCounters":
 			if err := awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(&sv.TrainingJobStatusCounters, value); err != nil {
+				return err
+			}
+
+		case "TuningJobCompletionDetails":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobCompletionDetails(&sv.TuningJobCompletionDetails, value); err != nil {
 				return err
 			}
 

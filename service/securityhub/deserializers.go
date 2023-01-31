@@ -8743,6 +8743,80 @@ func awsRestjson1_deserializeDocumentAdminAccounts(v *[]types.AdminAccount, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssociatedStandard(v **types.AssociatedStandard, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssociatedStandard
+	if *v == nil {
+		sv = &types.AssociatedStandard{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StandardsId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StandardsId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociatedStandardsList(v *[]types.AssociatedStandard, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssociatedStandard
+	if *v == nil {
+		cv = []types.AssociatedStandard{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssociatedStandard
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssociatedStandard(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAvailabilityZone(v **types.AvailabilityZone, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -40637,6 +40711,16 @@ func awsRestjson1_deserializeDocumentAwsSecurityFindingFilters(v **types.AwsSecu
 				return err
 			}
 
+		case "ComplianceAssociatedStandardsId":
+			if err := awsRestjson1_deserializeDocumentStringFilterList(&sv.ComplianceAssociatedStandardsId, value); err != nil {
+				return err
+			}
+
+		case "ComplianceSecurityControlId":
+			if err := awsRestjson1_deserializeDocumentStringFilterList(&sv.ComplianceSecurityControlId, value); err != nil {
+				return err
+			}
+
 		case "ComplianceStatus":
 			if err := awsRestjson1_deserializeDocumentStringFilterList(&sv.ComplianceStatus, value); err != nil {
 				return err
@@ -44835,9 +44919,23 @@ func awsRestjson1_deserializeDocumentCompliance(v **types.Compliance, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "AssociatedStandards":
+			if err := awsRestjson1_deserializeDocumentAssociatedStandardsList(&sv.AssociatedStandards, value); err != nil {
+				return err
+			}
+
 		case "RelatedRequirements":
 			if err := awsRestjson1_deserializeDocumentRelatedRequirementsList(&sv.RelatedRequirements, value); err != nil {
 				return err
+			}
+
+		case "SecurityControlId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SecurityControlId = ptr.String(jtv)
 			}
 
 		case "Status":

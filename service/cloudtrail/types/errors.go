@@ -34,8 +34,8 @@ func (e *AccountHasOngoingImportException) ErrorCode() string {
 }
 func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when when the specified account is not found or not
-// part of an organization.
+// This exception is thrown when the specified account is not found or not part of
+// an organization.
 type AccountNotFoundException struct {
 	Message *string
 
@@ -144,6 +144,32 @@ func (e *CannotDelegateManagementAccountException) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// This exception is thrown when the provided channel already exists.
+type ChannelAlreadyExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ChannelAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ChannelAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the specified value of ChannelARN is not valid.
 type ChannelARNInvalidException struct {
 	Message *string
@@ -170,7 +196,60 @@ func (e *ChannelARNInvalidException) ErrorCode() string {
 }
 func (e *ChannelARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified channel was not found.
+// This exception is thrown when the specified event data store cannot yet be
+// deleted because it is in use by a channel.
+type ChannelExistsForEDSException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelExistsForEDSException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelExistsForEDSException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelExistsForEDSException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ChannelExistsForEDSException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ChannelExistsForEDSException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the maximum number of channels limit is exceeded.
+type ChannelMaxLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelMaxLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelMaxLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelMaxLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ChannelMaxLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ChannelMaxLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when CloudTrail cannot find the specified channel.
 type ChannelNotFoundException struct {
 	Message *string
 
@@ -231,7 +310,13 @@ func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 
 // This exception is thrown when an operation is called with a trail ARN that is
 // not valid. The following is the format of a trail ARN.
-// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail This exception is also
+// thrown when you call AddTags or RemoveTags on a trail, event data store, or
+// channel with a resource ARN that is not valid. The following is the format of an
+// event data store ARN:
+// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+// The following is the format of a channel ARN:
+// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 type CloudTrailARNInvalidException struct {
 	Message *string
 
@@ -318,8 +403,9 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFa
 
 // This exception is thrown when the specified resource is not ready for an
 // operation. This can occur when you try to run an operation on a resource before
-// CloudTrail has time to fully load the resource. If this exception occurs, wait a
-// few minutes, and then try the operation again.
+// CloudTrail has time to fully load the resource, or because another operation is
+// modifying the resource. If this exception occurs, wait a few minutes, and then
+// try the operation again.
 type ConflictException struct {
 	Message *string
 
@@ -1360,6 +1446,32 @@ func (e *InvalidSnsTopicNameException) ErrorCode() string {
 }
 func (e *InvalidSnsTopicNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when the specified value of Source is not valid.
+type InvalidSourceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidSourceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidSourceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidSourceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidSourceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the specified tag key or values are not valid. It
 // can also occur if there are duplicate tags or too many tags on the resource.
 type InvalidTagParameterException struct {
@@ -1820,6 +1932,34 @@ func (e *QueryIdNotFoundException) ErrorCode() string {
 }
 func (e *QueryIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when the provided resource does not exist, or the ARN
+// format of the resource is not valid. The following is the valid format for a
+// resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel.
+type ResourceARNNotValidException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceARNNotValidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceARNNotValidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceARNNotValidException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceARNNotValidException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceARNNotValidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
@@ -1845,6 +1985,69 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the specified resource policy is not found.
+type ResourcePolicyNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourcePolicyNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the resouce-based policy has syntax errors, or
+// contains a principal that is not valid. The following are requirements for the
+// resource policy:
+//
+// * Contains only one action: cloudtrail-data:PutAuditEvents
+//
+// *
+// Contains at least one statement. The policy can have a maximum of 20
+// statements.
+//
+// * Each statement contains at least one principal. A statement can
+// have a maximum of 50 principals.
+type ResourcePolicyNotValidException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyNotValidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyNotValidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyNotValidException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourcePolicyNotValidException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourcePolicyNotValidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified resource type is not supported by
 // CloudTrail.
@@ -1899,8 +2102,8 @@ func (e *S3BucketDoesNotExistException) ErrorCode() string {
 }
 func (e *S3BucketDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of tags per trail has exceeded the permitted amount. Currently, the
-// limit is 50.
+// The number of tags per trail, event data store, or channel has exceeded the
+// permitted amount. Currently, the limit is 50.
 type TagsLimitExceededException struct {
 	Message *string
 

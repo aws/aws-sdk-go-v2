@@ -230,6 +230,26 @@ func (m *validateOpAssignPrivateIpAddresses) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssignPrivateNatGatewayAddress struct {
+}
+
+func (*validateOpAssignPrivateNatGatewayAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssignPrivateNatGatewayAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssignPrivateNatGatewayAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssignPrivateNatGatewayAddressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateClientVpnTargetNetwork struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpAssociateIpamResourceDiscovery) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateIpamResourceDiscoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateNatGatewayAddress struct {
+}
+
+func (*validateOpAssociateNatGatewayAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateNatGatewayAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateNatGatewayAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateNatGatewayAddressInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4470,6 +4510,26 @@ func (m *validateOpDisassociateIpamResourceDiscovery) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateNatGatewayAddress struct {
+}
+
+func (*validateOpDisassociateNatGatewayAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateNatGatewayAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateNatGatewayAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateNatGatewayAddressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateRouteTable struct {
 }
 
@@ -7930,6 +7990,26 @@ func (m *validateOpUnassignPrivateIpAddresses) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUnassignPrivateNatGatewayAddress struct {
+}
+
+func (*validateOpUnassignPrivateNatGatewayAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnassignPrivateNatGatewayAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnassignPrivateNatGatewayAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnassignPrivateNatGatewayAddressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUnmonitorInstances struct {
 }
 
@@ -8014,6 +8094,10 @@ func addOpAssignPrivateIpAddressesValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpAssignPrivateIpAddresses{}, middleware.After)
 }
 
+func addOpAssignPrivateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssignPrivateNatGatewayAddress{}, middleware.After)
+}
+
 func addOpAssociateClientVpnTargetNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateClientVpnTargetNetwork{}, middleware.After)
 }
@@ -8032,6 +8116,10 @@ func addOpAssociateInstanceEventWindowValidationMiddleware(stack *middleware.Sta
 
 func addOpAssociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateIpamResourceDiscovery{}, middleware.After)
+}
+
+func addOpAssociateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateNatGatewayAddress{}, middleware.After)
 }
 
 func addOpAssociateRouteTableValidationMiddleware(stack *middleware.Stack) error {
@@ -8862,6 +8950,10 @@ func addOpDisassociateIpamResourceDiscoveryValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDisassociateIpamResourceDiscovery{}, middleware.After)
 }
 
+func addOpDisassociateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateNatGatewayAddress{}, middleware.After)
+}
+
 func addOpDisassociateRouteTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateRouteTable{}, middleware.After)
 }
@@ -9552,6 +9644,10 @@ func addOpUnassignIpv6AddressesValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUnassignPrivateIpAddressesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUnassignPrivateIpAddresses{}, middleware.After)
+}
+
+func addOpUnassignPrivateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnassignPrivateNatGatewayAddress{}, middleware.After)
 }
 
 func addOpUnmonitorInstancesValidationMiddleware(stack *middleware.Stack) error {
@@ -10551,6 +10647,21 @@ func validateOpAssignPrivateIpAddressesInput(v *AssignPrivateIpAddressesInput) e
 	}
 }
 
+func validateOpAssignPrivateNatGatewayAddressInput(v *AssignPrivateNatGatewayAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssignPrivateNatGatewayAddressInput"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateClientVpnTargetNetworkInput(v *AssociateClientVpnTargetNetworkInput) error {
 	if v == nil {
 		return nil
@@ -10633,6 +10744,24 @@ func validateOpAssociateIpamResourceDiscoveryInput(v *AssociateIpamResourceDisco
 	}
 	if v.IpamResourceDiscoveryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateNatGatewayAddressInput(v *AssociateNatGatewayAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateNatGatewayAddressInput"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if v.AllocationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14121,6 +14250,24 @@ func validateOpDisassociateIpamResourceDiscoveryInput(v *DisassociateIpamResourc
 	}
 }
 
+func validateOpDisassociateNatGatewayAddressInput(v *DisassociateNatGatewayAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateNatGatewayAddressInput"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if v.AssociationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateRouteTableInput(v *DisassociateRouteTableInput) error {
 	if v == nil {
 		return nil
@@ -17039,6 +17186,24 @@ func validateOpUnassignPrivateIpAddressesInput(v *UnassignPrivateIpAddressesInpu
 	invalidParams := smithy.InvalidParamsError{Context: "UnassignPrivateIpAddressesInput"}
 	if v.NetworkInterfaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUnassignPrivateNatGatewayAddressInput(v *UnassignPrivateNatGatewayAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnassignPrivateNatGatewayAddressInput"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if v.PrivateIpAddresses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateIpAddresses"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

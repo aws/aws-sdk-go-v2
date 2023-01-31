@@ -8916,6 +8916,11 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				return err
 			}
 
+		case "eventBridgeConfig":
+			if err := awsRestjson1_deserializeDocumentEventBridgeDataSourceConfig(&sv.EventBridgeConfig, value); err != nil {
+				return err
+			}
+
 		case "httpConfig":
 			if err := awsRestjson1_deserializeDocumentHttpDataSourceConfig(&sv.HttpConfig, value); err != nil {
 				return err
@@ -9377,6 +9382,46 @@ func awsRestjson1_deserializeDocumentEvaluateCodeErrorDetail(v **types.EvaluateC
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEventBridgeDataSourceConfig(v **types.EventBridgeDataSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventBridgeDataSourceConfig
+	if *v == nil {
+		sv = &types.EventBridgeDataSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eventBusArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EventBusArn = ptr.String(jtv)
 			}
 
 		default:

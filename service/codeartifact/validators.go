@@ -130,6 +130,26 @@ func (m *validateOpDeleteDomainPermissionsPolicy) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePackage struct {
+}
+
+func (*validateOpDeletePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePackageVersions struct {
 }
 
@@ -714,6 +734,10 @@ func addOpDeleteDomainPermissionsPolicyValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDeleteDomainPermissionsPolicy{}, middleware.After)
 }
 
+func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePackage{}, middleware.After)
+}
+
 func addOpDeletePackageVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePackageVersions{}, middleware.After)
 }
@@ -1029,6 +1053,30 @@ func validateOpDeleteDomainPermissionsPolicyInput(v *DeleteDomainPermissionsPoli
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainPermissionsPolicyInput"}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePackageInput(v *DeletePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

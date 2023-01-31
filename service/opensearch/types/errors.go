@@ -7,8 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// An error occurred because user does not have permissions to access the resource.
-// Returns HTTP status code 403.
+// An error occurred because you don't have permissions to access the resource.
 type AccessDeniedException struct {
 	Message *string
 
@@ -60,8 +59,8 @@ func (e *BaseException) ErrorCode() string {
 }
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred because the client attempts to remove a resource that is
-// currently in use. Returns HTTP status code 409.
+// An error occurred because the client attempts to remove a resource that's
+// currently in use.
 type ConflictException struct {
 	Message *string
 
@@ -87,8 +86,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occured because the client wanted to access a not supported operation.
-// Gives http status code of 409.
+// An error occured because the client wanted to access an unsupported operation.
 type DisabledOperationException struct {
 	Message *string
 
@@ -114,9 +112,8 @@ func (e *DisabledOperationException) ErrorCode() string {
 }
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request processing has failed because of an unknown error, exception or
-// failure (the failure is internal to the service) . Gives http status code of
-// 500.
+// Request processing failed because of an unknown error, exception, or internal
+// failure.
 type InternalException struct {
 	Message *string
 
@@ -142,8 +139,8 @@ func (e *InternalException) ErrorCode() string {
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request processing has failed because of invalid pagination token provided
-// by customer. Returns an HTTP status code of 400.
+// The request processing has failed because you provided an invalid pagination
+// token.
 type InvalidPaginationTokenException struct {
 	Message *string
 
@@ -169,8 +166,8 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for trying to create or access sub-resource that is either invalid
-// or not supported. Gives http status code of 409.
+// An exception for trying to create or access a sub-resource that's either invalid
+// or not supported.
 type InvalidTypeException struct {
 	Message *string
 
@@ -196,8 +193,8 @@ func (e *InvalidTypeException) ErrorCode() string {
 }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for trying to create more than allowed resources or sub-resources.
-// Gives http status code of 409.
+// An exception for trying to create more than the allowed number of resources or
+// sub-resources.
 type LimitExceededException struct {
 	Message *string
 
@@ -223,8 +220,7 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for creating a resource that already exists. Gives http status code
-// of 400.
+// An exception for creating a resource that already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
 
@@ -250,8 +246,7 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for accessing or deleting a resource that does not exist. Gives
-// http status code of 400.
+// An exception for accessing or deleting a resource that doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -277,7 +272,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for missing / invalid input fields. Gives http status code of 400.
+// An exception for missing or invalid input fields.
 type ValidationException struct {
 	Message *string
 

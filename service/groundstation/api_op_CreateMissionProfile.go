@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +60,12 @@ type CreateMissionProfileInput struct {
 	// Amount of time prior to contact start you’d like to receive a CloudWatch event
 	// indicating an upcoming pass.
 	ContactPrePassDurationSeconds *int32
+
+	// KMS key to use for encrypting streams.
+	StreamsKmsKey types.KmsKey
+
+	// Role to use for encrypting streams with KMS key.
+	StreamsKmsRole *string
 
 	// Tags assigned to a mission profile.
 	Tags map[string]string

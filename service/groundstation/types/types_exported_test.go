@@ -117,3 +117,25 @@ func ExampleEphemerisTypeDescription_outputUsage() {
 }
 
 var _ *types.EphemerisDescription
+
+func ExampleKmsKey_outputUsage() {
+	var union types.KmsKey
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.KmsKeyMemberKmsAliasArn:
+		_ = v.Value // Value is string
+
+	case *types.KmsKeyMemberKmsKeyArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string

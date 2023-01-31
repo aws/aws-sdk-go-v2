@@ -35,10 +35,19 @@ type CreateEventDataStoreInput struct {
 	// This member is required.
 	Name *string
 
-	// The advanced event selectors to use to select the events for the data store. For
-	// more information about how to use advanced event selectors, see Log events by
-	// using advanced event selectors
+	// The advanced event selectors to use to select the events for the data store. You
+	// can configure up to five advanced event selectors for each event data store. For
+	// more information about how to use advanced event selectors to log CloudTrail
+	// events, see Log events by using advanced event selectors
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced)
+	// in the CloudTrail User Guide. For more information about how to use advanced
+	// event selectors to include Config configuration items in your event data store,
+	// see Create an event data store for Config configuration items
+	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config)
+	// in the CloudTrail User Guide. For more information about how to use advanced
+	// event selectors to include non-Amazon Web Services events in your event data
+	// store, see Create an integration to log events from outside Amazon Web Services
+	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration)
 	// in the CloudTrail User Guide.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 

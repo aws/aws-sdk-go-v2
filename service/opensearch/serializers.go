@@ -598,6 +598,11 @@ func awsRestjson1_serializeOpDocumentCreateOutboundConnectionInput(v *CreateOutb
 		ok.String(*v.ConnectionAlias)
 	}
 
+	if len(v.ConnectionMode) > 0 {
+		ok := object.Key("ConnectionMode")
+		ok.String(string(v.ConnectionMode))
+	}
+
 	if v.LocalDomainInfo != nil {
 		ok := object.Key("LocalDomainInfo")
 		if err := awsRestjson1_serializeDocumentDomainInformationContainer(v.LocalDomainInfo, ok); err != nil {

@@ -25,7 +25,10 @@ import (
 // attached to the source S3 bucket. For more information about disabling ACLs, see
 // Controlling ownership of objects and disabling ACLs for your bucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html).
-// When you retry an import, the ImportID parameter is required.
+// When you retry an import, the ImportID parameter is required. If the destination
+// event data store is for an organization, you must use the management account to
+// import trail events. You cannot use the delegated administrator account for the
+// organization.
 func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optFns ...func(*Options)) (*StartImportOutput, error) {
 	if params == nil {
 		params = &StartImportInput{}

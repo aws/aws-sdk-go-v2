@@ -60,11 +60,12 @@ type UpdateTrailInput struct {
 
 	// Specifies a log group name using an Amazon Resource Name (ARN), a unique
 	// identifier that represents the log group to which CloudTrail logs are delivered.
-	// Not required unless you specify CloudWatchLogsRoleArn.
+	// You must use a log group that exists in your account. Not required unless you
+	// specify CloudWatchLogsRoleArn.
 	CloudWatchLogsLogGroupArn *string
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to a
-	// user's log group.
+	// user's log group. You must use a role that exists in your account.
 	CloudWatchLogsRoleArn *string
 
 	// Specifies whether log file validation is enabled. The default is false. When you
@@ -94,12 +95,13 @@ type UpdateTrailInput struct {
 	// Specifies whether the trail is applied to all accounts in an organization in
 	// Organizations, or only for the current Amazon Web Services account. The default
 	// is false, and cannot be true unless the call is made on behalf of an Amazon Web
-	// Services account that is the management account for an organization in
-	// Organizations. If the trail is not an organization trail and this is set to
-	// true, the trail will be created in all Amazon Web Services accounts that belong
-	// to the organization. If the trail is an organization trail and this is set to
-	// false, the trail will remain in the current Amazon Web Services account but be
-	// deleted from all member accounts in the organization.
+	// Services account that is the management account or delegated administrator
+	// account for an organization in Organizations. If the trail is not an
+	// organization trail and this is set to true, the trail will be created in all
+	// Amazon Web Services accounts that belong to the organization. If the trail is an
+	// organization trail and this is set to false, the trail will remain in the
+	// current Amazon Web Services account but be deleted from all member accounts in
+	// the organization.
 	IsOrganizationTrail *bool
 
 	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The

@@ -16,9 +16,13 @@ import (
 // ID portion of the ARN. Other parameters are optional, but at least one optional
 // parameter must be specified, or CloudTrail throws an error. RetentionPeriod is
 // in days, and valid values are integers between 90 and 2557. By default,
-// TerminationProtection is enabled. AdvancedEventSelectors includes or excludes
-// management and data events in your event data store; for more information about
-// AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+// TerminationProtection is enabled. For event data stores for CloudTrail events,
+// AdvancedEventSelectors includes or excludes management and data events in your
+// event data store. For more information about AdvancedEventSelectors, see
+// PutEventSelectorsRequest$AdvancedEventSelectors. For event data stores for
+// Config configuration items, Audit Manager evidence, or non-Amazon Web Services
+// events, AdvancedEventSelectors includes events of that type in your event data
+// store.
 func (c *Client) UpdateEventDataStore(ctx context.Context, params *UpdateEventDataStoreInput, optFns ...func(*Options)) (*UpdateEventDataStoreOutput, error) {
 	if params == nil {
 		params = &UpdateEventDataStoreInput{}

@@ -12,11 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the channels in the current account, and their source names. Amazon Web
-// Services services create service-linked channels get information about
-// CloudTrail events on your behalf. For more information about service-linked
-// channels, see Viewing service-linked channels for CloudTrail by using the CLI
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html).
+// Lists the channels in the current account, and their source names.
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}

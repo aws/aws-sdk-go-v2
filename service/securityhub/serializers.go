@@ -3997,6 +3997,31 @@ func awsRestjson1_serializeDocumentArnList(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssociatedStandard(v *types.AssociatedStandard, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StandardsId != nil {
+		ok := object.Key("StandardsId")
+		ok.String(*v.StandardsId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociatedStandardsList(v []types.AssociatedStandard, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssociatedStandard(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailabilityZone(v *types.AvailabilityZone, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18738,6 +18763,20 @@ func awsRestjson1_serializeDocumentAwsSecurityFindingFilters(v *types.AwsSecurit
 		}
 	}
 
+	if v.ComplianceAssociatedStandardsId != nil {
+		ok := object.Key("ComplianceAssociatedStandardsId")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.ComplianceAssociatedStandardsId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ComplianceSecurityControlId != nil {
+		ok := object.Key("ComplianceSecurityControlId")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.ComplianceSecurityControlId, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ComplianceStatus != nil {
 		ok := object.Key("ComplianceStatus")
 		if err := awsRestjson1_serializeDocumentStringFilterList(v.ComplianceStatus, ok); err != nil {
@@ -20906,11 +20945,23 @@ func awsRestjson1_serializeDocumentCompliance(v *types.Compliance, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssociatedStandards != nil {
+		ok := object.Key("AssociatedStandards")
+		if err := awsRestjson1_serializeDocumentAssociatedStandardsList(v.AssociatedStandards, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RelatedRequirements != nil {
 		ok := object.Key("RelatedRequirements")
 		if err := awsRestjson1_serializeDocumentRelatedRequirementsList(v.RelatedRequirements, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SecurityControlId != nil {
+		ok := object.Key("SecurityControlId")
+		ok.String(*v.SecurityControlId)
 	}
 
 	if len(v.Status) > 0 {

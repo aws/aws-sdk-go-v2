@@ -1121,6 +1121,24 @@ func (CompilationJobStatus) Values() []CompilationJobStatus {
 	}
 }
 
+type CompleteOnConvergence string
+
+// Enum values for CompleteOnConvergence
+const (
+	CompleteOnConvergenceDisabled CompleteOnConvergence = "Disabled"
+	CompleteOnConvergenceEnabled  CompleteOnConvergence = "Enabled"
+)
+
+// Values returns all known values for CompleteOnConvergence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CompleteOnConvergence) Values() []CompleteOnConvergence {
+	return []CompleteOnConvergence{
+		"Disabled",
+		"Enabled",
+	}
+}
+
 type CompressionType string
 
 // Enum values for CompressionType
