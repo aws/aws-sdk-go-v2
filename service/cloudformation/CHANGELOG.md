@@ -1,3 +1,7 @@
+# v1.26.0 (2023-01-30)
+
+* **Feature**: This feature provides a method of obtaining which regions a stackset has stack instances deployed in.
+
 # v1.25.1 (2023-01-23)
 
 * No change notes available for this release.

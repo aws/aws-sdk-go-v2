@@ -29,16 +29,19 @@ func (c *Client) ModifyLocalGatewayRoute(ctx context.Context, params *ModifyLoca
 
 type ModifyLocalGatewayRouteInput struct {
 
-	// The CIDR block used for destination matches. The value that you provide must
-	// match the CIDR of an existing route in the table.
-	//
-	// This member is required.
-	DestinationCidrBlock *string
-
 	// The ID of the local gateway route table.
 	//
 	// This member is required.
 	LocalGatewayRouteTableId *string
+
+	// The CIDR block used for destination matches. The value that you provide must
+	// match the CIDR of an existing route in the table.
+	DestinationCidrBlock *string
+
+	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock.
+	// You cannot use DestinationPrefixListId and DestinationCidrBlock in the same
+	// request.
+	DestinationPrefixListId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

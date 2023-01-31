@@ -9959,6 +9959,21 @@ func validateInstanceRequirementsWithMetadataRequest(v *types.InstanceRequiremen
 	}
 }
 
+func validateInstanceSpecification(v *types.InstanceSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceSpecification"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIntegrateServices(v *types.IntegrateServices) error {
 	if v == nil {
 		return nil
@@ -11496,9 +11511,6 @@ func validateOpCreateLocalGatewayRouteInput(v *CreateLocalGatewayRouteInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocalGatewayRouteInput"}
-	if v.DestinationCidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationCidrBlock"))
-	}
 	if v.LocalGatewayRouteTableId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocalGatewayRouteTableId"))
 	}
@@ -11842,6 +11854,10 @@ func validateOpCreateSnapshotsInput(v *CreateSnapshotsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotsInput"}
 	if v.InstanceSpecification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceSpecification"))
+	} else if v.InstanceSpecification != nil {
+		if err := validateInstanceSpecification(v.InstanceSpecification); err != nil {
+			invalidParams.AddNested("InstanceSpecification", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12627,9 +12643,6 @@ func validateOpDeleteLocalGatewayRouteInput(v *DeleteLocalGatewayRouteInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLocalGatewayRouteInput"}
-	if v.DestinationCidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationCidrBlock"))
-	}
 	if v.LocalGatewayRouteTableId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocalGatewayRouteTableId"))
 	}
@@ -15525,9 +15538,6 @@ func validateOpModifyLocalGatewayRouteInput(v *ModifyLocalGatewayRouteInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyLocalGatewayRouteInput"}
-	if v.DestinationCidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationCidrBlock"))
-	}
 	if v.LocalGatewayRouteTableId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocalGatewayRouteTableId"))
 	}

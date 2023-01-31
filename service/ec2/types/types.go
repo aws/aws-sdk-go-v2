@@ -6772,6 +6772,11 @@ type InstanceRequirementsWithMetadataRequest struct {
 // The instance details to specify which volumes should be snapshotted.
 type InstanceSpecification struct {
 
+	// The instance to specify which volumes should be snapshotted.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// Excludes the root volume from being snapshotted.
 	ExcludeBootVolume *bool
 
@@ -6780,9 +6785,6 @@ type InstanceSpecification struct {
 	// root volume, use ExcludeBootVolume. You can specify up to 40 volume IDs per
 	// request.
 	ExcludeDataVolumeIds []string
-
-	// The instance to specify which volumes should be snapshotted.
-	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -9283,6 +9285,9 @@ type LocalGatewayRoute struct {
 
 	// The CIDR block used for destination matches.
 	DestinationCidrBlock *string
+
+	// The ID of the prefix list.
+	DestinationPrefixListId *string
 
 	// The Amazon Resource Name (ARN) of the local gateway route table.
 	LocalGatewayRouteTableArn *string

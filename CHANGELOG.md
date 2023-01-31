@@ -1,3 +1,11 @@
+# Release (2023-01-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.26.0](service/cloudformation/CHANGELOG.md#v1260-2023-01-30)
+  * **Feature**: This feature provides a method of obtaining which regions a stackset has stack instances deployed in.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.82.0](service/ec2/CHANGELOG.md#v1820-2023-01-30)
+  * **Feature**: We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route.
+
 # Release (2023-01-27)
 
 ## Module Highlights

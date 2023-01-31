@@ -35,16 +35,19 @@ func (c *Client) CreateLocalGatewayRoute(ctx context.Context, params *CreateLoca
 
 type CreateLocalGatewayRouteInput struct {
 
-	// The CIDR range used for destination matches. Routing decisions are based on the
-	// most specific match.
-	//
-	// This member is required.
-	DestinationCidrBlock *string
-
 	// The ID of the local gateway route table.
 	//
 	// This member is required.
 	LocalGatewayRouteTableId *string
+
+	// The CIDR range used for destination matches. Routing decisions are based on the
+	// most specific match.
+	DestinationCidrBlock *string
+
+	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock.
+	// You cannot use DestinationPrefixListId and DestinationCidrBlock in the same
+	// request.
+	DestinationPrefixListId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

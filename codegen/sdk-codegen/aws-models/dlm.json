@@ -229,6 +229,9 @@
                         "smithy.api#documentation": "<p>The tags to apply to the lifecycle policy during creation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#CreateLifecyclePolicyResponse": {
@@ -240,6 +243,9 @@
                         "smithy.api#documentation": "<p>The identifier of the lifecycle policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dlm#CreateRule": {
@@ -248,7 +254,7 @@
                 "Location": {
                     "target": "com.amazonaws.dlm#LocationValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies the destination for snapshots created by the policy. To create \n\t\t\tsnapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create \n\t\t\tsnapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. \n\t\t\tIf you omit this parameter, <code>CLOUD</code> is used by default.</p>\n\t\t       <p>If the policy targets resources in an Amazon Web Services Region, then you must create \n\t\t\tsnapshots in the same Region as the source resource. If the policy targets resources on an \n\t\t\tOutpost, then you can create snapshots on the same Outpost as the source resource, or in \n\t\t\tthe Region of that Outpost.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies the destination for snapshots created by the policy. To create \n\t\t\tsnapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create \n\t\t\tsnapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. \n\t\t\tIf you omit this parameter, <code>CLOUD</code> is used by default.</p>\n         <p>If the policy targets resources in an Amazon Web Services Region, then you must create \n\t\t\tsnapshots in the same Region as the source resource. If the policy targets resources on an \n\t\t\tOutpost, then you can create snapshots on the same Outpost as the source resource, or in \n\t\t\tthe Region of that Outpost.</p>"
                     }
                 },
                 "Interval": {
@@ -267,7 +273,7 @@
                 "Times": {
                     "target": "com.amazonaws.dlm#TimesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p>\n\t\t       <p>The operation occurs within a one-hour window following the specified time. If you do\n\t\t\tnot specify a time, Amazon Data Lifecycle Manager selects a time within the next 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p>\n         <p>The operation occurs within a one-hour window following the specified time. If you do\n\t\t\tnot specify a time, Amazon Data Lifecycle Manager selects a time within the next 24 hours.</p>"
                     }
                 },
                 "CronExpression": {
@@ -278,7 +284,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n\t\t       <note>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>If you need to specify an <a>ArchiveRule</a> for the schedule, then you must\n\t\t\t\t\t\tspecify a creation frequency of at least 28 days.</p>\n\t\t\t\t           </li>\n            </ul>\t\t\t\n\t\t       </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n               </li>\n               <li>\n                  <p>If you need to specify an <a>ArchiveRule</a> for the schedule, then you must\n\t\t\t\t\t\tspecify a creation frequency of at least 28 days.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CronExpression": {
@@ -313,7 +319,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Event-based policies only]</b> Specifies a cross-Region copy action for event-based policies.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>To specify a cross-Region copy rule for snapshot and AMI policies, use \n\t\t\t\t<a>CrossRegionCopyRule</a>.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Event-based policies only]</b> Specifies a cross-Region copy action for event-based policies.</p>\n         <note>\n            <p>To specify a cross-Region copy rule for snapshot and AMI policies, use \n\t\t\t\t<a>CrossRegionCopyRule</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyActionList": {
@@ -376,13 +382,13 @@
                 "TargetRegion": {
                     "target": "com.amazonaws.dlm#TargetRegion",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n\t\t\t         <p>Avoid using this parameter when creating new policies. Instead, use \n\t\t\t\t<b>Target</b> to specify a target Region or a target \n\t\t\t\tOutpost for snapshot copies.</p>\n\t\t\t         <p>For policies created before the <b>Target</b> parameter \n\t\t\t\twas introduced, this parameter indicates the target Region for snapshot copies.</p>\t\t\t\n\t\t       </note>"
+                        "smithy.api#documentation": "<note>\n            <p>Avoid using this parameter when creating new policies. Instead, use \n\t\t\t\t<b>Target</b> to specify a target Region or a target \n\t\t\t\tOutpost for snapshot copies.</p>\n            <p>For policies created before the <b>Target</b> parameter \n\t\t\t\twas introduced, this parameter indicates the target Region for snapshot copies.</p>\n         </note>"
                     }
                 },
                 "Target": {
                     "target": "com.amazonaws.dlm#Target",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>\n\t\t       <p>Use this parameter instead of <b>TargetRegion</b>. Do not \n\t\t\tspecify both.</p>"
+                        "smithy.api#documentation": "<p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>\n         <p>Use this parameter instead of <b>TargetRegion</b>. Do not \n\t\t\tspecify both.</p>"
                     }
                 },
                 "Encrypted": {
@@ -418,7 +424,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a cross-Region copy rule for snapshot and AMI policies.</p>\n\t\t       <note>\n\t\t\t         <p>To specify a cross-Region copy action for event-based polices, use \n\t\t\t\t<a>CrossRegionCopyAction</a>.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a cross-Region copy rule for snapshot and AMI policies.</p>\n         <note>\n            <p>To specify a cross-Region copy action for event-based polices, use \n\t\t\t\t<a>CrossRegionCopyAction</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyRules": {
@@ -453,7 +459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified lifecycle policy and halts the automated operations that the\n\t\t\tpolicy specified.</p>\n\t\t       <p>For more information about deleting a policy, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete\">Delete lifecycle \n\t\t\tpolicies</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified lifecycle policy and halts the automated operations that the\n\t\t\tpolicy specified.</p>\n         <p>For more information about deleting a policy, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete\">Delete lifecycle \n\t\t\tpolicies</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/policies/{PolicyId}",
@@ -472,11 +478,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#DeleteLifecyclePolicyResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.dlm#DeprecateRule": {
             "type": "structure",
@@ -503,7 +515,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Specifies an AMI deprecation rule for AMIs created by an AMI lifecycle policy.</p>\n\t\t       <p>For age-based schedules, you must specify <b>Interval</b> and \n\t\t\t<b>IntervalUnit</b>. For count-based schedules, you must specify \n\t\t\t<b>Count</b>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Specifies an AMI deprecation rule for AMIs created by an AMI lifecycle policy.</p>\n         <p>For age-based schedules, you must specify <b>Interval</b> and \n\t\t\t<b>IntervalUnit</b>. For count-based schedules, you must specify \n\t\t\t<b>Count</b>.</p>"
             }
         },
         "com.amazonaws.dlm#DescriptionRegex": {
@@ -566,7 +578,7 @@
                 "DescriptionRegex": {
                     "target": "com.amazonaws.dlm#DescriptionRegex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot description that can trigger the policy. The description pattern is specified using \n\t\t\ta regular expression. The policy runs only if a snapshot with a description that matches the \n\t\t\tspecified pattern is shared with your account.</p>\n\t\t       <p>For example, specifying <code>^.*Created for policy: policy-1234567890abcdef0.*$</code>  \n\t\t\tconfigures the policy to run only if snapshots created by policy <code>policy-1234567890abcdef0</code> \n\t\t\tare shared with your account.</p>",
+                        "smithy.api#documentation": "<p>The snapshot description that can trigger the policy. The description pattern is specified using \n\t\t\ta regular expression. The policy runs only if a snapshot with a description that matches the \n\t\t\tspecified pattern is shared with your account.</p>\n         <p>For example, specifying <code>^.*Created for policy: policy-1234567890abcdef0.*$</code>  \n\t\t\tconfigures the policy to run only if snapshots created by policy <code>policy-1234567890abcdef0</code> \n\t\t\tare shared with your account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -701,7 +713,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets summary information about all or the specified data lifecycle policies.</p>\n\t\t       <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>",
+                "smithy.api#documentation": "<p>Gets summary information about all or the specified data lifecycle policies.</p>\n         <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/policies",
@@ -736,17 +748,20 @@
                 "TargetTags": {
                     "target": "com.amazonaws.dlm#TargetTagsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target tag for a policy.</p>\n\t\t       <p>Tags are strings in the format <code>key=value</code>.</p>",
+                        "smithy.api#documentation": "<p>The target tag for a policy.</p>\n         <p>Tags are strings in the format <code>key=value</code>.</p>",
                         "smithy.api#httpQuery": "targetTags"
                     }
                 },
                 "TagsToAdd": {
                     "target": "com.amazonaws.dlm#TagsToAddFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p>\n\t\t       <p>Tags are strings in the format <code>key=value</code>.</p>\n\t\t       <p>These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.</p>",
+                        "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p>\n         <p>Tags are strings in the format <code>key=value</code>.</p>\n         <p>These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.</p>",
                         "smithy.api#httpQuery": "tagsToAdd"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#GetLifecyclePoliciesResponse": {
@@ -758,6 +773,9 @@
                         "smithy.api#documentation": "<p>Summary information about the lifecycle policies.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dlm#GetLifecyclePolicy": {
@@ -799,6 +817,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#GetLifecyclePolicyResponse": {
@@ -810,6 +831,9 @@
                         "smithy.api#documentation": "<p>Detailed information about the lifecycle policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dlm#GettablePolicyStateValues": {
@@ -1072,6 +1096,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#ListTagsForResourceResponse": {
@@ -1083,6 +1110,9 @@
                         "smithy.api#documentation": "<p>Information about the tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dlm#LocationValues": {
@@ -1120,28 +1150,24 @@
                 "ExcludeBootVolume": {
                     "target": "com.amazonaws.dlm#ExcludeBootVolume",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Indicates whether to exclude the root volume from multi-volume \n\t\t\tsnapshot sets. The default is <code>false</code>. If you specify <code>true</code>, \n\t\t\tthen the root volumes attached to targeted instances will be excluded from the multi-volume \n\t\t\tsnapshot sets created by the policy.</p>"
                     }
                 },
                 "NoReboot": {
                     "target": "com.amazonaws.dlm#NoReboot",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Indicates whether targeted instances are rebooted when the lifecycle policy \n\t\t\truns. <code>true</code> indicates that targeted instances are not rebooted when the policy \n\t\t\truns. <code>false</code> indicates that target instances are rebooted when the policy runs. \n\t\t\tThe default is <code>true</code> (instances are not rebooted).</p>"
                     }
                 },
                 "ExcludeDataVolumeTags": {
                     "target": "com.amazonaws.dlm#ExcludeDataVolumeTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> The tags used to identify data (non-root) volumes to exclude from \n\t\t\tmulti-volume snapshot sets.</p> \n\t\t       <p>If you create a snapshot lifecycle policy that targets instances and you specify tags for \n\t\t\tthis parameter, then data volumes with the specified tags that are attached to targeted \n\t\t\tinstances will be excluded from the multi-volume snapshot sets created by the policy.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> The tags used to identify data (non-root) volumes to exclude from \n\t\t\tmulti-volume snapshot sets.</p>\n         <p>If you create a snapshot lifecycle policy that targets instances and you specify tags for \n\t\t\tthis parameter, then data volumes with the specified tags that are attached to targeted \n\t\t\tinstances will be excluded from the multi-volume snapshot sets created by the policy.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies optional parameters for snapshot and AMI policies. The \n\t\t\tset of valid parameters depends on the combination of policy type and target resource \n\t\t\ttype.</p>\n\t\t       <p>If you choose to exclude boot volumes and you specify tags that consequently exclude \n\t\t\tall of the additional data volumes attached to an instance, then Amazon Data Lifecycle Manager will not create \n\t\t\tany snapshots for the affected instance, and it will emit a <code>SnapshotsCreateFailed</code> \n\t\t\tAmazon CloudWatch metric. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html\">Monitor your policies \n\t\t\t\tusing Amazon CloudWatch</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies optional parameters for snapshot and AMI policies. The \n\t\t\tset of valid parameters depends on the combination of policy type and target resource \n\t\t\ttype.</p>\n         <p>If you choose to exclude boot volumes and you specify tags that consequently exclude \n\t\t\tall of the additional data volumes attached to an instance, then Amazon Data Lifecycle Manager will not create \n\t\t\tany snapshots for the affected instance, and it will emit a <code>SnapshotsCreateFailed</code> \n\t\t\tAmazon CloudWatch metric. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html\">Monitor your policies \n\t\t\t\tusing Amazon CloudWatch</a>.</p>"
             }
         },
         "com.amazonaws.dlm#PolicyArn": {
@@ -1170,9 +1196,7 @@
                 "PolicyType": {
                     "target": "com.amazonaws.dlm#PolicyTypeValues",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "EBS_SNAPSHOT_MANAGEMENT",
-                        "smithy.api#documentation": "<p>\n            <b>[All policy types]</b> The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n\t\t       <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[All policy types]</b> The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n         <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
                     }
                 },
                 "ResourceTypes": {
@@ -1184,7 +1208,7 @@
                 "ResourceLocations": {
                     "target": "com.amazonaws.dlm#ResourceLocationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> The location of the resources to backup. If the source resources are located in an \n\t\t\tAmazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>.</p>\n\t\t\t      <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> The location of the resources to backup. If the source resources are located in an \n\t\t\tAmazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>.</p>\n         <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
                     }
                 },
                 "TargetTags": {
@@ -1202,7 +1226,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.dlm#Parameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> A set of optional parameters for snapshot and AMI lifecycle policies. </p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>If you are modifying a policy that was created or previously modified using the Amazon \n\t\t\t\tData Lifecycle Manager console, then you must include this parameter and specify either \n\t\t\t\tthe default values or the new values that you require. You can't omit this parameter or \n\t\t\t\tset its values to null.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> A set of optional parameters for snapshot and AMI lifecycle policies. </p>\n         <note>\n            <p>If you are modifying a policy that was created or previously modified using the Amazon \n\t\t\t\tData Lifecycle Manager console, then you must include this parameter and specify either \n\t\t\t\tthe default values or the new values that you require. You can't omit this parameter or \n\t\t\t\tset its values to null.</p>\n         </note>"
                     }
                 },
                 "EventSource": {
@@ -1372,7 +1396,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n\t\t\n\t\t       <note>\t\t\t\n\t\t\t         <p>For snapshot policies that have an <a>ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n\t\t\t         <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n\t\t       </note>\n\t\t\n\t\t       <p>You can retain snapshots based on either a count or a time interval.</p>\t\t\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Count-based retention</b>\n               </p>\n\t\t\t\t           <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a>ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a>FastRestoreRule</a>, \n\t\t\t\t\t<a>ShareRule</a>, or a <a>CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Age-based retention</b>\n               </p>\n\t\t\t\t           <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a>ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a>FastRestoreRule</a>, <a>ShareRule</a>, or a \n\t\t\t\t\t<a>CrossRegionCopyRule</a>, then you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n\t\t\t         </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n         <note>\n            <p>For snapshot policies that have an <a>ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n            <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n         </note>\n         <p>You can retain snapshots based on either a count or a time interval.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Count-based retention</b>\n               </p>\n               <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a>ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a>FastRestoreRule</a>, \n\t\t\t\t\t<a>ShareRule</a>, or a <a>CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Age-based retention</b>\n               </p>\n               <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a>ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a>FastRestoreRule</a>, <a>ShareRule</a>, or a \n\t\t\t\t\t<a>CrossRegionCopyRule</a>, then you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dlm#RetentionArchiveTier": {
@@ -1400,7 +1424,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Describes the retention rule for archived snapshots. Once the archive \n\t\t\tretention threshold is met, the snapshots are permanently deleted from the archive tier.</p> \n\t\t       <note>\n\t\t\t         <p>The archive retention rule must retain snapshots in the archive tier for a minimum \n\t\t\t\tof 90 days.</p>\n\t\t       </note>\n\t\t\t\n\t\t       <p>For <b>count-based schedules</b>, you must specify <b>Count</b>. For <b>age-based\n\t\t\t\tschedules</b>, you must specify <b>Interval</b> and\n\t\t\t\t<b> IntervalUnit</b>.</p>\n\t\t       <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\tsnapshot lifecycle policies</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Describes the retention rule for archived snapshots. Once the archive \n\t\t\tretention threshold is met, the snapshots are permanently deleted from the archive tier.</p>\n         <note>\n            <p>The archive retention rule must retain snapshots in the archive tier for a minimum \n\t\t\t\tof 90 days.</p>\n         </note>\n         <p>For <b>count-based schedules</b>, you must specify <b>Count</b>. For <b>age-based\n\t\t\t\tschedules</b>, you must specify <b>Interval</b> and\n\t\t\t\t<b> IntervalUnit</b>.</p>\n         <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\tsnapshot lifecycle policies</a>.</p>"
             }
         },
         "com.amazonaws.dlm#RetentionIntervalUnitValues": {
@@ -1481,7 +1505,7 @@
                 "CrossRegionCopyRules": {
                     "target": "com.amazonaws.dlm#CrossRegionCopyRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a rule for copying snapshots or AMIs across regions.</p>\n\t\t\n\t\t       <note>\n            <p>You can't specify cross-Region copy rules for policies that create snapshots on an Outpost. \n\t\t\tIf the policy creates snapshots in a Region, then snapshots can be copied to up to three \n\t\t\tRegions or Outposts.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a rule for copying snapshots or AMIs across regions.</p>\n         <note>\n            <p>You can't specify cross-Region copy rules for policies that create snapshots on an Outpost. \n\t\t\tIf the policy creates snapshots in a Region, then snapshots can be copied to up to three \n\t\t\tRegions or Outposts.</p>\n         </note>"
                     }
                 },
                 "ShareRules": {
@@ -1499,7 +1523,7 @@
                 "ArchiveRule": {
                     "target": "com.amazonaws.dlm#ArchiveRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target volumes only]</b> The snapshot archiving rule for the schedule. When you specify an archiving \n\t\t\trule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's \n\t\t\tretention threshold is met. Snapshots are then retained in the archive tier for the archive retention \n\t\t\tperiod that you specify. </p>\n\t\t       <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\t\tsnapshot lifecycle policies</a>.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target volumes only]</b> The snapshot archiving rule for the schedule. When you specify an archiving \n\t\t\trule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's \n\t\t\tretention threshold is met. Snapshots are then retained in the archive tier for the archive retention \n\t\t\tperiod that you specify. </p>\n         <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\t\tsnapshot lifecycle policies</a>.</p>"
                     }
                 }
             },
@@ -1763,11 +1787,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.dlm#TagValue": {
             "type": "string",
@@ -1919,11 +1949,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.dlm#UpdateLifecyclePolicy": {
             "type": "operation",
@@ -1948,7 +1984,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified lifecycle policy.</p>\n\t\t       <p>For more information about updating a policy, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify\">Modify lifecycle \n\t\t\tpolicies</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the specified lifecycle policy.</p>\n         <p>For more information about updating a policy, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify\">Modify lifecycle \n\t\t\tpolicies</a>.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/policies/{PolicyId}",
@@ -1991,11 +2027,17 @@
                         "smithy.api#documentation": "<p>The configuration of the lifecycle policy. You cannot update the policy type or the\n\t\t\tresource type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dlm#UpdateLifecyclePolicyResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.dlm#VariableTagsList": {
             "type": "list",
@@ -2050,8 +2092,920 @@
                     "name": "dlm"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n\t\t       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n\t\t       <p>Amazon Data Lifecycle Manager supports Amazon EBS volumes and snapshots. For information about using Amazon Data Lifecycle Manager\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">\n\t\t\t\tAmazon Data Lifecycle Manager</a> in the <i>Amazon EC2 User Guide</i>.</p>",
-                "smithy.api#title": "Amazon Data Lifecycle Manager"
+                "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n         <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n         <p>Amazon Data Lifecycle Manager supports Amazon EBS volumes and snapshots. For information about using Amazon Data Lifecycle Manager\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">\n\t\t\t\tAmazon Data Lifecycle Manager</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#title": "Amazon Data Lifecycle Manager",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://dlm-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dlm.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://dlm-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://dlm.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://dlm.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dlm.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         }
     }
