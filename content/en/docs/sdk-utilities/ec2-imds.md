@@ -60,12 +60,12 @@ instance. Instead, use the included `Region` method to easily return
 an instance's Region.
 
 ```go
-region, err := client.GetRegion(context.TODO(), &imds.GetRegionInput{})
+response, err := client.GetRegion(context.TODO(), &imds.GetRegionInput{})
 if err != nil {
     log.Printf("Unable to retrieve the region from the EC2 instance %v\n", err)
 }
 
-fmt.Printf("region: %v\n", region)
+fmt.Printf("region: %v\n", response.Region)
 ```
 
 For more information about the EC2 metadata utility, see the [feature/ec2/imds]({{% apiref "feature/ec2/imds" %}}) package in the
