@@ -39,6 +39,9 @@ type ListAnomaliesForInsightInput struct {
 	// The ID of the Amazon Web Services account.
 	AccountId *string
 
+	// Specifies one or more service names that are used to list anomalies.
+	Filters *types.ListAnomaliesForInsightFilters
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32

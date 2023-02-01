@@ -67,9 +67,9 @@ type CreateAutoPredictorInput struct {
 	// The data configuration for your dataset group and any additional datasets.
 	DataConfig *types.DataConfig
 
-	// An AWS Key Management Service (KMS) key and an AWS Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the key. You can
-	// specify this optional object in the CreateDataset and CreatePredictor requests.
+	// An Key Management Service (KMS) key and an Identity and Access Management (IAM)
+	// role that Amazon Forecast can assume to access the key. You can specify this
+	// optional object in the CreateDataset and CreatePredictor requests.
 	EncryptionConfig *types.EncryptionConfig
 
 	// Create an Explainability resource for the predictor.
@@ -81,11 +81,30 @@ type CreateAutoPredictorInput struct {
 	// store_id as a dimension to group sales forecasts for each store.
 	ForecastDimensions []string
 
-	// The frequency of predictions in a forecast. Valid intervals are Y (Year), M
-	// (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes),
-	// 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y"
-	// indicates every year and "5min" indicates every five minutes. The frequency must
-	// be greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
+	// The frequency of predictions in a forecast. Valid intervals are an integer
+	// followed by Y (Year), M (Month), W (Week), D (Day), H (Hour), and min (Minute).
+	// For example, "1D" indicates every day and "15min" indicates every 15 minutes.
+	// You cannot specify a value that would overlap with the next larger frequency.
+	// That means, for example, you cannot specify a frequency of 60 minutes, because
+	// that is equivalent to 1 hour. The valid values for each frequency are the
+	// following:
+	//
+	// * Minute - 1-59
+	//
+	// * Hour - 1-23
+	//
+	// * Day - 1-6
+	//
+	// * Week - 1-4
+	//
+	// * Month -
+	// 1-11
+	//
+	// * Year - 1
+	//
+	// Thus, if you want every other week forecasts, specify "2W".
+	// Or, if you want quarterly forecasts, you specify "3M". The frequency must be
+	// greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
 	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
 	// RELATED_TIME_SERIES dataset frequency.
 	ForecastFrequency *string

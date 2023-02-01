@@ -16,8 +16,8 @@ import (
 // Parquet files are exported to your specified S3 bucket. The export file names
 // will match the following conventions: __.csv The component is in Java SimpleDate
 // format (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that
-// includes an Amazon S3 bucket and an AWS Identity and Access Management (IAM)
-// role that Amazon Forecast can assume to access the Amazon S3 bucket. For more
+// includes an Amazon S3 bucket and an Identity and Access Management (IAM) role
+// that Amazon Forecast can assume to access the Amazon S3 bucket. For more
 // information, see aws-forecast-iam-roles. The Status of the export job must be
 // ACTIVE before you can access the export in your Amazon S3 bucket. To get the
 // status, use the DescribePredictorBacktestExportJob operation.
@@ -38,9 +38,9 @@ func (c *Client) CreatePredictorBacktestExportJob(ctx context.Context, params *C
 
 type CreatePredictorBacktestExportJobInput struct {
 
-	// The destination for an export job. Provide an S3 path, an AWS Identity and
-	// Access Management (IAM) role that allows Amazon Forecast to access the location,
-	// and an AWS Key Management Service (KMS) key (optional).
+	// The destination for an export job. Provide an S3 path, an Identity and Access
+	// Management (IAM) role that allows Amazon Forecast to access the location, and an
+	// Key Management Service (KMS) key (optional).
 	//
 	// This member is required.
 	Destination *types.DataDestination

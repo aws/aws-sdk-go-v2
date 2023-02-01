@@ -480,6 +480,15 @@ type InsightTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies one or more service names that are used to list anomalies.
+type ListAnomaliesForInsightFilters struct {
+
+	// A collection of the names of Amazon Web Services services.
+	ServiceCollection *ServiceCollection
+
+	noSmithyDocumentSerde
+}
+
 // Filters you can use to specify which events are returned when ListEvents is
 // called.
 type ListEventsFilters struct {

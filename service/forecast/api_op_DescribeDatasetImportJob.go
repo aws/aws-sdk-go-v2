@@ -64,9 +64,9 @@ type DescribeDatasetImportJobOutput struct {
 	// The size of the dataset in gigabytes (GB) after the import job has finished.
 	DataSize *float64
 
-	// The location of the training data to import and an AWS Identity and Access
+	// The location of the training data to import and an Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the data. If
-	// encryption is used, DataSource includes an AWS Key Management Service (KMS) key.
+	// encryption is used, DataSource includes an Key Management Service (KMS) key.
 	DataSource *types.DataSource
 
 	// The Amazon Resource Name (ARN) of the dataset that the training data was
@@ -91,6 +91,9 @@ type DescribeDatasetImportJobOutput struct {
 	// The format of the geolocation attribute. Valid Values:"LAT_LONG" and
 	// "CC_POSTALCODE".
 	GeolocationFormat *string
+
+	// The import mode of the dataset import job, FULL or INCREMENTAL.
+	ImportMode types.ImportMode
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:

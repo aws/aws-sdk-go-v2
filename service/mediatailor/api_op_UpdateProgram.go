@@ -12,26 +12,23 @@ import (
 	"time"
 )
 
-// Creates a program within a channel. For information about programs, see Working
-// with programs
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
-// in the MediaTailor User Guide.
-func (c *Client) CreateProgram(ctx context.Context, params *CreateProgramInput, optFns ...func(*Options)) (*CreateProgramOutput, error) {
+// Updates a program within a channel.
+func (c *Client) UpdateProgram(ctx context.Context, params *UpdateProgramInput, optFns ...func(*Options)) (*UpdateProgramOutput, error) {
 	if params == nil {
-		params = &CreateProgramInput{}
+		params = &UpdateProgramInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProgram", params, optFns, c.addOperationCreateProgramMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProgram", params, optFns, c.addOperationUpdateProgramMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateProgramOutput)
+	out := result.(*UpdateProgramOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateProgramInput struct {
+type UpdateProgramInput struct {
 
 	// The name of the channel for this Program.
 	//
@@ -46,26 +43,15 @@ type CreateProgramInput struct {
 	// The schedule configuration settings.
 	//
 	// This member is required.
-	ScheduleConfiguration *types.ScheduleConfiguration
-
-	// The name of the source location.
-	//
-	// This member is required.
-	SourceLocationName *string
+	ScheduleConfiguration *types.UpdateProgramScheduleConfiguration
 
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
 
-	// The name of the LiveSource for this Program.
-	LiveSourceName *string
-
-	// The name that's used to refer to a VOD source.
-	VodSourceName *string
-
 	noSmithyDocumentSerde
 }
 
-type CreateProgramOutput struct {
+type UpdateProgramOutput struct {
 
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
@@ -106,12 +92,12 @@ type CreateProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProgram{}, middleware.After)
+func (c *Client) addOperationUpdateProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProgram{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProgram{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProgram{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -151,10 +137,10 @@ func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateProgramValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateProgramValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProgram(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProgram(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,11 +155,11 @@ func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateProgram(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateProgram(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "mediatailor",
-		OperationName: "CreateProgram",
+		OperationName: "UpdateProgram",
 	}
 }

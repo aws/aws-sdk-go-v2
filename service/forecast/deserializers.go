@@ -8219,6 +8219,15 @@ func awsAwsjson11_deserializeDocumentDatasetImportJobSummary(v **types.DatasetIm
 				return err
 			}
 
+		case "ImportMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportMode to be of type string, got %T instead", value)
+				}
+				sv.ImportMode = types.ImportMode(jtv)
+			}
+
 		case "LastModificationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14438,6 +14447,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDatasetImportJobOutput(v **Descri
 					return fmt.Errorf("expected GeolocationFormat to be of type string, got %T instead", value)
 				}
 				sv.GeolocationFormat = ptr.String(jtv)
+			}
+
+		case "ImportMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportMode to be of type string, got %T instead", value)
+				}
+				sv.ImportMode = types.ImportMode(jtv)
 			}
 
 		case "LastModificationTime":

@@ -60,7 +60,7 @@ type DescribeWhatIfForecastOutput struct {
 	EstimatedTimeRemainingInMinutes *int64
 
 	// The quantiles at which probabilistic forecasts are generated. You can specify up
-	// to 5 quantiles per what-if forecast in the CreateWhatIfForecast operation. If
+	// to five quantiles per what-if forecast in the CreateWhatIfForecast operation. If
 	// you didn't specify quantiles, the default values are ["0.1", "0.5", "0.9"].
 	ForecastTypes []string
 

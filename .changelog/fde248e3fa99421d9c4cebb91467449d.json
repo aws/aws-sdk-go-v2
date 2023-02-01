@@ -1,0 +1,8 @@
+{
+    "id": "fde248e3-fa99-421d-9c4c-ebb91467449d",
+    "type": "feature",
+    "description": "Additional attributes added for set-topic-attributes.",
+    "modules": [
+        "service/sns"
+    ]
+}

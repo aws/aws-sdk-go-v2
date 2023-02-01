@@ -770,6 +770,26 @@ func (m *validateOpUpdateLiveSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProgram struct {
+}
+
+func (*validateOpUpdateProgram) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProgram) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProgramInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProgramInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSourceLocation struct {
 }
 
@@ -962,6 +982,10 @@ func addOpUpdateLiveSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLiveSource{}, middleware.After)
 }
 
+func addOpUpdateProgramValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProgram{}, middleware.After)
+}
+
 func addOpUpdateSourceLocationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSourceLocation{}, middleware.After)
 }
@@ -998,6 +1022,18 @@ func validateAvailMatchingCriteria(v *types.AvailMatchingCriteria) error {
 	if len(v.Operator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClipRange(v *types.ClipRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClipRange"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1140,6 +1176,11 @@ func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
 			invalidParams.AddNested("Transition", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ClipRange != nil {
+		if err := validateClipRange(v.ClipRange); err != nil {
+			invalidParams.AddNested("ClipRange", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1157,6 +1198,23 @@ func validateTransition(v *types.Transition) error {
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateProgramScheduleConfiguration(v *types.UpdateProgramScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProgramScheduleConfiguration"}
+	if v.ClipRange != nil {
+		if err := validateClipRange(v.ClipRange); err != nil {
+			invalidParams.AddNested("ClipRange", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1847,6 +1905,31 @@ func validateOpUpdateLiveSourceInput(v *UpdateLiveSourceInput) error {
 	}
 	if v.SourceLocationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProgramInput(v *UpdateProgramInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProgramInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ProgramName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramName"))
+	}
+	if v.ScheduleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfiguration"))
+	} else if v.ScheduleConfiguration != nil {
+		if err := validateUpdateProgramScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

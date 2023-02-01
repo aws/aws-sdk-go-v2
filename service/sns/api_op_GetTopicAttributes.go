@@ -83,13 +83,6 @@ type GetTopicAttributesOutput struct {
 	// * TopicArn – The
 	// topic's ARN.
 	//
-	// * TracingConfig – Tracing mode of an Amazon SNS topic. By default
-	// TracingConfig is set to PassThrough, and the topic passes through the tracing
-	// header it receives from an Amazon SNS publisher to its subscriptions. If set to
-	// Active, Amazon SNS will vend X-Ray segment data to topic owner account if the
-	// sampled flag in the tracing header is true. This is only supported on standard
-	// topics.
-	//
 	// The following attribute applies only to server-side-encryption
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//

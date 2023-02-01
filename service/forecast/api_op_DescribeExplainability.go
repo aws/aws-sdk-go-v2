@@ -44,8 +44,8 @@ type DescribeExplainabilityOutput struct {
 	// When the Explainability resource was created.
 	CreationTime *time.Time
 
-	// The source of your data, an AWS Identity and Access Management (IAM) role that
-	// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+	// The source of your data, an Identity and Access Management (IAM) role that
+	// allows Amazon Forecast to access the data and, optionally, an Key Management
 	// Service (KMS) key.
 	DataSource *types.DataSource
 

@@ -267,6 +267,18 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
+// Clip range configuration for the VOD source associated with the program.
+type ClipRange struct {
+
+	// The end offset of the clip range, in milliseconds, starting from the beginning
+	// of the VOD source associated with the program.
+	//
+	// This member is required.
+	EndOffsetMillis int64
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for DASH content.
 type DashConfiguration struct {
 
@@ -781,6 +793,9 @@ type ScheduleConfiguration struct {
 	// This member is required.
 	Transition *Transition
 
+	// Program clip range configuration.
+	ClipRange *ClipRange
+
 	noSmithyDocumentSerde
 }
 
@@ -1051,6 +1066,30 @@ type Transition struct {
 	// The name of the program that this program will be inserted next to, as defined
 	// by RelativePosition.
 	RelativeProgram *string
+
+	// The date and time that the program is scheduled to start, in epoch milliseconds.
+	ScheduledStartTimeMillis int64
+
+	noSmithyDocumentSerde
+}
+
+// Schedule configuration parameters.
+type UpdateProgramScheduleConfiguration struct {
+
+	// Program clip range configuration.
+	ClipRange *ClipRange
+
+	// Program transition configuration.
+	Transition *UpdateProgramTransition
+
+	noSmithyDocumentSerde
+}
+
+// Program transition configuration.
+type UpdateProgramTransition struct {
+
+	// The duration of the live program in seconds.
+	DurationMillis int64
 
 	// The date and time that the program is scheduled to start, in epoch milliseconds.
 	ScheduledStartTimeMillis int64

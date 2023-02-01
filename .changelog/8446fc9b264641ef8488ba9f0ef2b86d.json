@@ -1,0 +1,8 @@
+{
+    "id": "8446fc9b-2646-41ef-8488-ba9f0ef2b86d",
+    "type": "feature",
+    "description": "The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

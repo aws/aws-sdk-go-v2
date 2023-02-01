@@ -71,8 +71,8 @@ type DescribeDatasetOutput struct {
 	// The domain associated with the dataset.
 	Domain types.Domain
 
-	// The AWS Key Management Service (KMS) key and the AWS Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the key.
+	// The Key Management Service (KMS) key and the Identity and Access Management
+	// (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *types.EncryptionConfig
 
 	// When you create a dataset, LastModificationTime is the same as CreationTime.

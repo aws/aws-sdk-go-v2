@@ -15,13 +15,13 @@ import (
 // Storage Service (Amazon S3) bucket. The forecast file name will match the
 // following conventions: __ where the component is in Java SimpleDateFormat
 // (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes
-// an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume
-// to access the Amazon S3 bucket. For more information, see
-// aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a
-// list of all your forecast export jobs, use the ListForecastExportJobs operation.
-// The Status of the forecast export job must be ACTIVE before you can access the
-// forecast in your Amazon S3 bucket. To get the status, use the
-// DescribeForecastExportJob operation.
+// an Identity and Access Management (IAM) role that Amazon Forecast can assume to
+// access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles.
+// For more information, see howitworks-forecast. To get a list of all your
+// forecast export jobs, use the ListForecastExportJobs operation. The Status of
+// the forecast export job must be ACTIVE before you can access the forecast in
+// your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob
+// operation.
 func (c *Client) CreateForecastExportJob(ctx context.Context, params *CreateForecastExportJobInput, optFns ...func(*Options)) (*CreateForecastExportJobOutput, error) {
 	if params == nil {
 		params = &CreateForecastExportJobInput{}
@@ -39,11 +39,11 @@ func (c *Client) CreateForecastExportJob(ctx context.Context, params *CreateFore
 
 type CreateForecastExportJobInput struct {
 
-	// The location where you want to save the forecast and an AWS Identity and Access
+	// The location where you want to save the forecast and an Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the location.
 	// The forecast must be exported to an Amazon S3 bucket. If encryption is used,
-	// Destination must include an AWS Key Management Service (KMS) key. The IAM role
-	// must allow Amazon Forecast permission to access the key.
+	// Destination must include an Key Management Service (KMS) key. The IAM role must
+	// allow Amazon Forecast permission to access the key.
 	//
 	// This member is required.
 	Destination *types.DataDestination
@@ -86,12 +86,12 @@ type CreateForecastExportJobInput struct {
 	// keys and values are case sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or
-	// lowercase combination of such as a prefix for keys as it is reserved for AWS
-	// use. You cannot edit or delete tag keys with this prefix. Values can have this
-	// prefix. If a tag value has aws as its prefix but the key does not, then Forecast
-	// considers it to be a user tag and will count against the limit of 50 tags. Tags
-	// with only the key prefix of aws do not count against your tags per resource
-	// limit.
+	// lowercase combination of such as a prefix for keys as it is reserved for Amazon
+	// Web Services use. You cannot edit or delete tag keys with this prefix. Values
+	// can have this prefix. If a tag value has aws as its prefix but the key does not,
+	// then Forecast considers it to be a user tag and will count against the limit of
+	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
+	// resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
