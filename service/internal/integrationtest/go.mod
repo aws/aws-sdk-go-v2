@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.17.3
-	github.com/aws/aws-sdk-go-v2/config v1.18.10
+	github.com/aws/aws-sdk-go-v2/config v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.17.1
@@ -48,10 +48,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/glue v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/iam v1.19.0
+	github.com/aws/aws-sdk-go-v2/service/iam v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/iot v1.34.0
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.1
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/kms v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.25.0
@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/sms v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/sns v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/sns v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.18.2

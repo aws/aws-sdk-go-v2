@@ -1,3 +1,7 @@
+# v1.22.0 (2023-02-01)
+
+* **Feature**: The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs.
+
 # v1.21.0 (2023-01-27)
 
 * **Feature**: This release introduces the As Run logging type, along with API and documentation updates.

@@ -1,8 +1,0 @@
-{
-    "id": "b65e002a-70cc-4554-b8c4-8a85a7731bc7",
-    "type": "feature",
-    "description": "This release adds filter support ListAnomalyForInsight API.",
-    "modules": [
-        "service/devopsguru"
-    ]
-}

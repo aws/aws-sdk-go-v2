@@ -1,3 +1,7 @@
+# v1.20.0 (2023-02-01)
+
+* **Feature**: Additional attributes added for set-topic-attributes.
+
 # v1.19.1 (2023-01-23)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.19.1 (2023-02-01)
+
+* **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+
 # v1.19.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

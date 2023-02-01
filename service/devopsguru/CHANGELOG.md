@@ -1,3 +1,7 @@
+# v1.22.0 (2023-02-01)
+
+* **Feature**: This release adds filter support ListAnomalyForInsight API.
+
 # v1.21.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

@@ -1,3 +1,20 @@
+# Release (2023-02-01)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.22.0](service/devopsguru/CHANGELOG.md#v1220-2023-02-01)
+  * **Feature**: This release adds filter support ListAnomalyForInsight API.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.25.0](service/forecast/CHANGELOG.md#v1250-2023-02-01)
+  * **Feature**: This release will enable customer select INCREMENTAL as ImportModel in Forecast's CreateDatasetImportJob API. Verified latest SDK containing required attribute, following https://w.amazon.com/bin/view/AWS-Seer/Launch/Trebuchet/
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.1](service/iam/CHANGELOG.md#v1191-2023-02-01)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.22.0](service/mediatailor/CHANGELOG.md#v1220-2023-02-01)
+  * **Feature**: The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.20.0](service/sns/CHANGELOG.md#v1200-2023-02-01)
+  * **Feature**: Additional attributes added for set-topic-attributes.
+
 # Release (2023-01-31)
 
 ## Module Highlights
