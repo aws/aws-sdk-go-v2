@@ -1,3 +1,7 @@
+# v1.31.0 (2023-02-02)
+
+* **Feature**: QuickSight support for Radar Chart and Dashboard Publish Options
+
 # v1.30.0 (2023-01-20)
 
 * **Feature**: This release adds support for data bars in QuickSight table and increases pivot table field well limit.

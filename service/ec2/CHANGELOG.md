@@ -1,3 +1,7 @@
+# v1.84.0 (2023-02-02)
+
+* **Feature**: Documentation updates for EC2.
+
 # v1.83.0 (2023-01-31)
 
 * **Feature**: This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K.

@@ -1,8 +1,0 @@
-{
-    "id": "93b257fc-a9f5-42b2-b07e-75b22267753a",
-    "type": "feature",
-    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
-    "modules": [
-        "service/keyspaces"
-    ]
-}

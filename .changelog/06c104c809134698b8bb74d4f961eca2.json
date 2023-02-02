@@ -1,8 +1,0 @@
-{
-    "id": "06c104c8-0913-4698-b8bb-74d4f961eca2",
-    "type": "feature",
-    "description": "AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported.",
-    "modules": [
-        "service/appconfig"
-    ]
-}

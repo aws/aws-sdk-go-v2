@@ -1,8 +1,0 @@
-{
-    "id": "e970df2c-68b1-4a99-a463-9a740b5a30f2",
-    "type": "feature",
-    "description": "QuickSight support for Radar Chart and Dashboard Publish Options",
-    "modules": [
-        "service/quicksight"
-    ]
-}

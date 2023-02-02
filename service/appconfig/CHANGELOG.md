@@ -1,3 +1,7 @@
+# v1.16.0 (2023-02-02)
+
+* **Feature**: AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported.
+
 # v1.15.1 (2023-01-23)
 
 * No change notes available for this release.

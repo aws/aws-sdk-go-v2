@@ -1,3 +1,15 @@
+# Release (2023-02-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.16.0](service/appconfig/CHANGELOG.md#v1160-2023-02-02)
+  * **Feature**: AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.84.0](service/ec2/CHANGELOG.md#v1840-2023-02-02)
+  * **Feature**: Documentation updates for EC2.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.19.2](service/elasticloadbalancingv2/CHANGELOG.md#v1192-2023-02-02)
+  * **Documentation**: The GWLB Flex Health Check project updates the default values of healthy-threshold-count from 3 to 5 and unhealthy-threshold-count from 3 to 2
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.31.0](service/quicksight/CHANGELOG.md#v1310-2023-02-02)
+  * **Feature**: QuickSight support for Radar Chart and Dashboard Publish Options
+
 # Release (2023-02-01)
 
 ## General Highlights
