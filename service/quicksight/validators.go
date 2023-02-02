@@ -4041,7 +4041,9 @@ func validateCategoryFilter(v *types.CategoryFilter) error {
 			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Configuration != nil {
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
 		if err := validateCategoryFilterConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
@@ -10409,6 +10411,190 @@ func validateProjectOperation(v *types.ProjectOperation) error {
 	}
 }
 
+func validateRadarChartAggregatedFieldWells(v *types.RadarChartAggregatedFieldWells) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartAggregatedFieldWells"}
+	if v.Category != nil {
+		if err := validateRadarChartCategoryFieldList(v.Category); err != nil {
+			invalidParams.AddNested("Category", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Color != nil {
+		if err := validateRadarChartColorFieldList(v.Color); err != nil {
+			invalidParams.AddNested("Color", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Values != nil {
+		if err := validateRadarChartValuesFieldList(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartCategoryFieldList(v []types.DimensionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartCategoryFieldList"}
+	for i := range v {
+		if err := validateDimensionField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartColorFieldList(v []types.DimensionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartColorFieldList"}
+	for i := range v {
+		if err := validateDimensionField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartConfiguration(v *types.RadarChartConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartConfiguration"}
+	if v.FieldWells != nil {
+		if err := validateRadarChartFieldWells(v.FieldWells); err != nil {
+			invalidParams.AddNested("FieldWells", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortConfiguration != nil {
+		if err := validateRadarChartSortConfiguration(v.SortConfiguration); err != nil {
+			invalidParams.AddNested("SortConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VisualPalette != nil {
+		if err := validateVisualPalette(v.VisualPalette); err != nil {
+			invalidParams.AddNested("VisualPalette", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CategoryLabelOptions != nil {
+		if err := validateChartAxisLabelOptions(v.CategoryLabelOptions); err != nil {
+			invalidParams.AddNested("CategoryLabelOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColorLabelOptions != nil {
+		if err := validateChartAxisLabelOptions(v.ColorLabelOptions); err != nil {
+			invalidParams.AddNested("ColorLabelOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartFieldWells(v *types.RadarChartFieldWells) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartFieldWells"}
+	if v.RadarChartAggregatedFieldWells != nil {
+		if err := validateRadarChartAggregatedFieldWells(v.RadarChartAggregatedFieldWells); err != nil {
+			invalidParams.AddNested("RadarChartAggregatedFieldWells", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartSortConfiguration(v *types.RadarChartSortConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartSortConfiguration"}
+	if v.CategorySort != nil {
+		if err := validateFieldSortOptionsList(v.CategorySort); err != nil {
+			invalidParams.AddNested("CategorySort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColorSort != nil {
+		if err := validateFieldSortOptionsList(v.ColorSort); err != nil {
+			invalidParams.AddNested("ColorSort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartValuesFieldList(v []types.MeasureField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartValuesFieldList"}
+	for i := range v {
+		if err := validateMeasureField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRadarChartVisual(v *types.RadarChartVisual) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RadarChartVisual"}
+	if v.VisualId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VisualId"))
+	}
+	if v.ChartConfiguration != nil {
+		if err := validateRadarChartConfiguration(v.ChartConfiguration); err != nil {
+			invalidParams.AddNested("ChartConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Actions != nil {
+		if err := validateVisualCustomActionList(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColumnHierarchies != nil {
+		if err := validateColumnHierarchyList(v.ColumnHierarchies); err != nil {
+			invalidParams.AddNested("ColumnHierarchies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRdsParameters(v *types.RdsParameters) error {
 	if v == nil {
 		return nil
@@ -13143,6 +13329,11 @@ func validateVisual(v *types.Visual) error {
 	if v.EmptyVisual != nil {
 		if err := validateEmptyVisual(v.EmptyVisual); err != nil {
 			invalidParams.AddNested("EmptyVisual", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RadarChartVisual != nil {
+		if err := validateRadarChartVisual(v.RadarChartVisual); err != nil {
+			invalidParams.AddNested("RadarChartVisual", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

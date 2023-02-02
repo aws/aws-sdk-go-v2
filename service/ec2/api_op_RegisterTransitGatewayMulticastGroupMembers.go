@@ -37,6 +37,17 @@ func (c *Client) RegisterTransitGatewayMulticastGroupMembers(ctx context.Context
 
 type RegisterTransitGatewayMulticastGroupMembersInput struct {
 
+	// The group members' network interface IDs to register with the transit gateway
+	// multicast group.
+	//
+	// This member is required.
+	NetworkInterfaceIds []string
+
+	// The ID of the transit gateway multicast domain.
+	//
+	// This member is required.
+	TransitGatewayMulticastDomainId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -45,13 +56,6 @@ type RegisterTransitGatewayMulticastGroupMembersInput struct {
 
 	// The IP address assigned to the transit gateway multicast group.
 	GroupIpAddress *string
-
-	// The group members' network interface IDs to register with the transit gateway
-	// multicast group.
-	NetworkInterfaceIds []string
-
-	// The ID of the transit gateway multicast domain.
-	TransitGatewayMulticastDomainId *string
 
 	noSmithyDocumentSerde
 }
@@ -110,6 +114,9 @@ func (c *Client) addOperationRegisterTransitGatewayMulticastGroupMembersMiddlewa
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpRegisterTransitGatewayMulticastGroupMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTransitGatewayMulticastGroupMembers(options.Region), middleware.Before); err != nil {

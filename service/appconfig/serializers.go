@@ -2453,6 +2453,11 @@ func awsRestjson1_serializeOpDocumentStartDeploymentInput(v *StartDeploymentInpu
 		ok.String(*v.Description)
 	}
 
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

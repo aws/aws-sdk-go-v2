@@ -2176,6 +2176,24 @@ func (PrimaryValueDisplayType) Values() []PrimaryValueDisplayType {
 	}
 }
 
+type RadarChartShape string
+
+// Enum values for RadarChartShape
+const (
+	RadarChartShapeCircle  RadarChartShape = "CIRCLE"
+	RadarChartShapePolygon RadarChartShape = "POLYGON"
+)
+
+// Values returns all known values for RadarChartShape. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RadarChartShape) Values() []RadarChartShape {
+	return []RadarChartShape{
+		"CIRCLE",
+		"POLYGON",
+	}
+}
+
 type ReferenceLineLabelHorizontalPosition string
 
 // Enum values for ReferenceLineLabelHorizontalPosition

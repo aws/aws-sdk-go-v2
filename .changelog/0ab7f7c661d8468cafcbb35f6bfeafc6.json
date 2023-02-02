@@ -1,0 +1,8 @@
+{
+    "id": "0ab7f7c6-61d8-468c-afcb-b35f6bfeafc6",
+    "type": "feature",
+    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
+    "modules": [
+        "service/redshift"
+    ]
+}

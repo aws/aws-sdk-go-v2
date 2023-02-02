@@ -1,0 +1,8 @@
+{
+    "id": "495a66fd-a6ab-4643-a27c-29b4cce2ed90",
+    "type": "feature",
+    "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

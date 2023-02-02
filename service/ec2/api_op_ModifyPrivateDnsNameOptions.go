@@ -29,6 +29,11 @@ func (c *Client) ModifyPrivateDnsNameOptions(ctx context.Context, params *Modify
 
 type ModifyPrivateDnsNameOptionsInput struct {
 
+	// The ID of the instance.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -42,9 +47,6 @@ type ModifyPrivateDnsNameOptionsInput struct {
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS A
 	// records.
 	EnableResourceNameDnsARecord *bool
-
-	// The ID of the instance.
-	InstanceId *string
 
 	// The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS
 	// name must be based on the instance IPv4 address. For IPv6 only subnets, an
@@ -109,6 +111,9 @@ func (c *Client) addOperationModifyPrivateDnsNameOptionsMiddlewares(stack *middl
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpModifyPrivateDnsNameOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyPrivateDnsNameOptions(options.Region), middleware.Before); err != nil {

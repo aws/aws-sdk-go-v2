@@ -8812,6 +8812,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDashboardDefinitionOutput(v **Des
 				sv.DashboardId = ptr.String(jtv)
 			}
 
+		case "DashboardPublishOptions":
+			if err := awsRestjson1_deserializeDocumentDashboardPublishOptions(&sv.DashboardPublishOptions, value); err != nil {
+				return err
+			}
+
 		case "Definition":
 			if err := awsRestjson1_deserializeDocumentDashboardVersionDefinition(&sv.Definition, value); err != nil {
 				return err
@@ -26080,6 +26085,46 @@ func awsRestjson1_deserializeDocumentActiveIAMPolicyAssignmentList(v *[]types.Ac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdHocFilteringOption(v **types.AdHocFilteringOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdHocFilteringOption
+	if *v == nil {
+		sv = &types.AdHocFilteringOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAggregationFunction(v **types.AggregationFunction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -32920,6 +32965,92 @@ func awsRestjson1_deserializeDocumentDashboardErrorList(v *[]types.DashboardErro
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDashboardPublishOptions(v **types.DashboardPublishOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DashboardPublishOptions
+	if *v == nil {
+		sv = &types.DashboardPublishOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdHocFilteringOption":
+			if err := awsRestjson1_deserializeDocumentAdHocFilteringOption(&sv.AdHocFilteringOption, value); err != nil {
+				return err
+			}
+
+		case "DataPointDrillUpDownOption":
+			if err := awsRestjson1_deserializeDocumentDataPointDrillUpDownOption(&sv.DataPointDrillUpDownOption, value); err != nil {
+				return err
+			}
+
+		case "DataPointMenuLabelOption":
+			if err := awsRestjson1_deserializeDocumentDataPointMenuLabelOption(&sv.DataPointMenuLabelOption, value); err != nil {
+				return err
+			}
+
+		case "DataPointTooltipOption":
+			if err := awsRestjson1_deserializeDocumentDataPointTooltipOption(&sv.DataPointTooltipOption, value); err != nil {
+				return err
+			}
+
+		case "ExportToCSVOption":
+			if err := awsRestjson1_deserializeDocumentExportToCSVOption(&sv.ExportToCSVOption, value); err != nil {
+				return err
+			}
+
+		case "ExportWithHiddenFieldsOption":
+			if err := awsRestjson1_deserializeDocumentExportWithHiddenFieldsOption(&sv.ExportWithHiddenFieldsOption, value); err != nil {
+				return err
+			}
+
+		case "SheetControlsOption":
+			if err := awsRestjson1_deserializeDocumentSheetControlsOption(&sv.SheetControlsOption, value); err != nil {
+				return err
+			}
+
+		case "SheetLayoutElementMaximizationOption":
+			if err := awsRestjson1_deserializeDocumentSheetLayoutElementMaximizationOption(&sv.SheetLayoutElementMaximizationOption, value); err != nil {
+				return err
+			}
+
+		case "VisualAxisSortOption":
+			if err := awsRestjson1_deserializeDocumentVisualAxisSortOption(&sv.VisualAxisSortOption, value); err != nil {
+				return err
+			}
+
+		case "VisualMenuOption":
+			if err := awsRestjson1_deserializeDocumentVisualMenuOption(&sv.VisualMenuOption, value); err != nil {
+				return err
+			}
+
+		case "VisualPublishOptions":
+			if err := awsRestjson1_deserializeDocumentDashboardVisualPublishOptions(&sv.VisualPublishOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDashboardSummary(v **types.DashboardSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -33386,6 +33517,42 @@ func awsRestjson1_deserializeDocumentDashboardVersionSummaryList(v *[]types.Dash
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDashboardVisualPublishOptions(v **types.DashboardVisualPublishOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DashboardVisualPublishOptions
+	if *v == nil {
+		sv = &types.DashboardVisualPublishOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExportHiddenFieldsOption":
+			if err := awsRestjson1_deserializeDocumentExportHiddenFieldsOption(&sv.ExportHiddenFieldsOption, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -34161,6 +34328,126 @@ func awsRestjson1_deserializeDocumentDataPathValueList(v *[]types.DataPathValue,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataPointDrillUpDownOption(v **types.DataPointDrillUpDownOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataPointDrillUpDownOption
+	if *v == nil {
+		sv = &types.DataPointDrillUpDownOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataPointMenuLabelOption(v **types.DataPointMenuLabelOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataPointMenuLabelOption
+	if *v == nil {
+		sv = &types.DataPointMenuLabelOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataPointTooltipOption(v **types.DataPointTooltipOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataPointTooltipOption
+	if *v == nil {
+		sv = &types.DataPointTooltipOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -37253,6 +37540,126 @@ func awsRestjson1_deserializeDocumentExplicitHierarchyColumnList(v *[]types.Colu
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExportHiddenFieldsOption(v **types.ExportHiddenFieldsOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExportHiddenFieldsOption
+	if *v == nil {
+		sv = &types.ExportHiddenFieldsOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExportToCSVOption(v **types.ExportToCSVOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExportToCSVOption
+	if *v == nil {
+		sv = &types.ExportToCSVOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExportWithHiddenFieldsOption(v **types.ExportWithHiddenFieldsOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExportWithHiddenFieldsOption
+	if *v == nil {
+		sv = &types.ExportWithHiddenFieldsOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -51935,6 +52342,528 @@ func awsRestjson1_deserializeDocumentQuickSightUserNotFoundException(v **types.Q
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRadarChartAggregatedFieldWells(v **types.RadarChartAggregatedFieldWells, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartAggregatedFieldWells
+	if *v == nil {
+		sv = &types.RadarChartAggregatedFieldWells{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Category":
+			if err := awsRestjson1_deserializeDocumentRadarChartCategoryFieldList(&sv.Category, value); err != nil {
+				return err
+			}
+
+		case "Color":
+			if err := awsRestjson1_deserializeDocumentRadarChartColorFieldList(&sv.Color, value); err != nil {
+				return err
+			}
+
+		case "Values":
+			if err := awsRestjson1_deserializeDocumentRadarChartValuesFieldList(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartAreaStyleSettings(v **types.RadarChartAreaStyleSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartAreaStyleSettings
+	if *v == nil {
+		sv = &types.RadarChartAreaStyleSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartCategoryFieldList(v *[]types.DimensionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DimensionField
+	if *v == nil {
+		cv = []types.DimensionField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DimensionField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDimensionField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartColorFieldList(v *[]types.DimensionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DimensionField
+	if *v == nil {
+		cv = []types.DimensionField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DimensionField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDimensionField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartConfiguration(v **types.RadarChartConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartConfiguration
+	if *v == nil {
+		sv = &types.RadarChartConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AlternateBandColorsVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.AlternateBandColorsVisibility = types.Visibility(jtv)
+			}
+
+		case "AlternateBandEvenColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.AlternateBandEvenColor = ptr.String(jtv)
+			}
+
+		case "AlternateBandOddColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.AlternateBandOddColor = ptr.String(jtv)
+			}
+
+		case "BaseSeriesSettings":
+			if err := awsRestjson1_deserializeDocumentRadarChartSeriesSettings(&sv.BaseSeriesSettings, value); err != nil {
+				return err
+			}
+
+		case "CategoryAxis":
+			if err := awsRestjson1_deserializeDocumentAxisDisplayOptions(&sv.CategoryAxis, value); err != nil {
+				return err
+			}
+
+		case "CategoryLabelOptions":
+			if err := awsRestjson1_deserializeDocumentChartAxisLabelOptions(&sv.CategoryLabelOptions, value); err != nil {
+				return err
+			}
+
+		case "ColorAxis":
+			if err := awsRestjson1_deserializeDocumentAxisDisplayOptions(&sv.ColorAxis, value); err != nil {
+				return err
+			}
+
+		case "ColorLabelOptions":
+			if err := awsRestjson1_deserializeDocumentChartAxisLabelOptions(&sv.ColorLabelOptions, value); err != nil {
+				return err
+			}
+
+		case "FieldWells":
+			if err := awsRestjson1_deserializeDocumentRadarChartFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Legend":
+			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
+				return err
+			}
+
+		case "Shape":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RadarChartShape to be of type string, got %T instead", value)
+				}
+				sv.Shape = types.RadarChartShape(jtv)
+			}
+
+		case "SortConfiguration":
+			if err := awsRestjson1_deserializeDocumentRadarChartSortConfiguration(&sv.SortConfiguration, value); err != nil {
+				return err
+			}
+
+		case "StartAngle":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartAngle = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.StartAngle = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected RadarChartStartAngle to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "VisualPalette":
+			if err := awsRestjson1_deserializeDocumentVisualPalette(&sv.VisualPalette, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartFieldWells(v **types.RadarChartFieldWells, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartFieldWells
+	if *v == nil {
+		sv = &types.RadarChartFieldWells{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RadarChartAggregatedFieldWells":
+			if err := awsRestjson1_deserializeDocumentRadarChartAggregatedFieldWells(&sv.RadarChartAggregatedFieldWells, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartSeriesSettings(v **types.RadarChartSeriesSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartSeriesSettings
+	if *v == nil {
+		sv = &types.RadarChartSeriesSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AreaStyleSettings":
+			if err := awsRestjson1_deserializeDocumentRadarChartAreaStyleSettings(&sv.AreaStyleSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartSortConfiguration(v **types.RadarChartSortConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartSortConfiguration
+	if *v == nil {
+		sv = &types.RadarChartSortConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CategoryItemsLimit":
+			if err := awsRestjson1_deserializeDocumentItemsLimitConfiguration(&sv.CategoryItemsLimit, value); err != nil {
+				return err
+			}
+
+		case "CategorySort":
+			if err := awsRestjson1_deserializeDocumentFieldSortOptionsList(&sv.CategorySort, value); err != nil {
+				return err
+			}
+
+		case "ColorItemsLimit":
+			if err := awsRestjson1_deserializeDocumentItemsLimitConfiguration(&sv.ColorItemsLimit, value); err != nil {
+				return err
+			}
+
+		case "ColorSort":
+			if err := awsRestjson1_deserializeDocumentFieldSortOptionsList(&sv.ColorSort, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartValuesFieldList(v *[]types.MeasureField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MeasureField
+	if *v == nil {
+		cv = []types.MeasureField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MeasureField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMeasureField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRadarChartVisual(v **types.RadarChartVisual, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RadarChartVisual
+	if *v == nil {
+		sv = &types.RadarChartVisual{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Actions":
+			if err := awsRestjson1_deserializeDocumentVisualCustomActionList(&sv.Actions, value); err != nil {
+				return err
+			}
+
+		case "ChartConfiguration":
+			if err := awsRestjson1_deserializeDocumentRadarChartConfiguration(&sv.ChartConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ColumnHierarchies":
+			if err := awsRestjson1_deserializeDocumentColumnHierarchyList(&sv.ColumnHierarchies, value); err != nil {
+				return err
+			}
+
+		case "Subtitle":
+			if err := awsRestjson1_deserializeDocumentVisualSubtitleLabelOptions(&sv.Subtitle, value); err != nil {
+				return err
+			}
+
+		case "Title":
+			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
+				return err
+			}
+
+		case "VisualId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRangeEndsLabelType(v **types.RangeEndsLabelType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -55073,6 +56002,46 @@ func awsRestjson1_deserializeDocumentSheetControlLayoutList(v *[]types.SheetCont
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSheetControlsOption(v **types.SheetControlsOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetControlsOption
+	if *v == nil {
+		sv = &types.SheetControlsOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "VisibilityState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardUIState to be of type string, got %T instead", value)
+				}
+				sv.VisibilityState = types.DashboardUIState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSheetDefinition(v **types.SheetDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -55329,6 +56298,46 @@ func awsRestjson1_deserializeDocumentSheetElementRenderingRuleList(v *[]types.Sh
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetLayoutElementMaximizationOption(v **types.SheetLayoutElementMaximizationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetLayoutElementMaximizationOption
+	if *v == nil {
+		sv = &types.SheetLayoutElementMaximizationOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -62156,6 +63165,11 @@ func awsRestjson1_deserializeDocumentVisual(v **types.Visual, value interface{})
 				return err
 			}
 
+		case "RadarChartVisual":
+			if err := awsRestjson1_deserializeDocumentRadarChartVisual(&sv.RadarChartVisual, value); err != nil {
+				return err
+			}
+
 		case "SankeyDiagramVisual":
 			if err := awsRestjson1_deserializeDocumentSankeyDiagramVisual(&sv.SankeyDiagramVisual, value); err != nil {
 				return err
@@ -62184,6 +63198,46 @@ func awsRestjson1_deserializeDocumentVisual(v **types.Visual, value interface{})
 		case "WordCloudVisual":
 			if err := awsRestjson1_deserializeDocumentWordCloudVisual(&sv.WordCloudVisual, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVisualAxisSortOption(v **types.VisualAxisSortOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualAxisSortOption
+	if *v == nil {
+		sv = &types.VisualAxisSortOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
 			}
 
 		default:
@@ -62417,6 +63471,46 @@ func awsRestjson1_deserializeDocumentVisualList(v *[]types.Visual, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVisualMenuOption(v **types.VisualMenuOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualMenuOption
+	if *v == nil {
+		sv = &types.VisualMenuOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

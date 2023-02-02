@@ -103,6 +103,16 @@ type GetDeploymentOutput struct {
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType
 
+	// The Amazon Resource Name of the Key Management Service key used to encrypt
+	// configuration data. You can encrypt secrets stored in Secrets Manager, Amazon
+	// Simple Storage Service (Amazon S3) objects encrypted with SSE-KMS, or secure
+	// string parameters stored in Amazon Web Services Systems Manager Parameter Store.
+	KmsKeyArn *string
+
+	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID
+	// to encrypt the configuration data using a customer managed key.
+	KmsKeyIdentifier *string
+
 	// The percentage of targets for which the deployment is available.
 	PercentageComplete float32
 

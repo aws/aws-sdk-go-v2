@@ -35,6 +35,8 @@ type GetAssociatedEnclaveCertificateIamRolesInput struct {
 
 	// The ARN of the ACM certificate for which to view the associated IAM roles,
 	// encryption keys, and Amazon S3 object information.
+	//
+	// This member is required.
 	CertificateArn *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -100,6 +102,9 @@ func (c *Client) addOperationGetAssociatedEnclaveCertificateIamRolesMiddlewares(
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpGetAssociatedEnclaveCertificateIamRolesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssociatedEnclaveCertificateIamRoles(options.Region), middleware.Before); err != nil {

@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the latest deployed configuration. Note the following important
-// information.
+// (Deprecated) Retrieves the latest deployed configuration. Note the following
+// important information.
 //
-// * This API action has been deprecated. Calls to receive
+// * This API action is deprecated. Calls to receive
 // configuration data should use the StartConfigurationSession
 // (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html)
 // and GetLatestConfiguration
@@ -22,22 +22,6 @@ import (
 //
 // * GetConfiguration is a priced call. For more information, see
 // Pricing (https://aws.amazon.com/systems-manager/pricing/).
-//
-// * AppConfig uses the
-// value of the ClientConfigurationVersion parameter to identify the configuration
-// version on your clients. If you don’t send ClientConfigurationVersion with each
-// call to GetConfiguration, your clients receive the current configuration. You
-// are charged each time your clients receive a configuration. To avoid excess
-// charges, we recommend you use the StartConfigurationSession
-// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html)
-// and GetLatestConfiguration
-// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html)
-// APIs, which track the client configuration version on your behalf. If you choose
-// to continue using GetConfiguration, we recommend that you include the
-// ClientConfigurationVersion value with every call to GetConfiguration. The value
-// to use for ClientConfigurationVersion comes from the ConfigurationVersion
-// attribute returned by GetConfiguration when there is new or updated data, and
-// should be saved for subsequent calls to GetConfiguration.
 //
 // Deprecated: This API has been deprecated in favor of the GetLatestConfiguration
 // API used in conjunction with StartConfigurationSession.
@@ -88,11 +72,18 @@ type GetConfigurationInput struct {
 	// the configuration version on your clients. If you don’t send
 	// ClientConfigurationVersion with each call to GetConfiguration, your clients
 	// receive the current configuration. You are charged each time your clients
-	// receive a configuration. To avoid excess charges, we recommend that you include
-	// the ClientConfigurationVersion value with every call to GetConfiguration. This
-	// value must be saved on your client. Subsequent calls to GetConfiguration must
-	// pass this value by using the ClientConfigurationVersion parameter. For more
-	// information about working with configurations, see Retrieving the Configuration
+	// receive a configuration. To avoid excess charges, we recommend you use the
+	// StartConfigurationSession
+	// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html)
+	// and GetLatestConfiguration
+	// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html)
+	// APIs, which track the client configuration version on your behalf. If you choose
+	// to continue using GetConfiguration, we recommend that you include the
+	// ClientConfigurationVersion value with every call to GetConfiguration. The value
+	// to use for ClientConfigurationVersion comes from the ConfigurationVersion
+	// attribute returned by GetConfiguration when there is new or updated data, and
+	// should be saved for subsequent calls to GetConfiguration. For more information
+	// about working with configurations, see Retrieving the Configuration
 	// (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html)
 	// in the AppConfig User Guide.
 	ClientConfigurationVersion *string

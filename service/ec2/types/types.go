@@ -2948,6 +2948,12 @@ type EbsBlockDevice struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 	// This parameter is not returned by DescribeImageAttribute
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImageAttribute.html).
+	// For CreateImage and RegisterImage, you can specify this parameter only for block
+	// device mappings that result in new, empty volumes when instances are launched
+	// from the image. Omit this parameter on block device mappings that include an
+	// existing volume or snapshot. If you include this parameter, and specify an
+	// encryption setting that is different from the existing volume or snapshot, the
+	// request will fail.
 	Encrypted *bool
 
 	// The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes,
@@ -3993,7 +3999,8 @@ type FleetData struct {
 	Errors []DescribeFleetError
 
 	// Indicates whether running instances should be terminated if the target capacity
-	// of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+	// of the EC2 Fleet is decreased below the current size of the EC2 Fleet. Supported
+	// only for fleets of type maintain.
 	ExcessCapacityTerminationPolicy FleetExcessCapacityTerminationPolicy
 
 	// The ID of the EC2 Fleet.
@@ -5623,13 +5630,15 @@ type InstanceCreditSpecification struct {
 // Describes the credit option for CPU usage of a burstable performance instance.
 type InstanceCreditSpecificationRequest struct {
 
+	// The ID of the instance.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// The credit option for CPU usage of the instance. Valid values: standard |
 	// unlimited T3 instances with host tenancy do not support the unlimited CPU credit
 	// option.
 	CpuCredits *string
-
-	// The ID of the instance.
-	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -7651,8 +7660,8 @@ type IpamResourceCidr struct {
 	noSmithyDocumentSerde
 }
 
-// A resource discovery is an IPAM component that enables IPAM Service to manage
-// and monitor resources that belong to the owning account.
+// A resource discovery is an IPAM component that enables IPAM to manage and
+// monitor resources that belong to the owning account.
 type IpamResourceDiscovery struct {
 
 	// The resource discovery description.
@@ -11789,8 +11798,8 @@ type RequestLaunchTemplateData struct {
 	// resolve:ssm:parameter-name:label
 	//
 	// For more information, see Use a Systems
-	// Manager parameter instead of an AMI ID
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// Manager parameter to find an AMI
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
@@ -12668,9 +12677,10 @@ type S3ObjectTag struct {
 type S3Storage struct {
 
 	// The access key ID of the owner of the bucket. Before you specify a value for
-	// your access key ID, review and follow the guidance in Best practices for
-	// managing Amazon Web Services access keys
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
+	// your access key ID, review and follow the guidance in Best Practices for Amazon
+	// Web Services accounts
+	// (https://docs.aws.amazon.com/accounts/latest/reference/best-practices.html) in
+	// the Account ManagementReference Guide.
 	AWSAccessKeyId *string
 
 	// The bucket in which to store the AMI. You can specify a bucket that you already
@@ -13242,11 +13252,13 @@ type SecurityGroupRuleRequest struct {
 // Describes an update to a security group rule.
 type SecurityGroupRuleUpdate struct {
 
+	// The ID of the security group rule.
+	//
+	// This member is required.
+	SecurityGroupRuleId *string
+
 	// Information about the security group rule.
 	SecurityGroupRule *SecurityGroupRuleRequest
-
-	// The ID of the security group rule.
-	SecurityGroupRuleId *string
 
 	noSmithyDocumentSerde
 }
@@ -13934,9 +13946,9 @@ type SpotFleetRequestConfigData struct {
 	// Reserved.
 	Context *string
 
-	// Indicates whether running Spot Instances should be terminated if you decrease
-	// the target capacity of the Spot Fleet request below the current size of the Spot
-	// Fleet.
+	// Indicates whether running instances should be terminated if you decrease the
+	// target capacity of the Spot Fleet request below the current size of the Spot
+	// Fleet. Supported only for fleets of type maintain.
 	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy
 
 	// The number of units fulfilled by this request compared to the set target

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dashboard from a template. To first create a template, see the
-// CreateTemplate
+// Creates a dashboard from either a template or directly with a
+// DashboardDefinition. To first create a template, see the CreateTemplate
 // (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html)
 // API operation. A dashboard is an entity in Amazon QuickSight that identifies
 // Amazon QuickSight reports, created from analyses. You can share Amazon
@@ -71,7 +71,8 @@ type CreateDashboardInput struct {
 	DashboardPublishOptions *types.DashboardPublishOptions
 
 	// The definition of a dashboard. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis.
+	// a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must
+	// be provided in order for the request to be valid.
 	Definition *types.DashboardVersionDefinition
 
 	// The parameters for the creation of the dashboard, which you want to use to
@@ -95,7 +96,8 @@ type CreateDashboardInput struct {
 	// account and any Amazon QuickSight-supported Amazon Web Services Region. Use the
 	// DataSetReferences entity within SourceTemplate to list the replacement datasets
 	// for the placeholders listed in the original. The schema in each dataset must
-	// match its placeholder.
+	// match its placeholder. Either a SourceEntity or a Definition must be provided in
+	// order for the request to be valid.
 	SourceEntity *types.DashboardSourceEntity
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
