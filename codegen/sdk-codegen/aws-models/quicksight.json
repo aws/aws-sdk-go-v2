@@ -2284,6 +2284,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CancelIngestionResponse": {
@@ -2315,6 +2318,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CascadingControlConfiguration": {
@@ -2527,7 +2533,8 @@
                 "Configuration": {
                     "target": "com.amazonaws.quicksight#CategoryFilterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for a <code>CategoryFilter</code>.</p>"
+                        "smithy.api#documentation": "<p>The configuration for a <code>CategoryFilter</code>.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -4037,6 +4044,9 @@
                         "smithy.api#documentation": "<p>A list of the tags that you want to attach to this resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateAccountCustomizationResponse": {
@@ -4080,6 +4090,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateAccountSubscription": {
@@ -4227,6 +4240,9 @@
                         "smithy.api#documentation": "<p>A 10-digit phone number for the author of the Amazon QuickSight account to use for\n            future communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the\n            selected edition of the new Amazon QuickSight account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateAccountSubscriptionResponse": {
@@ -4252,6 +4268,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateAnalysis": {
@@ -4289,7 +4308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an analysis in Amazon QuickSight.</p>",
+                "smithy.api#documentation": "<p>Creates an analysis in Amazon QuickSight.  Analyses can be created either from a template or from an <code>AnalysisDefinition</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}",
@@ -4338,7 +4357,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#AnalysisSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>A source entity to use for the analysis that you're creating. This metadata structure\n            contains details that describe a source template and one or more datasets.</p>"
+                        "smithy.api#documentation": "<p>A source entity to use for the analysis that you're creating. This metadata structure\n            contains details that describe a source template and one or more datasets.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n            order for the request to be valid.</p>"
                     }
                 },
                 "ThemeArn": {
@@ -4356,9 +4375,12 @@
                 "Definition": {
                     "target": "com.amazonaws.quicksight#AnalysisDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The definition of an analysis.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
+                        "smithy.api#documentation": "<p>The definition of an analysis.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n            order for the request to be valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateAnalysisResponse": {
@@ -4396,6 +4418,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateColumnsOperation": {
@@ -4448,7 +4473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a dashboard from a template. To first create a template, see the \n        <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> \n            API operation.</p>\n         <p>A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created\n            from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can\n            create scheduled email reports from them. If you have the correct permissions, you can\n            create a dashboard from a template that exists in a different Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Creates a dashboard from either a template or directly with a <code>DashboardDefinition</code>. To first create a template, see the \n        <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> \n            API operation.</p>\n         <p>A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created\n            from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can\n            create scheduled email reports from them. If you have the correct permissions, you can\n            create a dashboard from a template that exists in a different Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}",
@@ -4497,7 +4522,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#DashboardSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only create a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to create a dashboard from an analysis, first convert the analysis\n            to a template by using the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> \n            API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any\n            Amazon QuickSight-supported Amazon Web Services Region. </p>\n         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>"
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only create a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to create a dashboard from an analysis, first convert the analysis\n            to a template by using the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> \n            API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any\n            Amazon QuickSight-supported Amazon Web Services Region. </p>\n         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n            order for the request to be valid.</p>"
                     }
                 },
                 "Tags": {
@@ -4527,9 +4552,12 @@
                 "Definition": {
                     "target": "com.amazonaws.quicksight#DashboardVersionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The definition of a dashboard.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
+                        "smithy.api#documentation": "<p>The definition of a dashboard.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n            order for the request to be valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateDashboardResponse": {
@@ -4573,6 +4601,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateDataSet": {
@@ -4711,6 +4742,9 @@
                 "DataSetUsageConfiguration": {
                     "target": "com.amazonaws.quicksight#DataSetUsageConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateDataSetResponse": {
@@ -4754,6 +4788,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateDataSource": {
@@ -4867,6 +4904,9 @@
                         "smithy.api#documentation": "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateDataSourceResponse": {
@@ -4904,6 +4944,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateFolder": {
@@ -5030,6 +5073,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateFolderMembershipResponse": {
@@ -5054,6 +5100,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateFolderRequest": {
@@ -5105,6 +5154,9 @@
                         "smithy.api#documentation": "<p>Tags for the folder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateFolderResponse": {
@@ -5136,6 +5188,9 @@
                         "smithy.api#documentation": "<p>The request ID for the newly created folder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateGroup": {
@@ -5259,6 +5314,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateGroupMembershipResponse": {
@@ -5284,6 +5342,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateGroupRequest": {
@@ -5320,7 +5381,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request object for this operation. </p>"
+                "smithy.api#documentation": "<p>The request object for this operation. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateGroupResponse": {
@@ -5348,7 +5410,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The response object for this operation.</p>"
+                "smithy.api#documentation": "<p>The response object for this operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateIAMPolicyAssignment": {
@@ -5436,6 +5499,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateIAMPolicyAssignmentResponse": {
@@ -5485,6 +5551,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateIngestion": {
@@ -5560,6 +5629,9 @@
                         "smithy.api#documentation": "<p>The type of ingestion that you want to create.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateIngestionResponse": {
@@ -5597,6 +5669,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateNamespace": {
@@ -5679,6 +5754,9 @@
                         "smithy.api#documentation": "<p>The tags that you want to associate with the namespace that you're creating.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateNamespaceResponse": {
@@ -5728,6 +5806,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateTemplate": {
@@ -5768,7 +5849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a template from an existing Amazon QuickSight analysis or template. You can use the resulting\n\t\t\ttemplate to create a dashboard.</p>\n         <p>A <i>template</i> is an entity in Amazon QuickSight that encapsulates the metadata\n\t\t\trequired to create an analysis and that you can use to create s dashboard. A template adds\n\t\t\ta layer of abstraction by using placeholders to replace the dataset associated with the\n\t\t\tanalysis. You can use templates to create dashboards by replacing dataset placeholders\n\t\t\twith datasets that follow the same schema that was used to create the source analysis\n\t\t\tand template.</p>",
+                "smithy.api#documentation": "<p>Creates a template either from a <code>TemplateDefinition</code> or from an existing Amazon QuickSight analysis or template. You can use the resulting\n\t\t\ttemplate to create additional dashboards, templates, or analyses.</p>\n         <p>A <i>template</i> is an entity in Amazon QuickSight that encapsulates the metadata\n\t\t\trequired to create an analysis and that you can use to create s dashboard. A template adds\n\t\t\ta layer of abstraction by using placeholders to replace the dataset associated with the\n\t\t\tanalysis. You can use templates to create dashboards by replacing dataset placeholders\n\t\t\twith datasets that follow the same schema that was used to create the source analysis\n\t\t\tand template.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/templates/{TemplateId}",
@@ -5850,6 +5931,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateTemplateAliasResponse": {
@@ -5875,6 +5959,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateTemplateRequest": {
@@ -5911,7 +5998,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#TemplateSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the template. In\n\t\t\t<code>SourceEntity</code>, you specify the type of object you're using as source:\n\t\t\t<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an\n\t\t\tanalysis. Both of these require an Amazon Resource Name (ARN). For\n\t\t\t<code>SourceTemplate</code>, specify the ARN of the source template. For\n\t\t\t<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>\n\t\t\tARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p>\n         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or\n\t\t\t<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed\n\t\t\tin the original. The schema in each dataset must match its placeholder. </p>"
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the template. In\n\t\t\t<code>SourceEntity</code>, you specify the type of object you're using as source:\n\t\t\t<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an\n\t\t\tanalysis. Both of these require an Amazon Resource Name (ARN). For\n\t\t\t<code>SourceTemplate</code>, specify the ARN of the source template. For\n\t\t\t<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>\n\t\t\tARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p>\n         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or\n\t\t\t<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed\n\t\t\tin the original. The schema in each dataset must match its placeholder. </p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n\t\t\torder for the request to be valid.</p>"
                     }
                 },
                 "Tags": {
@@ -5929,9 +6016,12 @@
                 "Definition": {
                     "target": "com.amazonaws.quicksight#TemplateVersionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The definition of a template.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
+                        "smithy.api#documentation": "<p>The definition of a template.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n\t\t\torder for the request to be valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateTemplateResponse": {
@@ -5975,6 +6065,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateTheme": {
@@ -6097,6 +6190,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateThemeAliasResponse": {
@@ -6122,6 +6218,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateThemeRequest": {
@@ -6182,6 +6281,9 @@
                         "smithy.api#documentation": "<p>A map of the key-value pairs for the resource tag or tags that you want to add to the\n\t\t\tresource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#CreateThemeResponse": {
@@ -6225,6 +6327,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CredentialPair": {
@@ -6804,7 +6909,7 @@
                 "ViolatedEntities": {
                     "target": "com.amazonaws.quicksight#EntityList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Lists the violated entities that caused the dashboard error.</p>"
                     }
                 }
             },
@@ -6968,7 +7073,52 @@
                 "VisualPublishOptions": {
                     "target": "com.amazonaws.quicksight#DashboardVisualPublishOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#deprecated": {
+                            "message": "VisualPublishOptions property will reach its end of standard support in a future release. To perform this action, use ExportWithHiddenFields."
+                        },
+                        "smithy.api#documentation": "<p>The visual publish options of a visual in a dashboard.</p>"
+                    }
+                },
+                "SheetLayoutElementMaximizationOption": {
+                    "target": "com.amazonaws.quicksight#SheetLayoutElementMaximizationOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sheet layout maximization options of a dashbaord.</p>"
+                    }
+                },
+                "VisualMenuOption": {
+                    "target": "com.amazonaws.quicksight#VisualMenuOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The menu options of a visual in a dashboard.</p>"
+                    }
+                },
+                "VisualAxisSortOption": {
+                    "target": "com.amazonaws.quicksight#VisualAxisSortOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The axis sort options of a dashboard.</p>"
+                    }
+                },
+                "ExportWithHiddenFieldsOption": {
+                    "target": "com.amazonaws.quicksight#ExportWithHiddenFieldsOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if hidden fields are exported with a dashboard.</p>"
+                    }
+                },
+                "DataPointDrillUpDownOption": {
+                    "target": "com.amazonaws.quicksight#DataPointDrillUpDownOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drill-down options of data points in a dashboard.</p>"
+                    }
+                },
+                "DataPointMenuLabelOption": {
+                    "target": "com.amazonaws.quicksight#DataPointMenuLabelOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data point menu label options of a dashboard.</p>"
+                    }
+                },
+                "DataPointTooltipOption": {
+                    "target": "com.amazonaws.quicksight#DataPointTooltipOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data point tool tip options of a dashboard.</p>"
                     }
                 }
             },
@@ -7337,12 +7487,12 @@
                 "ExportHiddenFieldsOption": {
                     "target": "com.amazonaws.quicksight#ExportHiddenFieldsOption",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Determines if hidden fields are included in an exported dashboard.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The visual publish options of a visual in a dashboard</p>"
             }
         },
         "com.amazonaws.quicksight#DataBarsOptions": {
@@ -7766,6 +7916,48 @@
                     "min": 0,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataPointDrillUpDownOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the drill down options of data points.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The drill down options for data points in a dashbaord.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataPointMenuLabelOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data point menu options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data point menu options of a dashboard.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataPointTooltipOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data point tool tip options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data point tooltip options.</p>"
             }
         },
         "com.amazonaws.quicksight#DataSet": {
@@ -9509,6 +9701,9 @@
                         "smithy.api#httpQuery": "namespace"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteAccountCustomizationResponse": {
@@ -9528,6 +9723,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteAccountSubscription": {
@@ -9581,6 +9779,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteAccountSubscriptionResponse": {
@@ -9600,6 +9801,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteAnalysis": {
@@ -9673,6 +9877,9 @@
                         "smithy.api#httpQuery": "force-delete-without-recovery"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteAnalysisResponse": {
@@ -9710,6 +9917,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDashboard": {
@@ -9775,6 +9985,9 @@
                         "smithy.api#httpQuery": "version-number"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDashboardResponse": {
@@ -9806,6 +10019,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDataSet": {
@@ -9861,6 +10077,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDataSetResponse": {
@@ -9892,6 +10111,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDataSource": {
@@ -9947,6 +10169,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteDataSourceResponse": {
@@ -9978,6 +10203,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteFolder": {
@@ -10095,6 +10323,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteFolderMembershipResponse": {
@@ -10113,6 +10344,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteFolderRequest": {
@@ -10134,6 +10368,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteFolderResponse": {
@@ -10165,6 +10402,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteGroup": {
@@ -10282,6 +10522,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteGroupMembershipResponse": {
@@ -10301,6 +10544,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteGroupRequest": {
@@ -10330,6 +10576,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteGroupResponse": {
@@ -10349,6 +10598,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteIAMPolicyAssignment": {
@@ -10418,6 +10670,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteIAMPolicyAssignmentResponse": {
@@ -10443,6 +10698,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteNamespace": {
@@ -10504,6 +10762,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteNamespaceResponse": {
@@ -10523,6 +10784,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteTemplate": {
@@ -10626,6 +10890,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteTemplateAliasResponse": {
@@ -10663,6 +10930,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteTemplateRequest": {
@@ -10691,6 +10961,9 @@
                         "smithy.api#httpQuery": "version-number"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteTemplateResponse": {
@@ -10722,6 +10995,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteTheme": {
@@ -10828,6 +11104,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteThemeAliasResponse": {
@@ -10865,6 +11144,9 @@
                         "smithy.api#documentation": "<p>An ID for the theme associated with the deletion.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteThemeRequest": {
@@ -10893,6 +11175,9 @@
                         "smithy.api#httpQuery": "version-number"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteThemeResponse": {
@@ -10924,6 +11209,9 @@
                         "smithy.api#documentation": "<p>An ID for the theme.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteUser": {
@@ -11035,7 +11323,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteUserByPrincipalIdResponse": {
@@ -11055,6 +11344,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DeleteUserRequest": {
@@ -11084,6 +11376,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DeleteUserResponse": {
@@ -11103,6 +11398,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#Delimiter": {
@@ -11177,6 +11475,9 @@
                         "smithy.api#httpQuery": "resolved"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAccountCustomizationResponse": {
@@ -11220,6 +11521,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAccountSettings": {
@@ -11270,6 +11574,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAccountSettingsResponse": {
@@ -11295,6 +11602,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAccountSubscription": {
@@ -11345,6 +11655,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAccountSubscriptionResponse": {
@@ -11370,6 +11683,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAnalysis": {
@@ -11471,6 +11787,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAnalysisDefinitionResponse": {
@@ -11526,6 +11845,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAnalysisPermissions": {
@@ -11581,6 +11903,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAnalysisPermissionsResponse": {
@@ -11618,6 +11943,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAnalysisRequest": {
@@ -11639,6 +11967,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeAnalysisResponse": {
@@ -11664,6 +11995,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDashboard": {
@@ -11779,6 +12113,9 @@
                         "smithy.api#httpQuery": "alias-name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDashboardDefinitionResponse": {
@@ -11833,7 +12170,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
+                },
+                "DashboardPublishOptions": {
+                    "target": "com.amazonaws.quicksight#DashboardPublishOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for publishing the dashboard:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This\n                    status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is\n                    set to <code>DISABLED</code>, Amazon QuickSight disables the left filter pane on the\n                    published dashboard, which can be used for ad hoc (one-time) filtering. This\n                    option is <code>ENABLED</code> by default. </p>\n            </li>\n            <li>\n               <p>\n                  <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This\n                    status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual\n                    option to export data to .CSV format isn't enabled when this is set to\n                    <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VisibilityState</code> for <code>SheetControlsOption</code> - This\n                    visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>.\n                    This option is <code>COLLAPSED</code> by default. </p>\n            </li>\n         </ul>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDashboardPermissions": {
@@ -11889,6 +12235,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDashboardPermissionsResponse": {
@@ -11932,6 +12281,9 @@
                         "smithy.api#documentation": "<p>A structure that contains the configuration of a shareable link that grants access to\n            the dashboard. Your users can use the link to view and interact with the dashboard, if\n            the dashboard has been shared with them. For more information about sharing dashboards,\n            see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html\">Sharing Dashboards</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDashboardRequest": {
@@ -11967,6 +12319,9 @@
                         "smithy.api#httpQuery": "alias-name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDashboardResponse": {
@@ -11992,6 +12347,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSet": {
@@ -12081,6 +12439,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSetPermissionsResponse": {
@@ -12118,6 +12479,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSetRequest": {
@@ -12139,6 +12503,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSetResponse": {
@@ -12164,6 +12531,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSource": {
@@ -12253,6 +12623,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSourcePermissionsResponse": {
@@ -12290,6 +12663,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSourceRequest": {
@@ -12311,6 +12687,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeDataSourceResponse": {
@@ -12336,6 +12715,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeFolder": {
@@ -12431,6 +12813,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeFolderPermissionsResponse": {
@@ -12468,6 +12853,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeFolderRequest": {
@@ -12489,6 +12877,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeFolderResolvedPermissions": {
@@ -12547,6 +12938,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeFolderResolvedPermissionsResponse": {
@@ -12584,6 +12978,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeFolderResponse": {
@@ -12609,6 +13006,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeGroup": {
@@ -12726,6 +13126,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeGroupMembershipResponse": {
@@ -12748,6 +13151,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeGroupRequest": {
@@ -12777,6 +13183,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeGroupResponse": {
@@ -12802,6 +13211,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeIAMPolicyAssignment": {
@@ -12868,6 +13280,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeIAMPolicyAssignmentResponse": {
@@ -12893,6 +13308,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeIngestion": {
@@ -12959,6 +13377,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeIngestionResponse": {
@@ -12984,6 +13405,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeIpRestriction": {
@@ -13031,6 +13455,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeIpRestrictionResponse": {
@@ -13068,6 +13495,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeNamespace": {
@@ -13126,6 +13556,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeNamespaceResponse": {
@@ -13151,6 +13584,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplate": {
@@ -13254,6 +13690,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplateAliasResponse": {
@@ -13279,6 +13718,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplateDefinition": {
@@ -13357,6 +13799,9 @@
                         "smithy.api#httpQuery": "alias-name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplateDefinitionResponse": {
@@ -13412,6 +13857,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplatePermissions": {
@@ -13470,6 +13918,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplatePermissionsResponse": {
@@ -13507,6 +13958,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplateRequest": {
@@ -13542,6 +13996,9 @@
                         "smithy.api#httpQuery": "alias-name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTemplateResponse": {
@@ -13567,6 +14024,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeTheme": {
@@ -13673,6 +14133,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeThemeAliasResponse": {
@@ -13698,6 +14161,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeThemePermissions": {
@@ -13756,6 +14222,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeThemePermissionsResponse": {
@@ -13793,6 +14262,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeThemeRequest": {
@@ -13828,6 +14300,9 @@
                         "smithy.api#httpQuery": "alias-name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeThemeResponse": {
@@ -13853,6 +14328,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DescribeUser": {
@@ -13922,6 +14400,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#DescribeUserResponse": {
@@ -13947,6 +14428,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#DestinationParameterValueConfiguration": {
@@ -14473,12 +14957,12 @@
                 "AvailabilityStatus": {
                     "target": "com.amazonaws.quicksight#DashboardBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The status of the export hidden fields options of a dashbaord.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Determines if hidden fields are included in an exported dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#ExportToCSVOption": {
@@ -14493,6 +14977,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Export to .csv option.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ExportWithHiddenFieldsOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export with hidden fields options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines whether or not hidden fields are visible on exported dashbaords.</p>"
             }
         },
         "com.amazonaws.quicksight#Expression": {
@@ -17037,6 +17535,9 @@
                         "smithy.api#documentation": "<p>The domains that you want to add to the allow list for access to the generated URL that\n            is then embedded. This optional parameter overrides the static domains that are\n            configured in the Manage QuickSight menu in the Amazon QuickSight console. Instead, it\n            allows only the domains that you include in this parameter. You can list up to three\n            domains or subdomains in each API call.</p>\n         <p>To include all subdomains under a specific domain to the allow list, use <code>*</code>.\n            For example, <code>https://*.sapp.amazon.com</code> includes all subdomains under\n            <code>https://sapp.amazon.com</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#GenerateEmbedUrlForAnonymousUserResponse": {
@@ -17072,6 +17573,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUser": {
@@ -17157,6 +17661,9 @@
                         "smithy.api#documentation": "<p>The domains that you want to add to the allow list for access to the generated URL that \n          is then embedded. This optional parameter overrides the static domains that are \n          configured in the Manage QuickSight menu in the Amazon QuickSight console. Instead, it \n          allows only the domains that you include in this parameter. You can list up to three \n          domains or subdomains in each API call.</p>\n         <p>To include all subdomains under a specific domain to the allow list, use <code>*</code>.\n            For example, <code>https://*.sapp.amazon.com</code> includes all subdomains under\n            <code>https://sapp.amazon.com</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserResponse": {
@@ -17185,6 +17692,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#GeoSpatialColumnGroup": {
@@ -17646,6 +18156,9 @@
                         "smithy.api#httpQuery": "additional-dashboard-ids"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#GetDashboardEmbedUrlResponse": {
@@ -17673,7 +18186,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output returned from the <code>GetDashboardEmbedUrl</code> operation.</p>"
+                "smithy.api#documentation": "<p>Output returned from the <code>GetDashboardEmbedUrl</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#GetSessionEmbedUrl": {
@@ -17754,6 +18268,9 @@
                         "smithy.api#httpQuery": "user-arn"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#GetSessionEmbedUrlResponse": {
@@ -17779,6 +18296,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#GlobalTableBorderOptions": {
@@ -21031,6 +21551,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListAnalysesResponse": {
@@ -21062,6 +21585,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListControlDisplayOptions": {
@@ -21195,6 +21721,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListDashboardVersionsResponse": {
@@ -21226,6 +21755,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListDashboards": {
@@ -21291,6 +21823,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListDashboardsResponse": {
@@ -21322,6 +21857,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListDataSets": {
@@ -21390,6 +21928,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListDataSetsResponse": {
@@ -21421,6 +21962,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListDataSources": {
@@ -21489,6 +22033,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListDataSourcesResponse": {
@@ -21520,6 +22067,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListFolderMembers": {
@@ -21596,6 +22146,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListFolderMembersResponse": {
@@ -21627,6 +22180,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListFolders": {
@@ -21695,6 +22251,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListFoldersResponse": {
@@ -21726,6 +22285,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListGroupMemberships": {
@@ -21813,6 +22375,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListGroupMembershipsResponse": {
@@ -21844,6 +22409,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListGroups": {
@@ -21923,6 +22491,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListGroupsResponse": {
@@ -21954,6 +22525,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListIAMPolicyAssignments": {
@@ -22075,6 +22649,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListIAMPolicyAssignmentsForUserResponse": {
@@ -22106,6 +22683,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListIAMPolicyAssignmentsRequest": {
@@ -22148,6 +22728,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListIAMPolicyAssignmentsResponse": {
@@ -22179,6 +22762,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListIngestions": {
@@ -22261,6 +22847,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListIngestionsResponse": {
@@ -22292,6 +22881,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListNamespaces": {
@@ -22369,6 +22961,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListNamespacesResponse": {
@@ -22400,6 +22995,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListTagsForResource": {
@@ -22447,6 +23045,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListTagsForResourceResponse": {
@@ -22472,6 +23073,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListTemplateAliases": {
@@ -22548,6 +23152,9 @@
                         "smithy.api#httpQuery": "max-result"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListTemplateAliasesResponse": {
@@ -22579,6 +23186,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListTemplateVersions": {
@@ -22658,6 +23268,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListTemplateVersionsResponse": {
@@ -22689,6 +23302,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListTemplates": {
@@ -22760,6 +23376,9 @@
                         "smithy.api#httpQuery": "max-result"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListTemplatesResponse": {
@@ -22791,6 +23410,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListThemeAliases": {
@@ -22867,6 +23489,9 @@
                         "smithy.api#httpQuery": "max-result"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListThemeAliasesResponse": {
@@ -22898,6 +23523,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListThemeVersions": {
@@ -22980,6 +23608,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListThemeVersionsResponse": {
@@ -23011,6 +23642,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListThemes": {
@@ -23092,6 +23726,9 @@
                         "smithy.api#httpQuery": "type"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListThemesResponse": {
@@ -23123,6 +23760,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListUserGroups": {
@@ -23207,6 +23847,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListUserGroupsResponse": {
@@ -23238,6 +23881,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListUsers": {
@@ -23317,6 +23963,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#ListUsersResponse": {
@@ -23348,6 +23997,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#LoadingAnimation": {
@@ -27358,12 +28010,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://quicksight-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://quicksight-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -27468,12 +28126,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://quicksight.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://quicksight.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -27486,12 +28150,18 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://quicksight.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://quicksight.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -27500,510 +28170,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ap-south-1.amazonaws.com"
+                                    "url": "https://quicksight.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -28020,94 +28196,107 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ap-northeast-1.amazonaws.com"
+                                    "url": "https://quicksight.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-south-1"
                             }
                         },
                         {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.sa-east-1.amazonaws.com"
+                                    "url": "https://quicksight.ap-southeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight.sa-east-1.api.aws"
+                                    "url": "https://quicksight.ap-southeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region api with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.api.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "api"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -28121,6 +28310,84 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -28176,42 +28443,16 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region api with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-gov-west-1.amazonaws.com"
+                                    "url": "https://quicksight.api.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "api"
                             }
                         },
                         {
@@ -28228,263 +28469,107 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.ap-southeast-1.api.aws"
+                                    "url": "https://quicksight-fips.us-gov-east-1.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.ap-southeast-1.amazonaws.com"
+                                    "url": "https://quicksight-fips.us-gov-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight.ap-southeast-1.api.aws"
+                                    "url": "https://quicksight.us-gov-east-1.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight.ap-southeast-1.amazonaws.com"
+                                    "url": "https://quicksight.us-gov-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.ap-southeast-2.amazonaws.com"
+                                    "url": "https://quicksight-fips.us-iso-east-1.c2s.ic.gov"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.ap-southeast-2.amazonaws.com"
+                                    "url": "https://quicksight.us-iso-east-1.c2s.ic.gov"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight-fips.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-east-1.amazonaws.com"
+                                    "url": "https://quicksight-fips.us-isob-east-1.sc2s.sgov.gov"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://quicksight.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-east-1.amazonaws.com"
+                                    "url": "https://quicksight.us-isob-east-1.sc2s.sgov.gov"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight-fips.cn-northwest-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.cn-northwest-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://quicksight.cn-northwest-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -28528,6 +28613,305 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartAggregatedFieldWells": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.quicksight#RadarChartCategoryFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregated field well categories of a radar chart.</p>"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.quicksight#RadarChartColorFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that are assigned to the aggregated field wells of a radar chart.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.quicksight#RadarChartValuesFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values that are assigned to the aggregated field wells of a radar chart.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The aggregated field well configuration of a <code>RadarChartVisual</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartAreaStyleSettings": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility settings of a radar chart.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configured style settings of a radar chart.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartCategoryFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DimensionField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartColorFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DimensionField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartConfiguration": {
+            "type": "structure",
+            "members": {
+                "FieldWells": {
+                    "target": "com.amazonaws.quicksight#RadarChartFieldWells",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field well configuration of a <code>RadarChartVisual</code>.</p>"
+                    }
+                },
+                "SortConfiguration": {
+                    "target": "com.amazonaws.quicksight#RadarChartSortConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration of a <code>RadarChartVisual</code>.</p>"
+                    }
+                },
+                "Shape": {
+                    "target": "com.amazonaws.quicksight#RadarChartShape",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape of the radar chart.</p>"
+                    }
+                },
+                "BaseSeriesSettings": {
+                    "target": "com.amazonaws.quicksight#RadarChartSeriesSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base sreies settings of a radar chart.</p>"
+                    }
+                },
+                "StartAngle": {
+                    "target": "com.amazonaws.quicksight#RadarChartStartAngle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start angle of a radar chart's axis.</p>"
+                    }
+                },
+                "VisualPalette": {
+                    "target": "com.amazonaws.quicksight#VisualPalette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The palette (chart color) display setup of the visual.</p>"
+                    }
+                },
+                "AlternateBandColorsVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the visibility of the colors of alternatign bands in a radar chart.</p>"
+                    }
+                },
+                "AlternateBandEvenColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color of the even-numbered alternate bands of a radar chart.</p>"
+                    }
+                },
+                "AlternateBandOddColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color of the odd-numbered alternate bands of a radar chart.</p>"
+                    }
+                },
+                "CategoryAxis": {
+                    "target": "com.amazonaws.quicksight#AxisDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category axis of a radar chart.</p>"
+                    }
+                },
+                "CategoryLabelOptions": {
+                    "target": "com.amazonaws.quicksight#ChartAxisLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category label options of a radar chart.</p>"
+                    }
+                },
+                "ColorAxis": {
+                    "target": "com.amazonaws.quicksight#AxisDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color axis of a radar chart.</p>"
+                    }
+                },
+                "ColorLabelOptions": {
+                    "target": "com.amazonaws.quicksight#ChartAxisLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color label options of a radar chart.</p>"
+                    }
+                },
+                "Legend": {
+                    "target": "com.amazonaws.quicksight#LegendOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The legend display setup of the visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a <code>RadarChartVisual</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartFieldWells": {
+            "type": "structure",
+            "members": {
+                "RadarChartAggregatedFieldWells": {
+                    "target": "com.amazonaws.quicksight#RadarChartAggregatedFieldWells",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregated field wells of a radar chart visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The field wells of a radar chart visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartSeriesSettings": {
+            "type": "structure",
+            "members": {
+                "AreaStyleSettings": {
+                    "target": "com.amazonaws.quicksight#RadarChartAreaStyleSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The area style settings of a radar chart.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The series settings of a radar chart.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartShape": {
+            "type": "enum",
+            "members": {
+                "CIRCLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CIRCLE"
+                    }
+                },
+                "POLYGON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLYGON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartSortConfiguration": {
+            "type": "structure",
+            "members": {
+                "CategorySort": {
+                    "target": "com.amazonaws.quicksight#FieldSortOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category sort options of a radar chart.</p>"
+                    }
+                },
+                "CategoryItemsLimit": {
+                    "target": "com.amazonaws.quicksight#ItemsLimitConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category items limit for a radar chart.</p>"
+                    }
+                },
+                "ColorSort": {
+                    "target": "com.amazonaws.quicksight#FieldSortOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color sort configuration of a radar chart.</p>"
+                    }
+                },
+                "ColorItemsLimit": {
+                    "target": "com.amazonaws.quicksight#ItemsLimitConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color items limit of a radar chart.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort configuration of a <code>RadarChartVisual</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartStartAngle": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -360,
+                    "max": 360
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartValuesFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#MeasureField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RadarChartVisual": {
+            "type": "structure",
+            "members": {
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.quicksight#VisualTitleLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title that is displayed on the visual.</p>"
+                    }
+                },
+                "Subtitle": {
+                    "target": "com.amazonaws.quicksight#VisualSubtitleLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtitle that is displayed on the visual.</p>"
+                    }
+                },
+                "ChartConfiguration": {
+                    "target": "com.amazonaws.quicksight#RadarChartConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the visual.</p>"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.quicksight#VisualCustomActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
+                    }
+                },
+                "ColumnHierarchies": {
+                    "target": "com.amazonaws.quicksight#ColumnHierarchyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A radar chart visual.</p>"
             }
         },
         "com.amazonaws.quicksight#RangeEndsLabelType": {
@@ -29032,6 +29416,9 @@
                         "smithy.api#documentation": "<p>The identity ID for a user in the external login provider.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#RegisterUserResponse": {
@@ -29063,6 +29450,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#RegisteredUserDashboardEmbeddingConfiguration": {
@@ -29651,6 +30041,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#RestoreAnalysisResponse": {
@@ -29682,6 +30075,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#RestrictiveResourceId": {
@@ -30458,6 +30854,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#SearchAnalysesResponse": {
@@ -30489,6 +30888,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#SearchDashboards": {
@@ -30565,6 +30967,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#SearchDashboardsResponse": {
@@ -30596,6 +31001,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#SearchDataSets": {
@@ -30672,6 +31080,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#SearchDataSetsResponse": {
@@ -30703,6 +31114,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#SearchDataSources": {
@@ -30779,6 +31193,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#SearchDataSourcesResponse": {
@@ -30810,6 +31227,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#SearchFolders": {
@@ -30886,6 +31306,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#SearchFoldersResponse": {
@@ -30917,6 +31340,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#SearchGroups": {
@@ -31003,6 +31429,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#SearchGroupsResponse": {
@@ -31034,6 +31463,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#Seasonality": {
@@ -31828,6 +32260,20 @@
                     "min": 0,
                     "max": 10000
                 }
+            }
+        },
+        "com.amazonaws.quicksight#SheetLayoutElementMaximizationOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sheet layout maximization options of a dashbaord.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sheet layout maximization options of a dashbaord.</p>"
             }
         },
         "com.amazonaws.quicksight#SheetList": {
@@ -33493,6 +33939,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#TagResourceResponse": {
@@ -33512,6 +33961,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#TagValue": {
@@ -35820,6 +36272,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UntagResourceResponse": {
@@ -35839,6 +36294,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAccountCustomization": {
@@ -35906,6 +36364,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAccountCustomizationResponse": {
@@ -35949,6 +36410,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAccountSettings": {
@@ -36019,6 +36483,9 @@
                         "smithy.api#documentation": "<p>A boolean value that determines whether or not an Amazon QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubscription</code> request. A <code>False</code> value will allow the account to be deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAccountSettingsResponse": {
@@ -36038,6 +36505,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAnalysis": {
@@ -36151,6 +36621,9 @@
                         "smithy.api#documentation": "<p>A structure that describes the permissions to remove and the principal to remove them\n            from.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAnalysisPermissionsResponse": {
@@ -36188,6 +36661,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAnalysisRequest": {
@@ -36240,6 +36716,9 @@
                         "smithy.api#documentation": "<p>The definition of an analysis.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateAnalysisResponse": {
@@ -36277,6 +36756,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDashboard": {
@@ -36402,6 +36884,9 @@
                         "smithy.api#documentation": "<p>Revokes link permissions from all users in a defined namespace.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDashboardPermissionsResponse": {
@@ -36445,6 +36930,9 @@
                         "smithy.api#documentation": "<p>Updates the permissions of a shared link to an Amazon QuickSight dashboard.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDashboardPublishedVersion": {
@@ -36511,6 +36999,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDashboardPublishedVersionResponse": {
@@ -36542,6 +37033,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDashboardRequest": {
@@ -36606,6 +37100,9 @@
                         "smithy.api#documentation": "<p>The definition of a dashboard.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDashboardResponse": {
@@ -36648,6 +37145,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSet": {
@@ -36761,6 +37261,9 @@
                         "smithy.api#documentation": "<p>The resource permissions that you want to revoke from the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSetPermissionsResponse": {
@@ -36792,6 +37295,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSetRequest": {
@@ -36873,6 +37379,9 @@
                 "DataSetUsageConfiguration": {
                     "target": "com.amazonaws.quicksight#DataSetUsageConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSetResponse": {
@@ -36916,6 +37425,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSource": {
@@ -37023,6 +37535,9 @@
                         "smithy.api#documentation": "<p>A list of resource permissions that you want to revoke on the data source.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSourcePermissionsResponse": {
@@ -37054,6 +37569,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSourceRequest": {
@@ -37106,6 +37624,9 @@
                         "smithy.api#documentation": "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying\n\t\t\tsource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateDataSourceResponse": {
@@ -37143,6 +37664,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateFolder": {
@@ -37259,6 +37783,9 @@
                         "smithy.api#documentation": "<p>The permissions that you want to revoke from a resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateFolderPermissionsResponse": {
@@ -37295,6 +37822,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateFolderRequest": {
@@ -37323,6 +37853,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateFolderResponse": {
@@ -37354,6 +37887,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateGroup": {
@@ -37429,6 +37965,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateGroupResponse": {
@@ -37454,6 +37993,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateIAMPolicyAssignment": {
@@ -37541,6 +38083,9 @@
                         "smithy.api#documentation": "<p>The Amazon QuickSight users, groups, or both that you want to assign the policy to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateIAMPolicyAssignmentResponse": {
@@ -37590,6 +38135,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateIpRestriction": {
@@ -37652,6 +38200,9 @@
                         "smithy.api#documentation": "<p>A value that specifies whether IP rules are turned on.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateIpRestrictionResponse": {
@@ -37677,6 +38228,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateLinkPermissionList": {
@@ -37746,6 +38300,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdatePublicSharingSettingsResponse": {
@@ -37765,6 +38322,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateResourcePermissionList": {
@@ -37890,6 +38450,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTemplateAliasResponse": {
@@ -37915,6 +38478,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTemplatePermissions": {
@@ -37988,6 +38554,9 @@
                         "smithy.api#documentation": "<p>A list of resource permissions to be revoked from the template. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTemplatePermissionsResponse": {
@@ -38025,6 +38594,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTemplateRequest": {
@@ -38070,6 +38642,9 @@
                         "smithy.api#documentation": "<p>The definition of a template.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTemplateResponse": {
@@ -38113,6 +38688,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTheme": {
@@ -38232,6 +38810,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateThemeAliasResponse": {
@@ -38257,6 +38838,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateThemePermissions": {
@@ -38330,6 +38914,9 @@
                         "smithy.api#documentation": "<p>A list of resource permissions to be revoked from the theme.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateThemePermissionsResponse": {
@@ -38367,6 +38954,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateThemeRequest": {
@@ -38413,6 +39003,9 @@
                         "smithy.api#documentation": "<p>The theme configuration, which contains the theme display properties.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateThemeResponse": {
@@ -38456,6 +39049,9 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateUser": {
@@ -38570,6 +39166,9 @@
                         "smithy.api#documentation": "<p>The identity ID for a user in the external login provider.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.quicksight#UpdateUserResponse": {
@@ -38595,6 +39194,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UploadSettings": {
@@ -39011,10 +39613,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An empty visual.</p>"
                     }
+                },
+                "RadarChartVisual": {
+                    "target": "com.amazonaws.quicksight#RadarChartVisual",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A radar chart visual.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html\">Using radar charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A visual displayed on a sheet in an analysis, dashboard, or template.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#VisualAxisSortOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availaiblity status of a visual's axis sort options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The axis sort options for a visual.</p>"
             }
         },
         "com.amazonaws.quicksight#VisualCustomAction": {
@@ -39151,6 +39773,20 @@
                     "min": 0,
                     "max": 30
                 }
+            }
+        },
+        "com.amazonaws.quicksight#VisualMenuOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availaiblity status of a visual's menu options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The menu options for a visual.</p>"
             }
         },
         "com.amazonaws.quicksight#VisualPalette": {
