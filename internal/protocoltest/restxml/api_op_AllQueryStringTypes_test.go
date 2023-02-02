@@ -92,6 +92,11 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 					types.FooEnum("Baz"),
 					types.FooEnum("Bar"),
 				},
+				QueryIntegerEnum: 1,
+				QueryIntegerEnumList: []types.IntegerEnum{
+					1,
+					2,
+				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",
@@ -130,6 +135,9 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 				{Key: "EnumList", Value: "Foo"},
 				{Key: "EnumList", Value: "Baz"},
 				{Key: "EnumList", Value: "Bar"},
+				{Key: "IntegerEnum", Value: "1"},
+				{Key: "IntegerEnumList", Value: "1"},
+				{Key: "IntegerEnumList", Value: "2"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

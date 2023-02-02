@@ -41,3 +41,12 @@ func (FooEnum) Values() []FooEnum {
 		"0",
 	}
 }
+
+type IntegerEnum = int32
+
+// Enum values for IntegerEnum
+const (
+	IntegerEnumA IntegerEnum = 1
+	IntegerEnumB IntegerEnum = 2
+	IntegerEnumC IntegerEnum = 3
+)

@@ -44,6 +44,10 @@ func TestClient_EndpointWithHostLabelOperation_awsAwsjson11Serialize(t *testing.
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.EndpointWithHostLabelOperation"},
+			},
 			Host: func() *url.URL {
 				host := "https://example.com"
 				if len(host) == 0 {

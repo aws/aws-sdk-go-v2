@@ -70,6 +70,10 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
 				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
+				},
 				NestedStringList: [][]string{
 					{
 						"foo",
@@ -146,6 +150,10 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 			        <member>Foo</member>
 			        <member>0</member>
 			    </enumList>
+			    <intEnumList>
+			        <member>1</member>
+			        <member>2</member>
+			    </intEnumList>
 			    <nestedStringList>
 			        <member>
 			            <member>foo</member>
@@ -304,6 +312,10 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 			        <member>Foo</member>
 			        <member>0</member>
 			    </enumList>
+			    <intEnumList>
+			        <member>1</member>
+			        <member>2</member>
+			    </intEnumList>
 			    <nestedStringList>
 			        <member>
 			            <member>foo</member>
@@ -370,6 +382,10 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
+				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
 				},
 				NestedStringList: [][]string{
 					{

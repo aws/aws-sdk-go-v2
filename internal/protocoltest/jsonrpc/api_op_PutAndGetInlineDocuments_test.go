@@ -51,6 +51,7 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.PutAndGetInlineDocuments"},
 			},
 			RequireHeader: []string{
 				"Content-Length",

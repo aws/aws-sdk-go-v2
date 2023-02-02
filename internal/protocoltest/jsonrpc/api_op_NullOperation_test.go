@@ -48,6 +48,7 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
@@ -66,6 +67,7 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
@@ -88,6 +90,7 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {

@@ -75,9 +75,6 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
         MemberShape member = shape.getMember();
         Shape target = context.getModel().expectShape(member.getTarget());
 
-        // If the list is empty, exit early to avoid extra effort.
-        writer.write("if len(v) == 0 { return nil }");
-
         writer.write("array := value.Array($S)", getSerializedLocationName(member, "member"));
         writer.write("");
 

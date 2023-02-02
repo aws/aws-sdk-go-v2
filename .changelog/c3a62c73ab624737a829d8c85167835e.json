@@ -1,0 +1,31 @@
+{
+    "id": "c3a62c73-ab62-4737-a829-d8c85167835e",
+    "type": "dependency",
+    "description": "Upgrade smithy to 1.27.2 and correct empty query list serialization.",
+    "modules": [
+        "internal/protocoltest/awsrestjson",
+        "internal/protocoltest/ec2query",
+        "internal/protocoltest/jsonrpc",
+        "internal/protocoltest/jsonrpc10",
+        "internal/protocoltest/query",
+        "internal/protocoltest/restxml",
+        "service/autoscaling",
+        "service/cloudformation",
+        "service/cloudsearch",
+        "service/cloudwatch",
+        "service/docdb",
+        "service/ec2",
+        "service/elasticache",
+        "service/elasticbeanstalk",
+        "service/elasticloadbalancing",
+        "service/elasticloadbalancingv2",
+        "service/iam",
+        "service/neptune",
+        "service/rds",
+        "service/redshift",
+        "service/ses",
+        "service/sns",
+        "service/sqs",
+        "service/sts"
+    ]
+}

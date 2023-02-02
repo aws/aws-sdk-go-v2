@@ -39,6 +39,10 @@ func TestClient_HostWithPathOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/custom/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.HostWithPathOperation"},
+			},
 			Host: func() *url.URL {
 				host := "https://example.com/custom"
 				if len(host) == 0 {

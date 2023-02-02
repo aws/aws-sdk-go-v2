@@ -21,6 +21,9 @@ func ExampleMyUnion_outputUsage() {
 	case *types.MyUnionMemberEnumValue:
 		_ = v.Value // Value is types.FooEnum
 
+	case *types.MyUnionMemberIntEnumValue:
+		_ = v.Value // Value is types.IntegerEnum
+
 	case *types.MyUnionMemberListValue:
 		_ = v.Value // Value is []string
 
@@ -50,6 +53,7 @@ func ExampleMyUnion_outputUsage() {
 
 var _ map[string]string
 var _ types.FooEnum
+var _ types.IntegerEnum
 var _ []string
 var _ *string
 var _ *types.GreetingStruct

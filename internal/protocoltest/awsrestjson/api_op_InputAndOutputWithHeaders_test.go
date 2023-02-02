@@ -182,6 +182,27 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
+		// Tests requests with intEnum header bindings
+		"RestJsonInputAndOutputWithIntEnumHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderIntegerEnum: 1,
+				HeaderIntegerEnumList: []types.IntegerEnum{
+					1,
+					2,
+					3,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-IntegerEnum":     []string{"1"},
+				"X-IntegerEnumList": []string{"1, 2, 3"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
 		// Supports handling NaN float header values.
 		"RestJsonSupportsNaNFloatHeaderInputs": {
 			Params: &InputAndOutputWithHeadersInput{
@@ -425,6 +446,22 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 					types.FooEnum("Foo"),
 					types.FooEnum("Bar"),
 					types.FooEnum("Baz"),
+				},
+			},
+		},
+		// Tests responses with intEnum header bindings
+		"RestJsonInputAndOutputWithIntEnumHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-IntegerEnum":     []string{"1"},
+				"X-IntegerEnumList": []string{"1, 2, 3"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderIntegerEnum: 1,
+				HeaderIntegerEnumList: []types.IntegerEnum{
+					1,
+					2,
+					3,
 				},
 			},
 		},

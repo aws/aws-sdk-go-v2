@@ -509,6 +509,10 @@ func awsAwsjson10_serializeDocumentMyUnion(v types.MyUnion, value smithyjson.Val
 		av := object.Key("enumValue")
 		av.String(string(uv.Value))
 
+	case *types.MyUnionMemberIntEnumValue:
+		av := object.Key("intEnumValue")
+		av.Integer(uv.Value)
+
 	case *types.MyUnionMemberListValue:
 		av := object.Key("listValue")
 		if err := awsAwsjson10_serializeDocumentStringList(uv.Value, av); err != nil {
