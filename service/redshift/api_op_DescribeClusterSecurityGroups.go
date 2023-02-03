@@ -42,8 +42,8 @@ func (c *Client) DescribeClusterSecurityGroups(ctx context.Context, params *Desc
 type DescribeClusterSecurityGroupsInput struct {
 
 	// The name of a cluster security group for which you are requesting details. You
-	// can specify either the Marker parameter or a ClusterSecurityGroupName parameter,
-	// but not both. Example: securitygroup1
+	// must specify either the Marker parameter or a ClusterSecurityGroupName
+	// parameter, but not both. Example: securitygroup1
 	ClusterSecurityGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
@@ -51,7 +51,7 @@ type DescribeClusterSecurityGroupsInput struct {
 	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
 	// the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request. Constraints: You can specify either the
+	// retrying the request. Constraints: You must specify either the
 	// ClusterSecurityGroupName parameter or the Marker parameter, but not both.
 	Marker *string
 

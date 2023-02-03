@@ -42,6 +42,7 @@
         "api_op_GetEnvironmentTemplateVersion.go",
         "api_op_GetRepository.go",
         "api_op_GetRepositorySyncStatus.go",
+        "api_op_GetResourcesSummary.go",
         "api_op_GetService.go",
         "api_op_GetServiceInstance.go",
         "api_op_GetServiceTemplate.go",

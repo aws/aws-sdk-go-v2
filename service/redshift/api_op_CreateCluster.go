@@ -81,13 +81,20 @@ type CreateClusterInput struct {
 	// The user name associated with the admin user account for the cluster that is
 	// being created. Constraints:
 	//
-	// * Must be 1 - 128 alphanumeric characters. The user
-	// name can't be PUBLIC.
+	// * Must be 1 - 128 alphanumeric characters or
+	// hyphens. The user name can't be PUBLIC.
 	//
-	// * First character must be a letter.
+	// * Must contain only lowercase letters,
+	// numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.
 	//
-	// * Cannot be a
-	// reserved word. A list of reserved words can be found in Reserved Words
+	// * The
+	// first character must be a letter.
+	//
+	// * Must not contain a colon (:) or a slash
+	// (/).
+	//
+	// * Cannot be a reserved word. A list of reserved words can be found in
+	// Reserved Words
 	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
 	// Amazon Redshift Database Developer Guide.
 	//
