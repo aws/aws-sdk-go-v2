@@ -79,6 +79,26 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			`))
 			},
 		},
+		// Ensures that the timestampFormat of date-time on the target shape works like
+		// normal timestamps
+		"XmlTimestampsWithDateTimeOnTargetFormat": {
+			Params: &XmlTimestampsInput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
+			</XmlTimestampsInputOutput>
+			`))
+			},
+		},
 		// Ensures that the timestampFormat of epoch-seconds works
 		"XmlTimestampsWithEpochSecondsFormat": {
 			Params: &XmlTimestampsInput{
@@ -98,6 +118,25 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			`))
 			},
 		},
+		// Ensures that the timestampFormat of epoch-seconds on the target shape works
+		"XmlTimestampsWithEpochSecondsOnTargetFormat": {
+			Params: &XmlTimestampsInput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
+			</XmlTimestampsInputOutput>
+			`))
+			},
+		},
 		// Ensures that the timestampFormat of http-date works
 		"XmlTimestampsWithHttpDateFormat": {
 			Params: &XmlTimestampsInput{
@@ -113,6 +152,25 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
 			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
+			</XmlTimestampsInputOutput>
+			`))
+			},
+		},
+		// Ensures that the timestampFormat of http-date on the target shape works
+		"XmlTimestampsWithHttpDateOnTargetFormat": {
+			Params: &XmlTimestampsInput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
 			</XmlTimestampsInputOutput>
 			`))
 			},
@@ -233,6 +291,22 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
+		// Ensures that the timestampFormat of date-time on the target shape works like
+		// normal timestamps
+		"XmlTimestampsWithDateTimeOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsInputOutput>
+			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
+			</XmlTimestampsInputOutput>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
 		// Ensures that the timestampFormat of epoch-seconds works
 		"XmlTimestampsWithEpochSecondsFormat": {
 			StatusCode: 200,
@@ -248,6 +322,21 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
+		// Ensures that the timestampFormat of epoch-seconds on the target shape works
+		"XmlTimestampsWithEpochSecondsOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsInputOutput>
+			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
+			</XmlTimestampsInputOutput>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
 		// Ensures that the timestampFormat of http-date works
 		"XmlTimestampsWithHttpDateFormat": {
 			StatusCode: 200,
@@ -261,6 +350,21 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		// Ensures that the timestampFormat of http-date on the target shape works
+		"XmlTimestampsWithHttpDateOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsInputOutput>
+			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
+			</XmlTimestampsInputOutput>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
 	}

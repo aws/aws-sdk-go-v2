@@ -70,6 +70,10 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
 				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
+				},
 				NestedStringList: [][]string{
 					{
 						"foo",
@@ -123,6 +127,10 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 			    "enumList": [
 			        "Foo",
 			        "0"
+			    ],
+			    "intEnumList": [
+			        1,
+			        2
 			    ],
 			    "nestedStringList": [
 			        [
@@ -307,6 +315,10 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 			        "Foo",
 			        "0"
 			    ],
+			    "intEnumList": [
+			        1,
+			        2
+			    ],
 			    "nestedStringList": [
 			        [
 			            "foo",
@@ -352,6 +364,10 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
+				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
 				},
 				NestedStringList: [][]string{
 					{

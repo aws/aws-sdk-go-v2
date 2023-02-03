@@ -34,9 +34,15 @@ type XmlTimestampsInput struct {
 type XmlTimestampsOutput struct {
 	DateTime *time.Time
 
+	DateTimeOnTarget *time.Time
+
 	EpochSeconds *time.Time
 
+	EpochSecondsOnTarget *time.Time
+
 	HttpDate *time.Time
+
+	HttpDateOnTarget *time.Time
 
 	Normal *time.Time
 

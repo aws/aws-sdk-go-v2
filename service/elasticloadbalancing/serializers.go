@@ -1915,9 +1915,6 @@ func awsAwsquery_serializeDocumentAdditionalAttribute(v *types.AdditionalAttribu
 }
 
 func awsAwsquery_serializeDocumentAdditionalAttributes(v []types.AdditionalAttribute, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -1930,9 +1927,6 @@ func awsAwsquery_serializeDocumentAdditionalAttributes(v []types.AdditionalAttri
 }
 
 func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2028,9 +2022,6 @@ func awsAwsquery_serializeDocumentInstance(v *types.Instance, value query.Value)
 }
 
 func awsAwsquery_serializeDocumentInstances(v []types.Instance, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2075,9 +2066,6 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 }
 
 func awsAwsquery_serializeDocumentListeners(v []types.Listener, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2132,9 +2120,6 @@ func awsAwsquery_serializeDocumentLoadBalancerAttributes(v *types.LoadBalancerAt
 }
 
 func awsAwsquery_serializeDocumentLoadBalancerNames(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2145,9 +2130,6 @@ func awsAwsquery_serializeDocumentLoadBalancerNames(v []string, value query.Valu
 }
 
 func awsAwsquery_serializeDocumentLoadBalancerNamesMax20(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2175,9 +2157,6 @@ func awsAwsquery_serializeDocumentPolicyAttribute(v *types.PolicyAttribute, valu
 }
 
 func awsAwsquery_serializeDocumentPolicyAttributes(v []types.PolicyAttribute, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2190,9 +2169,6 @@ func awsAwsquery_serializeDocumentPolicyAttributes(v []types.PolicyAttribute, va
 }
 
 func awsAwsquery_serializeDocumentPolicyNames(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2203,9 +2179,6 @@ func awsAwsquery_serializeDocumentPolicyNames(v []string, value query.Value) err
 }
 
 func awsAwsquery_serializeDocumentPolicyTypeNames(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2216,9 +2189,6 @@ func awsAwsquery_serializeDocumentPolicyTypeNames(v []string, value query.Value)
 }
 
 func awsAwsquery_serializeDocumentPorts(v []int32, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2229,9 +2199,6 @@ func awsAwsquery_serializeDocumentPorts(v []int32, value query.Value) error {
 }
 
 func awsAwsquery_serializeDocumentSecurityGroups(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2242,9 +2209,6 @@ func awsAwsquery_serializeDocumentSecurityGroups(v []string, value query.Value) 
 }
 
 func awsAwsquery_serializeDocumentSubnets(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2272,9 +2236,6 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 }
 
 func awsAwsquery_serializeDocumentTagKeyList(v []types.TagKeyOnly, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -2299,9 +2260,6 @@ func awsAwsquery_serializeDocumentTagKeyOnly(v *types.TagKeyOnly, value query.Va
 }
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {

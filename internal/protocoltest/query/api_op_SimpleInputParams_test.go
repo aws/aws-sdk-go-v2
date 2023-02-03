@@ -172,6 +172,25 @@ func TestClient_SimpleInputParams_awsAwsquerySerialize(t *testing.T) {
 				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&FooEnum=Foo`))
 			},
 		},
+		// Serializes intEnums in the query string
+		"QueryIntEnums": {
+			Params: &SimpleInputParamsInput{
+				IntegerEnum: 1,
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&IntegerEnum=1`))
+			},
+		},
 		// Supports handling NaN float values.
 		"AwsQuerySupportsNaNFloatInputs": {
 			Params: &SimpleInputParamsInput{
