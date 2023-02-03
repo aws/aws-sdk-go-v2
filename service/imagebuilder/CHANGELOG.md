@@ -1,3 +1,7 @@
+# v1.22.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-01-17)
 
 * **Feature**: Add support for AWS Marketplace product IDs as input during CreateImageRecipe for the parent-image parameter. Add support for listing third-party components.

@@ -1,3 +1,7 @@
+# v1.18.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-01-27)
 
 * **Feature**: Amazon SageMaker Runtime which supports InvokeEndpointAsync asynchronously can now invoke endpoints with custom timeout values. Asynchronous invocations support longer processing times.

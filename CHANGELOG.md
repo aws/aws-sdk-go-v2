@@ -1,3 +1,49 @@
+# Release (2023-02-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.26.2](service/autoscaling/CHANGELOG.md#v1262-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.26.2](service/cloudformation/CHANGELOG.md#v1262-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.14.1](service/cloudsearch/CHANGELOG.md#v1141-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.25.2](service/cloudwatch/CHANGELOG.md#v1252-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.20.2](service/docdb/CHANGELOG.md#v1202-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.84.1](service/ec2/CHANGELOG.md#v1841-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.26.2](service/elasticache/CHANGELOG.md#v1262-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.15.1](service/elasticbeanstalk/CHANGELOG.md#v1151-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.15.2](service/elasticloadbalancing/CHANGELOG.md#v1152-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.19.3](service/elasticloadbalancingv2/CHANGELOG.md#v1193-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.2](service/iam/CHANGELOG.md#v1192-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.19.2](service/neptune/CHANGELOG.md#v1192-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.20.0](service/proton/CHANGELOG.md#v1200-2023-02-03)
+  * **Feature**: Add new GetResourcesSummary API
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.40.2](service/rds/CHANGELOG.md#v1402-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.27.2](service/redshift/CHANGELOG.md#v1272-2023-02-03)
+  * **Documentation**: Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.15.1](service/ses/CHANGELOG.md#v1151-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.20.1](service/sns/CHANGELOG.md#v1201-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.20.2](service/sqs/CHANGELOG.md#v1202-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.18.3](service/sts/CHANGELOG.md#v1183-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # Release (2023-02-02)
 
 ## Module Highlights

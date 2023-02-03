@@ -1,3 +1,7 @@
+# v1.20.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-01-20)
 
 * **Feature**: API and Doc update. Update to arns field in BatchGetStreamKey. Also updates to operations and structures.

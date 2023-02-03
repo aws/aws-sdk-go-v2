@@ -1,3 +1,7 @@
+# v1.21.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-01-06)
 
 * **Feature**: Added revocation parameter validation: bucket names must match S3 bucket naming rules and CNAMEs conform to RFC2396 restrictions on the use of special characters in URIs.

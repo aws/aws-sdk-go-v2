@@ -1,3 +1,7 @@
+# v1.15.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2023-01-09)
 
 * **Feature**: This release for Amazon ECR Public makes several change to bring the SDK into sync with the API.

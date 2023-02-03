@@ -1,3 +1,7 @@
+# v1.17.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-01-31)
 
 * **Feature**: DigIF Expansion changes to the Customer APIs.

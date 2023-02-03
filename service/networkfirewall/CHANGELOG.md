@@ -1,3 +1,7 @@
+# v1.24.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-01-17)
 
 * **Feature**: Network Firewall now allows creation of dual stack endpoints, enabling inspection of IPv6 traffic.

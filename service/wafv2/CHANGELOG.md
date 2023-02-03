@@ -1,3 +1,7 @@
+# v1.24.3 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.2 (2023-01-18)
 
 * **Documentation**: Improved the visibility of the guidance for updating AWS WAF resources, such as web ACLs and rule groups.

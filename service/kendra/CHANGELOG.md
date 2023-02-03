@@ -1,3 +1,7 @@
+# v1.38.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2023-01-11)
 
 * **Feature**: This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD

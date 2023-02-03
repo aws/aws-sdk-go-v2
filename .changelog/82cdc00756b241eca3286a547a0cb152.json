@@ -1,8 +1,0 @@
-{
-    "id": "82cdc007-56b2-41ec-a328-6a547a0cb152",
-    "type": "documentation",
-    "description": "Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.",
-    "modules": [
-        "service/redshift"
-    ]
-}

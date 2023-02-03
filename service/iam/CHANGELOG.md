@@ -1,3 +1,8 @@
+# v1.19.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # v1.19.1 (2023-02-01)
 
 * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).

@@ -1,3 +1,8 @@
+# v1.20.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # v1.20.0 (2023-02-01)
 
 * **Feature**: Additional attributes added for set-topic-attributes.

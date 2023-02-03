@@ -1,8 +1,0 @@
-{
-    "id": "81bc9a04-f34a-4ac9-b3e8-2bbfc17f7f2d",
-    "type": "feature",
-    "description": "Add new GetResourcesSummary API",
-    "modules": [
-        "service/proton"
-    ]
-}

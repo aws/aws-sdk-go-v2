@@ -1,3 +1,7 @@
+# v1.4.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.1 (2023-01-25)
 
 * **Documentation**: Added query monitoring rules as possible parameters for create and update workgroup operations.
