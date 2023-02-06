@@ -1,8 +1,0 @@
-{
-    "id": "9bdcdcb3-9025-4f3d-8999-f52e208f1e0f",
-    "type": "feature",
-    "description": "AWS Compute optimizer can now infer if Kafka is running on an instance.",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

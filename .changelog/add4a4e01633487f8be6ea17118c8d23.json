@@ -1,8 +1,0 @@
-{
-    "id": "add4a4e0-1633-487f-8be6-ea17118c8d23",
-    "type": "feature",
-    "description": "Adds OrderType to Order structure. Adds PreviousOrderId and PreviousLineItemId to LineItem structure. Adds new line item status REPLACED. Increases maximum length of pagination token.",
-    "modules": [
-        "service/outposts"
-    ]
-}

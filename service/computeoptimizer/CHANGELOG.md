@@ -1,3 +1,7 @@
+# v1.21.0 (2023-02-06)
+
+* **Feature**: AWS Compute optimizer can now infer if Kafka is running on an instance.
+
 # v1.20.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions
