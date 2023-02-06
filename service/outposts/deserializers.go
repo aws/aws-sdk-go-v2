@@ -5062,6 +5062,24 @@ func awsRestjson1_deserializeDocumentLineItem(v **types.LineItem, value interfac
 				sv.LineItemId = ptr.String(jtv)
 			}
 
+		case "PreviousLineItemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LineItemId to be of type string, got %T instead", value)
+				}
+				sv.PreviousLineItemId = ptr.String(jtv)
+			}
+
+		case "PreviousOrderId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrderId to be of type string, got %T instead", value)
+				}
+				sv.PreviousOrderId = ptr.String(jtv)
+			}
+
 		case "Quantity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5393,6 +5411,15 @@ func awsRestjson1_deserializeDocumentOrder(v **types.Order, value interface{}) e
 					return fmt.Errorf("expected ISO8601Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "OrderType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrderType to be of type string, got %T instead", value)
+				}
+				sv.OrderType = types.OrderType(jtv)
 			}
 
 		case "OutpostId":

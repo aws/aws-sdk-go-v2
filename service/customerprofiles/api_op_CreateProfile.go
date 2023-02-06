@@ -71,6 +71,8 @@ type CreateProfileInput struct {
 	FirstName *string
 
 	// The gender with which the customer identifies.
+	//
+	// Deprecated: This member has been deprecated.
 	Gender types.Gender
 
 	// An alternative to Gender which accepts any string as input.
@@ -92,6 +94,8 @@ type CreateProfileInput struct {
 	MobilePhoneNumber *string
 
 	// The type of profile used to describe the customer.
+	//
+	// Deprecated: This member has been deprecated.
 	PartyType types.PartyType
 
 	// An alternative to PartyType which accepts any string as input.

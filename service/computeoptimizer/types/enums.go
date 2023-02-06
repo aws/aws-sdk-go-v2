@@ -835,6 +835,7 @@ const (
 	InferredWorkloadTypeNginx           InferredWorkloadType = "Nginx"
 	InferredWorkloadTypePostgreSql      InferredWorkloadType = "PostgreSql"
 	InferredWorkloadTypeRedis           InferredWorkloadType = "Redis"
+	InferredWorkloadTypeKafka           InferredWorkloadType = "Kafka"
 )
 
 // Values returns all known values for InferredWorkloadType. Note that this can be
@@ -849,6 +850,7 @@ func (InferredWorkloadType) Values() []InferredWorkloadType {
 		"Nginx",
 		"PostgreSql",
 		"Redis",
+		"Kafka",
 	}
 }
 

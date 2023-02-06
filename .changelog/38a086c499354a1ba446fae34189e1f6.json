@@ -1,0 +1,8 @@
+{
+    "id": "38a086c4-9935-4a1b-a446-fae34189e1f6",
+    "type": "feature",
+    "description": "The AWS Elemental MediaConvert SDK has added improved scene change detection capabilities and a bandwidth reduction filter, along with video quality enhancements, to the AVC encoder.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

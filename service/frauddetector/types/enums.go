@@ -277,6 +277,7 @@ const (
 	UnlabeledEventsTreatmentIgnore UnlabeledEventsTreatment = "IGNORE"
 	UnlabeledEventsTreatmentFraud  UnlabeledEventsTreatment = "FRAUD"
 	UnlabeledEventsTreatmentLegit  UnlabeledEventsTreatment = "LEGIT"
+	UnlabeledEventsTreatmentAuto   UnlabeledEventsTreatment = "AUTO"
 )
 
 // Values returns all known values for UnlabeledEventsTreatment. Note that this can
@@ -287,5 +288,6 @@ func (UnlabeledEventsTreatment) Values() []UnlabeledEventsTreatment {
 		"IGNORE",
 		"FRAUD",
 		"LEGIT",
+		"AUTO",
 	}
 }

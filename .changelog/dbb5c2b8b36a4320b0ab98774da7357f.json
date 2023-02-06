@@ -1,0 +1,8 @@
+{
+    "id": "dbb5c2b8-b36a-4320-b0ab-98774da7357f",
+    "type": "feature",
+    "description": "This release deprecates the PartyType and Gender enum data types from the Profile model and replaces them with new PartyTypeString and GenderString attributes, which accept any string of length up to 255.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

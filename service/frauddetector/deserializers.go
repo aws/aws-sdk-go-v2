@@ -13656,6 +13656,11 @@ func awsAwsjson11_deserializeDocumentOFIModelPerformance(v **types.OFIModelPerfo
 				}
 			}
 
+		case "uncertaintyRange":
+			if err := awsAwsjson11_deserializeDocumentUncertaintyRange(&sv.UncertaintyRange, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14565,6 +14570,11 @@ func awsAwsjson11_deserializeDocumentTFIModelPerformance(v **types.TFIModelPerfo
 				}
 			}
 
+		case "uncertaintyRange":
+			if err := awsAwsjson11_deserializeDocumentUncertaintyRange(&sv.UncertaintyRange, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14898,6 +14908,105 @@ func awsAwsjson11_deserializeDocumentTrainingResultV2(v **types.TrainingResultV2
 		case "variableImportanceMetrics":
 			if err := awsAwsjson11_deserializeDocumentVariableImportanceMetrics(&sv.VariableImportanceMetrics, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUncertaintyRange(v **types.UncertaintyRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UncertaintyRange
+	if *v == nil {
+		sv = &types.UncertaintyRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lowerBoundValue":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LowerBoundValue = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LowerBoundValue = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "upperBoundValue":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpperBoundValue = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.UpperBoundValue = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:

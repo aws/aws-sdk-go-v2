@@ -298,8 +298,8 @@ type EBSUtilizationMetric struct {
 }
 
 // Describes the projected metrics of an Amazon ECS service recommendation option.
-// To determine the performance difference between your current ECS service and the
-// recommended option, compare the metric data of your service against its
+// To determine the performance difference between your current Amazon ECS service
+// and the recommended option, compare the metric data of your service against its
 // projected metric data.
 type ECSServiceProjectedMetric struct {
 
@@ -308,12 +308,12 @@ type ECSServiceProjectedMetric struct {
 
 	// The name of the projected metric. The following metrics are available:
 	//
-	// * CPU —
-	// The percentage of allocated compute units that are currently in use on the ECS
+	// * Cpu —
+	// The percentage of allocated compute units that are currently in use on the
 	// service tasks.
 	//
-	// * Memory — The percentage of memory that is currently in use on
-	// the ECS service tasks.
+	// * Memory — The percentage of memory that's currently in use on
+	// the service tasks.
 	Name ECSServiceMetricName
 
 	// The timestamps of the projected metric.
@@ -327,8 +327,8 @@ type ECSServiceProjectedMetric struct {
 
 // Describes the projected utilization metrics of an Amazon ECS service
 // recommendation option. To determine the performance difference between your
-// current ECS service and the recommended option, compare the utilization metric
-// data of your service against its projected utilization metric data.
+// current Amazon ECS service and the recommended option, compare the utilization
+// metric data of your service against its projected utilization metric data.
 type ECSServiceProjectedUtilizationMetric struct {
 
 	// The lower bound values for the projected utilization metrics.
@@ -337,11 +337,11 @@ type ECSServiceProjectedUtilizationMetric struct {
 	// The name of the projected utilization metric. The following utilization metrics
 	// are available:
 	//
-	// * CPU — The percentage of allocated compute units that are
-	// currently in use on the ECS service tasks.
+	// * Cpu — The percentage of allocated compute units that are
+	// currently in use on the service tasks.
 	//
 	// * Memory — The percentage of memory
-	// that is currently in use on the ECS service tasks.
+	// that's currently in use on the service tasks.
 	Name ECSServiceMetricName
 
 	// The statistic of the projected utilization metric. The Compute Optimizer API,
@@ -367,78 +367,80 @@ type ECSServiceProjectedUtilizationMetric struct {
 // Describes an Amazon ECS service recommendation.
 type ECSServiceRecommendation struct {
 
-	// The Amazon Web Services account ID of the ECS service.
+	// The Amazon Web Services account ID of the Amazon ECS service.
 	AccountId *string
 
-	// The risk of the current ECS service not meeting the performance needs of its
-	// workloads. The higher the risk, the more likely the current service can't meet
-	// the performance requirements of its workload.
+	// The risk of the current Amazon ECS service not meeting the performance needs of
+	// its workloads. The higher the risk, the more likely the current service can't
+	// meet the performance requirements of its workload.
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
-	// The configuration of the current ECS service.
+	// The configuration of the current Amazon ECS service.
 	CurrentServiceConfiguration *ServiceConfiguration
 
-	// The finding classification of an ECS service. Findings for ECS services
-	// include:
+	// The finding classification of an Amazon ECS service. Findings for Amazon ECS
+	// services include:
 	//
-	// * Underprovisioned — When Compute Optimizer detects that there’s not
-	// enough memory or CPU, an ECS service is considered under-provisioned. An
-	// under-provisioned ECS service might result in poor application performance.
+	// * Underprovisioned — When Compute Optimizer detects that
+	// there’s not enough memory or CPU, an Amazon ECS service is considered
+	// under-provisioned. An under-provisioned service might result in poor application
+	// performance.
+	//
+	// * Overprovisioned — When Compute Optimizer detects that there’s
+	// excessive memory or CPU, an Amazon ECS service is considered over-provisioned.
+	// An over-provisioned service might result in additional infrastructure costs.
 	//
 	// *
-	// Overprovisioned — When Compute Optimizer detects that there’s excessive memory
-	// or CPU, an ECS service is considered over-provisioned. An over-provisioned ECS
-	// service might result in additional infrastructure costs.
-	//
-	// * Optimized — When
-	// both the CPU and memory of your ECS service meet the performance requirements of
-	// your workload, the service is considered optimized.
+	// Optimized — When both the CPU and memory of your Amazon ECS service meet the
+	// performance requirements of your workload, the service is considered optimized.
 	Finding ECSServiceRecommendationFinding
 
-	// The reason for the finding classification of an ECS service. Finding reason
-	// codes for ECS services include:
+	// The reason for the finding classification of an Amazon ECS service. Finding
+	// reason codes for Amazon ECS services include:
 	//
-	// * CPUUnderprovisioned — The ECS service CPU
-	// configuration can be sized up to enhance the performance of your workload. This
-	// is identified by analyzing the CPUUtilization metric of the current service
-	// during the look-back period.
+	// * CPUUnderprovisioned — The
+	// service CPU configuration can be sized up to enhance the performance of your
+	// workload. This is identified by analyzing the CPUUtilization metric of the
+	// current service during the look-back period.
 	//
-	// * CPUOverprovisioned — The ECS service CPU
-	// configuration can be sized down while still meeting the performance requirements
-	// of your workload. This is identified by analyzing the CPUUtilization metric of
-	// the current service during the look-back period.
+	// * CPUOverprovisioned — The service
+	// CPU configuration can be sized down while still meeting the performance
+	// requirements of your workload. This is identified by analyzing the
+	// CPUUtilization metric of the current service during the look-back period.
 	//
-	// * MemoryUnderprovisioned — The
-	// ECS service memory configuration can be sized up to enhance the performance of
-	// your workload. This is identified by analyzing the MemoryUtilization metric of
-	// the current service during the look-back period.
-	//
-	// * MemoryOverprovisioned — The
-	// ECS service memory configuration can be sized down while still meeting the
-	// performance requirements of your workload. This is identified by analyzing the
+	// *
+	// MemoryUnderprovisioned — The service memory configuration can be sized up to
+	// enhance the performance of your workload. This is identified by analyzing the
 	// MemoryUtilization metric of the current service during the look-back period.
+	//
+	// *
+	// MemoryOverprovisioned — The service memory configuration can be sized down while
+	// still meeting the performance requirements of your workload. This is identified
+	// by analyzing the MemoryUtilization metric of the current service during the
+	// look-back period.
 	FindingReasonCodes []ECSServiceRecommendationFindingReasonCode
 
-	// The timestamp of when the ECS service recommendation was last generated.
+	// The timestamp of when the Amazon ECS service recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
-	// The launch type the ECS service is using. Compute Optimizer only supports the
-	// Fargate launch type.
+	// The launch type the Amazon ECS service is using. Compute Optimizer only supports
+	// the Fargate launch type.
 	LaunchType ECSServiceLaunchType
 
-	// The number of days the ECS service utilization metrics were analyzed.
+	// The number of days the Amazon ECS service utilization metrics were analyzed.
 	LookbackPeriodInDays float64
 
-	// The Amazon Resource Name (ARN) of the current ECS service. The following is the
-	// format of the ARN:
+	// The Amazon Resource Name (ARN) of the current Amazon ECS service. The following
+	// is the format of the ARN:
 	// arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
 	ServiceArn *string
 
-	// An array of objects that describe the recommendation options for the ECS
+	// An array of objects that describe the recommendation options for the Amazon ECS
 	// service.
 	ServiceRecommendationOptions []ECSServiceRecommendationOption
 
-	// An array of objects that describe the utilization metrics of the ECS service.
+	// An array of objects that describe the utilization metrics of the Amazon ECS
+	// service.
 	UtilizationMetrics []ECSServiceUtilizationMetric
 
 	noSmithyDocumentSerde
@@ -471,17 +473,17 @@ type ECSServiceRecommendationFilter struct {
 type ECSServiceRecommendationOption struct {
 
 	// The CPU and memory size recommendations for the containers within the task of
-	// your ECS service.
+	// your Amazon ECS service.
 	ContainerRecommendations []ContainerRecommendation
 
-	// The CPU size of the ECS service recommendation option.
+	// The CPU size of the Amazon ECS service recommendation option.
 	Cpu *int32
 
-	// The memory size of the ECS service recommendation option.
+	// The memory size of the Amazon ECS service recommendation option.
 	Memory *int32
 
-	// An array of objects that describe the projected utilization metrics of the ECS
-	// service recommendation option.
+	// An array of objects that describe the projected utilization metrics of the
+	// Amazon ECS service recommendation option.
 	ProjectedUtilizationMetrics []ECSServiceProjectedUtilizationMetric
 
 	// Describes the savings opportunity for recommendations of a given resource type
@@ -505,36 +507,36 @@ type ECSServiceRecommendationOption struct {
 }
 
 // Describes the projected metrics of an Amazon ECS service recommendation option.
-// To determine the performance difference between your current ECS service and the
-// recommended option, compare the metric data of your service against its
+// To determine the performance difference between your current Amazon ECS service
+// and the recommended option, compare the metric data of your service against its
 // projected metric data.
 type ECSServiceRecommendedOptionProjectedMetric struct {
 
 	// An array of objects that describe the projected metric.
 	ProjectedMetrics []ECSServiceProjectedMetric
 
-	// The recommended CPU size for the ECS service.
+	// The recommended CPU size for the Amazon ECS service.
 	RecommendedCpuUnits int32
 
-	// The recommended memory size for the ECS service.
+	// The recommended memory size for the Amazon ECS service.
 	RecommendedMemorySize int32
 
 	noSmithyDocumentSerde
 }
 
 // Describes the utilization metric of an Amazon ECS service. To determine the
-// performance difference between your current ECS service and the recommended
-// option, compare the utilization metric data of your service against its
-// projected utilization metric data.
+// performance difference between your current Amazon ECS service and the
+// recommended option, compare the utilization metric data of your service against
+// its projected utilization metric data.
 type ECSServiceUtilizationMetric struct {
 
 	// The name of the utilization metric. The following utilization metrics are
 	// available:
 	//
-	// * Cpu — The amount of CPU units that are used in the service.
+	// * Cpu — The amount of CPU capacity that's used in the service.
 	//
 	// *
-	// Memory — The amount of memory that is used in the service.
+	// Memory — The amount of memory that's used in the service.
 	Name ECSServiceMetricName
 
 	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
@@ -964,6 +966,9 @@ type InstanceRecommendation struct {
 	// instance.
 	//
 	// * Redis - Infers that Redis might be running on the instance.
+	//
+	// *
+	// Kafka - Infers that Kafka might be running on the instance.
 	InferredWorkloadTypes []InferredWorkloadType
 
 	// The Amazon Resource Name (ARN) of the current instance.
@@ -1697,36 +1702,36 @@ type ServiceConfiguration struct {
 
 	// Describes the Auto Scaling configuration methods for an Amazon ECS service. This
 	// affects the generated recommendations. For example, if Auto Scaling is
-	// configured on a ECS service’s CPU, then Compute Optimizer doesn’t generate CPU
-	// size recommendations. The Auto Scaling configuration methods include:
+	// configured on a service’s CPU, then Compute Optimizer doesn’t generate CPU size
+	// recommendations. The Auto Scaling configuration methods include:
 	//
 	// *
-	// TARGET_TRACKING_SCALING_CPU — If the ECS service is configured to use target
-	// scaling on CPU, Compute Optimizer doesn't generate CPU recommendations.
-	//
-	// *
-	// TARGET_TRACKING_SCALING_MEMORY — If the ECS service is configured to use target
-	// scaling on memory, Compute Optimizer doesn't generate memory
+	// TARGET_TRACKING_SCALING_CPU — If the Amazon ECS service is configured to use
+	// target scaling on CPU, Compute Optimizer doesn't generate CPU
 	// recommendations.
 	//
-	// For more information about step scaling and target scaling,
-	// see  Step scaling policies for Application Auto Scaling
+	// * TARGET_TRACKING_SCALING_MEMORY — If the Amazon ECS service
+	// is configured to use target scaling on memory, Compute Optimizer doesn't
+	// generate memory recommendations.
+	//
+	// For more information about step scaling and
+	// target scaling, see  Step scaling policies for Application Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
 	// and  Target tracking scaling policies for Application Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// in the Application Auto Scaling User Guide.
 	AutoScalingConfiguration AutoScalingConfiguration
 
-	// The container configurations within a task of an ECS service.
+	// The container configurations within a task of an Amazon ECS service.
 	ContainerConfigurations []ContainerConfiguration
 
-	// The number of CPU units used by the tasks in the ECS service.
+	// The number of CPU units used by the tasks in the Amazon ECS service.
 	Cpu *int32
 
-	// The amount of memory used by the tasks in the ECS service.
+	// The amount of memory used by the tasks in the Amazon ECS service.
 	Memory *int32
 
-	// The task definition ARN used by the tasks in the ECS service.
+	// The task definition ARN used by the tasks in the Amazon ECS service.
 	TaskDefinitionArn *string
 
 	noSmithyDocumentSerde

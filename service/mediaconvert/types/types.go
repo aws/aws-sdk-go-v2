@@ -2948,9 +2948,9 @@ type EsamSignalProcessingNotification struct {
 // Content Advisory.
 type ExtendedDataServices struct {
 
-	// The action to take on copy and redistribution control XDS packets. If you select
-	// PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will
-	// be removed in output captions.
+	// The action to take on content advisory XDS packets. If you select PASSTHROUGH,
+	// packets will not be changed. If you select STRIP, any packets will be removed in
+	// output captions.
 	CopyProtectionAction CopyProtectionAction
 
 	// The action to take on content advisory XDS packets. If you select PASSTHROUGH,
@@ -4482,7 +4482,7 @@ type Input struct {
 	FilterEnable InputFilterEnable
 
 	// Use Filter strength (FilterStrength) to adjust the magnitude the input filter
-	// settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
+	// settings (Deblock and Denoise). The range is 0 to 5. Default is 0.
 	FilterStrength int32
 
 	// Enable the image inserter feature to include a graphic overlay on your video.
@@ -4685,7 +4685,7 @@ type InputTemplate struct {
 	FilterEnable InputFilterEnable
 
 	// Use Filter strength (FilterStrength) to adjust the magnitude the input filter
-	// settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
+	// settings (Deblock and Denoise). The range is 0 to 5. Default is 0.
 	FilterStrength int32
 
 	// Enable the image inserter feature to include a graphic overlay on your video.
