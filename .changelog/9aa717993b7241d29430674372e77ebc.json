@@ -1,0 +1,8 @@
+{
+    "id": "9aa71799-3b72-41d2-9430-674372e77ebc",
+    "type": "documentation",
+    "description": "Updated the documentation for the ImportCertificate API call, and added examples.",
+    "modules": [
+        "service/transfer"
+    ]
+}

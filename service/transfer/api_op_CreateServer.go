@@ -107,7 +107,7 @@ type CreateServerInput struct {
 	// commands, you can replace my-new-server-key with a string of your choice. If you
 	// aren't planning to migrate existing users from an existing SFTP-enabled server
 	// to a new server, don't update the host key. Accidentally changing a server's
-	// host key can be disruptive. For more information, see Update host keys for your
+	// host key can be disruptive. For more information, see Manage host keys for your
 	// SFTP-enabled server
 	// (https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key)
 	// in the Transfer Family User Guide.
@@ -198,18 +198,19 @@ type CreateServerInput struct {
 	// clients connect to it over FTPS.
 	//
 	// * If Protocol includes either FTP or FTPS,
-	// then the EndpointType must be VPC and the IdentityProviderType must be
-	// AWS_DIRECTORY_SERVICE or API_GATEWAY.
+	// then the EndpointType must be VPC and the IdentityProviderType must be either
+	// AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.
 	//
-	// * If Protocol includes FTP, then
-	// AddressAllocationIds cannot be associated.
+	// * If Protocol includes FTP,
+	// then AddressAllocationIds cannot be associated.
 	//
-	// * If Protocol is set only to SFTP,
-	// the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to
-	// SERVICE_MANAGED.
+	// * If Protocol is set only to
+	// SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be
+	// set any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE,
+	// AWS_LAMBDA, or API_GATEWAY.
 	//
-	// * If Protocol includes AS2, then the EndpointType must be VPC,
-	// and domain must be Amazon S3.
+	// * If Protocol includes AS2, then the EndpointType
+	// must be VPC, and domain must be Amazon S3.
 	Protocols []types.Protocol
 
 	// Specifies the name of the security policy that is attached to the server.
@@ -219,9 +220,9 @@ type CreateServerInput struct {
 	Tags []types.Tag
 
 	// Specifies the workflow ID for the workflow to assign and the execution role
-	// that's used for executing the workflow. In additon to a workflow to execute when
-	// a file is uploaded completely, WorkflowDeatails can also contain a workflow ID
-	// (and execution role) for a workflow to execute on partial upload. A partial
+	// that's used for executing the workflow. In addition to a workflow to execute
+	// when a file is uploaded completely, WorkflowDetails can also contain a workflow
+	// ID (and execution role) for a workflow to execute on partial upload. A partial
 	// upload occurs when a file is open when the session disconnects.
 	WorkflowDetails *types.WorkflowDetails
 
