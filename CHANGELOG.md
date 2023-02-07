@@ -1,3 +1,9 @@
+# Release (2023-02-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.28.2](service/transfer/CHANGELOG.md#v1282-2023-02-07)
+  * **Documentation**: Updated the documentation for the ImportCertificate API call, and added examples.
+
 # Release (2023-02-06)
 
 ## Module Highlights

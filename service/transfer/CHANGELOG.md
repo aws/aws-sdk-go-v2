@@ -1,3 +1,7 @@
+# v1.28.2 (2023-02-07)
+
+* **Documentation**: Updated the documentation for the ImportCertificate API call, and added examples.
+
 # v1.28.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions
