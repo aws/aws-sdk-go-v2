@@ -1,8 +1,0 @@
-{
-    "id": "bbcbd512-2689-4345-8a8d-b104ea381f02",
-    "type": "feature",
-    "description": "This release removes the LFTagpolicyResource expression limits.",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

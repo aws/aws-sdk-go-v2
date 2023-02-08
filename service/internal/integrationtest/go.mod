@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/batch v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.26.2
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.23.1
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.1
-	github.com/aws/aws-sdk-go-v2/service/glue v1.40.2
+	github.com/aws/aws-sdk-go-v2/service/glue v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.1

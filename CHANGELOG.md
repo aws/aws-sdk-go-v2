@@ -1,3 +1,13 @@
+# Release (2023-02-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.20.0](service/backup/CHANGELOG.md#v1200-2023-02-08)
+  * **Feature**: This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.25.0](service/cloudfront/CHANGELOG.md#v1250-2023-02-08)
+  * **Feature**: CloudFront Origin Access Control extends support to AWS Elemental MediaStore origins.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.41.0](service/glue/CHANGELOG.md#v1410-2023-02-08)
+  * **Feature**: DirectJDBCSource + Glue 4.0 streaming options
+
 # Release (2023-02-07)
 
 ## Module Highlights

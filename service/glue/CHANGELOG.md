@@ -1,3 +1,7 @@
+# v1.41.0 (2023-02-08)
+
+* **Feature**: DirectJDBCSource + Glue 4.0 streaming options
+
 # v1.40.2 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "21ba3b71-c9f7-48a2-970e-fc98e00cd5d3",
-    "type": "feature",
-    "description": "This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.",
-    "modules": [
-        "service/backup"
-    ]
-}

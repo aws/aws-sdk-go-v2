@@ -1,3 +1,7 @@
+# v1.20.0 (2023-02-08)
+
+* **Feature**: This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.
+
 # v1.19.2 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions
