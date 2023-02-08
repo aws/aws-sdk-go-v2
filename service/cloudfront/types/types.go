@@ -3044,8 +3044,7 @@ type OriginAccessControlConfig struct {
 	// This member is required.
 	Name *string
 
-	// The type of origin that this origin access control is for. The only valid value
-	// is s3.
+	// The type of origin that this origin access control is for.
 	//
 	// This member is required.
 	OriginAccessControlOriginType OriginAccessControlOriginTypes
@@ -3143,8 +3142,7 @@ type OriginAccessControlSummary struct {
 	// This member is required.
 	Name *string
 
-	// The type of origin that this origin access control is for. The only valid value
-	// is s3.
+	// The type of origin that this origin access control is for.
 	//
 	// This member is required.
 	OriginAccessControlOriginType OriginAccessControlOriginTypes

@@ -722,7 +722,7 @@ type CodeGenConfigurationNode struct {
 	// Specifies a custom visual transform created by a user.
 	DynamicTransform *DynamicTransform
 
-	// Specifies a DynamoDB data source in the Glue Data Catalog.
+	// Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
 	DynamoDBCatalogSource *DynamoDBCatalogSource
 
 	// Specifies your data quality evaluation criteria.
@@ -794,7 +794,7 @@ type CodeGenConfigurationNode struct {
 	// Specifies a target that uses Amazon Redshift.
 	RedshiftTarget *RedshiftTarget
 
-	// Specifies a Relational database data source in the Glue Data Catalog.
+	// Specifies a relational catalog data store in the Glue Data Catalog.
 	RelationalCatalogSource *RelationalCatalogSource
 
 	// Specifies a transform that renames a single data property key.
@@ -3981,6 +3981,12 @@ type JsonClassifier struct {
 // Additional options for streaming.
 type KafkaStreamingSourceOptions struct {
 
+	// When this option is set to 'true', the data output will contain an additional
+	// column named "__src_timestamp" that indicates the time when the corresponding
+	// record received by the topic. The default value is 'false'. This option is
+	// supported in Glue version 4.0 or later.
+	AddRecordTimestamp *string
+
 	// The specific TopicPartitions to consume. You must specify at least one of
 	// "topicName", "assign" or "subscribePattern".
 	Assign *string
@@ -3999,9 +4005,22 @@ type KafkaStreamingSourceOptions struct {
 	// Specifies the delimiter character.
 	Delimiter *string
 
+	// When this option is set to 'true', for each batch, it will emit the metrics for
+	// the duration between the oldest record received by the topic and the time it
+	// arrives in Glue to CloudWatch. The metric's name is
+	// "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This
+	// option is supported in Glue version 4.0 or later.
+	EmitConsumerLagMetrics *string
+
 	// The end point when a batch query is ended. Possible values are either "latest"
 	// or a JSON string that specifies an ending offset for each TopicPartition.
 	EndingOffsets *string
+
+	// Whether to include the Kafka headers. When the option is set to "true", the data
+	// output will contain an additional column named "glue_streaming_kafka_headers"
+	// with type Array[Struct(key: String, value: String)]. The default value is
+	// "false". This option is available in Glue version 3.0 or later only.
+	IncludeHeaders *bool
 
 	// The rate limit on the maximum number of offsets that are processed per trigger
 	// interval. The specified total number of offsets is proportionally split across
@@ -4069,6 +4088,12 @@ type KinesisStreamingSourceOptions struct {
 	// above.
 	AddIdleTimeBetweenReads *bool
 
+	// When this option is set to 'true', the data output will contain an additional
+	// column named "__src_timestamp" that indicates the time when the corresponding
+	// record received by the stream. The default value is 'false'. This option is
+	// supported in Glue version 4.0 or later.
+	AddRecordTimestamp *string
+
 	// Avoids creating an empty microbatch job by checking for unread data in the
 	// Kinesis data stream before the batch is started. The default value is "False".
 	AvoidEmptyBatches *bool
@@ -4082,6 +4107,13 @@ type KinesisStreamingSourceOptions struct {
 	// The minimum time interval between two ListShards API calls for your script to
 	// consider resharding. The default value is 1s.
 	DescribeShardInterval *int64
+
+	// When this option is set to 'true', for each batch, it will emit the metrics for
+	// the duration between the oldest record received by the stream and the time it
+	// arrives in Glue to CloudWatch. The metric's name is
+	// "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This
+	// option is supported in Glue version 4.0 or later.
+	EmitConsumerLagMetrics *string
 
 	// The URL of the Kinesis endpoint.
 	EndpointUrl *string
@@ -5610,6 +5642,8 @@ type S3HudiCatalogTarget struct {
 // Specifies a target that writes to a Hudi data source in Amazon S3.
 type S3HudiDirectTarget struct {
 
+	// Specifies additional connection options for the connector.
+	//
 	// This member is required.
 	AdditionalOptions map[string]string
 
@@ -5664,7 +5698,7 @@ type S3HudiSource struct {
 	// Specifies additional connection options.
 	AdditionalHudiOptions map[string]string
 
-	// Specifies additional connection options for the Amazon S3 data store.
+	// Specifies additional options for the connector.
 	AdditionalOptions *S3DirectSourceAdditionalOptions
 
 	// Specifies the data schema for the Hudi source.

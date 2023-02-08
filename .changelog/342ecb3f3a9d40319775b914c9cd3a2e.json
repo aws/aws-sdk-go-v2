@@ -1,0 +1,8 @@
+{
+    "id": "342ecb3f-3a9d-4031-9775-b914c9cd3a2e",
+    "type": "feature",
+    "description": "DirectJDBCSource + Glue 4.0 streaming options",
+    "modules": [
+        "service/glue"
+    ]
+}

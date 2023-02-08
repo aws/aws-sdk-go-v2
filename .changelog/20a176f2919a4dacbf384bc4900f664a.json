@@ -1,0 +1,8 @@
+{
+    "id": "20a176f2-919a-4dac-bf38-4bc4900f664a",
+    "type": "feature",
+    "description": "CloudFront Origin Access Control extends support to AWS Elemental MediaStore origins.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

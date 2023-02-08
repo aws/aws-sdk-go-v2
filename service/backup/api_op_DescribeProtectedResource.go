@@ -52,6 +52,10 @@ type DescribeProtectedResourceOutput struct {
 	// resource type.
 	ResourceArn *string
 
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
+
 	// The type of Amazon Web Services resource saved as a recovery point; for example,
 	// an Amazon EBS volume or an Amazon RDS database.
 	ResourceType *string

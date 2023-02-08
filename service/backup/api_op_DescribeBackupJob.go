@@ -123,6 +123,10 @@ type DescribeBackupJobOutput struct {
 	// on the resource type.
 	ResourceArn *string
 
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
+
 	// The type of Amazon Web Services resource to be backed up; for example, an Amazon
 	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
 	// (Amazon RDS) database.
