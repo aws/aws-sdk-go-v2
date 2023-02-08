@@ -2200,9 +2200,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "cn-northwest-1",
+                                                "name": "sigv4",
                                                 "signingName": "cloudfront",
-                                                "name": "sigv4"
+                                                "signingRegion": "cn-northwest-1"
                                             }
                                         ]
                                     },
@@ -2210,9 +2210,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "aws-cn-global",
-                                "UseDualStack": false
+                                "Region": "aws-cn-global"
                             }
                         },
                         {
@@ -2222,9 +2222,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "cloudfront",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2232,9 +2232,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "aws-global",
-                                "UseDualStack": false
+                                "Region": "aws-global"
                             }
                         },
                         {
@@ -2245,9 +2245,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2257,9 +2257,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2269,9 +2269,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -4199,7 +4199,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new origin access control in CloudFront. After you create an origin access\n\t\t\tcontrol, you can add it to an origin in a CloudFront distribution so that CloudFront sends\n\t\t\tauthenticated (signed) requests to the origin.</p>\n         <p>For an Amazon S3 origin, this makes it possible to block public access to the Amazon S3 bucket\n\t\t\tso that viewers (users) can access the content in the bucket only through CloudFront.</p>\n         <p>For more information about using a CloudFront origin access control, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html\">Restricting access to an Amazon S3 origin</a> in the\n\t\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a new origin access control in CloudFront. After you create an origin access\n\t\t\tcontrol, you can add it to an origin in a CloudFront distribution so that CloudFront sends\n\t\t\tauthenticated (signed) requests to the origin.</p>\n         <p>This makes it possible to block public access to the origin, allowing viewers (users) to\n\t\t\taccess the origin's content only through CloudFront.</p>\n         <p>For more information about using a CloudFront origin access control, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html\">Restricting access to an Amazon Web Services origin</a> in the\n\t\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/origin-access-control",
@@ -11957,7 +11957,7 @@
                 "OriginAccessControlOriginType": {
                     "target": "com.amazonaws.cloudfront#OriginAccessControlOriginTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of origin that this origin access control is for. The only valid value is\n\t\t\t\t<code>s3</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of origin that this origin access control is for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12034,6 +12034,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "s3"
+                    }
+                },
+                "mediastore": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mediastore"
                     }
                 }
             }
@@ -12113,7 +12119,7 @@
                 "OriginAccessControlOriginType": {
                     "target": "com.amazonaws.cloudfront#OriginAccessControlOriginTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of origin that this origin access control is for. The only valid value is\n\t\t\t\t<code>s3</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of origin that this origin access control is for.</p>",
                         "smithy.api#required": {}
                     }
                 }
