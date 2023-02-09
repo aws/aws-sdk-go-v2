@@ -1,8 +1,0 @@
-{
-    "id": "8339edb3-9846-4e83-ac5a-26f3c9cb7c0b",
-    "type": "feature",
-    "description": "This release adds support for creating environments with a network fabric type of NONE",
-    "modules": [
-        "service/migrationhubrefactorspaces"
-    ]
-}

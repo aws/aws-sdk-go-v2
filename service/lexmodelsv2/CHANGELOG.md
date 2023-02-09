@@ -1,3 +1,7 @@
+# v1.28.0 (2023-02-09)
+
+* **Feature**: AWS Lex now supports Network of Bots.
+
 # v1.27.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

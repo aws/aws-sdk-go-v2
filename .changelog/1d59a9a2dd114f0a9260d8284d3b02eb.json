@@ -1,8 +1,0 @@
-{
-    "id": "1d59a9a2-dd11-4f0a-9260-d8284d3b02eb",
-    "type": "documentation",
-    "description": "Documentation updates for Lightsail",
-    "modules": [
-        "service/lightsail"
-    ]
-}

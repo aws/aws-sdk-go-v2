@@ -1,3 +1,7 @@
+# v1.25.2 (2023-02-09)
+
+* **Documentation**: Documentation updates for Lightsail
+
 # v1.25.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

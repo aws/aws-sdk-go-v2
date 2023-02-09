@@ -54,7 +54,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/kms v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.29.1
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.1
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.2
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.24.3
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.1
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.2
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8
 )

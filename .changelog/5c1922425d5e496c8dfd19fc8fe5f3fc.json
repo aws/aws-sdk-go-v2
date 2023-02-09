@@ -1,8 +1,0 @@
-{
-    "id": "5c192242-5d5e-496c-8dfd-19fc8fe5f3fc",
-    "type": "documentation",
-    "description": "Documentation updates for Chime Meetings SDK",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}

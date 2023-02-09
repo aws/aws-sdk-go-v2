@@ -1,3 +1,7 @@
+# v1.28.2 (2023-02-09)
+
+* **Documentation**: Removed Windows Server 2016 BYOL and made changes based on IAM campaign.
+
 # v1.28.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,23 @@
+# Release (2023-02-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.14.2](service/chimesdkmeetings/CHANGELOG.md#v1142-2023-02-09)
+  * **Documentation**: Documentation updates for Chime Meetings SDK
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.17.0](service/emrcontainers/CHANGELOG.md#v1170-2023-02-09)
+  * **Feature**: EMR on EKS allows configuring retry policies for job runs through the StartJobRun API. Using retry policies, a job cause a driver pod to be restarted automatically if it fails or is deleted. The job's status can be seen in the DescribeJobRun and ListJobRun APIs and monitored using CloudWatch events.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.28.0](service/lexmodelsv2/CHANGELOG.md#v1280-2023-02-09)
+  * **Feature**: AWS Lex now supports Network of Bots.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.17.0](service/lexruntimev2/CHANGELOG.md#v1170-2023-02-09)
+  * **Feature**: AWS Lex now supports Network of Bots.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.25.2](service/lightsail/CHANGELOG.md#v1252-2023-02-09)
+  * **Documentation**: Documentation updates for Lightsail
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.9.0](service/migrationhubrefactorspaces/CHANGELOG.md#v190-2023-02-09)
+  * **Feature**: This release adds support for creating environments with a network fabric type of NONE
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.13.2](service/workdocs/CHANGELOG.md#v1132-2023-02-09)
+  * **Documentation**: Doc only update for the WorkDocs APIs.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.28.2](service/workspaces/CHANGELOG.md#v1282-2023-02-09)
+  * **Documentation**: Removed Windows Server 2016 BYOL and made changes based on IAM campaign.
+
 # Release (2023-02-08)
 
 ## Module Highlights

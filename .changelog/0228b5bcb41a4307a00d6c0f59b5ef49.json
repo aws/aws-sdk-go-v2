@@ -1,8 +1,0 @@
-{
-    "id": "0228b5bc-b41a-4307-a00d-6c0f59b5ef49",
-    "type": "documentation",
-    "description": "Doc only update for the WorkDocs APIs.",
-    "modules": [
-        "service/workdocs"
-    ]
-}
