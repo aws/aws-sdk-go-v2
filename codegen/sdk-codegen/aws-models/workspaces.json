@@ -225,6 +225,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#AssociateConnectionAliasResult": {
@@ -287,6 +290,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#AssociateIpGroupsResult": {
@@ -374,6 +380,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#AuthorizeIpRulesResult": {
@@ -1020,6 +1029,9 @@
                         "smithy.api#documentation": "<p>The tags for the image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CopyWorkspaceImageResult": {
@@ -1086,6 +1098,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateConnectClientAddInResult": {
@@ -1147,6 +1162,9 @@
                         "smithy.api#documentation": "<p>The tags to associate with the connection alias.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateConnectionAliasResult": {
@@ -1217,6 +1235,9 @@
                         "smithy.api#documentation": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateIpGroupResult": {
@@ -1256,7 +1277,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Standby WorkSpace in a secondary region.</p>"
+                "smithy.api#documentation": "<p>Creates a standby WorkSpace in a secondary Region.</p>"
             }
         },
         "com.amazonaws.workspaces#CreateStandbyWorkspacesRequest": {
@@ -1272,10 +1293,13 @@
                 "StandbyWorkspaces": {
                     "target": "com.amazonaws.workspaces#StandbyWorkspacesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace to be created.</p>",
+                        "smithy.api#documentation": "<p>Information about the standby WorkSpace to be created.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateStandbyWorkspacesResult": {
@@ -1284,13 +1308,13 @@
                 "FailedStandbyRequests": {
                     "target": "com.amazonaws.workspaces#FailedCreateStandbyWorkspacesRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace that could not be created. </p>"
+                        "smithy.api#documentation": "<p>Information about the standby WorkSpace that could not be created. </p>"
                     }
                 },
                 "PendingStandbyRequests": {
                     "target": "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace that was created.</p>"
+                        "smithy.api#documentation": "<p>Information about the standby WorkSpace that was created.</p>"
                     }
                 }
             }
@@ -1335,6 +1359,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateTagsResult": {
@@ -1373,7 +1400,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new updated WorkSpace image based on the specified source image. The new\n         updated WorkSpace image has the latest drivers and other updates required by the Amazon\n         WorkSpaces components.</p>\n         <p>To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces\n         requirements, use <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">\n            DescribeWorkspaceImages</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images\n                  can be programmatically updated at this time.</p>\n               </li>\n               <li>\n                  <p>Microsoft Windows updates and other application updates are not included in the\n                  update process.</p>\n               </li>\n               <li>\n                  <p>The source WorkSpace image is not deleted. You can delete the source image\n                  after you've verified your new updated image and created a new bundle. </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a new updated WorkSpace image based on the specified source image. The new\n         updated WorkSpace image has the latest drivers and other updates required by the \n         Amazon WorkSpaces components.</p>\n         <p>To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces\n         requirements, use <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">\n            DescribeWorkspaceImages</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images\n                  can be programmatically updated at this time.</p>\n               </li>\n               <li>\n                  <p>Microsoft Windows updates and other application updates are not included in the\n                  update process.</p>\n               </li>\n               <li>\n                  <p>The source WorkSpace image is not deleted. You can delete the source image\n                  after you've verified your new updated image and created a new bundle. </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#CreateUpdatedWorkspaceImageRequest": {
@@ -1406,6 +1433,9 @@
                         "smithy.api#documentation": "<p>The tags that you want to add to the new updated WorkSpace image.</p>\n         <note>\n            <p>To add tags at the same time when you're creating the updated image, you must create\n            an IAM policy that grants your IAM user permissions to use\n               <code>workspaces:CreateTags</code>. </p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateUpdatedWorkspaceImageResult": {
@@ -1493,9 +1523,12 @@
                 "Tags": {
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the bundle.</p>\n      \n         <note>\n            <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that \n            grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The tags associated with the bundle.</p>\n         <note>\n            <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that \n            grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateWorkspaceBundleResult": {
@@ -1571,6 +1604,9 @@
                         "smithy.api#documentation": "<p>The tags that you want to add to the new WorkSpace image. \n         To add tags when you're creating the image, you must create an IAM policy that grants \n         your IAM user permission to use <code>workspaces:CreateTags</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateWorkspaceImageResult": {
@@ -1656,6 +1692,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#CreateWorkspacesResult": {
@@ -1950,6 +1989,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteClientBrandingResult": {
@@ -1996,6 +2038,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteConnectClientAddInResult": {
@@ -2044,6 +2089,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteConnectionAliasResult": {
@@ -2086,6 +2134,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteIpGroupResult": {
@@ -2129,6 +2180,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteTagsResult": {
@@ -2170,6 +2224,9 @@
                         "smithy.api#documentation": "<p>The identifier of the bundle.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteWorkspaceBundleResult": {
@@ -2209,6 +2266,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeleteWorkspaceImageResult": {
@@ -2254,6 +2314,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DeregisterWorkspaceDirectoryResult": {
@@ -2303,6 +2366,9 @@
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeAccountModificationsResult": {
@@ -2324,7 +2390,10 @@
         },
         "com.amazonaws.workspaces#DescribeAccountRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.workspaces#DescribeAccountResult": {
             "type": "structure",
@@ -2376,6 +2445,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeClientBrandingResult": {
@@ -2452,6 +2524,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeClientPropertiesResult": {
@@ -2510,6 +2585,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeConnectClientAddInsResult": {
@@ -2577,6 +2655,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeConnectionAliasPermissionsResult": {
@@ -2652,6 +2733,9 @@
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeConnectionAliasesResult": {
@@ -2712,6 +2796,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeIpGroupsResult": {
@@ -2758,6 +2845,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeTagsResult": {
@@ -2814,6 +2904,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceBundlesResult": {
@@ -2876,6 +2969,9 @@
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesResult": {
@@ -2940,6 +3036,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceImagePermissionsResult": {
@@ -3009,6 +3108,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceImagesResult": {
@@ -3061,6 +3163,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceSnapshotsResult": {
@@ -3138,6 +3243,9 @@
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesConnectionStatusResult": {
@@ -3196,6 +3304,9 @@
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesResult": {
@@ -3288,6 +3399,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DisassociateConnectionAliasResult": {
@@ -3337,6 +3451,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#DisassociateIpGroupsResult": {
@@ -3370,24 +3487,24 @@
                 "StandbyWorkspaceRequest": {
                     "target": "com.amazonaws.workspaces#StandbyWorkspace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace that could not be created.</p>"
+                        "smithy.api#documentation": "<p>Information about the standby WorkSpace that could not be created.</p>"
                     }
                 },
                 "ErrorCode": {
                     "target": "com.amazonaws.workspaces#WorkspaceErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error code that is returned if the Standby WorkSpace could not be created.</p>"
+                        "smithy.api#documentation": "<p>The error code that is returned if the standby WorkSpace could not be created.</p>"
                     }
                 },
                 "ErrorMessage": {
                     "target": "com.amazonaws.workspaces#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text of the error message that is returned if the Standby WorkSpace could not be created.</p>"
+                        "smithy.api#documentation": "<p>The text of the error message that is returned if the standby WorkSpace could not be created.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Standby WorkSpace that could not be created.</p>"
+                "smithy.api#documentation": "<p>Describes the standby WorkSpace that could not be created.</p>"
             }
         },
         "com.amazonaws.workspaces#FailedCreateStandbyWorkspacesRequestList": {
@@ -3593,6 +3710,9 @@
                         "smithy.api#documentation": "<p>The branding information to import for web access.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ImportClientBrandingResult": {
@@ -3665,7 +3785,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports the specified Windows 10 Bring Your Own License (BYOL) or Windows Server 2016 BYOL \n         image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is \n         in your Amazon Web Services account, and you must own the image. For more information about \n         creating BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring Your Own Windows\n            Desktop Licenses</a>.</p>"
+                "smithy.api#documentation": "<p>Imports the specified Windows 10 Bring Your Own License (BYOL) \n         image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is \n         in your Amazon Web Services account, and you must own the image. For more information about \n         creating BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring Your Own Windows\n            Desktop Licenses</a>.</p>"
             }
         },
         "com.amazonaws.workspaces#ImportWorkspaceImageRequest": {
@@ -3711,6 +3831,9 @@
                         "smithy.api#documentation": "<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10\n         BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring\n            Your Own Windows Desktop Licenses</a>.</p>\n         <note>\n            <p>Although this parameter is an array, only one item is allowed at this time.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ImportWorkspaceImageResult": {
@@ -3988,6 +4111,9 @@
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ListAvailableManagementCidrRangesResult": {
@@ -4097,6 +4223,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#MigrateWorkspaceResult": {
@@ -4226,6 +4355,9 @@
                         "smithy.api#documentation": "<p>The IP address range, specified as an IPv4 CIDR block, for the management network\n         interface. Specify an IP address range that is compatible with your network and in CIDR\n         notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be\n         /16 (for example, 203.0.113.25/16). It must also be specified as available by the\n            <code>ListAvailableManagementCidrRanges</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyAccountResult": {
@@ -4280,6 +4412,9 @@
                         "smithy.api#documentation": "<p>The properties of the certificate-based authentication you want to delete.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyCertificateBasedAuthPropertiesResult": {
@@ -4326,6 +4461,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyClientPropertiesResult": {
@@ -4380,6 +4518,9 @@
                         "smithy.api#documentation": "<p>The SAML properties to delete as part of your request.</p>\n         <p>Specify one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAML_PROPERTIES_USER_ACCESS_URL</code> to delete the user access URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME</code> to delete the\n               relay state parameter name.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifySamlPropertiesResult": {
@@ -4426,6 +4567,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifySelfservicePermissionsResult": {
@@ -4469,6 +4613,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceAccessPropertiesResult": {
@@ -4518,6 +4665,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceCreationPropertiesResult": {
@@ -4576,6 +4726,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyWorkspacePropertiesResult": {
@@ -4625,6 +4778,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceStateResult": {
@@ -4718,30 +4874,30 @@
                 "UserName": {
                     "target": "com.amazonaws.workspaces#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the Standby WorkSpace that was created.</p>\n         <p>Because this operation is asynchronous, the identifier returned is not immediately \n         available for use with other operations. For example, if you call \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkspaces</a> \n         before the WorkSpace is created, the information returned can be incomplete. </p>"
+                        "smithy.api#documentation": "<p>Describes the standby WorkSpace that was created.</p>\n         <p>Because this operation is asynchronous, the identifier returned is not immediately \n         available for use with other operations. For example, if you call \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkspaces</a> \n         before the WorkSpace is created, the information returned can be incomplete. </p>"
                     }
                 },
                 "DirectoryId": {
                     "target": "com.amazonaws.workspaces#DirectoryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the directory for the Standby WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the directory for the standby WorkSpace.</p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.workspaces#WorkspaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operational state of the Standby WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The operational state of the standby WorkSpace.</p>"
                     }
                 },
                 "WorkspaceId": {
                     "target": "com.amazonaws.workspaces#WorkspaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Standby WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the standby WorkSpace.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the Standby WorkSpace.</p>"
+                "smithy.api#documentation": "<p>Information about the standby WorkSpace.</p>"
             }
         },
         "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequestList": {
@@ -4827,6 +4983,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#RebootWorkspacesResult": {
@@ -4894,6 +5053,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#RebuildWorkspacesResult": {
@@ -5013,6 +5175,9 @@
                         "smithy.api#documentation": "<p>The tags associated with the directory.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#RegisterWorkspaceDirectoryResult": {
@@ -5057,7 +5222,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the related WorkSpace. The related WorkSpace could be a Standby WorkSpace or \n         Primary WorkSpace related to the specified WorkSpace.</p>"
+                "smithy.api#documentation": "<p>Describes the related WorkSpace. The related WorkSpace could be a standby WorkSpace or \n         primary WorkSpace related to the specified WorkSpace.</p>"
             }
         },
         "com.amazonaws.workspaces#RelatedWorkspaces": {
@@ -5207,6 +5372,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#RestoreWorkspaceResult": {
@@ -5256,6 +5424,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#RevokeIpRulesResult": {
@@ -5323,7 +5494,7 @@
                 "RelayStateParameterName": {
                     "target": "com.amazonaws.workspaces#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to \n         the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query \n         parameter to the URL along with the relay state endpoint to return the user to the client application session.</p>\n      \n         <p>To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state \n         URL. Consult your IdP documentation for more information.</p>"
+                        "smithy.api#documentation": "<p>The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to \n         the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query \n         parameter to the URL along with the relay state endpoint to return the user to the client application session.</p>\n         <p>To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state \n         URL. Consult your IdP documentation for more information.</p>"
                     }
                 }
             },
@@ -5438,32 +5609,32 @@
                 "PrimaryWorkspaceId": {
                     "target": "com.amazonaws.workspaces#WorkspaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Standby WorkSpace.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the standby WorkSpace.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "VolumeEncryptionKey": {
                     "target": "com.amazonaws.workspaces#VolumeEncryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume encryption key of the Standby WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The volume encryption key of the standby WorkSpace.</p>"
                     }
                 },
                 "DirectoryId": {
                     "target": "com.amazonaws.workspaces#DirectoryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the directory for the Standby WorkSpace.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the directory for the standby WorkSpace.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the Standby WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The tags associated with the standby WorkSpace.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a Standby WorkSpace.</p>"
+                "smithy.api#documentation": "<p>Describes a standby WorkSpace.</p>"
             }
         },
         "com.amazonaws.workspaces#StandbyWorkspaceRelationshipType": {
@@ -5537,6 +5708,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#StartWorkspacesResult": {
@@ -5598,6 +5772,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#StopWorkspacesResult": {
@@ -5767,6 +5944,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesResult": {
@@ -5859,6 +6039,9 @@
                         "smithy.api#documentation": "<p>The endpoint URL of the Amazon Connect client add-in.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#UpdateConnectClientAddInResult": {
@@ -5917,6 +6100,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#UpdateConnectionAliasPermissionResult": {
@@ -5999,6 +6185,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#UpdateRulesOfIpGroupResult": {
@@ -6031,7 +6220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html\">\n            Update a Custom WorkSpaces Bundle</a>.</p>\n      \n         <important>\n            <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're \n            based on. To update existing WorkSpaces that are based on a bundle that you've updated, you \n            must either rebuild the WorkSpaces or delete and recreate them.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html\">\n            Update a Custom WorkSpaces Bundle</a>.</p>\n         <important>\n            <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're \n            based on. To update existing WorkSpaces that are based on a bundle that you've updated, you \n            must either rebuild the WorkSpaces or delete and recreate them.</p>\n         </important>"
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceBundleRequest": {
@@ -6049,6 +6238,9 @@
                         "smithy.api#documentation": "<p>The identifier of the image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceBundleResult": {
@@ -6108,6 +6300,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceImagePermissionResult": {
@@ -6239,7 +6434,7 @@
                 "RelatedWorkspaces": {
                     "target": "com.amazonaws.workspaces#RelatedWorkspaces",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Standby WorkSpace or Primary WorkSpace related to the specified WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.</p>"
                     }
                 }
             },
@@ -7405,7 +7600,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -7454,15 +7649,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -7576,12 +7762,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://workspaces-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://workspaces-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -7686,12 +7878,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://workspaces.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://workspaces.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -7704,12 +7902,18 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://workspaces.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://workspaces.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -7718,454 +7922,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces-fips.ap-south-1.api.aws"
+                                    "url": "https://workspaces.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.us-iso-west-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.us-iso-west-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -8176,204 +7942,22 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces-fips.ap-northeast-1.api.aws"
+                                    "url": "https://workspaces.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
+                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -8384,48 +7968,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -8436,96 +7981,74 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces-fips.us-iso-east-1.c2s.ic.gov"
+                                    "url": "https://workspaces.ca-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces.us-iso-east-1.c2s.ic.gov"
+                                    "url": "https://workspaces.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces-fips.us-east-1.api.aws"
+                                    "url": "https://workspaces.eu-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
+                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces.us-east-1.api.aws"
+                                    "url": "https://workspaces.eu-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -8536,48 +8059,74 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://workspaces-fips.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workspaces-fips.cn-northwest-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1"
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://workspaces.us-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -8588,44 +8137,165 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workspaces-fips.us-isob-east-1.sc2s.sgov.gov"
+                                    "url": "https://workspaces-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
                             "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.cn-north-1.amazonaws.com.cn"
+                                }
                             },
                             "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -8636,9 +8306,22 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workspaces-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -8649,9 +8332,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8661,9 +8344,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8673,9 +8356,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
