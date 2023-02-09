@@ -49,8 +49,8 @@ type CreateBotAliasInput struct {
 	BotAliasLocaleSettings map[string]types.BotAliasLocaleSettings
 
 	// The version of the bot that this alias points to. You can use the UpdateBotAlias
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html) operation
-	// to change the bot version associated with the alias.
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html)
+	// operation to change the bot version associated with the alias.
 	BotVersion *string
 
 	// Specifies whether Amazon Lex logs text and audio for a conversation with the

@@ -39,8 +39,8 @@ type DescribeFolderContentsInput struct {
 	// This member is required.
 	FolderId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The contents to include. Specify "INITIALIZED" to include initialized documents.

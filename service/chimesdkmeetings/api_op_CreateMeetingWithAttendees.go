@@ -48,20 +48,18 @@ type CreateMeetingWithAttendeesInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The external meeting ID.
+	// The external meeting ID. Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix. Case insensitive.
 	//
 	// This member is required.
 	ExternalMeetingId *string
 
 	// The Region in which to create the meeting. Available values: af-south-1,
-	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
-	// ap-southeast-2,
-	//
-	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1,
-	// eu-west-2, eu-west-3,
-	//
-	// sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
-	// Available values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
+	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2,
+	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2. Available
+	// values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
 	//
 	// This member is required.
 	MediaRegion *string

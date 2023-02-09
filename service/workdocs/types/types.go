@@ -239,7 +239,7 @@ type NotificationOptions struct {
 	EmailMessage *string
 
 	// Boolean value to indicate an email notification should be sent to the
-	// receipients.
+	// recipients.
 	SendEmail bool
 
 	noSmithyDocumentSerde

@@ -85,6 +85,9 @@ type DescribeBotAliasOutput struct {
 	// A timestamp of the date and time that the alias was last updated.
 	LastUpdatedDateTime *time.Time
 
+	// A list of the networks to which the bot alias you described belongs.
+	ParentBotNetworks []types.ParentBotNetwork
+
 	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
 	// of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings

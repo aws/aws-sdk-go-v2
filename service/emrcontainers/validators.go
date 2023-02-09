@@ -596,6 +596,21 @@ func validateParametricConfigurationOverrides(v *types.ParametricConfigurationOv
 	}
 }
 
+func validateRetryPolicyConfiguration(v *types.RetryPolicyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryPolicyConfiguration"}
+	if v.MaxAttempts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxAttempts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3MonitoringConfiguration(v *types.S3MonitoringConfiguration) error {
 	if v == nil {
 		return nil
@@ -907,6 +922,11 @@ func validateOpStartJobRunInput(v *StartJobRunInput) error {
 	if v.ConfigurationOverrides != nil {
 		if err := validateConfigurationOverrides(v.ConfigurationOverrides); err != nil {
 			invalidParams.AddNested("ConfigurationOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetryPolicyConfiguration != nil {
+		if err := validateRetryPolicyConfiguration(v.RetryPolicyConfiguration); err != nil {
+			invalidParams.AddNested("RetryPolicyConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

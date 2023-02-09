@@ -1,0 +1,8 @@
+{
+    "id": "41bac2e4-c858-4371-a433-d4b181438faf",
+    "type": "documentation",
+    "description": "Removed Windows Server 2016 BYOL and made changes based on IAM campaign.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

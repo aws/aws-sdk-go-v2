@@ -39,8 +39,8 @@ type DescribeCommentsInput struct {
 	// This member is required.
 	VersionId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The maximum number of items to return.

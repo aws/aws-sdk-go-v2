@@ -1,0 +1,8 @@
+{
+    "id": "a67a52d4-573f-4f2c-a500-814f87066647",
+    "type": "feature",
+    "description": "AWS Lex now supports Network of Bots.",
+    "modules": [
+        "service/lexruntimev2"
+    ]
+}

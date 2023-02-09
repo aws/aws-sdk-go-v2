@@ -1,0 +1,8 @@
+{
+    "id": "6f8a409b-28f4-44e1-bf1f-ed2760b4adad",
+    "type": "feature",
+    "description": "Updated entity overrides parameter to accept up to 2500 overrides or a total of 40KB.",
+    "modules": [
+        "service/evidently"
+    ]
+}

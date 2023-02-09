@@ -19,7 +19,7 @@ import (
 // (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html).
 //
 // *
-// Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images
+// Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images
 // can be programmatically updated at this time.
 //
 // * Microsoft Windows updates and

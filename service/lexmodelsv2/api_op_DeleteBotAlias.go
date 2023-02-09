@@ -39,8 +39,11 @@ type DeleteBotAliasInput struct {
 	// This member is required.
 	BotId *string
 
-	// When this parameter is true, Amazon Lex doesn't check to see if any other
-	// resource is using the alias before it is deleted.
+	// By default, Amazon Lex checks if any other resource, such as a bot network, is
+	// using the bot alias before it is deleted and throws a ResourceInUseException
+	// exception if the alias is being used by another resource. Set this parameter to
+	// true to skip this check and remove the alias even if it is being used by another
+	// resource.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde

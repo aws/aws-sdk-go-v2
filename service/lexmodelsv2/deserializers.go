@@ -961,6 +961,11 @@ func awsRestjson1_deserializeOpDocumentCreateBotOutput(v **CreateBotOutput, valu
 				sv.BotId = ptr.String(jtv)
 			}
 
+		case "botMembers":
+			if err := awsRestjson1_deserializeDocumentBotMembers(&sv.BotMembers, value); err != nil {
+				return err
+			}
+
 		case "botName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -982,6 +987,15 @@ func awsRestjson1_deserializeOpDocumentCreateBotOutput(v **CreateBotOutput, valu
 		case "botTags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.BotTags, value); err != nil {
 				return err
+			}
+
+		case "botType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotType to be of type string, got %T instead", value)
+				}
+				sv.BotType = types.BotType(jtv)
 			}
 
 		case "creationDateTime":
@@ -5475,6 +5489,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotOutput(v **DescribeBotOutput, 
 				sv.BotId = ptr.String(jtv)
 			}
 
+		case "botMembers":
+			if err := awsRestjson1_deserializeDocumentBotMembers(&sv.BotMembers, value); err != nil {
+				return err
+			}
+
 		case "botName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5491,6 +5510,15 @@ func awsRestjson1_deserializeOpDocumentDescribeBotOutput(v **DescribeBotOutput, 
 					return fmt.Errorf("expected BotStatus to be of type string, got %T instead", value)
 				}
 				sv.BotStatus = types.BotStatus(jtv)
+			}
+
+		case "botType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotType to be of type string, got %T instead", value)
+				}
+				sv.BotType = types.BotType(jtv)
 			}
 
 		case "creationDateTime":
@@ -5521,6 +5549,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotOutput(v **DescribeBotOutput, 
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
 			}
 
 		case "idleSessionTTLInSeconds":
@@ -5814,6 +5847,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotAliasOutput(v **DescribeBotAli
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "parentBotNetworks":
+			if err := awsRestjson1_deserializeDocumentParentBotNetworks(&sv.ParentBotNetworks, value); err != nil {
+				return err
 			}
 
 		case "sentimentAnalysisSettings":
@@ -6568,6 +6606,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotVersionOutput(v **DescribeBotV
 				sv.BotId = ptr.String(jtv)
 			}
 
+		case "botMembers":
+			if err := awsRestjson1_deserializeDocumentBotMembers(&sv.BotMembers, value); err != nil {
+				return err
+			}
+
 		case "botName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6584,6 +6627,15 @@ func awsRestjson1_deserializeOpDocumentDescribeBotVersionOutput(v **DescribeBotV
 					return fmt.Errorf("expected BotStatus to be of type string, got %T instead", value)
 				}
 				sv.BotStatus = types.BotStatus(jtv)
+			}
+
+		case "botType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotType to be of type string, got %T instead", value)
+				}
+				sv.BotType = types.BotType(jtv)
 			}
 
 		case "botVersion":
@@ -6641,6 +6693,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotVersionOutput(v **DescribeBotV
 					return err
 				}
 				sv.IdleSessionTTLInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "parentBotNetworks":
+			if err := awsRestjson1_deserializeDocumentParentBotNetworks(&sv.ParentBotNetworks, value); err != nil {
+				return err
 			}
 
 		case "roleArn":
@@ -12582,6 +12639,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBotOutput(v **UpdateBotOutput, valu
 				sv.BotId = ptr.String(jtv)
 			}
 
+		case "botMembers":
+			if err := awsRestjson1_deserializeDocumentBotMembers(&sv.BotMembers, value); err != nil {
+				return err
+			}
+
 		case "botName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12598,6 +12660,15 @@ func awsRestjson1_deserializeOpDocumentUpdateBotOutput(v **UpdateBotOutput, valu
 					return fmt.Errorf("expected BotStatus to be of type string, got %T instead", value)
 				}
 				sv.BotStatus = types.BotStatus(jtv)
+			}
+
+		case "botType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotType to be of type string, got %T instead", value)
+				}
+				sv.BotType = types.BotType(jtv)
 			}
 
 		case "creationDateTime":
@@ -16359,6 +16430,116 @@ func awsRestjson1_deserializeDocumentBotLocaleSummaryList(v *[]types.BotLocaleSu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBotMember(v **types.BotMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BotMember
+	if *v == nil {
+		sv = &types.BotMember{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "botMemberAliasId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotAliasId to be of type string, got %T instead", value)
+				}
+				sv.BotMemberAliasId = ptr.String(jtv)
+			}
+
+		case "botMemberAliasName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotAliasName to be of type string, got %T instead", value)
+				}
+				sv.BotMemberAliasName = ptr.String(jtv)
+			}
+
+		case "botMemberId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.BotMemberId = ptr.String(jtv)
+			}
+
+		case "botMemberName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.BotMemberName = ptr.String(jtv)
+			}
+
+		case "botMemberVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotVersion to be of type string, got %T instead", value)
+				}
+				sv.BotMemberVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBotMembers(v *[]types.BotMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BotMember
+	if *v == nil {
+		cv = []types.BotMember{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BotMember
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBotMember(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBotRecommendationResults(v **types.BotRecommendationResults, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16616,6 +16797,15 @@ func awsRestjson1_deserializeDocumentBotSummary(v **types.BotSummary, value inte
 					return fmt.Errorf("expected BotStatus to be of type string, got %T instead", value)
 				}
 				sv.BotStatus = types.BotStatus(jtv)
+			}
+
+		case "botType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotType to be of type string, got %T instead", value)
+				}
+				sv.BotType = types.BotType(jtv)
 			}
 
 		case "description":
@@ -20287,6 +20477,89 @@ func awsRestjson1_deserializeDocumentOutputContextsList(v *[]types.OutputContext
 		var col types.OutputContext
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentOutputContext(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParentBotNetwork(v **types.ParentBotNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParentBotNetwork
+	if *v == nil {
+		sv = &types.ParentBotNetwork{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "botId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.BotId = ptr.String(jtv)
+			}
+
+		case "botVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotVersion to be of type string, got %T instead", value)
+				}
+				sv.BotVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParentBotNetworks(v *[]types.ParentBotNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ParentBotNetwork
+	if *v == nil {
+		cv = []types.ParentBotNetwork{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ParentBotNetwork
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentParentBotNetwork(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

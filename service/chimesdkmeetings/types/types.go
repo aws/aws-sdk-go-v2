@@ -42,7 +42,9 @@ type Attendee struct {
 	Capabilities *AttendeeCapabilities
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application.
+	// to an identity managed by a builder application. Pattern:
+	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
+	// reserved. You can't configure a value that uses this prefix. Case insensitive.
 	ExternalUserId *string
 
 	// The join token used by the Amazon Chime SDK attendee.
@@ -125,7 +127,9 @@ type CreateAttendeeError struct {
 	ErrorMessage *string
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application.
+	// to an identity managed by a builder application. Pattern:
+	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
+	// reserved. You can't configure a value that uses this prefix. Case insensitive.
 	ExternalUserId *string
 
 	noSmithyDocumentSerde
@@ -136,7 +140,9 @@ type CreateAttendeeError struct {
 type CreateAttendeeRequestItem struct {
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application.
+	// to an identity managed by a builder application. Pattern:
+	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
+	// reserved. You can't configure a value that uses this prefix. Case insensitive.
 	//
 	// This member is required.
 	ExternalUserId *string
@@ -277,7 +283,9 @@ type MediaPlacement struct {
 // A meeting created using the Amazon Chime SDK.
 type Meeting struct {
 
-	// The external meeting ID.
+	// The external meeting ID. Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix. Case insensitive.
 	ExternalMeetingId *string
 
 	// The media placement for the meeting.
@@ -293,7 +301,7 @@ type Meeting struct {
 	// The ARN of the meeting.
 	MeetingArn *string
 
-	// The features available to a meeting, such as Amazon Voice Focus.
+	// The features available to a meeting, such as echo reduction.
 	MeetingFeatures *MeetingFeaturesConfiguration
 
 	// Reserved.
@@ -311,7 +319,7 @@ type Meeting struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration settings of the features available to a meeting.>
+// The configuration settings of the features available to a meeting.
 type MeetingFeaturesConfiguration struct {
 
 	// The configuration settings for the audio features available to a meeting.
