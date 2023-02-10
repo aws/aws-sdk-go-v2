@@ -227,7 +227,9 @@ type AutoScalingGroup struct {
 	// The termination policies for the group.
 	TerminationPolicies []string
 
-	// The unique identifiers of the traffic sources.
+	// Reserved for use with Amazon VPC Lattice, which is in preview release and is
+	// subject to change. Do not use this parameter for production workloads. It is
+	// also subject to change. The unique identifiers of the traffic sources.
 	TrafficSources []TrafficSourceIdentifier
 
 	// One or more subnet IDs, if applicable, separated by commas.
@@ -757,7 +759,7 @@ type InstanceRefresh struct {
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
 
-	// Describes the specific update you want to deploy.
+	// Describes the desired configuration for the instance refresh.
 	DesiredConfiguration *DesiredConfiguration
 
 	// The date and time at which the instance refresh ended.
@@ -767,14 +769,18 @@ type InstanceRefresh struct {
 	InstanceRefreshId *string
 
 	// The number of instances remaining to update before the instance refresh is
-	// complete.
+	// complete. If you roll back the instance refresh, InstancesToUpdate shows you the
+	// number of instances that were not yet updated by the instance refresh.
+	// Therefore, these instances don't need to be replaced as part of the rollback.
 	InstancesToUpdate *int32
 
 	// The percentage of the instance refresh that is complete. For each instance
 	// replacement, Amazon EC2 Auto Scaling tracks the instance's health status and
 	// warm-up time. When the instance's health status changes to healthy and the
 	// specified warm-up time passes, the instance is considered updated and is added
-	// to the percentage complete.
+	// to the percentage complete. PercentageComplete does not include instances that
+	// are replaced during a rollback. This value gradually goes back down to zero
+	// during a rollback.
 	PercentageComplete *int32
 
 	// Describes the preferences for an instance refresh.
@@ -783,39 +789,49 @@ type InstanceRefresh struct {
 	// Additional progress details for an Auto Scaling group that has a warm pool.
 	ProgressDetails *InstanceRefreshProgressDetails
 
+	// The rollback details.
+	RollbackDetails *RollbackDetails
+
 	// The date and time at which the instance refresh began.
 	StartTime *time.Time
 
 	// The current status for the instance refresh operation:
 	//
 	// * Pending - The request
-	// was created, but the operation has not started.
+	// was created, but the instance refresh has not started.
 	//
-	// * InProgress - The operation is
-	// in progress.
+	// * InProgress - An
+	// instance refresh is in progress.
 	//
-	// * Successful - The operation completed successfully.
+	// * Successful - An instance refresh completed
+	// successfully.
 	//
-	// * Failed -
-	// The operation failed to complete. You can troubleshoot using the status reason
-	// and the scaling activities.
+	// * Failed - An instance refresh failed to complete. You can
+	// troubleshoot using the status reason and the scaling activities.
 	//
-	// * Cancelling - An ongoing operation is being
-	// cancelled. Cancellation does not roll back any replacements that have already
-	// been completed, but it prevents new replacements from being started.
+	// * Cancelling -
+	// An ongoing instance refresh is being cancelled.
+	//
+	// * Cancelled - The instance
+	// refresh is cancelled.
+	//
+	// * RollbackInProgress - An instance refresh is being
+	// rolled back.
+	//
+	// * RollbackFailed - The rollback failed to complete. You can
+	// troubleshoot using the status reason and the scaling activities.
 	//
 	// *
-	// Cancelled - The operation is cancelled.
+	// RollbackSuccessful - The rollback completed successfully.
 	Status InstanceRefreshStatus
 
-	// Provides more details about the current status of the instance refresh.
+	// The explanation for the specific status assigned to this operation.
 	StatusReason *string
 
 	noSmithyDocumentSerde
 }
 
-// Reports the progress of an instance refresh on instances that are in the Auto
-// Scaling group.
+// Reports progress on replacing instances that are in the Auto Scaling group.
 type InstanceRefreshLivePoolProgress struct {
 
 	// The number of instances remaining to update.
@@ -831,24 +847,21 @@ type InstanceRefreshLivePoolProgress struct {
 	noSmithyDocumentSerde
 }
 
-// Reports the progress of an instance refresh on an Auto Scaling group that has a
-// warm pool. This includes separate details for instances in the warm pool and
+// Reports progress on replacing instances in an Auto Scaling group that has a warm
+// pool. This includes separate details for instances in the warm pool and
 // instances in the Auto Scaling group (the live pool).
 type InstanceRefreshProgressDetails struct {
 
-	// Indicates the progress of an instance refresh on instances that are in the Auto
-	// Scaling group.
+	// Reports progress on replacing instances that are in the Auto Scaling group.
 	LivePoolProgress *InstanceRefreshLivePoolProgress
 
-	// Indicates the progress of an instance refresh on instances that are in the warm
-	// pool.
+	// Reports progress on replacing instances that are in the warm pool.
 	WarmPoolProgress *InstanceRefreshWarmPoolProgress
 
 	noSmithyDocumentSerde
 }
 
-// Reports the progress of an instance refresh on instances that are in the warm
-// pool.
+// Reports progress on replacing instances that are in the warm pool.
 type InstanceRefreshWarmPoolProgress struct {
 
 	// The number of instances remaining to update.
@@ -2298,26 +2311,45 @@ type ProcessType struct {
 // Describes the preferences for an instance refresh.
 type RefreshPreferences struct {
 
-	// The amount of time, in seconds, to wait after a checkpoint before continuing.
-	// This property is optional, but if you specify a value for it, you must also
-	// specify a value for CheckpointPercentages. If you specify a value for
+	// (Optional) Indicates whether to roll back the Auto Scaling group to its previous
+	// configuration if the instance refresh fails. The default is false. A rollback is
+	// not supported in the following situations:
+	//
+	// * There is no desired configuration
+	// specified for the instance refresh.
+	//
+	// * The Auto Scaling group has a launch
+	// template that uses an Amazon Web Services Systems Manager parameter instead of
+	// an AMI ID for the ImageId property.
+	//
+	// * The Auto Scaling group uses the launch
+	// template's $Latest or $Default version.
+	AutoRollback *bool
+
+	// (Optional) The amount of time, in seconds, to wait after a checkpoint before
+	// continuing. This property is optional, but if you specify a value for it, you
+	// must also specify a value for CheckpointPercentages. If you specify a value for
 	// CheckpointPercentages and not for CheckpointDelay, the CheckpointDelay defaults
 	// to 3600 (1 hour).
 	CheckpointDelay *int32
 
-	// Threshold values for each checkpoint in ascending order. Each number must be
-	// unique. To replace all instances in the Auto Scaling group, the last number in
-	// the array must be 100. For usage examples, see Adding checkpoints to an instance
-	// refresh
+	// (Optional) Threshold values for each checkpoint in ascending order. Each number
+	// must be unique. To replace all instances in the Auto Scaling group, the last
+	// number in the array must be 100. For usage examples, see Adding checkpoints to
+	// an instance refresh
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-adding-checkpoints-instance-refresh.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	CheckpointPercentages []int32
 
-	// Not needed if the default instance warmup is defined for the group. The duration
-	// of the instance warmup, in seconds. The default is to use the value for the
-	// default instance warmup defined for the group. If default instance warmup is
-	// null, then InstanceWarmup falls back to the value of the health check grace
-	// period.
+	// A time period, in seconds, during which an instance refresh waits before moving
+	// on to replacing the next instance after a new instance enters the InService
+	// state. This property is not required for normal usage. Instead, use the
+	// DefaultInstanceWarmup property of the Auto Scaling group. The InstanceWarmup and
+	// DefaultInstanceWarmup properties work the same way. Only specify this property
+	// if you must override the DefaultInstanceWarmup property. If you do not specify
+	// this property, the instance warmup by default is the value of the
+	// DefaultInstanceWarmup property, if defined (which is recommended in all cases),
+	// or the HealthCheckGracePeriod property otherwise.
 	InstanceWarmup *int32
 
 	// The amount of capacity in the Auto Scaling group that must pass your group's
@@ -2329,12 +2361,57 @@ type RefreshPreferences struct {
 	// the same time.
 	MinHealthyPercentage *int32
 
-	// A boolean value that indicates whether skip matching is enabled. If true, then
+	// Choose the behavior that you want Amazon EC2 Auto Scaling to use if instances
+	// protected from scale in are found. The following lists the valid values: Refresh
+	// Amazon EC2 Auto Scaling replaces instances that are protected from scale in.
+	// Ignore Amazon EC2 Auto Scaling ignores instances that are protected from scale
+	// in and continues to replace instances that are not protected. Wait (default)
+	// Amazon EC2 Auto Scaling waits one hour for you to remove scale-in protection.
+	// Otherwise, the instance refresh will fail.
+	ScaleInProtectedInstances ScaleInProtectedInstances
+
+	// (Optional) Indicates whether skip matching is enabled. If enabled (true), then
 	// Amazon EC2 Auto Scaling skips replacing instances that match the desired
 	// configuration. If no desired configuration is specified, then it skips replacing
-	// instances that have the same configuration that is already set on the group. The
-	// default is false.
+	// instances that have the same launch template and instance types that the Auto
+	// Scaling group was using before the start of the instance refresh. The default is
+	// false. For more information, see Use an instance refresh with skip matching
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh-skip-matching.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	SkipMatching *bool
+
+	// Choose the behavior that you want Amazon EC2 Auto Scaling to use if instances in
+	// Standby state are found. The following lists the valid values: Terminate Amazon
+	// EC2 Auto Scaling terminates instances that are in Standby. Ignore Amazon EC2
+	// Auto Scaling ignores instances that are in Standby and continues to replace
+	// instances that are in the InService state. Wait (default) Amazon EC2 Auto
+	// Scaling waits one hour for you to return the instances to service. Otherwise,
+	// the instance refresh will fail.
+	StandbyInstances StandbyInstances
+
+	noSmithyDocumentSerde
+}
+
+// Details about an instance refresh rollback.
+type RollbackDetails struct {
+
+	// Indicates the value of InstancesToUpdate at the time the rollback started.
+	InstancesToUpdateOnRollback *int32
+
+	// Indicates the value of PercentageComplete at the time the rollback started.
+	PercentageCompleteOnRollback *int32
+
+	// Reports progress on replacing instances in an Auto Scaling group that has a warm
+	// pool. This includes separate details for instances in the warm pool and
+	// instances in the Auto Scaling group (the live pool).
+	ProgressDetailsOnRollback *InstanceRefreshProgressDetails
+
+	// The reason for this instance refresh rollback (for example, whether a manual or
+	// automatic rollback was initiated).
+	RollbackReason *string
+
+	// The date and time at which the rollback began.
+	RollbackStartTime *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -1510,6 +1510,51 @@ type AthenaDatasetDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The collection of algorithms run on a dataset for training the model candidates
+// of an Autopilot job.
+type AutoMLAlgorithmConfig struct {
+
+	// The selection of algorithms run on a dataset to train the model candidates of an
+	// Autopilot job. Selected algorithms must belong to the list corresponding to the
+	// training mode set in AutoMLJobConfig.Mode
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode)
+	// (ENSEMBLING or HYPERPARAMETER_TUNING). Choose a minimum of 1 algorithm.
+	//
+	// * In
+	// ENSEMBLING mode:
+	//
+	// * "catboost"
+	//
+	// * "extra-trees"
+	//
+	// * "fastai"
+	//
+	// * "lightgbm"
+	//
+	// *
+	// "linear-learner"
+	//
+	// * "nn-torch"
+	//
+	// * "randomforest"
+	//
+	// * "xgboost"
+	//
+	// * In
+	// HYPERPARAMETER_TUNING mode:
+	//
+	// * "linear-learner"
+	//
+	// * "mlp"
+	//
+	// * "xgboost"
+	//
+	// This member is required.
+	AutoMLAlgorithms []AutoMLAlgorithm
+
+	noSmithyDocumentSerde
+}
+
 // Information about a candidate produced by an AutoML training job, including its
 // status, steps, and other properties.
 type AutoMLCandidate struct {
@@ -1562,8 +1607,33 @@ type AutoMLCandidate struct {
 	noSmithyDocumentSerde
 }
 
-// Stores the config information for how a candidate is generated (optional).
+// Stores the configuration information for how a candidate is generated
+// (optional).
 type AutoMLCandidateGenerationConfig struct {
+
+	// Stores the configuration information for the selection of algorithms used to
+	// train the model candidates. The list of available algorithms to choose from
+	// depends on the training mode set in AutoMLJobConfig.Mode
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html).
+	//
+	// *
+	// AlgorithmsConfig should not be set in AUTO training mode.
+	//
+	// * When
+	// AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one
+	// only. If the list of algorithms provided as values for AutoMLAlgorithms is
+	// empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the
+	// given training mode.
+	//
+	// * When AlgorithmsConfig is not provided,
+	// AutoMLCandidateGenerationConfig uses the full set of algorithms for the given
+	// training mode.
+	//
+	// For the list of all algorithms per training mode, see . For more
+	// information on each algorithm, see the Algorithm support
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
+	// section in Autopilot developer guide.
+	AlgorithmsConfig []AutoMLAlgorithmConfig
 
 	// A URL to the Amazon S3 data source containing selected features from the input
 	// data source to run an Autopilot job. You can input FeatureAttributeNames
@@ -1571,17 +1641,16 @@ type AutoMLCandidateGenerationConfig struct {
 	// "col2", ...] }. You can also specify the data type of the feature (optional) in
 	// the format shown below: { "FeatureDataTypes":{"col1":"numeric",
 	// "col2":"categorical" ... } } These column keys may not include the target
-	// column. In ensembling mode, Autopilot will only support the following data
-	// types: numeric, categorical, text and datetime. In HPO mode, Autopilot can
-	// support numeric, categorical, text, datetime and sequence. If only
-	// FeatureDataTypes is provided, the column keys (col1, col2,..) should be a subset
-	// of the column names in the input data. If both FeatureDataTypes and
-	// FeatureAttributeNames are provided, then the column keys should be a subset of
-	// the column names provided in FeatureAttributeNames. The key name
-	// FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] is
-	// case sensitive and should be a list of strings containing unique values that are
-	// a subset of the column names in the input data. The list of columns provided
-	// must not include the target column.
+	// column. In ensembling mode, Autopilot only supports the following data types:
+	// numeric, categorical, text, and datetime. In HPO mode, Autopilot can support
+	// numeric, categorical, text, datetime, and sequence. If only FeatureDataTypes is
+	// provided, the column keys (col1, col2,..) should be a subset of the column names
+	// in the input data. If both FeatureDataTypes and FeatureAttributeNames are
+	// provided, then the column keys should be a subset of the column names provided
+	// in FeatureAttributeNames. The key name FeatureAttributeNames is fixed. The
+	// values listed in ["col1", "col2", ...] are case sensitive and should be a list
+	// of strings containing unique values that are a subset of the column names in the
+	// input data. The list of columns provided must not include the target column.
 	FeatureSpecificationS3Uri *string
 
 	noSmithyDocumentSerde
@@ -1709,8 +1778,7 @@ type AutoMLJobCompletionCriteria struct {
 	// exceeds the maximum runtime, the job is stopped automatically and its processing
 	// is ended gracefully. The AutoML job identifies the best model whose training was
 	// completed and marks it as the best-performing model. Any unfinished steps of the
-	// job, such as automatic one-click Autopilot model deployment, will not be
-	// completed.
+	// job, such as automatic one-click Autopilot model deployment, are not completed.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
 	// The maximum number of times a training job is allowed to run.
@@ -1751,7 +1819,7 @@ type AutoMLJobConfig struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
 	// for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING
 	// (HPO) mode uses the best hyperparameters to train the best version of a model.
-	// HPO will automatically select an algorithm for the type of problem you want to
+	// HPO automatically selects an algorithm for the type of problem you want to
 	// solve. Then HPO finds the best hyperparameters according to your objective
 	// metric. See Autopilot algorithm support
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
@@ -1850,29 +1918,29 @@ type AutoMLJobObjective struct {
 	// cancer because it's used to find all of the true positives. A false positive
 	// (FP) reflects a positive prediction that is actually negative in the data. It is
 	// often insufficient to measure only recall, because predicting every output as a
-	// true positive will yield a perfect recall score. RecallMacro The RecallMacro
-	// computes recall for multiclass classification problems by calculating recall for
-	// each class and averaging scores to obtain recall for several classes.
-	// RecallMacro scores range from 0 to 1. Higher scores reflect the model's ability
-	// to predict true positives (TP) in a dataset. Whereas, a true positive reflects a
-	// positive prediction that is also an actual positive value in the data. It is
-	// often insufficient to measure only recall, because predicting every output as a
-	// true positive will yield a perfect recall score. RMSE Root mean squared error
-	// (RMSE) measures the square root of the squared difference between predicted and
-	// actual values, and it's averaged over all values. It is used in regression
-	// analysis to understand model prediction error. It's an important metric to
-	// indicate the presence of large model errors and outliers. Values range from zero
-	// (0) to infinity, with smaller numbers indicating a better model fit to the data.
-	// RMSE is dependent on scale, and should not be used to compare datasets of
-	// different sizes. If you do not specify a metric explicitly, the default behavior
-	// is to automatically use:
+	// true positive yield a perfect recall score. RecallMacro The RecallMacro computes
+	// recall for multiclass classification problems by calculating recall for each
+	// class and averaging scores to obtain recall for several classes. RecallMacro
+	// scores range from 0 to 1. Higher scores reflect the model's ability to predict
+	// true positives (TP) in a dataset. Whereas, a true positive reflects a positive
+	// prediction that is also an actual positive value in the data. It is often
+	// insufficient to measure only recall, because predicting every output as a true
+	// positive yields a perfect recall score. RMSE Root mean squared error (RMSE)
+	// measures the square root of the squared difference between predicted and actual
+	// values, and it's averaged over all values. It is used in regression analysis to
+	// understand model prediction error. It's an important metric to indicate the
+	// presence of large model errors and outliers. Values range from zero (0) to
+	// infinity, with smaller numbers indicating a better model fit to the data. RMSE
+	// is dependent on scale, and should not be used to compare datasets of different
+	// sizes. If you do not specify a metric explicitly, the default behavior is to
+	// automatically use:
 	//
 	// * MSE: for regression.
 	//
-	// * F1: for binary
-	// classification
+	// * F1: for binary classification
 	//
-	// * Accuracy: for multiclass classification.
+	// *
+	// Accuracy: for multiclass classification.
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -2947,10 +3015,10 @@ type ContainerDefinition struct {
 	// model or endpoint you are creating. If you provide a value for this parameter,
 	// SageMaker uses Amazon Web Services Security Token Service to download model
 	// artifacts from the S3 path you provide. Amazon Web Services STS is activated in
-	// your IAM user account by default. If you previously deactivated Amazon Web
-	// Services STS for a region, you need to reactivate Amazon Web Services STS for
-	// that region. For more information, see Activating and Deactivating Amazon Web
-	// Services STS in an Amazon Web Services Region
+	// your Amazon Web Services account by default. If you previously deactivated
+	// Amazon Web Services STS for a region, you need to reactivate Amazon Web Services
+	// STS for that region. For more information, see Activating and Deactivating
+	// Amazon Web Services STS in an Amazon Web Services Region
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the Amazon Web Services Identity and Access Management User Guide. If you use
 	// a built-in algorithm to create a model, SageMaker requires that you provide a S3
@@ -4982,6 +5050,11 @@ type FinalAutoMLJobObjectiveMetric struct {
 	// This member is required.
 	Value float32
 
+	// The name of the standard metric. For a description of the standard metrics, see
+	// Autopilot candidate metrics
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics).
+	StandardMetricName AutoMLMetricEnum
+
 	// The type of metric with the best result.
 	Type AutoMLJobObjectiveType
 
@@ -5197,7 +5270,7 @@ type HubInfo struct {
 // The Amazon S3 storage configuration of a hub.
 type HubS3StorageConfig struct {
 
-	// The Amazon S3 output path for the hub.
+	// The Amazon S3 bucket prefix for hosting hub content.
 	S3OutputPath *string
 
 	noSmithyDocumentSerde
@@ -6587,7 +6660,7 @@ type HyperbandStrategyConfig struct {
 
 	// The minimum number of resources (such as epochs) that can be used by a training
 	// job launched by a hyperparameter tuning job. If the value for MinResource has
-	// not been reached, the training job will not be stopped by Hyperband.
+	// not been reached, the training job is not stopped by Hyperband.
 	MinResource *int32
 
 	noSmithyDocumentSerde
@@ -10784,8 +10857,8 @@ type OnlineStoreSecurityConfig struct {
 	//
 	// * "kms:RevokeGrant"
 	//
-	// The caller (either IAM user or IAM role)
-	// to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the
+	// The caller (either user or IAM role) to
+	// all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the
 	// following permissions to the KmsKeyId:
 	//
 	// * "kms:Decrypt"

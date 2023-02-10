@@ -3637,6 +3637,70 @@ func (m *awsAwsquery_serializeOpResumeProcesses) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpRollbackInstanceRefresh struct {
+}
+
+func (*awsAwsquery_serializeOpRollbackInstanceRefresh) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpRollbackInstanceRefresh) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RollbackInstanceRefreshInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("RollbackInstanceRefresh")
+	body.Key("Version").String("2011-01-01")
+
+	if err := awsAwsquery_serializeOpDocumentRollbackInstanceRefreshInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpSetDesiredCapacity struct {
 }
 
@@ -5411,6 +5475,11 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 	object := value.Object()
 	_ = object
 
+	if v.AutoRollback != nil {
+		objectKey := object.Key("AutoRollback")
+		objectKey.Boolean(*v.AutoRollback)
+	}
+
 	if v.CheckpointDelay != nil {
 		objectKey := object.Key("CheckpointDelay")
 		objectKey.Integer(*v.CheckpointDelay)
@@ -5433,9 +5502,19 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 		objectKey.Integer(*v.MinHealthyPercentage)
 	}
 
+	if len(v.ScaleInProtectedInstances) > 0 {
+		objectKey := object.Key("ScaleInProtectedInstances")
+		objectKey.String(string(v.ScaleInProtectedInstances))
+	}
+
 	if v.SkipMatching != nil {
 		objectKey := object.Key("SkipMatching")
 		objectKey.Boolean(*v.SkipMatching)
+	}
+
+	if len(v.StandbyInstances) > 0 {
+		objectKey := object.Key("StandbyInstances")
+		objectKey.String(string(v.StandbyInstances))
 	}
 
 	return nil
@@ -7339,6 +7418,18 @@ func awsAwsquery_serializeOpDocumentResumeProcessesInput(v *ResumeProcessesInput
 		if err := awsAwsquery_serializeDocumentProcessNames(v.ScalingProcesses, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentRollbackInstanceRefreshInput(v *RollbackInstanceRefreshInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AutoScalingGroupName != nil {
+		objectKey := object.Key("AutoScalingGroupName")
+		objectKey.String(*v.AutoScalingGroupName)
 	}
 
 	return nil

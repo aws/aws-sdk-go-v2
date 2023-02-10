@@ -32,8 +32,8 @@ func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInp
 
 type CreateAutoMLJobInput struct {
 
-	// Identifies an Autopilot job. The name must be unique to your account and is
-	// case-insensitive.
+	// Identifies an Autopilot job. The name must be unique to your account and is case
+	// insensitive.
 	//
 	// This member is required.
 	AutoMLJobName *string

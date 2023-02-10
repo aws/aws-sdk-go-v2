@@ -1,0 +1,8 @@
+{
+    "id": "2cb10204-7069-4895-99f0-f830fd8dd6c3",
+    "type": "feature",
+    "description": "Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -81,10 +81,12 @@ type DescribeVolumesModificationsInput struct {
 	Filters []types.Filter
 
 	// The maximum number of results (up to a limit of 500) to be returned in a
-	// paginated request.
+	// paginated request. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The nextToken value returned by a previous paginated request.
+	// The token returned by a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// The IDs of the volumes.
@@ -95,7 +97,8 @@ type DescribeVolumesModificationsInput struct {
 
 type DescribeVolumesModificationsOutput struct {
 
-	// Token for pagination, null if there are no more results
+	// The token to include in another request to get the next page of items. This
+	// value is null if there are no more items to return.
 	NextToken *string
 
 	// Information about the volume modifications.
@@ -179,7 +182,8 @@ var _ DescribeVolumesModificationsAPIClient = (*Client)(nil)
 // DescribeVolumesModifications
 type DescribeVolumesModificationsPaginatorOptions struct {
 	// The maximum number of results (up to a limit of 500) to be returned in a
-	// paginated request.
+	// paginated request. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

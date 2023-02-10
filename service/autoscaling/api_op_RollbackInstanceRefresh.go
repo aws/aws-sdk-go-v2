@@ -10,40 +10,54 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels an instance refresh or rollback that is in progress. If an instance
-// refresh or rollback is not in progress, an ActiveInstanceRefreshNotFound error
-// occurs. This operation is part of the instance refresh feature
+// Cancels an instance refresh that is in progress and rolls back any changes that
+// it made. Amazon EC2 Auto Scaling replaces any instances that were replaced
+// during the instance refresh. This restores your Auto Scaling group to the
+// configuration that it was using before the start of the instance refresh. This
+// operation is part of the instance refresh feature
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
-// Scaling group after you make configuration changes. When you cancel an instance
-// refresh, this does not roll back any changes that it made. Use the
-// RollbackInstanceRefresh API to roll back instead.
-func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstanceRefreshInput, optFns ...func(*Options)) (*CancelInstanceRefreshOutput, error) {
+// Scaling group after you make configuration changes. A rollback is not supported
+// in the following situations:
+//
+// * There is no desired configuration specified for
+// the instance refresh.
+//
+// * The Auto Scaling group has a launch template that uses
+// an Amazon Web Services Systems Manager parameter instead of an AMI ID for the
+// ImageId property.
+//
+// * The Auto Scaling group uses the launch template's $Latest
+// or $Default version.
+//
+// When you receive a successful response from this
+// operation, Amazon EC2 Auto Scaling immediately begins replacing instances. You
+// can check the status of this operation through the DescribeInstanceRefreshes API
+// operation.
+func (c *Client) RollbackInstanceRefresh(ctx context.Context, params *RollbackInstanceRefreshInput, optFns ...func(*Options)) (*RollbackInstanceRefreshOutput, error) {
 	if params == nil {
-		params = &CancelInstanceRefreshInput{}
+		params = &RollbackInstanceRefreshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelInstanceRefresh", params, optFns, c.addOperationCancelInstanceRefreshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RollbackInstanceRefresh", params, optFns, c.addOperationRollbackInstanceRefreshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CancelInstanceRefreshOutput)
+	out := result.(*RollbackInstanceRefreshOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CancelInstanceRefreshInput struct {
+type RollbackInstanceRefreshInput struct {
 
 	// The name of the Auto Scaling group.
-	//
-	// This member is required.
 	AutoScalingGroupName *string
 
 	noSmithyDocumentSerde
 }
 
-type CancelInstanceRefreshOutput struct {
+type RollbackInstanceRefreshOutput struct {
 
 	// The instance refresh ID associated with the request. This is the unique ID
 	// assigned to the instance refresh when it was started.
@@ -55,12 +69,12 @@ type CancelInstanceRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelInstanceRefresh{}, middleware.After)
+func (c *Client) addOperationRollbackInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpRollbackInstanceRefresh{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCancelInstanceRefresh{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRollbackInstanceRefresh{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -100,10 +114,7 @@ func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCancelInstanceRefreshValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelInstanceRefresh(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackInstanceRefresh(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -118,11 +129,11 @@ func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCancelInstanceRefresh(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRollbackInstanceRefresh(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "autoscaling",
-		OperationName: "CancelInstanceRefresh",
+		OperationName: "RollbackInstanceRefresh",
 	}
 }

@@ -16971,9 +16971,54 @@ func awsAwsjson11_serializeDocumentAttributeNames(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutoMLAlgorithmConfig(v *types.AutoMLAlgorithmConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoMLAlgorithms != nil {
+		ok := object.Key("AutoMLAlgorithms")
+		if err := awsAwsjson11_serializeDocumentAutoMLAlgorithms(v.AutoMLAlgorithms, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAutoMLAlgorithms(v []types.AutoMLAlgorithm, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAutoMLAlgorithmsConfig(v []types.AutoMLAlgorithmConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAutoMLAlgorithmConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoMLCandidateGenerationConfig(v *types.AutoMLCandidateGenerationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AlgorithmsConfig != nil {
+		ok := object.Key("AlgorithmsConfig")
+		if err := awsAwsjson11_serializeDocumentAutoMLAlgorithmsConfig(v.AlgorithmsConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.FeatureSpecificationS3Uri != nil {
 		ok := object.Key("FeatureSpecificationS3Uri")

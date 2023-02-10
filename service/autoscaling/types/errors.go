@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request failed because an active instance refresh for the specified Auto
-// Scaling group was not found.
+// The request failed because an active instance refresh or rollback for the
+// specified Auto Scaling group was not found.
 type ActiveInstanceRefreshNotFoundFault struct {
 	Message *string
 
@@ -62,8 +62,8 @@ func (e *AlreadyExistsFault) ErrorCode() string {
 }
 func (e *AlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request failed because an active instance refresh operation already exists
-// for the specified Auto Scaling group.
+// The request failed because an active instance refresh already exists for the
+// specified Auto Scaling group.
 type InstanceRefreshInProgressFault struct {
 	Message *string
 
@@ -114,6 +114,35 @@ func (e *InvalidNextToken) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request failed because a desired configuration was not found or an
+// incompatible launch template (uses a Systems Manager parameter instead of an AMI
+// ID) or launch template version ($Latest or $Default) is present on the Auto
+// Scaling group.
+type IrreversibleInstanceRefreshFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IrreversibleInstanceRefreshFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IrreversibleInstanceRefreshFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IrreversibleInstanceRefreshFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IrreversibleInstanceRefresh"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IrreversibleInstanceRefreshFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have already reached a limit for your Amazon EC2 Auto Scaling resources (for
 // example, Auto Scaling groups, launch configurations, or lifecycle hooks). For

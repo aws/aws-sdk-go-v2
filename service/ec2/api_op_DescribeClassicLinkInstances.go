@@ -67,12 +67,15 @@ type DescribeClassicLinkInstancesInput struct {
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
 	InstanceIds []string
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
+	// information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	// Constraint: If the value is greater than 1000, we return only 1000 items.
 	MaxResults *int32
 
-	// The token for the next page of results.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -83,8 +86,8 @@ type DescribeClassicLinkInstancesOutput struct {
 	// Information about one or more linked EC2-Classic instances.
 	Instances []types.ClassicLinkInstance
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to include in another request to get the next page of items. This
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -164,8 +167,10 @@ var _ DescribeClassicLinkInstancesAPIClient = (*Client)(nil)
 // DescribeClassicLinkInstancesPaginatorOptions is the paginator options for
 // DescribeClassicLinkInstances
 type DescribeClassicLinkInstancesPaginatorOptions struct {
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
+	// information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	// Constraint: If the value is greater than 1000, we return only 1000 items.
 	Limit int32
 
