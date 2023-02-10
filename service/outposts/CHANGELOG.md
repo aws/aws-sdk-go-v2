@@ -1,3 +1,7 @@
+# v1.27.1 (2023-02-10)
+
+* No change notes available for this release.
+
 # v1.27.0 (2023-02-06)
 
 * **Feature**: Adds OrderType to Order structure. Adds PreviousOrderId and PreviousLineItemId to LineItem structure. Adds new line item status REPLACED. Increases maximum length of pagination token.

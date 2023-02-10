@@ -1,8 +1,0 @@
-{
-    "id": "f4034519-64bb-4314-b017-de4d8f23cc54",
-    "type": "feature",
-    "description": "This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.",
-    "modules": [
-        "service/connect"
-    ]
-}

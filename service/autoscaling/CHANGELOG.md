@@ -1,3 +1,7 @@
+# v1.27.0 (2023-02-10)
+
+* **Feature**: You can now either terminate/replace, ignore, or wait for EC2 Auto Scaling instances on standby or protected from scale in. Also, you can also roll back changes from a failed instance refresh.
+
 # v1.26.2 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

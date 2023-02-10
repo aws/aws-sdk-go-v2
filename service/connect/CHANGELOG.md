@@ -1,3 +1,7 @@
+# v1.46.0 (2023-02-10)
+
+* **Feature**: This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+
 # v1.45.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

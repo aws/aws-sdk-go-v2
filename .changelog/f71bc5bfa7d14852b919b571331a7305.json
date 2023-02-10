@@ -1,8 +1,0 @@
-{
-    "id": "f71bc5bf-a7d1-4852-b919-b571331a7305",
-    "type": "feature",
-    "description": "Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko",
-    "modules": [
-        "service/polly"
-    ]
-}

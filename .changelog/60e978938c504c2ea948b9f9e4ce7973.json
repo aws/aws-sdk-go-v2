@@ -1,8 +1,0 @@
-{
-    "id": "60e97893-8c50-4c2e-a948-b9f9e4ce7973",
-    "type": "feature",
-    "description": "Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.",
-    "modules": [
-        "service/ec2"
-    ]
-}

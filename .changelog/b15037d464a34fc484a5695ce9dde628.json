@@ -1,8 +1,0 @@
-{
-    "id": "b15037d4-64a3-4fc4-84a5-695ce9dde628",
-    "type": "documentation",
-    "description": "This release adds support for SNS X-Ray active tracing as well as other updates.",
-    "modules": [
-        "service/sns"
-    ]
-}

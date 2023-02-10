@@ -1,3 +1,19 @@
+# Release (2023-02-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.27.0](service/autoscaling/CHANGELOG.md#v1270-2023-02-10)
+  * **Feature**: You can now either terminate/replace, ignore, or wait for EC2 Auto Scaling instances on standby or protected from scale in. Also, you can also roll back changes from a failed instance refresh.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.46.0](service/connect/CHANGELOG.md#v1460-2023-02-10)
+  * **Feature**: This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.85.0](service/ec2/CHANGELOG.md#v1850-2023-02-10)
+  * **Feature**: Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.25.0](service/polly/CHANGELOG.md#v1250-2023-02-10)
+  * **Feature**: Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.68.0](service/sagemaker/CHANGELOG.md#v1680-2023-02-10)
+  * **Feature**: Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.20.2](service/sns/CHANGELOG.md#v1202-2023-02-10)
+  * **Documentation**: This release adds support for SNS X-Ray active tracing as well as other updates.
+
 # Release (2023-02-09)
 
 ## Module Highlights
