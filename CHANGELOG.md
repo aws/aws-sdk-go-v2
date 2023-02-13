@@ -1,3 +1,13 @@
+# Release (2023-02-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.9.0](service/account/CHANGELOG.md#v190-2023-02-13)
+  * **Feature**: This release of the Account Management API enables customers to view and manage whether AWS Opt-In Regions are enabled or disabled for their Account. For more information, see https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.6.0](service/appconfigdata/CHANGELOG.md#v160-2023-02-13)
+  * **Feature**: AWS AppConfig now offers the option to set a version label on hosted configuration versions. If a labeled hosted configuration version is deployed, its version label is available in the GetLatestConfiguration response.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.18.0](service/snowball/CHANGELOG.md#v1180-2023-02-13)
+  * **Feature**: Adds support for EKS Anywhere on Snowball. AWS Snow Family customers can now install EKS Anywhere service on Snowball Edge Compute Optimized devices.
+
 # Release (2023-02-10)
 
 ## Module Highlights

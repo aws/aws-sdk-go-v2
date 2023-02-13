@@ -74,7 +74,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/sms v1.13.1
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.17.1
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.35.2

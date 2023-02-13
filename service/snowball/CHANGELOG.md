@@ -1,3 +1,7 @@
+# v1.18.0 (2023-02-13)
+
+* **Feature**: Adds support for EKS Anywhere on Snowball. AWS Snow Family customers can now install EKS Anywhere service on Snowball Edge Compute Optimized devices.
+
 # v1.17.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

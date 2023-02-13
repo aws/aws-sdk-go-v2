@@ -1,3 +1,7 @@
+# v1.9.0 (2023-02-13)
+
+* **Feature**: This release of the Account Management API enables customers to view and manage whether AWS Opt-In Regions are enabled or disabled for their Account. For more information, see https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
+
 # v1.8.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

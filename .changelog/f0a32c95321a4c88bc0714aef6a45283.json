@@ -1,8 +1,0 @@
-{
-    "id": "f0a32c95-321a-4c88-bc07-14aef6a45283",
-    "type": "feature",
-    "description": "AWS AppConfig now offers the option to set a version label on hosted configuration versions. If a labeled hosted configuration version is deployed, its version label is available in the GetLatestConfiguration response.",
-    "modules": [
-        "service/appconfigdata"
-    ]
-}
