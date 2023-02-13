@@ -67,29 +67,21 @@ import (
 // * Description: Snowball Edge Storage Optimized with EC2
 // Compute
 //
-// * Device type: V3_5C
-//
-// * Capacity: T32
-//
-// * Description: Snowball Edge
-// Compute Optimized without GPU
-//
 // * Device type: STANDARD
 //
 // * Capacity: T50
 //
-// *
-// Description: Original Snowball device This device is only available in the
-// Ningxia, Beijing, and Singapore Amazon Web Services Region
+// * Description: Original
+// Snowball device This device is only available in the Ningxia, Beijing, and
+// Singapore Amazon Web Services Region
 //
-// * Device type:
-// STANDARD
+// * Device type: STANDARD
 //
-// * Capacity: T80
+// * Capacity:
+// T80
 //
-// * Description: Original Snowball device This device
-// is only available in the Ningxia, Beijing, and Singapore Amazon Web Services
-// Region.
+// * Description: Original Snowball device This device is only available in
+// the Ningxia, Beijing, and Singapore Amazon Web Services Region.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}

@@ -145,6 +145,11 @@ func awsRestjson1_deserializeOpHttpBindingsGetLatestConfigurationOutput(v *GetLa
 		v.NextPollIntervalInSeconds = int32(vv)
 	}
 
+	if headerValues := response.Header.Values("Version-Label"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VersionLabel = ptr.String(headerValues[0])
+	}
+
 	return nil
 }
 func awsRestjson1_deserializeOpDocumentGetLatestConfigurationOutput(v *GetLatestConfigurationOutput, body io.ReadCloser, contentLength int64) error {

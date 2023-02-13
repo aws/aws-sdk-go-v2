@@ -13,7 +13,7 @@ import (
 // Retrieves the latest deployed configuration. This API may return empty
 // configuration data if the client already has the latest version. For more
 // information about this API action and to view example CLI commands that show how
-// to use it with the StartConfigurationSession API action, see Receiving the
+// to use it with the StartConfigurationSession API action, see Retrieving the
 // configuration
 // (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
 // in the AppConfig User Guide. Note the following important information.
@@ -46,8 +46,11 @@ type GetLatestConfigurationInput struct {
 	// Token describing the current state of the configuration session. To obtain a
 	// token, first call the StartConfigurationSession API. Note that every call to
 	// GetLatestConfiguration will return a new ConfigurationToken
-	// (NextPollConfigurationToken in the response) and MUST be provided to subsequent
-	// GetLatestConfiguration API calls.
+	// (NextPollConfigurationToken in the response) and must be provided to subsequent
+	// GetLatestConfiguration API calls. This token should only be used once. To
+	// support long poll use cases, the token is valid for up to 24 hours. If a
+	// GetLatestConfiguration call uses an expired token, the system returns
+	// BadRequestException.
 	//
 	// This member is required.
 	ConfigurationToken *string
@@ -65,13 +68,22 @@ type GetLatestConfigurationOutput struct {
 	ContentType *string
 
 	// The latest token describing the current state of the configuration session. This
-	// MUST be provided to the next call to GetLatestConfiguration.
+	// must be provided to the next call to GetLatestConfiguration. This token should
+	// only be used once. To support long poll use cases, the token is valid for up to
+	// 24 hours. If a GetLatestConfiguration call uses an expired token, the system
+	// returns BadRequestException.
 	NextPollConfigurationToken *string
 
 	// The amount of time the client should wait before polling for configuration
 	// updates again. Use RequiredMinimumPollIntervalInSeconds to set the desired poll
 	// interval.
 	NextPollIntervalInSeconds int32
+
+	// The user-defined label for the AppConfig hosted configuration version. This
+	// attribute doesn't apply if the configuration is not from an AppConfig hosted
+	// configuration version. If the client already has the latest version of the
+	// configuration data, this value is empty.
+	VersionLabel *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

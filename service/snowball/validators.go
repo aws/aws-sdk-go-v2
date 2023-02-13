@@ -310,6 +310,26 @@ func (m *validateOpListClusterJobs) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListServiceVersions struct {
+}
+
+func (*validateOpListServiceVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCluster struct {
 }
 
@@ -448,6 +468,10 @@ func addOpGetSoftwareUpdatesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListClusterJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListClusterJobs{}, middleware.After)
+}
+
+func addOpListServiceVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceVersions{}, middleware.After)
 }
 
 func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -753,6 +777,21 @@ func validateOpListClusterJobsInput(v *ListClusterJobsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListClusterJobsInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServiceVersionsInput(v *ListServiceVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceVersionsInput"}
+	if len(v.ServiceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
