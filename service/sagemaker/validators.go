@@ -6085,6 +6085,55 @@ func validateAthenaDatasetDefinition(v *types.AthenaDatasetDefinition) error {
 	}
 }
 
+func validateAutoMLAlgorithmConfig(v *types.AutoMLAlgorithmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLAlgorithmConfig"}
+	if v.AutoMLAlgorithms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMLAlgorithms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoMLAlgorithmsConfig(v []types.AutoMLAlgorithmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLAlgorithmsConfig"}
+	for i := range v {
+		if err := validateAutoMLAlgorithmConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoMLCandidateGenerationConfig(v *types.AutoMLCandidateGenerationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLCandidateGenerationConfig"}
+	if v.AlgorithmsConfig != nil {
+		if err := validateAutoMLAlgorithmsConfig(v.AlgorithmsConfig); err != nil {
+			invalidParams.AddNested("AlgorithmsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMLChannel(v *types.AutoMLChannel) error {
 	if v == nil {
 		return nil
@@ -6151,6 +6200,11 @@ func validateAutoMLJobConfig(v *types.AutoMLJobConfig) error {
 	if v.SecurityConfig != nil {
 		if err := validateAutoMLSecurityConfig(v.SecurityConfig); err != nil {
 			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CandidateGenerationConfig != nil {
+		if err := validateAutoMLCandidateGenerationConfig(v.CandidateGenerationConfig); err != nil {
+			invalidParams.AddNested("CandidateGenerationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

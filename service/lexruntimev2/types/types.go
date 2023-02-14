@@ -383,6 +383,9 @@ type IntentResultEvent struct {
 	// utterance.
 	Interpretations []Interpretation
 
+	// The bot member that is processing the intent.
+	RecognizedBotMember *RecognizedBotMember
+
 	// The attributes sent in the request.
 	RequestAttributes map[string]string
 
@@ -472,6 +475,20 @@ type PlaybackInterruptionEvent struct {
 
 	// Indicates the type of user input that Amazon Lex V2 detected.
 	EventReason PlaybackInterruptionReason
+
+	noSmithyDocumentSerde
+}
+
+// The bot member that processes the request.
+type RecognizedBotMember struct {
+
+	// The identifier of the bot member that processes the request.
+	//
+	// This member is required.
+	BotId *string
+
+	// The name of the bot member that processes the request.
+	BotName *string
 
 	noSmithyDocumentSerde
 }

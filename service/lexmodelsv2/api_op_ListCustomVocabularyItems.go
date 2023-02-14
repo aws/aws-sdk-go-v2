@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List custom vocabulary items for the specified locale in the specified bot.
+// Paginated list of custom vocabulary items for a given bot locale's custom
+// vocabulary.
 func (c *Client) ListCustomVocabularyItems(ctx context.Context, params *ListCustomVocabularyItemsInput, optFns ...func(*Options)) (*ListCustomVocabularyItemsOutput, error) {
 	if params == nil {
 		params = &ListCustomVocabularyItemsInput{}
@@ -30,7 +31,7 @@ func (c *Client) ListCustomVocabularyItems(ctx context.Context, params *ListCust
 
 type ListCustomVocabularyItemsInput struct {
 
-	// The unique identifier of the bot to the list custom vocabulary request.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	//
 	// This member is required.
 	BotId *string
@@ -40,12 +41,15 @@ type ListCustomVocabularyItemsInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// The locale identifier of the bot to the list custom vocabulary request.
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	//
 	// This member is required.
 	LocaleId *string
 
-	// The maximum results to the list custom vocabulary request.
+	// The maximum number of items returned by the list operation.
 	MaxResults *int32
 
 	// The nextToken identifier to the list custom vocabulary request.
@@ -56,16 +60,19 @@ type ListCustomVocabularyItemsInput struct {
 
 type ListCustomVocabularyItemsOutput struct {
 
-	// The unique identifier of the bot to the list custom vocabulary response.
+	// The identifier of the bot associated with this custom vocabulary.
 	BotId *string
 
-	// The bot version of the bot to the list custom vocabulary response.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	BotVersion *string
 
 	// The custom vocabulary items from the list custom vocabulary response.
 	CustomVocabularyItems []types.CustomVocabularyItem
 
-	// The locale identifier of the bot to the list custom vocabulary response.
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported Languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	LocaleId *string
 
 	// The nextToken identifier to the list custom vocabulary response.
@@ -151,7 +158,7 @@ var _ ListCustomVocabularyItemsAPIClient = (*Client)(nil)
 // ListCustomVocabularyItemsPaginatorOptions is the paginator options for
 // ListCustomVocabularyItems
 type ListCustomVocabularyItemsPaginatorOptions struct {
-	// The maximum results to the list custom vocabulary request.
+	// The maximum number of items returned by the list operation.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -1,3 +1,7 @@
+# v1.11.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2023-01-19)
 
 * **Feature**: Added AllowMajorVersionUpdate option to OTAJobConfig to make appliance software major version updates opt-in.

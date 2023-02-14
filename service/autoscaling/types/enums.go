@@ -192,12 +192,15 @@ type InstanceRefreshStatus string
 
 // Enum values for InstanceRefreshStatus
 const (
-	InstanceRefreshStatusPending    InstanceRefreshStatus = "Pending"
-	InstanceRefreshStatusInProgress InstanceRefreshStatus = "InProgress"
-	InstanceRefreshStatusSuccessful InstanceRefreshStatus = "Successful"
-	InstanceRefreshStatusFailed     InstanceRefreshStatus = "Failed"
-	InstanceRefreshStatusCancelling InstanceRefreshStatus = "Cancelling"
-	InstanceRefreshStatusCancelled  InstanceRefreshStatus = "Cancelled"
+	InstanceRefreshStatusPending            InstanceRefreshStatus = "Pending"
+	InstanceRefreshStatusInProgress         InstanceRefreshStatus = "InProgress"
+	InstanceRefreshStatusSuccessful         InstanceRefreshStatus = "Successful"
+	InstanceRefreshStatusFailed             InstanceRefreshStatus = "Failed"
+	InstanceRefreshStatusCancelling         InstanceRefreshStatus = "Cancelling"
+	InstanceRefreshStatusCancelled          InstanceRefreshStatus = "Cancelled"
+	InstanceRefreshStatusRollbackInProgress InstanceRefreshStatus = "RollbackInProgress"
+	InstanceRefreshStatusRollbackFailed     InstanceRefreshStatus = "RollbackFailed"
+	InstanceRefreshStatusRollbackSuccessful InstanceRefreshStatus = "RollbackSuccessful"
 )
 
 // Values returns all known values for InstanceRefreshStatus. Note that this can be
@@ -211,6 +214,9 @@ func (InstanceRefreshStatus) Values() []InstanceRefreshStatus {
 		"Failed",
 		"Cancelling",
 		"Cancelled",
+		"RollbackInProgress",
+		"RollbackFailed",
+		"RollbackSuccessful",
 	}
 }
 
@@ -477,6 +483,26 @@ func (RefreshStrategy) Values() []RefreshStrategy {
 	}
 }
 
+type ScaleInProtectedInstances string
+
+// Enum values for ScaleInProtectedInstances
+const (
+	ScaleInProtectedInstancesRefresh ScaleInProtectedInstances = "Refresh"
+	ScaleInProtectedInstancesIgnore  ScaleInProtectedInstances = "Ignore"
+	ScaleInProtectedInstancesWait    ScaleInProtectedInstances = "Wait"
+)
+
+// Values returns all known values for ScaleInProtectedInstances. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScaleInProtectedInstances) Values() []ScaleInProtectedInstances {
+	return []ScaleInProtectedInstances{
+		"Refresh",
+		"Ignore",
+		"Wait",
+	}
+}
+
 type ScalingActivityStatusCode string
 
 // Enum values for ScalingActivityStatusCode
@@ -512,6 +538,26 @@ func (ScalingActivityStatusCode) Values() []ScalingActivityStatusCode {
 		"Successful",
 		"Failed",
 		"Cancelled",
+	}
+}
+
+type StandbyInstances string
+
+// Enum values for StandbyInstances
+const (
+	StandbyInstancesTerminate StandbyInstances = "Terminate"
+	StandbyInstancesIgnore    StandbyInstances = "Ignore"
+	StandbyInstancesWait      StandbyInstances = "Wait"
+)
+
+// Values returns all known values for StandbyInstances. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StandbyInstances) Values() []StandbyInstances {
+	return []StandbyInstances{
+		"Terminate",
+		"Ignore",
+		"Wait",
 	}
 }
 

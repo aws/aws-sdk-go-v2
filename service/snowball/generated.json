@@ -29,6 +29,7 @@
         "api_op_ListCompatibleImages.go",
         "api_op_ListJobs.go",
         "api_op_ListLongTermPricing.go",
+        "api_op_ListServiceVersions.go",
         "api_op_UpdateCluster.go",
         "api_op_UpdateJob.go",
         "api_op_UpdateJobShipmentState.go",

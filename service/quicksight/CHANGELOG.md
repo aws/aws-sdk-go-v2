@@ -1,3 +1,7 @@
+# v1.31.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2023-02-02)
 
 * **Feature**: QuickSight support for Radar Chart and Dashboard Publish Options

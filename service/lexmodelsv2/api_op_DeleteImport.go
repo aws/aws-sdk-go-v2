@@ -44,10 +44,10 @@ type DeleteImportOutput struct {
 
 	// The current status of the deletion. When the deletion is complete, the import
 	// will no longer be returned by the ListImports
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html) operation and
-	// calls to the DescribeImport
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeImport.html) operation
-	// with the import identifier will fail.
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html)
+	// operation and calls to the DescribeImport
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeImport.html)
+	// operation with the import identifier will fail.
 	ImportStatus types.ImportStatus
 
 	// Metadata pertaining to the operation's result.

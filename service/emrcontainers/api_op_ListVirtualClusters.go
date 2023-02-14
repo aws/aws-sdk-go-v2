@@ -39,8 +39,8 @@ type ListVirtualClustersInput struct {
 	// The container provider ID of the virtual cluster.
 	ContainerProviderId *string
 
-	// The container provider type of the virtual cluster. EKS is the only supported
-	// type as of now.
+	// The container provider type of the virtual cluster. Amazon EKS is the only
+	// supported type as of now.
 	ContainerProviderType types.ContainerProviderType
 
 	// The date and time after which the virtual clusters are created.

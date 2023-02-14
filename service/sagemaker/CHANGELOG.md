@@ -1,3 +1,11 @@
+# v1.68.0 (2023-02-10)
+
+* **Feature**: Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
+
+# v1.67.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2023-01-31)
 
 * **Feature**: Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.

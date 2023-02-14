@@ -35,14 +35,14 @@ type UpdateUserInput struct {
 	// This member is required.
 	UserId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The given name of the user.
 	GivenName *string
 
-	// Boolean value to determine whether the user is granted Poweruser privileges.
+	// Boolean value to determine whether the user is granted Power user privileges.
 	GrantPoweruserPrivileges types.BooleanEnumType
 
 	// The locale of the user.

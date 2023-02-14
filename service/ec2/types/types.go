@@ -2946,14 +2946,31 @@ type EbsBlockDevice struct {
 	// support Amazon EBS encryption. For more information, see Supported instance
 	// types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
-	// This parameter is not returned by DescribeImageAttribute
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImageAttribute.html).
-	// For CreateImage and RegisterImage, you can specify this parameter only for block
-	// device mappings that result in new, empty volumes when instances are launched
-	// from the image. Omit this parameter on block device mappings that include an
-	// existing volume or snapshot. If you include this parameter, and specify an
-	// encryption setting that is different from the existing volume or snapshot, the
-	// request will fail.
+	// This parameter is not returned by DescribeImageAttribute. For CreateImage and
+	// RegisterImage, whether you can include this parameter, and the allowed values
+	// differ depending on the type of block device mapping you are creating.
+	//
+	// * If you
+	// are creating a block device mapping for a new (empty) volume, you can include
+	// this parameter, and specify either true for an encrypted volume, or false for an
+	// unencrypted volume. If you omit this parameter, it defaults to false
+	// (unencrypted).
+	//
+	// * If you are creating a block device mapping from an existing
+	// encrypted or unencrypted snapshot, you must omit this parameter. If you include
+	// this parameter, the request will fail, regardless of the value that you
+	// specify.
+	//
+	// * If you are creating a block device mapping from an existing
+	// unencrypted volume, you can include this parameter, but you must specify false.
+	// If you specify true, the request will fail. In this case, we recommend that you
+	// omit the parameter.
+	//
+	// * If you are creating a block device mapping from an
+	// existing encrypted volume, you can include this parameter, and specify either
+	// true or false. However, if you specify false, the parameter is ignored and the
+	// block device mapping is always encrypted. In this case, we recommend that you
+	// omit the parameter.
 	Encrypted *bool
 
 	// The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes,
@@ -14867,11 +14884,12 @@ type TagDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The tags to apply to a resource when the resource is being created. The Valid
-// Values lists all the resource types that can be tagged. However, the action
-// you're using might not support tagging all of these resource types. If you try
-// to tag a resource type that is unsupported for the action you're using, you'll
-// get an error.
+// The tags to apply to a resource when the resource is being created. When you
+// specify a tag, you must specify the resource type to tag, otherwise the request
+// will fail. The Valid Values lists all the resource types that can be tagged.
+// However, the action you're using might not support tagging all of these resource
+// types. If you try to tag a resource type that is unsupported for the action
+// you're using, you'll get an error.
 type TagSpecification struct {
 
 	// The type of resource to tag on creation.

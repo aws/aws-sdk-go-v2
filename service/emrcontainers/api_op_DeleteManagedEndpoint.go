@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR
-// Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual
-// cluster.
+// Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon
+// EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with
+// your virtual cluster.
 func (c *Client) DeleteManagedEndpoint(ctx context.Context, params *DeleteManagedEndpointInput, optFns ...func(*Options)) (*DeleteManagedEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteManagedEndpointInput{}

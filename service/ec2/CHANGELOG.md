@@ -1,3 +1,12 @@
+# v1.85.0 (2023-02-10)
+
+* **Feature**: Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+
+# v1.84.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # v1.84.0 (2023-02-02)
 
 * **Feature**: Documentation updates for EC2.

@@ -13,7 +13,7 @@ import (
 // Deletes stored utterances. Amazon Lex stores the utterances that users send to
 // your bot. Utterances are stored for 15 days for use with the
 // ListAggregatedUtterances
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListAggregatedUtterances.html)
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html)
 // operation, and then stored indefinitely for use in improving the ability of your
 // bot to respond to user input.. Use the DeleteUtterances operation to manually
 // delete utterances for a specific session. When you use the DeleteUtterances
@@ -50,9 +50,9 @@ type DeleteUtterancesInput struct {
 
 	// The unique identifier of the session with the user. The ID is returned in the
 	// response from the RecognizeText
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html) and
-	// RecognizeUtterance
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html)
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html)
+	// and RecognizeUtterance
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html)
 	// operations.
 	SessionId *string
 

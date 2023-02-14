@@ -1,3 +1,9 @@
+# v1.27.2 (2023-02-03)
+
+* **Documentation**: Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # v1.27.1 (2023-01-23)
 
 * No change notes available for this release.

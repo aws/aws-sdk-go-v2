@@ -119,6 +119,7 @@ type BotFilterName string
 // Enum values for BotFilterName
 const (
 	BotFilterNameBotName BotFilterName = "BotName"
+	BotFilterNameBotType BotFilterName = "BotType"
 )
 
 // Values returns all known values for BotFilterName. Note that this can be
@@ -127,6 +128,7 @@ const (
 func (BotFilterName) Values() []BotFilterName {
 	return []BotFilterName{
 		"BotName",
+		"BotType",
 	}
 }
 
@@ -134,8 +136,9 @@ type BotFilterOperator string
 
 // Enum values for BotFilterOperator
 const (
-	BotFilterOperatorContains BotFilterOperator = "CO"
-	BotFilterOperatorEquals   BotFilterOperator = "EQ"
+	BotFilterOperatorContains  BotFilterOperator = "CO"
+	BotFilterOperatorEquals    BotFilterOperator = "EQ"
+	BotFilterOperatorNotEquals BotFilterOperator = "NE"
 )
 
 // Values returns all known values for BotFilterOperator. Note that this can be
@@ -145,6 +148,7 @@ func (BotFilterOperator) Values() []BotFilterOperator {
 	return []BotFilterOperator{
 		"CO",
 		"EQ",
+		"NE",
 	}
 }
 
@@ -289,6 +293,7 @@ const (
 	BotStatusFailed     BotStatus = "Failed"
 	BotStatusVersioning BotStatus = "Versioning"
 	BotStatusImporting  BotStatus = "Importing"
+	BotStatusUpdating   BotStatus = "Updating"
 )
 
 // Values returns all known values for BotStatus. Note that this can be expanded in
@@ -303,6 +308,25 @@ func (BotStatus) Values() []BotStatus {
 		"Failed",
 		"Versioning",
 		"Importing",
+		"Updating",
+	}
+}
+
+type BotType string
+
+// Enum values for BotType
+const (
+	BotTypeBot        BotType = "Bot"
+	BotTypeBotNetwork BotType = "BotNetwork"
+)
+
+// Values returns all known values for BotType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BotType) Values() []BotType {
+	return []BotType{
+		"Bot",
+		"BotNetwork",
 	}
 }
 

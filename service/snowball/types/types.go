@@ -201,6 +201,18 @@ type DataTransfer struct {
 	noSmithyDocumentSerde
 }
 
+// The name and version of the service dependant on the requested service.
+type DependentService struct {
+
+	// The name of the dependent service.
+	ServiceName ServiceName
+
+	// The version of the dependent service.
+	ServiceVersion *ServiceVersion
+
+	noSmithyDocumentSerde
+}
+
 // The container for SnowconeDeviceConfiguration.
 type DeviceConfiguration struct {
 
@@ -223,6 +235,19 @@ type Ec2AmiResource struct {
 
 	// The ID of the AMI on the Snow device.
 	SnowballAmiId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the metadata and configuration settings of EKS Anywhere
+// on the Snow Family device.
+type EKSOnDeviceServiceConfiguration struct {
+
+	// The version of EKS Anywhere on the Snow Family device.
+	EKSAnywhereVersion *string
+
+	// The Kubernetes version for EKS Anywhere on the Snow Family device.
+	KubernetesVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -543,6 +568,9 @@ type Notification struct {
 // on an Amazon Web Services Snow Family device.
 type OnDeviceServiceConfiguration struct {
 
+	// The configuration of EKS Anywhere on the Snow Family device.
+	EKSOnDeviceService *EKSOnDeviceServiceConfiguration
+
 	// Represents the NFS (Network File System) service on a Snow Family device.
 	NFSOnDeviceService *NFSOnDeviceServiceConfiguration
 
@@ -573,6 +601,15 @@ type S3Resource struct {
 	// transferred data will be exported from or imported into. Amazon Web Services
 	// Snow Family supports Amazon S3 and NFS (Network File System).
 	TargetOnDeviceServices []TargetOnDeviceService
+
+	noSmithyDocumentSerde
+}
+
+// The version of the requested service.
+type ServiceVersion struct {
+
+	// The version number of the requested service.
+	Version *string
 
 	noSmithyDocumentSerde
 }

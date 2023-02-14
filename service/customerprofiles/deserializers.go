@@ -9519,6 +9519,15 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				sv.Gender = types.Gender(jtv)
 			}
 
+		case "GenderString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+				}
+				sv.GenderString = ptr.String(jtv)
+			}
+
 		case "HomePhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9567,6 +9576,15 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 					return fmt.Errorf("expected PartyType to be of type string, got %T instead", value)
 				}
 				sv.PartyType = types.PartyType(jtv)
+			}
+
+		case "PartyTypeString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+				}
+				sv.PartyTypeString = ptr.String(jtv)
 			}
 
 		case "PersonalEmailAddress":

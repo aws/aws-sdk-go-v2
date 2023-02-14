@@ -14845,6 +14845,11 @@ func awsAwsjson11_serializeDocumentKafkaStreamingSourceOptions(v *types.KafkaStr
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddRecordTimestamp != nil {
+		ok := object.Key("AddRecordTimestamp")
+		ok.String(*v.AddRecordTimestamp)
+	}
+
 	if v.Assign != nil {
 		ok := object.Key("Assign")
 		ok.String(*v.Assign)
@@ -14870,9 +14875,19 @@ func awsAwsjson11_serializeDocumentKafkaStreamingSourceOptions(v *types.KafkaStr
 		ok.String(*v.Delimiter)
 	}
 
+	if v.EmitConsumerLagMetrics != nil {
+		ok := object.Key("EmitConsumerLagMetrics")
+		ok.String(*v.EmitConsumerLagMetrics)
+	}
+
 	if v.EndingOffsets != nil {
 		ok := object.Key("EndingOffsets")
 		ok.String(*v.EndingOffsets)
+	}
+
+	if v.IncludeHeaders != nil {
+		ok := object.Key("IncludeHeaders")
+		ok.Boolean(*v.IncludeHeaders)
 	}
 
 	if v.MaxOffsetsPerTrigger != nil {
@@ -14943,6 +14958,11 @@ func awsAwsjson11_serializeDocumentKinesisStreamingSourceOptions(v *types.Kinesi
 		ok.Boolean(*v.AddIdleTimeBetweenReads)
 	}
 
+	if v.AddRecordTimestamp != nil {
+		ok := object.Key("AddRecordTimestamp")
+		ok.String(*v.AddRecordTimestamp)
+	}
+
 	if v.AvoidEmptyBatches != nil {
 		ok := object.Key("AvoidEmptyBatches")
 		ok.Boolean(*v.AvoidEmptyBatches)
@@ -14961,6 +14981,11 @@ func awsAwsjson11_serializeDocumentKinesisStreamingSourceOptions(v *types.Kinesi
 	if v.DescribeShardInterval != nil {
 		ok := object.Key("DescribeShardInterval")
 		ok.Long(*v.DescribeShardInterval)
+	}
+
+	if v.EmitConsumerLagMetrics != nil {
+		ok := object.Key("EmitConsumerLagMetrics")
+		ok.String(*v.EmitConsumerLagMetrics)
 	}
 
 	if v.EndpointUrl != nil {

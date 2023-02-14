@@ -361,6 +361,9 @@ type Contact struct {
 	// flow.
 	ScheduledTimestamp *time.Time
 
+	// Information about Amazon Connect Wisdom.
+	WisdomInfo *WisdomInfo
+
 	noSmithyDocumentSerde
 }
 
@@ -3073,6 +3076,15 @@ type VoiceRecordingConfiguration struct {
 
 	// Identifies which track is being recorded.
 	VoiceRecordingTrack VoiceRecordingTrack
+
+	noSmithyDocumentSerde
+}
+
+// Information about Amazon Connect Wisdom.
+type WisdomInfo struct {
+
+	// The Amazon Resource Name (ARN) of the Wisdom session.
+	SessionArn *string
 
 	noSmithyDocumentSerde
 }

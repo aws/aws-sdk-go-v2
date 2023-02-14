@@ -1,3 +1,11 @@
+# v1.17.0 (2023-02-09)
+
+* **Feature**: AWS Lex now supports Network of Bots.
+
+# v1.16.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

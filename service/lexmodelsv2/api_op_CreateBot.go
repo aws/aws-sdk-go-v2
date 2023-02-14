@@ -57,10 +57,16 @@ type CreateBotInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The list of bot members in a network to be created.
+	BotMembers []types.BotMember
+
 	// A list of tags to add to the bot. You can only add tags when you create a bot.
 	// You can't use the UpdateBot operation to update tags. To update tags, use the
 	// TagResource operation.
 	BotTags map[string]string
+
+	// The type of a bot to create.
+	BotType types.BotType
 
 	// A description of the bot. It appears in lists to help you identify a particular
 	// bot.
@@ -80,16 +86,22 @@ type CreateBotOutput struct {
 	// you call other Amazon Lex API operations.
 	BotId *string
 
+	// The list of bots in a network that was created.
+	BotMembers []types.BotMember
+
 	// The name specified for the bot.
 	BotName *string
 
 	// Shows the current status of the bot. The bot is first in the Creating status.
 	// Once the bot is read for use, it changes to the Available status. After the bot
-	// is created, you can use the Draft version of the bot.
+	// is created, you can use the DRAFT version of the bot.
 	BotStatus types.BotStatus
 
 	// A list of tags associated with the bot.
 	BotTags map[string]string
+
+	// The type of a bot that was created.
+	BotType types.BotType
 
 	// A timestamp indicating the date and time that the bot was created.
 	CreationDateTime *time.Time

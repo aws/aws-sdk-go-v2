@@ -12,8 +12,8 @@ import (
 
 // Starts a configuration session used to retrieve a deployed configuration. For
 // more information about this API action and to view example CLI commands that
-// show how to use it with the GetLatestConfiguration API action, see Receiving the
-// configuration
+// show how to use it with the GetLatestConfiguration API action, see Retrieving
+// the configuration
 // (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
 // in the AppConfig User Guide.
 func (c *Client) StartConfigurationSession(ctx context.Context, params *StartConfigurationSessionInput, optFns ...func(*Options)) (*StartConfigurationSessionOutput, error) {
@@ -50,7 +50,7 @@ type StartConfigurationSessionInput struct {
 
 	// Sets a constraint on a session. If you specify a value of, for example, 60
 	// seconds, then the client that established the session can't call
-	// GetLatestConfiguration more frequently then every 60 seconds.
+	// GetLatestConfiguration more frequently than every 60 seconds.
 	RequiredMinimumPollIntervalInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -60,9 +60,12 @@ type StartConfigurationSessionOutput struct {
 
 	// Token encapsulating state about the configuration session. Provide this token to
 	// the GetLatestConfiguration API to retrieve configuration data. This token should
-	// only be used once in your first call to GetLatestConfiguration. You MUST use the
+	// only be used once in your first call to GetLatestConfiguration. You must use the
 	// new token in the GetLatestConfiguration response (NextPollConfigurationToken) in
-	// each subsequent call to GetLatestConfiguration.
+	// each subsequent call to GetLatestConfiguration. The InitialConfigurationToken
+	// and NextPollConfigurationToken should only be used once. To support long poll
+	// use cases, the tokens are valid for up to 24 hours. If a GetLatestConfiguration
+	// call uses an expired token, the system returns BadRequestException.
 	InitialConfigurationToken *string
 
 	// Metadata pertaining to the operation's result.

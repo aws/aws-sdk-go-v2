@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops transcription for the specified meetingId.
+// Stops transcription for the specified meetingId. For more information, refer to
+// Using Amazon Chime SDK live transcription
+// (https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html) in
+// the Amazon Chime SDK Developer Guide. Amazon Chime SDK live transcription is
+// powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS
+// Service Terms (https://aws.amazon.com/service-terms/), including the terms
+// specific to the AWS Machine Learning and Artificial Intelligence Services.
 func (c *Client) StopMeetingTranscription(ctx context.Context, params *StopMeetingTranscriptionInput, optFns ...func(*Options)) (*StopMeetingTranscriptionOutput, error) {
 	if params == nil {
 		params = &StopMeetingTranscriptionInput{}

@@ -34,8 +34,8 @@ type DescribeActivitiesInput struct {
 	// empty, all activity types are returned.
 	ActivityTypes *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The timestamp that determines the end time of the activities. The response

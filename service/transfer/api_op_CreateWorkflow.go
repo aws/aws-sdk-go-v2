@@ -35,20 +35,23 @@ type CreateWorkflowInput struct {
 	// Specifies the details for the steps that are in the specified workflow. The TYPE
 	// specifies which of the following actions is being taken for this step.
 	//
-	// * COPY:
+	// * COPY -
 	// Copy the file to another location.
 	//
-	// * CUSTOM: Perform a custom step with an
+	// * CUSTOM - Perform a custom step with an
 	// Lambda function target.
 	//
-	// * DELETE: Delete the file.
+	// * DECRYPT - Decrypt a file that was encrypted before it
+	// was uploaded.
 	//
-	// * TAG: Add a tag to the
+	// * DELETE - Delete the file.
+	//
+	// * TAG - Add a tag to the
 	// file.
 	//
 	// Currently, copying and tagging are supported only on S3. For file
-	// location, you specify either the S3 bucket and key, or the EFS file system ID
-	// and path.
+	// location, you specify either the Amazon S3 bucket and key, or the Amazon EFS
+	// file system ID and path.
 	//
 	// This member is required.
 	Steps []types.WorkflowStep

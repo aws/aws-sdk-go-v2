@@ -1,3 +1,7 @@
+# v1.34.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-01-31)
 
 * **Feature**: Added support for IoT Rules Engine Cloudwatch Logs action batch mode.

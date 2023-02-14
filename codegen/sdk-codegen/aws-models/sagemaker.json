@@ -2035,6 +2035,104 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.sagemaker#AutoMLAlgorithm": {
+            "type": "enum",
+            "members": {
+                "XGBOOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "xgboost"
+                    }
+                },
+                "LINEAR_LEARNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "linear-learner"
+                    }
+                },
+                "MLP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mlp"
+                    }
+                },
+                "LIGHTGBM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lightgbm"
+                    }
+                },
+                "CATBOOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "catboost"
+                    }
+                },
+                "RANDOMFOREST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "randomforest"
+                    }
+                },
+                "EXTRA_TREES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "extra-trees"
+                    }
+                },
+                "NN_TORCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nn-torch"
+                    }
+                },
+                "FASTAI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fastai"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AutoMLAlgorithmConfig": {
+            "type": "structure",
+            "members": {
+                "AutoMLAlgorithms": {
+                    "target": "com.amazonaws.sagemaker#AutoMLAlgorithms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection of algorithms run on a dataset\n         to train the model candidates of an Autopilot job. </p>\n         <note>\n            <p>Selected algorithms must belong to the list corresponding to the training mode set in\n         <code>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode\">AutoMLJobConfig.Mode</a>\n               </code>\n         (<code>ENSEMBLING</code> or <code>HYPERPARAMETER_TUNING</code>). Choose a minimum of 1 algorithm.\n      </p>\n         </note>\n         <ul>\n            <li>\n               <p>In <code>ENSEMBLING</code> mode:</p>\n               <ul>\n                  <li>\n                     <p>\"catboost\"</p>\n                  </li>\n                  <li>\n                     <p>\"extra-trees\"</p>\n                  </li>\n                  <li>\n                     <p>\"fastai\"</p>\n                  </li>\n                  <li>\n                     <p>\"lightgbm\"</p>\n                  </li>\n                  <li>\n                     <p>\"linear-learner\"</p>\n                  </li>\n                  <li>\n                     <p>\"nn-torch\"</p>\n                  </li>\n                  <li>\n                     <p>\"randomforest\"</p>\n                  </li>\n                  <li>\n                     <p>\"xgboost\"</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>In <code>HYPERPARAMETER_TUNING</code> mode:</p>\n               <ul>\n                  <li>\n                     <p>\"linear-learner\"</p>\n                  </li>\n                  <li>\n                     <p>\"mlp\"</p>\n                  </li>\n                  <li>\n                     <p>\"xgboost\"</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The collection of algorithms run on a dataset for training the model candidates of an Autopilot job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AutoMLAlgorithms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AutoMLAlgorithm"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 11
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AutoMLAlgorithmsConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AutoMLAlgorithmConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AutoMLCandidate": {
             "type": "structure",
             "members": {
@@ -2118,12 +2216,18 @@
                 "FeatureSpecificationS3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input data source to\n         run an Autopilot job. You can input <code>FeatureAttributeNames</code> (optional) in JSON\n         format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <note>\n            <p>These column keys may not include the target column.</p>\n         </note>\n         <p>In ensembling mode, Autopilot will only support the following data types:\n            <code>numeric</code>, <code>categorical</code>, <code>text</code> and\n            <code>datetime</code>. In HPO mode, Autopilot can support <code>numeric</code>,\n            <code>categorical</code>, <code>text</code>, <code>datetime</code> and\n            <code>sequence</code>.</p>\n         <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>,\n            <code>col2</code>,..) should be a subset of the column names in the input data. </p>\n         <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are\n         provided, then the column keys should be a subset of the column names provided in\n            <code>FeatureAttributeNames</code>. </p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> is case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
+                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input data source to\n         run an Autopilot job. You can input <code>FeatureAttributeNames</code> (optional) in JSON\n         format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <note>\n            <p>These column keys may not include the target column.</p>\n         </note>\n         <p>In ensembling mode, Autopilot only supports the following data types: <code>numeric</code>,\n            <code>categorical</code>, <code>text</code>, and <code>datetime</code>. In HPO mode,\n         Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>,\n            <code>datetime</code>, and <code>sequence</code>.</p>\n         <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>,\n            <code>col2</code>,..) should be a subset of the column names in the input data. </p>\n         <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are\n         provided, then the column keys should be a subset of the column names provided in\n            <code>FeatureAttributeNames</code>. </p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> are case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
+                    }
+                },
+                "AlgorithmsConfig": {
+                    "target": "com.amazonaws.sagemaker#AutoMLAlgorithmsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores the configuration information for the selection of algorithms\n         used to train the model candidates.</p>\n         <p>The list of available algorithms to choose from depends on the training mode set in \n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html\">\n               <code>AutoMLJobConfig.Mode</code>\n            </a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmsConfig</code> should not be set in <code>AUTO</code> training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code> attribute must be set and one\n            only.</p>\n               <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is empty, \n               <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is not provided, <code>AutoMLCandidateGenerationConfig</code>\n               uses the full set of algorithms for the given training mode.</p>\n            </li>\n         </ul>\n         <p>For the list of all algorithms per training mode, see .</p>\n         <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in Autopilot developer guide.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stores the config information for how a candidate is generated (optional).</p>"
+                "smithy.api#documentation": "<p>Stores the configuration information for how a candidate is generated (optional).</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLCandidateStep": {
@@ -2356,7 +2460,7 @@
                 "MaxAutoMLJobRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxAutoMLJobRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum runtime, in seconds, an AutoML job has to complete.</p>\n         <p>If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its\n         processing is ended gracefully. The AutoML job identifies the best model whose training was\n         completed and marks it as the best-performing model. Any unfinished steps of the job, such\n         as automatic one-click Autopilot model deployment, will not be completed. </p>"
+                        "smithy.api#documentation": "<p>The maximum runtime, in seconds, an AutoML job has to complete.</p>\n         <p>If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its\n         processing is ended gracefully. The AutoML job identifies the best model whose training was\n         completed and marks it as the best-performing model. Any unfinished steps of the job, such\n         as automatic one-click Autopilot model deployment, are not completed. </p>"
                     }
                 }
             },
@@ -2394,7 +2498,7 @@
                 "Mode": {
                     "target": "com.amazonaws.sagemaker#AutoMLMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that Autopilot uses to train the data. You can either specify the mode manually\n         or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In\n            <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than\n         100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p>\n         <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict\n         classification and regression tasks directly from your dataset. This machine learning mode\n         combines several base models to produce an optimal predictive model. It then uses a\n         stacking ensemble method to combine predictions from contributing members. A multi-stack\n         ensemble model can provide better performance over a single model by combining the\n         predictive capabilities of multiple models. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by\n            <code>ENSEMBLING</code> mode.</p>\n         <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train\n         the best version of a model. HPO will automatically select an algorithm for the type of\n         problem you want to solve. Then HPO finds the best hyperparameters according to your\n         objective metric. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by\n            <code>HYPERPARAMETER_TUNING</code> mode.</p>"
+                        "smithy.api#documentation": "<p>The method that Autopilot uses to train the data. You can either specify the mode manually\n         or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In\n            <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than\n         100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p>\n         <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict\n         classification and regression tasks directly from your dataset. This machine learning mode\n         combines several base models to produce an optimal predictive model. It then uses a\n         stacking ensemble method to combine predictions from contributing members. A multi-stack\n         ensemble model can provide better performance over a single model by combining the\n         predictive capabilities of multiple models. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by\n            <code>ENSEMBLING</code> mode.</p>\n         <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train\n         the best version of a model. HPO automatically selects an algorithm for the type of problem\n         you want to solve. Then HPO finds the best hyperparameters according to your objective\n         metric. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by\n            <code>HYPERPARAMETER_TUNING</code> mode.</p>"
                     }
                 }
             },
@@ -2418,7 +2522,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. This metric is optimized during training to provide the best estimate for\n         model parameter values from data.</p>\n         <p>Here are the options:</p>\n         <dl>\n            <dt>Accuracy</dt>\n            <dd>\n               <p> The ratio of the number of correctly classified items to the total number of\n                  (correctly and incorrectly) classified items. It is used for both binary and\n                  multiclass classification. Accuracy measures how close the predicted class values\n                  are to the actual values. Values for accuracy metrics vary between zero (0) and\n                  one (1). A value of 1 indicates perfect accuracy, and 0 indicates perfect\n                  inaccuracy.</p>\n            </dd>\n            <dt>AUC</dt>\n            <dd>\n               <p>The area under the curve (AUC) metric is used to compare and evaluate binary\n                  classification by algorithms that return probabilities, such as logistic\n                  regression. To map the probabilities into classifications, these are compared\n                  against a threshold value. </p>\n               <p>The relevant curve is the receiver operating characteristic curve (ROC curve).\n                  The ROC curve plots the true positive rate (TPR) of predictions (or recall)\n                  against the false positive rate (FPR) as a function of the threshold value, above\n                  which a prediction is considered positive. Increasing the threshold results in\n                  fewer false positives, but more false negatives. </p>\n               <p>AUC is the area under this ROC curve. Therefore, AUC provides an aggregated\n                  measure of the model performance across all possible classification thresholds.\n                  AUC scores vary between 0 and 1. A score of 1 indicates perfect accuracy, and a\n                  score of one half (0.5) indicates that the prediction is not better than a random\n                  classifier. </p>\n            </dd>\n            <dt>BalancedAccuracy</dt>\n            <dd>\n               <p>\n                  <code>BalancedAccuracy</code> is a metric that measures the ratio of accurate\n                  predictions to all predictions. This ratio is calculated after normalizing true\n                  positives (TP) and true negatives (TN) by the total number of positive (P) and\n                  negative (N) values. It is used in both binary and multiclass classification and\n                  is defined as follows: 0.5*((TP/P)+(TN/N)), with values ranging from 0 to 1.\n                     <code>BalancedAccuracy</code> gives a better measure of accuracy when the\n                  number of positives or negatives differ greatly from each other in an imbalanced\n                  dataset. For example, when only 1% of email is spam. </p>\n            </dd>\n            <dt>F1</dt>\n            <dd>\n               <p>The <code>F1</code> score is the harmonic mean of the precision and recall,\n                  defined as follows: F1 = 2 * (precision * recall) / (precision + recall). It is\n                  used for binary classification into classes traditionally referred to as positive\n                  and negative. Predictions are said to be true when they match their actual\n                  (correct) class, and false when they do not. </p>\n               <p>Precision is the ratio of the true positive predictions to all positive\n                  predictions, and it includes the false positives in a dataset. Precision measures\n                  the quality of the prediction when it predicts the positive class. </p>\n               <p>Recall (or sensitivity) is the ratio of the true positive predictions to all\n                  actual positive instances. Recall measures how completely a model predicts the\n                  actual class members in a dataset. </p>\n               <p>F1 scores vary between 0 and 1. A score of 1 indicates the best possible\n                  performance, and 0 indicates the worst.</p>\n            </dd>\n            <dt>F1macro</dt>\n            <dd>\n               <p>The <code>F1macro</code> score applies F1 scoring to multiclass classification\n                  problems. It does this by calculating the precision and recall, and then taking\n                  their harmonic mean to calculate the F1 score for each class. Lastly, the F1macro\n                  averages the individual scores to obtain the <code>F1macro</code> score.\n                     <code>F1macro</code> scores vary between 0 and 1. A score of 1 indicates the\n                  best possible performance, and 0 indicates the worst.</p>\n            </dd>\n            <dt>MAE</dt>\n            <dd>\n               <p>The mean absolute error (MAE) is a measure of how different the predicted and\n                  actual values are, when they're averaged over all values. MAE is commonly used in\n                  regression analysis to understand model prediction error. If there is linear\n                  regression, MAE represents the average distance from a predicted line to the\n                  actual value. MAE is defined as the sum of absolute errors divided by the number\n                  of observations. Values range from 0 to infinity, with smaller numbers indicating\n                  a better model fit to the data.</p>\n            </dd>\n            <dt>MSE</dt>\n            <dd>\n               <p>The mean squared error (MSE) is the average of the squared differences between\n                  the predicted and actual values. It is used for regression. MSE values are always\n                  positive. The better a model is at predicting the actual values, the smaller the\n                  MSE value is</p>\n            </dd>\n            <dt>Precision</dt>\n            <dd>\n               <p>Precision measures how well an algorithm predicts the true positives (TP) out\n                  of all of the positives that it identifies. It is defined as follows: Precision =\n                  TP/(TP+FP), with values ranging from zero (0) to one (1), and is used in binary\n                  classification. Precision is an important metric when the cost of a false positive\n                  is high. For example, the cost of a false positive is very high if an airplane\n                  safety system is falsely deemed safe to fly. A false positive (FP) reflects a\n                  positive prediction that is actually negative in the data.</p>\n            </dd>\n            <dt>PrecisionMacro</dt>\n            <dd>\n               <p>The precision macro computes precision for multiclass classification problems.\n                  It does this by calculating precision for each class and averaging scores to\n                  obtain precision for several classes. <code>PrecisionMacro</code> scores range\n                  from zero (0) to one (1). Higher scores reflect the model's ability to predict\n                  true positives (TP) out of all of the positives that it identifies, averaged\n                  across multiple classes.</p>\n            </dd>\n            <dt>R2</dt>\n            <dd>\n               <p>R2, also known as the coefficient of determination, is used in regression to\n                  quantify how much a model can explain the variance of a dependent variable. Values\n                  range from one (1) to negative one (-1). Higher numbers indicate a higher fraction\n                  of explained variability. <code>R2</code> values close to zero (0) indicate that\n                  very little of the dependent variable can be explained by the model. Negative\n                  values indicate a poor fit and that the model is outperformed by a constant\n                  function. For linear regression, this is a horizontal line.</p>\n            </dd>\n            <dt>Recall</dt>\n            <dd>\n               <p>Recall measures how well an algorithm correctly predicts all of the true\n                  positives (TP) in a dataset. A true positive is a positive prediction that is also\n                  an actual positive value in the data. Recall is defined as follows: Recall =\n                  TP/(TP+FN), with values ranging from 0 to 1. Higher scores reflect a better\n                  ability of the model to predict true positives (TP) in the data, and is used in\n                  binary classification. </p>\n               <p>Recall is important when testing for cancer because it's used to find all of\n                  the true positives. A false positive (FP) reflects a positive prediction that is\n                  actually negative in the data. It is often insufficient to measure only recall,\n                  because predicting every output as a true positive will yield a perfect recall\n                  score.</p>\n            </dd>\n            <dt>RecallMacro</dt>\n            <dd>\n               <p>The RecallMacro computes recall for multiclass classification problems by\n                  calculating recall for each class and averaging scores to obtain recall for\n                  several classes. RecallMacro scores range from 0 to 1. Higher scores reflect the\n                  model's ability to predict true positives (TP) in a dataset. Whereas, a true\n                  positive reflects a positive prediction that is also an actual positive value in\n                  the data. It is often insufficient to measure only recall, because predicting\n                  every output as a true positive will yield a perfect recall score.</p>\n            </dd>\n            <dt>RMSE</dt>\n            <dd>\n               <p>Root mean squared error (RMSE) measures the square root of the squared\n                  difference between predicted and actual values, and it's averaged over all values.\n                  It is used in regression analysis to understand model prediction error. It's an\n                  important metric to indicate the presence of large model errors and outliers.\n                  Values range from zero (0) to infinity, with smaller numbers indicating a better\n                  model fit to the data. RMSE is dependent on scale, and should not be used to\n                  compare datasets of different sizes.</p>\n            </dd>\n         </dl>\n         <p>If you do not specify a metric explicitly, the default behavior is to automatically\n         use:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MSE</code>: for regression.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1</code>: for binary classification</p>\n            </li>\n            <li>\n               <p>\n                  <code>Accuracy</code>: for multiclass classification.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. This metric is optimized during training to provide the best estimate for\n         model parameter values from data.</p>\n         <p>Here are the options:</p>\n         <dl>\n            <dt>Accuracy</dt>\n            <dd>\n               <p>The ratio of the number of correctly classified items to the total number of\n                  (correctly and incorrectly) classified items. It is used for both binary and\n                  multiclass classification. Accuracy measures how close the predicted class values\n                  are to the actual values. Values for accuracy metrics vary between zero (0) and\n                  one (1). A value of 1 indicates perfect accuracy, and 0 indicates perfect\n                  inaccuracy.</p>\n            </dd>\n            <dt>AUC</dt>\n            <dd>\n               <p>The area under the curve (AUC) metric is used to compare and evaluate binary\n                  classification by algorithms that return probabilities, such as logistic\n                  regression. To map the probabilities into classifications, these are compared\n                  against a threshold value. </p>\n               <p>The relevant curve is the receiver operating characteristic curve (ROC curve).\n                  The ROC curve plots the true positive rate (TPR) of predictions (or recall)\n                  against the false positive rate (FPR) as a function of the threshold value, above\n                  which a prediction is considered positive. Increasing the threshold results in\n                  fewer false positives, but more false negatives. </p>\n               <p>AUC is the area under this ROC curve. Therefore, AUC provides an aggregated\n                  measure of the model performance across all possible classification thresholds.\n                  AUC scores vary between 0 and 1. A score of 1 indicates perfect accuracy, and a\n                  score of one half (0.5) indicates that the prediction is not better than a random\n                  classifier. </p>\n            </dd>\n            <dt>BalancedAccuracy</dt>\n            <dd>\n               <p>\n                  <code>BalancedAccuracy</code> is a metric that measures the ratio of accurate\n                  predictions to all predictions. This ratio is calculated after normalizing true\n                  positives (TP) and true negatives (TN) by the total number of positive (P) and\n                  negative (N) values. It is used in both binary and multiclass classification and\n                  is defined as follows: 0.5*((TP/P)+(TN/N)), with values ranging from 0 to 1.\n                     <code>BalancedAccuracy</code> gives a better measure of accuracy when the\n                  number of positives or negatives differ greatly from each other in an imbalanced\n                  dataset. For example, when only 1% of email is spam. </p>\n            </dd>\n            <dt>F1</dt>\n            <dd>\n               <p>The <code>F1</code> score is the harmonic mean of the precision and recall,\n                  defined as follows: F1 = 2 * (precision * recall) / (precision + recall). It is\n                  used for binary classification into classes traditionally referred to as positive\n                  and negative. Predictions are said to be true when they match their actual\n                  (correct) class, and false when they do not. </p>\n               <p>Precision is the ratio of the true positive predictions to all positive\n                  predictions, and it includes the false positives in a dataset. Precision measures\n                  the quality of the prediction when it predicts the positive class. </p>\n               <p>Recall (or sensitivity) is the ratio of the true positive predictions to all\n                  actual positive instances. Recall measures how completely a model predicts the\n                  actual class members in a dataset. </p>\n               <p>F1 scores vary between 0 and 1. A score of 1 indicates the best possible\n                  performance, and 0 indicates the worst.</p>\n            </dd>\n            <dt>F1macro</dt>\n            <dd>\n               <p>The <code>F1macro</code> score applies F1 scoring to multiclass classification\n                  problems. It does this by calculating the precision and recall, and then taking\n                  their harmonic mean to calculate the F1 score for each class. Lastly, the F1macro\n                  averages the individual scores to obtain the <code>F1macro</code> score.\n                     <code>F1macro</code> scores vary between 0 and 1. A score of 1 indicates the\n                  best possible performance, and 0 indicates the worst.</p>\n            </dd>\n            <dt>MAE</dt>\n            <dd>\n               <p>The mean absolute error (MAE) is a measure of how different the predicted and\n                  actual values are, when they're averaged over all values. MAE is commonly used in\n                  regression analysis to understand model prediction error. If there is linear\n                  regression, MAE represents the average distance from a predicted line to the\n                  actual value. MAE is defined as the sum of absolute errors divided by the number\n                  of observations. Values range from 0 to infinity, with smaller numbers indicating\n                  a better model fit to the data.</p>\n            </dd>\n            <dt>MSE</dt>\n            <dd>\n               <p>The mean squared error (MSE) is the average of the squared differences between\n                  the predicted and actual values. It is used for regression. MSE values are always\n                  positive. The better a model is at predicting the actual values, the smaller the\n                  MSE value is</p>\n            </dd>\n            <dt>Precision</dt>\n            <dd>\n               <p>Precision measures how well an algorithm predicts the true positives (TP) out\n                  of all of the positives that it identifies. It is defined as follows: Precision =\n                  TP/(TP+FP), with values ranging from zero (0) to one (1), and is used in binary\n                  classification. Precision is an important metric when the cost of a false positive\n                  is high. For example, the cost of a false positive is very high if an airplane\n                  safety system is falsely deemed safe to fly. A false positive (FP) reflects a\n                  positive prediction that is actually negative in the data.</p>\n            </dd>\n            <dt>PrecisionMacro</dt>\n            <dd>\n               <p>The precision macro computes precision for multiclass classification problems.\n                  It does this by calculating precision for each class and averaging scores to\n                  obtain precision for several classes. <code>PrecisionMacro</code> scores range\n                  from zero (0) to one (1). Higher scores reflect the model's ability to predict\n                  true positives (TP) out of all of the positives that it identifies, averaged\n                  across multiple classes.</p>\n            </dd>\n            <dt>R2</dt>\n            <dd>\n               <p>R2, also known as the coefficient of determination, is used in regression to\n                  quantify how much a model can explain the variance of a dependent variable. Values\n                  range from one (1) to negative one (-1). Higher numbers indicate a higher fraction\n                  of explained variability. <code>R2</code> values close to zero (0) indicate that\n                  very little of the dependent variable can be explained by the model. Negative\n                  values indicate a poor fit and that the model is outperformed by a constant\n                  function. For linear regression, this is a horizontal line.</p>\n            </dd>\n            <dt>Recall</dt>\n            <dd>\n               <p>Recall measures how well an algorithm correctly predicts all of the true\n                  positives (TP) in a dataset. A true positive is a positive prediction that is also\n                  an actual positive value in the data. Recall is defined as follows: Recall =\n                  TP/(TP+FN), with values ranging from 0 to 1. Higher scores reflect a better\n                  ability of the model to predict true positives (TP) in the data, and is used in\n                  binary classification. </p>\n               <p>Recall is important when testing for cancer because it's used to find all of\n                  the true positives. A false positive (FP) reflects a positive prediction that is\n                  actually negative in the data. It is often insufficient to measure only recall,\n                  because predicting every output as a true positive yield a perfect recall\n                  score.</p>\n            </dd>\n            <dt>RecallMacro</dt>\n            <dd>\n               <p>The RecallMacro computes recall for multiclass classification problems by\n                  calculating recall for each class and averaging scores to obtain recall for\n                  several classes. RecallMacro scores range from 0 to 1. Higher scores reflect the\n                  model's ability to predict true positives (TP) in a dataset. Whereas, a true\n                  positive reflects a positive prediction that is also an actual positive value in\n                  the data. It is often insufficient to measure only recall, because predicting\n                  every output as a true positive yields a perfect recall score.</p>\n            </dd>\n            <dt>RMSE</dt>\n            <dd>\n               <p>Root mean squared error (RMSE) measures the square root of the squared\n                  difference between predicted and actual values, and it's averaged over all values.\n                  It is used in regression analysis to understand model prediction error. It's an\n                  important metric to indicate the presence of large model errors and outliers.\n                  Values range from zero (0) to infinity, with smaller numbers indicating a better\n                  model fit to the data. RMSE is dependent on scale, and should not be used to\n                  compare datasets of different sizes.</p>\n            </dd>\n         </dl>\n         <p>If you do not specify a metric explicitly, the default behavior is to automatically\n         use:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MSE</code>: for regression.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1</code>: for binary classification</p>\n            </li>\n            <li>\n               <p>\n                  <code>Accuracy</code>: for multiclass classification.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5536,7 +5640,7 @@
                 "ModelDataUrl": {
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3\n            path is required for SageMaker built-in algorithms, but not if you use your own algorithms.\n            For more information on built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Common\n                Parameters</a>. </p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model or endpoint you are creating.</p>\n         </note>\n         <p>If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token\n            Service to download model artifacts from the S3 path you provide. Amazon Web Services STS\n            is activated in your IAM user account by default. If you previously deactivated\n                Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS\n            for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <important>\n            <p>If you use a built-in algorithm to create a model, SageMaker requires that you provide\n                a S3 path to the model artifacts in <code>ModelDataUrl</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3\n            path is required for SageMaker built-in algorithms, but not if you use your own algorithms.\n            For more information on built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Common\n                Parameters</a>. </p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model or endpoint you are creating.</p>\n         </note>\n         <p>If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token\n            Service to download model artifacts from the S3 path you provide. Amazon Web Services STS\n            is activated in your Amazon Web Services account by default. If you previously deactivated\n                Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS\n            for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <important>\n            <p>If you use a built-in algorithm to create a model, SageMaker requires that you provide\n                a S3 path to the model artifacts in <code>ModelDataUrl</code>.</p>\n         </important>"
                     }
                 },
                 "Environment": {
@@ -6276,7 +6380,7 @@
                 "AutoMLJobName": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies an Autopilot job. The name must be unique to your account and is\n         case-insensitive.</p>",
+                        "smithy.api#documentation": "<p>Identifies an Autopilot job. The name must be unique to your account and is case\n         insensitive.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6773,7 +6877,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated\n    Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application,\n    policy, and Amazon Virtual Private Cloud (VPC) configurations. An Amazon Web Services account is limited to one domain per region.\n    Users within a domain can share notebook files and other artifacts with each other.</p>\n         <p>\n            <b>EFS storage</b>\n         </p>\n         <p>When a domain is created, an EFS volume is created for use by all of the users within the\n    domain. Each user receives a private home directory within the EFS volume for notebooks,\n    Git repositories, and data files.</p>\n         <p>SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with\n     an Amazon Web Services managed key by default. For more control, you can specify a\n     customer managed key. For more information, see\n    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html\">Protect Data at\n      Rest Using Encryption</a>.</p>\n         <p>\n            <b>VPC configuration</b>\n         </p>\n         <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified\n    VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code>\n    parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you\n    choose when you onboard to Studio. The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by\n        Amazon SageMaker, which allows internet access. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets.\n        Internet access is disabled by default. To allow internet access, you must specify a\n        NAT gateway.</p>\n               <p>When internet access is disabled, you won't be able to run a Studio notebook or to\n        train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime\n        or a NAT gateway and your security groups allow outbound connections.</p>\n            </li>\n         </ul>\n         <important>\n            <p>NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules\n      in order to launch a SageMaker Studio app successfully.</p>\n         </important>\n         <p>For more information, see\n    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html\">Connect\n       SageMaker Studio Notebooks to Resources in a VPC</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated\n    Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application,\n    policy, and Amazon Virtual Private Cloud (VPC) configurations.\n    Users within a domain can share notebook files and other artifacts with each other.</p>\n         <p>\n            <b>EFS storage</b>\n         </p>\n         <p>When a domain is created, an EFS volume is created for use by all of the users within the\n    domain. Each user receives a private home directory within the EFS volume for notebooks,\n    Git repositories, and data files.</p>\n         <p>SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with\n     an Amazon Web Services managed key by default. For more control, you can specify a\n     customer managed key. For more information, see\n    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html\">Protect Data at\n      Rest Using Encryption</a>.</p>\n         <p>\n            <b>VPC configuration</b>\n         </p>\n         <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified\n    VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code>\n    parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you\n    choose when you onboard to Studio. The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by\n        Amazon SageMaker, which allows internet access. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets.\n        Internet access is disabled by default. To allow internet access, you must specify a\n        NAT gateway.</p>\n               <p>When internet access is disabled, you won't be able to run a Studio notebook or to\n        train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime\n        or a NAT gateway and your security groups allow outbound connections.</p>\n            </li>\n         </ul>\n         <important>\n            <p>NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules\n      in order to launch a SageMaker Studio app successfully.</p>\n         </important>\n         <p>For more information, see\n    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html\">Connect\n       SageMaker Studio Notebooks to Resources in a VPC</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateDomainRequest": {
@@ -7089,7 +7193,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n         <p> Use this API to deploy models using SageMaker hosting services. </p>\n         <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n         <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n         </note>\n         <p>The endpoint name must be unique within an Amazon Web Services Region in your\n                Amazon Web Services account. </p>\n         <p>When it receives the request, SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n         <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n         </note>\n         <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n         <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the\n            S3 path you provided. Amazon Web Services STS is activated in your IAM user account by\n            default. If you previously deactivated Amazon Web Services STS for a region, you need to\n            reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                  <p>Option 1: For a full SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n               </li>\n               <li>\n                  <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                  <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                  <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                  <p>\n                     <code>]</code>\n                  </p>\n                  <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n         <p> Use this API to deploy models using SageMaker hosting services. </p>\n         <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n         <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n         </note>\n         <p>The endpoint name must be unique within an Amazon Web Services Region in your\n                Amazon Web Services account. </p>\n         <p>When it receives the request, SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n         <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n         </note>\n         <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n         <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the\n            S3 path you provided. Amazon Web Services STS is activated in your Amazon Web Services account by\n            default. If you previously deactivated Amazon Web Services STS for a region, you need to\n            reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                  <p>Option 1: For a full SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n               </li>\n               <li>\n                  <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                  <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                  <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                  <p>\n                     <code>]</code>\n                  </p>\n                  <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateEndpointConfig": {
@@ -7496,7 +7600,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a hub.</p>"
+                "smithy.api#documentation": "<p>Create a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateHubRequest": {
@@ -11818,7 +11922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a hub.</p>"
+                "smithy.api#documentation": "<p>Delete a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#DeleteHubContent": {
@@ -11838,7 +11942,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete the contents of a hub.</p>"
+                "smithy.api#documentation": "<p>Delete the contents of a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#DeleteHubContentRequest": {
@@ -13598,7 +13702,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLInputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the input data configuration for the AutoML job..</p>",
+                        "smithy.api#documentation": "<p>Returns the input data configuration for the AutoML job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13702,7 +13806,7 @@
                 "ResolvedAttributes": {
                     "target": "com.amazonaws.sagemaker#ResolvedAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>This contains <code>ProblemType</code>, <code>AutoMLJobObjective</code>, and\n            <code>CompletionCriteria</code>. If you do not provide these values, they are\n         auto-inferred. If you do provide them, the values used are the ones you provide.</p>"
+                        "smithy.api#documentation": "<p>Contains <code>ProblemType</code>, <code>AutoMLJobObjective</code>, and\n            <code>CompletionCriteria</code>. If you do not provide these values, they are\n         auto-inferred. If you do provide them, the values used are the ones you provide.</p>"
                     }
                 },
                 "ModelDeployConfig": {
@@ -15538,7 +15642,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe a hub.</p>"
+                "smithy.api#documentation": "<p>Describe a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#DescribeHubContent": {
@@ -15555,7 +15659,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe the content of a hub.</p>"
+                "smithy.api#documentation": "<p>Describe the content of a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#DescribeHubContentRequest": {
@@ -15660,7 +15764,7 @@
                 "HubContentMarkdown": {
                     "target": "com.amazonaws.sagemaker#HubContentMarkdown",
                     "traits": {
-                        "smithy.api#documentation": "<p>Markdown files associated with the hub content to import.</p>"
+                        "smithy.api#documentation": "<p>A string that provides a description of the hub content. This string can include links, tables, and standard markdown formating.</p>"
                     }
                 },
                 "HubContentDocument": {
@@ -23442,6 +23546,12 @@
                         "smithy.api#documentation": "<p>The value of the metric with the best result.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "StandardMetricName": {
+                    "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the standard metric. For a description of the standard metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot candidate metrics</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24489,7 +24599,7 @@
                 "S3OutputPath": {
                     "target": "com.amazonaws.sagemaker#S3OutputPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 output path for the hub.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket prefix for hosting hub content.</p>"
                     }
                 }
             },
@@ -25881,7 +25991,7 @@
                 "MinResource": {
                     "target": "com.amazonaws.sagemaker#HyperbandStrategyMinResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of resources (such as epochs) that can be used by a training job\n         launched by a hyperparameter tuning job. If the value for <code>MinResource</code> has not\n         been reached, the training job will not be stopped by <code>Hyperband</code>.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of resources (such as epochs) that can be used by a training job\n         launched by a hyperparameter tuning job. If the value for <code>MinResource</code> has not\n         been reached, the training job is not stopped by <code>Hyperband</code>.</p>"
                     }
                 },
                 "MaxResource": {
@@ -26381,7 +26491,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Import hub content.</p>"
+                "smithy.api#documentation": "<p>Import hub content.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#ImportHubContentRequest": {
@@ -26436,7 +26546,7 @@
                 "HubContentMarkdown": {
                     "target": "com.amazonaws.sagemaker#HubContentMarkdown",
                     "traits": {
-                        "smithy.api#documentation": "<p>Markdown files associated with the hub content to import.</p>"
+                        "smithy.api#documentation": "<p>A string that provides a description of the hub content. This string can include links, tables, and standard markdown formating.</p>"
                     }
                 },
                 "HubContentDocument": {
@@ -30972,7 +31082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List hub content versions.</p>"
+                "smithy.api#documentation": "<p>List hub content versions.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#ListHubContentVersionsRequest": {
@@ -31087,7 +31197,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the contents of a hub.</p>"
+                "smithy.api#documentation": "<p>List the contents of a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#ListHubContentsRequest": {
@@ -31190,7 +31300,7 @@
                 "target": "com.amazonaws.sagemaker#ListHubsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List all existing hubs.</p>"
+                "smithy.api#documentation": "<p>List all existing hubs.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#ListHubsRequest": {
@@ -35657,7 +35767,8 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1
+                    "min": 1,
+                    "max": 750
                 }
             }
         },
@@ -40585,7 +40696,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker Feature Store uses\n         to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p>\n         <p>The caller (either IAM user or IAM role) of <code>CreateFeatureGroup</code> must have\n         below permissions to the <code>OnlineStore</code>\n            <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Encrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:DescribeKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:CreateGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RetireGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptFrom\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptTo\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListAliases\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListGrants\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RevokeGrant\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>The caller (either IAM user or IAM role) to all DataPlane operations\n            (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have\n         the following permissions to the <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker Feature Store uses\n         to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p>\n         <p>The caller (either IAM user or IAM role) of <code>CreateFeatureGroup</code> must have\n         below permissions to the <code>OnlineStore</code>\n            <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Encrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:DescribeKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:CreateGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RetireGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptFrom\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptTo\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListAliases\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListGrants\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RevokeGrant\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>The caller (either user or IAM role) to all DataPlane operations\n            (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have\n         the following permissions to the <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -47636,7 +47747,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -47665,15 +47776,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -47682,7 +47845,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -47692,22 +47855,207 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://api.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        "aws",
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "name"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://api-fips.sagemaker.{Region}.amazonaws.com",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        "aws-us-gov",
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "name"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://api-fips.sagemaker.{Region}.amazonaws.com",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://api.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -47720,248 +48068,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
-                                                        },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://api.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
                                                     "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
-                                                                    "fn": "stringEquals",
+                                                                    "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        "aws",
+                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
                                                                                 {
                                                                                     "ref": "PartitionResult"
                                                                                 },
-                                                                                "name"
+                                                                                "supportsDualStack"
                                                                             ]
                                                                         }
                                                                     ]
                                                                 }
                                                             ],
-                                                            "endpoint": {
-                                                                "url": "https://api-fips.sagemaker.{Region}.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
+                                                            "type": "tree",
+                                                            "rules": [
                                                                 {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        "aws-us-gov",
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
                                                                         {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "name"
-                                                                            ]
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://api.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
                                                                         }
                                                                     ]
                                                                 }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://api-fips.sagemaker.{Region}.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                            ]
                                                         },
                                                         {
                                                             "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://api.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
                                                 },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -47969,7 +48121,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://api.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "url": "https://api.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -47978,28 +48130,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [],
-                                            "endpoint": {
-                                                "url": "https://api.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
-                                                "properties": {},
-                                                "headers": {}
-                                            },
-                                            "type": "endpoint"
-                                        }
-                                    ]
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -48015,9 +48152,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48028,9 +48165,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48041,9 +48178,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48054,9 +48191,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48067,9 +48204,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48080,9 +48217,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48093,9 +48230,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48106,9 +48243,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48119,9 +48256,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48132,9 +48269,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48145,9 +48282,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48158,9 +48295,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48171,9 +48308,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48184,9 +48321,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48197,9 +48334,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48210,9 +48347,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48223,9 +48360,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48236,9 +48373,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48249,9 +48386,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48262,9 +48399,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48275,9 +48412,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48288,9 +48425,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48301,9 +48438,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48314,9 +48451,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48327,9 +48464,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48340,9 +48477,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48353,9 +48490,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48366,9 +48503,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48379,9 +48516,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48392,9 +48529,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48405,9 +48542,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48418,9 +48555,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48431,9 +48568,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48444,9 +48581,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48457,9 +48594,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48470,9 +48607,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48483,9 +48620,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48496,9 +48633,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48509,9 +48646,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -48522,9 +48659,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48535,9 +48672,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -48548,22 +48685,35 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48573,9 +48723,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48585,9 +48735,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -50332,7 +50482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A method for forcing the termination of a running job.</p>"
+                "smithy.api#documentation": "<p>A method for forcing a running job to shut down.</p>"
             }
         },
         "com.amazonaws.sagemaker#StopAutoMLJobRequest": {
@@ -55202,7 +55352,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a hub.</p>"
+                "smithy.api#documentation": "<p>Update a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#UpdateHubRequest": {

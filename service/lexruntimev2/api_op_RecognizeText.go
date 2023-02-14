@@ -103,6 +103,9 @@ type RecognizeTextOutput struct {
 	// the messages are defined in the bot.
 	Messages []types.Message
 
+	// The bot member that recognized the text.
+	RecognizedBotMember *types.RecognizedBotMember
+
 	// The attributes sent in the request.
 	RequestAttributes map[string]string
 

@@ -10,13 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels an instance refresh operation in progress. Cancellation does not roll
-// back any replacements that have already been completed, but it prevents new
-// replacements from being started. This operation is part of the instance refresh
-// feature
+// Cancels an instance refresh or rollback that is in progress. If an instance
+// refresh or rollback is not in progress, an ActiveInstanceRefreshNotFound error
+// occurs. This operation is part of the instance refresh feature
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
-// Scaling group after you make configuration changes.
+// Scaling group after you make configuration changes. When you cancel an instance
+// refresh, this does not roll back any changes that it made. Use the
+// RollbackInstanceRefresh API to roll back instead.
 func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstanceRefreshInput, optFns ...func(*Options)) (*CancelInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &CancelInstanceRefreshInput{}
@@ -44,7 +45,8 @@ type CancelInstanceRefreshInput struct {
 
 type CancelInstanceRefreshOutput struct {
 
-	// The instance refresh ID.
+	// The instance refresh ID associated with the request. This is the unique ID
+	// assigned to the instance refresh when it was started.
 	InstanceRefreshId *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Standby WorkSpace in a secondary region.
+// Creates a standby WorkSpace in a secondary Region.
 func (c *Client) CreateStandbyWorkspaces(ctx context.Context, params *CreateStandbyWorkspacesInput, optFns ...func(*Options)) (*CreateStandbyWorkspacesOutput, error) {
 	if params == nil {
 		params = &CreateStandbyWorkspacesInput{}
@@ -34,7 +34,7 @@ type CreateStandbyWorkspacesInput struct {
 	// This member is required.
 	PrimaryRegion *string
 
-	// Information about the Standby WorkSpace to be created.
+	// Information about the standby WorkSpace to be created.
 	//
 	// This member is required.
 	StandbyWorkspaces []types.StandbyWorkspace
@@ -44,10 +44,10 @@ type CreateStandbyWorkspacesInput struct {
 
 type CreateStandbyWorkspacesOutput struct {
 
-	// Information about the Standby WorkSpace that could not be created.
+	// Information about the standby WorkSpace that could not be created.
 	FailedStandbyRequests []types.FailedCreateStandbyWorkspacesRequest
 
-	// Information about the Standby WorkSpace that was created.
+	// Information about the standby WorkSpace that was created.
 	PendingStandbyRequests []types.PendingCreateStandbyWorkspacesRequest
 
 	// Metadata pertaining to the operation's result.

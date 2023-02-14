@@ -3890,6 +3890,16 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
 
+		case "retryPolicyConfiguration":
+			if err := awsRestjson1_deserializeDocumentRetryPolicyConfiguration(&sv.RetryPolicyConfiguration, value); err != nil {
+				return err
+			}
+
+		case "retryPolicyExecution":
+			if err := awsRestjson1_deserializeDocumentRetryPolicyExecution(&sv.RetryPolicyExecution, value); err != nil {
+				return err
+			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4435,6 +4445,94 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected String1024 to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetryPolicyConfiguration(v **types.RetryPolicyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryPolicyConfiguration
+	if *v == nil {
+		sv = &types.RetryPolicyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxAttempts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected JavaInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAttempts = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetryPolicyExecution(v **types.RetryPolicyExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryPolicyExecution
+	if *v == nil {
+		sv = &types.RetryPolicyExecution{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currentAttemptCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected JavaInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentAttemptCount = ptr.Int32(int32(i64))
 			}
 
 		default:

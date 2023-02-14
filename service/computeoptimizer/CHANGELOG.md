@@ -1,3 +1,11 @@
+# v1.21.0 (2023-02-06)
+
+* **Feature**: AWS Compute optimizer can now infer if Kafka is running on an instance.
+
+# v1.20.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

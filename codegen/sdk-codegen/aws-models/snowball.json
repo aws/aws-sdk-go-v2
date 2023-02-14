@@ -97,6 +97,9 @@
                     "target": "com.amazonaws.snowball#ListLongTermPricing"
                 },
                 {
+                    "target": "com.amazonaws.snowball#ListServiceVersions"
+                },
+                {
                     "target": "com.amazonaws.snowball#UpdateCluster"
                 },
                 {
@@ -122,7 +125,1115 @@
                 },
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>The Amazon Web Services Snow Family provides a petabyte-scale data transport solution that uses\n      secure devices to transfer large amounts of data between your on-premises data centers and\n      Amazon Simple Storage Service (Amazon S3). The Snow Family commands described here provide access to the same\n      functionality that is available in the Amazon Web Services Snow Family Management Console, which enables you to create\n      and manage jobs for a Snow Family device. To transfer data locally with a Snow Family device,\n      you'll need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or OpsHub for Snow Family. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>",
-                "smithy.api#title": "Amazon Import/Export Snowball"
+                "smithy.api#title": "Amazon Import/Export Snowball",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://snowball-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://snowball-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://snowball.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://snowball.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://snowball-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.snowball#Address": {
@@ -283,6 +1394,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CancelClusterResult": {
@@ -322,6 +1436,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CancelJobResult": {
@@ -454,7 +1571,7 @@
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each device, rather it represents how quickly each device moves to its destination\n      while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each device, rather it represents how quickly each device moves to its destination\n      while in transit. Regional shipping speeds are as follows:</p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Notification": {
@@ -595,6 +1712,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CreateAddressResult": {
@@ -640,7 +1760,7 @@
                 "JobType": {
                     "target": "com.amazonaws.snowball#JobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of job for this cluster. Currently, the only job type supported for clusters\n      is <code>LOCAL_USE</code>.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of job for this cluster. Currently, the only job type supported for clusters\n      is <code>LOCAL_USE</code>.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -686,14 +1806,14 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for this cluster. </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for this cluster. </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each Snowball Edge device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows: </p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each Snowball Edge device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows: </p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -721,6 +1841,9 @@
                         "smithy.api#documentation": "<p>Allows you to securely operate and manage Snow devices in a cluster remotely from outside\n      of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will\n      automatically be available when the device arrives at your location. Otherwise, you need to\n      use the Snowball Client to manage the device.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CreateClusterResult": {
@@ -760,7 +1883,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n\n         <p></p>\n\n         <p class=\"title\">\n            <b>Snow Family devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Snow Family device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n\n\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>V3_5C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T32</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n         <p></p>\n         <p class=\"title\">\n            <b>Snow Family devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Snow Family device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.snowball#CreateJobRequest": {
@@ -775,7 +1898,7 @@
                 "Resources": {
                     "target": "com.amazonaws.snowball#JobResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the Amazon S3 buckets associated with this job.</p>\n\n         <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred\n      data will be imported into.</p>\n\n         <p>With <code>EXPORT</code> jobs, you specify the bucket or buckets that your transferred\n      data will be exported from. Optionally, you can also specify a <code>KeyRange</code> value. If\n      you choose to export a range, you define the length of the range by providing either an\n      inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code> value, or both.\n      Ranges are UTF-8 binary sorted.</p>"
+                        "smithy.api#documentation": "<p>Defines the Amazon S3 buckets associated with this job.</p>\n         <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred\n      data will be imported into.</p>\n         <p>With <code>EXPORT</code> jobs, you specify the bucket or buckets that your transferred\n      data will be exported from. Optionally, you can also specify a <code>KeyRange</code> value. If\n      you choose to export a range, you define the length of the range by providing either an\n      inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code> value, or both.\n      Ranges are UTF-8 binary sorted.</p>"
                     }
                 },
                 "OnDeviceServiceConfiguration": {
@@ -811,13 +1934,13 @@
                 "SnowballCapacityPreference": {
                     "target": "com.amazonaws.snowball#SnowballCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your job is being created in one of the US regions, you have the option of\n      specifying what size Snow device you'd like for this job. In all other regions, Snowballs come\n      with 80 TB in storage capacity.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If your job is being created in one of the US regions, you have the option of\n      specifying what size Snow device you'd like for this job. In all other regions, Snowballs come\n      with 80 TB in storage capacity.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the\n      Snow device, rather it represents how quickly the Snow device moves to its destination while\n      in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the\n      Snow device, rather it represents how quickly the Snow device moves to its destination while\n      in transit. Regional shipping speeds are as follows:</p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Notification": {
@@ -835,7 +1958,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for this job.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of Amazon Web Services Snow device to use for this job. Currently, the only\n      supported device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n        Options</a> in the Snowball Edge Developer Guide.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for this job.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of Amazon Web Services Snow device to use for this job. Currently, the only\n      supported device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n        Options</a> in the Snowball Edge Developer Guide.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "ForwardingAddressId": {
@@ -853,7 +1976,7 @@
                 "DeviceConfiguration": {
                     "target": "com.amazonaws.snowball#DeviceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the device configuration for an Snowcone job.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Defines the device configuration for an Snowcone job.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "RemoteManagement": {
@@ -868,6 +1991,9 @@
                         "smithy.api#documentation": "<p>The ID of the long-term pricing type for the device.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CreateJobResult": {
@@ -911,7 +2037,7 @@
                 "IsLongTermPricingAutoRenew": {
                     "target": "com.amazonaws.snowball#JavaBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>snowballty</p>\n         <p>Specifies whether the current long-term pricing type for the device should be\n      renewed.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the current long-term pricing type for the device should be\n      renewed.</p>"
                     }
                 },
                 "SnowballType": {
@@ -920,6 +2046,9 @@
                         "smithy.api#documentation": "<p>The type of Snow Family devices to use for the long-term pricing job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CreateLongTermPricingResult": {
@@ -978,6 +2107,9 @@
                         "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon the device\n      is returned to Amazon Web Services. This speed represents how quickly it moves to its\n      destination while in transit. Regional shipping speeds are as follows:</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#CreateReturnShippingLabelResult": {
@@ -1027,6 +2159,32 @@
                 "smithy.api#documentation": "<p>Defines the real-time status of a Snow device's data transfer while the device is at\n        Amazon Web Services. This data is only available while a job has a <code>JobState</code>\n      value of <code>InProgress</code>, for both import and export jobs.</p>"
             }
         },
+        "com.amazonaws.snowball#DependentService": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.snowball#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dependent service.</p>"
+                    }
+                },
+                "ServiceVersion": {
+                    "target": "com.amazonaws.snowball#ServiceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the dependent service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name and version of the service dependant on the requested service.</p>"
+            }
+        },
+        "com.amazonaws.snowball#DependentServiceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.snowball#DependentService"
+            }
+        },
         "com.amazonaws.snowball#DescribeAddress": {
             "type": "operation",
             "input": {
@@ -1054,6 +2212,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#DescribeAddressResult": {
@@ -1108,6 +2269,9 @@
                         "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>ADDRESS</code> objects, you have the option of specifying a value for\n        <code>NextToken</code> as the starting point for your list of returned addresses.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#DescribeAddressesResult": {
@@ -1154,6 +2318,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#DescribeClusterResult": {
@@ -1194,6 +2361,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#DescribeJobResult": {
@@ -1246,6 +2416,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#DescribeReturnShippingLabelResult": {
@@ -1300,6 +2473,26 @@
                         "smithy.api#enumValue": "S3_ON_DEVICE_SERVICE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.snowball#EKSOnDeviceServiceConfiguration": {
+            "type": "structure",
+            "members": {
+                "KubernetesVersion": {
+                    "target": "com.amazonaws.snowball#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes version for EKS Anywhere on the Snow Family device.</p>"
+                    }
+                },
+                "EKSAnywhereVersion": {
+                    "target": "com.amazonaws.snowball#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of EKS Anywhere on the Snow Family device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the metadata and configuration settings of EKS Anywhere on the Snow Family device.</p>"
             }
         },
         "com.amazonaws.snowball#Ec2AmiResource": {
@@ -1388,7 +2581,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. This is the only valid status for calling this API as the\n      manifest and <code>UnlockCode</code> code value are used for securing your device and should\n      only be used when you have the device.  The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time. </p>\n\n\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n\n\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
+                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. This is the only valid status for calling this API as the\n      manifest and <code>UnlockCode</code> code value are used for securing your device and should\n      only be used when you have the device.  The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time. </p>\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
             }
         },
         "com.amazonaws.snowball#GetJobManifestRequest": {
@@ -1401,6 +2594,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#GetJobManifestResult": {
@@ -1431,7 +2627,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time. The only valid status for calling this API is\n        <code>WithCustomer</code> as the manifest and <code>Unlock</code> code values are used for\n      securing your device and should only be used when you have the device.</p>\n\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>"
+                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time. The only valid status for calling this API is\n        <code>WithCustomer</code> as the manifest and <code>Unlock</code> code values are used for\n      securing your device and should only be used when you have the device.</p>\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>"
             }
         },
         "com.amazonaws.snowball#GetJobUnlockCodeRequest": {
@@ -1444,6 +2640,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#GetJobUnlockCodeResult": {
@@ -1466,12 +2665,15 @@
                 "target": "com.amazonaws.snowball#GetSnowballUsageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the Snow Family service limit for your account, and also the\n      number of Snow devices your account has in use.</p>\n\n         <p>The default service limit for the number of Snow devices that you can have at one time\n      is 1. If you want to increase your service limit, contact Amazon Web Services Support.</p>"
+                "smithy.api#documentation": "<p>Returns information about the Snow Family service limit for your account, and also the\n      number of Snow devices your account has in use.</p>\n         <p>The default service limit for the number of Snow devices that you can have at one time\n      is 1. If you want to increase your service limit, contact Amazon Web Services Support.</p>"
             }
         },
         "com.amazonaws.snowball#GetSnowballUsageRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.snowball#GetSnowballUsageResult": {
             "type": "structure",
@@ -1520,6 +2722,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#GetSoftwareUpdatesResult": {
@@ -1709,7 +2914,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains job logs. Whenever a Snow device is used to import data into or export data\n      out of Amazon S3, you'll have the option of downloading a PDF job report. Job logs are\n      returned as a part of the response syntax of the <code>DescribeJob</code> action in the\n        <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after\n      this request has been made. To access any of the job logs after 60 minutes have passed, you'll\n      have to make another call to the <code>DescribeJob</code> action.</p>\n\n         <p>For import jobs, the PDF job report becomes available at the end of the import process.\n      For export jobs, your job report typically becomes available while the Snow device for your\n      job part is being delivered to you.</p>\n\n         <p>The job report provides you insight into the state of your Amazon S3 data transfer. The\n      report includes details about your job or job part for your records.</p>\n\n         <p>For deeper visibility into the status of your transferred objects, you can look at the\n      two associated logs: a success log and a failure log. The logs are saved in comma-separated\n      value (CSV) format, and the name of each log includes the ID of the job or job part that the\n      log describes.</p>"
+                "smithy.api#documentation": "<p>Contains job logs. Whenever a Snow device is used to import data into or export data\n      out of Amazon S3, you'll have the option of downloading a PDF job report. Job logs are\n      returned as a part of the response syntax of the <code>DescribeJob</code> action in the\n        <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after\n      this request has been made. To access any of the job logs after 60 minutes have passed, you'll\n      have to make another call to the <code>DescribeJob</code> action.</p>\n         <p>For import jobs, the PDF job report becomes available at the end of the import process.\n      For export jobs, your job report typically becomes available while the Snow device for your\n      job part is being delivered to you.</p>\n         <p>The job report provides you insight into the state of your Amazon S3 data transfer. The\n      report includes details about your job or job part for your records.</p>\n         <p>For deeper visibility into the status of your transferred objects, you can look at the\n      two associated logs: a success log and a failure log. The logs are saved in comma-separated\n      value (CSV) format, and the name of each log includes the ID of the job or job part that the\n      log describes.</p>"
             }
         },
         "com.amazonaws.snowball#JobMetadata": {
@@ -1784,7 +2989,7 @@
                 "SnowballCapacityPreference": {
                     "target": "com.amazonaws.snowball#SnowballCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Snow device capacity preference for this job, specified at job creation. In US\n      regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB\n      capacity Snowballs.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Snow device capacity preference for this job, specified at job creation. In US\n      regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB\n      capacity Snowballs.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "Notification": {
@@ -2109,6 +3314,9 @@
                         "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code>\n      as the starting point for your returned list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#ListClusterJobsResult": {
@@ -2166,6 +3374,9 @@
                         "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>ClusterListEntry</code> objects, you have the option of specifying\n        <code>NextToken</code> as the starting point for your returned list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#ListClustersResult": {
@@ -2226,6 +3437,9 @@
                         "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n      compatible images, you can specify a value for <code>NextToken</code> as the starting point\n      for your list of returned images.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#ListCompatibleImagesResult": {
@@ -2283,6 +3497,9 @@
                         "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code>\n      as the starting point for your returned list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#ListJobsResult": {
@@ -2352,6 +3569,9 @@
                         "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point for your next list of\n        <code>ListLongTermPricing</code> to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#ListLongTermPricingResult": {
@@ -2367,6 +3587,90 @@
                     "target": "com.amazonaws.snowball#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point for your next list of\n      returned <code>ListLongTermPricing</code> list.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.snowball#ListServiceVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.snowball#ListServiceVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.snowball#ListServiceVersionsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.snowball#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.snowball#InvalidResourceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all supported versions for Snow on-device services. Returns an\n      array of <code>ServiceVersion</code> object containing the supported versions for a particular service.</p>"
+            }
+        },
+        "com.amazonaws.snowball#ListServiceVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.snowball#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service for which you're requesting supported versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DependentServices": {
+                    "target": "com.amazonaws.snowball#DependentServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of names and versions of dependant services of the requested service.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.snowball#ListLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of <code>ListServiceVersions</code> objects to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.snowball#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point for the next list of returned \n      <code>ListServiceVersionsRequest</code> versions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.snowball#ListServiceVersionsResult": {
+            "type": "structure",
+            "members": {
+                "ServiceVersions": {
+                    "target": "com.amazonaws.snowball#ServiceVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of supported versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.snowball#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service for which the system provided supported versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DependentServices": {
+                    "target": "com.amazonaws.snowball#DependentServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of names and versions of dependant services of the service for which the system provided supported versions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.snowball#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point of the next list of returned \n      <code>ListServiceVersionsResult</code> results.</p>"
                     }
                 }
             }
@@ -2511,7 +3815,7 @@
                 "SnsTopicARN": {
                     "target": "com.amazonaws.snowball#SnsTopicARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can\n      create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API\n      action.</p>\n\n         <p>You can subscribe email addresses to an Amazon SNS topic through the Amazon Web Services Management Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> Amazon Simple Notification\n      Service (Amazon SNS) API action.</p>"
+                        "smithy.api#documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can\n      create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API\n      action.</p>\n         <p>You can subscribe email addresses to an Amazon SNS topic through the Amazon Web Services Management Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> Amazon Simple Notification\n      Service (Amazon SNS) API action.</p>"
                     }
                 },
                 "JobStatesToNotify": {
@@ -2529,7 +3833,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated\n      with a specific job. The <code>Notification</code> object is returned as a part of the\n      response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data\n      type.</p>\n\n         <p>When the notification settings are defined during job creation, you can choose to\n      notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of\n      strings, or you can specify that you want to have Amazon SNS notifications sent out for all\n      job states with <code>NotifyAll</code> set to true.</p>"
+                "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated\n      with a specific job. The <code>Notification</code> object is returned as a part of the\n      response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data\n      type.</p>\n         <p>When the notification settings are defined during job creation, you can choose to\n      notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of\n      strings, or you can specify that you want to have Amazon SNS notifications sent out for all\n      job states with <code>NotifyAll</code> set to true.</p>"
             }
         },
         "com.amazonaws.snowball#OnDeviceServiceConfiguration": {
@@ -2545,6 +3849,12 @@
                     "target": "com.amazonaws.snowball#TGWOnDeviceServiceConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the Storage Gateway service Tape Gateway type on a Snow Family device.</p>"
+                    }
+                },
+                "EKSOnDeviceService": {
+                    "target": "com.amazonaws.snowball#EKSOnDeviceServiceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of EKS Anywhere on the Snow Family device.</p>"
                     }
                 }
             },
@@ -2633,6 +3943,43 @@
                 "target": "com.amazonaws.snowball#S3Resource"
             }
         },
+        "com.amazonaws.snowball#ServiceName": {
+            "type": "enum",
+            "members": {
+                "KUBERNETES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KUBERNETES"
+                    }
+                },
+                "EKS_ANYWHERE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_ANYWHERE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.snowball#ServiceVersion": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "com.amazonaws.snowball#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the requested service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The version of the requested service.</p>"
+            }
+        },
+        "com.amazonaws.snowball#ServiceVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.snowball#ServiceVersion"
+            }
+        },
         "com.amazonaws.snowball#Shipment": {
             "type": "structure",
             "members": {
@@ -2676,7 +4023,7 @@
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get\n      the Snow device from the job's creation date. This speed represents how quickly it moves to\n      its destination while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get\n      the Snow device from the job's creation date. This speed represents how quickly it moves to\n      its destination while in transit. Regional shipping speeds are as follows:</p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "InboundShipment": {
@@ -2799,16 +4146,16 @@
                         "smithy.api#enumValue": "T14"
                     }
                 },
-                "NO_PREFERENCE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "NoPreference"
-                    }
-                },
                 "T32": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "T32"
+                    }
+                },
+                "NO_PREFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoPreference"
                     }
                 }
             }
@@ -3103,6 +4450,9 @@
                         "smithy.api#documentation": "<p>The updated ID for the forwarding address for a cluster. This field is not\n      supported in most regions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#UpdateClusterResult": {
@@ -3196,7 +4546,7 @@
                 "SnowballCapacityPreference": {
                     "target": "com.amazonaws.snowball#SnowballCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US\n      regions.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US\n      regions.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "ForwardingAddressId": {
@@ -3205,6 +4555,9 @@
                         "smithy.api#documentation": "<p>The updated ID for the forwarding address for a job. This field is not\n      supported in most regions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#UpdateJobResult": {
@@ -3248,6 +4601,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#UpdateJobShipmentStateResult": {
@@ -3293,6 +4649,9 @@
                         "smithy.api#documentation": "<p>If set to <code>true</code>, specifies that the current long-term pricing type for the\n      device should be automatically renewed before the long-term pricing contract expires.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.snowball#UpdateLongTermPricingResult": {

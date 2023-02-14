@@ -1,3 +1,11 @@
+# v1.46.0 (2023-02-10)
+
+* **Feature**: This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+
+# v1.45.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2023-01-19)
 
 * **Feature**: Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.

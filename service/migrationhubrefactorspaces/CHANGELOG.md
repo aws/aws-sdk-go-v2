@@ -1,3 +1,11 @@
+# v1.9.0 (2023-02-09)
+
+* **Feature**: This release adds support for creating environments with a network fabric type of NONE
+
+# v1.8.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

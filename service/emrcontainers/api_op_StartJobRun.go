@@ -62,6 +62,9 @@ type StartJobRunInput struct {
 	// The Amazon EMR release version to use for the job run.
 	ReleaseLabel *string
 
+	// The retry policy configuration for the job run.
+	RetryPolicyConfiguration *types.RetryPolicyConfiguration
+
 	// The tags assigned to job runs.
 	Tags map[string]string
 

@@ -116,6 +116,10 @@ type BackupJob struct {
 	// resource type.
 	ResourceArn *string
 
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
+
 	// The type of Amazon Web Services resource to be backed up; for example, an Amazon
 	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
 	// (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the
@@ -770,6 +774,10 @@ type CopyJob struct {
 	// RDS) database.
 	ResourceArn *string
 
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
+
 	// The type of Amazon Web Services resource to be copied; for example, an Amazon
 	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
 	// (Amazon RDS) database.
@@ -942,6 +950,10 @@ type ProtectedResource struct {
 	// the ARN depends on the resource type.
 	ResourceArn *string
 
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
+
 	// The type of Amazon Web Services resource; for example, an Amazon Elastic Block
 	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
 	// database. For Windows Volume Shadow Copy Service (VSS) backups, the only
@@ -1043,6 +1055,10 @@ type RecoveryPointByBackupVault struct {
 	// resource type.
 	ResourceArn *string
 
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
+
 	// The type of Amazon Web Services resource saved as a recovery point; for example,
 	// an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational
 	// Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service
@@ -1095,6 +1111,10 @@ type RecoveryPointByResource struct {
 	// example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
 	RecoveryPointArn *string
+
+	// This is the non-unique name of the resource that belongs to the specified
+	// backup.
+	ResourceName *string
 
 	// A status code specifying the state of the recovery point.
 	Status RecoveryPointStatus

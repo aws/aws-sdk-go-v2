@@ -229,7 +229,7 @@ func (e *EntityNotExistsException) ErrorCode() string {
 }
 func (e *EntityNotExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS Directory Service cannot reach an on-premises instance. Or a dependency
+// The Directory Service cannot reach an on-premises instance. Or a dependency
 // under the control of the organization is failing, such as a connected Active
 // Directory.
 type FailedDependencyException struct {

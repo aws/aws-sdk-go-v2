@@ -183,6 +183,40 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Summary counts of each Proton resource type.
+type CountsSummary struct {
+
+	// The total number of components in the Amazon Web Services account. The semantics
+	// of the components field are different from the semantics of results for other
+	// infrastructure-provisioning resources. That's because at this time components
+	// don't have associated templates, therefore they don't have the concept of
+	// staleness. The components object will only contain total and failed members.
+	Components *ResourceCountsSummary
+
+	// The total number of environment templates in the Amazon Web Services account.
+	EnvironmentTemplates *ResourceCountsSummary
+
+	// The staleness counts for Proton environments in the Amazon Web Services account.
+	// The environments object will only contain total members.
+	Environments *ResourceCountsSummary
+
+	// The staleness counts for Proton pipelines in the Amazon Web Services account.
+	Pipelines *ResourceCountsSummary
+
+	// The staleness counts for Proton service instances in the Amazon Web Services
+	// account.
+	ServiceInstances *ResourceCountsSummary
+
+	// The total number of service templates in the Amazon Web Services account. The
+	// serviceTemplates object will only contain total members.
+	ServiceTemplates *ResourceCountsSummary
+
+	// The staleness counts for Proton services in the Amazon Web Services account.
+	Services *ResourceCountsSummary
+
+	noSmithyDocumentSerde
+}
+
 // Detailed data of an Proton environment resource. An Proton environment is a set
 // of resources shared across Proton services.
 type Environment struct {
@@ -916,6 +950,33 @@ type RepositorySyncEvent struct {
 
 	// The external ID of the sync event.
 	ExternalId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary counts of each Proton resource types.
+type ResourceCountsSummary struct {
+
+	// The total number of resources of this type in the Amazon Web Services account.
+	//
+	// This member is required.
+	Total *int32
+
+	// The number of resources of this type in the Amazon Web Services account that
+	// need a major template version update.
+	BehindMajor *int32
+
+	// The number of resources of this type in the Amazon Web Services account that
+	// need a minor template version update.
+	BehindMinor *int32
+
+	// The number of resources of this type in the Amazon Web Services account that
+	// failed to deploy.
+	Failed *int32
+
+	// The number of resources of this type in the Amazon Web Services account that are
+	// up-to-date with their template.
+	UpToDate *int32
 
 	noSmithyDocumentSerde
 }

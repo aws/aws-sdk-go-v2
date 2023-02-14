@@ -1170,6 +1170,61 @@ func (m *awsAwsjson11_serializeOpListLongTermPricing) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListServiceVersions struct {
+}
+
+func (*awsAwsjson11_serializeOpListServiceVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListServiceVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListServiceVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListServiceVersions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListServiceVersionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateCluster struct {
 }
 
@@ -1466,6 +1521,38 @@ func awsAwsjson11_serializeDocumentAddress(v *types.Address, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDependentService(v *types.DependentService, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ServiceName) > 0 {
+		ok := object.Key("ServiceName")
+		ok.String(string(v.ServiceName))
+	}
+
+	if v.ServiceVersion != nil {
+		ok := object.Key("ServiceVersion")
+		if err := awsAwsjson11_serializeDocumentServiceVersion(v.ServiceVersion, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDependentServiceList(v []types.DependentService, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDependentService(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDeviceConfiguration(v *types.DeviceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1507,6 +1594,23 @@ func awsAwsjson11_serializeDocumentEc2AmiResourceList(v []types.Ec2AmiResource, 
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEKSOnDeviceServiceConfiguration(v *types.EKSOnDeviceServiceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EKSAnywhereVersion != nil {
+		ok := object.Key("EKSAnywhereVersion")
+		ok.String(*v.EKSAnywhereVersion)
+	}
+
+	if v.KubernetesVersion != nil {
+		ok := object.Key("KubernetesVersion")
+		ok.String(*v.KubernetesVersion)
+	}
+
 	return nil
 }
 
@@ -1680,6 +1784,13 @@ func awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v *types.OnDevic
 	object := value.Object()
 	defer object.Close()
 
+	if v.EKSOnDeviceService != nil {
+		ok := object.Key("EKSOnDeviceService")
+		if err := awsAwsjson11_serializeDocumentEKSOnDeviceServiceConfiguration(v.EKSOnDeviceService, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NFSOnDeviceService != nil {
 		ok := object.Key("NFSOnDeviceService")
 		if err := awsAwsjson11_serializeDocumentNFSOnDeviceServiceConfiguration(v.NFSOnDeviceService, ok); err != nil {
@@ -1733,6 +1844,18 @@ func awsAwsjson11_serializeDocumentS3ResourceList(v []types.S3Resource, value sm
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceVersion(v *types.ServiceVersion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.String(*v.Version)
+	}
+
 	return nil
 }
 
@@ -2275,6 +2398,35 @@ func awsAwsjson11_serializeOpDocumentListLongTermPricingInput(v *ListLongTermPri
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListServiceVersionsInput(v *ListServiceVersionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DependentServices != nil {
+		ok := object.Key("DependentServices")
+		if err := awsAwsjson11_serializeDocumentDependentServiceList(v.DependentServices, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.ServiceName) > 0 {
+		ok := object.Key("ServiceName")
+		ok.String(string(v.ServiceName))
 	}
 
 	return nil

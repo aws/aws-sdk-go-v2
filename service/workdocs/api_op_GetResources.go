@@ -30,8 +30,8 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 
 type GetResourcesInput struct {
 
-	// The Amazon WorkDocs authentication token. Not required when using AWS
-	// administrator credentials to access the API.
+	// The Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The collection type.

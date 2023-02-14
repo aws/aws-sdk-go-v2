@@ -39,8 +39,8 @@ type GetDocumentVersionInput struct {
 	// This member is required.
 	VersionId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// A comma-separated list of values. Specify "SOURCE" to include a URL for the

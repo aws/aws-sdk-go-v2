@@ -1,3 +1,7 @@
+# v1.15.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2023-01-19)
 
 * **Feature**: This release updates Amazon Connect Participant's GetTranscript api to provide transcripts of past chats on a persistent chat session.

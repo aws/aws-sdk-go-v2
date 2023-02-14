@@ -442,6 +442,38 @@ func (AuthMode) Values() []AuthMode {
 	}
 }
 
+type AutoMLAlgorithm string
+
+// Enum values for AutoMLAlgorithm
+const (
+	AutoMLAlgorithmXgboost       AutoMLAlgorithm = "xgboost"
+	AutoMLAlgorithmLinearLearner AutoMLAlgorithm = "linear-learner"
+	AutoMLAlgorithmMlp           AutoMLAlgorithm = "mlp"
+	AutoMLAlgorithmLightgbm      AutoMLAlgorithm = "lightgbm"
+	AutoMLAlgorithmCatboost      AutoMLAlgorithm = "catboost"
+	AutoMLAlgorithmRandomforest  AutoMLAlgorithm = "randomforest"
+	AutoMLAlgorithmExtraTrees    AutoMLAlgorithm = "extra-trees"
+	AutoMLAlgorithmNnTorch       AutoMLAlgorithm = "nn-torch"
+	AutoMLAlgorithmFastai        AutoMLAlgorithm = "fastai"
+)
+
+// Values returns all known values for AutoMLAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLAlgorithm) Values() []AutoMLAlgorithm {
+	return []AutoMLAlgorithm{
+		"xgboost",
+		"linear-learner",
+		"mlp",
+		"lightgbm",
+		"catboost",
+		"randomforest",
+		"extra-trees",
+		"nn-torch",
+		"fastai",
+	}
+}
+
 type AutoMLChannelType string
 
 // Enum values for AutoMLChannelType

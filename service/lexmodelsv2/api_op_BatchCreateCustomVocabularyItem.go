@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Batch create custom vocabulary item for the specified locale in the specified
-// bot.
+// Create a batch of custom vocabulary items for a given bot locale's custom
+// vocabulary.
 func (c *Client) BatchCreateCustomVocabularyItem(ctx context.Context, params *BatchCreateCustomVocabularyItemInput, optFns ...func(*Options)) (*BatchCreateCustomVocabularyItemOutput, error) {
 	if params == nil {
 		params = &BatchCreateCustomVocabularyItemInput{}
@@ -30,24 +30,26 @@ func (c *Client) BatchCreateCustomVocabularyItem(ctx context.Context, params *Ba
 
 type BatchCreateCustomVocabularyItemInput struct {
 
-	// The unique identifier of the bot to batch create the custom vocabulary item for.
+	// The identifier of the bot associated with this custom vocabulary.
 	//
 	// This member is required.
 	BotId *string
 
-	// The bot version of the bot to batch create the custom vocabulary item for.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	//
 	// This member is required.
 	BotVersion *string
 
-	// The custom vocabulary item list of the bot to batch create the custom vocabulary
-	// item for.
+	// A list of new custom vocabulary items. Each entry must contain a phrase and can
+	// optionally contain a displayAs and/or a weight.
 	//
 	// This member is required.
 	CustomVocabularyItemList []types.NewCustomVocabularyItem
 
-	// The unique locale identifier of the bot to batch create the custom vocabulary
-	// item for.
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported Languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	//
 	// This member is required.
 	LocaleId *string
@@ -57,24 +59,24 @@ type BatchCreateCustomVocabularyItemInput struct {
 
 type BatchCreateCustomVocabularyItemOutput struct {
 
-	// The unique identifier of the bot to batch create response for the custom
-	// vocabulary item.
+	// The identifier of the bot associated with this custom vocabulary.
 	BotId *string
 
-	// The bot version of the bot to batch create the custom vocabulary item response
-	// for.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	BotVersion *string
 
-	// The errors of the action to batch create the custom vocabulary item response for
-	// a bot.
+	// A list of custom vocabulary items that failed to create during the operation.
+	// The reason for the error is contained within each error object.
 	Errors []types.FailedCustomVocabularyItem
 
-	// The unique locale identifier of the bot to batch create the custom vocabulary
-	// item response for.
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported Languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	LocaleId *string
 
-	// The resources of the action to batch create the custom vocabulary item response
-	// for a bot.
+	// A list of custom vocabulary items that were successfully created during the
+	// operation.
 	Resources []types.CustomVocabularyItem
 
 	// Metadata pertaining to the operation's result.

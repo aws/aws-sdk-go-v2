@@ -175,7 +175,7 @@
                     "name": "workdocs"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The WorkDocs API is designed for the following use cases:</p>\n        <ul>\n            <li>\n                <p>File Migration: File migration applications are supported for users who\n                    want to migrate their files from an on-premises or off-premises file system or\n                    service. Users can insert files into a user directory structure, as well as\n                    allow for basic metadata changes, such as modifications to the permissions of\n                    files.</p>\n            </li>\n            <li>\n                <p>Security: Support security applications are supported for users who have\n                    additional security needs, such as antivirus or data loss prevention. The API\n                    actions, along with AWS CloudTrail, allow these applications to detect when\n                    changes occur in Amazon WorkDocs. Then, the application can take the necessary\n                    actions and replace the target file. If the target file violates the policy, the\n                    application can also choose to email the user.</p>\n            </li>\n            <li>\n                <p>eDiscovery/Analytics: General administrative applications are supported,\n                    such as eDiscovery and analytics. These applications can choose to mimic or\n                    record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to\n                    replicate data for eDiscovery, backup, or analytical applications.</p>\n            </li>\n         </ul>\n        <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed.\n            They not only require the use of the AWS SDK, but also allow for the exclusive use of\n            IAM users and roles to help facilitate access, trust, and permission policies. By\n            creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM\n            user gains full administrative visibility into the entire Amazon WorkDocs site (or as\n            set in the IAM policy). This includes, but is not limited to, the ability to modify file\n            permissions and upload any file to any user. This allows developers to perform the three\n            use cases above, as well as give users the ability to grant access on a selective basis\n            using the IAM model.</p>\n        <note>\n            <p>The pricing for Amazon WorkDocs APIs varies depending on the API call type for these actions:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>READ  (Get*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>WRITE (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>LIST (Describe*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>DELETE*, CANCEL</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For information about Amazon WorkDocs API pricing, see <a href=\"https://aws.amazon.com/workdocs/pricing/\">Amazon WorkDocs Pricing</a>.</p>\n        </note>",
+                "smithy.api#documentation": "<p>The Amazon WorkDocs API is designed for the following use cases:</p>\n         <ul>\n            <li>\n               <p>File Migration: File migration applications are supported for users who\n                    want to migrate their files from an on-premises or off-premises file system or\n                    service. Users can insert files into a user directory structure, as well as\n                    allow for basic metadata changes, such as modifications to the permissions of\n                    files.</p>\n            </li>\n            <li>\n               <p>Security: Support security applications are supported for users who have\n                    additional security needs, such as antivirus or data loss prevention. The API\n                    actions, along with CloudTrail, allow these applications to detect when\n                    changes occur in Amazon WorkDocs. Then, the application can take the necessary\n                    actions and replace the target file. If the target file violates the policy, the\n                    application can also choose to email the user.</p>\n            </li>\n            <li>\n               <p>eDiscovery/Analytics: General administrative applications are supported,\n                    such as eDiscovery and analytics. These applications can choose to mimic or\n                    record the actions in an Amazon WorkDocs site, along with CloudTrail, to\n                    replicate data for eDiscovery, backup, or analytical applications.</p>\n            </li>\n         </ul>\n         <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed.\n            They not only require the use of the Amazon Web Services SDK, but also allow for the exclusive use of\n            IAM users and roles to help facilitate access, trust, and permission policies. By\n            creating a role and allowing an IAM user to access the Amazon WorkDocs site, the\n            IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as\n            set in the IAM policy). This includes, but is not limited to, the ability to modify file\n            permissions and upload any file to any user. This allows developers to perform the three\n            use cases above, as well as give users the ability to grant access on a selective basis\n            using the IAM model.</p>\n         <note>\n            <p>The pricing for Amazon WorkDocs APIs varies depending on the API call type for these actions:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>READ  (Get*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>WRITE (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>LIST (Describe*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>DELETE*, CANCEL</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For information about Amazon WorkDocs API pricing, see <a href=\"https://aws.amazon.com/workdocs/pricing/\">Amazon WorkDocs Pricing</a>.</p>\n         </note>",
                 "smithy.api#title": "Amazon WorkDocs",
                 "smithy.api#xmlNamespace": {
                     "uri": "https://aws.amazon.com/api/v1/"
@@ -185,7 +185,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -234,15 +234,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -356,12 +347,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://workdocs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://workdocs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -466,12 +463,18 @@
                                             "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://workdocs.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://workdocs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
                                                 }
                                             ]
                                         },
@@ -484,12 +487,18 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://workdocs.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://workdocs.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -498,149 +507,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
                             "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -648,48 +514,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -700,48 +527,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://workdocs.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -752,21 +540,34 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workdocs-fips.us-east-1.api.aws"
+                                    "url": "https://workdocs.eu-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -778,8 +579,47 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -791,22 +631,165 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://workdocs.us-east-1.amazonaws.com"
+                                    "url": "https://workdocs-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -817,8 +800,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -829,8 +812,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -841,8 +824,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -898,7 +881,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -918,6 +901,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#ActivateUser": {
@@ -968,10 +954,13 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#ActivateUserResponse": {
@@ -983,6 +972,9 @@
                         "smithy.api#documentation": "<p>The user information.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#Activity": {
@@ -1301,7 +1293,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -1326,6 +1318,9 @@
                         "smithy.api#documentation": "<p>The notification options.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#AddResourcePermissionsResponse": {
@@ -1337,6 +1332,9 @@
                         "smithy.api#documentation": "<p>The share results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#AuthenticationHeaderType": {
@@ -1614,7 +1612,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -1666,6 +1664,9 @@
                         "smithy.api#documentation": "<p>Set this parameter to TRUE to send an email out to the document collaborators after\n            the comment is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#CreateCommentResponse": {
@@ -1677,6 +1678,9 @@
                         "smithy.api#documentation": "<p>The comment that has been created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#CreateCustomMetadata": {
@@ -1725,7 +1729,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -1751,11 +1755,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#CreateCustomMetadataResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workdocs#CreateFolder": {
             "type": "operation",
@@ -1812,7 +1822,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -1829,6 +1839,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#CreateFolderResponse": {
@@ -1840,6 +1853,9 @@
                         "smithy.api#documentation": "<p>The metadata of the folder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#CreateLabels": {
@@ -1900,15 +1916,21 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#CreateLabelsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workdocs#CreateNotificationSubscription": {
             "type": "operation",
@@ -1933,7 +1955,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a\n            confirmation message, and must confirm the subscription.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html\">Setting up notifications for an IAM user or role</a> in the <i>Amazon WorkDocs Developer\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a\n            confirmation message, and must confirm the subscription.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html\">Setting up notifications for an IAM user or role</a> in the <i>Amazon WorkDocs Developer\n            Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/api/v1/organizations/{OrganizationId}/subscriptions",
@@ -1973,6 +1995,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#CreateNotificationSubscriptionResponse": {
@@ -1984,6 +2009,9 @@
                         "smithy.api#documentation": "<p>The subscription.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#CreateUser": {
@@ -2078,10 +2106,13 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#CreateUserResponse": {
@@ -2093,6 +2124,9 @@
                         "smithy.api#documentation": "<p>The user information.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#CustomMetadataKeyList": {
@@ -2203,10 +2237,13 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeactivatingLastSystemUserException": {
@@ -2271,7 +2308,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2299,6 +2336,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteCustomMetadata": {
@@ -2344,7 +2384,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2378,11 +2418,17 @@
                         "smithy.api#httpQuery": "deleteAll"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteCustomMetadataResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workdocs#DeleteDocument": {
             "type": "operation",
@@ -2436,7 +2482,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2448,6 +2494,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteDocumentVersion": {
@@ -2485,7 +2534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a version of an Amazon WorkDocs document. Use the <code>DeletePriorVersions</code> parameter to delete prior versions.</p>",
+                "smithy.api#documentation": "<p>Deletes a specific version of a document.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/api/v1/documentVersions/{DocumentId}/versions/{VersionId}",
@@ -2499,14 +2548,14 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
                 "DocumentId": {
                     "target": "com.amazonaws.workdocs#ResourceIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a document.</p>",
+                        "smithy.api#documentation": "<p>The ID of the document associated with the version being deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2514,7 +2563,7 @@
                 "VersionId": {
                     "target": "com.amazonaws.workdocs#DocumentVersionIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version ID of a document.</p>",
+                        "smithy.api#documentation": "<p>The ID of the version being deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2523,11 +2572,14 @@
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When set to <code>TRUE</code>, deletes the specified version and <i>all prior versions</i> of a document.</p>",
+                        "smithy.api#documentation": "<p>Deletes all versions of a document prior to the current version.</p>",
                         "smithy.api#httpQuery": "deletePriorVersions",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteFolder": {
@@ -2622,7 +2674,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2634,6 +2686,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteFolderRequest": {
@@ -2642,7 +2697,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2654,6 +2709,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteLabels": {
@@ -2707,7 +2765,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2726,11 +2784,17 @@
                         "smithy.api#httpQuery": "deleteAll"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteLabelsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workdocs#DeleteNotificationSubscription": {
             "type": "operation",
@@ -2782,6 +2846,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DeleteUser": {
@@ -2810,7 +2877,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified user from a Simple AD or Microsoft AD directory.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified user from a Simple AD or Microsoft AD directory.</p>\n         <important>\n            <p>Deleting a user immediately and permanently deletes all content in that user's folder structure. Site retention policies do NOT apply to this type of deletion.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/api/v1/users/{UserId}",
@@ -2824,7 +2891,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using\n            administrative API actions, as in accessing the API using AWS credentials.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using\n            administrative API actions, as in accessing the API using Amazon Web Services credentials.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2836,6 +2903,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeActivities": {
@@ -2878,7 +2948,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -2946,6 +3016,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeActivitiesResponse": {
@@ -2963,6 +3036,9 @@
                         "smithy.api#documentation": "<p>The marker for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeComments": {
@@ -3008,7 +3084,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -3042,6 +3118,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeCommentsResponse": {
@@ -3059,6 +3138,9 @@
                         "smithy.api#documentation": "<p>The marker for the next set of results. This marker was received from a previous\n            call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeDocumentVersions": {
@@ -3096,7 +3178,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the document versions for the specified document.</p>\n        <p>By default, only active versions are returned.</p>",
+                "smithy.api#documentation": "<p>Retrieves the document versions for the specified document.</p>\n         <p>By default, only active versions are returned.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/documents/{DocumentId}/versions",
@@ -3116,7 +3198,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -3156,6 +3238,9 @@
                         "smithy.api#httpQuery": "fields"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeDocumentVersionsResponse": {
@@ -3173,6 +3258,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no\n            additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeFolderContents": {
@@ -3204,7 +3292,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the contents of the specified folder, including its documents and\n            subfolders.</p>\n        <p>By default, Amazon WorkDocs returns the first 100 active document and folder\n            metadata items. If there are more results, the response includes a marker that you can\n            use to request the next set of results. You can also request initialized\n            documents.</p>",
+                "smithy.api#documentation": "<p>Describes the contents of the specified folder, including its documents and\n            subfolders.</p>\n         <p>By default, Amazon WorkDocs returns the first 100 active document and folder\n            metadata items. If there are more results, the response includes a marker that you can\n            use to request the next set of results. You can also request initialized\n            documents.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/folders/{FolderId}/contents",
@@ -3223,7 +3311,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -3277,6 +3365,9 @@
                         "smithy.api#httpQuery": "include"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeFolderContentsResponse": {
@@ -3300,6 +3391,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no\n            additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeGroups": {
@@ -3339,7 +3433,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -3372,6 +3466,9 @@
                         "smithy.api#httpQuery": "limit"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeGroupsResponse": {
@@ -3389,6 +3486,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no additional\n            results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeNotificationSubscriptions": {
@@ -3444,6 +3544,9 @@
                         "smithy.api#httpQuery": "limit"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeNotificationSubscriptionsResponse": {
@@ -3461,6 +3564,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no\n            additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeResourcePermissions": {
@@ -3503,7 +3609,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -3536,6 +3642,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeResourcePermissionsResponse": {
@@ -3553,6 +3662,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no\n            additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeRootFolders": {
@@ -3581,7 +3693,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the current user's special folders; the <code>RootFolder</code> and the\n                <code>RecycleBin</code>. <code>RootFolder</code> is the root of user's files and\n            folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid\n            action for SigV4 (administrative API) clients.</p>\n        <p>This action requires an authentication token. To get an authentication token,\n            register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access\n                Control for User Applications</a> in the\n            <i>Amazon\n            WorkDocs Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the current user's special folders; the <code>RootFolder</code> and the\n                <code>RecycleBin</code>. <code>RootFolder</code> is the root of user's files and\n            folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid\n            action for SigV4 (administrative API) clients.</p>\n         <p>This action requires an authentication token. To get an authentication token,\n            register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access\n                Control for User Applications</a> in the\n            <i>Amazon\n            WorkDocs Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/me/root",
@@ -3614,6 +3726,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeRootFoldersResponse": {
@@ -3631,6 +3746,9 @@
                         "smithy.api#documentation": "<p>The marker for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DescribeUsers": {
@@ -3665,7 +3783,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified users. You can describe all users or filter the results\n            (for example, by status or organization).</p>\n        <p>By default, Amazon WorkDocs returns the first 24 active or pending users. If there\n            are more results, the response includes a marker that you can use to request the next\n            set of results.</p>",
+                "smithy.api#documentation": "<p>Describes the specified users. You can describe all users or filter the results\n            (for example, by status or organization).</p>\n         <p>By default, Amazon WorkDocs returns the first 24 active or pending users. If there\n            are more results, the response includes a marker that you can use to request the next\n            set of results.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/users",
@@ -3685,7 +3803,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -3706,7 +3824,7 @@
                 "Query": {
                     "target": "com.amazonaws.workdocs#SearchQueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A query to filter users by user name. Remember the following about the <code>Userids</code> and <code>Query</code> parameters:</p>\n        <ul>\n            <li>\n               <p>If you don't use either parameter, the API returns a paginated list of all users on the site.</p>\n            </li>\n            <li>\n               <p>If you use both parameters, the API ignores the <code>Query</code> parameter.</p>\n            </li>\n            <li>\n               <p>The <code>Userid</code> parameter only returns user names that match a corresponding user ID.</p>\n            </li>\n            <li>\n               <p>The <code>Query</code> parameter runs a \"prefix\" search for users by the <code>GivenName</code>, <code>SurName</code>, or <code>UserName</code> fields included in a \n                <a href=\"https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html\">CreateUser</a> API call. For example, querying on \n                <code>Ma</code> returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on <code>Ma J</code> only \n                returns Mateo Jackson.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A query to filter users by user name. Remember the following about the <code>Userids</code> and <code>Query</code> parameters:</p>\n         <ul>\n            <li>\n               <p>If you don't use either parameter, the API returns a paginated list of all users on the site.</p>\n            </li>\n            <li>\n               <p>If you use both parameters, the API ignores the <code>Query</code> parameter.</p>\n            </li>\n            <li>\n               <p>The <code>Userid</code> parameter only returns user names that match a corresponding user ID.</p>\n            </li>\n            <li>\n               <p>The <code>Query</code> parameter runs a \"prefix\" search for users by the <code>GivenName</code>, <code>SurName</code>, or <code>UserName</code> fields included in a \n                <a href=\"https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html\">CreateUser</a> API call. For example, querying on \n                <code>Ma</code> returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on <code>Ma J</code> only \n                returns Mateo Jackson.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "query"
                     }
                 },
@@ -3752,6 +3870,9 @@
                         "smithy.api#httpQuery": "fields"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#DescribeUsersResponse": {
@@ -3776,6 +3897,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no\n            additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#DocumentContentType": {
@@ -4126,7 +4250,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS Directory Service cannot reach an on-premises instance. Or a dependency\n            under the control of the organization is failing, such as a connected Active\n            Directory.</p>",
+                "smithy.api#documentation": "<p>The Directory Service cannot reach an on-premises instance. Or a dependency\n            under the control of the organization is failing, such as a connected Active\n            Directory.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 424
             }
@@ -4270,7 +4394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details of the current user for whom the authentication token was\n            generated. This is not a valid action for SigV4 (administrative API) clients.</p>\n        <p>This action requires an authentication token. To get an authentication token,\n            register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access\n                Control for User Applications</a> in the\n            <i>Amazon\n                WorkDocs Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves details of the current user for whom the authentication token was\n            generated. This is not a valid action for SigV4 (administrative API) clients.</p>\n         <p>This action requires an authentication token. To get an authentication token,\n            register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access\n                Control for User Applications</a> in the\n            <i>Amazon\n                WorkDocs Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/me",
@@ -4289,6 +4413,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetCurrentUserResponse": {
@@ -4300,6 +4427,9 @@
                         "smithy.api#documentation": "<p>Metadata of the user.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GetDocument": {
@@ -4368,7 +4498,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the path information (the hierarchy from the root folder) for the\n            requested document.</p>\n        <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the\n            requested document and only includes the IDs of the parent folders in the path. You can\n            limit the maximum number of levels. You can also request the names of the parent\n            folders.</p>",
+                "smithy.api#documentation": "<p>Retrieves the path information (the hierarchy from the root folder) for the\n            requested document.</p>\n         <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the\n            requested document and only includes the IDs of the parent folders in the path. You can\n            limit the maximum number of levels. You can also request the names of the parent\n            folders.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/documents/{DocumentId}/path",
@@ -4382,7 +4512,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -4415,6 +4545,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetDocumentPathResponse": {
@@ -4426,6 +4559,9 @@
                         "smithy.api#documentation": "<p>The path information.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GetDocumentRequest": {
@@ -4434,7 +4570,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -4454,6 +4590,9 @@
                         "smithy.api#httpQuery": "includeCustomMetadata"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetDocumentResponse": {
@@ -4471,6 +4610,9 @@
                         "smithy.api#documentation": "<p>The custom metadata on the document.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GetDocumentVersion": {
@@ -4519,7 +4661,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -4554,6 +4696,9 @@
                         "smithy.api#httpQuery": "includeCustomMetadata"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetDocumentVersionResponse": {
@@ -4571,6 +4716,9 @@
                         "smithy.api#documentation": "<p>The custom metadata on the document version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GetFolder": {
@@ -4639,7 +4787,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the path information (the hierarchy from the root folder) for the\n            specified folder.</p>\n        <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the\n            requested folder and only includes the IDs of the parent folders in the path. You can\n            limit the maximum number of levels. You can also request the parent folder\n            names.</p>",
+                "smithy.api#documentation": "<p>Retrieves the path information (the hierarchy from the root folder) for the\n            specified folder.</p>\n         <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the\n            requested folder and only includes the IDs of the parent folders in the path. You can\n            limit the maximum number of levels. You can also request the parent folder\n            names.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/api/v1/folders/{FolderId}/path",
@@ -4653,7 +4801,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -4686,6 +4834,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetFolderPathResponse": {
@@ -4697,6 +4848,9 @@
                         "smithy.api#documentation": "<p>The path information.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GetFolderRequest": {
@@ -4705,7 +4859,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -4725,6 +4879,9 @@
                         "smithy.api#httpQuery": "includeCustomMetadata"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetFolderResponse": {
@@ -4742,6 +4899,9 @@
                         "smithy.api#documentation": "<p>The custom metadata on the folder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GetResources": {
@@ -4784,7 +4944,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>The Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -4816,6 +4976,9 @@
                         "smithy.api#httpQuery": "marker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#GetResourcesResponse": {
@@ -4839,6 +5002,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#GroupMetadata": {
@@ -4972,7 +5138,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new document object and version object.</p>\n        <p>The client specifies the parent folder ID and name of the document to upload. The\n            ID is optionally specified when creating a new version of an existing document. This is\n            the first step to upload a document. Next, upload the document to the URL returned from\n            the call, and then call <a>UpdateDocumentVersion</a>.</p>\n        <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new document object and version object.</p>\n         <p>The client specifies the parent folder ID and name of the document to upload. The\n            ID is optionally specified when creating a new version of an existing document. This is\n            the first step to upload a document. Next, upload the document to the URL returned from\n            the call, and then call <a>UpdateDocumentVersion</a>.</p>\n         <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/api/v1/documents",
@@ -4986,7 +5152,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -5032,6 +5198,9 @@
                         "smithy.api#documentation": "<p>The ID of the parent folder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#InitiateDocumentVersionUploadResponse": {
@@ -5049,6 +5218,9 @@
                         "smithy.api#documentation": "<p>The upload metadata.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#InvalidArgumentException": {
@@ -5223,7 +5395,7 @@
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Boolean value to indicate an email notification should be sent to the\n            receipients.</p>"
+                        "smithy.api#documentation": "<p>Boolean value to indicate an email notification should be sent to the\n            recipients.</p>"
                     }
                 },
                 "EmailMessage": {
@@ -5459,7 +5631,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -5471,6 +5643,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#RemoveResourcePermission": {
@@ -5510,7 +5685,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -5537,6 +5712,9 @@
                         "smithy.api#httpQuery": "type"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#RequestedEntityTooLargeException": {
@@ -5798,7 +5976,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -5810,6 +5988,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#RolePermissionType": {
@@ -6288,7 +6469,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -6318,6 +6499,9 @@
                         "smithy.api#documentation": "<p>The resource state of the document. Only ACTIVE and RECYCLED are\n            supported.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#UpdateDocumentVersion": {
@@ -6355,7 +6539,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the status of the document version to ACTIVE. </p>\n        <p>Amazon WorkDocs also sets its document container to ACTIVE. This is the last step\n            in a document upload, after the client uploads the document to an S3-presigned URL\n            returned by <a>InitiateDocumentVersionUpload</a>. </p>",
+                "smithy.api#documentation": "<p>Changes the status of the document version to ACTIVE. </p>\n         <p>Amazon WorkDocs also sets its document container to ACTIVE. This is the last step\n            in a document upload, after the client uploads the document to an S3-presigned URL\n            returned by <a>InitiateDocumentVersionUpload</a>. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/api/v1/documents/{DocumentId}/versions/{VersionId}",
@@ -6369,7 +6553,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -6395,6 +6579,9 @@
                         "smithy.api#documentation": "<p>The status of the version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#UpdateFolder": {
@@ -6452,7 +6639,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -6482,6 +6669,9 @@
                         "smithy.api#documentation": "<p>The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from\n            the API.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#UpdateUser": {
@@ -6536,7 +6726,7 @@
                 "AuthenticationToken": {
                     "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
                         "smithy.api#httpHeader": "Authentication"
                     }
                 },
@@ -6587,9 +6777,12 @@
                 "GrantPoweruserPrivileges": {
                     "target": "com.amazonaws.workdocs#BooleanEnumType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean value to determine whether the user is granted Poweruser privileges.</p>"
+                        "smithy.api#documentation": "<p>Boolean value to determine whether the user is granted Power user privileges.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.workdocs#UpdateUserResponse": {
@@ -6601,6 +6794,9 @@
                         "smithy.api#documentation": "<p>The user information.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workdocs#UploadMetadata": {

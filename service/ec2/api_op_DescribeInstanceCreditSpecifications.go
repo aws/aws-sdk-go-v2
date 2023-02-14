@@ -62,13 +62,15 @@ type DescribeInstanceCreditSpecificationsInput struct {
 	// 1000 explicitly specified instance IDs.
 	InstanceIds []string
 
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 5 and 1000. You cannot specify this parameter and the
-	// instance IDs parameter in the same call.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. This value
+	// can be between 5 and 1000. You cannot specify this parameter and the instance
+	// IDs parameter in the same call. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The token to retrieve the next page of results.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -79,8 +81,8 @@ type DescribeInstanceCreditSpecificationsOutput struct {
 	// Information about the credit option for CPU usage of an instance.
 	InstanceCreditSpecifications []types.InstanceCreditSpecification
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to include in another request to get the next page of items. This
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -160,10 +162,11 @@ var _ DescribeInstanceCreditSpecificationsAPIClient = (*Client)(nil)
 // DescribeInstanceCreditSpecificationsPaginatorOptions is the paginator options
 // for DescribeInstanceCreditSpecifications
 type DescribeInstanceCreditSpecificationsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 5 and 1000. You cannot specify this parameter and the
-	// instance IDs parameter in the same call.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. This value
+	// can be between 5 and 1000. You cannot specify this parameter and the instance
+	// IDs parameter in the same call. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

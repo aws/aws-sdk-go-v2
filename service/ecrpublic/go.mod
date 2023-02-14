@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/ecrpublic
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.3
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.27
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.21
+	github.com/aws/aws-sdk-go-v2 v1.17.4
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.28
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.22
 	github.com/aws/smithy-go v1.13.5
 )
 

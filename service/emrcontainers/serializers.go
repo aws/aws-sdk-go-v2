@@ -1305,6 +1305,13 @@ func awsRestjson1_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 		ok.String(*v.ReleaseLabel)
 	}
 
+	if v.RetryPolicyConfiguration != nil {
+		ok := object.Key("retryPolicyConfiguration")
+		if err := awsRestjson1_serializeDocumentRetryPolicyConfiguration(v.RetryPolicyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1767,6 +1774,18 @@ func awsRestjson1_serializeDocumentParametricS3MonitoringConfiguration(v *types.
 	if v.LogUri != nil {
 		ok := object.Key("logUri")
 		ok.String(*v.LogUri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetryPolicyConfiguration(v *types.RetryPolicyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxAttempts != nil {
+		ok := object.Key("maxAttempts")
+		ok.Integer(*v.MaxAttempts)
 	}
 
 	return nil

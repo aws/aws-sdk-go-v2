@@ -1,3 +1,8 @@
+# v1.20.0 (2023-02-03)
+
+* **Feature**: Add new GetResourcesSummary API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

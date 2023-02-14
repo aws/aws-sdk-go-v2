@@ -20,13 +20,11 @@ import (
 
 // Describes the specified EBS volumes or all of your EBS volumes. If you are
 // describing a long list of volumes, we recommend that you paginate the output to
-// make the list more manageable. The MaxResults parameter sets the maximum number
-// of results returned in a single page. If the list of results exceeds your
-// MaxResults value, then that number of results is returned along with a NextToken
-// value that can be passed to a subsequent DescribeVolumes request to retrieve the
-// remaining results. For more information about EBS volumes, see Amazon EBS
-// volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// make the list more manageable. For more information, see Pagination
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+// For more information about EBS volumes, see Amazon EBS volumes
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html) in the
+// Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInput, optFns ...func(*Options)) (*DescribeVolumesOutput, error) {
 	if params == nil {
 		params = &DescribeVolumesInput{}
@@ -108,20 +106,16 @@ type DescribeVolumesInput struct {
 	// io2 | st1 | sc1| standard)
 	Filters []types.Filter
 
-	// The maximum number of volume results returned by DescribeVolumes in paginated
-	// output. When this parameter is used, DescribeVolumes only returns MaxResults
-	// results in a single page along with a NextToken response element. The remaining
-	// results of the initial request can be seen by sending another DescribeVolumes
-	// request with the returned NextToken value. This value can be between 5 and 500;
-	// if MaxResults is given a value larger than 500, only 500 results are returned.
-	// If this parameter is not used, then DescribeVolumes returns all results. You
-	// cannot specify this parameter and the volume IDs parameter in the same request.
+	// The maximum number of volumes to return for this request. This value can be
+	// between 5 and 500; if you specify a value larger than 500, only 500 items are
+	// returned. If this parameter is not used, then all items are returned. You cannot
+	// specify this parameter and the volume IDs parameter in the same request. For
+	// more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The NextToken value returned from a previous paginated DescribeVolumes request
-	// where MaxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// NextToken value. This value is null when there are no more results to return.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned from the previous request.
 	NextToken *string
 
 	// The volume IDs.
@@ -132,10 +126,8 @@ type DescribeVolumesInput struct {
 
 type DescribeVolumesOutput struct {
 
-	// The NextToken value to include in a future DescribeVolumes request. When the
-	// results of a DescribeVolumes request exceed MaxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The token to include in another request to get the next page of items. This
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Information about the volumes.
@@ -217,14 +209,12 @@ var _ DescribeVolumesAPIClient = (*Client)(nil)
 
 // DescribeVolumesPaginatorOptions is the paginator options for DescribeVolumes
 type DescribeVolumesPaginatorOptions struct {
-	// The maximum number of volume results returned by DescribeVolumes in paginated
-	// output. When this parameter is used, DescribeVolumes only returns MaxResults
-	// results in a single page along with a NextToken response element. The remaining
-	// results of the initial request can be seen by sending another DescribeVolumes
-	// request with the returned NextToken value. This value can be between 5 and 500;
-	// if MaxResults is given a value larger than 500, only 500 results are returned.
-	// If this parameter is not used, then DescribeVolumes returns all results. You
-	// cannot specify this parameter and the volume IDs parameter in the same request.
+	// The maximum number of volumes to return for this request. This value can be
+	// between 5 and 500; if you specify a value larger than 500, only 500 items are
+	// returned. If this parameter is not used, then all items are returned. You cannot
+	// specify this parameter and the volume IDs parameter in the same request. For
+	// more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

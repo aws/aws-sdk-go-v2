@@ -50,13 +50,12 @@ import (
 // specify Amazon Web Services account IDs (if you own the snapshots), self for
 // snapshots for which you own or have explicit permissions, or all for public
 // snapshots. If you are describing a long list of snapshots, we recommend that you
-// paginate the output to make the list more manageable. The MaxResults parameter
-// sets the maximum number of results returned in a single page. If the list of
-// results exceeds your MaxResults value, then that number of results is returned
-// along with a NextToken value that can be passed to a subsequent
-// DescribeSnapshots request to retrieve the remaining results. To get the state of
-// fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores. For
-// more information about EBS snapshots, see Amazon EBS snapshots
+// paginate the output to make the list more manageable. For more information, see
+// Pagination
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+// To get the state of fast snapshot restores for a snapshot, use
+// DescribeFastSnapshotRestores. For more information about EBS snapshots, see
+// Amazon EBS snapshots
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
@@ -128,21 +127,16 @@ type DescribeSnapshotsInput struct {
 	// * volume-size - The size of the volume, in GiB.
 	Filters []types.Filter
 
-	// The maximum number of snapshot results returned by DescribeSnapshots in
-	// paginated output. When this parameter is used, DescribeSnapshots only returns
-	// MaxResults results in a single page along with a NextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// DescribeSnapshots request with the returned NextToken value. This value can be
-	// between 5 and 1,000; if MaxResults is given a value larger than 1,000, only
-	// 1,000 results are returned. If this parameter is not used, then
-	// DescribeSnapshots returns all results. You cannot specify this parameter and the
-	// snapshot IDs parameter in the same request.
+	// The maximum number of snapshots to return for this request. This value can be
+	// between 5 and 1,000; if this value is larger than 1,000, only 1,000 results are
+	// returned. If this parameter is not used, then the request returns all snapshots.
+	// You cannot specify this parameter and the snapshot IDs parameter in the same
+	// request. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The NextToken value returned from a previous paginated DescribeSnapshots request
-	// where MaxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// NextToken value. This value is null when there are no more results to return.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// Scopes the results to snapshots with the specified owners. You can specify a
@@ -162,10 +156,8 @@ type DescribeSnapshotsInput struct {
 
 type DescribeSnapshotsOutput struct {
 
-	// The NextToken value to include in a future DescribeSnapshots request. When the
-	// results of a DescribeSnapshots request exceed MaxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The token to include in another request to return the next page of snapshots.
+	// This value is null when there are no more snapshots to return.
 	NextToken *string
 
 	// Information about the snapshots.
@@ -247,15 +239,12 @@ var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 
 // DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
 type DescribeSnapshotsPaginatorOptions struct {
-	// The maximum number of snapshot results returned by DescribeSnapshots in
-	// paginated output. When this parameter is used, DescribeSnapshots only returns
-	// MaxResults results in a single page along with a NextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// DescribeSnapshots request with the returned NextToken value. This value can be
-	// between 5 and 1,000; if MaxResults is given a value larger than 1,000, only
-	// 1,000 results are returned. If this parameter is not used, then
-	// DescribeSnapshots returns all results. You cannot specify this parameter and the
-	// snapshot IDs parameter in the same request.
+	// The maximum number of snapshots to return for this request. This value can be
+	// between 5 and 1,000; if this value is larger than 1,000, only 1,000 results are
+	// returned. If this parameter is not used, then the request returns all snapshots.
+	// You cannot specify this parameter and the snapshot IDs parameter in the same
+	// request. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

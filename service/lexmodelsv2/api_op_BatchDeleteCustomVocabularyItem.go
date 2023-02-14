@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Batch delete custom vocabulary item for the specified locale in the specified
-// bot.
+// Delete a batch of custom vocabulary items for a given bot locale's custom
+// vocabulary.
 func (c *Client) BatchDeleteCustomVocabularyItem(ctx context.Context, params *BatchDeleteCustomVocabularyItemInput, optFns ...func(*Options)) (*BatchDeleteCustomVocabularyItemOutput, error) {
 	if params == nil {
 		params = &BatchDeleteCustomVocabularyItemInput{}
@@ -30,25 +30,26 @@ func (c *Client) BatchDeleteCustomVocabularyItem(ctx context.Context, params *Ba
 
 type BatchDeleteCustomVocabularyItemInput struct {
 
-	// The unique identifier of the bot to batch delete request for the custom
-	// vocabulary item.
+	// The identifier of the bot associated with this custom vocabulary.
 	//
 	// This member is required.
 	BotId *string
 
-	// The version of the bot to batch delete request for the custom vocabulary item.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	//
 	// This member is required.
 	BotVersion *string
 
-	// The custom vocabulary list to batch delete request for the custom vocabulary
-	// item.
+	// A list of custom vocabulary items requested to be deleted. Each entry must
+	// contain the unique custom vocabulary entry identifier.
 	//
 	// This member is required.
 	CustomVocabularyItemList []types.CustomVocabularyEntryId
 
-	// The locale identifier of the bot to batch delete request for the custom
-	// vocabulary item.
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported Languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	//
 	// This member is required.
 	LocaleId *string
@@ -58,23 +59,24 @@ type BatchDeleteCustomVocabularyItemInput struct {
 
 type BatchDeleteCustomVocabularyItemOutput struct {
 
-	// The unique identifier of the bot to batch delete response for the custom
-	// vocabulary item.
+	// The identifier of the bot associated with this custom vocabulary.
 	BotId *string
 
-	// The version of the bot to batch delete response for the custom vocabulary item.
+	// The identifier of the version of the bot associated with this custom vocabulary.
 	BotVersion *string
 
-	// The errors of the action to batch delete response for the custom vocabulary
-	// item.
+	// A list of custom vocabulary items that failed to delete during the operation.
+	// The reason for the error is contained within each error object.
 	Errors []types.FailedCustomVocabularyItem
 
-	// The locale identifier of the bot to batch delete response for the custom
-	// vocabulary item.
+	// The identifier of the language and locale where this custom vocabulary is used.
+	// The string must match one of the supported locales. For more information, see
+	// Supported languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	LocaleId *string
 
-	// The resources of the action to batch delete response for the custom vocabulary
-	// item.
+	// A list of custom vocabulary items that were successfully deleted during the
+	// operation.
 	Resources []types.CustomVocabularyItem
 
 	// Metadata pertaining to the operation's result.

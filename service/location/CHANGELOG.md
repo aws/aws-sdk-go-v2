@@ -1,3 +1,7 @@
+# v1.21.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-01-10)
 
 * **Feature**: This release adds support for two new route travel models, Bicycle and Motorcycle which can be used with Grab data source.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unassigns secondary private NAT gateway IPv4 addresses from a private NAT
-// gateway. You cannot unassign your primary private IP. For more information, see
-// Edit secondary IP address associations
+// Unassigns secondary private IPv4 addresses from a private NAT gateway. You
+// cannot unassign your primary private IP. For more information, see Edit
+// secondary IP address associations
 // (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
 // in the Amazon Virtual Private Cloud User Guide. While unassigning is in
 // progress, you cannot assign/unassign additional IP addresses while the

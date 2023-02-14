@@ -425,7 +425,8 @@ type AutoSnapshotDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Availability Zone.
+// Describes an Availability Zone. This is returned only as part of a GetRegions
+// request.
 type AvailabilityZone struct {
 
 	// The state of the Availability Zone.
@@ -1423,11 +1424,11 @@ type ContainerServicePower struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the login information for the container image registry of an Amazon
+// Describes the sign-in credentials for the container image registry of an Amazon
 // Lightsail account.
 type ContainerServiceRegistryLogin struct {
 
-	// The timestamp of when the container image registry username and password expire.
+	// The timestamp of when the container image registry sign-in credentials expire.
 	// The log in credentials expire 12 hours after they are created, at which point
 	// you will need to create a new set of log in credentials using the
 	// CreateContainerServiceRegistryLogin action.
@@ -1797,8 +1798,11 @@ type DomainEntry struct {
 	Id *string
 
 	// When true, specifies whether the domain entry is an alias used by the Lightsail
-	// load balancer. You can include an alias (A type) record in your request, which
-	// points to a load balancer DNS name and routes traffic to your load balancer.
+	// load balancer, Lightsail container service, Lightsail content delivery network
+	// (CDN) distribution, or another Amazon Web Services resource. You can include an
+	// alias (A type) record in your request, which points to the DNS name of a load
+	// balancer, container service, CDN distribution, or other Amazon Web Services
+	// resource and routes traffic to that resource.
 	IsAlias *bool
 
 	// The name of the domain.

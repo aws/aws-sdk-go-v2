@@ -77,7 +77,7 @@ type ContainerInfo interface {
 	isContainerInfo()
 }
 
-// The information about the EKS cluster.
+// The information about the Amazon EKS cluster.
 type ContainerInfoMemberEksInfo struct {
 	Value EksInfo
 
@@ -94,7 +94,8 @@ type ContainerProvider struct {
 	// This member is required.
 	Id *string
 
-	// The type of the container provider. EKS is the only supported type as of now.
+	// The type of the container provider. Amazon EKS is the only supported type as of
+	// now.
 	//
 	// This member is required.
 	Type ContainerProviderType
@@ -105,10 +106,10 @@ type ContainerProvider struct {
 	noSmithyDocumentSerde
 }
 
-// The information about the EKS cluster.
+// The information about the Amazon EKS cluster.
 type EksInfo struct {
 
-	// The namespaces of the EKS cluster.
+	// The namespaces of the Amazon EKS cluster.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -232,6 +233,12 @@ type JobRun struct {
 
 	// The release version of Amazon EMR.
 	ReleaseLabel *string
+
+	// The configuration of the retry policy that the job runs on.
+	RetryPolicyConfiguration *RetryPolicyConfiguration
+
+	// The current status of the retry policy executed on the job.
+	RetryPolicyExecution *RetryPolicyExecution
 
 	// The state of the job run.
 	State JobRunState
@@ -387,6 +394,28 @@ type ParametricS3MonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the retry policy that the job runs on.
+type RetryPolicyConfiguration struct {
+
+	// The maximum number of attempts on the job's driver.
+	//
+	// This member is required.
+	MaxAttempts *int32
+
+	noSmithyDocumentSerde
+}
+
+// The current status of the retry policy executed on the job.
+type RetryPolicyExecution struct {
+
+	// The current number of attempts made on the driver of the job.
+	//
+	// This member is required.
+	CurrentAttemptCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // Amazon S3 configuration for monitoring log publishing. You can configure your
 // jobs to send log information to Amazon S3.
 type S3MonitoringConfiguration struct {
@@ -434,7 +463,7 @@ type TemplateParameterConfiguration struct {
 	// The default value for the job template parameter.
 	DefaultValue *string
 
-	// The type of the job template parameter. Allowed values are: ‘String’, ‘Number’.
+	// The type of the job template parameter. Allowed values are: ‘STRING’, ‘NUMBER’.
 	Type TemplateParameterDataType
 
 	noSmithyDocumentSerde
@@ -444,8 +473,9 @@ type TemplateParameterConfiguration struct {
 // namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters
 // to run jobs and host endpoints. Multiple virtual clusters can be backed by the
 // same physical cluster. However, each virtual cluster maps to one namespace on an
-// EKS cluster. Virtual clusters do not create any active resources that contribute
-// to your bill or that require lifecycle management outside the service.
+// Amazon EKS cluster. Virtual clusters do not create any active resources that
+// contribute to your bill or that require lifecycle management outside the
+// service.
 type VirtualCluster struct {
 
 	// The ARN of the virtual cluster.

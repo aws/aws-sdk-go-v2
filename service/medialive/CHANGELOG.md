@@ -1,3 +1,7 @@
+# v1.29.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2023-01-19)
 
 * **Feature**: AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.

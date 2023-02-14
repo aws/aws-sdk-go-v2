@@ -140,6 +140,24 @@ func (RemoteManagement) Values() []RemoteManagement {
 	}
 }
 
+type ServiceName string
+
+// Enum values for ServiceName
+const (
+	ServiceNameKubernetes  ServiceName = "KUBERNETES"
+	ServiceNameEksAnywhere ServiceName = "EKS_ANYWHERE"
+)
+
+// Values returns all known values for ServiceName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceName) Values() []ServiceName {
+	return []ServiceName{
+		"KUBERNETES",
+		"EKS_ANYWHERE",
+	}
+}
+
 type ShipmentState string
 
 // Enum values for ShipmentState
@@ -213,8 +231,8 @@ const (
 	SnowballCapacityT98          SnowballCapacity = "T98"
 	SnowballCapacityT8           SnowballCapacity = "T8"
 	SnowballCapacityT14          SnowballCapacity = "T14"
-	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
 	SnowballCapacityT32          SnowballCapacity = "T32"
+	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
 )
 
 // Values returns all known values for SnowballCapacity. Note that this can be
@@ -229,8 +247,8 @@ func (SnowballCapacity) Values() []SnowballCapacity {
 		"T98",
 		"T8",
 		"T14",
-		"NoPreference",
 		"T32",
+		"NoPreference",
 	}
 }
 

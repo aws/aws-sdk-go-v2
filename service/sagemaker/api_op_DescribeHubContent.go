@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Describe the content of a hub.
+// Describe the content of a hub. Hub APIs are only callable through SageMaker
+// Studio.
 func (c *Client) DescribeHubContent(ctx context.Context, params *DescribeHubContentInput, optFns ...func(*Options)) (*DescribeHubContentOutput, error) {
 	if params == nil {
 		params = &DescribeHubContentInput{}
@@ -117,7 +118,8 @@ type DescribeHubContentOutput struct {
 	// The display name of the hub content.
 	HubContentDisplayName *string
 
-	// Markdown files associated with the hub content to import.
+	// A string that provides a description of the hub content. This string can include
+	// links, tables, and standard markdown formating.
 	HubContentMarkdown *string
 
 	// The searchable keywords for the hub content.

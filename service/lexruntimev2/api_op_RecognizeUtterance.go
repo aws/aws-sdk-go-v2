@@ -144,7 +144,7 @@ type RecognizeUtteranceInput struct {
 	// * If the
 	// value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon
 	// Lex V2 uses Amazon Polly to generate the speech using the configuration that you
-	// specified in the requestContentType parameter. For example, if you specify
+	// specified in the responseContentType parameter. For example, if you specify
 	// audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.
 	//
 	// * If
@@ -220,6 +220,9 @@ type RecognizeUtteranceOutput struct {
 	// the field, you must decode and decompress the contents. See the example for a
 	// simple function to decode and decompress the contents.
 	Messages *string
+
+	// The bot member that recognized the utterance.
+	RecognizedBotMember *string
 
 	// The attributes sent in the request. The requestAttributes field is compressed
 	// with gzip and then base64 encoded. Before you can use the contents of the field,

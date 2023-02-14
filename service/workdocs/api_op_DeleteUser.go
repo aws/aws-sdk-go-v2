@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified user from a Simple AD or Microsoft AD directory.
+// Deletes the specified user from a Simple AD or Microsoft AD directory. Deleting
+// a user immediately and permanently deletes all content in that user's folder
+// structure. Site retention policies do NOT apply to this type of deletion.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}
@@ -34,7 +36,8 @@ type DeleteUserInput struct {
 	UserId *string
 
 	// Amazon WorkDocs authentication token. Do not set this field when using
-	// administrative API actions, as in accessing the API using AWS credentials.
+	// administrative API actions, as in accessing the API using Amazon Web Services
+	// credentials.
 	AuthenticationToken *string
 
 	noSmithyDocumentSerde

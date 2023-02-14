@@ -1,3 +1,7 @@
+# v1.22.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-02-01)
 
 * **Feature**: The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs.

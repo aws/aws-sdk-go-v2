@@ -64,9 +64,9 @@ type GetIntegrationOutput struct {
 	// This member is required.
 	Uri *string
 
-	// Boolean to indicate if the Flow associated with the Integration is created via
-	// Appflow console or with ObjectTypeName equals _unstructured via API/CLI in
-	// flowDefinition
+	// Boolean that shows if the Flow that's associated with the Integration is created
+	// in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in
+	// flowDefinition.
 	IsUnstructured *bool
 
 	// The name of the profile object type.

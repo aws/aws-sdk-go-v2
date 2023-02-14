@@ -1,3 +1,11 @@
+# v1.25.0 (2023-02-10)
+
+* **Feature**: Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko
+
+# v1.24.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-01-31)
 
 * **Feature**: Amazon Polly adds two new neural American English voices - Ruth, Stephen

@@ -38228,6 +38228,15 @@ func awsAwsjson11_deserializeDocumentKafkaStreamingSourceOptions(v **types.Kafka
 
 	for key, value := range shape {
 		switch key {
+		case "AddRecordTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.AddRecordTimestamp = ptr.String(jtv)
+			}
+
 		case "Assign":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38273,6 +38282,15 @@ func awsAwsjson11_deserializeDocumentKafkaStreamingSourceOptions(v **types.Kafka
 				sv.Delimiter = ptr.String(jtv)
 			}
 
+		case "EmitConsumerLagMetrics":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.EmitConsumerLagMetrics = ptr.String(jtv)
+			}
+
 		case "EndingOffsets":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38280,6 +38298,15 @@ func awsAwsjson11_deserializeDocumentKafkaStreamingSourceOptions(v **types.Kafka
 					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
 				}
 				sv.EndingOffsets = ptr.String(jtv)
+			}
+
+		case "IncludeHeaders":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeHeaders = ptr.Bool(jtv)
 			}
 
 		case "MaxOffsetsPerTrigger":
@@ -38506,6 +38533,15 @@ func awsAwsjson11_deserializeDocumentKinesisStreamingSourceOptions(v **types.Kin
 				sv.AddIdleTimeBetweenReads = ptr.Bool(jtv)
 			}
 
+		case "AddRecordTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.AddRecordTimestamp = ptr.String(jtv)
+			}
+
 		case "AvoidEmptyBatches":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -38544,6 +38580,15 @@ func awsAwsjson11_deserializeDocumentKinesisStreamingSourceOptions(v **types.Kin
 					return err
 				}
 				sv.DescribeShardInterval = ptr.Int64(i64)
+			}
+
+		case "EmitConsumerLagMetrics":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.EmitConsumerLagMetrics = ptr.String(jtv)
 			}
 
 		case "EndpointUrl":

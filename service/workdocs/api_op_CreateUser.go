@@ -50,8 +50,8 @@ type CreateUserInput struct {
 	// This member is required.
 	Username *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The email address of the user.

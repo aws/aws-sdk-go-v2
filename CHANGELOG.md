@@ -1,3 +1,125 @@
+# Release (2023-02-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.9.0](service/account/CHANGELOG.md#v190-2023-02-13)
+  * **Feature**: This release of the Account Management API enables customers to view and manage whether AWS Opt-In Regions are enabled or disabled for their Account. For more information, see https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.6.0](service/appconfigdata/CHANGELOG.md#v160-2023-02-13)
+  * **Feature**: AWS AppConfig now offers the option to set a version label on hosted configuration versions. If a labeled hosted configuration version is deployed, its version label is available in the GetLatestConfiguration response.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.18.0](service/snowball/CHANGELOG.md#v1180-2023-02-13)
+  * **Feature**: Adds support for EKS Anywhere on Snowball. AWS Snow Family customers can now install EKS Anywhere service on Snowball Edge Compute Optimized devices.
+
+# Release (2023-02-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.27.0](service/autoscaling/CHANGELOG.md#v1270-2023-02-10)
+  * **Feature**: You can now either terminate/replace, ignore, or wait for EC2 Auto Scaling instances on standby or protected from scale in. Also, you can also roll back changes from a failed instance refresh.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.46.0](service/connect/CHANGELOG.md#v1460-2023-02-10)
+  * **Feature**: This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.85.0](service/ec2/CHANGELOG.md#v1850-2023-02-10)
+  * **Feature**: Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.25.0](service/polly/CHANGELOG.md#v1250-2023-02-10)
+  * **Feature**: Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.68.0](service/sagemaker/CHANGELOG.md#v1680-2023-02-10)
+  * **Feature**: Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.20.2](service/sns/CHANGELOG.md#v1202-2023-02-10)
+  * **Documentation**: This release adds support for SNS X-Ray active tracing as well as other updates.
+
+# Release (2023-02-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.14.2](service/chimesdkmeetings/CHANGELOG.md#v1142-2023-02-09)
+  * **Documentation**: Documentation updates for Chime Meetings SDK
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.17.0](service/emrcontainers/CHANGELOG.md#v1170-2023-02-09)
+  * **Feature**: EMR on EKS allows configuring retry policies for job runs through the StartJobRun API. Using retry policies, a job cause a driver pod to be restarted automatically if it fails or is deleted. The job's status can be seen in the DescribeJobRun and ListJobRun APIs and monitored using CloudWatch events.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.28.0](service/lexmodelsv2/CHANGELOG.md#v1280-2023-02-09)
+  * **Feature**: AWS Lex now supports Network of Bots.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.17.0](service/lexruntimev2/CHANGELOG.md#v1170-2023-02-09)
+  * **Feature**: AWS Lex now supports Network of Bots.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.25.2](service/lightsail/CHANGELOG.md#v1252-2023-02-09)
+  * **Documentation**: Documentation updates for Lightsail
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.9.0](service/migrationhubrefactorspaces/CHANGELOG.md#v190-2023-02-09)
+  * **Feature**: This release adds support for creating environments with a network fabric type of NONE
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.13.2](service/workdocs/CHANGELOG.md#v1132-2023-02-09)
+  * **Documentation**: Doc only update for the WorkDocs APIs.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.28.2](service/workspaces/CHANGELOG.md#v1282-2023-02-09)
+  * **Documentation**: Removed Windows Server 2016 BYOL and made changes based on IAM campaign.
+
+# Release (2023-02-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.20.0](service/backup/CHANGELOG.md#v1200-2023-02-08)
+  * **Feature**: This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.25.0](service/cloudfront/CHANGELOG.md#v1250-2023-02-08)
+  * **Feature**: CloudFront Origin Access Control extends support to AWS Elemental MediaStore origins.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.41.0](service/glue/CHANGELOG.md#v1410-2023-02-08)
+  * **Feature**: DirectJDBCSource + Glue 4.0 streaming options
+
+# Release (2023-02-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.28.2](service/transfer/CHANGELOG.md#v1282-2023-02-07)
+  * **Documentation**: Updated the documentation for the ImportCertificate API call, and added examples.
+
+# Release (2023-02-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.21.0](service/computeoptimizer/CHANGELOG.md#v1210-2023-02-06)
+  * **Feature**: AWS Compute optimizer can now infer if Kafka is running on an instance.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.23.0](service/customerprofiles/CHANGELOG.md#v1230-2023-02-06)
+  * **Feature**: This release deprecates the PartyType and Gender enum data types from the Profile model and replaces them with new PartyTypeString and GenderString attributes, which accept any string of length up to 255.
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.22.0](service/frauddetector/CHANGELOG.md#v1220-2023-02-06)
+  * **Feature**: My AWS Service (Amazon Fraud Detector) - This release introduces Cold Start Model Training which optimizes training for small datasets and adds intelligent methods for treating unlabeled data. You can now train Online Fraud Insights or Transaction Fraud Insights models with minimal historical-data.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.31.0](service/mediaconvert/CHANGELOG.md#v1310-2023-02-06)
+  * **Feature**: The AWS Elemental MediaConvert SDK has added improved scene change detection capabilities and a bandwidth reduction filter, along with video quality enhancements, to the AVC encoder.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.27.0](service/outposts/CHANGELOG.md#v1270-2023-02-06)
+  * **Feature**: Adds OrderType to Order structure. Adds PreviousOrderId and PreviousLineItemId to LineItem structure. Adds new line item status REPLACED. Increases maximum length of pagination token.
+
+# Release (2023-02-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.26.2](service/autoscaling/CHANGELOG.md#v1262-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.26.2](service/cloudformation/CHANGELOG.md#v1262-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.14.1](service/cloudsearch/CHANGELOG.md#v1141-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.25.2](service/cloudwatch/CHANGELOG.md#v1252-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.20.2](service/docdb/CHANGELOG.md#v1202-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.84.1](service/ec2/CHANGELOG.md#v1841-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.26.2](service/elasticache/CHANGELOG.md#v1262-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.15.1](service/elasticbeanstalk/CHANGELOG.md#v1151-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.15.2](service/elasticloadbalancing/CHANGELOG.md#v1152-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.19.3](service/elasticloadbalancingv2/CHANGELOG.md#v1193-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.2](service/iam/CHANGELOG.md#v1192-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.19.2](service/neptune/CHANGELOG.md#v1192-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.20.0](service/proton/CHANGELOG.md#v1200-2023-02-03)
+  * **Feature**: Add new GetResourcesSummary API
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.40.2](service/rds/CHANGELOG.md#v1402-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.27.2](service/redshift/CHANGELOG.md#v1272-2023-02-03)
+  * **Documentation**: Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.15.1](service/ses/CHANGELOG.md#v1151-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.20.1](service/sns/CHANGELOG.md#v1201-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.20.2](service/sqs/CHANGELOG.md#v1202-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.18.3](service/sts/CHANGELOG.md#v1183-2023-02-03)
+  * **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # Release (2023-02-02)
 
 ## Module Highlights

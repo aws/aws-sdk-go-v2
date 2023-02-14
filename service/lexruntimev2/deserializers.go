@@ -712,6 +712,11 @@ func awsRestjson1_deserializeOpDocumentRecognizeTextOutput(v **RecognizeTextOutp
 				return err
 			}
 
+		case "recognizedBotMember":
+			if err := awsRestjson1_deserializeDocumentRecognizedBotMember(&sv.RecognizedBotMember, value); err != nil {
+				return err
+			}
+
 		case "requestAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.RequestAttributes, value); err != nil {
 				return err
@@ -882,6 +887,11 @@ func awsRestjson1_deserializeOpHttpBindingsRecognizeUtteranceOutput(v *Recognize
 	if headerValues := response.Header.Values("x-amz-lex-messages"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.Messages = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-recognized-bot-member"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.RecognizedBotMember = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-request-attributes"); len(headerValues) != 0 {
@@ -2508,6 +2518,11 @@ func awsRestjson1_deserializeDocumentIntentResultEvent(v **types.IntentResultEve
 				return err
 			}
 
+		case "recognizedBotMember":
+			if err := awsRestjson1_deserializeDocumentRecognizedBotMember(&sv.RecognizedBotMember, value); err != nil {
+				return err
+			}
+
 		case "requestAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.RequestAttributes, value); err != nil {
 				return err
@@ -2791,6 +2806,55 @@ func awsRestjson1_deserializeDocumentPlaybackInterruptionEvent(v **types.Playbac
 					return fmt.Errorf("expected PlaybackInterruptionReason to be of type string, got %T instead", value)
 				}
 				sv.EventReason = types.PlaybackInterruptionReason(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecognizedBotMember(v **types.RecognizedBotMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecognizedBotMember
+	if *v == nil {
+		sv = &types.RecognizedBotMember{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "botId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotIdentifier to be of type string, got %T instead", value)
+				}
+				sv.BotId = ptr.String(jtv)
+			}
+
+		case "botName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.BotName = ptr.String(jtv)
 			}
 
 		default:

@@ -1,3 +1,7 @@
+# v1.18.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-01-26)
 
 * **Feature**: Minor comments for Redshift Serverless workgroup target support.

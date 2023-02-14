@@ -74,7 +74,9 @@ type UpdateInstanceMetadataOptionsInput struct {
 
 type UpdateInstanceMetadataOptionsOutput struct {
 
-	// Describes the API operation.
+	// An array of objects that describe the result of the action, such as the status
+	// of the request, the timestamp of the request, and the resources affected by the
+	// request.
 	Operation *types.Operation
 
 	// Metadata pertaining to the operation's result.
