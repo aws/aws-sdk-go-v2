@@ -40,7 +40,9 @@ type StartDeploymentInput struct {
 	// This member is required.
 	ConfigurationProfileId *string
 
-	// The configuration version to deploy.
+	// The configuration version to deploy. If deploying an AppConfig hosted
+	// configuration version, you can specify either the version number or version
+	// label.
 	//
 	// This member is required.
 	ConfigurationVersion *string

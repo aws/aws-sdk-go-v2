@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-// Returns metadata such as the name, the network interfaces, and the status (that
-// is, whether the agent is running or not) for an agent. To specify which agent to
-// describe, use the Amazon Resource Name (ARN) of the agent in your request.
+// Returns metadata about an DataSync agent, such as its name, endpoint type, and
+// status.
 func (c *Client) DescribeAgent(ctx context.Context, params *DescribeAgentInput, optFns ...func(*Options)) (*DescribeAgentOutput, error) {
 	if params == nil {
 		params = &DescribeAgentInput{}
@@ -33,7 +32,7 @@ func (c *Client) DescribeAgent(ctx context.Context, params *DescribeAgentInput, 
 // DescribeAgent
 type DescribeAgentInput struct {
 
-	// The Amazon Resource Name (ARN) of the agent to describe.
+	// Specifies the Amazon Resource Name (ARN) of the DataSync agent to describe.
 	//
 	// This member is required.
 	AgentArn *string
@@ -44,7 +43,7 @@ type DescribeAgentInput struct {
 // DescribeAgentResponse
 type DescribeAgentOutput struct {
 
-	// The Amazon Resource Name (ARN) of the agent.
+	// The ARN of the agent.
 	AgentArn *string
 
 	// The time that the agent was activated (that is, created in your account).

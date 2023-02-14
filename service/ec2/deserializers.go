@@ -73717,6 +73717,19 @@ func awsEc2query_deserializeDocumentHost(v **types.Host, decoder smithyxml.NodeD
 				sv.HostId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("hostMaintenance", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HostMaintenance = types.HostMaintenance(xtv)
+			}
+
 		case strings.EqualFold("hostProperties", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentHostProperties(&sv.HostProperties, nodeDecoder); err != nil {

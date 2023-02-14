@@ -46684,6 +46684,11 @@ func awsEc2query_serializeOpDocumentAllocateHostsInput(v *AllocateHostsInput, va
 		objectKey.String(*v.ClientToken)
 	}
 
+	if len(v.HostMaintenance) > 0 {
+		objectKey := object.Key("HostMaintenance")
+		objectKey.String(string(v.HostMaintenance))
+	}
+
 	if len(v.HostRecovery) > 0 {
 		objectKey := object.Key("HostRecovery")
 		objectKey.String(string(v.HostRecovery))
@@ -61010,6 +61015,11 @@ func awsEc2query_serializeOpDocumentModifyHostsInput(v *ModifyHostsInput, value 
 		if err := awsEc2query_serializeDocumentRequestHostIdList(v.HostIds, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.HostMaintenance) > 0 {
+		objectKey := object.Key("HostMaintenance")
+		objectKey.String(string(v.HostMaintenance))
 	}
 
 	if len(v.HostRecovery) > 0 {

@@ -1406,6 +1406,11 @@ func awsRestjson1_deserializeOpHttpBindingsCreateHostedConfigurationVersionOutpu
 		v.Description = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("VersionLabel"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VersionLabel = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("Version-Number"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		vv, err := strconv.ParseInt(headerValues[0], 0, 32)
@@ -4020,6 +4025,11 @@ func awsRestjson1_deserializeOpHttpBindingsGetHostedConfigurationVersionOutput(v
 	if headerValues := response.Header.Values("Description"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.Description = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("VersionLabel"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VersionLabel = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("Version-Number"); len(headerValues) != 0 {
@@ -9642,6 +9652,15 @@ func awsRestjson1_deserializeDocumentHostedConfigurationVersionSummary(v **types
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "VersionLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionLabel to be of type string, got %T instead", value)
+				}
+				sv.VersionLabel = ptr.String(jtv)
 			}
 
 		case "VersionNumber":

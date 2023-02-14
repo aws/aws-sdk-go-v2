@@ -2150,6 +2150,24 @@ func (GatewayType) Values() []GatewayType {
 	}
 }
 
+type HostMaintenance string
+
+// Enum values for HostMaintenance
+const (
+	HostMaintenanceOn  HostMaintenance = "on"
+	HostMaintenanceOff HostMaintenance = "off"
+)
+
+// Values returns all known values for HostMaintenance. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HostMaintenance) Values() []HostMaintenance {
+	return []HostMaintenance{
+		"on",
+		"off",
+	}
+}
+
 type HostnameType string
 
 // Enum values for HostnameType

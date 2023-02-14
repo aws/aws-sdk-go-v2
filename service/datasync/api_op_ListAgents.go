@@ -12,14 +12,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of agents owned by an Amazon Web Services account in the Amazon
-// Web Services Region specified in the request. The returned list is ordered by
-// agent Amazon Resource Name (ARN). By default, this operation returns a maximum
-// of 100 agents. This operation supports pagination that enables you to optionally
-// reduce the number of agents returned in a response. If you have more agents than
-// are returned in a response (that is, the response returns only a truncated list
-// of your agents), the response contains a marker that you can specify in your
-// next request to fetch the next page of agents.
+// Returns a list of DataSync agents that belong to an Amazon Web Services account
+// in the Amazon Web Services Region specified in the request. With pagination, you
+// can reduce the number of agents returned in a response. If you get a truncated
+// list of agents in a response, the response contains a marker that you can
+// specify in your next request to fetch the next page of agents. ListAgents is
+// eventually consistent. This means the result of running the operation might not
+// reflect that you just created or deleted an agent. For example, if you create an
+// agent with CreateAgent
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html) and
+// then immediately run ListAgents, that agent might not show up in the list right
+// away. In situations like this, you can always confirm whether an agent has been
+// created (or deleted) by using DescribeAgent
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html).
 func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns ...func(*Options)) (*ListAgentsOutput, error) {
 	if params == nil {
 		params = &ListAgentsInput{}
@@ -38,11 +43,12 @@ func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns
 // ListAgentsRequest
 type ListAgentsInput struct {
 
-	// The maximum number of agents to list.
+	// Specifies the maximum number of DataSync agents to list in a response. By
+	// default, a response shows a maximum of 100 agents.
 	MaxResults *int32
 
-	// An opaque string that indicates the position at which to begin the next list of
-	// agents.
+	// Specifies an opaque string that indicates the position to begin the next list of
+	// results in the response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,11 +57,13 @@ type ListAgentsInput struct {
 // ListAgentsResponse
 type ListAgentsOutput struct {
 
-	// A list of agents in your account.
+	// A list of DataSync agents in your Amazon Web Services account in the Amazon Web
+	// Services Region specified in the request. The list is ordered by the agents'
+	// Amazon Resource Names (ARNs).
 	Agents []types.AgentListEntry
 
-	// An opaque string that indicates the position at which to begin returning the
-	// next list of agents.
+	// The opaque string that indicates the position to begin the next list of results
+	// in the response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,7 +141,8 @@ var _ ListAgentsAPIClient = (*Client)(nil)
 
 // ListAgentsPaginatorOptions is the paginator options for ListAgents
 type ListAgentsPaginatorOptions struct {
-	// The maximum number of agents to list.
+	// Specifies the maximum number of DataSync agents to list in a response. By
+	// default, a response shows a maximum of 100 agents.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

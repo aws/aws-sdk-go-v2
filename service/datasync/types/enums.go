@@ -476,6 +476,8 @@ const (
 	SmbVersionAutomatic SmbVersion = "AUTOMATIC"
 	SmbVersionSmb2      SmbVersion = "SMB2"
 	SmbVersionSmb3      SmbVersion = "SMB3"
+	SmbVersionSmb1      SmbVersion = "SMB1"
+	SmbVersionSmb20     SmbVersion = "SMB2_0"
 )
 
 // Values returns all known values for SmbVersion. Note that this can be expanded
@@ -486,6 +488,8 @@ func (SmbVersion) Values() []SmbVersion {
 		"AUTOMATIC",
 		"SMB2",
 		"SMB3",
+		"SMB1",
+		"SMB2_0",
 	}
 }
 

@@ -343,6 +343,9 @@ type HostedConfigurationVersionSummary struct {
 	// A description of the configuration.
 	Description *string
 
+	// A user-defined label for an AppConfig hosted configuration version.
+	VersionLabel *string
+
 	// The configuration version.
 	VersionNumber int32
 

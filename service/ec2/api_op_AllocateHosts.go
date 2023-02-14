@@ -54,6 +54,12 @@ type AllocateHostsInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
+	// Indicates whether to enable or disable host maintenance for the Dedicated Host.
+	// For more information, see  Host maintenance
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html)
+	// in the Amazon EC2 User Guide. Default: on
+	HostMaintenance types.HostMaintenance
+
 	// Indicates whether to enable or disable host recovery for the Dedicated Host.
 	// Host recovery is disabled by default. For more information, see  Host recovery
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)

@@ -4711,6 +4711,10 @@ type Host struct {
 	// The ID of the Dedicated Host.
 	HostId *string
 
+	// Indicates whether host maintenance is enabled or disabled for the Dedicated
+	// Host.
+	HostMaintenance HostMaintenance
+
 	// The hardware specifications of the Dedicated Host.
 	HostProperties *HostProperties
 
