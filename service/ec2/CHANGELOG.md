@@ -1,3 +1,7 @@
+# v1.86.0 (2023-02-14)
+
+* **Feature**: With this release customers can turn host maintenance on or off when allocating or modifying a supported dedicated host. Host maintenance is turned on by default for supported hosts.
+
 # v1.85.0 (2023-02-10)
 
 * **Feature**: Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.

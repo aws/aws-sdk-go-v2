@@ -1,3 +1,7 @@
+# v1.17.0 (2023-02-14)
+
+* **Feature**: AWS AppConfig now offers the option to set a version label on hosted configuration versions. Version labels allow you to identify specific hosted configuration versions based on an alternate versioning scheme that you define.
+
 # v1.16.1 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

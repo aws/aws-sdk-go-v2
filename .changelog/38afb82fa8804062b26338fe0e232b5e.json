@@ -1,8 +1,0 @@
-{
-    "id": "38afb82f-a880-4062-b263-38fe0e232b5e",
-    "type": "feature",
-    "description": "With this launch, we are giving customers the ability to use older SMB protocol versions, enabling them to use DataSync to copy data to and from their legacy storage arrays.",
-    "modules": [
-        "service/datasync"
-    ]
-}

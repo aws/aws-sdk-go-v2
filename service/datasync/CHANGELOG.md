@@ -1,3 +1,7 @@
+# v1.22.0 (2023-02-14)
+
+* **Feature**: With this launch, we are giving customers the ability to use older SMB protocol versions, enabling them to use DataSync to copy data to and from their legacy storage arrays.
+
 # v1.21.2 (2023-02-08)
 
 * No change notes available for this release.

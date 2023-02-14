@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.17.4
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.28
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.22
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.0.19
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.0.20
 	github.com/aws/smithy-go v1.13.5
 )
 
