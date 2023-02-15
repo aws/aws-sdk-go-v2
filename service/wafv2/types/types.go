@@ -66,7 +66,36 @@ type AndStatement struct {
 	noSmithyDocumentSerde
 }
 
-// Details for your use of the Bot Control managed rule group, used in
+// Details for your use of the account takeover prevention managed rule group,
+// AWSManagedRulesATPRuleSet. This configuration is used in ManagedRuleGroupConfig.
+type AWSManagedRulesATPRuleSet struct {
+
+	// The path of the login endpoint for your application. For example, for the URL
+	// https://example.com/web/login, you would provide the path /web/login. The rule
+	// group inspects only HTTP POST requests to your specified login endpoint.
+	//
+	// This member is required.
+	LoginPath *string
+
+	// The criteria for inspecting login requests, used by the ATP rule group to
+	// validate credentials usage.
+	RequestInspection *RequestInspection
+
+	// The criteria for inspecting responses to login requests, used by the ATP rule
+	// group to track login failure rates. The ATP rule group evaluates the responses
+	// that your protected resources send back to client login attempts, keeping count
+	// of successful and failed attempts from each IP address and client session. Using
+	// this information, the rule group labels and mitigates requests from client
+	// sessions and IP addresses that submit too many failed login attempts in a short
+	// amount of time. Response inspection is available only in web ACLs that protect
+	// Amazon CloudFront distributions.
+	ResponseInspection *ResponseInspection
+
+	noSmithyDocumentSerde
+}
+
+// Details for your use of the Bot Control managed rule group,
+// AWSManagedRulesBotControlRuleSet. This configuration is used in
 // ManagedRuleGroupConfig.
 type AWSManagedRulesBotControlRuleSet struct {
 
@@ -169,7 +198,7 @@ type ByteMatchStatement struct {
 
 	// A string value that you want WAF to search for. WAF searches only in the part of
 	// web requests that you designate for inspection in FieldToMatch. The maximum
-	// length of the value is 50 bytes. Valid values depend on the component that you
+	// length of the value is 200 bytes. Valid values depend on the component that you
 	// specify for inspection in FieldToMatch:
 	//
 	// * Method: The HTTP method that you want
@@ -182,7 +211,7 @@ type ByteMatchStatement struct {
 	// If SearchString includes alphabetic
 	// characters A-Z and a-z, note that the value is case sensitive. If you're using
 	// the WAF API Specify a base64-encoded version of the value. The maximum length of
-	// the value before you base64-encode it is 50 bytes. For example, suppose the
+	// the value before you base64-encode it is 200 bytes. For example, suppose the
 	// value of Type is HEADER and the value of Data is User-Agent. If you want to
 	// search the User-Agent header for the value BadBot, you base64-encode BadBot
 	// using MIME base64-encoding and include the resulting value, QmFkQm90, in the
@@ -1410,11 +1439,28 @@ type LoggingFilter struct {
 }
 
 // Additional information that's used by a managed rule group. Many managed rule
-// groups don't require this. Use the AWSManagedRulesBotControlRuleSet
+// groups don't require this. Use the AWSManagedRulesATPRuleSet configuration
+// object for the account takeover prevention managed rule group, to provide
+// information such as the sign-in page of your application and the type of content
+// to accept or reject from the client. Use the AWSManagedRulesBotControlRuleSet
 // configuration object to configure the protection level that you want the Bot
 // Control rule group to use. For example specifications, see the examples section
 // of CreateWebACL.
 type ManagedRuleGroupConfig struct {
+
+	// Additional configuration for using the account takeover prevention (ATP) managed
+	// rule group, AWSManagedRulesATPRuleSet. Use this to provide login request
+	// information to the rule group. For web ACLs that protect CloudFront
+	// distributions, use this to also provide the information about how your
+	// distribution responds to login requests. This configuration replaces the
+	// individual configuration fields in ManagedRuleGroupConfig and provides
+	// additional feature configuration. For information about using the ATP managed
+	// rule group, see WAF Fraud Control account takeover prevention (ATP) rule group
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html)
+	// and WAF Fraud Control account takeover prevention (ATP)
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html) in the WAF
+	// Developer Guide.
+	AWSManagedRulesATPRuleSet *AWSManagedRulesATPRuleSet
 
 	// Additional configuration for using the Bot Control managed rule group. Use this
 	// to specify the inspection level that you want to use. For information about
@@ -1425,17 +1471,31 @@ type ManagedRuleGroupConfig struct {
 	// the WAF Developer Guide.
 	AWSManagedRulesBotControlRuleSet *AWSManagedRulesBotControlRuleSet
 
-	// The path of the login endpoint for your application. For example, for the URL
-	// https://example.com/web/login, you would provide the path /web/login.
+	// Instead of this setting, provide your configuration under
+	// AWSManagedRulesATPRuleSet.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet LoginPath
 	LoginPath *string
 
-	// Details about your login page password field.
+	// Instead of this setting, provide your configuration under
+	// AWSManagedRulesATPRuleSetRequestInspection.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection
+	// PasswordField
 	PasswordField *PasswordField
 
-	// The payload type for your login endpoint, either JSON or form encoded.
+	// Instead of this setting, provide your configuration under
+	// AWSManagedRulesATPRuleSetRequestInspection.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection
+	// PayloadType
 	PayloadType PayloadType
 
-	// Details about your login page username field.
+	// Instead of this setting, provide your configuration under
+	// AWSManagedRulesATPRuleSetRequestInspection.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection
+	// UsernameField
 	UsernameField *UsernameField
 
 	noSmithyDocumentSerde
@@ -1471,7 +1531,10 @@ type ManagedRuleGroupStatement struct {
 	ExcludedRules []ExcludedRule
 
 	// Additional information that's used by a managed rule group. Many managed rule
-	// groups don't require this. Use the AWSManagedRulesBotControlRuleSet
+	// groups don't require this. Use the AWSManagedRulesATPRuleSet configuration
+	// object for the account takeover prevention managed rule group, to provide
+	// information such as the sign-in page of your application and the type of content
+	// to accept or reject from the client. Use the AWSManagedRulesBotControlRuleSet
 	// configuration object to configure the protection level that you want the Bot
 	// Control rule group to use.
 	ManagedRuleGroupConfigs []ManagedRuleGroupConfig
@@ -1780,7 +1843,8 @@ type OverrideAction struct {
 	noSmithyDocumentSerde
 }
 
-// Details about your login page password field, used in a ManagedRuleGroupConfig.
+// Details about your login page password field for request inspection, used in the
+// AWSManagedRulesATPRuleSetRequestInspection configuration.
 type PasswordField struct {
 
 	// The name of the password field. For example /form/password.
@@ -1818,7 +1882,7 @@ type QueryString struct {
 // rate-based rule with a nested AND rule statement that contains the following
 // nested statements:
 //
-// * An IP match statement with an IP set that specified the
+// * An IP match statement with an IP set that specifies the
 // address 192.0.2.44.
 //
 // * A string match statement that searches in the User-Agent
@@ -2018,6 +2082,195 @@ type ReleaseSummary struct {
 
 	// The timestamp of the release.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The criteria for inspecting login requests, used by the ATP rule group to
+// validate credentials usage. This is part of the AWSManagedRulesATPRuleSet
+// configuration in ManagedRuleGroupConfig. In these settings, you specify how your
+// application accepts login attempts by providing the request payload type and the
+// names of the fields within the request body where the username and password are
+// provided.
+type RequestInspection struct {
+
+	// Details about your login page password field. How you specify this depends on
+	// the payload type.
+	//
+	// * For JSON payloads, specify the field name in JSON pointer
+	// syntax. For information about the JSON Pointer syntax, see the Internet
+	// Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON)
+	// Pointer (https://tools.ietf.org/html/rfc6901). For example, for the JSON payload
+	// { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" } }, the
+	// username field specification is /login/username and the password field
+	// specification is /login/password.
+	//
+	// * For form encoded payload types, use the
+	// HTML form names. For example, for an HTML form with input elements named
+	// username1 and password1, the username field specification is username1 and the
+	// password field specification is password1.
+	//
+	// This member is required.
+	PasswordField *PasswordField
+
+	// The payload type for your login endpoint, either JSON or form encoded.
+	//
+	// This member is required.
+	PayloadType PayloadType
+
+	// Details about your login page username field. How you specify this depends on
+	// the payload type.
+	//
+	// * For JSON payloads, specify the field name in JSON pointer
+	// syntax. For information about the JSON Pointer syntax, see the Internet
+	// Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON)
+	// Pointer (https://tools.ietf.org/html/rfc6901). For example, for the JSON payload
+	// { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" } }, the
+	// username field specification is /login/username and the password field
+	// specification is /login/password.
+	//
+	// * For form encoded payload types, use the
+	// HTML form names. For example, for an HTML form with input elements named
+	// username1 and password1, the username field specification is username1 and the
+	// password field specification is password1.
+	//
+	// This member is required.
+	UsernameField *UsernameField
+
+	noSmithyDocumentSerde
+}
+
+// The criteria for inspecting responses to login requests, used by the ATP rule
+// group to track login failure rates. The ATP rule group evaluates the responses
+// that your protected resources send back to client login attempts, keeping count
+// of successful and failed attempts from each IP address and client session. Using
+// this information, the rule group labels and mitigates requests from client
+// sessions and IP addresses that submit too many failed login attempts in a short
+// amount of time. Response inspection is available only in web ACLs that protect
+// Amazon CloudFront distributions. This is part of the AWSManagedRulesATPRuleSet
+// configuration in ManagedRuleGroupConfig. Enable login response inspection by
+// configuring exactly one component of the response to inspect. You can't
+// configure more than one. If you don't configure any of the response inspection
+// options, response inspection is disabled.
+type ResponseInspection struct {
+
+	// Configures inspection of the response body.
+	BodyContains *ResponseInspectionBodyContains
+
+	// Configures inspection of the response header.
+	Header *ResponseInspectionHeader
+
+	// Configures inspection of the response JSON.
+	Json *ResponseInspectionJson
+
+	// Configures inspection of the response status code.
+	StatusCode *ResponseInspectionStatusCode
+
+	noSmithyDocumentSerde
+}
+
+// Configures inspection of the response body. This is part of the
+// ResponseInspection configuration for AWSManagedRulesATPRuleSet.
+type ResponseInspectionBodyContains struct {
+
+	// Strings in the body of the response that indicate a failed login attempt. To be
+	// counted as a failed login, the string can be anywhere in the body and must be an
+	// exact match, including case. Each string must be unique among the success and
+	// failure strings. JSON example: "FailureStrings": [ "Login failed" ]
+	//
+	// This member is required.
+	FailureStrings []string
+
+	// Strings in the body of the response that indicate a successful login attempt. To
+	// be counted as a successful login, the string can be anywhere in the body and
+	// must be an exact match, including case. Each string must be unique among the
+	// success and failure strings. JSON example: "SuccessStrings": [ "Login
+	// successful", "Welcome to our site!" ]
+	//
+	// This member is required.
+	SuccessStrings []string
+
+	noSmithyDocumentSerde
+}
+
+// Configures inspection of the response header. This is part of the
+// ResponseInspection configuration for AWSManagedRulesATPRuleSet.
+type ResponseInspectionHeader struct {
+
+	// Values in the response header with the specified name that indicate a failed
+	// login attempt. To be counted as a failed login, the value must be an exact
+	// match, including case. Each value must be unique among the success and failure
+	// values. JSON example: "FailureValues": [ "LoginFailed", "Failed login" ]
+	//
+	// This member is required.
+	FailureValues []string
+
+	// The name of the header to match against. The name must be an exact match,
+	// including case. JSON example: "Name": [ "LoginResult" ]
+	//
+	// This member is required.
+	Name *string
+
+	// Values in the response header with the specified name that indicate a successful
+	// login attempt. To be counted as a successful login, the value must be an exact
+	// match, including case. Each value must be unique among the success and failure
+	// values. JSON example: "SuccessValues": [ "LoginPassed", "Successful login" ]
+	//
+	// This member is required.
+	SuccessValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Configures inspection of the response JSON. This is part of the
+// ResponseInspection configuration for AWSManagedRulesATPRuleSet.
+type ResponseInspectionJson struct {
+
+	// Values for the specified identifier in the response JSON that indicate a failed
+	// login attempt. To be counted as a failed login, the value must be an exact
+	// match, including case. Each value must be unique among the success and failure
+	// values. JSON example: "FailureValues": [ "False", "Failed" ]
+	//
+	// This member is required.
+	FailureValues []string
+
+	// The identifier for the value to match against in the JSON. The identifier must
+	// be an exact match, including case. JSON example: "Identifier": [
+	// "/login/success" ]
+	//
+	// This member is required.
+	Identifier *string
+
+	// Values for the specified identifier in the response JSON that indicate a
+	// successful login attempt. To be counted as a successful login, the value must be
+	// an exact match, including case. Each value must be unique among the success and
+	// failure values. JSON example: "SuccessValues": [ "True", "Succeeded" ]
+	//
+	// This member is required.
+	SuccessValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Configures inspection of the response status code. This is part of the
+// ResponseInspection configuration for AWSManagedRulesATPRuleSet.
+type ResponseInspectionStatusCode struct {
+
+	// Status codes in the response that indicate a failed login attempt. To be counted
+	// as a failed login, the response status code must match one of these. Each code
+	// must be unique among the success and failure status codes. JSON example:
+	// "FailureCodes": [ 400, 404 ]
+	//
+	// This member is required.
+	FailureCodes []int32
+
+	// Status codes in the response that indicate a successful login attempt. To be
+	// counted as a successful login, the response status code must match one of these.
+	// Each code must be unique among the success and failure status codes. JSON
+	// example: "SuccessCodes": [ 200, 201 ]
+	//
+	// This member is required.
+	SuccessCodes []int32
 
 	noSmithyDocumentSerde
 }
@@ -2592,7 +2845,7 @@ type Statement struct {
 	// rate-based rule with a nested AND rule statement that contains the following
 	// nested statements:
 	//
-	// * An IP match statement with an IP set that specified the
+	// * An IP match statement with an IP set that specifies the
 	// address 192.0.2.44.
 	//
 	// * A string match statement that searches in the User-Agent
@@ -2863,7 +3116,8 @@ type UriPath struct {
 	noSmithyDocumentSerde
 }
 
-// Details about your login page username field, used in a ManagedRuleGroupConfig.
+// Details about your login page username field for request inspection, used in the
+// AWSManagedRulesATPRuleSetRequestInspection configuration.
 type UsernameField struct {
 
 	// The name of the username field. For example /form/username.

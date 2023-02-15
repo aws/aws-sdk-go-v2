@@ -1,0 +1,8 @@
+{
+    "id": "f4cba423-9d9d-4356-9b9d-127ceb841fd0",
+    "type": "feature",
+    "description": "Fix DirectJDBCSource not showing up in CLI code gen",
+    "modules": [
+        "service/glue"
+    ]
+}

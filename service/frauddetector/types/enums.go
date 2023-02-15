@@ -124,6 +124,26 @@ func (Language) Values() []Language {
 	}
 }
 
+type ListUpdateMode string
+
+// Enum values for ListUpdateMode
+const (
+	ListUpdateModeReplace ListUpdateMode = "REPLACE"
+	ListUpdateModeAppend  ListUpdateMode = "APPEND"
+	ListUpdateModeRemove  ListUpdateMode = "REMOVE"
+)
+
+// Values returns all known values for ListUpdateMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListUpdateMode) Values() []ListUpdateMode {
+	return []ListUpdateMode{
+		"REPLACE",
+		"APPEND",
+		"REMOVE",
+	}
+}
+
 type ModelEndpointStatus string
 
 // Enum values for ModelEndpointStatus

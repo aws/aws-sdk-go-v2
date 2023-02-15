@@ -1,0 +1,8 @@
+{
+    "id": "d14c5d41-9bf1-4ff5-a94f-6b456461d860",
+    "type": "feature",
+    "description": "This release introduces a new StartNetworkResourceUpdate API, which enables return/replacement of hardware from a NetworkSite.",
+    "modules": [
+        "service/privatenetworks"
+    ]
+}

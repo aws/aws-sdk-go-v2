@@ -45,6 +45,9 @@ type DeleteBlueGreenDeploymentInput struct {
 	BlueGreenDeploymentIdentifier *string
 
 	// A value that indicates whether to delete the resources in the green environment.
+	// You can't specify this option if the blue/green deployment status
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html)
+	// is SWITCHOVER_COMPLETED.
 	DeleteTarget *bool
 
 	noSmithyDocumentSerde

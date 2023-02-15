@@ -701,6 +701,9 @@ type CodeGenConfigurationNode struct {
 	// transformation. The output is a collection of DynamicFrames.
 	CustomCode *CustomCode
 
+	// Specifies the direct JDBC source connection.
+	DirectJDBCSource *DirectJDBCSource
+
 	// Specifies an Apache Kafka data store.
 	DirectKafkaSource *DirectKafkaSource
 
@@ -2441,6 +2444,40 @@ type DevEndpointCustomLibraries struct {
 	// pandas (http://pandas.pydata.org/) Python data analysis library, are not
 	// currently supported.
 	ExtraPythonLibsS3Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the direct JDBC source connection.
+type DirectJDBCSource struct {
+
+	// The connection name of the JDBC source.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The connection type of the JDBC source.
+	//
+	// This member is required.
+	ConnectionType JDBCConnectionType
+
+	// The database of the JDBC source connection.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the JDBC source connection.
+	//
+	// This member is required.
+	Name *string
+
+	// The table of the JDBC source connection.
+	//
+	// This member is required.
+	Table *string
+
+	// The temp directory of the JDBC Redshift source.
+	RedshiftTmpDir *string
 
 	noSmithyDocumentSerde
 }

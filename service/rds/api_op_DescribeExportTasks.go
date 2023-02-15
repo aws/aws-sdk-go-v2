@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a snapshot export to Amazon S3. This API operation
-// supports pagination.
+// Returns information about a snapshot or cluster export to Amazon S3. This API
+// operation supports pagination.
 func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExportTasksInput, optFns ...func(*Options)) (*DescribeExportTasksOutput, error) {
 	if params == nil {
 		params = &DescribeExportTasksInput{}
@@ -31,25 +31,25 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 
 type DescribeExportTasksInput struct {
 
-	// The identifier of the snapshot export task to be described.
+	// The identifier of the snapshot or cluster export task to be described.
 	ExportTaskIdentifier *string
 
-	// Filters specify one or more snapshot exports to describe. The filters are
-	// specified as name-value pairs that define what to include in the output. Filter
-	// names and values are case-sensitive. Supported filters include the following:
-	//
-	// *
-	// export-task-identifier - An identifier for the snapshot export task.
-	//
-	// *
-	// s3-bucket - The Amazon S3 bucket the snapshot is exported to.
-	//
-	// * source-arn -
-	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3
-	//
-	// * status -
-	// The status of the export task. Must be lowercase. Valid statuses are the
+	// Filters specify one or more snapshot or cluster exports to describe. The filters
+	// are specified as name-value pairs that define what to include in the output.
+	// Filter names and values are case-sensitive. Supported filters include the
 	// following:
+	//
+	// * export-task-identifier - An identifier for the snapshot or cluster
+	// export task.
+	//
+	// * s3-bucket - The Amazon S3 bucket the data is exported to.
+	//
+	// *
+	// source-arn - The Amazon Resource Name (ARN) of the snapshot or cluster exported
+	// to Amazon S3.
+	//
+	// * status - The status of the export task. Must be lowercase.
+	// Valid statuses are the following:
 	//
 	// * canceled
 	//
@@ -57,12 +57,12 @@ type DescribeExportTasksInput struct {
 	//
 	// * complete
 	//
-	// * failed
+	// *
+	// failed
 	//
 	// * in_progress
 	//
-	// *
-	// starting
+	// * starting
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks request.
@@ -77,7 +77,7 @@ type DescribeExportTasksInput struct {
 	// 100.
 	MaxRecords *int32
 
-	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
+	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
 	SourceArn *string
 
 	// The type of source for the export.
@@ -88,7 +88,7 @@ type DescribeExportTasksInput struct {
 
 type DescribeExportTasksOutput struct {
 
-	// Information about an export of a snapshot to Amazon S3.
+	// Information about an export of a snapshot or cluster to Amazon S3.
 	ExportTasks []types.ExportTask
 
 	// A pagination token that can be used in a later DescribeExportTasks request. A

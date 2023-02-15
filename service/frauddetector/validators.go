@@ -150,6 +150,26 @@ func (m *validateOpCreateDetectorVersion) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateList struct {
+}
+
+func (*validateOpCreateList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModel struct {
 }
 
@@ -430,6 +450,26 @@ func (m *validateOpDeleteLabel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteList struct {
+}
+
+func (*validateOpDeleteList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteModel struct {
 }
 
@@ -645,6 +685,26 @@ func (m *validateOpGetEventPredictionMetadata) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventPredictionMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetListElements struct {
+}
+
+func (*validateOpGetListElements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetListElements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetListElementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetListElementsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1070,26 @@ func (m *validateOpUpdateEventLabel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateList struct {
+}
+
+func (*validateOpUpdateList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateModel struct {
 }
 
@@ -1158,6 +1238,10 @@ func addOpCreateDetectorVersionValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateDetectorVersion{}, middleware.After)
 }
 
+func addOpCreateListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateList{}, middleware.After)
+}
+
 func addOpCreateModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModel{}, middleware.After)
 }
@@ -1214,6 +1298,10 @@ func addOpDeleteLabelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLabel{}, middleware.After)
 }
 
+func addOpDeleteListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteList{}, middleware.After)
+}
+
 func addOpDeleteModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteModel{}, middleware.After)
 }
@@ -1256,6 +1344,10 @@ func addOpGetEventPredictionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetEventPredictionMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventPredictionMetadata{}, middleware.After)
+}
+
+func addOpGetListElementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetListElements{}, middleware.After)
 }
 
 func addOpGetModelVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -1328,6 +1420,10 @@ func addOpUpdateDetectorVersionStatusValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateEventLabelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEventLabel{}, middleware.After)
+}
+
+func addOpUpdateListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateList{}, middleware.After)
 }
 
 func addOpUpdateModelValidationMiddleware(stack *middleware.Stack) error {
@@ -1782,6 +1878,26 @@ func validateOpCreateDetectorVersionInput(v *CreateDetectorVersionInput) error {
 	}
 }
 
+func validateOpCreateListInput(v *CreateListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateListInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelInput(v *CreateModelInput) error {
 	if v == nil {
 		return nil
@@ -2068,6 +2184,21 @@ func validateOpDeleteLabelInput(v *DeleteLabelInput) error {
 	}
 }
 
+func validateOpDeleteListInput(v *DeleteListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteListInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteModelInput(v *DeleteModelInput) error {
 	if v == nil {
 		return nil
@@ -2275,6 +2406,21 @@ func validateOpGetEventPredictionMetadataInput(v *GetEventPredictionMetadataInpu
 	}
 	if v.PredictionTimestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PredictionTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetListElementsInput(v *GetListElementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetListElementsInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2680,6 +2826,21 @@ func validateOpUpdateEventLabelInput(v *UpdateEventLabelInput) error {
 	}
 	if v.LabelTimestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LabelTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateListInput(v *UpdateListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateListInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

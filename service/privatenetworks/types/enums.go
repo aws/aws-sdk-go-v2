@@ -172,14 +172,15 @@ type NetworkResourceStatus string
 
 // Enum values for NetworkResourceStatus
 const (
-	NetworkResourceStatusPending       NetworkResourceStatus = "PENDING"
-	NetworkResourceStatusShipped       NetworkResourceStatus = "SHIPPED"
-	NetworkResourceStatusProvisioning  NetworkResourceStatus = "PROVISIONING"
-	NetworkResourceStatusProvisioned   NetworkResourceStatus = "PROVISIONED"
-	NetworkResourceStatusAvailable     NetworkResourceStatus = "AVAILABLE"
-	NetworkResourceStatusDeleting      NetworkResourceStatus = "DELETING"
-	NetworkResourceStatusPendingReturn NetworkResourceStatus = "PENDING_RETURN"
-	NetworkResourceStatusDeleted       NetworkResourceStatus = "DELETED"
+	NetworkResourceStatusPending               NetworkResourceStatus = "PENDING"
+	NetworkResourceStatusShipped               NetworkResourceStatus = "SHIPPED"
+	NetworkResourceStatusProvisioning          NetworkResourceStatus = "PROVISIONING"
+	NetworkResourceStatusProvisioned           NetworkResourceStatus = "PROVISIONED"
+	NetworkResourceStatusAvailable             NetworkResourceStatus = "AVAILABLE"
+	NetworkResourceStatusDeleting              NetworkResourceStatus = "DELETING"
+	NetworkResourceStatusPendingReturn         NetworkResourceStatus = "PENDING_RETURN"
+	NetworkResourceStatusDeleted               NetworkResourceStatus = "DELETED"
+	NetworkResourceStatusCreatingShippingLabel NetworkResourceStatus = "CREATING_SHIPPING_LABEL"
 )
 
 // Values returns all known values for NetworkResourceStatus. Note that this can be
@@ -195,6 +196,7 @@ func (NetworkResourceStatus) Values() []NetworkResourceStatus {
 		"DELETING",
 		"PENDING_RETURN",
 		"DELETED",
+		"CREATING_SHIPPING_LABEL",
 	}
 }
 
@@ -293,6 +295,24 @@ func (OrderFilterKeys) Values() []OrderFilterKeys {
 	return []OrderFilterKeys{
 		"STATUS",
 		"NETWORK_SITE",
+	}
+}
+
+type UpdateType string
+
+// Enum values for UpdateType
+const (
+	UpdateTypeReplace UpdateType = "REPLACE"
+	UpdateTypeReturn  UpdateType = "RETURN"
+)
+
+// Values returns all known values for UpdateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UpdateType) Values() []UpdateType {
+	return []UpdateType{
+		"REPLACE",
+		"RETURN",
 	}
 }
 

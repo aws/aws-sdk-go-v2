@@ -4954,6 +4954,9 @@ func awsAwsjson11_deserializeOpErrorStartImport(response *smithyhttp.Response, m
 	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
 		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
 
+	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
+
 	case strings.EqualFold("InvalidEventDataStoreCategoryException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidEventDataStoreCategoryException(response, errorBody)
 

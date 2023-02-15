@@ -91,8 +91,8 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The amount of storage (in gibibytes) to allocate initially for the read replica.
 	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
-	// enough memory for your read replica so that the create operation can succeed.
-	// You can also allocate additional memory for future growth.
+	// enough storage for your read replica so that the create operation can succeed.
+	// You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically

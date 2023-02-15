@@ -11923,6 +11923,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.DirectJDBCSource != nil {
+		ok := object.Key("DirectJDBCSource")
+		if err := awsAwsjson11_serializeDocumentDirectJDBCSource(v.DirectJDBCSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DirectKafkaSource != nil {
 		ok := object.Key("DirectKafkaSource")
 		if err := awsAwsjson11_serializeDocumentDirectKafkaSource(v.DirectKafkaSource, ok); err != nil {
@@ -13406,6 +13413,43 @@ func awsAwsjson11_serializeDocumentDevEndpointNames(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDirectJDBCSource(v *types.DirectJDBCSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionName != nil {
+		ok := object.Key("ConnectionName")
+		ok.String(*v.ConnectionName)
+	}
+
+	if len(v.ConnectionType) > 0 {
+		ok := object.Key("ConnectionType")
+		ok.String(string(v.ConnectionType))
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.RedshiftTmpDir != nil {
+		ok := object.Key("RedshiftTmpDir")
+		ok.String(*v.RedshiftTmpDir)
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
 	return nil
 }
 

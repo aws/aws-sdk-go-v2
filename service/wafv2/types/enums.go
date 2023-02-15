@@ -867,6 +867,7 @@ const (
 	ParameterExceptionFieldOversizeHandling               ParameterExceptionField = "OVERSIZE_HANDLING"
 	ParameterExceptionFieldChallengeConfig                ParameterExceptionField = "CHALLENGE_CONFIG"
 	ParameterExceptionFieldTokenDomain                    ParameterExceptionField = "TOKEN_DOMAIN"
+	ParameterExceptionFieldAtpRuleSetResponseInspection   ParameterExceptionField = "ATP_RULE_SET_RESPONSE_INSPECTION"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -939,6 +940,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"OVERSIZE_HANDLING",
 		"CHALLENGE_CONFIG",
 		"TOKEN_DOMAIN",
+		"ATP_RULE_SET_RESPONSE_INSPECTION",
 	}
 }
 

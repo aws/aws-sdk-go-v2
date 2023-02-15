@@ -4800,6 +4800,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("S3HudiDirectTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DirectJDBCSource != nil {
+		if err := validateDirectJDBCSource(v.DirectJDBCSource); err != nil {
+			invalidParams.AddNested("DirectJDBCSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5403,6 +5408,33 @@ func validateDecimalNumber(v *types.DecimalNumber) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DecimalNumber"}
 	if v.UnscaledValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UnscaledValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDirectJDBCSource(v *types.DirectJDBCSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DirectJDBCSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if len(v.ConnectionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

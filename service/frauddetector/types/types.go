@@ -71,6 +71,32 @@ type AggregatedVariablesImportanceMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// The metadata of a list.
+type AllowDenyList struct {
+
+	// The name of the list.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the list.
+	Arn *string
+
+	// The time the list was created.
+	CreatedTime *string
+
+	// The description of the list.
+	Description *string
+
+	// The time the list was last updated.
+	UpdatedTime *string
+
+	// The variable type of the list.
+	VariableType *string
+
+	noSmithyDocumentSerde
+}
+
 // The Account Takeover Insights (ATI) model performance metrics data points.
 type ATIMetricDataPoint struct {
 
