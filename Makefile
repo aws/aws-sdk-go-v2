@@ -504,9 +504,17 @@ sandbox-tests: sandbox-test-go1.15 sandbox-test-go1.16 sandbox-test-go1.17 sandb
 sandbox-build-%:
 	@# sandbox-build-go1.17
 	@# sandbox-build-gotip
-	docker build \
-		-f ./internal/awstesting/sandbox/Dockerfile.test.$(subst sandbox-build-,,$@) \
-		-t "aws-sdk-go-$(subst sandbox-build-,,$@)" .
+	@if [ $@ == sandbox-build-gotip ]; then\
+		docker build \
+			-f ./internal/awstesting/sandbox/Dockerfile.test.gotip \
+			-t "aws-sdk-go-$(subst sandbox-build-,,$@)" . ;\
+	else\
+		docker build \
+			--build-arg GO_VERSION=$(subst sandbox-build-go,,$@) \
+			-f ./internal/awstesting/sandbox/Dockerfile.test.goversion \
+			-t "aws-sdk-go-$(subst sandbox-build-,,$@)" . ;\
+	fi
+
 sandbox-run-%: sandbox-build-%
 	@# sandbox-run-go1.17
 	@# sandbox-run-gotip

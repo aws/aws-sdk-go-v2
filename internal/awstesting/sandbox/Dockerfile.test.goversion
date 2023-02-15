@@ -1,8 +1,7 @@
-FROM golang:1.20
+ARG GO_VERSION
+FROM golang:${GO_VERSION}
 
 ENV GOPROXY=direct
-
-ADD . /go/src/github.com/aws/aws-sdk-go-v2
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
@@ -12,6 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         vim \
         java-17-amazon-corretto-jdk \
     && rm -rf /var/list/apt/lists/*
+
+ADD . /go/src/github.com/aws/aws-sdk-go-v2
 
 WORKDIR /go/src/github.com/aws/aws-sdk-go-v2
 CMD ["make", "unit"]
