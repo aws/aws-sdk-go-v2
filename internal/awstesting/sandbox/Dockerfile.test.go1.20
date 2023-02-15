@@ -1,0 +1,17 @@
+FROM golang:1.20
+
+ENV GOPROXY=direct
+
+ADD . /go/src/github.com/aws/aws-sdk-go-v2
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        software-properties-common \
+    && wget -O- https://apt.corretto.aws/corretto.key | apt-key add - \
+    && add-apt-repository 'deb https://apt.corretto.aws stable main' \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        vim \
+        java-17-amazon-corretto-jdk \
+    && rm -rf /var/list/apt/lists/*
+
+WORKDIR /go/src/github.com/aws/aws-sdk-go-v2
+CMD ["make", "unit"]
