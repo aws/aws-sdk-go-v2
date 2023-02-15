@@ -15,7 +15,7 @@ var _ ListObjectVersionsAPIClient = (*Client)(nil)
 
 // ListObjectVersionsPaginatorOptions is the paginator options for ListObjectVersions
 type ListObjectVersionsPaginatorOptions struct {
-	// (Optional) The maximum number of Object Versions that you want Amazon Route 53 to
+	// (Optional) The maximum number of Object Versions that you want Amazon S3 to
 	// return.
 	Limit int32
 
@@ -30,8 +30,8 @@ type ListObjectVersionsPaginator struct {
 	client          ListObjectVersionsAPIClient
 	params          *ListObjectVersionsInput
 	firstPage       bool
-	KeyMarker       *string
-	VersionIdMarker *string
+	keyMarker       *string
+	versionIdMarker *string
 }
 
 // NewListObjectVersionsPaginator returns a new ListObjectVersionsPaginator
@@ -52,14 +52,14 @@ func NewListObjectVersionsPaginator(client ListObjectVersionsAPIClient, params *
 		client:          client,
 		params:          params,
 		firstPage:       true,
-		KeyMarker:       params.KeyMarker,
-		VersionIdMarker: params.VersionIdMarker,
+		keyMarker:       params.KeyMarker,
+		versionIdMarker: params.VersionIdMarker,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListObjectVersionsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.KeyMarker != nil && len(*p.KeyMarker) != 0)
+	return p.firstPage || (p.keyMarker != nil && len(*p.keyMarker) != 0) && (p.versionIdMarker != nil && len(*p.versionIdMarker) != 0)
 }
 
 // NextPage retrieves the next ListObjectVersions page.
@@ -69,8 +69,8 @@ func (p *ListObjectVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 
 	params := *p.params
-	params.KeyMarker = p.KeyMarker
-	params.VersionIdMarker = p.VersionIdMarker
+	params.KeyMarker = p.keyMarker
+	params.VersionIdMarker = p.versionIdMarker
 
 	var limit int32
 	if p.options.Limit > 0 {
@@ -84,16 +84,19 @@ func (p *ListObjectVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	p.firstPage = false
 
-	prevToken := p.KeyMarker
-
-	p.KeyMarker = result.NextKeyMarker
-	p.VersionIdMarker = result.NextVersionIdMarker
+	prevToken := p.keyMarker
+	p.keyMarker = nil
+	p.versionIdMarker = nil
+	if result.IsTruncated {
+		p.keyMarker = result.NextKeyMarker
+		p.versionIdMarker = result.NextVersionIdMarker
+	}
 
 	if p.options.StopOnDuplicateToken &&
 		prevToken != nil &&
-		p.KeyMarker != nil &&
-		*prevToken == *p.KeyMarker {
-		p.KeyMarker = nil
+		p.keyMarker != nil &&
+		*prevToken == *p.keyMarker {
+		p.keyMarker = nil
 	}
 
 	return result, nil
@@ -109,7 +112,7 @@ var _ ListMultipartUploadsAPIClient = (*Client)(nil)
 
 // ListMultipartUploadsPaginatorOptions is the paginator options for ListMultipartUploads
 type ListMultipartUploadsPaginatorOptions struct {
-	// (Optional) The maximum number of Multipart Uploads that you want Amazon Route 53 to
+	// (Optional) The maximum number of Multipart Uploads that you want Amazon S3 to
 	// return.
 	Limit int32
 
@@ -124,8 +127,8 @@ type ListMultipartUploadsPaginator struct {
 	client         ListMultipartUploadsAPIClient
 	params         *ListMultipartUploadsInput
 	firstPage      bool
-	KeyMarker      *string
-	UploadIdMarker *string
+	keyMarker      *string
+	uploadIdMarker *string
 }
 
 // NewListMultipartUploadsPaginator returns a new ListMultipartUploadsPaginator
@@ -146,14 +149,14 @@ func NewListMultipartUploadsPaginator(client ListMultipartUploadsAPIClient, para
 		client:         client,
 		params:         params,
 		firstPage:      true,
-		KeyMarker:      params.KeyMarker,
-		UploadIdMarker: params.UploadIdMarker,
+		keyMarker:      params.KeyMarker,
+		uploadIdMarker: params.UploadIdMarker,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListMultipartUploadsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.KeyMarker != nil && len(*p.KeyMarker) != 0)
+	return p.firstPage || (p.keyMarker != nil && len(*p.keyMarker) != 0) && (p.uploadIdMarker != nil && len(*p.uploadIdMarker) != 0)
 }
 
 // NextPage retrieves the next ListMultipartUploads page.
@@ -163,8 +166,8 @@ func (p *ListMultipartUploadsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 
 	params := *p.params
-	params.KeyMarker = p.KeyMarker
-	params.UploadIdMarker = p.UploadIdMarker
+	params.KeyMarker = p.keyMarker
+	params.UploadIdMarker = p.uploadIdMarker
 
 	var limit int32
 	if p.options.Limit > 0 {
@@ -178,15 +181,20 @@ func (p *ListMultipartUploadsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	p.firstPage = false
 
-	prevToken := p.KeyMarker
-	p.KeyMarker = result.NextKeyMarker
-	p.UploadIdMarker = result.NextUploadIdMarker
+	prevToken := p.keyMarker
+
+	p.keyMarker = nil
+	p.uploadIdMarker = nil
+	if result.IsTruncated {
+		p.keyMarker = result.NextKeyMarker
+		p.uploadIdMarker = result.NextUploadIdMarker
+	}
 
 	if p.options.StopOnDuplicateToken &&
 		prevToken != nil &&
-		p.KeyMarker != nil &&
-		*prevToken == *p.KeyMarker {
-		p.KeyMarker = nil
+		p.keyMarker != nil &&
+		*prevToken == *p.keyMarker {
+		p.keyMarker = nil
 	}
 
 	return result, nil
