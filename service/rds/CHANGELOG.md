@@ -1,3 +1,7 @@
+# v1.40.3 (2023-02-15)
+
+* **Documentation**: Database Activity Stream support for RDS for SQL Server.
+
 # v1.40.2 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

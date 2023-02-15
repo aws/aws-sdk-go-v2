@@ -1,8 +1,0 @@
-{
-    "id": "0376934a-30b5-4310-a1c4-2f0f62df2e76",
-    "type": "documentation",
-    "description": "Database Activity Stream support for RDS for SQL Server.",
-    "modules": [
-        "service/rds"
-    ]
-}

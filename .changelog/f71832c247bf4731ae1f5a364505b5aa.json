@@ -1,8 +1,0 @@
-{
-    "id": "f71832c2-47bf-4731-ae1f-5a364505b5aa",
-    "type": "feature",
-    "description": "For protected CloudFront distributions, you can now use the AWS WAF Fraud Control account takeover prevention (ATP) managed rule group to block new login attempts from clients that have recently submitted too many failed login attempts.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

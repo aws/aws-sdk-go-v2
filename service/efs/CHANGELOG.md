@@ -1,3 +1,9 @@
+# v1.19.4 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+* **Documentation**: Documentation update for EFS to support IAM best practices.
+
 # v1.19.3 (2023-02-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

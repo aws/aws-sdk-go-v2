@@ -1,3 +1,8 @@
+# v1.15.3 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
 # v1.15.2 (2023-02-07)
 
 * No change notes available for this release.

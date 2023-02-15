@@ -1,8 +1,0 @@
-{
-    "id": "7650d89a-a5d0-448d-862c-432c8aaa72a6",
-    "type": "feature",
-    "description": "This release adds an InsufficientEncryptionPolicyException type to the StartImport endpoint",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}
