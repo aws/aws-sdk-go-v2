@@ -83,6 +83,14 @@ type CreateWorkspaceInput struct {
 	// This value conforms to the media type: application/json
 	Configuration *string
 
+	// Configuration for network access to your workspace. When this is configured,
+	// only listed IP addresses and VPC endpoints will be able to access your
+	// workspace. Standard Grafana authentication and authorization will still be
+	// required. If this is not configured, or is removed, then all IP addresses and
+	// VPC endpoints will be allowed. Standard Grafana authentication and authorization
+	// will still be required.
+	NetworkAccessControl *types.NetworkAccessConfiguration
+
 	// The name of an IAM role that already exists to use with Organizations to access
 	// Amazon Web Services data sources and notification channels in other accounts in
 	// an organization.

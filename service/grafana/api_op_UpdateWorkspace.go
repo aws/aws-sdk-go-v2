@@ -48,11 +48,19 @@ type UpdateWorkspaceInput struct {
 	// access in the workspaceOrganizationalUnits parameter.
 	AccountAccessType types.AccountAccessType
 
+	// The configuration settings for network access to your workspace. When this is
+	// configured, only listed IP addresses and VPC endpoints will be able to access
+	// your workspace. Standard Grafana authentication and authorization will still be
+	// required. If this is not configured, or is removed, then all IP addresses and
+	// VPC endpoints will be allowed. Standard Grafana authentication and authorization
+	// will still be required.
+	NetworkAccessControl *types.NetworkAccessConfiguration
+
 	// The name of an IAM role that already exists to use to access resources through
 	// Organizations.
 	OrganizationRoleName *string
 
-	// If you specify Service Managed, Amazon Managed Grafana automatically creates the
+	// If you specify SERVICE_MANAGED, Amazon Managed Grafana automatically creates the
 	// IAM roles and provisions the permissions that the workspace needs to use Amazon
 	// Web Services data sources and notification channels. If you specify
 	// CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you
@@ -64,6 +72,13 @@ type UpdateWorkspaceInput struct {
 	// notification channels
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
 	PermissionType types.PermissionType
+
+	// Whether to remove the network access configuration from the workspace. Setting
+	// this to true and providing a networkAccessControl to set will return an error.
+	// If you remove this configuration by setting this to true, then all IP addresses
+	// and VPC endpoints will be allowed. Standard Grafana authentication and
+	// authorization will still be required.
+	RemoveNetworkAccessConfiguration *bool
 
 	// Whether to remove the VPC configuration from the workspace. Setting this to true
 	// and providing a vpcConfiguration to set will return an error.

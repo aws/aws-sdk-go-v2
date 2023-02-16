@@ -8256,6 +8256,11 @@ func awsAwsjson11_deserializeDocumentInstanceFleet(v **types.InstanceFleet, valu
 				sv.ProvisionedSpotCapacity = ptr.Int32(int32(i64))
 			}
 
+		case "ResizeSpecifications":
+			if err := awsAwsjson11_deserializeDocumentInstanceFleetResizingSpecifications(&sv.ResizeSpecifications, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if err := awsAwsjson11_deserializeDocumentInstanceFleetStatus(&sv.Status, value); err != nil {
 				return err
@@ -8359,6 +8364,47 @@ func awsAwsjson11_deserializeDocumentInstanceFleetProvisioningSpecifications(v *
 
 		case "SpotSpecification":
 			if err := awsAwsjson11_deserializeDocumentSpotProvisioningSpecification(&sv.SpotSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceFleetResizingSpecifications(v **types.InstanceFleetResizingSpecifications, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceFleetResizingSpecifications
+	if *v == nil {
+		sv = &types.InstanceFleetResizingSpecifications{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OnDemandResizeSpecification":
+			if err := awsAwsjson11_deserializeDocumentOnDemandResizingSpecification(&sv.OnDemandResizeSpecification, value); err != nil {
+				return err
+			}
+
+		case "SpotResizeSpecification":
+			if err := awsAwsjson11_deserializeDocumentSpotResizingSpecification(&sv.SpotResizeSpecification, value); err != nil {
 				return err
 			}
 
@@ -10871,6 +10917,50 @@ func awsAwsjson11_deserializeDocumentOnDemandProvisioningSpecification(v **types
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOnDemandResizingSpecification(v **types.OnDemandResizingSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OnDemandResizingSpecification
+	if *v == nil {
+		sv = &types.OnDemandResizingSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TimeoutDurationMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WholeNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutDurationMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOSRelease(v **types.OSRelease, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12015,6 +12105,50 @@ func awsAwsjson11_deserializeDocumentSpotProvisioningSpecification(v **types.Spo
 				sv.TimeoutAction = types.SpotProvisioningTimeoutAction(jtv)
 			}
 
+		case "TimeoutDurationMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WholeNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutDurationMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpotResizingSpecification(v **types.SpotResizingSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpotResizingSpecification
+	if *v == nil {
+		sv = &types.SpotResizingSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		case "TimeoutDurationMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
