@@ -48,7 +48,7 @@
                 "ResponseInspection": {
                     "target": "com.amazonaws.wafv2#ResponseInspection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
                     }
                 }
             },
@@ -8158,7 +8158,7 @@
                 "AWSManagedRulesATPRuleSet": {
                     "target": "com.amazonaws.wafv2#AWSManagedRulesATPRuleSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration for using the account takeover prevention (ATP) managed rule group, <code>AWSManagedRulesATPRuleSet</code>. \n       Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide\n       the information about how your distribution responds to login requests. This configuration replaces the individual configuration fields in <code>ManagedRuleGroupConfig</code> and provides additional feature configuration. </p>\n         <p>For information \n       about using the ATP managed rule group, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html\">WAF Fraud Control account takeover prevention (ATP) rule group</a> \n               and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html\">WAF Fraud Control account takeover prevention (ATP)</a>\n               in the <i>WAF Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Additional configuration for using the account takeover prevention (ATP) managed rule group, <code>AWSManagedRulesATPRuleSet</code>. \n       Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide\n           the information about how your distribution responds to login requests. </p>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>\n         <p>This configuration replaces the individual configuration fields in <code>ManagedRuleGroupConfig</code> and provides additional feature configuration. </p>\n         <p>For information \n       about using the ATP managed rule group, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html\">WAF Fraud Control account takeover prevention (ATP) rule group</a> \n               and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html\">WAF Fraud Control account takeover prevention (ATP)</a>\n               in the <i>WAF Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -9781,7 +9781,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>Enable login response inspection by configuring exactly one component of the response to inspect. You can't configure more than one. If you don't configure any of the response inspection options, response inspection is disabled. </p>"
+                "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>Enable login response inspection by configuring exactly one component of the response to inspect. You can't configure more than one. If you don't configure any of the response inspection options, response inspection is disabled. </p>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionBodyContains": {
@@ -9803,7 +9803,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response body. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>"
+                "smithy.api#documentation": "<p>Configures inspection of the response body. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionBodyContainsFailureStrings": {
@@ -9856,7 +9856,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response header. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>"
+                "smithy.api#documentation": "<p>Configures inspection of the response header. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionHeaderFailureValues": {
@@ -9919,7 +9919,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response JSON. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>"
+                "smithy.api#documentation": "<p>Configures inspection of the response JSON. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionJsonFailureValues": {
@@ -9965,7 +9965,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response status code. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>"
+                "smithy.api#documentation": "<p>Configures inspection of the response status code. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionStatusCodeFailureCodes": {
