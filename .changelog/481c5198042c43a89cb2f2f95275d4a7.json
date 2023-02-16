@@ -1,8 +1,0 @@
-{
-    "id": "481c5198-042c-43a8-9cb2-f2f95275d4a7",
-    "type": "feature",
-    "description": "With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces",
-    "modules": [
-        "service/grafana"
-    ]
-}

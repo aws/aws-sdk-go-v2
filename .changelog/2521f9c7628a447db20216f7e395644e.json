@@ -1,8 +1,0 @@
-{
-    "id": "2521f9c7-628a-447d-b202-16f7e395644e",
-    "type": "feature",
-    "description": "This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs.",
-    "modules": [
-        "service/emr"
-    ]
-}

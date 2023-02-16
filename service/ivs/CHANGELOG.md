@@ -1,3 +1,7 @@
+# v1.20.3 (2023-02-16)
+
+* **Documentation**: Doc-only update. Updated text description in DeleteChannel, Stream, and StreamSummary.
+
 # v1.20.2 (2023-02-15)
 
 * **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.

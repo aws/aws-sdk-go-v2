@@ -1,3 +1,7 @@
+# v1.12.0 (2023-02-16)
+
+* **Feature**: With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces
+
 # v1.11.2 (2023-02-15)
 
 * **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.

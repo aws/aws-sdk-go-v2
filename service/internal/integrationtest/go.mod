@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.14.2
-	github.com/aws/aws-sdk-go-v2/service/emr v1.22.3
+	github.com/aws/aws-sdk-go-v2/service/emr v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.2
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.2
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.3
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.25.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.3
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

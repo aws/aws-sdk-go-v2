@@ -1,3 +1,15 @@
+# Release (2023-02-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.23.0](service/emr/CHANGELOG.md#v1230-2023-02-16)
+  * **Feature**: This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.12.0](service/grafana/CHANGELOG.md#v1120-2023-02-16)
+  * **Feature**: With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.20.3](service/ivs/CHANGELOG.md#v1203-2023-02-16)
+  * **Documentation**: Doc-only update. Updated text description in DeleteChannel, Stream, and StreamSummary.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.25.1](service/wafv2/CHANGELOG.md#v1251-2023-02-16)
+  * **Documentation**: Added a notice for account takeover prevention (ATP). The interface incorrectly lets you to configure ATP response inspection in regional web ACLs in Region US East (N. Virginia), without returning an error. ATP response inspection is only available in web ACLs that protect CloudFront distributions.
+
 # Release (2023-02-15)
 
 ## General Highlights

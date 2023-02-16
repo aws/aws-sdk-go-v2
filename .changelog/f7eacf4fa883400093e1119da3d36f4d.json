@@ -1,8 +1,0 @@
-{
-    "id": "f7eacf4f-a883-4000-93e1-119da3d36f4d",
-    "type": "documentation",
-    "description": "Doc-only update. Updated text description in DeleteChannel, Stream, and StreamSummary.",
-    "modules": [
-        "service/ivs"
-    ]
-}
