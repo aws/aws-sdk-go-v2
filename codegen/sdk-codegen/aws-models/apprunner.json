@@ -42,8 +42,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 25
+                    "min": 1
                 }
             }
         },
@@ -178,7 +177,7 @@
                     "name": "apprunner"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>App Runner</fullname>\n\n    \n\n         <p>App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code\n      to a running service in the Amazon Web Services Cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to\n      provision and configure Amazon Web Services resources.</p>\n         <p>App Runner connects directly to your container registry or source code repository. It provides an automatic delivery pipeline with fully managed operations,\n      high performance, scalability, and security.</p>\n         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">App Runner Developer Guide</a>.\n      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">App Runner Release Notes</a>.</p>\n         <p>\n       To install the Software Development Kits (SDKs), Integrated\n      Development Environment (IDE) Toolkits, and command line tools that you can use to access the API, see <a href=\"http://aws.amazon.com/tools/\">Tools for\n        Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">App Runner\n        endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#documentation": "<fullname>App Runner</fullname>\n         <p>App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code\n      to a running service in the Amazon Web Services Cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to\n      provision and configure Amazon Web Services resources.</p>\n         <p>App Runner connects directly to your container registry or source code repository. It provides an automatic delivery pipeline with fully managed operations,\n      high performance, scalability, and security.</p>\n         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">App Runner Developer Guide</a>.\n      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">App Runner Release Notes</a>.</p>\n         <p>\n       To install the Software Development Kits (SDKs), Integrated\n      Development Environment (IDE) Toolkits, and command line tools that you can use to access the API, see <a href=\"http://aws.amazon.com/tools/\">Tools for\n        Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">App Runner\n        endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "AWS App Runner",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://apprunner.amazonaws.com/doc/2020-05-15/"
@@ -188,7 +187,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -217,13 +216,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -231,23 +229,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -256,19 +251,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://apprunner-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://apprunner-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -281,134 +458,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://apprunner.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://apprunner-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -416,7 +511,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://apprunner-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://apprunner.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -425,74 +520,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://apprunner.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://apprunner.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -501,94 +535,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://apprunner-fips.us-west-2.api.aws"
+                                    "url": "https://apprunner.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -600,99 +556,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -704,47 +569,21 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://apprunner-fips.us-east-2.api.aws"
+                                    "url": "https://apprunner-fips.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://apprunner.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -756,12 +595,233 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apprunner.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -769,8 +829,21 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -781,8 +854,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -793,8 +866,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -859,6 +932,9 @@
                         "smithy.api#documentation": "<p>Set to <code>true</code> to associate the subdomain <code>www.<i>DomainName</i>\n            </code> with the App Runner service in addition to the base\n      domain.</p>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#AssociateCustomDomainResponse": {
@@ -892,6 +968,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#AuthenticationConfiguration": {
@@ -1179,7 +1258,7 @@
                 "RuntimeEnvironmentSecrets": {
                     "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecrets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul> \n         </note>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -1420,6 +1499,9 @@
                         "smithy.api#documentation": "<p>A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#CreateAutoScalingConfigurationResponse": {
@@ -1432,6 +1514,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#CreateConnection": {
@@ -1480,6 +1565,9 @@
                         "smithy.api#documentation": "<p>A list of metadata items that you can associate with your connection resource. A tag is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#CreateConnectionResponse": {
@@ -1492,6 +1580,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#CreateObservabilityConfiguration": {
@@ -1539,6 +1630,9 @@
                         "smithy.api#documentation": "<p>A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#CreateObservabilityConfigurationResponse": {
@@ -1551,6 +1645,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#CreateService": {
@@ -1635,6 +1732,9 @@
                         "smithy.api#documentation": "<p>The observability configuration of your service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#CreateServiceResponse": {
@@ -1654,6 +1754,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#CreateVpcConnector": {
@@ -1708,6 +1811,9 @@
                         "smithy.api#documentation": "<p>A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#CreateVpcConnectorResponse": {
@@ -1720,6 +1826,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#CreateVpcIngressConnection": {
@@ -1778,6 +1887,9 @@
                         "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with the VPC Ingress Connection resource. A tag is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#CreateVpcIngressConnectionResponse": {
@@ -1790,6 +1902,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#CustomDomain": {
@@ -1923,6 +2038,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DeleteAutoScalingConfigurationResponse": {
@@ -1935,6 +2053,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DeleteConnection": {
@@ -1970,6 +2091,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DeleteConnectionResponse": {
@@ -1981,6 +2105,9 @@
                         "smithy.api#documentation": "<p>A description of the App Runner connection that this request just deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DeleteObservabilityConfiguration": {
@@ -2016,6 +2143,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DeleteObservabilityConfigurationResponse": {
@@ -2028,6 +2158,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DeleteService": {
@@ -2066,6 +2199,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DeleteServiceResponse": {
@@ -2085,6 +2221,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DeleteVpcConnector": {
@@ -2120,6 +2259,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DeleteVpcConnectorResponse": {
@@ -2132,6 +2274,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DeleteVpcIngressConnection": {
@@ -2170,6 +2315,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DeleteVpcIngressConnectionResponse": {
@@ -2182,6 +2330,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DescribeAutoScalingConfiguration": {
@@ -2217,6 +2368,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DescribeAutoScalingConfigurationResponse": {
@@ -2229,6 +2383,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DescribeCustomDomains": {
@@ -2290,6 +2447,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results that each response (result page) can include. It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DescribeCustomDomainsResponse": {
@@ -2329,6 +2489,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DescribeObservabilityConfiguration": {
@@ -2364,6 +2527,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DescribeObservabilityConfigurationResponse": {
@@ -2376,6 +2542,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DescribeService": {
@@ -2411,6 +2580,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DescribeServiceResponse": {
@@ -2423,6 +2595,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DescribeVpcConnector": {
@@ -2458,6 +2633,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DescribeVpcConnectorResponse": {
@@ -2470,6 +2648,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DescribeVpcIngressConnection": {
@@ -2505,6 +2686,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DescribeVpcIngressConnectionResponse": {
@@ -2517,6 +2701,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DisassociateCustomDomain": {
@@ -2562,6 +2749,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#DisassociateCustomDomainResponse": {
@@ -2595,6 +2785,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#DomainName": {
@@ -2797,7 +2990,7 @@
                 "RuntimeEnvironmentSecrets": {
                     "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecrets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul> \n         </note>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -3041,6 +3234,9 @@
                         "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListAutoScalingConfigurationsResponse": {
@@ -3059,6 +3255,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListConnections": {
@@ -3107,6 +3306,9 @@
                         "smithy.api#documentation": "<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListConnectionsResponse": {
@@ -3125,6 +3327,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListObservabilityConfigurations": {
@@ -3180,6 +3385,9 @@
                         "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListObservabilityConfigurationsResponse": {
@@ -3198,6 +3406,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListOperations": {
@@ -3259,6 +3470,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListOperationsResponse": {
@@ -3276,6 +3490,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListServices": {
@@ -3318,6 +3535,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListServicesResponse": {
@@ -3336,6 +3556,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListTagsForResource": {
@@ -3374,6 +3597,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListTagsForResourceResponse": {
@@ -3385,6 +3611,9 @@
                         "smithy.api#documentation": "<p>A list of the tag key-value pairs that are associated with the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListVpcConnectors": {
@@ -3427,6 +3656,9 @@
                         "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListVpcConnectorsResponse": {
@@ -3445,6 +3677,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ListVpcIngressConnections": {
@@ -3513,6 +3748,9 @@
                         "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ListVpcIngressConnectionsResponse": {
@@ -3531,6 +3769,9 @@
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#MaxResults": {
@@ -3838,6 +4079,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETE_SERVICE"
                     }
+                },
+                "UPDATE_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_SERVICE"
+                    }
                 }
             }
         },
@@ -3877,6 +4124,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#PauseServiceResponse": {
@@ -3895,6 +4145,9 @@
                         "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#ProviderType": {
@@ -3961,6 +4214,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#ResumeServiceResponse": {
@@ -3979,6 +4235,9 @@
                         "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#RoleArn": {
@@ -4494,6 +4753,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#StartDeploymentResponse": {
@@ -4506,6 +4768,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#String": {
@@ -4609,11 +4874,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.apprunner#TagValue": {
             "type": "string",
@@ -4707,11 +4978,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.apprunner#UpdateService": {
             "type": "operation",
@@ -4785,6 +5062,9 @@
                         "smithy.api#documentation": "<p>The observability configuration of your service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#UpdateServiceResponse": {
@@ -4804,6 +5084,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#UpdateVpcIngressConnection": {
@@ -4849,6 +5132,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apprunner#UpdateVpcIngressConnectionResponse": {
@@ -4861,6 +5147,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apprunner#VpcConnector": {
