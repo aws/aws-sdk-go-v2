@@ -213,11 +213,15 @@ func TestCachedFields(t *testing.T) {
 	}
 
 	for tagKey, cs := range cases {
+		tagKey := tagKey
+		cs := cs
 		for _, c := range cs {
 			name := tagKey
 			if name == "" {
 				name = "none"
 			}
+
+			c := c
 			t.Run(fmt.Sprintf("%s/%s", name, c.Name), func(t *testing.T) {
 				t.Parallel()
 

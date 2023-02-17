@@ -1,4 +1,5 @@
-FROM aws-golang:tip
+ARG GO_VERSION
+FROM golang:${GO_VERSION}
 
 ENV GOPROXY=direct
 
@@ -12,5 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/list/apt/lists/*
 
 ADD . /go/src/github.com/aws/aws-sdk-go-v2
+
 WORKDIR /go/src/github.com/aws/aws-sdk-go-v2
 CMD ["make", "unit"]
