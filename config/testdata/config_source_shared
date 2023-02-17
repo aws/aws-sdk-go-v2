@@ -98,3 +98,6 @@ sso_region = us-west-2
 [profile webident]
 web_identity_token_file = ./testdata/wit.txt
 role_arn = webident_arn
+
+[profile webident-partial]
+web_identity_token_file = ./testdata/wit.txt
