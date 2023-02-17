@@ -1,0 +1,8 @@
+{
+    "id": "ef9c1342-e75c-45c9-9d7c-ce04448cb7ff",
+    "type": "feature",
+    "description": "This release supports removing MaxSize limit for AutoScalingConfiguration.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

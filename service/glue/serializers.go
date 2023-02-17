@@ -11573,6 +11573,42 @@ func awsAwsjson11_serializeDocumentBoundedPartitionValueList(v []string, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCatalogDeltaSource(v *types.CatalogDeltaSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalDeltaOptions != nil {
+		ok := object.Key("AdditionalDeltaOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalDeltaOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCatalogEntries(v []types.CatalogEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -11881,6 +11917,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.CatalogDeltaSource != nil {
+		ok := object.Key("CatalogDeltaSource")
+		if err := awsAwsjson11_serializeDocumentCatalogDeltaSource(v.CatalogDeltaSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CatalogHudiSource != nil {
 		ok := object.Key("CatalogHudiSource")
 		if err := awsAwsjson11_serializeDocumentCatalogHudiSource(v.CatalogHudiSource, ok); err != nil {
@@ -12133,6 +12176,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.S3CatalogDeltaSource != nil {
+		ok := object.Key("S3CatalogDeltaSource")
+		if err := awsAwsjson11_serializeDocumentS3CatalogDeltaSource(v.S3CatalogDeltaSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3CatalogHudiSource != nil {
 		ok := object.Key("S3CatalogHudiSource")
 		if err := awsAwsjson11_serializeDocumentS3CatalogHudiSource(v.S3CatalogHudiSource, ok); err != nil {
@@ -12157,6 +12207,27 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 	if v.S3CsvSource != nil {
 		ok := object.Key("S3CsvSource")
 		if err := awsAwsjson11_serializeDocumentS3CsvSource(v.S3CsvSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3DeltaCatalogTarget != nil {
+		ok := object.Key("S3DeltaCatalogTarget")
+		if err := awsAwsjson11_serializeDocumentS3DeltaCatalogTarget(v.S3DeltaCatalogTarget, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3DeltaDirectTarget != nil {
+		ok := object.Key("S3DeltaDirectTarget")
+		if err := awsAwsjson11_serializeDocumentS3DeltaDirectTarget(v.S3DeltaDirectTarget, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3DeltaSource != nil {
+		ok := object.Key("S3DeltaSource")
+		if err := awsAwsjson11_serializeDocumentS3DeltaSource(v.S3DeltaSource, ok); err != nil {
 			return err
 		}
 	}
@@ -16369,6 +16440,42 @@ func awsAwsjson11_serializeDocumentRulesetNames(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3CatalogDeltaSource(v *types.S3CatalogDeltaSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalDeltaOptions != nil {
+		ok := object.Key("AdditionalDeltaOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalDeltaOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3CatalogHudiSource(v *types.S3CatalogHudiSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16587,6 +16694,151 @@ func awsAwsjson11_serializeDocumentS3CsvSource(v *types.S3CsvSource, value smith
 	if v.WriteHeader != nil {
 		ok := object.Key("WriteHeader")
 		ok.Boolean(*v.WriteHeader)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3DeltaCatalogTarget(v *types.S3DeltaCatalogTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.PartitionKeys != nil {
+		ok := object.Key("PartitionKeys")
+		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaChangePolicy != nil {
+		ok := object.Key("SchemaChangePolicy")
+		if err := awsAwsjson11_serializeDocumentCatalogSchemaChangePolicy(v.SchemaChangePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3DeltaDirectTarget(v *types.S3DeltaDirectTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Compression) > 0 {
+		ok := object.Key("Compression")
+		ok.String(string(v.Compression))
+	}
+
+	if len(v.Format) > 0 {
+		ok := object.Key("Format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.PartitionKeys != nil {
+		ok := object.Key("PartitionKeys")
+		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Path != nil {
+		ok := object.Key("Path")
+		ok.String(*v.Path)
+	}
+
+	if v.SchemaChangePolicy != nil {
+		ok := object.Key("SchemaChangePolicy")
+		if err := awsAwsjson11_serializeDocumentDirectSchemaChangePolicy(v.SchemaChangePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3DeltaSource(v *types.S3DeltaSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalDeltaOptions != nil {
+		ok := object.Key("AdditionalDeltaOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalDeltaOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentS3DirectSourceAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Paths != nil {
+		ok := object.Key("Paths")
+		if err := awsAwsjson11_serializeDocumentEnclosedInStringProperties(v.Paths, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -221,6 +221,7 @@ const (
 	OperationTypePauseService    OperationType = "PAUSE_SERVICE"
 	OperationTypeResumeService   OperationType = "RESUME_SERVICE"
 	OperationTypeDeleteService   OperationType = "DELETE_SERVICE"
+	OperationTypeUpdateService   OperationType = "UPDATE_SERVICE"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -233,6 +234,7 @@ func (OperationType) Values() []OperationType {
 		"PAUSE_SERVICE",
 		"RESUME_SERVICE",
 		"DELETE_SERVICE",
+		"UPDATE_SERVICE",
 	}
 }
 

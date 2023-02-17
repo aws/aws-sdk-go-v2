@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves table metadata from the Data Catalog that contains unfiltered
+// metadata. For IAM authorization, the public IAM action associated with this API
+// is glue:GetTable.
 func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfilteredTableMetadataInput, optFns ...func(*Options)) (*GetUnfilteredTableMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredTableMetadataInput{}
@@ -28,32 +31,45 @@ func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfi
 
 type GetUnfilteredTableMetadataInput struct {
 
+	// The catalog ID where the table resides.
+	//
 	// This member is required.
 	CatalogId *string
 
+	// (Required) Specifies the name of a database that contains the table.
+	//
 	// This member is required.
 	DatabaseName *string
 
+	// (Required) Specifies the name of a table for which you are requesting metadata.
+	//
 	// This member is required.
 	Name *string
 
+	// (Required) A list of supported permission types.
+	//
 	// This member is required.
 	SupportedPermissionTypes []types.PermissionType
 
-	// A structure containing information for audit.
+	// A structure containing Lake Formation audit context information.
 	AuditContext *types.AuditContext
 
 	noSmithyDocumentSerde
 }
 
 type GetUnfilteredTableMetadataOutput struct {
+
+	// A list of column names that the user has been granted access to.
 	AuthorizedColumns []string
 
+	// A list of column row filters.
 	CellFilters []types.ColumnRowFilter
 
+	// A Boolean value that indicates whether the partition location is registered with
+	// Lake Formation.
 	IsRegisteredWithLakeFormation bool
 
-	// Represents a collection of related data organized in columns and rows.
+	// A Table object containing the table metadata.
 	Table *types.Table
 
 	// Metadata pertaining to the operation's result.

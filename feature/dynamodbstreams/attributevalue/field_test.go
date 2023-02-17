@@ -220,6 +220,7 @@ func TestCachedFields(t *testing.T) {
 			if name == "" {
 				name = "none"
 			}
+
 			c := c
 			t.Run(fmt.Sprintf("%s/%s", name, c.Name), func(t *testing.T) {
 				t.Parallel()

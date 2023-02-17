@@ -4351,6 +4351,32 @@ func validateBooleanColumnStatisticsData(v *types.BooleanColumnStatisticsData) e
 	}
 }
 
+func validateCatalogDeltaSource(v *types.CatalogDeltaSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogDeltaSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCatalogEntries(v []types.CatalogEntry) error {
 	if v == nil {
 		return nil
@@ -4803,6 +4829,31 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 	if v.DirectJDBCSource != nil {
 		if err := validateDirectJDBCSource(v.DirectJDBCSource); err != nil {
 			invalidParams.AddNested("DirectJDBCSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3CatalogDeltaSource != nil {
+		if err := validateS3CatalogDeltaSource(v.S3CatalogDeltaSource); err != nil {
+			invalidParams.AddNested("S3CatalogDeltaSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogDeltaSource != nil {
+		if err := validateCatalogDeltaSource(v.CatalogDeltaSource); err != nil {
+			invalidParams.AddNested("CatalogDeltaSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3DeltaSource != nil {
+		if err := validateS3DeltaSource(v.S3DeltaSource); err != nil {
+			invalidParams.AddNested("S3DeltaSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3DeltaCatalogTarget != nil {
+		if err := validateS3DeltaCatalogTarget(v.S3DeltaCatalogTarget); err != nil {
+			invalidParams.AddNested("S3DeltaCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3DeltaDirectTarget != nil {
+		if err := validateS3DeltaDirectTarget(v.S3DeltaDirectTarget); err != nil {
+			invalidParams.AddNested("S3DeltaDirectTarget", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6588,6 +6639,32 @@ func validateRenameField(v *types.RenameField) error {
 	}
 }
 
+func validateS3CatalogDeltaSource(v *types.S3CatalogDeltaSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CatalogDeltaSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3CatalogHudiSource(v *types.S3CatalogHudiSource) error {
 	if v == nil {
 		return nil
@@ -6675,6 +6752,80 @@ func validateS3CsvSource(v *types.S3CsvSource) error {
 	}
 	if len(v.QuoteChar) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("QuoteChar"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DeltaCatalogTarget(v *types.S3DeltaCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DeltaCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DeltaDirectTarget(v *types.S3DeltaDirectTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DeltaDirectTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if len(v.Compression) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Compression"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DeltaSource(v *types.S3DeltaSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DeltaSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
 	}
 	if v.OutputSchemas != nil {
 		if err := validateGlueSchemas(v.OutputSchemas); err != nil {

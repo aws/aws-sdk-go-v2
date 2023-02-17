@@ -27159,6 +27159,74 @@ func awsAwsjson11_deserializeDocumentBoundedPartitionValueList(v *[]string, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCatalogDeltaSource(v **types.CatalogDeltaSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CatalogDeltaSource
+	if *v == nil {
+		sv = &types.CatalogDeltaSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalDeltaOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalDeltaOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCatalogHudiSource(v **types.CatalogHudiSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27928,6 +27996,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "CatalogDeltaSource":
+			if err := awsAwsjson11_deserializeDocumentCatalogDeltaSource(&sv.CatalogDeltaSource, value); err != nil {
+				return err
+			}
+
 		case "CatalogHudiSource":
 			if err := awsAwsjson11_deserializeDocumentCatalogHudiSource(&sv.CatalogHudiSource, value); err != nil {
 				return err
@@ -28108,6 +28181,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "S3CatalogDeltaSource":
+			if err := awsAwsjson11_deserializeDocumentS3CatalogDeltaSource(&sv.S3CatalogDeltaSource, value); err != nil {
+				return err
+			}
+
 		case "S3CatalogHudiSource":
 			if err := awsAwsjson11_deserializeDocumentS3CatalogHudiSource(&sv.S3CatalogHudiSource, value); err != nil {
 				return err
@@ -28125,6 +28203,21 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 
 		case "S3CsvSource":
 			if err := awsAwsjson11_deserializeDocumentS3CsvSource(&sv.S3CsvSource, value); err != nil {
+				return err
+			}
+
+		case "S3DeltaCatalogTarget":
+			if err := awsAwsjson11_deserializeDocumentS3DeltaCatalogTarget(&sv.S3DeltaCatalogTarget, value); err != nil {
+				return err
+			}
+
+		case "S3DeltaDirectTarget":
+			if err := awsAwsjson11_deserializeDocumentS3DeltaDirectTarget(&sv.S3DeltaDirectTarget, value); err != nil {
+				return err
+			}
+
+		case "S3DeltaSource":
+			if err := awsAwsjson11_deserializeDocumentS3DeltaSource(&sv.S3DeltaSource, value); err != nil {
 				return err
 			}
 
@@ -43046,6 +43139,74 @@ func awsAwsjson11_deserializeDocumentRulesetNames(v *[]string, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3CatalogDeltaSource(v **types.S3CatalogDeltaSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3CatalogDeltaSource
+	if *v == nil {
+		sv = &types.S3CatalogDeltaSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalDeltaOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalDeltaOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3CatalogHudiSource(v **types.S3CatalogHudiSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43442,6 +43603,231 @@ func awsAwsjson11_deserializeDocumentS3CsvSource(v **types.S3CsvSource, value in
 					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.WriteHeader = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3DeltaCatalogTarget(v **types.S3DeltaCatalogTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3DeltaCatalogTarget
+	if *v == nil {
+		sv = &types.S3DeltaCatalogTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentCatalogSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3DeltaDirectTarget(v **types.S3DeltaDirectTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3DeltaDirectTarget
+	if *v == nil {
+		sv = &types.S3DeltaDirectTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Compression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeltaTargetCompressionType to be of type string, got %T instead", value)
+				}
+				sv.Compression = types.DeltaTargetCompressionType(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.TargetFormat(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3DeltaSource(v **types.S3DeltaSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3DeltaSource
+	if *v == nil {
+		sv = &types.S3DeltaSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalDeltaOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalDeltaOptions, value); err != nil {
+				return err
+			}
+
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentS3DirectSourceAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Paths":
+			if err := awsAwsjson11_deserializeDocumentEnclosedInStringProperties(&sv.Paths, value); err != nil {
+				return err
 			}
 
 		default:
