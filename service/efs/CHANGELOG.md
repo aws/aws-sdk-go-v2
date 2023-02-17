@@ -1,3 +1,7 @@
+# v1.19.5 (2023-02-17)
+
+* No change notes available for this release.
+
 # v1.19.4 (2023-02-15)
 
 * **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.

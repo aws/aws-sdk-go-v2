@@ -34,9 +34,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.86.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.23.3
-	github.com/aws/aws-sdk-go-v2/service/efs v1.19.4
+	github.com/aws/aws-sdk-go-v2/service/efs v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.26.2
-	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.1
+	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.18.3
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.42.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.2

@@ -1,3 +1,14 @@
+# Release (2023-02-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.17.0](service/apprunner/CHANGELOG.md#v1170-2023-02-17)
+  * **Feature**: This release supports removing MaxSize limit for AutoScalingConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.43.0](service/glue/CHANGELOG.md#v1430-2023-02-17)
+  * **Feature**: Release of Delta Lake Data Lake Format for Glue Studio Service
+
 # Release (2023-02-16)
 
 ## Module Highlights

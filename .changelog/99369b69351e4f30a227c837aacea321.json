@@ -1,8 +1,0 @@
-{
-    "id": "99369b69-351e-4f30-a227-c837aacea321",
-    "type": "feature",
-    "description": "Release of Delta Lake Data Lake Format for Glue Studio Service",
-    "modules": [
-        "service/glue"
-    ]
-}
