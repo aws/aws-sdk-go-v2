@@ -1,3 +1,7 @@
+# v1.12.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2023-02-16)
 
 * **Feature**: With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces

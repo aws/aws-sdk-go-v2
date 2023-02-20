@@ -1,3 +1,7 @@
+# v1.20.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.2 (2023-02-10)
 
 * **Documentation**: This release adds support for SNS X-Ray active tracing as well as other updates.

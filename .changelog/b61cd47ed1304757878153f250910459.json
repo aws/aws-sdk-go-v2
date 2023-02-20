@@ -1,8 +1,0 @@
-{
-    "id": "b61cd47e-d130-4757-8781-53f250910459",
-    "type": "feature",
-    "description": "Reasons for failed diff has been approved by SDK Reviewer",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.43.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2023-02-17)
 
 * **Feature**: Release of Delta Lake Data Lake Format for Glue Studio Service

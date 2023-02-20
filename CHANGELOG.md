@@ -1,3 +1,16 @@
+# Release (2023-02-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.17.5
+  * **Bug Fix**: fix int overflow bug on 32 bit architecture
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.24.0](service/auditmanager/CHANGELOG.md#v1240-2023-02-20)
+  * **Feature**: This release introduces a ServiceQuotaExceededException to the UpdateAssessmentFrameworkShare API operation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.47.0](service/connect/CHANGELOG.md#v1470-2023-02-20)
+  * **Feature**: Reasons for failed diff has been approved by SDK Reviewer
+
 # Release (2023-02-17)
 
 ## General Highlights

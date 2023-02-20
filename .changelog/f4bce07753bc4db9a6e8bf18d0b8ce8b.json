@@ -1,9 +1,0 @@
-{
-    "id": "f4bce077-53bc-4db9-a6e8-bf18d0b8ce8b",
-    "type": "bugfix",
-    "description": "fix int overflow bug on 32 bit architecture",
-    "modules": [
-        ".",
-        "service/internal/benchmark"
-    ]
-}

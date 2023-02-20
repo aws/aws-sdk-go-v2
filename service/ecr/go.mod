@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/ecr
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.4
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.28
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.22
+	github.com/aws/aws-sdk-go-v2 v1.17.5
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.29
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.23
 	github.com/aws/smithy-go v1.13.5
 	github.com/jmespath/go-jmespath v0.4.0
 )

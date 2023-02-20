@@ -1,3 +1,7 @@
+# v1.20.4 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.3 (2023-02-16)
 
 * **Documentation**: Doc-only update. Updated text description in DeleteChannel, Stream, and StreamSummary.

@@ -1,3 +1,7 @@
+# v1.25.2 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.1 (2023-02-16)
 
 * **Documentation**: Added a notice for account takeover prevention (ATP). The interface incorrectly lets you to configure ATP response inspection in regional web ACLs in Region US East (N. Virginia), without returning an error. ATP response inspection is only available in web ACLs that protect CloudFront distributions.

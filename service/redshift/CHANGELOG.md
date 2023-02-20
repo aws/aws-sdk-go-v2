@@ -1,3 +1,7 @@
+# v1.27.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.2 (2023-02-03)
 
 * **Documentation**: Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.

@@ -1,3 +1,7 @@
+# v1.17.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-02-17)
 
 * **Feature**: This release supports removing MaxSize limit for AutoScalingConfiguration.
