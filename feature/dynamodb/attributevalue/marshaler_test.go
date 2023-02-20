@@ -636,6 +636,10 @@ func BenchmarkUnmarshalTwoMembers(b *testing.B) {
 }
 
 func Test_Encode_YAML_TagKey(t *testing.T) {
+	type Embedded struct {
+		String string `yaml:"string"`
+	}
+
 	input := struct {
 		String      string         `yaml:"string"`
 		EmptyString string         `yaml:"empty"`
@@ -649,6 +653,7 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 		Slice       []string       `yaml:"slice"`
 		Map         map[string]int `yaml:"map"`
 		NoTag       string
+		Embedded    `yaml:"embedded"`
 	}{
 		String:  "String",
 		Ignored: "Ignored",
@@ -658,6 +663,9 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 			"two": 2,
 		},
 		NoTag: "NoTag",
+		Embedded: Embedded{
+			String: "String",
+		},
 	}
 
 	expected := &types.AttributeValueMemberM{
@@ -682,6 +690,11 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 				},
 			},
 			"NoTag": &types.AttributeValueMemberS{Value: "NoTag"},
+			"embedded": &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"string": &types.AttributeValueMemberS{Value: "String"},
+				},
+			},
 		},
 	}
 
