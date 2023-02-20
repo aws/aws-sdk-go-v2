@@ -594,8 +594,9 @@ type DateReference struct {
 // Contains information about a default vocabulary.
 type DefaultVocabulary struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -672,7 +673,9 @@ type EncryptionConfig struct {
 	EncryptionType EncryptionType
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the
-	// encryption key, not just the ID.
+	// encryption key, not just the ID. Amazon Connect supports only KMS keys with the
+	// default key spec of SYMMETRIC_DEFAULT
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default).
 	//
 	// This member is required.
 	KeyId *string
@@ -1016,8 +1019,9 @@ type Instance struct {
 	// When the instance was created.
 	CreatedTime *time.Time
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	Id *string
 
 	// The identity management type.
@@ -1116,8 +1120,9 @@ type InstanceSummary struct {
 // Contains summary information about the associated AppIntegrations.
 type IntegrationAssociationSummary struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
 
 	// The Amazon Resource Name (ARN) for the AppIntegration.
@@ -1202,9 +1207,13 @@ type KinesisVideoStreamConfig struct {
 type LexBot struct {
 
 	// The Amazon Web Services Region where the Amazon Lex bot was created.
+	//
+	// This member is required.
 	LexRegion *string
 
 	// The name of the Amazon Lex bot.
+	//
+	// This member is required.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1852,8 +1861,9 @@ type RoutingProfile struct {
 	// The description of the routing profile.
 	Description *string
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
 
 	// The channels agents can handle in the Contact Control Panel (CCP) for this

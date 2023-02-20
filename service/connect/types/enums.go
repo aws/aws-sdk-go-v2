@@ -543,6 +543,8 @@ const (
 	InstanceStorageResourceTypeContactTraceRecords             InstanceStorageResourceType = "CONTACT_TRACE_RECORDS"
 	InstanceStorageResourceTypeAgentEvents                     InstanceStorageResourceType = "AGENT_EVENTS"
 	InstanceStorageResourceTypeRealTimeContactAnalysisSegments InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"
+	InstanceStorageResourceTypeAttachments                     InstanceStorageResourceType = "ATTACHMENTS"
+	InstanceStorageResourceTypeContactEvaluations              InstanceStorageResourceType = "CONTACT_EVALUATIONS"
 )
 
 // Values returns all known values for InstanceStorageResourceType. Note that this
@@ -557,6 +559,8 @@ func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 		"CONTACT_TRACE_RECORDS",
 		"AGENT_EVENTS",
 		"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
+		"ATTACHMENTS",
+		"CONTACT_EVALUATIONS",
 	}
 }
 

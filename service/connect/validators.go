@@ -4308,6 +4308,24 @@ func validateKinesisVideoStreamConfig(v *types.KinesisVideoStreamConfig) error {
 	}
 }
 
+func validateLexBot(v *types.LexBot) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LexBot"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.LexRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LexRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaConcurrencies(v []types.MediaConcurrency) error {
 	if v == nil {
 		return nil
@@ -4812,6 +4830,11 @@ func validateOpAssociateBotInput(v *AssociateBotInput) error {
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
+	if v.LexBot != nil {
+		if err := validateLexBot(v.LexBot); err != nil {
+			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4890,6 +4913,10 @@ func validateOpAssociateLexBotInput(v *AssociateLexBotInput) error {
 	}
 	if v.LexBot == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LexBot"))
+	} else if v.LexBot != nil {
+		if err := validateLexBot(v.LexBot); err != nil {
+			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6019,6 +6046,11 @@ func validateOpDisassociateBotInput(v *DisassociateBotInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateBotInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.LexBot != nil {
+		if err := validateLexBot(v.LexBot); err != nil {
+			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates Audit Manager settings for the current user account.
+// Updates Audit Manager settings for the current account.
 func (c *Client) UpdateSettings(ctx context.Context, params *UpdateSettingsInput, optFns ...func(*Options)) (*UpdateSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateSettingsInput{}
