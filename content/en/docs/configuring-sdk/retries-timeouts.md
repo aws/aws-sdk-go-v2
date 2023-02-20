@@ -120,8 +120,9 @@ import "github.com/aws/aws-sdk-go-v2/service/s3/types"
 
 // ...
 
+noSuchBucketException := &types.NoSuchBucketException{}
 cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRetryer(func() aws.Retryer {
-	return retry.AddWithErrorCodes(retry.NewStandard(), (*types.NoSuchBucketException)(nil).ErrorCode())
+	return retry.AddWithErrorCodes(retry.NewStandard(), noSuchBucketException.ErrorCode())
 }))
 if err != nil {
 	return err
