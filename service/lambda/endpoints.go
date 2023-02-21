@@ -95,10 +95,14 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 
 	// 1.
 	//translation layer here that maps from legacy fields in Options to new fields in Options.
+	//legacy fields are sourced via config sources.
 	eo.Region = &region
 	eo.UseFIPS = aws.Bool(eo.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	eo.UseDualStack = aws.Bool(eo.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
 	//this translation feels weird because its read and writing to itself
+	//is this actually necessary?
+	// region not necessary because it will be resolved as a builtin.
+	// what about fips and dual stack? how are they resolved for reterminus?
 
 	// 2.
 	// resolve builtins on eo object
