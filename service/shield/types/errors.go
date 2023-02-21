@@ -27,7 +27,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -58,7 +58,7 @@ func (e *AccessDeniedForDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedForDependencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedForDependencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -87,7 +87,7 @@ func (e *InternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -113,7 +113,7 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -141,7 +141,7 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPaginationTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -171,7 +171,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -198,7 +198,7 @@ func (e *InvalidResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -227,7 +227,7 @@ func (e *LimitsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -256,7 +256,7 @@ func (e *LockedSubscriptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LockedSubscriptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LockedSubscriptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -282,7 +282,7 @@ func (e *NoAssociatedRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAssociatedRoleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAssociatedRoleException"
 	}
 	return *e.ErrorCodeOverride
@@ -309,7 +309,7 @@ func (e *OptimisticLockException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OptimisticLockException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OptimisticLockException"
 	}
 	return *e.ErrorCodeOverride
@@ -338,7 +338,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -367,7 +367,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

@@ -28,7 +28,7 @@ func (e *RequestError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestError"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *ServiceFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceFault"
 	}
 	return *e.ErrorCodeOverride

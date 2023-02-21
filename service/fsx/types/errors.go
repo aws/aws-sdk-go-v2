@@ -29,7 +29,7 @@ func (e *ActiveDirectoryError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveDirectoryError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActiveDirectoryError"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *BackupBeingCopied) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BackupBeingCopied) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BackupBeingCopied"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *BackupInProgress) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BackupInProgress) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BackupInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *BackupNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BackupNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BackupNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -138,7 +138,7 @@ func (e *BackupRestoring) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BackupRestoring) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BackupRestoring"
 	}
 	return *e.ErrorCodeOverride
@@ -164,7 +164,7 @@ func (e *BadRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequest) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -190,7 +190,7 @@ func (e *DataRepositoryAssociationNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DataRepositoryAssociationNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DataRepositoryAssociationNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -217,7 +217,7 @@ func (e *DataRepositoryTaskEnded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DataRepositoryTaskEnded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DataRepositoryTaskEnded"
 	}
 	return *e.ErrorCodeOverride
@@ -244,7 +244,7 @@ func (e *DataRepositoryTaskExecuting) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DataRepositoryTaskExecuting) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DataRepositoryTaskExecuting"
 	}
 	return *e.ErrorCodeOverride
@@ -270,7 +270,7 @@ func (e *DataRepositoryTaskNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DataRepositoryTaskNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DataRepositoryTaskNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -296,7 +296,7 @@ func (e *FileCacheNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileCacheNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileCacheNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -322,7 +322,7 @@ func (e *FileSystemNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileSystemNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileSystemNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -352,7 +352,7 @@ func (e *IncompatibleParameterError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleParameterError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleParameterError"
 	}
 	return *e.ErrorCodeOverride
@@ -379,7 +379,7 @@ func (e *IncompatibleRegionForMultiAZ) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleRegionForMultiAZ) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleRegionForMultiAZ"
 	}
 	return *e.ErrorCodeOverride
@@ -405,7 +405,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -431,7 +431,7 @@ func (e *InvalidDataRepositoryType) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDataRepositoryType) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDataRepositoryType"
 	}
 	return *e.ErrorCodeOverride
@@ -457,7 +457,7 @@ func (e *InvalidDestinationKmsKey) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDestinationKmsKey) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDestinationKmsKey"
 	}
 	return *e.ErrorCodeOverride
@@ -483,7 +483,7 @@ func (e *InvalidExportPath) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidExportPath) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidExportPath"
 	}
 	return *e.ErrorCodeOverride
@@ -509,7 +509,7 @@ func (e *InvalidImportPath) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidImportPath) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidImportPath"
 	}
 	return *e.ErrorCodeOverride
@@ -539,7 +539,7 @@ func (e *InvalidNetworkSettings) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNetworkSettings) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNetworkSettings"
 	}
 	return *e.ErrorCodeOverride
@@ -566,7 +566,7 @@ func (e *InvalidPerUnitStorageThroughput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPerUnitStorageThroughput) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPerUnitStorageThroughput"
 	}
 	return *e.ErrorCodeOverride
@@ -593,7 +593,7 @@ func (e *InvalidRegion) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRegion) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRegion"
 	}
 	return *e.ErrorCodeOverride
@@ -619,7 +619,7 @@ func (e *InvalidSourceKmsKey) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSourceKmsKey) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSourceKmsKey"
 	}
 	return *e.ErrorCodeOverride
@@ -645,7 +645,7 @@ func (e *MissingFileCacheConfiguration) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingFileCacheConfiguration) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingFileCacheConfiguration"
 	}
 	return *e.ErrorCodeOverride
@@ -671,7 +671,7 @@ func (e *MissingFileSystemConfiguration) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingFileSystemConfiguration) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingFileSystemConfiguration"
 	}
 	return *e.ErrorCodeOverride
@@ -697,7 +697,7 @@ func (e *MissingVolumeConfiguration) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingVolumeConfiguration) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingVolumeConfiguration"
 	}
 	return *e.ErrorCodeOverride
@@ -726,7 +726,7 @@ func (e *NotServiceResourceError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotServiceResourceError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotServiceResourceError"
 	}
 	return *e.ErrorCodeOverride
@@ -754,7 +754,7 @@ func (e *ResourceDoesNotSupportTagging) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceDoesNotSupportTagging) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceDoesNotSupportTagging"
 	}
 	return *e.ErrorCodeOverride
@@ -782,7 +782,7 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -811,7 +811,7 @@ func (e *ServiceLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -837,7 +837,7 @@ func (e *SnapshotNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapshotNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -866,7 +866,7 @@ func (e *SourceBackupUnavailable) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SourceBackupUnavailable) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SourceBackupUnavailable"
 	}
 	return *e.ErrorCodeOverride
@@ -892,7 +892,7 @@ func (e *StorageVirtualMachineNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageVirtualMachineNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StorageVirtualMachineNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -918,7 +918,7 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperation"
 	}
 	return *e.ErrorCodeOverride
@@ -944,7 +944,7 @@ func (e *VolumeNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VolumeNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VolumeNotFound"
 	}
 	return *e.ErrorCodeOverride

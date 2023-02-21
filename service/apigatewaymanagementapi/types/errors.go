@@ -26,7 +26,7 @@ func (e *ForbiddenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ForbiddenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ForbiddenException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *GoneException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GoneException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GoneException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *PayloadTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PayloadTooLargeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PayloadTooLargeException"
 	}
 	return *e.ErrorCodeOverride

@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *InvalidParameterValuesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValuesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValuesException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *OperationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *OperationNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *ResourceAssociatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAssociatedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAssociatedException"
 	}
 	return *e.ErrorCodeOverride
@@ -211,7 +211,7 @@ func (e *ResourceCreationFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceCreationFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceCreationFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -265,7 +265,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -322,7 +322,7 @@ func (e *UnsupportedNetworkConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedNetworkConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedNetworkConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -353,7 +353,7 @@ func (e *UnsupportedWorkspaceConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedWorkspaceConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedWorkspaceConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -385,7 +385,7 @@ func (e *WorkspacesDefaultRoleNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WorkspacesDefaultRoleNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WorkspacesDefaultRoleNotFoundException"
 	}
 	return *e.ErrorCodeOverride

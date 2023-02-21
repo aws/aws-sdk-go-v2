@@ -26,7 +26,7 @@ func (e *ArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *CannotDeleteException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotDeleteException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotDeleteException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *IdempotencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *NotEligibleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotEligibleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotEligibleException"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *ServiceAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceAccountException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceAccountException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *TagOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *TagPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -324,7 +324,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

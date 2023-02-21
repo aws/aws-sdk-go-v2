@@ -29,7 +29,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -58,7 +58,7 @@ func (e *InvalidGatewayRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGatewayRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidGatewayRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -87,7 +87,7 @@ func (e *ServiceUnavailableError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableError"
 	}
 	return *e.ErrorCodeOverride

@@ -26,7 +26,7 @@ func (e *ClusterAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *ClusterNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterQuotaForCustomerExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterQuotaForCustomerExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *InsufficientClusterCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientClusterCapacityFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientClusterCapacityFault"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *InvalidARNFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidARNFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidARNFault"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *InvalidClusterStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClusterStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidClusterStateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterCombinationException"
 	}
 	return *e.ErrorCodeOverride
@@ -214,7 +214,7 @@ func (e *InvalidParameterGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterGroupStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterGroupStateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -240,7 +240,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *InvalidSubnet) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSubnet) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSubnet"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidVPCNetworkStateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -318,7 +318,7 @@ func (e *NodeNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NodeNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -344,7 +344,7 @@ func (e *NodeQuotaForClusterExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeQuotaForClusterExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -370,7 +370,7 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeQuotaForCustomerExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -396,7 +396,7 @@ func (e *ParameterGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParameterGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParameterGroupAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -422,7 +422,7 @@ func (e *ParameterGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParameterGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParameterGroupNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -448,7 +448,7 @@ func (e *ParameterGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParameterGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParameterGroupQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -474,7 +474,7 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceLinkedRoleNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -502,7 +502,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceQuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -528,7 +528,7 @@ func (e *SubnetGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetGroupAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -554,7 +554,7 @@ func (e *SubnetGroupInUseFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetGroupInUseFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetGroupInUseFault"
 	}
 	return *e.ErrorCodeOverride
@@ -580,7 +580,7 @@ func (e *SubnetGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetGroupNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -607,7 +607,7 @@ func (e *SubnetGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetGroupQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -633,7 +633,7 @@ func (e *SubnetInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -660,7 +660,7 @@ func (e *SubnetQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -686,7 +686,7 @@ func (e *TagNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -712,7 +712,7 @@ func (e *TagQuotaPerResourceExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagQuotaPerResourceExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagQuotaPerResourceExceeded"
 	}
 	return *e.ErrorCodeOverride

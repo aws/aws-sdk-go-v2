@@ -26,7 +26,7 @@ func (e *AccessForbidden) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessForbidden) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessForbidden"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InternalFailure) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalFailure) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalFailure"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *ServiceUnavailable) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailable) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailable"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *ValidationError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationError"
 	}
 	return *e.ErrorCodeOverride

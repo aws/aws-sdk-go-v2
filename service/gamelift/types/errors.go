@@ -28,7 +28,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *FleetCapacityExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FleetCapacityExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FleetCapacityExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *GameSessionFullException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GameSessionFullException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GameSessionFullException"
 	}
 	return *e.ErrorCodeOverride
@@ -109,7 +109,7 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -138,7 +138,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -166,7 +166,7 @@ func (e *InvalidFleetStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFleetStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFleetStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -194,7 +194,7 @@ func (e *InvalidGameSessionStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGameSessionStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidGameSessionStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -248,7 +248,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -275,7 +275,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -303,7 +303,7 @@ func (e *OutOfCapacityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OutOfCapacityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OutOfCapacityException"
 	}
 	return *e.ErrorCodeOverride
@@ -331,7 +331,7 @@ func (e *TaggingFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaggingFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TaggingFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -361,7 +361,7 @@ func (e *TerminalRoutingStrategyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TerminalRoutingStrategyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TerminalRoutingStrategyException"
 	}
 	return *e.ErrorCodeOverride
@@ -387,7 +387,7 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -413,7 +413,7 @@ func (e *UnsupportedRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedRegionException"
 	}
 	return *e.ErrorCodeOverride

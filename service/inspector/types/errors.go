@@ -29,7 +29,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -60,7 +60,7 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AgentsAlreadyRunningAssessmentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AgentsAlreadyRunningAssessmentException"
 	}
 	return *e.ErrorCodeOverride
@@ -93,7 +93,7 @@ func (e *AssessmentRunInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssessmentRunInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AssessmentRunInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -121,7 +121,7 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -151,7 +151,7 @@ func (e *InvalidCrossAccountRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCrossAccountRoleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCrossAccountRoleException"
 	}
 	return *e.ErrorCodeOverride
@@ -181,7 +181,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -211,7 +211,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchEntityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchEntityException"
 	}
 	return *e.ErrorCodeOverride
@@ -268,7 +268,7 @@ func (e *PreviewGenerationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreviewGenerationInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PreviewGenerationInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -298,7 +298,7 @@ func (e *ServiceTemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceTemporarilyUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceTemporarilyUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -332,7 +332,7 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedFeatureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedFeatureException"
 	}
 	return *e.ErrorCodeOverride

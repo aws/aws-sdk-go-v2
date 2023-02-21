@@ -28,7 +28,7 @@ func (e *DnssecLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DnssecLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DnssecLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *DomainLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DomainLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *DuplicateRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateRequest) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -109,7 +109,7 @@ func (e *InvalidInput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInput) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInput"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *OperationLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *TLDRulesViolation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TLDRulesViolation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TLDRulesViolation"
 	}
 	return *e.ErrorCodeOverride
@@ -188,7 +188,7 @@ func (e *UnsupportedTLD) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedTLD) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedTLD"
 	}
 	return *e.ErrorCodeOverride

@@ -27,7 +27,7 @@ func (e *AccessDeniedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *CollectorNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CollectorNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CollectorNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InsufficientResourceCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientResourceCapacityFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientResourceCapacityFault"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *InvalidCertificateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCertificateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCertificateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *InvalidOperationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOperationFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOperationFault"
 	}
 	return *e.ErrorCodeOverride
@@ -158,7 +158,7 @@ func (e *InvalidResourceStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceStateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -184,7 +184,7 @@ func (e *InvalidSubnet) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSubnet) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSubnet"
 	}
 	return *e.ErrorCodeOverride
@@ -211,7 +211,7 @@ func (e *KMSAccessDeniedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSAccessDeniedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSAccessDeniedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *KMSDisabledFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSDisabledFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSDisabledFault"
 	}
 	return *e.ErrorCodeOverride
@@ -263,7 +263,7 @@ func (e *KMSFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSFault"
 	}
 	return *e.ErrorCodeOverride
@@ -289,7 +289,7 @@ func (e *KMSInvalidStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSInvalidStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSInvalidStateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -315,7 +315,7 @@ func (e *KMSKeyNotAccessibleFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSKeyNotAccessibleFault"
 	}
 	return *e.ErrorCodeOverride
@@ -341,7 +341,7 @@ func (e *KMSNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -367,7 +367,7 @@ func (e *KMSThrottlingFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSThrottlingFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSThrottlingFault"
 	}
 	return *e.ErrorCodeOverride
@@ -394,7 +394,7 @@ func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationSubnetGroupDoesNotCoverEnoughAZs"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *ResourceAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -450,7 +450,7 @@ func (e *ResourceNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -476,7 +476,7 @@ func (e *ResourceQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -502,7 +502,7 @@ func (e *S3AccessDeniedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3AccessDeniedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "S3AccessDeniedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -528,7 +528,7 @@ func (e *S3ResourceNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3ResourceNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "S3ResourceNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -554,7 +554,7 @@ func (e *SNSInvalidTopicFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SNSInvalidTopicFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SNSInvalidTopicFault"
 	}
 	return *e.ErrorCodeOverride
@@ -580,7 +580,7 @@ func (e *SNSNoAuthorizationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SNSNoAuthorizationFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SNSNoAuthorizationFault"
 	}
 	return *e.ErrorCodeOverride
@@ -606,7 +606,7 @@ func (e *StorageQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StorageQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -632,7 +632,7 @@ func (e *SubnetAlreadyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetAlreadyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetAlreadyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -658,7 +658,7 @@ func (e *UpgradeDependencyFailureFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UpgradeDependencyFailureFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UpgradeDependencyFailureFault"
 	}
 	return *e.ErrorCodeOverride

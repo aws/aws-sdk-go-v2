@@ -26,7 +26,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *ClientTokenConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientTokenConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientTokenConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *ConcurrentOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *GeneralServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GeneralServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GeneralServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *HandlerFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandlerFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HandlerFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,7 +187,7 @@ func (e *HandlerInternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandlerInternalFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HandlerInternalFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -214,7 +214,7 @@ func (e *InvalidCredentialsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCredentialsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCredentialsException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -268,7 +268,7 @@ func (e *NetworkFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NetworkFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NetworkFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *NotStabilizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotStabilizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotStabilizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -322,7 +322,7 @@ func (e *NotUpdatableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotUpdatableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotUpdatableException"
 	}
 	return *e.ErrorCodeOverride
@@ -350,7 +350,7 @@ func (e *PrivateTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PrivateTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PrivateTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -376,7 +376,7 @@ func (e *RequestTokenNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestTokenNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestTokenNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -404,7 +404,7 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -430,7 +430,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -457,7 +457,7 @@ func (e *ServiceInternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceInternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceInternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -484,7 +484,7 @@ func (e *ServiceLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -510,7 +510,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -536,7 +536,7 @@ func (e *TypeNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TypeNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TypeNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -562,7 +562,7 @@ func (e *UnsupportedActionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedActionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedActionException"
 	}
 	return *e.ErrorCodeOverride

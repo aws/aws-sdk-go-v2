@@ -26,7 +26,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ConflictingOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictingOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictingOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *CustomMetadataLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomMetadataLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CustomMetadataLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *DeactivatingLastSystemUserException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeactivatingLastSystemUserException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DeactivatingLastSystemUserException"
 	}
 	return *e.ErrorCodeOverride
@@ -139,7 +139,7 @@ func (e *DocumentLockedForCommentsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DocumentLockedForCommentsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DocumentLockedForCommentsException"
 	}
 	return *e.ErrorCodeOverride
@@ -168,7 +168,7 @@ func (e *DraftUploadOutOfSyncException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DraftUploadOutOfSyncException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DraftUploadOutOfSyncException"
 	}
 	return *e.ErrorCodeOverride
@@ -194,7 +194,7 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -222,7 +222,7 @@ func (e *EntityNotExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityNotExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityNotExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -250,7 +250,7 @@ func (e *FailedDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FailedDependencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FailedDependencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -276,7 +276,7 @@ func (e *IllegalUserStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalUserStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalUserStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -302,7 +302,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -328,7 +328,7 @@ func (e *InvalidCommentOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCommentOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCommentOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -354,7 +354,7 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -380,7 +380,7 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPasswordException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPasswordException"
 	}
 	return *e.ErrorCodeOverride
@@ -407,7 +407,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -433,7 +433,7 @@ func (e *ProhibitedStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProhibitedStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProhibitedStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -460,7 +460,7 @@ func (e *RequestedEntityTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestedEntityTooLargeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestedEntityTooLargeException"
 	}
 	return *e.ErrorCodeOverride
@@ -486,7 +486,7 @@ func (e *ResourceAlreadyCheckedOutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyCheckedOutException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyCheckedOutException"
 	}
 	return *e.ErrorCodeOverride
@@ -514,7 +514,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -540,7 +540,7 @@ func (e *StorageLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StorageLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -566,7 +566,7 @@ func (e *StorageLimitWillExceedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageLimitWillExceedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StorageLimitWillExceedException"
 	}
 	return *e.ErrorCodeOverride
@@ -592,7 +592,7 @@ func (e *TooManyLabelsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyLabelsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyLabelsException"
 	}
 	return *e.ErrorCodeOverride
@@ -619,7 +619,7 @@ func (e *TooManySubscriptionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManySubscriptionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManySubscriptionsException"
 	}
 	return *e.ErrorCodeOverride
@@ -647,7 +647,7 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -673,7 +673,7 @@ func (e *UnauthorizedResourceAccessException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedResourceAccessException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedResourceAccessException"
 	}
 	return *e.ErrorCodeOverride

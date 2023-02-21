@@ -26,7 +26,7 @@ func (e *ActorDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActorDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActorDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ApprovalRuleContentRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleContentRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleContentRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *ApprovalRuleDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *ApprovalRuleNameAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleNameAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleNameAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *ApprovalRuleNameRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleNameRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleNameRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *ApprovalRuleTemplateContentRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleTemplateContentRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleTemplateContentRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -193,7 +193,7 @@ func (e *ApprovalRuleTemplateDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleTemplateDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleTemplateDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -223,7 +223,7 @@ func (e *ApprovalRuleTemplateInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleTemplateInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleTemplateInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -253,7 +253,7 @@ func (e *ApprovalRuleTemplateNameAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleTemplateNameAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleTemplateNameAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -281,7 +281,7 @@ func (e *ApprovalRuleTemplateNameRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalRuleTemplateNameRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalRuleTemplateNameRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -309,7 +309,7 @@ func (e *ApprovalStateRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalStateRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalStateRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -335,7 +335,7 @@ func (e *AuthorDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AuthorDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -362,7 +362,7 @@ func (e *BeforeCommitIdAndAfterCommitIdAreSameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BeforeCommitIdAndAfterCommitIdAreSameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BeforeCommitIdAndAfterCommitIdAreSameException"
 	}
 	return *e.ErrorCodeOverride
@@ -390,7 +390,7 @@ func (e *BlobIdDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BlobIdDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BlobIdDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -416,7 +416,7 @@ func (e *BlobIdRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BlobIdRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BlobIdRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -442,7 +442,7 @@ func (e *BranchDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BranchDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BranchDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -469,7 +469,7 @@ func (e *BranchNameExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BranchNameExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BranchNameExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -497,7 +497,7 @@ func (e *BranchNameIsTagNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BranchNameIsTagNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BranchNameIsTagNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -523,7 +523,7 @@ func (e *BranchNameRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BranchNameRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BranchNameRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -550,7 +550,7 @@ func (e *CannotDeleteApprovalRuleFromTemplateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotDeleteApprovalRuleFromTemplateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotDeleteApprovalRuleFromTemplateException"
 	}
 	return *e.ErrorCodeOverride
@@ -579,7 +579,7 @@ func (e *CannotModifyApprovalRuleFromTemplateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotModifyApprovalRuleFromTemplateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotModifyApprovalRuleFromTemplateException"
 	}
 	return *e.ErrorCodeOverride
@@ -611,7 +611,7 @@ func (e *ClientRequestTokenRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientRequestTokenRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientRequestTokenRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -640,7 +640,7 @@ func (e *CommentContentRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommentContentRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommentContentRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -666,7 +666,7 @@ func (e *CommentContentSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommentContentSizeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommentContentSizeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -695,7 +695,7 @@ func (e *CommentDeletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommentDeletedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommentDeletedException"
 	}
 	return *e.ErrorCodeOverride
@@ -722,7 +722,7 @@ func (e *CommentDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommentDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommentDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -748,7 +748,7 @@ func (e *CommentIdRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommentIdRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommentIdRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -775,7 +775,7 @@ func (e *CommentNotCreatedByCallerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommentNotCreatedByCallerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommentNotCreatedByCallerException"
 	}
 	return *e.ErrorCodeOverride
@@ -804,7 +804,7 @@ func (e *CommitDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -830,7 +830,7 @@ func (e *CommitIdDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitIdDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitIdDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -856,7 +856,7 @@ func (e *CommitIdRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitIdRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitIdRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -883,7 +883,7 @@ func (e *CommitIdsLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitIdsLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitIdsLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -910,7 +910,7 @@ func (e *CommitIdsListRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitIdsListRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitIdsListRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -936,7 +936,7 @@ func (e *CommitMessageLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitMessageLengthExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitMessageLengthExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -964,7 +964,7 @@ func (e *CommitRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CommitRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CommitRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -992,7 +992,7 @@ func (e *ConcurrentReferenceUpdateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentReferenceUpdateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentReferenceUpdateException"
 	}
 	return *e.ErrorCodeOverride
@@ -1022,7 +1022,7 @@ func (e *DefaultBranchCannotBeDeletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DefaultBranchCannotBeDeletedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DefaultBranchCannotBeDeletedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1052,7 +1052,7 @@ func (e *DirectoryNameConflictsWithFileNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryNameConflictsWithFileNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryNameConflictsWithFileNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1080,7 +1080,7 @@ func (e *EncryptionIntegrityChecksFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EncryptionIntegrityChecksFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EncryptionIntegrityChecksFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1108,7 +1108,7 @@ func (e *EncryptionKeyAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EncryptionKeyAccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EncryptionKeyAccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1136,7 +1136,7 @@ func (e *EncryptionKeyDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EncryptionKeyDisabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EncryptionKeyDisabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1162,7 +1162,7 @@ func (e *EncryptionKeyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EncryptionKeyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EncryptionKeyNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1188,7 +1188,7 @@ func (e *EncryptionKeyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EncryptionKeyUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EncryptionKeyUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -1216,7 +1216,7 @@ func (e *FileContentAndSourceFileSpecifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileContentAndSourceFileSpecifiedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileContentAndSourceFileSpecifiedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1245,7 +1245,7 @@ func (e *FileContentRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileContentRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileContentRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -1273,7 +1273,7 @@ func (e *FileContentSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileContentSizeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileContentSizeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -1302,7 +1302,7 @@ func (e *FileDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -1329,7 +1329,7 @@ func (e *FileEntryRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileEntryRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileEntryRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -1356,7 +1356,7 @@ func (e *FileModeRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileModeRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileModeRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -1384,7 +1384,7 @@ func (e *FileNameConflictsWithDirectoryNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileNameConflictsWithDirectoryNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileNameConflictsWithDirectoryNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1414,7 +1414,7 @@ func (e *FilePathConflictsWithSubmodulePathException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FilePathConflictsWithSubmodulePathException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FilePathConflictsWithSubmodulePathException"
 	}
 	return *e.ErrorCodeOverride
@@ -1444,7 +1444,7 @@ func (e *FileTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileTooLargeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileTooLargeException"
 	}
 	return *e.ErrorCodeOverride
@@ -1473,7 +1473,7 @@ func (e *FolderContentSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FolderContentSizeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FolderContentSizeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -1502,7 +1502,7 @@ func (e *FolderDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FolderDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FolderDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -1529,7 +1529,7 @@ func (e *IdempotencyParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotencyParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotencyParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -1559,7 +1559,7 @@ func (e *InvalidActorArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidActorArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidActorArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -1585,7 +1585,7 @@ func (e *InvalidApprovalRuleContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidApprovalRuleContentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalRuleContentException"
 	}
 	return *e.ErrorCodeOverride
@@ -1613,7 +1613,7 @@ func (e *InvalidApprovalRuleNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidApprovalRuleNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalRuleNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1639,7 +1639,7 @@ func (e *InvalidApprovalRuleTemplateContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidApprovalRuleTemplateContentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalRuleTemplateContentException"
 	}
 	return *e.ErrorCodeOverride
@@ -1670,7 +1670,7 @@ func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalRuleTemplateDescriptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1701,7 +1701,7 @@ func (e *InvalidApprovalRuleTemplateNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidApprovalRuleTemplateNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalRuleTemplateNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1730,7 +1730,7 @@ func (e *InvalidApprovalStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidApprovalStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -1757,7 +1757,7 @@ func (e *InvalidAuthorArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAuthorArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAuthorArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -1783,7 +1783,7 @@ func (e *InvalidBlobIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidBlobIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidBlobIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -1809,7 +1809,7 @@ func (e *InvalidBranchNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidBranchNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidBranchNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1835,7 +1835,7 @@ func (e *InvalidClientRequestTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientRequestTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidClientRequestTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -1864,7 +1864,7 @@ func (e *InvalidCommentIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCommentIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCommentIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -1890,7 +1890,7 @@ func (e *InvalidCommitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCommitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCommitException"
 	}
 	return *e.ErrorCodeOverride
@@ -1916,7 +1916,7 @@ func (e *InvalidCommitIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCommitIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCommitIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -1942,7 +1942,7 @@ func (e *InvalidConflictDetailLevelException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConflictDetailLevelException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConflictDetailLevelException"
 	}
 	return *e.ErrorCodeOverride
@@ -1970,7 +1970,7 @@ func (e *InvalidConflictResolutionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConflictResolutionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConflictResolutionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1998,7 +1998,7 @@ func (e *InvalidConflictResolutionStrategyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConflictResolutionStrategyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConflictResolutionStrategyException"
 	}
 	return *e.ErrorCodeOverride
@@ -2026,7 +2026,7 @@ func (e *InvalidContinuationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidContinuationTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidContinuationTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -2052,7 +2052,7 @@ func (e *InvalidDeletionParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeletionParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDeletionParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -2079,7 +2079,7 @@ func (e *InvalidDescriptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDescriptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDescriptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -2106,7 +2106,7 @@ func (e *InvalidDestinationCommitSpecifierException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDestinationCommitSpecifierException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDestinationCommitSpecifierException"
 	}
 	return *e.ErrorCodeOverride
@@ -2136,7 +2136,7 @@ func (e *InvalidEmailException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEmailException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEmailException"
 	}
 	return *e.ErrorCodeOverride
@@ -2163,7 +2163,7 @@ func (e *InvalidFileLocationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFileLocationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFileLocationException"
 	}
 	return *e.ErrorCodeOverride
@@ -2190,7 +2190,7 @@ func (e *InvalidFileModeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFileModeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFileModeException"
 	}
 	return *e.ErrorCodeOverride
@@ -2217,7 +2217,7 @@ func (e *InvalidFilePositionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFilePositionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFilePositionException"
 	}
 	return *e.ErrorCodeOverride
@@ -2243,7 +2243,7 @@ func (e *InvalidMaxConflictFilesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMaxConflictFilesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMaxConflictFilesException"
 	}
 	return *e.ErrorCodeOverride
@@ -2269,7 +2269,7 @@ func (e *InvalidMaxMergeHunksException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMaxMergeHunksException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMaxMergeHunksException"
 	}
 	return *e.ErrorCodeOverride
@@ -2295,7 +2295,7 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMaxResultsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMaxResultsException"
 	}
 	return *e.ErrorCodeOverride
@@ -2322,7 +2322,7 @@ func (e *InvalidMergeOptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMergeOptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMergeOptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -2348,7 +2348,7 @@ func (e *InvalidOrderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOrderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOrderException"
 	}
 	return *e.ErrorCodeOverride
@@ -2374,7 +2374,7 @@ func (e *InvalidOverrideStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOverrideStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOverrideStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -2402,7 +2402,7 @@ func (e *InvalidParentCommitIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParentCommitIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParentCommitIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -2428,7 +2428,7 @@ func (e *InvalidPathException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPathException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPathException"
 	}
 	return *e.ErrorCodeOverride
@@ -2454,7 +2454,7 @@ func (e *InvalidPullRequestEventTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPullRequestEventTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPullRequestEventTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -2483,7 +2483,7 @@ func (e *InvalidPullRequestIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPullRequestIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPullRequestIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -2509,7 +2509,7 @@ func (e *InvalidPullRequestStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPullRequestStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPullRequestStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -2536,7 +2536,7 @@ func (e *InvalidPullRequestStatusUpdateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPullRequestStatusUpdateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPullRequestStatusUpdateException"
 	}
 	return *e.ErrorCodeOverride
@@ -2564,7 +2564,7 @@ func (e *InvalidReactionUserArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidReactionUserArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidReactionUserArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -2592,7 +2592,7 @@ func (e *InvalidReactionValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidReactionValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidReactionValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -2622,7 +2622,7 @@ func (e *InvalidReferenceNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidReferenceNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidReferenceNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -2649,7 +2649,7 @@ func (e *InvalidRelativeFileVersionEnumException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRelativeFileVersionEnumException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRelativeFileVersionEnumException"
 	}
 	return *e.ErrorCodeOverride
@@ -2678,7 +2678,7 @@ func (e *InvalidReplacementContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidReplacementContentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidReplacementContentException"
 	}
 	return *e.ErrorCodeOverride
@@ -2707,7 +2707,7 @@ func (e *InvalidReplacementTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidReplacementTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidReplacementTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -2733,7 +2733,7 @@ func (e *InvalidRepositoryDescriptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryDescriptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryDescriptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -2763,7 +2763,7 @@ func (e *InvalidRepositoryNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -2789,7 +2789,7 @@ func (e *InvalidRepositoryTriggerBranchNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryTriggerBranchNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryTriggerBranchNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -2817,7 +2817,7 @@ func (e *InvalidRepositoryTriggerCustomDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryTriggerCustomDataException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryTriggerCustomDataException"
 	}
 	return *e.ErrorCodeOverride
@@ -2847,7 +2847,7 @@ func (e *InvalidRepositoryTriggerDestinationArnException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *InvalidRepositoryTriggerDestinationArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryTriggerDestinationArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -2876,7 +2876,7 @@ func (e *InvalidRepositoryTriggerEventsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryTriggerEventsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryTriggerEventsException"
 	}
 	return *e.ErrorCodeOverride
@@ -2904,7 +2904,7 @@ func (e *InvalidRepositoryTriggerNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryTriggerNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryTriggerNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -2934,7 +2934,7 @@ func (e *InvalidRepositoryTriggerRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRepositoryTriggerRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRepositoryTriggerRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -2965,7 +2965,7 @@ func (e *InvalidResourceArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -2991,7 +2991,7 @@ func (e *InvalidRevisionIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRevisionIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRevisionIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -3017,7 +3017,7 @@ func (e *InvalidRuleContentSha256Exception) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRuleContentSha256Exception) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRuleContentSha256Exception"
 	}
 	return *e.ErrorCodeOverride
@@ -3043,7 +3043,7 @@ func (e *InvalidSortByException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSortByException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSortByException"
 	}
 	return *e.ErrorCodeOverride
@@ -3070,7 +3070,7 @@ func (e *InvalidSourceCommitSpecifierException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSourceCommitSpecifierException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSourceCommitSpecifierException"
 	}
 	return *e.ErrorCodeOverride
@@ -3098,7 +3098,7 @@ func (e *InvalidSystemTagUsageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSystemTagUsageException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSystemTagUsageException"
 	}
 	return *e.ErrorCodeOverride
@@ -3124,7 +3124,7 @@ func (e *InvalidTagKeysListException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagKeysListException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagKeysListException"
 	}
 	return *e.ErrorCodeOverride
@@ -3150,7 +3150,7 @@ func (e *InvalidTagsMapException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagsMapException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagsMapException"
 	}
 	return *e.ErrorCodeOverride
@@ -3176,7 +3176,7 @@ func (e *InvalidTargetBranchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTargetBranchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTargetBranchException"
 	}
 	return *e.ErrorCodeOverride
@@ -3204,7 +3204,7 @@ func (e *InvalidTargetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTargetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTargetException"
 	}
 	return *e.ErrorCodeOverride
@@ -3233,7 +3233,7 @@ func (e *InvalidTargetsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTargetsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTargetsException"
 	}
 	return *e.ErrorCodeOverride
@@ -3260,7 +3260,7 @@ func (e *InvalidTitleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTitleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTitleException"
 	}
 	return *e.ErrorCodeOverride
@@ -3287,7 +3287,7 @@ func (e *ManualMergeRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ManualMergeRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ManualMergeRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -3313,7 +3313,7 @@ func (e *MaximumBranchesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumBranchesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumBranchesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3339,7 +3339,7 @@ func (e *MaximumConflictResolutionEntriesExceededException) ErrorMessage() strin
 	return *e.Message
 }
 func (e *MaximumConflictResolutionEntriesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumConflictResolutionEntriesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3367,7 +3367,7 @@ func (e *MaximumFileContentToLoadExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumFileContentToLoadExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumFileContentToLoadExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3397,7 +3397,7 @@ func (e *MaximumFileEntriesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumFileEntriesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumFileEntriesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3426,7 +3426,7 @@ func (e *MaximumItemsToCompareExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumItemsToCompareExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumItemsToCompareExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3455,7 +3455,7 @@ func (e *MaximumNumberOfApprovalsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumNumberOfApprovalsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumNumberOfApprovalsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3485,7 +3485,7 @@ func (e *MaximumOpenPullRequestsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumOpenPullRequestsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumOpenPullRequestsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3514,7 +3514,7 @@ func (e *MaximumRepositoryNamesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumRepositoryNamesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumRepositoryNamesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3542,7 +3542,7 @@ func (e *MaximumRepositoryTriggersExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumRepositoryTriggersExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumRepositoryTriggersExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3572,7 +3572,7 @@ func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) ErrorMessage() s
 	return *e.Message
 }
 func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumRuleTemplatesAssociatedWithRepositoryException"
 	}
 	return *e.ErrorCodeOverride
@@ -3600,7 +3600,7 @@ func (e *MergeOptionRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MergeOptionRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MergeOptionRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -3627,7 +3627,7 @@ func (e *MultipleConflictResolutionEntriesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MultipleConflictResolutionEntriesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MultipleConflictResolutionEntriesException"
 	}
 	return *e.ErrorCodeOverride
@@ -3656,7 +3656,7 @@ func (e *MultipleRepositoriesInPullRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MultipleRepositoriesInPullRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MultipleRepositoriesInPullRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -3685,7 +3685,7 @@ func (e *NameLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NameLengthExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NameLengthExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3712,7 +3712,7 @@ func (e *NoChangeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoChangeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoChangeException"
 	}
 	return *e.ErrorCodeOverride
@@ -3739,7 +3739,7 @@ func (e *NumberOfRulesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NumberOfRulesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NumberOfRulesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3766,7 +3766,7 @@ func (e *NumberOfRuleTemplatesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NumberOfRuleTemplatesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NumberOfRuleTemplatesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -3794,7 +3794,7 @@ func (e *OverrideAlreadySetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OverrideAlreadySetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OverrideAlreadySetException"
 	}
 	return *e.ErrorCodeOverride
@@ -3821,7 +3821,7 @@ func (e *OverrideStatusRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OverrideStatusRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OverrideStatusRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -3848,7 +3848,7 @@ func (e *ParentCommitDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParentCommitDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParentCommitDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -3876,7 +3876,7 @@ func (e *ParentCommitIdOutdatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParentCommitIdOutdatedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParentCommitIdOutdatedException"
 	}
 	return *e.ErrorCodeOverride
@@ -3903,7 +3903,7 @@ func (e *ParentCommitIdRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParentCommitIdRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParentCommitIdRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -3929,7 +3929,7 @@ func (e *PathDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PathDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PathDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -3955,7 +3955,7 @@ func (e *PathRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PathRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PathRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -3981,7 +3981,7 @@ func (e *PullRequestAlreadyClosedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PullRequestAlreadyClosedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PullRequestAlreadyClosedException"
 	}
 	return *e.ErrorCodeOverride
@@ -4008,7 +4008,7 @@ func (e *PullRequestApprovalRulesNotSatisfiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PullRequestApprovalRulesNotSatisfiedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PullRequestApprovalRulesNotSatisfiedException"
 	}
 	return *e.ErrorCodeOverride
@@ -4038,7 +4038,7 @@ func (e *PullRequestCannotBeApprovedByAuthorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PullRequestCannotBeApprovedByAuthorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PullRequestCannotBeApprovedByAuthorException"
 	}
 	return *e.ErrorCodeOverride
@@ -4067,7 +4067,7 @@ func (e *PullRequestDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PullRequestDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PullRequestDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -4093,7 +4093,7 @@ func (e *PullRequestIdRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PullRequestIdRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PullRequestIdRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4119,7 +4119,7 @@ func (e *PullRequestStatusRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PullRequestStatusRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PullRequestStatusRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4148,7 +4148,7 @@ func (e *PutFileEntryConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PutFileEntryConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PutFileEntryConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -4175,7 +4175,7 @@ func (e *ReactionLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReactionLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReactionLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -4201,7 +4201,7 @@ func (e *ReactionValueRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReactionValueRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReactionValueRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4227,7 +4227,7 @@ func (e *ReferenceDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReferenceDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReferenceDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -4253,7 +4253,7 @@ func (e *ReferenceNameRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReferenceNameRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReferenceNameRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4279,7 +4279,7 @@ func (e *ReferenceTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReferenceTypeNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReferenceTypeNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -4307,7 +4307,7 @@ func (e *ReplacementContentRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplacementContentRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplacementContentRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4335,7 +4335,7 @@ func (e *ReplacementTypeRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplacementTypeRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplacementTypeRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4361,7 +4361,7 @@ func (e *RepositoryDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -4387,7 +4387,7 @@ func (e *RepositoryLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -4413,7 +4413,7 @@ func (e *RepositoryNameExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryNameExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryNameExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -4439,7 +4439,7 @@ func (e *RepositoryNameRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryNameRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryNameRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4465,7 +4465,7 @@ func (e *RepositoryNamesRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryNamesRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryNamesRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4492,7 +4492,7 @@ func (e *RepositoryNotAssociatedWithPullRequestException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *RepositoryNotAssociatedWithPullRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryNotAssociatedWithPullRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -4521,7 +4521,7 @@ func (e *RepositoryTriggerBranchNameListRequiredException) ErrorMessage() string
 	return *e.Message
 }
 func (e *RepositoryTriggerBranchNameListRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryTriggerBranchNameListRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4550,7 +4550,7 @@ func (e *RepositoryTriggerDestinationArnRequiredException) ErrorMessage() string
 	return *e.Message
 }
 func (e *RepositoryTriggerDestinationArnRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryTriggerDestinationArnRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4578,7 +4578,7 @@ func (e *RepositoryTriggerEventsListRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryTriggerEventsListRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryTriggerEventsListRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4606,7 +4606,7 @@ func (e *RepositoryTriggerNameRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryTriggerNameRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryTriggerNameRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4634,7 +4634,7 @@ func (e *RepositoryTriggersListRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RepositoryTriggersListRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RepositoryTriggersListRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4666,7 +4666,7 @@ func (e *ResourceArnRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceArnRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceArnRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4693,7 +4693,7 @@ func (e *RestrictedSourceFileException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RestrictedSourceFileException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RestrictedSourceFileException"
 	}
 	return *e.ErrorCodeOverride
@@ -4719,7 +4719,7 @@ func (e *RevisionIdRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RevisionIdRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RevisionIdRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4746,7 +4746,7 @@ func (e *RevisionNotCurrentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RevisionNotCurrentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RevisionNotCurrentException"
 	}
 	return *e.ErrorCodeOverride
@@ -4774,7 +4774,7 @@ func (e *SameFileContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SameFileContentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SameFileContentException"
 	}
 	return *e.ErrorCodeOverride
@@ -4803,7 +4803,7 @@ func (e *SamePathRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SamePathRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SamePathRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -4830,7 +4830,7 @@ func (e *SourceAndDestinationAreSameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SourceAndDestinationAreSameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SourceAndDestinationAreSameException"
 	}
 	return *e.ErrorCodeOverride
@@ -4859,7 +4859,7 @@ func (e *SourceFileOrContentRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SourceFileOrContentRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SourceFileOrContentRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4887,7 +4887,7 @@ func (e *TagKeysListRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagKeysListRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagKeysListRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4913,7 +4913,7 @@ func (e *TagPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -4939,7 +4939,7 @@ func (e *TagsMapRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagsMapRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagsMapRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4967,7 +4967,7 @@ func (e *TargetRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -4993,7 +4993,7 @@ func (e *TargetsRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetsRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetsRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -5021,7 +5021,7 @@ func (e *TipOfSourceReferenceIsDifferentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TipOfSourceReferenceIsDifferentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TipOfSourceReferenceIsDifferentException"
 	}
 	return *e.ErrorCodeOverride
@@ -5051,7 +5051,7 @@ func (e *TipsDivergenceExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TipsDivergenceExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TipsDivergenceExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -5077,7 +5077,7 @@ func (e *TitleRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TitleRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TitleRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -5103,7 +5103,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

@@ -27,7 +27,7 @@ func (e *InternalDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalDependencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalDependencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InternalFailure) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalFailure) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalFailure"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *ModelError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ModelError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ModelError"
 	}
 	return *e.ErrorCodeOverride
@@ -111,7 +111,7 @@ func (e *ModelNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ModelNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ModelNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -137,7 +137,7 @@ func (e *ServiceUnavailable) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailable) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailable"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *ValidationError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationError"
 	}
 	return *e.ErrorCodeOverride

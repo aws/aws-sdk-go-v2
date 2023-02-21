@@ -27,7 +27,7 @@ func (e *DryRunOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DryRunOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DryRunOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InternalError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalError"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingRequiredParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *NoConnectorsAvailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoConnectorsAvailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoConnectorsAvailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotPermittedException"
 	}
 	return *e.ErrorCodeOverride
@@ -183,7 +183,7 @@ func (e *ReplicationJobAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationJobAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationJobAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -211,7 +211,7 @@ func (e *ReplicationJobNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationJobNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationJobNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *ReplicationRunLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationRunLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationRunLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *ServerCannotBeReplicatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerCannotBeReplicatedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServerCannotBeReplicatedException"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *TemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemporarilyUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TemporarilyUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -319,7 +319,7 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedOperationException"
 	}
 	return *e.ErrorCodeOverride

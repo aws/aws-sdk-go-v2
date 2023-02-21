@@ -31,7 +31,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationToken) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPaginationToken"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *UnsupportedLocale) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedLocale) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedLocale"
 	}
 	return *e.ErrorCodeOverride

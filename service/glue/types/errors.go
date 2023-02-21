@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *ConcurrentRunsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentRunsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentRunsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -130,7 +130,7 @@ func (e *ConditionCheckFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConditionCheckFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConditionCheckFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -156,7 +156,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -182,7 +182,7 @@ func (e *CrawlerNotRunningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CrawlerNotRunningException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CrawlerNotRunningException"
 	}
 	return *e.ErrorCodeOverride
@@ -208,7 +208,7 @@ func (e *CrawlerRunningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CrawlerRunningException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CrawlerRunningException"
 	}
 	return *e.ErrorCodeOverride
@@ -234,7 +234,7 @@ func (e *CrawlerStoppingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CrawlerStoppingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CrawlerStoppingException"
 	}
 	return *e.ErrorCodeOverride
@@ -260,7 +260,7 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -286,7 +286,7 @@ func (e *GlueEncryptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlueEncryptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GlueEncryptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -312,7 +312,7 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -340,7 +340,7 @@ func (e *IllegalBlueprintStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalBlueprintStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalBlueprintStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -366,7 +366,7 @@ func (e *IllegalSessionStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalSessionStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalSessionStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -392,7 +392,7 @@ func (e *IllegalWorkflowStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalWorkflowStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalWorkflowStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -418,7 +418,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -444,7 +444,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -470,7 +470,7 @@ func (e *InvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -496,7 +496,7 @@ func (e *MLTransformNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MLTransformNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MLTransformNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -522,7 +522,7 @@ func (e *NoScheduleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoScheduleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoScheduleException"
 	}
 	return *e.ErrorCodeOverride
@@ -548,7 +548,7 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationTimeoutException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationTimeoutException"
 	}
 	return *e.ErrorCodeOverride
@@ -573,7 +573,7 @@ func (e *PermissionTypeMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PermissionTypeMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PermissionTypeMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -599,7 +599,7 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -625,7 +625,7 @@ func (e *ResourceNumberLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNumberLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNumberLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -653,7 +653,7 @@ func (e *SchedulerNotRunningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchedulerNotRunningException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SchedulerNotRunningException"
 	}
 	return *e.ErrorCodeOverride
@@ -679,7 +679,7 @@ func (e *SchedulerRunningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchedulerRunningException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SchedulerRunningException"
 	}
 	return *e.ErrorCodeOverride
@@ -705,7 +705,7 @@ func (e *SchedulerTransitioningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchedulerTransitioningException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SchedulerTransitioningException"
 	}
 	return *e.ErrorCodeOverride
@@ -731,7 +731,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -757,7 +757,7 @@ func (e *VersionMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VersionMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VersionMismatchException"
 	}
 	return *e.ErrorCodeOverride

@@ -26,7 +26,7 @@ func (e *BatchEntryIdsNotDistinct) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchEntryIdsNotDistinct) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *BatchRequestTooLong) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchRequestTooLong) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.BatchRequestTooLong"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *EmptyBatchRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EmptyBatchRequest) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.EmptyBatchRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *InvalidAttributeName) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAttributeName) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAttributeName"
 	}
 	return *e.ErrorCodeOverride
@@ -130,7 +130,7 @@ func (e *InvalidBatchEntryId) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidBatchEntryId) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.InvalidBatchEntryId"
 	}
 	return *e.ErrorCodeOverride
@@ -156,7 +156,7 @@ func (e *InvalidIdFormat) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidIdFormat) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidIdFormat"
 	}
 	return *e.ErrorCodeOverride
@@ -182,7 +182,7 @@ func (e *InvalidMessageContents) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMessageContents) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMessageContents"
 	}
 	return *e.ErrorCodeOverride
@@ -208,7 +208,7 @@ func (e *MessageNotInflight) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageNotInflight) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.MessageNotInflight"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *OverLimit) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OverLimit) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OverLimit"
 	}
 	return *e.ErrorCodeOverride
@@ -265,7 +265,7 @@ func (e *PurgeQueueInProgress) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PurgeQueueInProgress) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.PurgeQueueInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *QueueDeletedRecently) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueDeletedRecently) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.QueueDeletedRecently"
 	}
 	return *e.ErrorCodeOverride
@@ -318,7 +318,7 @@ func (e *QueueDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.NonExistentQueue"
 	}
 	return *e.ErrorCodeOverride
@@ -346,7 +346,7 @@ func (e *QueueNameExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueNameExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QueueAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *ReceiptHandleIsInvalid) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReceiptHandleIsInvalid) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReceiptHandleIsInvalid"
 	}
 	return *e.ErrorCodeOverride
@@ -398,7 +398,7 @@ func (e *TooManyEntriesInBatchRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyEntriesInBatchRequest) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWS.SimpleQueueService.UnsupportedOperation"
 	}
 	return *e.ErrorCodeOverride

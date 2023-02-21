@@ -26,7 +26,7 @@ func (e *AcceleratorNotDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AcceleratorNotDisabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AcceleratorNotDisabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *AcceleratorNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AcceleratorNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AcceleratorNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *AssociatedEndpointGroupFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssociatedEndpointGroupFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AssociatedEndpointGroupFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *AssociatedListenerFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssociatedListenerFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AssociatedListenerFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *ByoipCidrNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ByoipCidrNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ByoipCidrNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *EndpointAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EndpointAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *EndpointGroupAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointGroupAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EndpointGroupAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *EndpointGroupNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointGroupNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EndpointGroupNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *EndpointNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EndpointNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -319,7 +319,7 @@ func (e *IncorrectCidrStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncorrectCidrStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncorrectCidrStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -345,7 +345,7 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -371,7 +371,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -397,7 +397,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *InvalidPortRangeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPortRangeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPortRangeException"
 	}
 	return *e.ErrorCodeOverride
@@ -450,7 +450,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -476,7 +476,7 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ListenerNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ListenerNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -503,7 +503,7 @@ func (e *TransactionInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionInProgressException"
 	}
 	return *e.ErrorCodeOverride

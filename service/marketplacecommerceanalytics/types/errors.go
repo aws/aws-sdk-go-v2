@@ -26,7 +26,7 @@ func (e *MarketplaceCommerceAnalyticsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MarketplaceCommerceAnalyticsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MarketplaceCommerceAnalyticsException"
 	}
 	return *e.ErrorCodeOverride

@@ -28,7 +28,7 @@ func (e *AccountSendingPausedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountSendingPausedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountSendingPausedException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *CannotDeleteException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotDeleteException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotDelete"
 	}
 	return *e.ErrorCodeOverride
@@ -113,7 +113,7 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConfigurationSetAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -143,7 +143,7 @@ func (e *ConfigurationSetDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConfigurationSetDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -175,7 +175,7 @@ func (e *ConfigurationSetSendingPausedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetSendingPausedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConfigurationSetSendingPausedException"
 	}
 	return *e.ErrorCodeOverride
@@ -203,7 +203,7 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CustomVerificationEmailInvalidContent"
 	}
 	return *e.ErrorCodeOverride
@@ -234,7 +234,7 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorMessage() s
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CustomVerificationEmailTemplateAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -265,7 +265,7 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorMessage() st
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CustomVerificationEmailTemplateDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -297,7 +297,7 @@ func (e *EventDestinationAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDestinationAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -328,7 +328,7 @@ func (e *EventDestinationDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDestinationDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -360,7 +360,7 @@ func (e *FromEmailAddressNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FromEmailAddressNotVerified"
 	}
 	return *e.ErrorCodeOverride
@@ -392,7 +392,7 @@ func (e *InvalidCloudWatchDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchDestinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCloudWatchDestination"
 	}
 	return *e.ErrorCodeOverride
@@ -421,7 +421,7 @@ func (e *InvalidConfigurationSetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationSetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConfigurationSet"
 	}
 	return *e.ErrorCodeOverride
@@ -447,7 +447,7 @@ func (e *InvalidDeliveryOptionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeliveryOptionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDeliveryOptions"
 	}
 	return *e.ErrorCodeOverride
@@ -477,7 +477,7 @@ func (e *InvalidFirehoseDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFirehoseDestinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFirehoseDestination"
 	}
 	return *e.ErrorCodeOverride
@@ -510,7 +510,7 @@ func (e *InvalidLambdaFunctionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLambdaFunctionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLambdaFunction"
 	}
 	return *e.ErrorCodeOverride
@@ -537,7 +537,7 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -566,7 +566,7 @@ func (e *InvalidRenderingParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRenderingParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRenderingParameter"
 	}
 	return *e.ErrorCodeOverride
@@ -600,7 +600,7 @@ func (e *InvalidS3ConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3ConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3Configuration"
 	}
 	return *e.ErrorCodeOverride
@@ -630,7 +630,7 @@ func (e *InvalidSNSDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSNSDestinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSNSDestination"
 	}
 	return *e.ErrorCodeOverride
@@ -661,7 +661,7 @@ func (e *InvalidSnsTopicException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSnsTopicException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSnsTopic"
 	}
 	return *e.ErrorCodeOverride
@@ -690,7 +690,7 @@ func (e *InvalidTemplateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTemplateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTemplate"
 	}
 	return *e.ErrorCodeOverride
@@ -724,7 +724,7 @@ func (e *InvalidTrackingOptionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTrackingOptionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTrackingOptions"
 	}
 	return *e.ErrorCodeOverride
@@ -752,7 +752,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -782,7 +782,7 @@ func (e *MailFromDomainNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MailFromDomainNotVerifiedException"
 	}
 	return *e.ErrorCodeOverride
@@ -811,7 +811,7 @@ func (e *MessageRejected) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageRejected) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MessageRejected"
 	}
 	return *e.ErrorCodeOverride
@@ -841,7 +841,7 @@ func (e *MissingRenderingAttributeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRenderingAttributeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingRenderingAttribute"
 	}
 	return *e.ErrorCodeOverride
@@ -869,7 +869,7 @@ func (e *ProductionAccessNotGrantedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProductionAccessNotGrantedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProductionAccessNotGranted"
 	}
 	return *e.ErrorCodeOverride
@@ -899,7 +899,7 @@ func (e *RuleDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RuleDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RuleDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -927,7 +927,7 @@ func (e *RuleSetDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RuleSetDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RuleSetDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -956,7 +956,7 @@ func (e *TemplateDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemplateDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TemplateDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -985,7 +985,7 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrackingOptionsAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrackingOptionsAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1015,7 +1015,7 @@ func (e *TrackingOptionsDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrackingOptionsDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride

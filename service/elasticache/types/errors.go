@@ -26,7 +26,7 @@ func (e *APICallRateForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *APICallRateForCustomerExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "APICallRateForCustomerExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *AuthorizationAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AuthorizationAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorizationNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AuthorizationNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *CacheClusterAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheClusterAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheClusterAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *CacheClusterNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheClusterNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheClusterNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *CacheParameterGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheParameterGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheParameterGroupAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *CacheParameterGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheParameterGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheParameterGroupNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -216,7 +216,7 @@ func (e *CacheParameterGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheParameterGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheParameterGroupQuotaExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -244,7 +244,7 @@ func (e *CacheSecurityGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSecurityGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSecurityGroupAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -273,7 +273,7 @@ func (e *CacheSecurityGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSecurityGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSecurityGroupNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -300,7 +300,7 @@ func (e *CacheSecurityGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSecurityGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QuotaExceeded.CacheSecurityGroup"
 	}
 	return *e.ErrorCodeOverride
@@ -329,7 +329,7 @@ func (e *CacheSubnetGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSubnetGroupAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -357,7 +357,7 @@ func (e *CacheSubnetGroupInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetGroupInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSubnetGroupInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -384,7 +384,7 @@ func (e *CacheSubnetGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSubnetGroupNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -411,7 +411,7 @@ func (e *CacheSubnetGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSubnetGroupQuotaExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -440,7 +440,7 @@ func (e *CacheSubnetQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CacheSubnetQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -467,7 +467,7 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterQuotaForCustomerExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterQuotaForCustomerExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -495,7 +495,7 @@ func (e *DefaultUserAssociatedToUserGroupFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DefaultUserAssociatedToUserGroupFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DefaultUserAssociatedToUserGroup"
 	}
 	return *e.ErrorCodeOverride
@@ -523,7 +523,7 @@ func (e *DefaultUserRequired) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DefaultUserRequired) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DefaultUserRequired"
 	}
 	return *e.ErrorCodeOverride
@@ -549,7 +549,7 @@ func (e *DuplicateUserNameFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateUserNameFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateUserName"
 	}
 	return *e.ErrorCodeOverride
@@ -575,7 +575,7 @@ func (e *GlobalReplicationGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalReplicationGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GlobalReplicationGroupAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -603,7 +603,7 @@ func (e *GlobalReplicationGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalReplicationGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GlobalReplicationGroupNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -634,7 +634,7 @@ func (e *InsufficientCacheClusterCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientCacheClusterCapacityFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientCacheClusterCapacity"
 	}
 	return *e.ErrorCodeOverride
@@ -662,7 +662,7 @@ func (e *InvalidARNFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidARNFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidARN"
 	}
 	return *e.ErrorCodeOverride
@@ -688,7 +688,7 @@ func (e *InvalidCacheClusterStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCacheClusterStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCacheClusterState"
 	}
 	return *e.ErrorCodeOverride
@@ -715,7 +715,7 @@ func (e *InvalidCacheParameterGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCacheParameterGroupStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCacheParameterGroupState"
 	}
 	return *e.ErrorCodeOverride
@@ -743,7 +743,7 @@ func (e *InvalidCacheSecurityGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCacheSecurityGroupStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCacheSecurityGroupState"
 	}
 	return *e.ErrorCodeOverride
@@ -771,7 +771,7 @@ func (e *InvalidGlobalReplicationGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGlobalReplicationGroupStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidGlobalReplicationGroupState"
 	}
 	return *e.ErrorCodeOverride
@@ -799,7 +799,7 @@ func (e *InvalidKMSKeyFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKMSKeyFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidKMSKeyFault"
 	}
 	return *e.ErrorCodeOverride
@@ -825,7 +825,7 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterCombination"
 	}
 	return *e.ErrorCodeOverride
@@ -853,7 +853,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValue"
 	}
 	return *e.ErrorCodeOverride
@@ -879,7 +879,7 @@ func (e *InvalidReplicationGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidReplicationGroupStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidReplicationGroupState"
 	}
 	return *e.ErrorCodeOverride
@@ -906,7 +906,7 @@ func (e *InvalidSnapshotStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSnapshotStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSnapshotState"
 	}
 	return *e.ErrorCodeOverride
@@ -932,7 +932,7 @@ func (e *InvalidSubnet) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSubnet) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSubnet"
 	}
 	return *e.ErrorCodeOverride
@@ -958,7 +958,7 @@ func (e *InvalidUserGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUserGroupStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUserGroupState"
 	}
 	return *e.ErrorCodeOverride
@@ -984,7 +984,7 @@ func (e *InvalidUserStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUserStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUserState"
 	}
 	return *e.ErrorCodeOverride
@@ -1010,7 +1010,7 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidVPCNetworkStateFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1038,7 +1038,7 @@ func (e *NodeGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NodeGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeGroupNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1066,7 +1066,7 @@ func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorMessage() string 
 	return *e.Message
 }
 func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeGroupsPerReplicationGroupQuotaExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1095,7 +1095,7 @@ func (e *NodeQuotaForClusterExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeQuotaForClusterExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1122,7 +1122,7 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NodeQuotaForCustomerExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1148,7 +1148,7 @@ func (e *NoOperationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoOperationFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoOperationFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1174,7 +1174,7 @@ func (e *ReplicationGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationGroupAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1202,7 +1202,7 @@ func (e *ReplicationGroupAlreadyUnderMigrationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationGroupAlreadyUnderMigrationFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationGroupAlreadyUnderMigrationFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1230,7 +1230,7 @@ func (e *ReplicationGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationGroupNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1256,7 +1256,7 @@ func (e *ReplicationGroupNotUnderMigrationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationGroupNotUnderMigrationFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationGroupNotUnderMigrationFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1284,7 +1284,7 @@ func (e *ReservedCacheNodeAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodeAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReservedCacheNodeAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1312,7 +1312,7 @@ func (e *ReservedCacheNodeNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodeNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReservedCacheNodeNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1339,7 +1339,7 @@ func (e *ReservedCacheNodeQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodeQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReservedCacheNodeQuotaExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1367,7 +1367,7 @@ func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReservedCacheNodesOfferingNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1395,7 +1395,7 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceLinkedRoleNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1421,7 +1421,7 @@ func (e *ServiceUpdateNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUpdateNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUpdateNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1447,7 +1447,7 @@ func (e *SnapshotAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapshotAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1482,7 +1482,7 @@ func (e *SnapshotFeatureNotSupportedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotFeatureNotSupportedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapshotFeatureNotSupportedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1508,7 +1508,7 @@ func (e *SnapshotNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapshotNotFoundFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1535,7 +1535,7 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapshotQuotaExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1561,7 +1561,7 @@ func (e *SubnetInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -1590,7 +1590,7 @@ func (e *SubnetNotAllowedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetNotAllowedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetNotAllowedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1616,7 +1616,7 @@ func (e *TagNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1644,7 +1644,7 @@ func (e *TagQuotaPerResourceExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagQuotaPerResourceExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagQuotaPerResourceExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1670,7 +1670,7 @@ func (e *TestFailoverNotAvailableFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TestFailoverNotAvailableFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TestFailoverNotAvailableFault"
 	}
 	return *e.ErrorCodeOverride
@@ -1696,7 +1696,7 @@ func (e *UserAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1722,7 +1722,7 @@ func (e *UserGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserGroupAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserGroupAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1748,7 +1748,7 @@ func (e *UserGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserGroupNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserGroupNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1774,7 +1774,7 @@ func (e *UserGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserGroupQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserGroupQuotaExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1800,7 +1800,7 @@ func (e *UserNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1826,7 +1826,7 @@ func (e *UserQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserQuotaExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserQuotaExceeded"
 	}
 	return *e.ErrorCodeOverride

@@ -28,7 +28,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *BatchWriteException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchWriteException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BatchWriteException"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *CannotListParentOfRootException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotListParentOfRootException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotListParentOfRootException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *DirectoryAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -137,7 +137,7 @@ func (e *DirectoryDeletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryDeletedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryDeletedException"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *DirectoryNotDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryNotDisabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryNotDisabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *DirectoryNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -215,7 +215,7 @@ func (e *FacetAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FacetAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FacetAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -242,7 +242,7 @@ func (e *FacetInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FacetInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FacetInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -268,7 +268,7 @@ func (e *FacetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FacetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FacetNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *FacetValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FacetValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FacetValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -323,7 +323,7 @@ func (e *IncompatibleSchemaException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleSchemaException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleSchemaException"
 	}
 	return *e.ErrorCodeOverride
@@ -350,7 +350,7 @@ func (e *IndexedAttributeMissingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IndexedAttributeMissingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IndexedAttributeMissingException"
 	}
 	return *e.ErrorCodeOverride
@@ -380,7 +380,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -406,7 +406,7 @@ func (e *InvalidArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -434,7 +434,7 @@ func (e *InvalidAttachmentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAttachmentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAttachmentException"
 	}
 	return *e.ErrorCodeOverride
@@ -460,7 +460,7 @@ func (e *InvalidFacetUpdateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFacetUpdateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFacetUpdateException"
 	}
 	return *e.ErrorCodeOverride
@@ -486,7 +486,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -512,7 +512,7 @@ func (e *InvalidRuleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRuleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRuleException"
 	}
 	return *e.ErrorCodeOverride
@@ -538,7 +538,7 @@ func (e *InvalidSchemaDocException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSchemaDocException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSchemaDocException"
 	}
 	return *e.ErrorCodeOverride
@@ -566,7 +566,7 @@ func (e *InvalidTaggingRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTaggingRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTaggingRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -594,7 +594,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -621,7 +621,7 @@ func (e *LinkNameAlreadyInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LinkNameAlreadyInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LinkNameAlreadyInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -647,7 +647,7 @@ func (e *NotIndexException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotIndexException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotIndexException"
 	}
 	return *e.ErrorCodeOverride
@@ -674,7 +674,7 @@ func (e *NotNodeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotNodeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotNodeException"
 	}
 	return *e.ErrorCodeOverride
@@ -700,7 +700,7 @@ func (e *NotPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -726,7 +726,7 @@ func (e *ObjectAlreadyDetachedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ObjectAlreadyDetachedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ObjectAlreadyDetachedException"
 	}
 	return *e.ErrorCodeOverride
@@ -753,7 +753,7 @@ func (e *ObjectNotDetachedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ObjectNotDetachedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ObjectNotDetachedException"
 	}
 	return *e.ErrorCodeOverride
@@ -779,7 +779,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -810,7 +810,7 @@ func (e *RetryableConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RetryableConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RetryableConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -837,7 +837,7 @@ func (e *SchemaAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchemaAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SchemaAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -863,7 +863,7 @@ func (e *SchemaAlreadyPublishedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchemaAlreadyPublishedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SchemaAlreadyPublishedException"
 	}
 	return *e.ErrorCodeOverride
@@ -890,7 +890,7 @@ func (e *StillContainsLinksException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StillContainsLinksException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StillContainsLinksException"
 	}
 	return *e.ErrorCodeOverride
@@ -916,7 +916,7 @@ func (e *UnsupportedIndexTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedIndexTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedIndexTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -943,7 +943,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

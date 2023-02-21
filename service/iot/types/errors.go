@@ -28,7 +28,7 @@ func (e *CertificateConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *CertificateStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *CertificateValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *ConflictingResourceUpdateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictingResourceUpdateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictingResourceUpdateException"
 	}
 	return *e.ErrorCodeOverride
@@ -161,7 +161,7 @@ func (e *DeleteConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeleteConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DeleteConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,7 +187,7 @@ func (e *IndexNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IndexNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IndexNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -213,7 +213,7 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -239,7 +239,7 @@ func (e *InternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *InvalidAggregationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAggregationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAggregationException"
 	}
 	return *e.ErrorCodeOverride
@@ -318,7 +318,7 @@ func (e *InvalidQueryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidQueryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidQueryException"
 	}
 	return *e.ErrorCodeOverride
@@ -344,7 +344,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -370,7 +370,7 @@ func (e *InvalidResponseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResponseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResponseException"
 	}
 	return *e.ErrorCodeOverride
@@ -397,7 +397,7 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateTransitionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateTransitionException"
 	}
 	return *e.ErrorCodeOverride
@@ -423,7 +423,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -449,7 +449,7 @@ func (e *MalformedPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -475,7 +475,7 @@ func (e *NotConfiguredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotConfiguredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotConfiguredException"
 	}
 	return *e.ErrorCodeOverride
@@ -501,7 +501,7 @@ func (e *RegistrationCodeValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RegistrationCodeValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RegistrationCodeValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -532,7 +532,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -558,7 +558,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -584,7 +584,7 @@ func (e *ResourceRegistrationFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceRegistrationFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceRegistrationFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -612,7 +612,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -638,7 +638,7 @@ func (e *SqlParseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SqlParseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SqlParseException"
 	}
 	return *e.ErrorCodeOverride
@@ -665,7 +665,7 @@ func (e *TaskAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaskAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TaskAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -691,7 +691,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -718,7 +718,7 @@ func (e *TransferAlreadyCompletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransferAlreadyCompletedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransferAlreadyCompletedException"
 	}
 	return *e.ErrorCodeOverride
@@ -745,7 +745,7 @@ func (e *TransferConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransferConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransferConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -771,7 +771,7 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -798,7 +798,7 @@ func (e *VersionConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VersionConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VersionConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -824,7 +824,7 @@ func (e *VersionsLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VersionsLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VersionsLimitExceededException"
 	}
 	return *e.ErrorCodeOverride

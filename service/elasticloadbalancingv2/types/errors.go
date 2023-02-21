@@ -26,7 +26,7 @@ func (e *AllocationIdNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AllocationIdNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AllocationIdNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *ALPNPolicyNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ALPNPolicyNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ALPNPolicyNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *AvailabilityZoneNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AvailabilityZoneNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AvailabilityZoneNotSupported"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *CertificateNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -132,7 +132,7 @@ func (e *DuplicateListenerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateListenerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateListener"
 	}
 	return *e.ErrorCodeOverride
@@ -158,7 +158,7 @@ func (e *DuplicateLoadBalancerNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateLoadBalancerNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateLoadBalancerName"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateTagKeysException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateTagKeys"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *DuplicateTargetGroupNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateTargetGroupNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateTargetGroupName"
 	}
 	return *e.ErrorCodeOverride
@@ -239,7 +239,7 @@ func (e *HealthUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HealthUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HealthUnavailable"
 	}
 	return *e.ErrorCodeOverride
@@ -265,7 +265,7 @@ func (e *IncompatibleProtocolsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleProtocolsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleProtocols"
 	}
 	return *e.ErrorCodeOverride
@@ -291,7 +291,7 @@ func (e *InvalidConfigurationRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConfigurationRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -319,7 +319,7 @@ func (e *InvalidLoadBalancerActionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLoadBalancerActionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLoadBalancerAction"
 	}
 	return *e.ErrorCodeOverride
@@ -347,7 +347,7 @@ func (e *InvalidSchemeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSchemeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidScheme"
 	}
 	return *e.ErrorCodeOverride
@@ -373,7 +373,7 @@ func (e *InvalidSecurityGroupException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSecurityGroupException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSecurityGroup"
 	}
 	return *e.ErrorCodeOverride
@@ -399,7 +399,7 @@ func (e *InvalidSubnetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSubnetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSubnet"
 	}
 	return *e.ErrorCodeOverride
@@ -426,7 +426,7 @@ func (e *InvalidTargetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTargetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTarget"
 	}
 	return *e.ErrorCodeOverride
@@ -452,7 +452,7 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ListenerNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ListenerNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -478,7 +478,7 @@ func (e *LoadBalancerNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LoadBalancerNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LoadBalancerNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -504,7 +504,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotPermitted"
 	}
 	return *e.ErrorCodeOverride
@@ -530,7 +530,7 @@ func (e *PriorityInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PriorityInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PriorityInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -556,7 +556,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -582,7 +582,7 @@ func (e *RuleNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RuleNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RuleNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -608,7 +608,7 @@ func (e *SSLPolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SSLPolicyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SSLPolicyNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -634,7 +634,7 @@ func (e *SubnetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -660,7 +660,7 @@ func (e *TargetGroupAssociationLimitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetGroupAssociationLimitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetGroupAssociationLimit"
 	}
 	return *e.ErrorCodeOverride
@@ -688,7 +688,7 @@ func (e *TargetGroupNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetGroupNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetGroupNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -714,7 +714,7 @@ func (e *TooManyActionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyActionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyActions"
 	}
 	return *e.ErrorCodeOverride
@@ -740,7 +740,7 @@ func (e *TooManyCertificatesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCertificatesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCertificates"
 	}
 	return *e.ErrorCodeOverride
@@ -766,7 +766,7 @@ func (e *TooManyListenersException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyListenersException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyListeners"
 	}
 	return *e.ErrorCodeOverride
@@ -793,7 +793,7 @@ func (e *TooManyLoadBalancersException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyLoadBalancersException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyLoadBalancers"
 	}
 	return *e.ErrorCodeOverride
@@ -820,7 +820,7 @@ func (e *TooManyRegistrationsForTargetIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRegistrationsForTargetIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRegistrationsForTargetId"
 	}
 	return *e.ErrorCodeOverride
@@ -848,7 +848,7 @@ func (e *TooManyRulesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRulesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRules"
 	}
 	return *e.ErrorCodeOverride
@@ -874,7 +874,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTags"
 	}
 	return *e.ErrorCodeOverride
@@ -901,7 +901,7 @@ func (e *TooManyTargetGroupsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTargetGroupsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTargetGroups"
 	}
 	return *e.ErrorCodeOverride
@@ -927,7 +927,7 @@ func (e *TooManyTargetsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTargetsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTargets"
 	}
 	return *e.ErrorCodeOverride
@@ -955,7 +955,7 @@ func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorMessage() strin
 	return *e.Message
 }
 func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyUniqueTargetGroupsPerLoadBalancer"
 	}
 	return *e.ErrorCodeOverride
@@ -983,7 +983,7 @@ func (e *UnsupportedProtocolException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedProtocolException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedProtocol"
 	}
 	return *e.ErrorCodeOverride

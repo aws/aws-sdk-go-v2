@@ -27,7 +27,7 @@ func (e *BackupInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BackupInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BackupInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *BackupNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BackupNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BackupNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *ConditionalCheckFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConditionalCheckFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConditionalCheckFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *ContinuousBackupsUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContinuousBackupsUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ContinuousBackupsUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *DuplicateItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateItemException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateItemException"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *ExportConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExportConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExportConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *ExportNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExportNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExportNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *GlobalTableAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalTableAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GlobalTableAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *GlobalTableNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalTableNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GlobalTableNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -265,7 +265,7 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *ImportConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ImportConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ImportConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -321,7 +321,7 @@ func (e *ImportNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ImportNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ImportNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -347,7 +347,7 @@ func (e *IndexNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IndexNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IndexNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -373,7 +373,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -398,7 +398,7 @@ func (e *InvalidEndpointException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEndpointException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEndpointException"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *InvalidExportTimeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidExportTimeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidExportTimeException"
 	}
 	return *e.ErrorCodeOverride
@@ -451,7 +451,7 @@ func (e *InvalidRestoreTimeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRestoreTimeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRestoreTimeException"
 	}
 	return *e.ErrorCodeOverride
@@ -478,7 +478,7 @@ func (e *ItemCollectionSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ItemCollectionSizeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ItemCollectionSizeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -515,7 +515,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -541,7 +541,7 @@ func (e *PointInTimeRecoveryUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PointInTimeRecoveryUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PointInTimeRecoveryUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -575,7 +575,7 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProvisionedThroughputExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -603,7 +603,7 @@ func (e *ReplicaAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicaAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicaAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -629,7 +629,7 @@ func (e *ReplicaNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicaNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicaNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -657,7 +657,7 @@ func (e *RequestLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -685,7 +685,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -712,7 +712,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -738,7 +738,7 @@ func (e *TableAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TableAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TableAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -764,7 +764,7 @@ func (e *TableInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TableInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TableInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -792,7 +792,7 @@ func (e *TableNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TableNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TableNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -967,7 +967,7 @@ func (e *TransactionCanceledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionCanceledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionCanceledException"
 	}
 	return *e.ErrorCodeOverride
@@ -993,7 +993,7 @@ func (e *TransactionConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -1019,7 +1019,7 @@ func (e *TransactionInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionInProgressException"
 	}
 	return *e.ErrorCodeOverride
