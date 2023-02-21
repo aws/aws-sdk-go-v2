@@ -1,3 +1,7 @@
+# v1.9.0 (2023-02-21)
+
+* **Feature**: In this release we improved resilience hub application creation and maintenance by introducing new resource and app component crud APIs, improving visibility and maintenance of application input sources and added support for additional information attributes to be provided by customers.
+
 # v1.8.3 (2023-02-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

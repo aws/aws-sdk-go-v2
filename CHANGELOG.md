@@ -1,3 +1,16 @@
+# Release (2023-02-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.32.0](service/quicksight/CHANGELOG.md#v1320-2023-02-21)
+  * **Feature**: S3 data sources now accept a custom IAM role.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.9.0](service/resiliencehub/CHANGELOG.md#v190-2023-02-21)
+  * **Feature**: In this release we improved resilience hub application creation and maintenance by introducing new resource and app component crud APIs, improving visibility and maintenance of application input sources and added support for additional information attributes to be provided by customers.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.28.4](service/securityhub/CHANGELOG.md#v1284-2023-02-21)
+  * **Documentation**: Documentation updates for AWS Security Hub
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.0.0](service/tnb/CHANGELOG.md#v100-2023-02-21)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for AWS Telco Network Builder (TNB). AWS Telco Network Builder is a network automation service that helps you deploy and manage telecom networks.
+
 # Release (2023-02-20)
 
 ## General Highlights

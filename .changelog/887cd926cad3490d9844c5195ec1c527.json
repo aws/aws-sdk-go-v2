@@ -1,8 +1,0 @@
-{
-    "id": "887cd926-cad3-490d-9844-c5195ec1c527",
-    "type": "feature",
-    "description": "S3 data sources now accept a custom IAM role.",
-    "modules": [
-        "service/quicksight"
-    ]
-}
