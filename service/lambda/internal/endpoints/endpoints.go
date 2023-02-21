@@ -15,7 +15,9 @@ type Options struct {
 
 	// legacy fields
 	// will not deprecate. this is because we will still use this for initial population
-	// then there will be some translation in the middleware to the reterminus fields
+	// then there will be some translation in the middleware to the reterminus fields.
+	// but if there is another reterminus-endorsed way of resolving fips and dual stack
+	// rather than the existing way through config sources, then can deprecate these fields.
 	ResolvedRegion string
 	DisableHTTPS bool
 	UseDualStackEndpoint aws.DualStackEndpointState
