@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the resiliency policies for the Resilience Hub applications.
+// Lists the resiliency policies for the AWS Resilience Hub applications.
 func (c *Client) ListResiliencyPolicies(ctx context.Context, params *ListResiliencyPoliciesInput, optFns ...func(*Options)) (*ListResiliencyPoliciesOutput, error) {
 	if params == nil {
 		params = &ListResiliencyPoliciesInput{}
@@ -46,7 +46,7 @@ type ListResiliencyPoliciesInput struct {
 
 type ListResiliencyPoliciesOutput struct {
 
-	// The resiliency policies for the Resilience Hub applications.
+	// The resiliency policies for the AWS Resilience Hub applications.
 	//
 	// This member is required.
 	ResiliencyPolicies []types.ResiliencyPolicy

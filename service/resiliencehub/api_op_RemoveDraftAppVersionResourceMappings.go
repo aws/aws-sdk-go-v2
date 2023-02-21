@@ -28,28 +28,31 @@ func (c *Client) RemoveDraftAppVersionResourceMappings(ctx context.Context, para
 
 type RemoveDraftAppVersionResourceMappingsInput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The names of the registered applications to remove from the resource mappings.
+	// The names of the registered applications you want to remove from the resource
+	// mappings.
 	AppRegistryAppNames []string
 
-	// The names of the CloudFormation stacks to remove from the resource mappings.
+	// The names of the CloudFormation stacks you want to remove from the resource
+	// mappings.
 	LogicalStackNames []string
 
-	// The names of the resource groups to remove from the resource mappings.
+	// The names of the resource groups you want to remove from the resource mappings.
 	ResourceGroupNames []string
 
-	// The names of the resources to remove from the resource mappings.
+	// The names of the resources you want to remove from the resource mappings.
 	ResourceNames []string
 
-	//
+	// The names of the Terraform sources you want to remove from the resource
+	// mappings.
 	TerraformSourceNames []string
 
 	noSmithyDocumentSerde
@@ -57,11 +60,11 @@ type RemoveDraftAppVersionResourceMappingsInput struct {
 
 type RemoveDraftAppVersionResourceMappingsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	AppArn *string
 
 	// The version of the application.

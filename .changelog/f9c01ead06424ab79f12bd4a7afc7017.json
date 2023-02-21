@@ -1,0 +1,8 @@
+{
+    "id": "f9c01ead-0642-4ab7-9f12-bd4a7afc7017",
+    "type": "feature",
+    "description": "In this release we improved resilience hub application creation and maintenance by introducing new resource and app component crud APIs, improving visibility and maintenance of application input sources and added support for additional information attributes to be provided by customers.",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}

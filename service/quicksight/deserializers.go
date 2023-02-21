@@ -54496,6 +54496,15 @@ func awsRestjson1_deserializeDocumentS3Parameters(v **types.S3Parameters, value 
 				return err
 			}
 
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

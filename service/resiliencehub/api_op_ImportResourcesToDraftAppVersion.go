@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports resources from sources such as a CloudFormation stack, resource-groups,
-// or application registry app to a draft application version.
+// Imports resources to AWS Resilience Hub application draft version from different
+// input sources. For more information about the input sources supported by AWS
+// Resilience Hub, see Discover the structure and describe your Resilience Hub
+// application
+// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html).
 func (c *Client) ImportResourcesToDraftAppVersion(ctx context.Context, params *ImportResourcesToDraftAppVersionInput, optFns ...func(*Options)) (*ImportResourcesToDraftAppVersionOutput, error) {
 	if params == nil {
 		params = &ImportResourcesToDraftAppVersionInput{}
@@ -30,14 +33,18 @@ func (c *Client) ImportResourcesToDraftAppVersion(ctx context.Context, params *I
 
 type ImportResourcesToDraftAppVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
+
+	// The import strategy you would like to set to import resources into AWS
+	// Resilience Hub application.
+	ImportStrategy types.ResourceImportStrategyType
 
 	// The Amazon Resource Names (ARNs) for the resources that you want to import.
 	SourceArns []string
@@ -50,11 +57,11 @@ type ImportResourcesToDraftAppVersionInput struct {
 
 type ImportResourcesToDraftAppVersionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

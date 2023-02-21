@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates the app template for a draft version of a Resilience Hub app.
+// Adds or updates the app template for an AWS Resilience Hub application draft
+// version.
 func (c *Client) PutDraftAppVersionTemplate(ctx context.Context, params *PutDraftAppVersionTemplateInput, optFns ...func(*Options)) (*PutDraftAppVersionTemplateOutput, error) {
 	if params == nil {
 		params = &PutDraftAppVersionTemplateInput{}
@@ -28,16 +29,99 @@ func (c *Client) PutDraftAppVersionTemplate(ctx context.Context, params *PutDraf
 
 type PutDraftAppVersionTemplateInput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// A JSON string that contains the body of the app template.
+	// A JSON string that provides information about your application structure. To
+	// learn more about the appTemplateBody template, see the sample template provided
+	// in the Examples section. The appTemplateBody JSON string has the following
+	// structure:
+	//
+	// * resources The list of logical resources that needs to be included
+	// in the application. Type: Array Don't add the resources that you want to
+	// exclude. Each resources array item includes the following fields:
+	//
+	// *
+	// logicalResourceId The logical identifier of the resource. Type: Object Each
+	// logicalResourceId object includes the following fields:
+	//
+	// * identifier The
+	// identifier of the resource. Type: String
+	//
+	// * logicalStackName The name of the
+	// CloudFormation stack this resource belongs to. Type: String
+	//
+	// * resourceGroupName
+	// The name of the resource group this resource belongs to. Type: String
+	//
+	// *
+	// terraformSourceName The name of the Terraform S3 state file this resource
+	// belongs to. Type: String
+	//
+	// * type The type of resource. Type: string
+	//
+	// * name The
+	// name of the resource. Type: String
+	//
+	// * appComponents The list of Application
+	// Components that this resource belongs to. If an Application Component is not
+	// part of the AWS Resilience Hub application, it will be added. Type: Array Each
+	// appComponents array item includes the following fields:
+	//
+	// * name The name of the
+	// Application Component. Type: String
+	//
+	// * type The type of Application Component.
+	// For more information about the types of Application Component, see Grouping
+	// resources in an AppComponent
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html).
+	// Type: String
+	//
+	// * resourceNames The list of included resources that are assigned
+	// to the Application Component. Type: Array of strings
+	//
+	// * additionalInfo
+	// Additional configuration parameters for an AWS Resilience Hub application.
+	// Currently, this parameter accepts a key-value mapping (in a string format) of
+	// only one failover region and one associated account. Key: "failover-regions"
+	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	//
+	// *
+	// excludedResources The list of logical resource identifiers to be excluded from
+	// the application. Type: Array Don't add the resources that you want to include.
+	// Each excludedResources array item includes the following fields:
+	//
+	// *
+	// logicalResourceIds The logical identifier of the resource. Type: Object You can
+	// configure only one of the following fields:
+	//
+	// * logicalStackName
+	//
+	// *
+	// resourceGroupName
+	//
+	// * terraformSourceName
+	//
+	// Each logicalResourceIds object
+	// includes the following fields:
+	//
+	// * identifier The identifier of the resource.
+	// Type: String
+	//
+	// * logicalStackName The name of the CloudFormation stack this
+	// resource belongs to. Type: String
+	//
+	// * resourceGroupName The name of the resource
+	// group this resource belongs to. Type: String
+	//
+	// * terraformSourceName The name of
+	// the Terraform S3 state file this resource belongs to. Type: String
 	//
 	// This member is required.
 	AppTemplateBody *string
@@ -47,11 +131,11 @@ type PutDraftAppVersionTemplateInput struct {
 
 type PutDraftAppVersionTemplateOutput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	AppArn *string
 
 	// The version of the application.

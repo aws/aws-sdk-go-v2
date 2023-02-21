@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Resilience Hub application. A Resilience Hub application is a
-// collection of Amazon Web Services resources structured to prevent and recover
-// Amazon Web Services application disruptions. To describe a Resilience Hub
+// Creates an AWS Resilience Hub application. An AWS Resilience Hub application is
+// a collection of Amazon Web Services resources structured to prevent and recover
+// Amazon Web Services application disruptions. To describe a AWS Resilience Hub
 // application, you provide an application name, resources from one or more–up to
 // five–CloudFormation stacks, and an appropriate resiliency policy. After you
-// create a Resilience Hub application, you publish it so that you can run a
+// create an AWS Resilience Hub application, you publish it so that you can run a
 // resiliency assessment on it. You can then use recommendations from the
 // assessment to improve resiliency by running another assessment, comparing
 // results, and then iterating the process until you achieve your goals for
@@ -59,7 +59,7 @@ type CreateAppInput struct {
 	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
 	// more information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	PolicyArn *string
 
 	// The tags assigned to the resource. A tag is a label that you assign to an Amazon

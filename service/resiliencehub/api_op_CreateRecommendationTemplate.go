@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new recommendation template.
+// Creates a new recommendation template for the AWS Resilience Hub application.
 func (c *Client) CreateRecommendationTemplate(ctx context.Context, params *CreateRecommendationTemplateInput, optFns ...func(*Options)) (*CreateRecommendationTemplateOutput, error) {
 	if params == nil {
 		params = &CreateRecommendationTemplateInput{}
@@ -34,7 +34,7 @@ type CreateRecommendationTemplateInput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string

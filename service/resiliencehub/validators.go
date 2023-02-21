@@ -50,6 +50,46 @@ func (m *validateOpCreateApp) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAppVersionAppComponent struct {
+}
+
+func (*validateOpCreateAppVersionAppComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppVersionAppComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppVersionAppComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppVersionAppComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAppVersionResource struct {
+}
+
+func (*validateOpCreateAppVersionResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppVersionResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppVersionResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppVersionResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRecommendationTemplate struct {
 }
 
@@ -130,6 +170,66 @@ func (m *validateOpDeleteApp) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAppInputSource struct {
+}
+
+func (*validateOpDeleteAppInputSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppInputSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppInputSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppInputSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppVersionAppComponent struct {
+}
+
+func (*validateOpDeleteAppVersionAppComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppVersionAppComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppVersionAppComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppVersionAppComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppVersionResource struct {
+}
+
+func (*validateOpDeleteAppVersionResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppVersionResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppVersionResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppVersionResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRecommendationTemplate struct {
 }
 
@@ -205,6 +305,66 @@ func (m *validateOpDescribeApp) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppVersionAppComponent struct {
+}
+
+func (*validateOpDescribeAppVersionAppComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppVersionAppComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppVersionAppComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppVersionAppComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppVersion struct {
+}
+
+func (*validateOpDescribeAppVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppVersionResource struct {
+}
+
+func (*validateOpDescribeAppVersionResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppVersionResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppVersionResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppVersionResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -365,6 +525,46 @@ func (m *validateOpListAppComponentRecommendations) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAppComponentRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAppInputSources struct {
+}
+
+func (*validateOpListAppInputSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppInputSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppInputSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppInputSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAppVersionAppComponents struct {
+}
+
+func (*validateOpListAppVersionAppComponents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppVersionAppComponents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppVersionAppComponentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppVersionAppComponentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +890,66 @@ func (m *validateOpUpdateApp) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAppVersionAppComponent struct {
+}
+
+func (*validateOpUpdateAppVersionAppComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppVersionAppComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppVersionAppComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppVersionAppComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAppVersion struct {
+}
+
+func (*validateOpUpdateAppVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAppVersionResource struct {
+}
+
+func (*validateOpUpdateAppVersionResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppVersionResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppVersionResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppVersionResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResiliencyPolicy struct {
 }
 
@@ -718,6 +978,14 @@ func addOpCreateAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApp{}, middleware.After)
 }
 
+func addOpCreateAppVersionAppComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppVersionAppComponent{}, middleware.After)
+}
+
+func addOpCreateAppVersionResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppVersionResource{}, middleware.After)
+}
+
 func addOpCreateRecommendationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRecommendationTemplate{}, middleware.After)
 }
@@ -734,6 +1002,18 @@ func addOpDeleteAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApp{}, middleware.After)
 }
 
+func addOpDeleteAppInputSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppInputSource{}, middleware.After)
+}
+
+func addOpDeleteAppVersionAppComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppVersionAppComponent{}, middleware.After)
+}
+
+func addOpDeleteAppVersionResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppVersionResource{}, middleware.After)
+}
+
 func addOpDeleteRecommendationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecommendationTemplate{}, middleware.After)
 }
@@ -748,6 +1028,18 @@ func addOpDescribeAppAssessmentValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeApp{}, middleware.After)
+}
+
+func addOpDescribeAppVersionAppComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppVersionAppComponent{}, middleware.After)
+}
+
+func addOpDescribeAppVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppVersion{}, middleware.After)
+}
+
+func addOpDescribeAppVersionResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppVersionResource{}, middleware.After)
 }
 
 func addOpDescribeAppVersionResourcesResolutionStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -780,6 +1072,14 @@ func addOpListAppComponentCompliancesValidationMiddleware(stack *middleware.Stac
 
 func addOpListAppComponentRecommendationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAppComponentRecommendations{}, middleware.After)
+}
+
+func addOpListAppInputSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppInputSources{}, middleware.After)
+}
+
+func addOpListAppVersionAppComponentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppVersionAppComponents{}, middleware.After)
 }
 
 func addOpListAppVersionResourceMappingsValidationMiddleware(stack *middleware.Stack) error {
@@ -846,6 +1146,18 @@ func addOpUpdateAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApp{}, middleware.After)
 }
 
+func addOpUpdateAppVersionAppComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppVersionAppComponent{}, middleware.After)
+}
+
+func addOpUpdateAppVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppVersion{}, middleware.After)
+}
+
+func addOpUpdateAppVersionResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppVersionResource{}, middleware.After)
+}
+
 func addOpUpdateResiliencyPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResiliencyPolicy{}, middleware.After)
 }
@@ -873,6 +1185,21 @@ func validateFailurePolicy(v *types.FailurePolicy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FailurePolicy"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogicalResourceId(v *types.LogicalResourceId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogicalResourceId"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1006,6 +1333,61 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 	}
 }
 
+func validateOpCreateAppVersionAppComponentInput(v *CreateAppVersionAppComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppVersionAppComponentInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAppVersionResourceInput(v *CreateAppVersionResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppVersionResourceInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.LogicalResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogicalResourceId"))
+	} else if v.LogicalResourceId != nil {
+		if err := validateLogicalResourceId(v.LogicalResourceId); err != nil {
+			invalidParams.AddNested("LogicalResourceId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PhysicalResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhysicalResourceId"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.AppComponents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppComponents"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRecommendationTemplateInput(v *CreateRecommendationTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1079,6 +1461,64 @@ func validateOpDeleteAppInput(v *DeleteAppInput) error {
 	}
 }
 
+func validateOpDeleteAppInputSourceInput(v *DeleteAppInputSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppInputSourceInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.TerraformSource != nil {
+		if err := validateTerraformSource(v.TerraformSource); err != nil {
+			invalidParams.AddNested("TerraformSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppVersionAppComponentInput(v *DeleteAppVersionAppComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppVersionAppComponentInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppVersionResourceInput(v *DeleteAppVersionResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppVersionResourceInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.LogicalResourceId != nil {
+		if err := validateLogicalResourceId(v.LogicalResourceId); err != nil {
+			invalidParams.AddNested("LogicalResourceId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRecommendationTemplateInput(v *DeleteRecommendationTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1131,6 +1571,68 @@ func validateOpDescribeAppInput(v *DescribeAppInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInput"}
 	if v.AppArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppVersionAppComponentInput(v *DescribeAppVersionAppComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppVersionAppComponentInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.AppVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppVersion"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppVersionInput(v *DescribeAppVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppVersionInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.AppVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppVersionResourceInput(v *DescribeAppVersionResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppVersionResourceInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.AppVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppVersion"))
+	}
+	if v.LogicalResourceId != nil {
+		if err := validateLogicalResourceId(v.LogicalResourceId); err != nil {
+			invalidParams.AddNested("LogicalResourceId", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1262,6 +1764,42 @@ func validateOpListAppComponentRecommendationsInput(v *ListAppComponentRecommend
 	invalidParams := smithy.InvalidParamsError{Context: "ListAppComponentRecommendationsInput"}
 	if v.AssessmentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAppInputSourcesInput(v *ListAppInputSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppInputSourcesInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.AppVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAppVersionAppComponentsInput(v *ListAppVersionAppComponentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppVersionAppComponentsInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.AppVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1529,6 +2067,59 @@ func validateOpUpdateAppInput(v *UpdateAppInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppInput"}
 	if v.AppArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAppVersionAppComponentInput(v *UpdateAppVersionAppComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppVersionAppComponentInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAppVersionInput(v *UpdateAppVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppVersionInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAppVersionResourceInput(v *UpdateAppVersionResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppVersionResourceInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.LogicalResourceId != nil {
+		if err := validateLogicalResourceId(v.LogicalResourceId); err != nil {
+			invalidParams.AddNested("LogicalResourceId", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

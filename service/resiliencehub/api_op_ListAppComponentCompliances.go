@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the compliances for an AWS Resilience Hub component.
+// Lists the compliances for an AWS Resilience Hub Application Component.
 func (c *Client) ListAppComponentCompliances(ctx context.Context, params *ListAppComponentCompliancesInput, optFns ...func(*Options)) (*ListAppComponentCompliancesOutput, error) {
 	if params == nil {
 		params = &ListAppComponentCompliancesInput{}
@@ -34,7 +34,7 @@ type ListAppComponentCompliancesInput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -52,9 +52,9 @@ type ListAppComponentCompliancesInput struct {
 
 type ListAppComponentCompliancesOutput struct {
 
-	// The compliances for an AWS Resilience Hub application component, returned as an
-	// object. This object contains component names, compliances, costs, resiliency
-	// scores, outage scores, and more.
+	// The compliances for an AWS Resilience Hub Application Component, returned as an
+	// object. This object contains the names of the Application Components,
+	// compliances, costs, resiliency scores, outage scores, and more.
 	//
 	// This member is required.
 	ComponentCompliances []types.AppComponentCompliance

@@ -23531,6 +23531,11 @@ func awsRestjson1_serializeDocumentS3Parameters(v *types.S3Parameters, value smi
 		}
 	}
 
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	return nil
 }
 

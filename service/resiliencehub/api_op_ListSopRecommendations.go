@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the standard operating procedure (SOP) recommendations for the Resilience
-// Hub applications.
+// Lists the standard operating procedure (SOP) recommendations for the AWS
+// Resilience Hub applications.
 func (c *Client) ListSopRecommendations(ctx context.Context, params *ListSopRecommendationsInput, optFns ...func(*Options)) (*ListSopRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListSopRecommendationsInput{}
@@ -35,7 +35,7 @@ type ListSopRecommendationsInput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -53,8 +53,8 @@ type ListSopRecommendationsInput struct {
 
 type ListSopRecommendationsOutput struct {
 
-	// The standard operating procedure (SOP) recommendations for the Resilience Hub
-	// applications.
+	// The standard operating procedure (SOP) recommendations for the AWS Resilience
+	// Hub applications.
 	//
 	// This member is required.
 	SopRecommendations []types.SopRecommendation

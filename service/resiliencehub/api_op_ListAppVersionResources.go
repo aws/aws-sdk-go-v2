@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the resources in an application version.
+// Lists all the resources in an AWS Resilience Hub application.
 func (c *Client) ListAppVersionResources(ctx context.Context, params *ListAppVersionResourcesInput, optFns ...func(*Options)) (*ListAppVersionResourcesOutput, error) {
 	if params == nil {
 		params = &ListAppVersionResourcesInput{}
@@ -30,11 +30,11 @@ func (c *Client) ListAppVersionResources(ctx context.Context, params *ListAppVer
 
 type ListAppVersionResourcesInput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -65,7 +65,7 @@ type ListAppVersionResourcesOutput struct {
 	// This member is required.
 	PhysicalResources []types.PhysicalResource
 
-	// The identifier for a specific resolution.
+	// The ID for a specific resolution.
 	//
 	// This member is required.
 	ResolutionId *string

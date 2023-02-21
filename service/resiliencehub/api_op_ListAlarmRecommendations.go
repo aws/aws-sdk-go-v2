@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the alarm recommendations for a AWS Resilience Hub application.
+// Lists the alarm recommendations for an AWS Resilience Hub application.
 func (c *Client) ListAlarmRecommendations(ctx context.Context, params *ListAlarmRecommendationsInput, optFns ...func(*Options)) (*ListAlarmRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListAlarmRecommendationsInput{}
@@ -34,7 +34,7 @@ type ListAlarmRecommendationsInput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -53,7 +53,7 @@ type ListAlarmRecommendationsInput struct {
 type ListAlarmRecommendationsOutput struct {
 
 	// The alarm recommendations for an AWS Resilience Hub application, returned as an
-	// object. This object includes application component names, descriptions,
+	// object. This object includes Application Component names, descriptions,
 	// information about whether a recommendation has already been implemented or not,
 	// prerequisites, and more.
 	//

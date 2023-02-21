@@ -35,10 +35,10 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Occurs when a conflict with a previous successful write is detected. This
-// generally occurs when the previous write did not have time to propagate to the
-// host serving the current request. A retry (with appropriate backoff logic) is
-// the recommended response to this exception.
+// This exception occurs when a conflict with a previous successful write is
+// detected. This generally occurs when the previous write did not have time to
+// propagate to the host serving the current request. A retry (with appropriate
+// backoff logic) is the recommended response to this exception.
 type ConflictException struct {
 	Message *string
 
@@ -94,7 +94,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The specified resource could not be found.
+// This exception occurs when the specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -123,9 +123,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded your service quota. To perform the requested action, remove
-// some of the relevant resources, or use Service Quotas to request a service quota
-// increase.
+// This exception occurs when you have exceeded your service quota. To perform the
+// requested action, remove some of the relevant resources, or use Service Quotas
+// to request a service quota increase.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -151,7 +151,8 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The limit on the number of requests per second was exceeded.
+// This exception occurs when you have exceeded the limit on the number of requests
+// per second.
 type ThrottlingException struct {
 	Message *string
 
@@ -179,7 +180,7 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that a request was not valid.
+// This exception occurs when a request is not valid.
 type ValidationException struct {
 	Message *string
 

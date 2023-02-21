@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the test recommendations for the Resilience Hub application.
+// Lists the test recommendations for the AWS Resilience Hub application.
 func (c *Client) ListTestRecommendations(ctx context.Context, params *ListTestRecommendationsInput, optFns ...func(*Options)) (*ListTestRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListTestRecommendationsInput{}
@@ -34,7 +34,7 @@ type ListTestRecommendationsInput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -52,7 +52,7 @@ type ListTestRecommendationsInput struct {
 
 type ListTestRecommendationsOutput struct {
 
-	// The test recommendations for the Resilience Hub application.
+	// The test recommendations for the AWS Resilience Hub application.
 	//
 	// This member is required.
 	TestRecommendations []types.TestRecommendation
