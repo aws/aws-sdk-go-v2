@@ -91,8 +91,16 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	eo := m.Options
 	eo.Logger = middleware.GetLogger(ctx)
 
+	region := awsmiddleware.GetRegion(ctx)
+
+	//translation layer here that maps from legacy fields in Options to new fields in Options.
+	eo.Region = &region
+	eo.UseFIPS = aws.Bool(eo.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	eo.UseDualStack = aws.Bool(eo.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	//this translation feels weird because its read and writing to itself
+
 	var endpoint aws.Endpoint
-	endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), eo)
+	endpoint, err = m.Resolver.ResolveEndpoint(region, eo)
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
@@ -132,6 +140,8 @@ type wrappedEndpointResolver struct {
 	resolver    EndpointResolver
 }
 
+
+// at this call point, all of the reterminus fields on the options object should be set.
 func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
 	if w.awsResolver == nil {
 		goto fallback
@@ -144,6 +154,18 @@ func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options Endpoin
 	if nf := (&aws.EndpointNotFoundError{}); !errors.As(err, &nf) {
 		return endpoint, err
 	}
+
+	// here we would need to re-invoke our provided resolver (which was updated with a reterminus implementation)
+	// because we are junking the customizations that would have followed in later middlewares.
+	// unless hostname immutable
+	if endpoint.HostnameImmutable {
+		// return fully qualified endpoint
+		return aws.Endpoint{}, nil
+	}
+
+	options.Endpoint = &endpoint.URL
+	return w.resolver.ResolveEndpoint(region, options)
+
 
 fallback:
 	if w.resolver == nil {
