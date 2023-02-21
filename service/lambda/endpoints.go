@@ -93,11 +93,19 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 
 	region := awsmiddleware.GetRegion(ctx)
 
+	// 1.
 	//translation layer here that maps from legacy fields in Options to new fields in Options.
 	eo.Region = &region
 	eo.UseFIPS = aws.Bool(eo.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	eo.UseDualStack = aws.Bool(eo.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
 	//this translation feels weird because its read and writing to itself
+
+	// 2.
+	// resolve builtins on eo object
+
+	// 3.
+	// copy request input fields into eo object
+
 
 	var endpoint aws.Endpoint
 	endpoint, err = m.Resolver.ResolveEndpoint(region, eo)
