@@ -340,7 +340,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid\n         destinations include CloudWatch and Evidently.</p>\n         <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics\n         are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect \n            with CloudWatch RUM</a>.</p>\n         <p>If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also \n         optionally\n         send the metrics with additional dimensions. The valid dimension names for the additional dimensions are\n         <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>,\n         <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>\n         <p>The maximum number of metric definitions that one destination can contain is 2000.</p>\n         <p>Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension\n         value counts as a custom metric. For more information, see \n         <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n         <p>You must have\n         already created a destination for the metrics before you send them. For more information, see \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>\n         <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,\n      those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
+                "smithy.api#documentation": "<p>Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid\n         destinations include CloudWatch and Evidently.</p>\n         <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics\n         are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect \n            with CloudWatch RUM</a>.</p>\n         <p>In addition to these default metrics, you can choose to send extended metrics or custom metrics or both.</p>\n         <ul>\n            <li>\n               <p>Extended metrics enable you to send metrics with additional dimensions not included \n            in the default metrics. You can also send extended metrics to Evidently as well as CloudWatch. \n        The valid dimension names for the additional dimensions for extended metrics are\n         <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>,\n         <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n            </li>\n            <li>\n               <p>Custom metrics are metrics that you define. You can send custom metrics to CloudWatch or\n            to CloudWatch Evidently or to both. With custom metrics, \n            you can use any metric name and namespace, and to derive the metrics you can use any custom events, built-in events, \n            custom attributes, or default attributes. </p>\n               <p>You can't send custom metrics to the <code>AWS/RUM</code> namespace. You must send custom metrics to a \n               custom namespace that you define. The namespace that you use can't start with <code>AWS/</code>. \n               CloudWatch RUM prepends <code>RUM/CustomMetrics/</code> to the custom namespace that you define, \n               so the final namespace for your metrics in CloudWatch is \n         <code>RUM/CustomMetrics/<i>your-custom-namespace</i>\n                  </code>.</p>\n            </li>\n         </ul>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>\n         <p>The maximum number of metric definitions that one destination can contain is 2000.</p>\n         <p>Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension\n         value counts as a custom metric. For more information, see \n         <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n         <p>You must have\n         already created a destination for the metrics before you send them. For more information, see \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>\n         <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,\n      those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchCreateRumMetricDefinitions.html"
                 },
@@ -1013,6 +1013,12 @@
             },
             "value": {
                 "target": "com.amazonaws.rum#DimensionName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 29
+                }
             }
         },
         "com.amazonaws.rum#DimensionName": {
@@ -1542,6 +1548,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The pattern that defines the metric. RUM checks events that happen in a user's session\n      against the pattern, and events that match the pattern are sent to the metric destination.</p>\n         <p>If the metrics destination\n      is <code>CloudWatch</code> and the event\n      also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
                     }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.rum#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this metric definition is for a custom metric instead of an extended metric, this field displays\n      the metric namespace that the custom metric is published to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1569,7 +1581,7 @@
                 "Name": {
                     "target": "com.amazonaws.rum#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the metric that is defined in this structure. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PerformanceNavigationDuration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceResourceDuration\n            </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationSatisfiedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationToleratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationFrustratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsCumulativeLayoutShift</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsFirstInputDelay</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsLargestContentfulPaint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>JsErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HttpErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionCount</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name for the metric that is defined in this structure. For custom metrics, you can specify \n         any name that you like. For extended metrics, valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PerformanceNavigationDuration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceResourceDuration\n            </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationSatisfiedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationToleratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationFrustratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsCumulativeLayoutShift</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsFirstInputDelay</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsLargestContentfulPaint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>JsErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HttpErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionCount</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1588,7 +1600,7 @@
                 "DimensionKeys": {
                     "target": "com.amazonaws.rum#DimensionKeysMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p>\n         <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch. Valid values for the entries in this field are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"metadata.pageId\": \"PageId\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.browserName\": \"BrowserName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.deviceType\": \"DeviceType\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.osName\": \"OSName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.countryCode\": \"CountryCode\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"event_details.fileType\": \"FileType\"</code>\n               </p>\n            </li>\n         </ul>\n         <p> All dimensions listed in this field\n         must also be included in <code>EventPattern</code>.</p>"
+                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p>\n         <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"metadata.pageId\": \"PageId\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.browserName\": \"BrowserName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.deviceType\": \"DeviceType\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.osName\": \"OSName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.countryCode\": \"CountryCode\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"event_details.fileType\": \"FileType\"</code>\n               </p>\n            </li>\n         </ul>\n         <p> For both extended metrics and custom metrics, \n         all dimensions listed in this field\n         must also be included in <code>EventPattern</code>.</p>"
                     }
                 },
                 "EventPattern": {
@@ -1596,10 +1608,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session\n         against the pattern, and events that match the pattern are sent to the metric destination.</p>\n         <p>When you define extended metrics, the metric definition is not valid if <code>EventPattern</code>\n      is omitted.</p>\n         <p>Example event patterns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.js_error_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Safari\" ], } }'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Firefox\" ]\n            },\n            \"event_details\": {\n            \"duration\": [{\n            \"numeric\": [ \"&lt;\", 2000 ]\n            }]\n            }\n            }'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Safari\" ],\n            \"countryCode\": [ \"US\" ]\n            },\n            \"event_details\": {\n            \"duration\": [{\n            \"numeric\": [ \"&gt;=\", 2000, \"&lt;\", 8000 ]\n            }]\n            }\n            }'</code>\n               </p>\n            </li>\n         </ul>\n         <p>If the metrics destination'\n         is <code>CloudWatch</code> and the event\n         also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
                     }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.rum#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this structure is for a custom metric instead of an extended metrics, use this parameter to define the \n         metric namespace for that custom metric. Do not specify this parameter if this structure is for an extended metric.</p>\n         <p>You cannot use any string that starts with <code>AWS/</code> for your namespace.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to define one extended metric that RUM will send\n         to CloudWatch or CloudWatch Evidently. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Additional metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>Only certain combinations of values for <code>Name</code>, <code>ValueKey</code>, and <code>EventPattern</code>\n         are valid. In addition to what is displayed in the list below, the <code>EventPattern</code> can also include information\n      used by the <code>DimensionKeys</code> field.</p>\n         <ul>\n            <li>\n               <p>If <code>Name</code> is <code>PerformanceNavigationDuration</code>, then\n      <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n         must include <code>{\"event_type\":[\"com.amazon.rum.performance_navigation_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>PerformanceResourceDuration</code>, then\n            <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.performance_resource_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>NavigationSatisfiedTransaction</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\n               \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n               \"event_details\": {\n               \"duration\": [{\n               \"numeric\": [\"&gt;\",2000]\n               }]\n               }\n               }</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>NavigationToleratedTransaction</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\n               \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n               \"event_details\": {\n               \"duration\": [{\n               \"numeric\": [\"&gt;=\",2000,\"&lt;\"8000]\n               }]\n               }\n               }</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>NavigationFrustratedTransaction</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\n               \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n               \"event_details\": {\n               \"duration\": [{\n               \"numeric\": [\"&gt;=\",8000]\n               }]\n               }\n               }</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>WebVitalsCumulativeLayoutShift</code>, then\n            <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.cumulative_layout_shift_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>WebVitalsFirstInputDelay</code>, then\n            <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.first_input_delay_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>WebVitalsLargestContentfulPaint</code>, then\n            <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.largest_contentful_paint_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>JsErrorCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.js_error_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>HttpErrorCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.http_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>SessionCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.session_start_event\"]}</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this structure to define one extended metric or custom metric that RUM will send\n         to CloudWatch or CloudWatch Evidently. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Additional metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>This structure is validated differently for extended metrics and custom metrics. For extended metrics\n      that are sent to the <code>AWS/RUM</code> namespace, the following validations apply:</p>\n         <ul>\n            <li>\n               <p>The <code>Namespace</code> parameter must be omitted or set to <code>AWS/RUM</code>.</p>\n            </li>\n            <li>\n               <p>Only certain combinations of values for <code>Name</code>, <code>ValueKey</code>, and <code>EventPattern</code>\n         are valid. In addition to what is displayed in the list below, the <code>EventPattern</code> can also include information\n      used by the <code>DimensionKeys</code> field.</p>\n               <ul>\n                  <li>\n                     <p>If <code>Name</code> is <code>PerformanceNavigationDuration</code>, then\n                  <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.performance_navigation_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>PerformanceResourceDuration</code>, then\n                  <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.performance_resource_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>NavigationSatisfiedTransaction</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\n                     \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n                     \"event_details\": {\n                     \"duration\": [{\n                     \"numeric\": [\"&gt;\",2000]\n                     }]\n                     }\n                     }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>NavigationToleratedTransaction</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\n                     \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n                     \"event_details\": {\n                     \"duration\": [{\n                     \"numeric\": [\"&gt;=\",2000,\"&lt;\"8000]\n                     }]\n                     }\n                     }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>NavigationFrustratedTransaction</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\n                     \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n                     \"event_details\": {\n                     \"duration\": [{\n                     \"numeric\": [\"&gt;=\",8000]\n                     }]\n                     }\n                     }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>WebVitalsCumulativeLayoutShift</code>, then\n                  <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.cumulative_layout_shift_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>WebVitalsFirstInputDelay</code>, then\n                  <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.first_input_delay_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>WebVitalsLargestContentfulPaint</code>, then\n                  <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.largest_contentful_paint_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>JsErrorCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.js_error_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>HttpErrorCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.http_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>SessionCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.session_start_event\"]}</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For custom metrics, the following validation rules apply:</p>\n         <ul>\n            <li>\n               <p>The namespace can't be omitted and can't be <code>AWS/RUM</code>. You can use the <code>AWS/RUM</code>\n         namespace only for extended metrics.</p>\n            </li>\n            <li>\n               <p>All dimensions listed in the <code>DimensionKeys</code> field must be present in the value\n         of <code>EventPattern</code>.</p>\n            </li>\n            <li>\n               <p>The values that you specify for <code>ValueKey</code>, <code>EventPattern</code>, and \n            <code>DimensionKeys</code> must be fields in RUM events, so all first-level keys in these fields must \n            be one of the keys in the list later in this section.</p>\n            </li>\n            <li>\n               <p>If you set a value for <code>EventPattern</code>, it must be a JSON object.</p>\n            </li>\n            <li>\n               <p>For every non-empty <code>event_details</code>, there must be a non-empty <code>event_type</code>.</p>\n            </li>\n            <li>\n               <p>If <code>EventPattern</code> contains an <code>event_details</code> field, \n            it must also contain an <code>event_type</code>. For every built-in <code>event_type</code> that you use, you must use \n            a value for <code>event_details</code> that corresponds to that\n        <code>event_type</code>. For information about event details that correspond to event types, see  \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails\">\n               RUM event details</a>.</p>\n            </li>\n            <li>\n               <p>In <code>EventPattern</code>, any JSON array must contain only one value.</p>\n            </li>\n         </ul>\n         <p>Valid key values for first-level keys in the <code>ValueKey</code>, <code>EventPattern</code>, and \n         <code>DimensionKeys</code> fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>account_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application_Id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application_version</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>batch_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_details</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_interaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_timestamp</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_version</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>log_stream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>metadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sessionId</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>user_details</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>userId</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.rum#MetricDefinitions": {
@@ -1670,6 +1688,16 @@
                 }
             }
         },
+        "com.amazonaws.rum#Namespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 237
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9-._/#:]+$"
+            }
+        },
         "com.amazonaws.rum#Pages": {
             "type": "list",
             "member": {
@@ -1727,6 +1755,11 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the app monitor that is sending this data.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 36,
+                            "max": 36
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                         "smithy.api#required": {}
                     }
                 },
@@ -1734,6 +1767,11 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for this batch of RUM event data.</p>",
+                        "smithy.api#length": {
+                            "min": 36,
+                            "max": 36
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                         "smithy.api#required": {}
                     }
                 },
@@ -1793,7 +1831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send\n         extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p>\n         <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrics.html\">AddRumMetrics</a>.</p>",
+                "smithy.api#documentation": "<p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send\n         extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p>\n         <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html\">BatchCreateRumMetricDefinitions</a>.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/PutRumMetricsDestination.html"
                 },
@@ -1977,13 +2015,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -1991,23 +2028,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -2016,19 +2050,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://rum-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://rum-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -2041,134 +2257,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://rum.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://rum-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -2176,7 +2310,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://rum-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://rum.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -2185,74 +2319,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://rum.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://rum.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -2261,305 +2334,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
                             "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -2567,48 +2341,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2619,48 +2354,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2671,48 +2367,61 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://rum-fips.us-east-1.api.aws"
+                                    "url": "https://rum.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://rum.us-east-1.api.aws"
+                                    "url": "https://rum.eu-north-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2723,48 +2432,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rum.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2775,13 +2445,235 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -2790,7 +2682,6 @@
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2800,9 +2691,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2812,9 +2703,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2859,6 +2750,11 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique ID for this event.</p>",
+                        "smithy.api#length": {
+                            "min": 36,
+                            "max": 36
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                         "smithy.api#required": {}
                     }
                 },
@@ -3375,13 +3271,23 @@
                 "userId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user for this user session. This ID is generated by RUM and does not include any \n      personally identifiable information about the user.</p>"
+                        "smithy.api#documentation": "<p>The ID of the user for this user session. This ID is generated by RUM and does not include any \n      personally identifiable information about the user.</p>",
+                        "smithy.api#length": {
+                            "min": 36,
+                            "max": 36
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
                     }
                 },
                 "sessionId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session ID that the performance events are from.</p>"
+                        "smithy.api#documentation": "<p>The session ID that the performance events are from.</p>",
+                        "smithy.api#length": {
+                            "min": 36,
+                            "max": 36
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
                     }
                 }
             },

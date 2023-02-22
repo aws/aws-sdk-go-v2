@@ -234,6 +234,9 @@
                 "ForceAssociate": {
                     "target": "com.amazonaws.chimesdkvoice#NullableBoolean"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#AssociatePhoneNumbersWithVoiceConnectorGroupResponse": {
@@ -242,6 +245,9 @@
                 "PhoneNumberErrors": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberErrorList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#AssociatePhoneNumbersWithVoiceConnectorRequest": {
@@ -263,6 +269,9 @@
                 "ForceAssociate": {
                     "target": "com.amazonaws.chimesdkvoice#NullableBoolean"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#AssociatePhoneNumbersWithVoiceConnectorResponse": {
@@ -271,6 +280,9 @@
                 "PhoneNumberErrors": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberErrorList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#BadRequestException": {
@@ -336,6 +348,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#BatchDeletePhoneNumberResponse": {
@@ -344,6 +359,9 @@
                 "PhoneNumberErrors": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberErrorList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#BatchUpdatePhoneNumber": {
@@ -394,6 +412,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#BatchUpdatePhoneNumberResponse": {
@@ -402,6 +423,9 @@
                 "PhoneNumberErrors": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberErrorList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#Boolean": {
@@ -784,13 +808,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -798,23 +821,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -823,19 +843,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://voice-chime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://voice-chime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -848,212 +1050,75 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://voice-chime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://voice-chime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
+                                                    "type": "tree",
+                                                    "rules": [
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://voice-chime.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
                                                         }
                                                     ]
                                                 }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://voice-chime-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://voice-chime.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://voice-chime.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -1069,9 +1134,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1082,9 +1147,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1095,9 +1160,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1108,9 +1173,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1121,9 +1186,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1134,9 +1199,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1147,9 +1212,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1160,9 +1225,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1171,9 +1236,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1184,9 +1249,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1195,9 +1260,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1208,9 +1273,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1221,9 +1286,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1234,9 +1299,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1247,9 +1312,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1260,9 +1325,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1271,9 +1336,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1284,9 +1349,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1295,9 +1360,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1308,9 +1373,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1321,9 +1386,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1333,9 +1398,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1345,9 +1410,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1454,6 +1519,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreatePhoneNumberOrderResponse": {
@@ -1462,6 +1530,9 @@
                 "PhoneNumberOrder": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberOrder"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateProxySession": {
@@ -1540,6 +1611,9 @@
                 "GeoMatchParams": {
                     "target": "com.amazonaws.chimesdkvoice#GeoMatchParams"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateProxySessionResponse": {
@@ -1548,6 +1622,9 @@
                 "ProxySession": {
                     "target": "com.amazonaws.chimesdkvoice#ProxySession"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateSipMediaApplication": {
@@ -1665,6 +1742,9 @@
                 "ArgumentsMap": {
                     "target": "com.amazonaws.chimesdkvoice#SMACreateCallArgumentsMap"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateSipMediaApplicationCallResponse": {
@@ -1673,6 +1753,9 @@
                 "SipMediaApplicationCall": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationCall"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateSipMediaApplicationRequest": {
@@ -1696,6 +1779,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateSipMediaApplicationResponse": {
@@ -1704,6 +1790,9 @@
                 "SipMediaApplication": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplication"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateSipRule": {
@@ -1778,6 +1867,9 @@
                 "TargetApplications": {
                     "target": "com.amazonaws.chimesdkvoice#SipRuleTargetApplicationList"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateSipRuleResponse": {
@@ -1786,6 +1878,9 @@
                 "SipRule": {
                     "target": "com.amazonaws.chimesdkvoice#SipRule"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateVoiceConnector": {
@@ -1884,6 +1979,9 @@
                 "VoiceConnectorItems": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorItemList"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateVoiceConnectorGroupResponse": {
@@ -1892,6 +1990,9 @@
                 "VoiceConnectorGroup": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateVoiceConnectorRequest": {
@@ -1912,6 +2013,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#CreateVoiceConnectorResponse": {
@@ -1920,6 +2024,9 @@
                 "VoiceConnector": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnector"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#Credential": {
@@ -2022,6 +2129,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteProxySession": {
@@ -2080,6 +2190,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteSipMediaApplication": {
@@ -2134,6 +2247,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteSipRule": {
@@ -2188,6 +2304,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnector": {
@@ -2281,6 +2400,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorGroup": {
@@ -2335,6 +2457,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorOrigination": {
@@ -2386,6 +2511,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorProxy": {
@@ -2437,6 +2565,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorRequest": {
@@ -2449,6 +2580,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorStreamingConfiguration": {
@@ -2500,6 +2634,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorTermination": {
@@ -2596,6 +2733,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorTerminationRequest": {
@@ -2608,6 +2748,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DisassociatePhoneNumbersFromVoiceConnector": {
@@ -2704,6 +2847,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DisassociatePhoneNumbersFromVoiceConnectorGroupResponse": {
@@ -2712,6 +2858,9 @@
                 "PhoneNumberErrors": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberErrorList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DisassociatePhoneNumbersFromVoiceConnectorRequest": {
@@ -2730,6 +2879,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#DisassociatePhoneNumbersFromVoiceConnectorResponse": {
@@ -2738,6 +2890,9 @@
                 "PhoneNumberErrors": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberErrorList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#E164PhoneNumber": {
@@ -2964,6 +3119,9 @@
                 "VoiceConnector": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorSettings"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetPhoneNumber": {
@@ -3054,6 +3212,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetPhoneNumberOrderResponse": {
@@ -3062,6 +3223,9 @@
                 "PhoneNumberOrder": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberOrder"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetPhoneNumberRequest": {
@@ -3074,6 +3238,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetPhoneNumberResponse": {
@@ -3082,6 +3249,9 @@
                 "PhoneNumber": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumber"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetPhoneNumberSettings": {
@@ -3129,6 +3299,9 @@
                 "CallingNameUpdatedTimestamp": {
                     "target": "com.amazonaws.chimesdkvoice#Iso8601Timestamp"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetProxySession": {
@@ -3187,6 +3360,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetProxySessionResponse": {
@@ -3195,6 +3371,9 @@
                 "ProxySession": {
                     "target": "com.amazonaws.chimesdkvoice#ProxySession"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipMediaApplication": {
@@ -3285,6 +3464,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipMediaApplicationAlexaSkillConfigurationResponse": {
@@ -3293,6 +3475,9 @@
                 "SipMediaApplicationAlexaSkillConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationAlexaSkillConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipMediaApplicationLoggingConfiguration": {
@@ -3344,6 +3529,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipMediaApplicationLoggingConfigurationResponse": {
@@ -3352,6 +3540,9 @@
                 "SipMediaApplicationLoggingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationLoggingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipMediaApplicationRequest": {
@@ -3364,6 +3555,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipMediaApplicationResponse": {
@@ -3372,6 +3566,9 @@
                 "SipMediaApplication": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplication"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipRule": {
@@ -3423,6 +3620,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetSipRuleResponse": {
@@ -3431,6 +3631,9 @@
                 "SipRule": {
                     "target": "com.amazonaws.chimesdkvoice#SipRule"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnector": {
@@ -3521,6 +3724,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorEmergencyCallingConfigurationResponse": {
@@ -3529,6 +3735,9 @@
                 "EmergencyCallingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#EmergencyCallingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorGroup": {
@@ -3580,6 +3789,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorGroupResponse": {
@@ -3588,6 +3800,9 @@
                 "VoiceConnectorGroup": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorLoggingConfiguration": {
@@ -3639,6 +3854,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorLoggingConfigurationResponse": {
@@ -3647,6 +3865,9 @@
                 "LoggingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#LoggingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorOrigination": {
@@ -3698,6 +3919,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorOriginationResponse": {
@@ -3706,6 +3930,9 @@
                 "Origination": {
                     "target": "com.amazonaws.chimesdkvoice#Origination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorProxy": {
@@ -3757,6 +3984,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorProxyResponse": {
@@ -3765,6 +3995,9 @@
                 "Proxy": {
                     "target": "com.amazonaws.chimesdkvoice#Proxy"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorRequest": {
@@ -3777,6 +4010,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorResponse": {
@@ -3785,6 +4021,9 @@
                 "VoiceConnector": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnector"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorStreamingConfiguration": {
@@ -3836,6 +4075,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorStreamingConfigurationResponse": {
@@ -3844,6 +4086,9 @@
                 "StreamingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#StreamingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorTermination": {
@@ -3934,6 +4179,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorTerminationHealthResponse": {
@@ -3942,6 +4190,9 @@
                 "TerminationHealth": {
                     "target": "com.amazonaws.chimesdkvoice#TerminationHealth"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorTerminationRequest": {
@@ -3954,6 +4205,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GetVoiceConnectorTerminationResponse": {
@@ -3962,6 +4216,9 @@
                 "Termination": {
                     "target": "com.amazonaws.chimesdkvoice#Termination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#GuidString": {
@@ -4021,6 +4278,9 @@
                 "VoiceConnectorRegions": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorAwsRegionList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListPhoneNumberOrders": {
@@ -4079,6 +4339,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListPhoneNumberOrdersResponse": {
@@ -4090,6 +4353,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#String"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListPhoneNumbers": {
@@ -4175,6 +4441,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListPhoneNumbersResponse": {
@@ -4186,6 +4455,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#String"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListProxySessions": {
@@ -4260,6 +4532,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListProxySessionsResponse": {
@@ -4271,6 +4546,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#NextTokenString"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListSipMediaApplications": {
@@ -4330,6 +4608,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListSipMediaApplicationsResponse": {
@@ -4341,6 +4622,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#NextTokenString"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListSipRules": {
@@ -4406,6 +4690,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListSipRulesResponse": {
@@ -4417,6 +4704,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#NextTokenString"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListSupportedPhoneNumberCountries": {
@@ -4468,6 +4758,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListSupportedPhoneNumberCountriesResponse": {
@@ -4476,6 +4769,9 @@
                 "PhoneNumberCountries": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumberCountriesList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListVoiceConnectorGroups": {
@@ -4534,6 +4830,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListVoiceConnectorGroupsResponse": {
@@ -4545,6 +4844,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#String"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListVoiceConnectorTerminationCredentials": {
@@ -4596,6 +4898,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListVoiceConnectorTerminationCredentialsResponse": {
@@ -4604,6 +4909,9 @@
                 "Usernames": {
                     "target": "com.amazonaws.chimesdkvoice#SensitiveStringList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListVoiceConnectors": {
@@ -4662,6 +4970,9 @@
                         "smithy.api#httpQuery": "max-results"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ListVoiceConnectorsResponse": {
@@ -4673,12 +4984,18 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#String"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#LoggingConfiguration": {
             "type": "structure",
             "members": {
                 "EnableSIPLogs": {
+                    "target": "com.amazonaws.chimesdkvoice#Boolean"
+                },
+                "EnableMediaMetricLogs": {
                     "target": "com.amazonaws.chimesdkvoice#Boolean"
                 }
             }
@@ -5480,6 +5797,9 @@
                 "SipMediaApplicationAlexaSkillConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationAlexaSkillConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutSipMediaApplicationAlexaSkillConfigurationResponse": {
@@ -5488,6 +5808,9 @@
                 "SipMediaApplicationAlexaSkillConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationAlexaSkillConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutSipMediaApplicationLoggingConfiguration": {
@@ -5542,6 +5865,9 @@
                 "SipMediaApplicationLoggingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationLoggingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutSipMediaApplicationLoggingConfigurationResponse": {
@@ -5550,6 +5876,9 @@
                 "SipMediaApplicationLoggingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationLoggingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorEmergencyCallingConfiguration": {
@@ -5607,6 +5936,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorEmergencyCallingConfigurationResponse": {
@@ -5615,6 +5947,9 @@
                 "EmergencyCallingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#EmergencyCallingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorLoggingConfiguration": {
@@ -5672,6 +6007,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorLoggingConfigurationResponse": {
@@ -5680,6 +6018,9 @@
                 "LoggingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#LoggingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorOrigination": {
@@ -5737,6 +6078,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorOriginationResponse": {
@@ -5745,6 +6089,9 @@
                 "Origination": {
                     "target": "com.amazonaws.chimesdkvoice#Origination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorProxy": {
@@ -5817,6 +6164,9 @@
                 "Disabled": {
                     "target": "com.amazonaws.chimesdkvoice#Boolean"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorProxyResponse": {
@@ -5825,6 +6175,9 @@
                 "Proxy": {
                     "target": "com.amazonaws.chimesdkvoice#Proxy"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorStreamingConfiguration": {
@@ -5882,6 +6235,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorStreamingConfigurationResponse": {
@@ -5890,6 +6246,9 @@
                 "StreamingConfiguration": {
                     "target": "com.amazonaws.chimesdkvoice#StreamingConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorTermination": {
@@ -5986,6 +6345,9 @@
                 "Credentials": {
                     "target": "com.amazonaws.chimesdkvoice#CredentialList"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorTerminationRequest": {
@@ -6004,6 +6366,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorTerminationResponse": {
@@ -6012,6 +6377,9 @@
                 "Termination": {
                     "target": "com.amazonaws.chimesdkvoice#Termination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ResourceLimitExceededException": {
@@ -6081,6 +6449,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#RestorePhoneNumberResponse": {
@@ -6089,6 +6460,9 @@
                 "PhoneNumber": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumber"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ResultMax": {
@@ -6225,6 +6599,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#SearchAvailablePhoneNumbersResponse": {
@@ -6236,6 +6613,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.chimesdkvoice#String"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#SensitiveNonEmptyString": {
@@ -6659,6 +7039,9 @@
                 "VoiceConnector": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorSettings"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdatePhoneNumber": {
@@ -6719,6 +7102,9 @@
                 "CallingName": {
                     "target": "com.amazonaws.chimesdkvoice#CallingName"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdatePhoneNumberRequestItem": {
@@ -6750,6 +7136,9 @@
                 "PhoneNumber": {
                     "target": "com.amazonaws.chimesdkvoice#PhoneNumber"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdatePhoneNumberSettings": {
@@ -6797,6 +7186,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateProxySession": {
@@ -6864,6 +7256,9 @@
                 "ExpiryMinutes": {
                     "target": "com.amazonaws.chimesdkvoice#PositiveInteger"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateProxySessionResponse": {
@@ -6872,6 +7267,9 @@
                 "ProxySession": {
                     "target": "com.amazonaws.chimesdkvoice#ProxySession"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateSipMediaApplication": {
@@ -6981,6 +7379,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateSipMediaApplicationCallResponse": {
@@ -6989,6 +7390,9 @@
                 "SipMediaApplicationCall": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationCall"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateSipMediaApplicationRequest": {
@@ -7007,6 +7411,9 @@
                 "Endpoints": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationEndpointList"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateSipMediaApplicationResponse": {
@@ -7015,6 +7422,9 @@
                 "SipMediaApplication": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplication"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateSipRule": {
@@ -7084,6 +7494,9 @@
                 "TargetApplications": {
                     "target": "com.amazonaws.chimesdkvoice#SipRuleTargetApplicationList"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateSipRuleResponse": {
@@ -7092,6 +7505,9 @@
                 "SipRule": {
                     "target": "com.amazonaws.chimesdkvoice#SipRule"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateVoiceConnector": {
@@ -7197,6 +7613,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateVoiceConnectorGroupResponse": {
@@ -7205,6 +7624,9 @@
                 "VoiceConnectorGroup": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateVoiceConnectorRequest": {
@@ -7229,6 +7651,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#UpdateVoiceConnectorResponse": {
@@ -7237,6 +7662,9 @@
                 "VoiceConnector": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnector"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ValidateE911Address": {
@@ -7323,6 +7751,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ValidateE911AddressResponse": {
@@ -7343,6 +7774,9 @@
                 "CandidateAddressList": {
                     "target": "com.amazonaws.chimesdkvoice#CandidateAddressList"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chimesdkvoice#ValidationResult": {
