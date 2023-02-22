@@ -199,6 +199,11 @@ type AutoTuneDetails struct {
 	noSmithyDocumentSerde
 }
 
+// This object is deprecated. Use the domain's off-peak window
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html)
+// to schedule Auto-Tune optimizations. For migration instructions, see Migrating
+// from Auto-Tune maintenance windows
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html#off-peak-migrate).
 // The Auto-Tune maintenance schedule. For more information, see Auto-Tune for
 // Amazon OpenSearch Service
 // (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
@@ -226,7 +231,10 @@ type AutoTuneOptions struct {
 	// Whether Auto-Tune is enabled or disabled.
 	DesiredState AutoTuneDesiredState
 
-	// A list of maintenance schedules during which Auto-Tune can deploy changes.
+	// DEPRECATED. Use off-peak window
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html)
+	// instead. A list of maintenance schedules during which Auto-Tune can deploy
+	// changes.
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
 
 	// When disabling Auto-Tune, specify NO_ROLLBACK to retain all prior Auto-Tune
@@ -235,23 +243,31 @@ type AutoTuneOptions struct {
 	// request. Otherwise, OpenSearch Service is unable to perform the rollback.
 	RollbackOnDisable RollbackOnDisable
 
+	// Whether to use the domain's off-peak window
+	// (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html)
+	// to deploy configuration changes on the domain rather than a maintenance
+	// schedule.
+	UseOffPeakWindow *bool
+
 	noSmithyDocumentSerde
 }
 
 // Options for configuring Auto-Tune. For more information, see Auto-Tune for
 // Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
 type AutoTuneOptionsInput struct {
 
 	// Whether Auto-Tune is enabled or disabled.
 	DesiredState AutoTuneDesiredState
 
 	// A list of maintenance schedules during which Auto-Tune can deploy changes.
-	// Maintenance schedules are overwrite, not append. If your request includes no
-	// schedules, the request deletes all existing schedules. To preserve existing
-	// schedules, make a call to DescribeDomainConfig first and use the
-	// MaintenanceSchedules portion of the response as the basis for this section.
+	// Maintenance windows are deprecated and have been replaced with off-peak windows
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html).
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
+
+	// Whether to schedule Auto-Tune optimizations that require blue/green deployments
+	// during the domain's configured daily off-peak window.
+	UseOffPeakWindow *bool
 
 	noSmithyDocumentSerde
 }
@@ -265,6 +281,10 @@ type AutoTuneOptionsOutput struct {
 
 	// The current state of Auto-Tune on the domain.
 	State AutoTuneState
+
+	// Whether the domain's off-peak window will be used to deploy Auto-Tune changes
+	// rather than a maintenance schedule.
+	UseOffPeakWindow *bool
 
 	noSmithyDocumentSerde
 }
@@ -573,7 +593,7 @@ type DomainConfig struct {
 	// all traffic.
 	DomainEndpointOptions *DomainEndpointOptionsStatus
 
-	// Container for EBS options configured for an OpenSearch Service domain.
+	// Container for EBS options configured for the domain.
 	EBSOptions *EBSOptionsStatus
 
 	// Key-value pairs to enable encryption at rest.
@@ -588,9 +608,15 @@ type DomainConfig struct {
 	// Whether node-to-node encryption is enabled or disabled.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptionsStatus
 
+	// Container for off-peak window options for the domain.
+	OffPeakWindowOptions *OffPeakWindowOptionsStatus
+
 	// DEPRECATED. Container for parameters required to configure automated snapshots
 	// of domain indexes.
 	SnapshotOptions *SnapshotOptionsStatus
+
+	// Software update options for the domain.
+	SoftwareUpdateOptions *SoftwareUpdateOptionsStatus
 
 	// The current VPC options for the domain and the status of any updates to their
 	// configuration.
@@ -787,6 +813,10 @@ type DomainStatus struct {
 	// Whether node-to-node encryption is enabled or disabled.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
 
+	// Options that specify a custom 10-hour window during which OpenSearch Service can
+	// perform configuration changes on the domain.
+	OffPeakWindowOptions *OffPeakWindowOptions
+
 	// The status of the domain configuration. True if OpenSearch Service is processing
 	// configuration changes. False if the configuration is active.
 	Processing *bool
@@ -797,6 +827,9 @@ type DomainStatus struct {
 	// DEPRECATED. Container for parameters required to configure automated snapshots
 	// of domain indexes.
 	SnapshotOptions *SnapshotOptions
+
+	// Service software update options for the domain.
+	SoftwareUpdateOptions *SoftwareUpdateOptions
 
 	// The status of a domain version upgrade to a new version of OpenSearch or
 	// Elasticsearch. True if OpenSearch Service is in the process of a version
@@ -1176,6 +1209,57 @@ type NodeToNodeEncryptionOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A custom 10-hour, low-traffic window during which OpenSearch Service can perform
+// mandatory configuration changes on the domain. These actions can include
+// scheduled service software updates and blue/green Auto-Tune enhancements.
+// OpenSearch Service will schedule these actions during the window that you
+// specify. If you don't specify a window start time, it defaults to 10:00 P.M.
+// local time. For more information, see Defining off-peak maintenance windows for
+// Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html).
+type OffPeakWindow struct {
+
+	// A custom start time for the off-peak window, in Coordinated Universal Time
+	// (UTC). The window length will always be 10 hours, so you can't specify an end
+	// time. For example, if you specify 11:00 P.M. UTC as a start time, the end time
+	// will automatically be set to 9:00 A.M.
+	WindowStartTime *WindowStartTime
+
+	noSmithyDocumentSerde
+}
+
+// Options for a domain's off-peak window
+// (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html),
+// during which OpenSearch Service can perform mandatory configuration changes on
+// the domain.
+type OffPeakWindowOptions struct {
+
+	// Whether to enable an off-peak window. This option is only available when
+	// modifying a domain created prior to February 13, 2023, not when creating a new
+	// domain. All domains created after this date have the off-peak window enabled by
+	// default. You can't disable the off-peak window after it's enabled for a domain.
+	Enabled *bool
+
+	// Off-peak window settings for the domain.
+	OffPeakWindow *OffPeakWindow
+
+	noSmithyDocumentSerde
+}
+
+// The status of off-peak window
+// (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html)
+// options for a domain.
+type OffPeakWindowOptionsStatus struct {
+
+	// The domain's off-peak window configuration.
+	Options *OffPeakWindowOptions
+
+	// The current status of off-peak window options.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Provides the current status of an entity.
 type OptionStatus struct {
 
@@ -1497,6 +1581,52 @@ type SAMLOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a scheduled configuration change for an OpenSearch Service
+// domain. This actions can be a service software update
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
+// or a blue/green Auto-Tune enhancement
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types).
+type ScheduledAction struct {
+
+	// The unique identifier of the scheduled action.
+	//
+	// This member is required.
+	Id *string
+
+	// The time when the change is scheduled to happen.
+	//
+	// This member is required.
+	ScheduledTime *int64
+
+	// The severity of the action.
+	//
+	// This member is required.
+	Severity ActionSeverity
+
+	// The type of action that will be taken on the domain.
+	//
+	// This member is required.
+	Type ActionType
+
+	// Whether or not the scheduled action is cancellable.
+	Cancellable *bool
+
+	// A description of the action to be taken.
+	Description *string
+
+	// Whether the action is required or optional.
+	Mandatory *bool
+
+	// Whether the action was scheduled manually (CUSTOMER, or by OpenSearch Service
+	// automatically (SYSTEM).
+	ScheduledBy ScheduledBy
+
+	// The current status of the scheduled action.
+	Status ActionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Specifies details about a scheduled Auto-Tune action. For more information, see
 // Auto-Tune for Amazon OpenSearch Service
 // (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
@@ -1577,6 +1707,28 @@ type SnapshotOptionsStatus struct {
 	// The status of a daily automated snapshot.
 	//
 	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Options for configuring service software updates for a domain.
+type SoftwareUpdateOptions struct {
+
+	// Whether automatic service software updates are enabled for the domain.
+	AutoSoftwareUpdateEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The status of the service software options for a domain.
+type SoftwareUpdateOptionsStatus struct {
+
+	// The service software update options for a domain.
+	Options *SoftwareUpdateOptions
+
+	// The status of service software update options, including creation date and last
+	// updated date.
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
@@ -1860,6 +2012,24 @@ type VPCOptions struct {
 	// domain uses multiple Availability Zones, you need to provide two subnet IDs, one
 	// per zone. Otherwise, provide only one.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The desired start time for an off-peak maintenance window
+// (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html).
+type WindowStartTime struct {
+
+	// The start hour of the window in Coordinated Universal Time (UTC), using 24-hour
+	// time. For example, 17 refers to 5:00 P.M. UTC.
+	//
+	// This member is required.
+	Hours int64
+
+	// The start minute of the window, in UTC.
+	//
+	// This member is required.
+	Minutes int64
 
 	noSmithyDocumentSerde
 }

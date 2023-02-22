@@ -1,0 +1,8 @@
+{
+    "id": "e5d9a7da-60d7-4c4c-ab3f-3e91da71ddfe",
+    "type": "feature",
+    "description": "This release lets customers configure Off-peak window and software update related properties for a new/existing domain. It enhances the capabilities of StartServiceSoftwareUpdate API; adds 2 new APIs - ListScheduledActions \u0026 UpdateScheduledAction; and allows Auto-tune to make use of Off-peak window.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

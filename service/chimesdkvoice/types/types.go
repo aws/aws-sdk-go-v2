@@ -88,6 +88,8 @@ type GeoMatchParams struct {
 }
 
 type LoggingConfiguration struct {
+	EnableMediaMetricLogs *bool
+
 	EnableSIPLogs *bool
 
 	noSmithyDocumentSerde

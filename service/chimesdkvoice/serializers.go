@@ -5378,6 +5378,11 @@ func awsRestjson1_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableMediaMetricLogs != nil {
+		ok := object.Key("EnableMediaMetricLogs")
+		ok.Boolean(*v.EnableMediaMetricLogs)
+	}
+
 	if v.EnableSIPLogs != nil {
 		ok := object.Key("EnableSIPLogs")
 		ok.Boolean(*v.EnableSIPLogs)

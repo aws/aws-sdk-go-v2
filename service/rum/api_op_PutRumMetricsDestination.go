@@ -13,8 +13,9 @@ import (
 
 // Creates or updates a destination to receive extended metrics from CloudWatch
 // RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently
-// experiment. For more information about extended metrics, see AddRumMetrics
-// (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrics.html).
+// experiment. For more information about extended metrics, see
+// BatchCreateRumMetricDefinitions
+// (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html).
 func (c *Client) PutRumMetricsDestination(ctx context.Context, params *PutRumMetricsDestinationInput, optFns ...func(*Options)) (*PutRumMetricsDestinationOutput, error) {
 	if params == nil {
 		params = &PutRumMetricsDestinationInput{}

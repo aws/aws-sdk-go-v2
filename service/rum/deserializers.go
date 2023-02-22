@@ -3522,6 +3522,15 @@ func awsRestjson1_deserializeDocumentMetricDefinition(v **types.MetricDefinition
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Namespace to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
 		case "UnitLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3628,6 +3637,15 @@ func awsRestjson1_deserializeDocumentMetricDefinitionRequest(v **types.MetricDef
 					return fmt.Errorf("expected MetricName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Namespace to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
 			}
 
 		case "UnitLabel":

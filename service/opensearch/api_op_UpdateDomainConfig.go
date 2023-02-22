@@ -109,15 +109,21 @@ type UpdateDomainConfigInput struct {
 	// Encryption at rest options for the domain.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
-	// Options to publish OpenSearch lots to Amazon CloudWatch Logs.
+	// Options to publish OpenSearch logs to Amazon CloudWatch Logs.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
-	// Node-To-Node Encryption options for the domain.
+	// Node-to-node encryption options for the domain.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
+
+	// Off-peak window options for the domain.
+	OffPeakWindowOptions *types.OffPeakWindowOptions
 
 	// Option to set the time, in UTC format, for the daily automated snapshot. Default
 	// value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
+
+	// Service software update options for the domain.
+	SoftwareUpdateOptions *types.SoftwareUpdateOptions
 
 	// Options to specify the subnets and security groups for a VPC endpoint. For more
 	// information, see Launching your Amazon OpenSearch Service domains using a VPC

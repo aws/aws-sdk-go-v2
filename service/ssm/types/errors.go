@@ -472,12 +472,12 @@ func (e *DocumentLimitExceeded) ErrorCode() string {
 }
 func (e *DocumentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The document can't be shared with more Amazon Web Services user accounts. You
-// can specify a maximum of 20 accounts per API operation to share a private
-// document. By default, you can share a private document with a maximum of 1,000
-// accounts and publicly share up to five documents. If you need to increase the
-// quota for privately or publicly shared Systems Manager documents, contact Amazon
-// Web Services Support.
+// The document can't be shared with more Amazon Web Services accounts. You can
+// specify a maximum of 20 accounts per API operation to share a private document.
+// By default, you can share a private document with a maximum of 1,000 accounts
+// and publicly share up to five documents. If you need to increase the quota for
+// privately or publicly shared Systems Manager documents, contact Amazon Web
+// Services Support.
 type DocumentPermissionLimit struct {
 	Message *string
 

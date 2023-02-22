@@ -80,9 +80,11 @@ type AlarmConfiguration struct {
 	// This member is required.
 	Alarms []Alarm
 
-	// If you specify true for this value, your automation or command continue to run
-	// even if we can't gather information about the state of your CloudWatch alarm.
-	// The default value is false.
+	// When this value is true, your automation or command continues to run in cases
+	// where we can’t retrieve alarm status information from CloudWatch. In cases where
+	// we successfully retrieve an alarm status of OK or INSUFFICIENT_DATA, the
+	// automation or command continues to run, regardless of this value. Default is
+	// false.
 	IgnorePollAlarmFailure bool
 
 	noSmithyDocumentSerde
@@ -1762,7 +1764,7 @@ type DocumentDescription struct {
 	// The name of the SSM document.
 	Name *string
 
-	// The Amazon Web Services user account that created the document.
+	// The Amazon Web Services user that created the document.
 	Owner *string
 
 	// A description of the parameters for a document.
@@ -1858,7 +1860,7 @@ type DocumentIdentifier struct {
 	// The name of the SSM document.
 	Name *string
 
-	// The Amazon Web Services user account that created the document.
+	// The Amazon Web Services user that created the document.
 	Owner *string
 
 	// The operating system platform.
@@ -1974,7 +1976,7 @@ type DocumentMetadataResponseInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Parameters specified in a System Manager document that run on the server when
+// Parameters specified in a Systems Manager document that run on the server when
 // the command is run.
 type DocumentParameter struct {
 
@@ -4950,7 +4952,7 @@ type Session struct {
 	// Reserved for future use.
 	OutputUrl *SessionManagerOutputUrl
 
-	// The ID of the Amazon Web Services user account that started the session.
+	// The ID of the Amazon Web Services user that started the session.
 	Owner *string
 
 	// The reason for connecting to the instance.
@@ -4993,11 +4995,11 @@ type SessionFilter struct {
 	// Target: Specify a managed node to which session connections have been made.
 	//
 	// *
-	// Owner: Specify an Amazon Web Services user account to see a list of sessions
-	// started by that user.
+	// Owner: Specify an Amazon Web Services user to see a list of sessions started by
+	// that user.
 	//
-	// * Status: Specify a valid session status to see a list of
-	// all sessions with that status. Status values you can specify include:
+	// * Status: Specify a valid session status to see a list of all
+	// sessions with that status. Status values you can specify include:
 	//
 	// *
 	// Connected

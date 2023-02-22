@@ -1,0 +1,8 @@
+{
+    "id": "ef13e510-fcc8-46d2-8ba9-7a227fefdbb5",
+    "type": "feature",
+    "description": "CloudFront now supports block lists in origin request policies so that you can forward all headers, cookies, or query string from viewer requests to the origin *except* for those specified in the block list.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

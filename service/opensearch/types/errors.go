@@ -59,7 +59,7 @@ func (e *BaseException) ErrorCode() string {
 }
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred because the client attempts to remove a resource that's
+// An error occurred because the client attempts to remove a resource that is
 // currently in use.
 type ConflictException struct {
 	Message *string
@@ -86,7 +86,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occured because the client wanted to access an unsupported operation.
+// An error occured because the client wanted to access a not supported operation.
 type DisabledOperationException struct {
 	Message *string
 
@@ -246,7 +246,7 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for accessing or deleting a resource that doesn't exist.
+// An exception for accessing or deleting a resource that does not exist..
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -272,7 +272,36 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for missing or invalid input fields.
+// An exception for attempting to schedule a domain action during an unavailable
+// time slot.
+type SlotNotAvailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	SlotSuggestions []int64
+
+	noSmithyDocumentSerde
+}
+
+func (e *SlotNotAvailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SlotNotAvailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SlotNotAvailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SlotNotAvailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SlotNotAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An exception for accessing or deleting a resource that doesn't exist.
 type ValidationException struct {
 	Message *string
 

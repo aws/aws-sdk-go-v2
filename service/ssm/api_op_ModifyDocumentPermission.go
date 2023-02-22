@@ -13,8 +13,8 @@ import (
 
 // Shares a Amazon Web Services Systems Manager document (SSM document)publicly or
 // privately. If you share a document privately, you must specify the Amazon Web
-// Services user account IDs for those people who can use the document. If you
-// share a document publicly, you must specify All as the account ID.
+// Services user IDs for those people who can use the document. If you share a
+// document publicly, you must specify All as the account ID.
 func (c *Client) ModifyDocumentPermission(ctx context.Context, params *ModifyDocumentPermissionInput, optFns ...func(*Options)) (*ModifyDocumentPermissionOutput, error) {
 	if params == nil {
 		params = &ModifyDocumentPermissionInput{}
@@ -42,15 +42,14 @@ type ModifyDocumentPermissionInput struct {
 	// This member is required.
 	PermissionType types.DocumentPermissionType
 
-	// The Amazon Web Services user accounts that should have access to the document.
-	// The account IDs can either be a group of account IDs or All.
+	// The Amazon Web Services users that should have access to the document. The
+	// account IDs can either be a group of account IDs or All.
 	AccountIdsToAdd []string
 
-	// The Amazon Web Services user accounts that should no longer have access to the
-	// document. The Amazon Web Services user account can either be a group of account
-	// IDs or All. This action has a higher priority than AccountIdsToAdd. If you
-	// specify an account ID to add and the same ID to remove, the system removes
-	// access to the document.
+	// The Amazon Web Services users that should no longer have access to the document.
+	// The Amazon Web Services user can either be a group of account IDs or All. This
+	// action has a higher priority than AccountIdsToAdd. If you specify an ID to add
+	// and the same ID to remove, the system removes access to the document.
 	AccountIdsToRemove []string
 
 	// (Optional) The version of the document to share. If it isn't specified, the

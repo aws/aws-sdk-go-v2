@@ -110,9 +110,19 @@ type CreateDomainInput struct {
 	// Enables node-to-node encryption.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
 
+	// Specifies a daily 10-hour time block during which OpenSearch Service can perform
+	// configuration changes on the domain, including service software updates and
+	// Auto-Tune enhancements that require a blue/green deployment. If no options are
+	// specified, the default start time of 10:00 P.M. local time (for the Region that
+	// the domain is created in) is used.
+	OffPeakWindowOptions *types.OffPeakWindowOptions
+
 	// DEPRECATED. Container for the parameters required to configure automated
 	// snapshots of domain indexes.
 	SnapshotOptions *types.SnapshotOptions
+
+	// Software update options for the domain.
+	SoftwareUpdateOptions *types.SoftwareUpdateOptions
 
 	// List of tags to add to the domain upon creation.
 	TagList []types.Tag

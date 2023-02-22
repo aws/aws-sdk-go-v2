@@ -1505,6 +1505,11 @@ func awsRestjson1_serializeDocumentMetricDefinitionRequest(v *types.MetricDefini
 		ok.String(*v.Name)
 	}
 
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		ok.String(*v.Namespace)
+	}
+
 	if v.UnitLabel != nil {
 		ok := object.Key("UnitLabel")
 		ok.String(*v.UnitLabel)
