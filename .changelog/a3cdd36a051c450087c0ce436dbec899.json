@@ -1,8 +1,0 @@
-{
-    "id": "a3cdd36a-051c-4500-87c0-ce436dbec899",
-    "type": "feature",
-    "description": "CloudWatch RUM now supports CloudWatch Custom Metrics",
-    "modules": [
-        "service/rum"
-    ]
-}

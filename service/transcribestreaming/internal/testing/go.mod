@@ -5,8 +5,8 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2 v1.17.5
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.10
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.53
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.3
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.54
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.4
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8
 )

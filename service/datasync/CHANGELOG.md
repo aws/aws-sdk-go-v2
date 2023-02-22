@@ -1,3 +1,8 @@
+# v1.23.0 (2023-02-22)
+
+* **Feature**: AWS DataSync has relaxed the minimum length constraint of AccessKey for Object Storage locations to 1.
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.22.2 (2023-02-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

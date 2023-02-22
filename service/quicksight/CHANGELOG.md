@@ -1,3 +1,7 @@
+# v1.32.1 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.32.0 (2023-02-21)
 
 * **Feature**: S3 data sources now accept a custom IAM role.

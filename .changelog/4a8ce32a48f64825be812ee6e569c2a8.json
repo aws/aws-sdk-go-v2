@@ -1,8 +1,0 @@
-{
-    "id": "4a8ce32a-48f6-4825-be81-2ee6e569c2a8",
-    "type": "feature",
-    "description": "AWS DataSync has relaxed the minimum length constraint of AccessKey for Object Storage locations to 1.",
-    "modules": [
-        "service/datasync"
-    ]
-}

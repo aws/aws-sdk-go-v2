@@ -1,8 +1,0 @@
-{
-    "id": "7ec16f96-6abd-4bff-9f77-a30d784c20f6",
-    "type": "feature",
-    "description": "This release introduces support for Voice Connector media metrics in the Amazon Chime SDK Voice namespace",
-    "modules": [
-        "service/chimesdkvoice"
-    ]
-}

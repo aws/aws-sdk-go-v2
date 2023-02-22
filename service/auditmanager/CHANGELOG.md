@@ -1,3 +1,7 @@
+# v1.24.1 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.24.0 (2023-02-20)
 
 * **Feature**: This release introduces a ServiceQuotaExceededException to the UpdateAssessmentFrameworkShare API operation.

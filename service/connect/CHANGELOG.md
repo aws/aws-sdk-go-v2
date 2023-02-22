@@ -1,3 +1,7 @@
+# v1.47.1 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.47.0 (2023-02-20)
 
 * **Feature**: Reasons for failed diff has been approved by SDK Reviewer

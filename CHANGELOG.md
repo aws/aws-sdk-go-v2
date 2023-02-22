@@ -1,3 +1,23 @@
+# Release (2023-02-22)
+
+## General Highlights
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.2.0](service/chimesdkvoice/CHANGELOG.md#v120-2023-02-22)
+  * **Feature**: This release introduces support for Voice Connector media metrics in the Amazon Chime SDK Voice namespace
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.26.0](service/cloudfront/CHANGELOG.md#v1260-2023-02-22)
+  * **Feature**: CloudFront now supports block lists in origin request policies so that you can forward all headers, cookies, or query string from viewer requests to the origin *except* for those specified in the block list.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.23.0](service/datasync/CHANGELOG.md#v1230-2023-02-22)
+  * **Feature**: AWS DataSync has relaxed the minimum length constraint of AccessKey for Object Storage locations to 1.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.15.0](service/opensearch/CHANGELOG.md#v1150-2023-02-22)
+  * **Feature**: This release lets customers configure Off-peak window and software update related properties for a new/existing domain. It enhances the capabilities of StartServiceSoftwareUpdate API; adds 2 new APIs - ListScheduledActions & UpdateScheduledAction; and allows Auto-tune to make use of Off-peak window.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.10.0](service/rum/CHANGELOG.md#v1100-2023-02-22)
+  * **Feature**: CloudWatch RUM now supports CloudWatch Custom Metrics
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.35.5](service/ssm/CHANGELOG.md#v1355-2023-02-22)
+  * **Documentation**: Document only update for Feb 2023
+
 # Release (2023-02-21)
 
 ## Module Highlights

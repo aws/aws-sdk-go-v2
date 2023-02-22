@@ -1,3 +1,8 @@
+# v1.15.0 (2023-02-22)
+
+* **Feature**: This release lets customers configure Off-peak window and software update related properties for a new/existing domain. It enhances the capabilities of StartServiceSoftwareUpdate API; adds 2 new APIs - ListScheduledActions & UpdateScheduledAction; and allows Auto-tune to make use of Off-peak window.
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.14.3 (2023-02-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

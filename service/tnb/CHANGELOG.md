@@ -1,3 +1,7 @@
+# v1.0.1 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.0.0 (2023-02-21)
 
 * **Release**: New AWS service client module

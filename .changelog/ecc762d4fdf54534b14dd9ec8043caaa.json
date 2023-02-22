@@ -1,8 +1,0 @@
-{
-    "id": "ecc762d4-fdf5-4534-b14d-d9ec8043caaa",
-    "type": "documentation",
-    "description": "Document only update for Feb 2023",
-    "modules": [
-        "service/ssm"
-    ]
-}

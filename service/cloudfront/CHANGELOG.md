@@ -1,3 +1,8 @@
+# v1.26.0 (2023-02-22)
+
+* **Feature**: CloudFront now supports block lists in origin request policies so that you can forward all headers, cookies, or query string from viewer requests to the origin *except* for those specified in the block list.
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.25.1 (2023-02-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

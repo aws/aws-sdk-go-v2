@@ -1,3 +1,7 @@
+# v1.28.5 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
 # v1.28.4 (2023-02-21)
 
 * **Documentation**: Documentation updates for AWS Security Hub
