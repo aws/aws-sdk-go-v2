@@ -28,7 +28,7 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *InvalidClientTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidClientTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMaxResultsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMaxResultsException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *InvalidResourceTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateTransitionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateTransitionException"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *MalformedArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingRequiredParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -264,7 +264,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotPermittedException"
 	}
 	return *e.ErrorCodeOverride
@@ -290,7 +290,7 @@ func (e *ResourceArnNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceArnNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceArnNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -316,7 +316,7 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceShareInvitationAlreadyAcceptedException"
 	}
 	return *e.ErrorCodeOverride
@@ -344,7 +344,7 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *ResourceShareInvitationAlreadyRejectedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceShareInvitationAlreadyRejectedException"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceShareInvitationArnNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceShareInvitationArnNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -400,7 +400,7 @@ func (e *ResourceShareInvitationExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceShareInvitationExpiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceShareInvitationExpiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -428,7 +428,7 @@ func (e *ResourceShareLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceShareLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceShareLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -456,7 +456,7 @@ func (e *ServerInternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerInternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServerInternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -482,7 +482,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -508,7 +508,7 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -534,7 +534,7 @@ func (e *TagPolicyViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagPolicyViolationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagPolicyViolationException"
 	}
 	return *e.ErrorCodeOverride
@@ -561,7 +561,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -587,7 +587,7 @@ func (e *UnknownResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnknownResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnknownResourceException"
 	}
 	return *e.ErrorCodeOverride

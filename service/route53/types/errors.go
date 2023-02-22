@@ -26,7 +26,7 @@ func (e *CidrBlockInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CidrBlockInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CidrBlockInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *CidrCollectionAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CidrCollectionAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CidrCollectionAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *CidrCollectionInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CidrCollectionInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CidrCollectionInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *CidrCollectionVersionMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CidrCollectionVersionMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CidrCollectionVersionMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -137,7 +137,7 @@ func (e *ConcurrentModification) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModification) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModification"
 	}
 	return *e.ErrorCodeOverride
@@ -181,7 +181,7 @@ func (e *ConflictingDomainExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictingDomainExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictingDomainExists"
 	}
 	return *e.ErrorCodeOverride
@@ -210,7 +210,7 @@ func (e *ConflictingTypes) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictingTypes) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictingTypes"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *DelegationSetAlreadyCreated) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegationSetAlreadyCreated) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DelegationSetAlreadyCreated"
 	}
 	return *e.ErrorCodeOverride
@@ -263,7 +263,7 @@ func (e *DelegationSetAlreadyReusable) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegationSetAlreadyReusable) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DelegationSetAlreadyReusable"
 	}
 	return *e.ErrorCodeOverride
@@ -290,7 +290,7 @@ func (e *DelegationSetInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegationSetInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DelegationSetInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -320,7 +320,7 @@ func (e *DelegationSetNotAvailable) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegationSetNotAvailable) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DelegationSetNotAvailable"
 	}
 	return *e.ErrorCodeOverride
@@ -346,7 +346,7 @@ func (e *DelegationSetNotReusable) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegationSetNotReusable) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DelegationSetNotReusable"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *DNSSECNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DNSSECNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DNSSECNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -407,7 +407,7 @@ func (e *HealthCheckAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HealthCheckAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HealthCheckAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -433,7 +433,7 @@ func (e *HealthCheckInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HealthCheckInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HealthCheckInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -460,7 +460,7 @@ func (e *HealthCheckVersionMismatch) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HealthCheckVersionMismatch) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HealthCheckVersionMismatch"
 	}
 	return *e.ErrorCodeOverride
@@ -488,7 +488,7 @@ func (e *HostedZoneAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HostedZoneAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HostedZoneAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -514,7 +514,7 @@ func (e *HostedZoneNotEmpty) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HostedZoneNotEmpty) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HostedZoneNotEmpty"
 	}
 	return *e.ErrorCodeOverride
@@ -540,7 +540,7 @@ func (e *HostedZoneNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HostedZoneNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HostedZoneNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -566,7 +566,7 @@ func (e *HostedZoneNotPrivate) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HostedZoneNotPrivate) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HostedZoneNotPrivate"
 	}
 	return *e.ErrorCodeOverride
@@ -593,7 +593,7 @@ func (e *HostedZonePartiallyDelegated) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HostedZonePartiallyDelegated) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HostedZonePartiallyDelegated"
 	}
 	return *e.ErrorCodeOverride
@@ -620,7 +620,7 @@ func (e *IncompatibleVersion) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleVersion) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleVersion"
 	}
 	return *e.ErrorCodeOverride
@@ -666,7 +666,7 @@ func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientCloudWatchLogsResourcePolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -694,7 +694,7 @@ func (e *InvalidArgument) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgument) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgument"
 	}
 	return *e.ErrorCodeOverride
@@ -723,7 +723,7 @@ func (e *InvalidChangeBatch) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidChangeBatch) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidChangeBatch"
 	}
 	return *e.ErrorCodeOverride
@@ -749,7 +749,7 @@ func (e *InvalidDomainName) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDomainName) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDomainName"
 	}
 	return *e.ErrorCodeOverride
@@ -775,7 +775,7 @@ func (e *InvalidInput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInput) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInput"
 	}
 	return *e.ErrorCodeOverride
@@ -801,7 +801,7 @@ func (e *InvalidKeySigningKeyName) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKeySigningKeyName) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidKeySigningKeyName"
 	}
 	return *e.ErrorCodeOverride
@@ -828,7 +828,7 @@ func (e *InvalidKeySigningKeyStatus) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKeySigningKeyStatus) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidKeySigningKeyStatus"
 	}
 	return *e.ErrorCodeOverride
@@ -855,7 +855,7 @@ func (e *InvalidKMSArn) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKMSArn) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidKMSArn"
 	}
 	return *e.ErrorCodeOverride
@@ -882,7 +882,7 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationToken) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPaginationToken"
 	}
 	return *e.ErrorCodeOverride
@@ -909,7 +909,7 @@ func (e *InvalidSigningStatus) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSigningStatus) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSigningStatus"
 	}
 	return *e.ErrorCodeOverride
@@ -936,7 +936,7 @@ func (e *InvalidTrafficPolicyDocument) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTrafficPolicyDocument) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTrafficPolicyDocument"
 	}
 	return *e.ErrorCodeOverride
@@ -963,7 +963,7 @@ func (e *InvalidVPCId) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidVPCId) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidVPCId"
 	}
 	return *e.ErrorCodeOverride
@@ -990,7 +990,7 @@ func (e *KeySigningKeyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeySigningKeyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KeySigningKeyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1016,7 +1016,7 @@ func (e *KeySigningKeyInParentDSRecord) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeySigningKeyInParentDSRecord) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KeySigningKeyInParentDSRecord"
 	}
 	return *e.ErrorCodeOverride
@@ -1044,7 +1044,7 @@ func (e *KeySigningKeyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeySigningKeyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KeySigningKeyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -1070,7 +1070,7 @@ func (e *KeySigningKeyWithActiveStatusNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeySigningKeyWithActiveStatusNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KeySigningKeyWithActiveStatusNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1100,7 +1100,7 @@ func (e *LastVPCAssociation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LastVPCAssociation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LastVPCAssociation"
 	}
 	return *e.ErrorCodeOverride
@@ -1129,7 +1129,7 @@ func (e *LimitsExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitsExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitsExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -1155,7 +1155,7 @@ func (e *NoSuchChange) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchChange) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchChange"
 	}
 	return *e.ErrorCodeOverride
@@ -1181,7 +1181,7 @@ func (e *NoSuchCidrCollectionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchCidrCollectionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchCidrCollectionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1207,7 +1207,7 @@ func (e *NoSuchCidrLocationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchCidrLocationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchCidrLocationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1233,7 +1233,7 @@ func (e *NoSuchCloudWatchLogsLogGroup) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchCloudWatchLogsLogGroup) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchCloudWatchLogsLogGroup"
 	}
 	return *e.ErrorCodeOverride
@@ -1259,7 +1259,7 @@ func (e *NoSuchDelegationSet) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchDelegationSet) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchDelegationSet"
 	}
 	return *e.ErrorCodeOverride
@@ -1288,7 +1288,7 @@ func (e *NoSuchGeoLocation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchGeoLocation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchGeoLocation"
 	}
 	return *e.ErrorCodeOverride
@@ -1314,7 +1314,7 @@ func (e *NoSuchHealthCheck) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchHealthCheck) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchHealthCheck"
 	}
 	return *e.ErrorCodeOverride
@@ -1340,7 +1340,7 @@ func (e *NoSuchHostedZone) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchHostedZone) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchHostedZone"
 	}
 	return *e.ErrorCodeOverride
@@ -1366,7 +1366,7 @@ func (e *NoSuchKeySigningKey) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchKeySigningKey) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchKeySigningKey"
 	}
 	return *e.ErrorCodeOverride
@@ -1392,7 +1392,7 @@ func (e *NoSuchQueryLoggingConfig) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchQueryLoggingConfig) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchQueryLoggingConfig"
 	}
 	return *e.ErrorCodeOverride
@@ -1418,7 +1418,7 @@ func (e *NoSuchTrafficPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchTrafficPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchTrafficPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -1444,7 +1444,7 @@ func (e *NoSuchTrafficPolicyInstance) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchTrafficPolicyInstance) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchTrafficPolicyInstance"
 	}
 	return *e.ErrorCodeOverride
@@ -1471,7 +1471,7 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAuthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1501,7 +1501,7 @@ func (e *PriorRequestNotComplete) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PriorRequestNotComplete) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PriorRequestNotComplete"
 	}
 	return *e.ErrorCodeOverride
@@ -1528,7 +1528,7 @@ func (e *PublicZoneVPCAssociation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PublicZoneVPCAssociation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PublicZoneVPCAssociation"
 	}
 	return *e.ErrorCodeOverride
@@ -1555,7 +1555,7 @@ func (e *QueryLoggingConfigAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueryLoggingConfigAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QueryLoggingConfigAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1581,7 +1581,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -1618,7 +1618,7 @@ func (e *TooManyHealthChecks) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyHealthChecks) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyHealthChecks"
 	}
 	return *e.ErrorCodeOverride
@@ -1656,7 +1656,7 @@ func (e *TooManyHostedZones) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyHostedZones) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyHostedZones"
 	}
 	return *e.ErrorCodeOverride
@@ -1683,7 +1683,7 @@ func (e *TooManyKeySigningKeys) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyKeySigningKeys) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyKeySigningKeys"
 	}
 	return *e.ErrorCodeOverride
@@ -1717,7 +1717,7 @@ func (e *TooManyTrafficPolicies) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTrafficPolicies) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTrafficPolicies"
 	}
 	return *e.ErrorCodeOverride
@@ -1751,7 +1751,7 @@ func (e *TooManyTrafficPolicyInstances) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTrafficPolicyInstances) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTrafficPolicyInstances"
 	}
 	return *e.ErrorCodeOverride
@@ -1784,7 +1784,7 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTrafficPolicyVersionsForCurrentPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -1816,7 +1816,7 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyVPCAssociationAuthorizations) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyVPCAssociationAuthorizations"
 	}
 	return *e.ErrorCodeOverride
@@ -1844,7 +1844,7 @@ func (e *TrafficPolicyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrafficPolicyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrafficPolicyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1870,7 +1870,7 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrafficPolicyInstanceAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrafficPolicyInstanceAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1899,7 +1899,7 @@ func (e *TrafficPolicyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrafficPolicyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrafficPolicyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -1926,7 +1926,7 @@ func (e *VPCAssociationAuthorizationNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VPCAssociationAuthorizationNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VPCAssociationAuthorizationNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -1954,7 +1954,7 @@ func (e *VPCAssociationNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VPCAssociationNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VPCAssociationNotFound"
 	}
 	return *e.ErrorCodeOverride

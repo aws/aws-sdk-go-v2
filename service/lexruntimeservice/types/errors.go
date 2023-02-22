@@ -27,7 +27,7 @@ func (e *BadGatewayException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadGatewayException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadGatewayException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *BadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -116,7 +116,7 @@ func (e *DependencyFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DependencyFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DependencyFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -142,7 +142,7 @@ func (e *InternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -170,7 +170,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -196,7 +196,7 @@ func (e *LoopDetectedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LoopDetectedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LoopDetectedException"
 	}
 	return *e.ErrorCodeOverride
@@ -222,7 +222,7 @@ func (e *NotAcceptableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAcceptableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAcceptableException"
 	}
 	return *e.ErrorCodeOverride
@@ -249,7 +249,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -275,7 +275,7 @@ func (e *RequestTimeoutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestTimeoutException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestTimeoutException"
 	}
 	return *e.ErrorCodeOverride
@@ -301,7 +301,7 @@ func (e *UnsupportedMediaTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedMediaTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedMediaTypeException"
 	}
 	return *e.ErrorCodeOverride

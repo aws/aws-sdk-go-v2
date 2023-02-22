@@ -29,7 +29,7 @@ func (e *ComplexError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ComplexError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ComplexError"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *FooError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FooError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FooError"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InvalidGreeting) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGreeting) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidGreeting"
 	}
 	return *e.ErrorCodeOverride

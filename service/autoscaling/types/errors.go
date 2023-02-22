@@ -27,7 +27,7 @@ func (e *ActiveInstanceRefreshNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveInstanceRefreshNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActiveInstanceRefreshNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *AlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InstanceRefreshInProgressFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InstanceRefreshInProgressFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InstanceRefreshInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *InvalidNextToken) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextToken) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextToken"
 	}
 	return *e.ErrorCodeOverride
@@ -137,7 +137,7 @@ func (e *IrreversibleInstanceRefreshFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IrreversibleInstanceRefreshFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IrreversibleInstanceRefresh"
 	}
 	return *e.ErrorCodeOverride
@@ -167,7 +167,7 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -194,7 +194,7 @@ func (e *ResourceContentionFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceContentionFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceContention"
 	}
 	return *e.ErrorCodeOverride
@@ -220,7 +220,7 @@ func (e *ResourceInUseFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -247,7 +247,7 @@ func (e *ScalingActivityInProgressFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ScalingActivityInProgressFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ScalingActivityInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -273,7 +273,7 @@ func (e *ServiceLinkedRoleFailure) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceLinkedRoleFailure) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceLinkedRoleFailure"
 	}
 	return *e.ErrorCodeOverride

@@ -30,7 +30,7 @@ func (e *DataAlreadyAcceptedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DataAlreadyAcceptedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DataAlreadyAcceptedException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -113,7 +113,7 @@ func (e *InvalidSequenceTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSequenceTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSequenceTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -139,7 +139,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -172,7 +172,7 @@ func (e *MalformedQueryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedQueryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedQueryException"
 	}
 	return *e.ErrorCodeOverride
@@ -198,7 +198,7 @@ func (e *OperationAbortedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationAbortedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationAbortedException"
 	}
 	return *e.ErrorCodeOverride
@@ -224,7 +224,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -250,7 +250,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -276,7 +276,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -304,7 +304,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride
@@ -331,7 +331,7 @@ func (e *UnrecognizedClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnrecognizedClientException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnrecognizedClientException"
 	}
 	return *e.ErrorCodeOverride

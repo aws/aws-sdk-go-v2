@@ -28,7 +28,7 @@ func (e *CloudHsmInternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmInternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudHsmInternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudHsmServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride

@@ -32,7 +32,7 @@ func (e *DefaultUndefinedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DefaultUndefinedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DefaultUndefinedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -60,7 +60,7 @@ func (e *DomainAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DomainAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -86,7 +86,7 @@ func (e *DomainDeprecatedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainDeprecatedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DomainDeprecatedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -114,7 +114,7 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededFault"
 	}
 	return *e.ErrorCodeOverride
@@ -141,7 +141,7 @@ func (e *OperationNotPermittedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotPermittedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -167,7 +167,7 @@ func (e *TooManyTagsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -195,7 +195,7 @@ func (e *TypeAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TypeAlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TypeAlreadyExistsFault"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *TypeDeprecatedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TypeDeprecatedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TypeDeprecatedFault"
 	}
 	return *e.ErrorCodeOverride
@@ -249,7 +249,7 @@ func (e *UnknownResourceFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnknownResourceFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnknownResourceFault"
 	}
 	return *e.ErrorCodeOverride
@@ -276,7 +276,7 @@ func (e *WorkflowExecutionAlreadyStartedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WorkflowExecutionAlreadyStartedFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WorkflowExecutionAlreadyStartedFault"
 	}
 	return *e.ErrorCodeOverride

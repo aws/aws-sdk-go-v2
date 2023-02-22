@@ -27,7 +27,7 @@ func (e *CertificateMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InvalidArgsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgsException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *InvalidArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -188,7 +188,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -214,7 +214,7 @@ func (e *InvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *InvalidTagException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagException"
 	}
 	return *e.ErrorCodeOverride
@@ -268,7 +268,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -296,7 +296,7 @@ func (e *LockoutPreventedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LockoutPreventedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LockoutPreventedException"
 	}
 	return *e.ErrorCodeOverride
@@ -322,7 +322,7 @@ func (e *MalformedCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedCertificateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedCertificateException"
 	}
 	return *e.ErrorCodeOverride
@@ -348,7 +348,7 @@ func (e *MalformedCSRException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedCSRException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedCSRException"
 	}
 	return *e.ErrorCodeOverride
@@ -374,7 +374,7 @@ func (e *PermissionAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PermissionAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PermissionAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -400,7 +400,7 @@ func (e *RequestAlreadyProcessedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestAlreadyProcessedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestAlreadyProcessedException"
 	}
 	return *e.ErrorCodeOverride
@@ -426,7 +426,7 @@ func (e *RequestFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -452,7 +452,7 @@ func (e *RequestInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -479,7 +479,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -506,7 +506,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

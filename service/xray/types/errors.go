@@ -28,7 +28,7 @@ func (e *InvalidPolicyRevisionIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyRevisionIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPolicyRevisionIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *LockoutPreventionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LockoutPreventionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LockoutPreventionException"
 	}
 	return *e.ErrorCodeOverride
@@ -107,7 +107,7 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedPolicyDocumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *PolicyCountLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyCountLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyCountLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *PolicySizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicySizeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicySizeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -215,7 +215,7 @@ func (e *RuleLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RuleLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RuleLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *ThrottledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottledException"
 	}
 	return *e.ErrorCodeOverride
@@ -269,7 +269,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

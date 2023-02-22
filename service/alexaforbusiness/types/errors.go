@@ -26,7 +26,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *DeviceNotRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeviceNotRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DeviceNotRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *InvalidCertificateAuthorityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCertificateAuthorityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCertificateAuthorityException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *InvalidDeviceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeviceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDeviceException"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *InvalidSecretsManagerResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSecretsManagerResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSecretsManagerResourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,7 +187,7 @@ func (e *InvalidServiceLinkedRoleStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidServiceLinkedRoleStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidServiceLinkedRoleStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -215,7 +215,7 @@ func (e *InvalidUserStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUserStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUserStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -267,7 +267,7 @@ func (e *NameInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NameInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NameInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -319,7 +319,7 @@ func (e *ResourceAssociatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAssociatedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAssociatedException"
 	}
 	return *e.ErrorCodeOverride
@@ -347,7 +347,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -373,7 +373,7 @@ func (e *SkillNotLinkedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SkillNotLinkedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SkillNotLinkedException"
 	}
 	return *e.ErrorCodeOverride
@@ -400,7 +400,7 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedException"
 	}
 	return *e.ErrorCodeOverride

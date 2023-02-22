@@ -28,7 +28,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *AuthenticationFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthenticationFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AuthenticationFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *CertificateAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -113,7 +113,7 @@ func (e *CertificateDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -142,7 +142,7 @@ func (e *CertificateInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -171,7 +171,7 @@ func (e *CertificateLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CertificateLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -199,7 +199,7 @@ func (e *ClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientException"
 	}
 	return *e.ErrorCodeOverride
@@ -228,7 +228,7 @@ func (e *DirectoryAlreadyInRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryAlreadyInRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryAlreadyInRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -257,7 +257,7 @@ func (e *DirectoryAlreadySharedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryAlreadySharedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryAlreadySharedException"
 	}
 	return *e.ErrorCodeOverride
@@ -285,7 +285,7 @@ func (e *DirectoryDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -313,7 +313,7 @@ func (e *DirectoryInDesiredStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryInDesiredStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryInDesiredStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -343,7 +343,7 @@ func (e *DirectoryLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *DirectoryNotSharedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryNotSharedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryNotSharedException"
 	}
 	return *e.ErrorCodeOverride
@@ -400,7 +400,7 @@ func (e *DirectoryUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -429,7 +429,7 @@ func (e *DomainControllerLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainControllerLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DomainControllerLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -459,7 +459,7 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -487,7 +487,7 @@ func (e *EntityDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -515,7 +515,7 @@ func (e *IncompatibleSettingsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleSettingsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleSettingsException"
 	}
 	return *e.ErrorCodeOverride
@@ -543,7 +543,7 @@ func (e *InsufficientPermissionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientPermissionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientPermissionsException"
 	}
 	return *e.ErrorCodeOverride
@@ -571,7 +571,7 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCertificateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCertificateException"
 	}
 	return *e.ErrorCodeOverride
@@ -599,7 +599,7 @@ func (e *InvalidClientAuthStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientAuthStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidClientAuthStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -628,7 +628,7 @@ func (e *InvalidLDAPSStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLDAPSStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLDAPSStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -656,7 +656,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -684,7 +684,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -713,7 +713,7 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPasswordException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPasswordException"
 	}
 	return *e.ErrorCodeOverride
@@ -741,7 +741,7 @@ func (e *InvalidTargetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTargetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTargetException"
 	}
 	return *e.ErrorCodeOverride
@@ -770,7 +770,7 @@ func (e *IpRouteLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IpRouteLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IpRouteLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -799,7 +799,7 @@ func (e *NoAvailableCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableCertificateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableCertificateException"
 	}
 	return *e.ErrorCodeOverride
@@ -828,7 +828,7 @@ func (e *OrganizationsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationsException"
 	}
 	return *e.ErrorCodeOverride
@@ -857,7 +857,7 @@ func (e *RegionLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RegionLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RegionLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -885,7 +885,7 @@ func (e *ServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -914,7 +914,7 @@ func (e *ShareLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ShareLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ShareLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -944,7 +944,7 @@ func (e *SnapshotLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapshotLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -972,7 +972,7 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -1000,7 +1000,7 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1028,7 +1028,7 @@ func (e *UnsupportedSettingsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedSettingsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedSettingsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1056,7 +1056,7 @@ func (e *UserDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride

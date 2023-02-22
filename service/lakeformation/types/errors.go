@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -130,7 +130,7 @@ func (e *ExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExpiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExpiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -156,7 +156,7 @@ func (e *GlueEncryptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlueEncryptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GlueEncryptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -182,7 +182,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -208,7 +208,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -234,7 +234,7 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationTimeoutException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationTimeoutException"
 	}
 	return *e.ErrorCodeOverride
@@ -263,7 +263,7 @@ func (e *PermissionTypeMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PermissionTypeMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PermissionTypeMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -290,7 +290,7 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -316,7 +316,7 @@ func (e *ResourceNumberLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNumberLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNumberLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -344,7 +344,7 @@ func (e *StatisticsNotReadyYetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StatisticsNotReadyYetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StatisticsNotReadyYetException"
 	}
 	return *e.ErrorCodeOverride
@@ -370,7 +370,7 @@ func (e *ThrottledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottledException"
 	}
 	return *e.ErrorCodeOverride
@@ -396,7 +396,7 @@ func (e *TransactionCanceledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionCanceledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionCanceledException"
 	}
 	return *e.ErrorCodeOverride
@@ -423,7 +423,7 @@ func (e *TransactionCommitInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionCommitInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionCommitInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -452,7 +452,7 @@ func (e *TransactionCommittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionCommittedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TransactionCommittedException"
 	}
 	return *e.ErrorCodeOverride
@@ -478,7 +478,7 @@ func (e *WorkUnitsNotReadyYetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WorkUnitsNotReadyYetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WorkUnitsNotReadyYetException"
 	}
 	return *e.ErrorCodeOverride

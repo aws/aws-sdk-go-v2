@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *AuthorizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AuthorizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *EntitlementNotAllowedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntitlementNotAllowedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntitlementNotAllowedException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *FailedDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FailedDependencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FailedDependencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *FilterLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FilterLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FilterLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -213,7 +213,7 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -239,7 +239,7 @@ func (e *LicenseUsageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LicenseUsageException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LicenseUsageException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *NoEntitlementsAllowedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoEntitlementsAllowedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoEntitlementsAllowedException"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *RateLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RateLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RateLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -320,7 +320,7 @@ func (e *RedirectException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RedirectException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RedirectException"
 	}
 	return *e.ErrorCodeOverride
@@ -346,7 +346,7 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -398,7 +398,7 @@ func (e *ServerInternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerInternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServerInternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *UnsupportedDigitalSignatureMethodException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedDigitalSignatureMethodException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedDigitalSignatureMethodException"
 	}
 	return *e.ErrorCodeOverride
@@ -452,7 +452,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

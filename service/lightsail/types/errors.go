@@ -31,7 +31,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -62,7 +62,7 @@ func (e *AccountSetupInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountSetupInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountSetupInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -96,7 +96,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -126,7 +126,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -156,7 +156,7 @@ func (e *OperationFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *ServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -216,7 +216,7 @@ func (e *UnauthenticatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthenticatedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthenticatedException"
 	}
 	return *e.ErrorCodeOverride

@@ -29,7 +29,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -58,7 +58,7 @@ func (e *BadDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadDocumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadDocumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -88,7 +88,7 @@ func (e *DocumentTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DocumentTooLargeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DocumentTooLargeException"
 	}
 	return *e.ErrorCodeOverride
@@ -120,7 +120,7 @@ func (e *HumanLoopQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HumanLoopQuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HumanLoopQuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -150,7 +150,7 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -180,7 +180,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -208,7 +208,7 @@ func (e *InvalidJobIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidJobIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidJobIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *InvalidKMSKeyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKMSKeyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidKMSKeyException"
 	}
 	return *e.ErrorCodeOverride
@@ -268,7 +268,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -300,7 +300,7 @@ func (e *InvalidS3ObjectException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3ObjectException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3ObjectException"
 	}
 	return *e.ErrorCodeOverride
@@ -332,7 +332,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -361,7 +361,7 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProvisionedThroughputExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -392,7 +392,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -421,7 +421,7 @@ func (e *UnsupportedDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedDocumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedDocumentException"
 	}
 	return *e.ErrorCodeOverride

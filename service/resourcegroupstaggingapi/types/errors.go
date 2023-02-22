@@ -27,7 +27,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -69,7 +69,7 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConstraintViolationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConstraintViolationException"
 	}
 	return *e.ErrorCodeOverride
@@ -96,7 +96,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -139,7 +139,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -166,7 +166,7 @@ func (e *PaginationTokenExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PaginationTokenExpiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PaginationTokenExpiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -192,7 +192,7 @@ func (e *ThrottledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottledException"
 	}
 	return *e.ErrorCodeOverride

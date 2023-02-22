@@ -27,7 +27,7 @@ func (e *DuplicateReportNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateReportNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateReportNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *InternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *ReportLimitReachedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReportLimitReachedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReportLimitReachedException"
 	}
 	return *e.ErrorCodeOverride
@@ -107,7 +107,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

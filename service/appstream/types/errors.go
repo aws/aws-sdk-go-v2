@@ -26,7 +26,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *EntitlementAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntitlementAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntitlementAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *EntitlementNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntitlementNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntitlementNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *IncompatibleImageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncompatibleImageException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncompatibleImageException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *InvalidAccountStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAccountStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAccountStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterCombinationException"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *InvalidRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRoleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRoleException"
 	}
 	return *e.ErrorCodeOverride
@@ -211,7 +211,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotPermittedException"
 	}
 	return *e.ErrorCodeOverride
@@ -264,7 +264,7 @@ func (e *RequestLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -290,7 +290,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -316,7 +316,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -342,7 +342,7 @@ func (e *ResourceNotAvailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotAvailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotAvailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -368,7 +368,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

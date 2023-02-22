@@ -28,7 +28,7 @@ func (e *EngineNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EngineNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EngineNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *InvalidLexiconException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLexiconException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLexiconException"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -109,7 +109,7 @@ func (e *InvalidS3BucketException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3BucketException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3BucketException"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *InvalidS3KeyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3KeyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3KeyException"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *InvalidSampleRateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSampleRateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSampleRateException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *InvalidSnsTopicArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSnsTopicArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSnsTopicArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -216,7 +216,7 @@ func (e *InvalidSsmlException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSsmlException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSsmlException"
 	}
 	return *e.ErrorCodeOverride
@@ -242,7 +242,7 @@ func (e *InvalidTaskIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTaskIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTaskIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -269,7 +269,7 @@ func (e *LanguageNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LanguageNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LanguageNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -299,7 +299,7 @@ func (e *LexiconNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LexiconNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LexiconNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -325,7 +325,7 @@ func (e *LexiconSizeExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LexiconSizeExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LexiconSizeExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -352,7 +352,7 @@ func (e *MarksNotSupportedForFormatException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MarksNotSupportedForFormatException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MarksNotSupportedForFormatException"
 	}
 	return *e.ErrorCodeOverride
@@ -380,7 +380,7 @@ func (e *MaxLexemeLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxLexemeLengthExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxLexemeLengthExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -406,7 +406,7 @@ func (e *MaxLexiconsNumberExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxLexiconsNumberExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxLexiconsNumberExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -434,7 +434,7 @@ func (e *ServiceFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -460,7 +460,7 @@ func (e *SsmlMarksNotSupportedForTextTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SsmlMarksNotSupportedForTextTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SsmlMarksNotSupportedForTextTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -488,7 +488,7 @@ func (e *SynthesisTaskNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SynthesisTaskNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SynthesisTaskNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -519,7 +519,7 @@ func (e *TextLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TextLengthExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TextLengthExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -546,7 +546,7 @@ func (e *UnsupportedPlsAlphabetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedPlsAlphabetException"
 	}
 	return *e.ErrorCodeOverride
@@ -574,7 +574,7 @@ func (e *UnsupportedPlsLanguageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedPlsLanguageException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedPlsLanguageException"
 	}
 	return *e.ErrorCodeOverride

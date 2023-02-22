@@ -26,7 +26,7 @@ func (e *ConformancePackTemplateValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConformancePackTemplateValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConformancePackTemplateValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *IdempotentParameterMismatch) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatch) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatch"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *InsufficientDeliveryPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientDeliveryPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientDeliveryPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *InsufficientPermissionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientPermissionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientPermissionsException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *InvalidConfigurationRecorderNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationRecorderNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConfigurationRecorderNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *InvalidDeliveryChannelNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeliveryChannelNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDeliveryChannelNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -213,7 +213,7 @@ func (e *InvalidExpressionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidExpressionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidExpressionException"
 	}
 	return *e.ErrorCodeOverride
@@ -239,7 +239,7 @@ func (e *InvalidLimitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLimitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLimitException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -320,7 +320,7 @@ func (e *InvalidRecordingGroupException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRecordingGroupException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRecordingGroupException"
 	}
 	return *e.ErrorCodeOverride
@@ -346,7 +346,7 @@ func (e *InvalidResultTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResultTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResultTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *InvalidRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRoleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRoleException"
 	}
 	return *e.ErrorCodeOverride
@@ -398,7 +398,7 @@ func (e *InvalidS3KeyPrefixException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3KeyPrefixException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3KeyPrefixException"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *InvalidS3KmsKeyArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3KmsKeyArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3KmsKeyArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -450,7 +450,7 @@ func (e *InvalidSNSTopicARNException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSNSTopicARNException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSNSTopicARNException"
 	}
 	return *e.ErrorCodeOverride
@@ -477,7 +477,7 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTimeRangeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTimeRangeException"
 	}
 	return *e.ErrorCodeOverride
@@ -504,7 +504,7 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LastDeliveryChannelDeleteFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LastDeliveryChannelDeleteFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -535,7 +535,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -563,7 +563,7 @@ func (e *MaxActiveResourcesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxActiveResourcesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxActiveResourcesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -593,7 +593,7 @@ func (e *MaxNumberOfConfigRulesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxNumberOfConfigRulesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfConfigRulesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -621,7 +621,7 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorMessage() stri
 	return *e.Message
 }
 func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfConfigurationRecordersExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -652,7 +652,7 @@ func (e *MaxNumberOfConformancePacksExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxNumberOfConformancePacksExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfConformancePacksExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -680,7 +680,7 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfDeliveryChannelsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -711,7 +711,7 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorMessage() str
 	return *e.Message
 }
 func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfOrganizationConfigRulesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -742,7 +742,7 @@ func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorMessage(
 	return *e.Message
 }
 func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfOrganizationConformancePacksExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -771,7 +771,7 @@ func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorMessage() str
 	return *e.Message
 }
 func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfRetentionConfigurationsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -800,7 +800,7 @@ func (e *NoAvailableConfigurationRecorderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableConfigurationRecorderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableConfigurationRecorderException"
 	}
 	return *e.ErrorCodeOverride
@@ -828,7 +828,7 @@ func (e *NoAvailableDeliveryChannelException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableDeliveryChannelException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableDeliveryChannelException"
 	}
 	return *e.ErrorCodeOverride
@@ -856,7 +856,7 @@ func (e *NoAvailableOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -882,7 +882,7 @@ func (e *NoRunningConfigurationRecorderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoRunningConfigurationRecorderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoRunningConfigurationRecorderException"
 	}
 	return *e.ErrorCodeOverride
@@ -910,7 +910,7 @@ func (e *NoSuchBucketException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchBucketException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchBucketException"
 	}
 	return *e.ErrorCodeOverride
@@ -938,7 +938,7 @@ func (e *NoSuchConfigRuleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigRuleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigRuleException"
 	}
 	return *e.ErrorCodeOverride
@@ -964,7 +964,7 @@ func (e *NoSuchConfigRuleInConformancePackException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigRuleInConformancePackException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigRuleInConformancePackException"
 	}
 	return *e.ErrorCodeOverride
@@ -992,7 +992,7 @@ func (e *NoSuchConfigurationAggregatorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigurationAggregatorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigurationAggregatorException"
 	}
 	return *e.ErrorCodeOverride
@@ -1020,7 +1020,7 @@ func (e *NoSuchConfigurationRecorderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigurationRecorderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigurationRecorderException"
 	}
 	return *e.ErrorCodeOverride
@@ -1048,7 +1048,7 @@ func (e *NoSuchConformancePackException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConformancePackException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConformancePackException"
 	}
 	return *e.ErrorCodeOverride
@@ -1074,7 +1074,7 @@ func (e *NoSuchDeliveryChannelException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchDeliveryChannelException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchDeliveryChannelException"
 	}
 	return *e.ErrorCodeOverride
@@ -1102,7 +1102,7 @@ func (e *NoSuchOrganizationConfigRuleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOrganizationConfigRuleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOrganizationConfigRuleException"
 	}
 	return *e.ErrorCodeOverride
@@ -1132,7 +1132,7 @@ func (e *NoSuchOrganizationConformancePackException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOrganizationConformancePackException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOrganizationConformancePackException"
 	}
 	return *e.ErrorCodeOverride
@@ -1160,7 +1160,7 @@ func (e *NoSuchRemediationConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRemediationConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRemediationConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1188,7 +1188,7 @@ func (e *NoSuchRemediationExceptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRemediationExceptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRemediationExceptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1216,7 +1216,7 @@ func (e *NoSuchRetentionConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRetentionConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRetentionConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1269,7 +1269,7 @@ func (e *OrganizationAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationAccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationAccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1296,7 +1296,7 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationAllFeaturesNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationAllFeaturesNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1324,7 +1324,7 @@ func (e *OrganizationConformancePackTemplateValidationException) ErrorMessage() 
 	return *e.Message
 }
 func (e *OrganizationConformancePackTemplateValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationConformancePackTemplateValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1352,7 +1352,7 @@ func (e *OversizedConfigurationItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OversizedConfigurationItemException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OversizedConfigurationItemException"
 	}
 	return *e.ErrorCodeOverride
@@ -1381,7 +1381,7 @@ func (e *RemediationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RemediationInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RemediationInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -1408,7 +1408,7 @@ func (e *ResourceConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1462,7 +1462,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -1488,7 +1488,7 @@ func (e *ResourceNotDiscoveredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotDiscoveredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotDiscoveredException"
 	}
 	return *e.ErrorCodeOverride
@@ -1514,7 +1514,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1543,7 +1543,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1573,7 +1573,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

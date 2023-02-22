@@ -28,7 +28,7 @@ func (e *ClusterLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *Ec2RequestFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *Ec2RequestFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "Ec2RequestFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -111,7 +111,7 @@ func (e *InvalidAddressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAddressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAddressException"
 	}
 	return *e.ErrorCodeOverride
@@ -139,7 +139,7 @@ func (e *InvalidInputCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputCombinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputCombinationException"
 	}
 	return *e.ErrorCodeOverride
@@ -166,7 +166,7 @@ func (e *InvalidJobStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidJobStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidJobStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -193,7 +193,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -222,7 +222,7 @@ func (e *InvalidResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -249,7 +249,7 @@ func (e *KMSRequestFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSRequestFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSRequestFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -277,7 +277,7 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReturnShippingLabelAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReturnShippingLabelAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -307,7 +307,7 @@ func (e *UnsupportedAddressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedAddressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedAddressException"
 	}
 	return *e.ErrorCodeOverride

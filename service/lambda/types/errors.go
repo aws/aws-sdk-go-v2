@@ -28,7 +28,7 @@ func (e *CodeSigningConfigNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeSigningConfigNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CodeSigningConfigNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -60,7 +60,7 @@ func (e *CodeStorageExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeStorageExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CodeStorageExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -90,7 +90,7 @@ func (e *CodeVerificationFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeVerificationFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CodeVerificationFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -118,7 +118,7 @@ func (e *EC2AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EC2AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EC2AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -147,7 +147,7 @@ func (e *EC2ThrottledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EC2ThrottledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EC2ThrottledException"
 	}
 	return *e.ErrorCodeOverride
@@ -177,7 +177,7 @@ func (e *EC2UnexpectedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EC2UnexpectedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EC2UnexpectedException"
 	}
 	return *e.ErrorCodeOverride
@@ -205,7 +205,7 @@ func (e *EFSIOException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EFSIOException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EFSIOException"
 	}
 	return *e.ErrorCodeOverride
@@ -234,7 +234,7 @@ func (e *EFSMountConnectivityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EFSMountConnectivityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EFSMountConnectivityException"
 	}
 	return *e.ErrorCodeOverride
@@ -263,7 +263,7 @@ func (e *EFSMountFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EFSMountFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EFSMountFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -292,7 +292,7 @@ func (e *EFSMountTimeoutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EFSMountTimeoutException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EFSMountTimeoutException"
 	}
 	return *e.ErrorCodeOverride
@@ -323,7 +323,7 @@ func (e *ENILimitReachedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ENILimitReachedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ENILimitReachedException"
 	}
 	return *e.ErrorCodeOverride
@@ -352,7 +352,7 @@ func (e *InvalidCodeSignatureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCodeSignatureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCodeSignatureException"
 	}
 	return *e.ErrorCodeOverride
@@ -380,7 +380,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -408,7 +408,7 @@ func (e *InvalidRequestContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestContentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestContentException"
 	}
 	return *e.ErrorCodeOverride
@@ -436,7 +436,7 @@ func (e *InvalidRuntimeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRuntimeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRuntimeException"
 	}
 	return *e.ErrorCodeOverride
@@ -465,7 +465,7 @@ func (e *InvalidSecurityGroupIDException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSecurityGroupIDException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSecurityGroupIDException"
 	}
 	return *e.ErrorCodeOverride
@@ -493,7 +493,7 @@ func (e *InvalidSubnetIDException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSubnetIDException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSubnetIDException"
 	}
 	return *e.ErrorCodeOverride
@@ -521,7 +521,7 @@ func (e *InvalidZipFileException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidZipFileException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidZipFileException"
 	}
 	return *e.ErrorCodeOverride
@@ -550,7 +550,7 @@ func (e *KMSAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSAccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSAccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -579,7 +579,7 @@ func (e *KMSDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSDisabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSDisabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -608,7 +608,7 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSInvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSInvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -637,7 +637,7 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KMSNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -667,7 +667,7 @@ func (e *PolicyLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyLengthExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyLengthExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -697,7 +697,7 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreconditionFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PreconditionFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -725,7 +725,7 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProvisionedConcurrencyConfigNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -757,7 +757,7 @@ func (e *RequestTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestTooLargeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestTooLargeException"
 	}
 	return *e.ErrorCodeOverride
@@ -785,7 +785,7 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -815,7 +815,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -843,7 +843,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -872,7 +872,7 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -900,7 +900,7 @@ func (e *ServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -930,7 +930,7 @@ func (e *SnapStartException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapStartException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapStartException"
 	}
 	return *e.ErrorCodeOverride
@@ -961,7 +961,7 @@ func (e *SnapStartNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapStartNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapStartNotReadyException"
 	}
 	return *e.ErrorCodeOverride
@@ -989,7 +989,7 @@ func (e *SnapStartTimeoutException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapStartTimeoutException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SnapStartTimeoutException"
 	}
 	return *e.ErrorCodeOverride
@@ -1018,7 +1018,7 @@ func (e *SubnetIPAddressLimitReachedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetIPAddressLimitReachedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetIPAddressLimitReachedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1052,7 +1052,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1080,7 +1080,7 @@ func (e *UnsupportedMediaTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedMediaTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedMediaTypeException"
 	}
 	return *e.ErrorCodeOverride

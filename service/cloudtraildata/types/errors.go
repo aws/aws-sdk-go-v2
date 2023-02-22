@@ -26,7 +26,7 @@ func (e *ChannelInsufficientPermission) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChannelInsufficientPermission) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChannelInsufficientPermission"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *ChannelNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChannelNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChannelNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *ChannelUnsupportedSchema) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChannelUnsupportedSchema) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChannelUnsupportedSchema"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *DuplicatedAuditEventId) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicatedAuditEventId) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicatedAuditEventId"
 	}
 	return *e.ErrorCodeOverride
@@ -130,7 +130,7 @@ func (e *InvalidChannelARN) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidChannelARN) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidChannelARN"
 	}
 	return *e.ErrorCodeOverride
@@ -156,7 +156,7 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperationException"
 	}
 	return *e.ErrorCodeOverride

@@ -26,7 +26,7 @@ func (e *ContainerNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContainerNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ContainerNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *ObjectNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ObjectNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ObjectNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *RequestedRangeNotSatisfiableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestedRangeNotSatisfiableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestedRangeNotSatisfiableException"
 	}
 	return *e.ErrorCodeOverride

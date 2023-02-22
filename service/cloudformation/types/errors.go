@@ -26,7 +26,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *CFNRegistryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CFNRegistryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CFNRegistryException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *ChangeSetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChangeSetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChangeSetNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *CreatedButModifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CreatedButModifiedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CreatedButModifiedException"
 	}
 	return *e.ErrorCodeOverride
@@ -132,7 +132,7 @@ func (e *InsufficientCapabilitiesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientCapabilitiesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientCapabilitiesException"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *InvalidChangeSetStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidChangeSetStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidChangeSetStatus"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -214,7 +214,7 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateTransitionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateTransition"
 	}
 	return *e.ErrorCodeOverride
@@ -243,7 +243,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -269,7 +269,7 @@ func (e *NameAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NameAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NameAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *OperationIdAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationIdAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationIdAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -322,7 +322,7 @@ func (e *OperationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -348,7 +348,7 @@ func (e *OperationNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -376,7 +376,7 @@ func (e *OperationStatusCheckFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationStatusCheckFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConditionalCheckFailed"
 	}
 	return *e.ErrorCodeOverride
@@ -404,7 +404,7 @@ func (e *StackInstanceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StackInstanceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StackInstanceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -431,7 +431,7 @@ func (e *StackNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StackNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StackNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -459,7 +459,7 @@ func (e *StackSetNotEmptyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StackSetNotEmptyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StackSetNotEmptyException"
 	}
 	return *e.ErrorCodeOverride
@@ -485,7 +485,7 @@ func (e *StackSetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StackSetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StackSetNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -512,7 +512,7 @@ func (e *StaleRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StaleRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StaleRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -538,7 +538,7 @@ func (e *TokenAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TokenAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TokenAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -564,7 +564,7 @@ func (e *TypeConfigurationNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TypeConfigurationNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TypeConfigurationNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -592,7 +592,7 @@ func (e *TypeNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TypeNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TypeNotFoundException"
 	}
 	return *e.ErrorCodeOverride

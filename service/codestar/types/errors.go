@@ -27,7 +27,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InvalidServiceRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidServiceRoleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidServiceRoleException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *ProjectAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProjectAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProjectAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *ProjectConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProjectConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProjectConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,7 +187,7 @@ func (e *ProjectCreationFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProjectCreationFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProjectCreationFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -213,7 +213,7 @@ func (e *ProjectNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProjectNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ProjectNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -239,7 +239,7 @@ func (e *TeamMemberAlreadyAssociatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TeamMemberAlreadyAssociatedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TeamMemberAlreadyAssociatedException"
 	}
 	return *e.ErrorCodeOverride
@@ -267,7 +267,7 @@ func (e *TeamMemberNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TeamMemberNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TeamMemberNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *UserProfileAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserProfileAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserProfileAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -321,7 +321,7 @@ func (e *UserProfileNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserProfileNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserProfileNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -347,7 +347,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

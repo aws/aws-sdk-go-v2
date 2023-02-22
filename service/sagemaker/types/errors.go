@@ -27,7 +27,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ResourceInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *ResourceLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFound"
 	}
 	return *e.ErrorCodeOverride

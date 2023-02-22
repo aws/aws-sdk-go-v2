@@ -26,7 +26,7 @@ func (e *AccessDenied) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDenied) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDenied"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *BatchTooLarge) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchTooLarge) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BatchTooLarge"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *CachePolicyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CachePolicyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CachePolicyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *CachePolicyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CachePolicyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CachePolicyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -132,7 +132,7 @@ func (e *CannotChangeImmutablePublicKeyFields) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotChangeImmutablePublicKeyFields) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotChangeImmutablePublicKeyFields"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *CloudFrontOriginAccessIdentityAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudFrontOriginAccessIdentityAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudFrontOriginAccessIdentityAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -191,7 +191,7 @@ func (e *CloudFrontOriginAccessIdentityInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudFrontOriginAccessIdentityInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudFrontOriginAccessIdentityInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -219,7 +219,7 @@ func (e *CNAMEAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CNAMEAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CNAMEAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -245,7 +245,7 @@ func (e *ContinuousDeploymentPolicyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContinuousDeploymentPolicyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ContinuousDeploymentPolicyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -274,7 +274,7 @@ func (e *ContinuousDeploymentPolicyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContinuousDeploymentPolicyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ContinuousDeploymentPolicyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -301,7 +301,7 @@ func (e *DistributionAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DistributionAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DistributionAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -328,7 +328,7 @@ func (e *DistributionNotDisabled) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DistributionNotDisabled) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DistributionNotDisabled"
 	}
 	return *e.ErrorCodeOverride
@@ -354,7 +354,7 @@ func (e *FieldLevelEncryptionConfigAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FieldLevelEncryptionConfigAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FieldLevelEncryptionConfigAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -382,7 +382,7 @@ func (e *FieldLevelEncryptionConfigInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FieldLevelEncryptionConfigInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FieldLevelEncryptionConfigInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -408,7 +408,7 @@ func (e *FieldLevelEncryptionProfileAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FieldLevelEncryptionProfileAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FieldLevelEncryptionProfileAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -436,7 +436,7 @@ func (e *FieldLevelEncryptionProfileInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FieldLevelEncryptionProfileInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FieldLevelEncryptionProfileInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -462,7 +462,7 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FieldLevelEncryptionProfileSizeExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -492,7 +492,7 @@ func (e *FunctionAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FunctionAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FunctionAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -518,7 +518,7 @@ func (e *FunctionInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FunctionInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FunctionInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -546,7 +546,7 @@ func (e *FunctionSizeLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FunctionSizeLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FunctionSizeLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -572,7 +572,7 @@ func (e *IllegalDelete) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalDelete) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalDelete"
 	}
 	return *e.ErrorCodeOverride
@@ -599,7 +599,7 @@ func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorMes
 	return *e.Message
 }
 func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior"
 	}
 	return *e.ErrorCodeOverride
@@ -628,7 +628,7 @@ func (e *IllegalOriginAccessConfiguration) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalOriginAccessConfiguration) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalOriginAccessConfiguration"
 	}
 	return *e.ErrorCodeOverride
@@ -654,7 +654,7 @@ func (e *IllegalUpdate) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalUpdate) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalUpdate"
 	}
 	return *e.ErrorCodeOverride
@@ -680,7 +680,7 @@ func (e *InconsistentQuantities) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InconsistentQuantities) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InconsistentQuantities"
 	}
 	return *e.ErrorCodeOverride
@@ -706,7 +706,7 @@ func (e *InvalidArgument) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgument) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgument"
 	}
 	return *e.ErrorCodeOverride
@@ -732,7 +732,7 @@ func (e *InvalidDefaultRootObject) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDefaultRootObject) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDefaultRootObject"
 	}
 	return *e.ErrorCodeOverride
@@ -759,7 +759,7 @@ func (e *InvalidDomainNameForOriginAccessControl) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDomainNameForOriginAccessControl) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDomainNameForOriginAccessControl"
 	}
 	return *e.ErrorCodeOverride
@@ -787,7 +787,7 @@ func (e *InvalidErrorCode) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidErrorCode) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidErrorCode"
 	}
 	return *e.ErrorCodeOverride
@@ -816,7 +816,7 @@ func (e *InvalidForwardCookies) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidForwardCookies) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidForwardCookies"
 	}
 	return *e.ErrorCodeOverride
@@ -842,7 +842,7 @@ func (e *InvalidFunctionAssociation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFunctionAssociation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidFunctionAssociation"
 	}
 	return *e.ErrorCodeOverride
@@ -868,7 +868,7 @@ func (e *InvalidGeoRestrictionParameter) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGeoRestrictionParameter) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidGeoRestrictionParameter"
 	}
 	return *e.ErrorCodeOverride
@@ -894,7 +894,7 @@ func (e *InvalidHeadersForS3Origin) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidHeadersForS3Origin) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidHeadersForS3Origin"
 	}
 	return *e.ErrorCodeOverride
@@ -920,7 +920,7 @@ func (e *InvalidIfMatchVersion) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidIfMatchVersion) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidIfMatchVersion"
 	}
 	return *e.ErrorCodeOverride
@@ -946,7 +946,7 @@ func (e *InvalidLambdaFunctionAssociation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLambdaFunctionAssociation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLambdaFunctionAssociation"
 	}
 	return *e.ErrorCodeOverride
@@ -972,7 +972,7 @@ func (e *InvalidLocationCode) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLocationCode) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLocationCode"
 	}
 	return *e.ErrorCodeOverride
@@ -998,7 +998,7 @@ func (e *InvalidMinimumProtocolVersion) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMinimumProtocolVersion) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMinimumProtocolVersion"
 	}
 	return *e.ErrorCodeOverride
@@ -1025,7 +1025,7 @@ func (e *InvalidOrigin) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOrigin) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOrigin"
 	}
 	return *e.ErrorCodeOverride
@@ -1051,7 +1051,7 @@ func (e *InvalidOriginAccessControl) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOriginAccessControl) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOriginAccessControl"
 	}
 	return *e.ErrorCodeOverride
@@ -1077,7 +1077,7 @@ func (e *InvalidOriginAccessIdentity) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOriginAccessIdentity) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOriginAccessIdentity"
 	}
 	return *e.ErrorCodeOverride
@@ -1103,7 +1103,7 @@ func (e *InvalidOriginKeepaliveTimeout) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOriginKeepaliveTimeout) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOriginKeepaliveTimeout"
 	}
 	return *e.ErrorCodeOverride
@@ -1129,7 +1129,7 @@ func (e *InvalidOriginReadTimeout) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOriginReadTimeout) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOriginReadTimeout"
 	}
 	return *e.ErrorCodeOverride
@@ -1156,7 +1156,7 @@ func (e *InvalidProtocolSettings) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidProtocolSettings) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidProtocolSettings"
 	}
 	return *e.ErrorCodeOverride
@@ -1182,7 +1182,7 @@ func (e *InvalidQueryStringParameters) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidQueryStringParameters) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidQueryStringParameters"
 	}
 	return *e.ErrorCodeOverride
@@ -1209,7 +1209,7 @@ func (e *InvalidRelativePath) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRelativePath) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRelativePath"
 	}
 	return *e.ErrorCodeOverride
@@ -1237,7 +1237,7 @@ func (e *InvalidRequiredProtocol) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequiredProtocol) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequiredProtocol"
 	}
 	return *e.ErrorCodeOverride
@@ -1263,7 +1263,7 @@ func (e *InvalidResponseCode) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResponseCode) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResponseCode"
 	}
 	return *e.ErrorCodeOverride
@@ -1289,7 +1289,7 @@ func (e *InvalidTagging) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagging) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagging"
 	}
 	return *e.ErrorCodeOverride
@@ -1315,7 +1315,7 @@ func (e *InvalidTTLOrder) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTTLOrder) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTTLOrder"
 	}
 	return *e.ErrorCodeOverride
@@ -1341,7 +1341,7 @@ func (e *InvalidViewerCertificate) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidViewerCertificate) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidViewerCertificate"
 	}
 	return *e.ErrorCodeOverride
@@ -1371,7 +1371,7 @@ func (e *InvalidWebACLId) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidWebACLId) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidWebACLId"
 	}
 	return *e.ErrorCodeOverride
@@ -1398,7 +1398,7 @@ func (e *KeyGroupAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeyGroupAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KeyGroupAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1425,7 +1425,7 @@ func (e *MissingBody) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingBody) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingBody"
 	}
 	return *e.ErrorCodeOverride
@@ -1451,7 +1451,7 @@ func (e *MonitoringSubscriptionAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MonitoringSubscriptionAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MonitoringSubscriptionAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1479,7 +1479,7 @@ func (e *NoSuchCachePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchCachePolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchCachePolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -1505,7 +1505,7 @@ func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchCloudFrontOriginAccessIdentity"
 	}
 	return *e.ErrorCodeOverride
@@ -1533,7 +1533,7 @@ func (e *NoSuchContinuousDeploymentPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchContinuousDeploymentPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchContinuousDeploymentPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -1559,7 +1559,7 @@ func (e *NoSuchDistribution) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchDistribution) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchDistribution"
 	}
 	return *e.ErrorCodeOverride
@@ -1585,7 +1585,7 @@ func (e *NoSuchFieldLevelEncryptionConfig) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchFieldLevelEncryptionConfig) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchFieldLevelEncryptionConfig"
 	}
 	return *e.ErrorCodeOverride
@@ -1611,7 +1611,7 @@ func (e *NoSuchFieldLevelEncryptionProfile) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchFieldLevelEncryptionProfile) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchFieldLevelEncryptionProfile"
 	}
 	return *e.ErrorCodeOverride
@@ -1637,7 +1637,7 @@ func (e *NoSuchFunctionExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchFunctionExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchFunctionExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1663,7 +1663,7 @@ func (e *NoSuchInvalidation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchInvalidation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchInvalidation"
 	}
 	return *e.ErrorCodeOverride
@@ -1689,7 +1689,7 @@ func (e *NoSuchMonitoringSubscription) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchMonitoringSubscription) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchMonitoringSubscription"
 	}
 	return *e.ErrorCodeOverride
@@ -1715,7 +1715,7 @@ func (e *NoSuchOrigin) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOrigin) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOrigin"
 	}
 	return *e.ErrorCodeOverride
@@ -1741,7 +1741,7 @@ func (e *NoSuchOriginAccessControl) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOriginAccessControl) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOriginAccessControl"
 	}
 	return *e.ErrorCodeOverride
@@ -1767,7 +1767,7 @@ func (e *NoSuchOriginRequestPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOriginRequestPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOriginRequestPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -1793,7 +1793,7 @@ func (e *NoSuchPublicKey) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchPublicKey) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchPublicKey"
 	}
 	return *e.ErrorCodeOverride
@@ -1819,7 +1819,7 @@ func (e *NoSuchRealtimeLogConfig) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRealtimeLogConfig) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRealtimeLogConfig"
 	}
 	return *e.ErrorCodeOverride
@@ -1845,7 +1845,7 @@ func (e *NoSuchResource) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchResource) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchResource"
 	}
 	return *e.ErrorCodeOverride
@@ -1871,7 +1871,7 @@ func (e *NoSuchResponseHeadersPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchResponseHeadersPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchResponseHeadersPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -1897,7 +1897,7 @@ func (e *NoSuchStreamingDistribution) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchStreamingDistribution) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchStreamingDistribution"
 	}
 	return *e.ErrorCodeOverride
@@ -1923,7 +1923,7 @@ func (e *OriginAccessControlAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OriginAccessControlAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OriginAccessControlAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -1950,7 +1950,7 @@ func (e *OriginAccessControlInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OriginAccessControlInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OriginAccessControlInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -1978,7 +1978,7 @@ func (e *OriginRequestPolicyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OriginRequestPolicyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OriginRequestPolicyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -2005,7 +2005,7 @@ func (e *OriginRequestPolicyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OriginRequestPolicyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OriginRequestPolicyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -2031,7 +2031,7 @@ func (e *PreconditionFailed) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreconditionFailed) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PreconditionFailed"
 	}
 	return *e.ErrorCodeOverride
@@ -2057,7 +2057,7 @@ func (e *PublicKeyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PublicKeyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PublicKeyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -2083,7 +2083,7 @@ func (e *PublicKeyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PublicKeyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PublicKeyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -2109,7 +2109,7 @@ func (e *QueryArgProfileEmpty) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueryArgProfileEmpty) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QueryArgProfileEmpty"
 	}
 	return *e.ErrorCodeOverride
@@ -2137,7 +2137,7 @@ func (e *RealtimeLogConfigAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RealtimeLogConfigAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RealtimeLogConfigAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -2164,7 +2164,7 @@ func (e *RealtimeLogConfigInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RealtimeLogConfigInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RealtimeLogConfigInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -2191,7 +2191,7 @@ func (e *RealtimeLogConfigOwnerMismatch) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RealtimeLogConfigOwnerMismatch) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RealtimeLogConfigOwnerMismatch"
 	}
 	return *e.ErrorCodeOverride
@@ -2217,7 +2217,7 @@ func (e *ResourceInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -2245,7 +2245,7 @@ func (e *ResponseHeadersPolicyAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResponseHeadersPolicyAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResponseHeadersPolicyAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -2274,7 +2274,7 @@ func (e *ResponseHeadersPolicyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResponseHeadersPolicyInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResponseHeadersPolicyInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -2300,7 +2300,7 @@ func (e *StagingDistributionInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StagingDistributionInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StagingDistributionInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -2327,7 +2327,7 @@ func (e *StreamingDistributionAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StreamingDistributionAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StreamingDistributionAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -2356,7 +2356,7 @@ func (e *StreamingDistributionNotDisabled) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StreamingDistributionNotDisabled) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StreamingDistributionNotDisabled"
 	}
 	return *e.ErrorCodeOverride
@@ -2382,7 +2382,7 @@ func (e *TestFunctionFailed) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TestFunctionFailed) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TestFunctionFailed"
 	}
 	return *e.ErrorCodeOverride
@@ -2411,7 +2411,7 @@ func (e *TooLongCSPInResponseHeadersPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooLongCSPInResponseHeadersPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooLongCSPInResponseHeadersPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2437,7 +2437,7 @@ func (e *TooManyCacheBehaviors) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCacheBehaviors) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCacheBehaviors"
 	}
 	return *e.ErrorCodeOverride
@@ -2466,7 +2466,7 @@ func (e *TooManyCachePolicies) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCachePolicies) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCachePolicies"
 	}
 	return *e.ErrorCodeOverride
@@ -2492,7 +2492,7 @@ func (e *TooManyCertificates) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCertificates) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCertificates"
 	}
 	return *e.ErrorCodeOverride
@@ -2519,7 +2519,7 @@ func (e *TooManyCloudFrontOriginAccessIdentities) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCloudFrontOriginAccessIdentities) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCloudFrontOriginAccessIdentities"
 	}
 	return *e.ErrorCodeOverride
@@ -2548,7 +2548,7 @@ func (e *TooManyContinuousDeploymentPolicies) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyContinuousDeploymentPolicies) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyContinuousDeploymentPolicies"
 	}
 	return *e.ErrorCodeOverride
@@ -2577,7 +2577,7 @@ func (e *TooManyCookieNamesInWhiteList) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCookieNamesInWhiteList) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCookieNamesInWhiteList"
 	}
 	return *e.ErrorCodeOverride
@@ -2606,7 +2606,7 @@ func (e *TooManyCookiesInCachePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCookiesInCachePolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCookiesInCachePolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2635,7 +2635,7 @@ func (e *TooManyCookiesInOriginRequestPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCookiesInOriginRequestPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCookiesInOriginRequestPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2666,7 +2666,7 @@ func (e *TooManyCustomHeadersInResponseHeadersPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyCustomHeadersInResponseHeadersPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyCustomHeadersInResponseHeadersPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2694,7 +2694,7 @@ func (e *TooManyDistributionCNAMEs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributionCNAMEs) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionCNAMEs"
 	}
 	return *e.ErrorCodeOverride
@@ -2721,7 +2721,7 @@ func (e *TooManyDistributions) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributions) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributions"
 	}
 	return *e.ErrorCodeOverride
@@ -2750,7 +2750,7 @@ func (e *TooManyDistributionsAssociatedToCachePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributionsAssociatedToCachePolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsAssociatedToCachePolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2779,7 +2779,7 @@ func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorMessag
 	return *e.Message
 }
 func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsAssociatedToFieldLevelEncryptionConfig"
 	}
 	return *e.ErrorCodeOverride
@@ -2810,7 +2810,7 @@ func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsAssociatedToKeyGroup"
 	}
 	return *e.ErrorCodeOverride
@@ -2841,7 +2841,7 @@ func (e *TooManyDistributionsAssociatedToOriginAccessControl) ErrorMessage() str
 	return *e.Message
 }
 func (e *TooManyDistributionsAssociatedToOriginAccessControl) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsAssociatedToOriginAccessControl"
 	}
 	return *e.ErrorCodeOverride
@@ -2872,7 +2872,7 @@ func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorMessage() str
 	return *e.Message
 }
 func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsAssociatedToOriginRequestPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2903,7 +2903,7 @@ func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorMessage() s
 	return *e.Message
 }
 func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsAssociatedToResponseHeadersPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -2934,7 +2934,7 @@ func (e *TooManyDistributionsWithFunctionAssociations) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributionsWithFunctionAssociations) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsWithFunctionAssociations"
 	}
 	return *e.ErrorCodeOverride
@@ -2963,7 +2963,7 @@ func (e *TooManyDistributionsWithLambdaAssociations) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributionsWithLambdaAssociations) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsWithLambdaAssociations"
 	}
 	return *e.ErrorCodeOverride
@@ -2992,7 +2992,7 @@ func (e *TooManyDistributionsWithSingleFunctionARN) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyDistributionsWithSingleFunctionARN) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyDistributionsWithSingleFunctionARN"
 	}
 	return *e.ErrorCodeOverride
@@ -3021,7 +3021,7 @@ func (e *TooManyFieldLevelEncryptionConfigs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFieldLevelEncryptionConfigs) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFieldLevelEncryptionConfigs"
 	}
 	return *e.ErrorCodeOverride
@@ -3050,7 +3050,7 @@ func (e *TooManyFieldLevelEncryptionContentTypeProfiles) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFieldLevelEncryptionContentTypeProfiles) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFieldLevelEncryptionContentTypeProfiles"
 	}
 	return *e.ErrorCodeOverride
@@ -3079,7 +3079,7 @@ func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFieldLevelEncryptionEncryptionEntities"
 	}
 	return *e.ErrorCodeOverride
@@ -3108,7 +3108,7 @@ func (e *TooManyFieldLevelEncryptionFieldPatterns) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFieldLevelEncryptionFieldPatterns) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFieldLevelEncryptionFieldPatterns"
 	}
 	return *e.ErrorCodeOverride
@@ -3136,7 +3136,7 @@ func (e *TooManyFieldLevelEncryptionProfiles) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFieldLevelEncryptionProfiles) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFieldLevelEncryptionProfiles"
 	}
 	return *e.ErrorCodeOverride
@@ -3165,7 +3165,7 @@ func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFieldLevelEncryptionQueryArgProfiles"
 	}
 	return *e.ErrorCodeOverride
@@ -3196,7 +3196,7 @@ func (e *TooManyFunctionAssociations) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFunctionAssociations) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFunctionAssociations"
 	}
 	return *e.ErrorCodeOverride
@@ -3225,7 +3225,7 @@ func (e *TooManyFunctions) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFunctions) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFunctions"
 	}
 	return *e.ErrorCodeOverride
@@ -3254,7 +3254,7 @@ func (e *TooManyHeadersInCachePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyHeadersInCachePolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyHeadersInCachePolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -3280,7 +3280,7 @@ func (e *TooManyHeadersInForwardedValues) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyHeadersInForwardedValues) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyHeadersInForwardedValues"
 	}
 	return *e.ErrorCodeOverride
@@ -3309,7 +3309,7 @@ func (e *TooManyHeadersInOriginRequestPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyHeadersInOriginRequestPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyHeadersInOriginRequestPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -3338,7 +3338,7 @@ func (e *TooManyInvalidationsInProgress) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyInvalidationsInProgress) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyInvalidationsInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -3367,7 +3367,7 @@ func (e *TooManyKeyGroups) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyKeyGroups) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyKeyGroups"
 	}
 	return *e.ErrorCodeOverride
@@ -3396,7 +3396,7 @@ func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyKeyGroupsAssociatedToDistribution"
 	}
 	return *e.ErrorCodeOverride
@@ -3425,7 +3425,7 @@ func (e *TooManyLambdaFunctionAssociations) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyLambdaFunctionAssociations) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyLambdaFunctionAssociations"
 	}
 	return *e.ErrorCodeOverride
@@ -3454,7 +3454,7 @@ func (e *TooManyOriginAccessControls) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyOriginAccessControls) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyOriginAccessControls"
 	}
 	return *e.ErrorCodeOverride
@@ -3480,7 +3480,7 @@ func (e *TooManyOriginCustomHeaders) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyOriginCustomHeaders) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyOriginCustomHeaders"
 	}
 	return *e.ErrorCodeOverride
@@ -3507,7 +3507,7 @@ func (e *TooManyOriginGroupsPerDistribution) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyOriginGroupsPerDistribution) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyOriginGroupsPerDistribution"
 	}
 	return *e.ErrorCodeOverride
@@ -3538,7 +3538,7 @@ func (e *TooManyOriginRequestPolicies) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyOriginRequestPolicies) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyOriginRequestPolicies"
 	}
 	return *e.ErrorCodeOverride
@@ -3564,7 +3564,7 @@ func (e *TooManyOrigins) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyOrigins) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyOrigins"
 	}
 	return *e.ErrorCodeOverride
@@ -3591,7 +3591,7 @@ func (e *TooManyPublicKeys) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyPublicKeys) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyPublicKeys"
 	}
 	return *e.ErrorCodeOverride
@@ -3620,7 +3620,7 @@ func (e *TooManyPublicKeysInKeyGroup) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyPublicKeysInKeyGroup) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyPublicKeysInKeyGroup"
 	}
 	return *e.ErrorCodeOverride
@@ -3646,7 +3646,7 @@ func (e *TooManyQueryStringParameters) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyQueryStringParameters) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyQueryStringParameters"
 	}
 	return *e.ErrorCodeOverride
@@ -3675,7 +3675,7 @@ func (e *TooManyQueryStringsInCachePolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyQueryStringsInCachePolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyQueryStringsInCachePolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -3704,7 +3704,7 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyQueryStringsInOriginRequestPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -3735,7 +3735,7 @@ func (e *TooManyRealtimeLogConfigs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRealtimeLogConfigs) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRealtimeLogConfigs"
 	}
 	return *e.ErrorCodeOverride
@@ -3764,7 +3764,7 @@ func (e *TooManyRemoveHeadersInResponseHeadersPolicy) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRemoveHeadersInResponseHeadersPolicy) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRemoveHeadersInResponseHeadersPolicy"
 	}
 	return *e.ErrorCodeOverride
@@ -3795,7 +3795,7 @@ func (e *TooManyResponseHeadersPolicies) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyResponseHeadersPolicies) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyResponseHeadersPolicies"
 	}
 	return *e.ErrorCodeOverride
@@ -3821,7 +3821,7 @@ func (e *TooManyStreamingDistributionCNAMEs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyStreamingDistributionCNAMEs) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyStreamingDistributionCNAMEs"
 	}
 	return *e.ErrorCodeOverride
@@ -3850,7 +3850,7 @@ func (e *TooManyStreamingDistributions) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyStreamingDistributions) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyStreamingDistributions"
 	}
 	return *e.ErrorCodeOverride
@@ -3876,7 +3876,7 @@ func (e *TooManyTrustedSigners) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTrustedSigners) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTrustedSigners"
 	}
 	return *e.ErrorCodeOverride
@@ -3902,7 +3902,7 @@ func (e *TrustedKeyGroupDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrustedKeyGroupDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrustedKeyGroupDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -3928,7 +3928,7 @@ func (e *TrustedSignerDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrustedSignerDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrustedSignerDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -3954,7 +3954,7 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperation"
 	}
 	return *e.ErrorCodeOverride
