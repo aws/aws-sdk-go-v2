@@ -1,3 +1,7 @@
+# v1.25.0 (2023-02-23)
+
+* **Feature**: This release enables the customers to choose whether to use Private Link for Metadata and Authorization call when using a private Salesforce connections
+
 # v1.24.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

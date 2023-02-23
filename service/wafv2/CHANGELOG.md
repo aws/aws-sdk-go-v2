@@ -1,3 +1,7 @@
+# v1.26.0 (2023-02-23)
+
+* **Feature**: You can now associate an AWS WAF v2 web ACL with an AWS App Runner service.
+
 # v1.25.3 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

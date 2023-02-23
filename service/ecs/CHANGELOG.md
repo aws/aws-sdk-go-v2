@@ -1,3 +1,7 @@
+# v1.24.0 (2023-02-23)
+
+* **Feature**: This release supports deleting Amazon ECS task definitions that are in the INACTIVE state.
+
 # v1.23.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

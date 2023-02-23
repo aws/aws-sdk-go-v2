@@ -1,3 +1,23 @@
+# Release (2023-02-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.25.0](service/appflow/CHANGELOG.md#v1250-2023-02-23)
+  * **Feature**: This release enables the customers to choose whether to use Private Link for Metadata and Authorization call when using a private Salesforce connections
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.24.0](service/ecs/CHANGELOG.md#v1240-2023-02-23)
+  * **Feature**: This release supports deleting Amazon ECS task definitions that are in the INACTIVE state.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.12.3](service/grafana/CHANGELOG.md#v1123-2023-02-23)
+  * **Documentation**: Doc-only update. Updated information on attached role policies for customer provided roles
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.17.6](service/guardduty/CHANGELOG.md#v1176-2023-02-23)
+  * **Documentation**: Updated API and data types descriptions for CreateFilter, UpdateFilter, and TriggerDetails.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.25.0](service/iotwireless/CHANGELOG.md#v1250-2023-02-23)
+  * **Feature**: In this release, we add additional capabilities for the FUOTA which allows user to configure the fragment size, the sending interval and the redundancy ratio of the FUOTA tasks
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.22.0](service/location/CHANGELOG.md#v1220-2023-02-23)
+  * **Feature**: This release adds support for using Maps APIs with an API Key in addition to AWS Cognito. This includes support for adding, listing, updating and deleting API Keys.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.27.0](service/macie2/CHANGELOG.md#v1270-2023-02-23)
+  * **Feature**: This release adds support for a new finding type, Policy:IAMUser/S3BucketSharedWithCloudFront, and S3 bucket metadata that indicates if a bucket is shared with an Amazon CloudFront OAI or OAC.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.26.0](service/wafv2/CHANGELOG.md#v1260-2023-02-23)
+  * **Feature**: You can now associate an AWS WAF v2 web ACL with an AWS App Runner service.
+
 # Release (2023-02-22)
 
 ## General Highlights

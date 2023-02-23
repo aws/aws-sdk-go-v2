@@ -1,3 +1,7 @@
+# v1.22.0 (2023-02-23)
+
+* **Feature**: This release adds support for using Maps APIs with an API Key in addition to AWS Cognito. This includes support for adding, listing, updating and deleting API Keys.
+
 # v1.21.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

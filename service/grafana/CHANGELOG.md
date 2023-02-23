@@ -1,3 +1,7 @@
+# v1.12.3 (2023-02-23)
+
+* **Documentation**: Doc-only update. Updated information on attached role policies for customer provided roles
+
 # v1.12.2 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

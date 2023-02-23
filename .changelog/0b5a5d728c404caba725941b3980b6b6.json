@@ -1,8 +1,0 @@
-{
-    "id": "0b5a5d72-8c40-4cab-a725-941b3980b6b6",
-    "type": "documentation",
-    "description": "Doc-only update. Updated information on attached role policies for customer provided roles",
-    "modules": [
-        "service/grafana"
-    ]
-}

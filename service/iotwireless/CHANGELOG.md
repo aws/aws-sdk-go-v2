@@ -1,3 +1,7 @@
+# v1.25.0 (2023-02-23)
+
+* **Feature**: In this release, we add additional capabilities for the FUOTA which allows user to configure the fragment size, the sending interval and the redundancy ratio of the FUOTA tasks
+
 # v1.24.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

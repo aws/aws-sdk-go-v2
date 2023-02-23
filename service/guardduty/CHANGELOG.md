@@ -1,3 +1,7 @@
+# v1.17.6 (2023-02-23)
+
+* **Documentation**: Updated API and data types descriptions for CreateFilter, UpdateFilter, and TriggerDetails.
+
 # v1.17.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
