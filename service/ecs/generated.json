@@ -18,6 +18,7 @@
         "api_op_DeleteCapacityProvider.go",
         "api_op_DeleteCluster.go",
         "api_op_DeleteService.go",
+        "api_op_DeleteTaskDefinitions.go",
         "api_op_DeleteTaskSet.go",
         "api_op_DeregisterContainerInstance.go",
         "api_op_DeregisterTaskDefinition.go",

@@ -75,7 +75,7 @@ type DescribePlaceIndexOutput struct {
 	Description *string
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
-	// resource across AWS.
+	// resource across Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex

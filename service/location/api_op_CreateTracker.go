@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Creates a tracker resource in your AWS account, which lets you retrieve current
-// and historical location of devices.
+// Creates a tracker resource in your Amazon Web Services account, which lets you
+// retrieve current and historical location of devices.
 func (c *Client) CreateTracker(ctx context.Context, params *CreateTrackerInput, optFns ...func(*Options)) (*CreateTrackerOutput, error) {
 	if params == nil {
 		params = &CreateTrackerInput{}
@@ -49,7 +49,7 @@ type CreateTrackerInput struct {
 	// An optional description for the tracker resource.
 	Description *string
 
-	// A key identifier for an AWS KMS customer managed key
+	// A key identifier for an Amazon Web Services KMS customer managed key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter
 	// a key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string
@@ -127,7 +127,7 @@ type CreateTrackerOutput struct {
 	CreateTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
-	// specify a resource across all AWS.
+	// specify a resource across all Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:tracker/ExampleTracker

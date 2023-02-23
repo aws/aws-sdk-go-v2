@@ -145,7 +145,7 @@ type CdmaObj struct {
 	// CDMA base station latitude in degrees.
 	BaseLat *float32
 
-	// CDMA base station longtitude in degrees.
+	// CDMA base station longitude in degrees.
 	BaseLng *float32
 
 	// CDMA local identification (local ID) parameters.
@@ -435,7 +435,7 @@ type Gnss struct {
 	AssistAltitude *float32
 
 	// Optional assistance position information, specified using latitude and longitude
-	// values in degrees. The co-ordinates are inside the WGS84 reference frame.
+	// values in degrees. The coordinates are inside the WGS84 reference frame.
 	AssistPosition []float32
 
 	// Optional parameter that gives an estimate of the time when the GNSS scan

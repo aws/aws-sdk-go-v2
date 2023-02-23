@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a map resource from your AWS account. This operation deletes the
-// resource permanently. If the map is being used in an application, the map may
-// not render.
+// Deletes a map resource from your Amazon Web Services account. This operation
+// deletes the resource permanently. If the map is being used in an application,
+// the map may not render.
 func (c *Client) DeleteMap(ctx context.Context, params *DeleteMapInput, optFns ...func(*Options)) (*DeleteMapOutput, error) {
 	if params == nil {
 		params = &DeleteMapInput{}

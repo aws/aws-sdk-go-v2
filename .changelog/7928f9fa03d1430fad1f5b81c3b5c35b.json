@@ -1,0 +1,8 @@
+{
+    "id": "7928f9fa-03d1-430f-ad1f-5b81c3b5c35b",
+    "type": "documentation",
+    "description": "Updated API and data types descriptions for CreateFilter, UpdateFilter, and TriggerDetails.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

@@ -12,11 +12,11 @@ import (
 
 // Associates a web ACL with a regional application resource, to protect the
 // resource. A regional application can be an Application Load Balancer (ALB), an
-// Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user
-// pool. For Amazon CloudFront, don't use this call. Instead, use your CloudFront
-// distribution configuration. To associate a web ACL, in the CloudFront call
-// UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the
-// web ACL. For information, see UpdateDistribution
+// Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool,
+// or an App Runner service. For Amazon CloudFront, don't use this call. Instead,
+// use your CloudFront distribution configuration. To associate a web ACL, in the
+// CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource
+// Name (ARN) of the web ACL. For information, see UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 // When you make changes to web ACLs or web ACL components, like rules and rule
 // groups, WAF propagates the changes everywhere that the web ACL and its
@@ -64,6 +64,10 @@ type AssociateWebACLInput struct {
 	// * For an
 	// Amazon Cognito user pool:
 	// arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
+	//
+	// * For an App Runner
+	// service:
+	// arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
 	// This member is required.
 	ResourceArn *string

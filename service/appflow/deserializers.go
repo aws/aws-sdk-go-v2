@@ -9991,6 +9991,15 @@ func awsRestjson1_deserializeDocumentSalesforceConnectorProfileProperties(v **ty
 				sv.IsSandboxEnvironment = jtv
 			}
 
+		case "usePrivateLinkForMetadataAndAuthorization":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UsePrivateLinkForMetadataAndAuthorization = jtv
+			}
+
 		default:
 			_, _ = key, value
 

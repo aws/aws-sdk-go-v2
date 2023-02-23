@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Contains information on member accounts to be updated.
+// Contains information on member accounts to be updated. There might be regional
+// differences because some data sources might not be available in all the Amazon
+// Web Services Regions where GuardDuty is presently supported. For more
+// information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) UpdateMemberDetectors(ctx context.Context, params *UpdateMemberDetectorsInput, optFns ...func(*Options)) (*UpdateMemberDetectorsOutput, error) {
 	if params == nil {
 		params = &UpdateMemberDetectorsInput{}

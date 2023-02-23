@@ -1,0 +1,8 @@
+{
+    "id": "52ab65a9-ce6a-4a98-9221-aa28a7463912",
+    "type": "feature",
+    "description": "This release supports deleting Amazon ECS task definitions that are in the INACTIVE state.",
+    "modules": [
+        "service/ecs"
+    ]
+}

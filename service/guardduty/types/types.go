@@ -1600,7 +1600,7 @@ type RemotePortDetails struct {
 // activity that prompted GuardDuty to generate a finding.
 type Resource struct {
 
-	// The IAM access key details (IAM user information) of a user that engaged in the
+	// The IAM access key details (user information) of a user that engaged in the
 	// activity that prompted GuardDuty to generate a finding.
 	AccessKeyDetails *AccessKeyDetails
 
@@ -1970,7 +1970,7 @@ type ServiceAdditionalInfo struct {
 // Contains information about the criteria used for sorting findings.
 type SortCriteria struct {
 
-	// Represents the finding attribute (for example, accountId) to sort findings by.
+	// Represents the finding attribute, such as accountId, that sorts the findings.
 	AttributeName *string
 
 	// The order by which the sorted findings are to be displayed.
@@ -2051,7 +2051,7 @@ type TriggerDetails struct {
 	// The description of the scan trigger.
 	Description *string
 
-	// The ID of the GuardDuty finding that triggered the BirdDog scan.
+	// The ID of the GuardDuty finding that triggered the malware scan.
 	GuardDutyFindingId *string
 
 	noSmithyDocumentSerde

@@ -57,7 +57,7 @@ type CreateIPSetInput struct {
 	Location *string
 
 	// The user-friendly name to identify the IPSet. Allowed characters are
-	// alphanumerics, spaces, hyphens (-), and underscores (_).
+	// alphanumeric, whitespace, dash (-), and underscores (_).
 	//
 	// This member is required.
 	Name *string

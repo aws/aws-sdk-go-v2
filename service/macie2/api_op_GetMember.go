@@ -50,12 +50,13 @@ type GetMemberOutput struct {
 	// The Amazon Resource Name (ARN) of the account.
 	Arn *string
 
-	// The email address for the account.
+	// The email address for the account. This value is null if the account is
+	// associated with the administrator account through Organizations.
 	Email *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
-	// membership invitation was last sent to the account. This value is null if an
-	// invitation hasn't been sent to the account.
+	// membership invitation was last sent to the account. This value is null if a
+	// Macie membership invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
 	// (Deprecated) The Amazon Web Services account ID for the administrator account.

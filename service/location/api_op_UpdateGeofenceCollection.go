@@ -56,7 +56,7 @@ type UpdateGeofenceCollectionInput struct {
 type UpdateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated geofence collection. Used to
-	// specify a resource across AWS.
+	// specify a resource across Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection

@@ -1,0 +1,8 @@
+{
+    "id": "a9d057e2-644b-49ab-aec4-7eae4939de4d",
+    "type": "feature",
+    "description": "You can now associate an AWS WAF v2 web ACL with an AWS App Runner service.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

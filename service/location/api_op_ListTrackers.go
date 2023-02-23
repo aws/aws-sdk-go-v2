@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists tracker resources in your AWS account.
+// Lists tracker resources in your Amazon Web Services account.
 func (c *Client) ListTrackers(ctx context.Context, params *ListTrackersInput, optFns ...func(*Options)) (*ListTrackersOutput, error) {
 	if params == nil {
 		params = &ListTrackersInput{}
@@ -43,8 +43,9 @@ type ListTrackersInput struct {
 
 type ListTrackersOutput struct {
 
-	// Contains tracker resources in your AWS account. Details include tracker name,
-	// description and timestamps for when the tracker was created and last updated.
+	// Contains tracker resources in your Amazon Web Services account. Details include
+	// tracker name, description and timestamps for when the tracker was created and
+	// last updated.
 	//
 	// This member is required.
 	Entries []types.ListTrackersResponseEntry

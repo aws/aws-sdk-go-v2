@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Amazon GuardDuty detector specified by the detectorId.
+// Updates the Amazon GuardDuty detector specified by the detectorId. There might
+// be regional differences because some data sources might not be available in all
+// the Amazon Web Services Regions where GuardDuty is presently supported. For more
+// information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) UpdateDetector(ctx context.Context, params *UpdateDetectorInput, optFns ...func(*Options)) (*UpdateDetectorOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorInput{}
@@ -34,7 +38,11 @@ type UpdateDetectorInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// Describes which data sources will be updated.
+	// Describes which data sources will be updated. There might be regional
+	// differences because some data sources might not be available in all the Amazon
+	// Web Services Regions where GuardDuty is presently supported. For more
+	// information, see Regions and endpoints
+	// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 	DataSources *types.DataSourceConfigurations
 
 	// Specifies whether the detector is enabled or not enabled.

@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the delegated administrator account with the values provided.
+// Updates the delegated administrator account with the values provided. There
+// might be regional differences because some data sources might not be available
+// in all the Amazon Web Services Regions where GuardDuty is presently supported.
+// For more information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *UpdateOrganizationConfigurationInput, optFns ...func(*Options)) (*UpdateOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationConfigurationInput{}

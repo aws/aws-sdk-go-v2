@@ -7,6 +7,78 @@ import (
 	"time"
 )
 
+// Options for filtering API keys.
+type ApiKeyFilter struct {
+
+	// Filter on Active or Expired API keys.
+	KeyStatus Status
+
+	noSmithyDocumentSerde
+}
+
+// API Restrictions on the allowed actions, resources, and referers for an API key
+// resource.
+type ApiKeyRestrictions struct {
+
+	// A list of allowed actions that an API key resource grants permissions to perform
+	// Currently, the only valid action is geo:GetMap* as an input to the list. For
+	// example, ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not.
+	//
+	// This member is required.
+	AllowActions []string
+
+	// A list of allowed resource ARNs that a API key bearer can perform actions on For
+	// more information about ARN format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). In
+	// this preview, you can allow only map resources. Requirements:
+	//
+	// * Must be
+	// prefixed with arn.
+	//
+	// * partition and service must not be empty and should begin
+	// with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric
+	// numbers, hyphens (-) and periods (.).
+	//
+	// * region and account-id can be empty or
+	// should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only
+	// alphanumeric numbers, hyphens (-) and periods (.).
+	//
+	// * resource-id can begin with
+	// any character except for forward slash (/) and contain any characters after,
+	// including forward slashes to form a path. resource-id can also include wildcard
+	// characters, denoted by an asterisk (*).
+	//
+	// * arn, partition, service, region,
+	// account-id and resource-id must be delimited by a colon (:).
+	//
+	// * No spaces
+	// allowed. For example, arn:aws:geo:region:account-id:map/ExampleMap*.
+	//
+	// This member is required.
+	AllowResources []string
+
+	// An optional list of allowed HTTP referers for which requests must originate
+	// from. Requests using this API key from other domains will not be allowed.
+	// Requirements:
+	//
+	// * Contain only alphanumeric characters (A–Z, a–z, 0–9) or any
+	// symbols in this list $\-._+!*`(),;/?:@=&
+	//
+	// * May contain a percent (%) if
+	// followed by 2 hexadecimal digits (A-F, a-f, 0-9); this is used for URL encoding
+	// purposes.
+	//
+	// * May contain wildcard characters question mark (?) and asterisk (*).
+	// Question mark (?) will replace any single character (including hexadecimal
+	// digits). Asterisk (*) will replace any multiple characters (including multiple
+	// hexadecimal digits).
+	//
+	// * No spaces allowed. For example, https://example.com.
+	AllowReferers []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the tracker resource details.
 type BatchDeleteDevicePositionHistoryError struct {
 
@@ -665,7 +737,49 @@ type ListGeofenceResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details of an existing map resource in your AWS account.
+// An API key resource listed in your Amazon Web Services account.
+type ListKeysResponseEntry struct {
+
+	// The timestamp of when the API key was created, in  ISO 8601
+	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The timestamp for when the API key resource will expire, in  ISO 8601
+	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// This member is required.
+	ExpireTime *time.Time
+
+	// The name of the API key resource.
+	//
+	// This member is required.
+	KeyName *string
+
+	// API Restrictions on the allowed actions, resources, and referers for an API key
+	// resource.
+	//
+	// This member is required.
+	Restrictions *ApiKeyRestrictions
+
+	// The timestamp of when the API key was last updated, in  ISO 8601
+	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The optional description for the API key resource.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details of an existing map resource in your Amazon Web Services
+// account.
 type ListMapsResponseEntry struct {
 
 	// The timestamp for when the map resource was created in ISO 8601
@@ -705,7 +819,7 @@ type ListMapsResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
-// A place index resource listed in your AWS account.
+// A place index resource listed in your Amazon Web Services account.
 type ListPlaceIndexesResponseEntry struct {
 
 	// The timestamp for when the place index resource was created in ISO 8601
@@ -756,7 +870,7 @@ type ListPlaceIndexesResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
-// A route calculator resource listed in your AWS account.
+// A route calculator resource listed in your Amazon Web Services account.
 type ListRouteCalculatorsResponseEntry struct {
 
 	// The name of the route calculator resource.

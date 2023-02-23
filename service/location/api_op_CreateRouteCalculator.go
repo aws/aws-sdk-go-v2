@@ -13,13 +13,13 @@ import (
 	"time"
 )
 
-// Creates a route calculator resource in your AWS account. You can send requests
-// to a route calculator resource to estimate travel time, distance, and get
-// directions. A route calculator sources traffic and road network data from your
-// chosen data provider. If your application is tracking or routing assets you use
-// in your business, such as delivery vehicles or employees, you must not use Esri
-// as your geolocation provider. See section 82 of the AWS service terms
-// (http://aws.amazon.com/service-terms) for more details.
+// Creates a route calculator resource in your Amazon Web Services account. You can
+// send requests to a route calculator resource to estimate travel time, distance,
+// and get directions. A route calculator sources traffic and road network data
+// from your chosen data provider. If your application is tracking or routing
+// assets you use in your business, such as delivery vehicles or employees, you
+// must not use Esri as your geolocation provider. See section 82 of the Amazon Web
+// Services service terms (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreateRouteCalculator(ctx context.Context, params *CreateRouteCalculatorInput, optFns ...func(*Options)) (*CreateRouteCalculatorOutput, error) {
 	if params == nil {
 		params = &CreateRouteCalculatorInput{}
@@ -127,7 +127,7 @@ type CreateRouteCalculatorInput struct {
 type CreateRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) for the route calculator resource. Use the ARN
-	// when you specify a resource across all AWS.
+	// when you specify a resource across all Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:route-calculator/ExampleCalculator

@@ -56,10 +56,10 @@ type ListAccountSettingsInput struct {
 	// purposes.
 	NextToken *string
 
-	// The ARN of the principal, which can be an IAM user, IAM role, or the root user.
-	// If this field is omitted, the account settings are listed only for the
-	// authenticated user. Federated users assume the account setting of the root user
-	// and can't have explicit account settings set for them.
+	// The ARN of the principal, which can be a user, role, or the root user. If this
+	// field is omitted, the account settings are listed only for the authenticated
+	// user. Federated users assume the account setting of the root user and can't have
+	// explicit account settings set for them.
 	PrincipalArn *string
 
 	// The value of the account settings to filter results with. You must also specify

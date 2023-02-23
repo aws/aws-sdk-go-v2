@@ -13,11 +13,11 @@ import (
 	"time"
 )
 
-// Creates a map resource in your AWS account, which provides map tiles of
-// different styles sourced from global location data providers. If your
+// Creates a map resource in your Amazon Web Services account, which provides map
+// tiles of different styles sourced from global location data providers. If your
 // application is tracking or routing assets you use in your business, such as
 // delivery vehicles or employees, you must not use Esri as your geolocation
-// provider. See section 82 of the AWS service terms
+// provider. See section 82 of the Amazon Web Services service terms
 // (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreateMap(ctx context.Context, params *CreateMapInput, optFns ...func(*Options)) (*CreateMapOutput, error) {
 	if params == nil {
@@ -100,9 +100,10 @@ type CreateMapOutput struct {
 	CreateTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the map resource. Used to specify a resource
-	// across all AWS.
+	// across all Amazon Web Services.
 	//
-	// * Format example: arn:aws:geo:region:account-id:map/ExampleMap
+	// * Format example:
+	// arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
 	MapArn *string

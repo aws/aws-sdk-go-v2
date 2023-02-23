@@ -37,6 +37,11 @@ type GetMapStyleDescriptorInput struct {
 	// This member is required.
 	MapName *string
 
+	// The optional API key
+	// (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	noSmithyDocumentSerde
 }
 
@@ -44,6 +49,9 @@ type GetMapStyleDescriptorOutput struct {
 
 	// Contains the body of the style descriptor.
 	Blob []byte
+
+	// The HTTP Cache-Control directive for the value.
+	CacheControl *string
 
 	// The style descriptor's content type. For example, application/json.
 	ContentType *string

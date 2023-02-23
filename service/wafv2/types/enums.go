@@ -1031,6 +1031,7 @@ const (
 	ResourceTypeApiGateway              ResourceType = "API_GATEWAY"
 	ResourceTypeAppsync                 ResourceType = "APPSYNC"
 	ResourceTypeCognitioUserPool        ResourceType = "COGNITO_USER_POOL"
+	ResourceTypeAppRunnerService        ResourceType = "APP_RUNNER_SERVICE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1042,6 +1043,7 @@ func (ResourceType) Values() []ResourceType {
 		"API_GATEWAY",
 		"APPSYNC",
 		"COGNITO_USER_POOL",
+		"APP_RUNNER_SERVICE",
 	}
 }
 

@@ -279,6 +279,21 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "clouddirectory.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "clouddirectory.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
 		},
 	},
 }

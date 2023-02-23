@@ -18,8 +18,8 @@ import (
 // administrator this action will enable GuardDuty in the added member accounts,
 // with the exception of the organization delegated administrator account, which
 // must enable GuardDuty prior to being added as a member. If you are adding
-// accounts by invitation use this action after GuardDuty has been enabled in
-// potential member accounts and before using Invite Members
+// accounts by invitation, use this action after GuardDuty has bee enabled in
+// potential member accounts and before using InviteMembers
 // (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html).
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {

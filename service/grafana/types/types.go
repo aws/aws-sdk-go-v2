@@ -357,7 +357,9 @@ type WorkspaceDescription struct {
 
 	// Specifies the Amazon Web Services data sources that have been configured to have
 	// IAM roles and permissions created to allow Amazon Managed Grafana to read data
-	// from these sources.
+	// from these sources. This list is only used when the workspace was created
+	// through the Amazon Web Services console, and the permissionType is
+	// SERVICE_MANAGED.
 	//
 	// This member is required.
 	DataSources []DataSourceType
@@ -432,16 +434,21 @@ type WorkspaceDescription struct {
 	// organization.
 	OrganizationalUnits []string
 
-	// If this is SERVICE_MANAGED, Amazon Managed Grafana automatically creates the IAM
-	// roles and provisions the permissions that the workspace needs to use Amazon Web
-	// Services data sources and notification channels. If this is CUSTOMER_MANAGED,
-	// you manage those roles and permissions yourself. If you are creating this
-	// workspace in a member account of an organization and that account is not a
-	// delegated administrator account, and you want the workspace to access data
-	// sources in other Amazon Web Services accounts in the organization, you must
-	// choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana
-	// permissions and policies for Amazon Web Services data sources and notification
-	// channels
+	// If this is SERVICE_MANAGED, and the workplace was created through the Amazon
+	// Managed Grafana console, then Amazon Managed Grafana automatically creates the
+	// IAM roles and provisions the permissions that the workspace needs to use Amazon
+	// Web Services data sources and notification channels. If this is
+	// CUSTOMER_MANAGED, you must manage those roles and permissions yourself. If you
+	// are working with a workspace in a member account of an organization and that
+	// account is not a delegated administrator account, and you want the workspace to
+	// access data sources in other Amazon Web Services accounts in the organization,
+	// this parameter must be set to CUSTOMER_MANAGED. For more information about
+	// converting between customer and service managed, see Managing permissions for
+	// data sources and notification channels
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html).
+	// For more information about the roles and permissions that must be managed for
+	// customer managed workspaces, see Amazon Managed Grafana permissions and policies
+	// for Amazon Web Services data sources and notification channels
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
 	PermissionType PermissionType
 

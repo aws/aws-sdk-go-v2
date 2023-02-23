@@ -47,6 +47,10 @@ type GetWebACLForResourceInput struct {
 	// Amazon Cognito user pool:
 	// arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
 	//
+	// * For an App Runner
+	// service:
+	// arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	//
 	// This member is required.
 	ResourceArn *string
 

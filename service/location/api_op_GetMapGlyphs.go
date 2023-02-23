@@ -96,13 +96,21 @@ type GetMapGlyphsInput struct {
 	// This member is required.
 	MapName *string
 
+	// The optional API key
+	// (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	noSmithyDocumentSerde
 }
 
 type GetMapGlyphsOutput struct {
 
-	// The blob's content type.
+	// The glyph, as binary blob.
 	Blob []byte
+
+	// The HTTP Cache-Control directive for the value.
+	CacheControl *string
 
 	// The map glyph content type. For example, application/octet-stream.
 	ContentType *string

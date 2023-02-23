@@ -88,11 +88,7 @@ type AWSManagedRulesATPRuleSet struct {
 	// this information, the rule group labels and mitigates requests from client
 	// sessions and IP addresses that submit too many failed login attempts in a short
 	// amount of time. Response inspection is available only in web ACLs that protect
-	// Amazon CloudFront distributions. For regional web ACLs in Region US East (N.
-	// Virginia) us-east-1, it's possible to configure response inspection through the
-	// APIs, but ATP response inspection will not be enabled. You can only use the
-	// response inspection capabilities of the ATP managed rule group in web ACLs that
-	// protect CloudFront distributions.
+	// Amazon CloudFront distributions.
 	ResponseInspection *ResponseInspection
 
 	noSmithyDocumentSerde
@@ -1414,9 +1410,9 @@ type LoggingConfiguration struct {
 	ManagedByFirewallManager bool
 
 	// The parts of the request that you want to keep out of the logs. For example, if
-	// you redact the SingleHeader field, the HEADER field in the logs will be xxx. You
-	// can specify only the following fields for redaction: UriPath, QueryString,
-	// SingleHeader, Method, and JsonBody.
+	// you redact the SingleHeader field, the HEADER field in the logs will be
+	// REDACTED. You can specify only the following fields for redaction: UriPath,
+	// QueryString, SingleHeader, Method, and JsonBody.
 	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
@@ -1456,14 +1452,10 @@ type ManagedRuleGroupConfig struct {
 	// rule group, AWSManagedRulesATPRuleSet. Use this to provide login request
 	// information to the rule group. For web ACLs that protect CloudFront
 	// distributions, use this to also provide the information about how your
-	// distribution responds to login requests. For regional web ACLs in Region US East
-	// (N. Virginia) us-east-1, it's possible to configure response inspection through
-	// the APIs, but ATP response inspection will not be enabled. You can only use the
-	// response inspection capabilities of the ATP managed rule group in web ACLs that
-	// protect CloudFront distributions. This configuration replaces the individual
-	// configuration fields in ManagedRuleGroupConfig and provides additional feature
-	// configuration. For information about using the ATP managed rule group, see WAF
-	// Fraud Control account takeover prevention (ATP) rule group
+	// distribution responds to login requests. This configuration replaces the
+	// individual configuration fields in ManagedRuleGroupConfig and provides
+	// additional feature configuration. For information about using the ATP managed
+	// rule group, see WAF Fraud Control account takeover prevention (ATP) rule group
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html)
 	// and WAF Fraud Control account takeover prevention (ATP)
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html) in the WAF
@@ -2155,24 +2147,22 @@ type RequestInspection struct {
 // this information, the rule group labels and mitigates requests from client
 // sessions and IP addresses that submit too many failed login attempts in a short
 // amount of time. Response inspection is available only in web ACLs that protect
-// Amazon CloudFront distributions. For regional web ACLs in Region US East (N.
-// Virginia) us-east-1, it's possible to configure response inspection through the
-// APIs, but ATP response inspection will not be enabled. You can only use the
-// response inspection capabilities of the ATP managed rule group in web ACLs that
-// protect CloudFront distributions. This is part of the AWSManagedRulesATPRuleSet
+// Amazon CloudFront distributions. This is part of the AWSManagedRulesATPRuleSet
 // configuration in ManagedRuleGroupConfig. Enable login response inspection by
 // configuring exactly one component of the response to inspect. You can't
 // configure more than one. If you don't configure any of the response inspection
 // options, response inspection is disabled.
 type ResponseInspection struct {
 
-	// Configures inspection of the response body.
+	// Configures inspection of the response body. WAF can inspect the first 65,536
+	// bytes (64 KB) of the response body.
 	BodyContains *ResponseInspectionBodyContains
 
 	// Configures inspection of the response header.
 	Header *ResponseInspectionHeader
 
-	// Configures inspection of the response JSON.
+	// Configures inspection of the response JSON. WAF can inspect the first 65,536
+	// bytes (64 KB) of the response JSON.
 	Json *ResponseInspectionJson
 
 	// Configures inspection of the response status code.
@@ -2181,14 +2171,10 @@ type ResponseInspection struct {
 	noSmithyDocumentSerde
 }
 
-// Configures inspection of the response body. This is part of the
-// ResponseInspection configuration for AWSManagedRulesATPRuleSet. Response
-// inspection is available only in web ACLs that protect Amazon CloudFront
-// distributions. For regional web ACLs in Region US East (N. Virginia) us-east-1,
-// it's possible to configure response inspection through the APIs, but ATP
-// response inspection will not be enabled. You can only use the response
-// inspection capabilities of the ATP managed rule group in web ACLs that protect
-// CloudFront distributions.
+// Configures inspection of the response body. WAF can inspect the first 65,536
+// bytes (64 KB) of the response body. This is part of the ResponseInspection
+// configuration for AWSManagedRulesATPRuleSet. Response inspection is available
+// only in web ACLs that protect Amazon CloudFront distributions.
 type ResponseInspectionBodyContains struct {
 
 	// Strings in the body of the response that indicate a failed login attempt. To be
@@ -2214,11 +2200,7 @@ type ResponseInspectionBodyContains struct {
 // Configures inspection of the response header. This is part of the
 // ResponseInspection configuration for AWSManagedRulesATPRuleSet. Response
 // inspection is available only in web ACLs that protect Amazon CloudFront
-// distributions. For regional web ACLs in Region US East (N. Virginia) us-east-1,
-// it's possible to configure response inspection through the APIs, but ATP
-// response inspection will not be enabled. You can only use the response
-// inspection capabilities of the ATP managed rule group in web ACLs that protect
-// CloudFront distributions.
+// distributions.
 type ResponseInspectionHeader struct {
 
 	// Values in the response header with the specified name that indicate a failed
@@ -2246,14 +2228,10 @@ type ResponseInspectionHeader struct {
 	noSmithyDocumentSerde
 }
 
-// Configures inspection of the response JSON. This is part of the
-// ResponseInspection configuration for AWSManagedRulesATPRuleSet. Response
-// inspection is available only in web ACLs that protect Amazon CloudFront
-// distributions. For regional web ACLs in Region US East (N. Virginia) us-east-1,
-// it's possible to configure response inspection through the APIs, but ATP
-// response inspection will not be enabled. You can only use the response
-// inspection capabilities of the ATP managed rule group in web ACLs that protect
-// CloudFront distributions.
+// Configures inspection of the response JSON. WAF can inspect the first 65,536
+// bytes (64 KB) of the response JSON. This is part of the ResponseInspection
+// configuration for AWSManagedRulesATPRuleSet. Response inspection is available
+// only in web ACLs that protect Amazon CloudFront distributions.
 type ResponseInspectionJson struct {
 
 	// Values for the specified identifier in the response JSON that indicate a failed
@@ -2285,11 +2263,7 @@ type ResponseInspectionJson struct {
 // Configures inspection of the response status code. This is part of the
 // ResponseInspection configuration for AWSManagedRulesATPRuleSet. Response
 // inspection is available only in web ACLs that protect Amazon CloudFront
-// distributions. For regional web ACLs in Region US East (N. Virginia) us-east-1,
-// it's possible to configure response inspection through the APIs, but ATP
-// response inspection will not be enabled. You can only use the response
-// inspection capabilities of the ATP managed rule group in web ACLs that protect
-// CloudFront distributions.
+// distributions.
 type ResponseInspectionStatusCode struct {
 
 	// Status codes in the response that indicate a failed login attempt. To be counted
@@ -3219,7 +3193,7 @@ type VisibilityConfig struct {
 // and managed rule group. You can associate a web ACL with one or more Amazon Web
 // Services resources to protect. The resources can be an Amazon CloudFront
 // distribution, an Amazon API Gateway REST API, an Application Load Balancer, an
-// AppSync GraphQL API, or an Amazon Cognito user pool.
+// AppSync GraphQL API, Amazon Cognito user pool, or an App Runner service.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with

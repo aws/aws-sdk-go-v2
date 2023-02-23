@@ -54,6 +54,11 @@ type GetMapSpritesInput struct {
 	// This member is required.
 	MapName *string
 
+	// The optional API key
+	// (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	noSmithyDocumentSerde
 }
 
@@ -61,6 +66,9 @@ type GetMapSpritesOutput struct {
 
 	// Contains the body of the sprite sheet or JSON offset ﬁle.
 	Blob []byte
+
+	// The HTTP Cache-Control directive for the value.
+	CacheControl *string
 
 	// The content type of the sprite sheet and offsets. For example, the sprite sheet
 	// content type is image/png, and the sprite offset JSON document is

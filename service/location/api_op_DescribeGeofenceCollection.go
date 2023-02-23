@@ -42,9 +42,10 @@ type DescribeGeofenceCollectionInput struct {
 type DescribeGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
-	// you need to specify a resource across all AWS.
+	// you need to specify a resource across all Amazon Web Services.
 	//
-	// * Format example:
+	// * Format
+	// example:
 	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
 	// This member is required.
@@ -74,7 +75,7 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// A key identifier for an AWS KMS customer managed key
+	// A key identifier for an Amazon Web Services KMS customer managed key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// assigned to the Amazon Location resource
 	KmsKeyId *string

@@ -57,20 +57,28 @@ type UpdateWorkspaceInput struct {
 	NetworkAccessControl *types.NetworkAccessConfiguration
 
 	// The name of an IAM role that already exists to use to access resources through
-	// Organizations.
+	// Organizations. This can only be used with a workspace that has the
+	// permissionType set to CUSTOMER_MANAGED.
 	OrganizationRoleName *string
 
-	// If you specify SERVICE_MANAGED, Amazon Managed Grafana automatically creates the
-	// IAM roles and provisions the permissions that the workspace needs to use Amazon
-	// Web Services data sources and notification channels. If you specify
-	// CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you
-	// are creating this workspace in a member account of an organization and that
-	// account is not a delegated administrator account, and you want the workspace to
-	// access data sources in other Amazon Web Services accounts in the organization,
-	// you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed
-	// Grafana permissions and policies for Amazon Web Services data sources and
-	// notification channels
+	// Use this parameter if you want to change a workspace from SERVICE_MANAGED to
+	// CUSTOMER_MANAGED. This allows you to manage the permissions that the workspace
+	// uses to access datasources and notification channels. If the workspace is in a
+	// member Amazon Web Services account of an organization, and that account is not a
+	// delegated administrator account, and you want the workspace to access data
+	// sources in other Amazon Web Services accounts in the organization, you must
+	// choose CUSTOMER_MANAGED. If you specify this as CUSTOMER_MANAGED, you must also
+	// specify a workspaceRoleArn that the workspace will use for accessing Amazon Web
+	// Services resources. For more information on the role and permissions needed, see
+	// Amazon Managed Grafana permissions and policies for Amazon Web Services data
+	// sources and notification channels
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
+	// Do not use this to convert a CUSTOMER_MANAGED workspace to SERVICE_MANAGED. Do
+	// not include this parameter if you want to leave the workspace as
+	// SERVICE_MANAGED. You can convert a CUSTOMER_MANAGED workspace to SERVICE_MANAGED
+	// using the Amazon Managed Grafana console. For more information, see Managing
+	// permissions for data sources and notification channels
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html).
 	PermissionType types.PermissionType
 
 	// Whether to remove the network access configuration from the workspace. Setting
@@ -92,13 +100,7 @@ type UpdateWorkspaceInput struct {
 	// Grafana workspace to connect to.
 	VpcConfiguration *types.VpcConfiguration
 
-	// Specify the Amazon Web Services data sources that you want to be queried in this
-	// workspace. Specifying these data sources here enables Amazon Managed Grafana to
-	// create IAM roles and permissions that allow Amazon Managed Grafana to read data
-	// from these sources. You must still add them as data sources in the Grafana
-	// console in the workspace. If you don't specify a data source here, you can still
-	// add it as a data source later in the workspace console. However, you will then
-	// have to manually configure permissions for it.
+	// This parameter is for internal use only, and should not be used.
 	WorkspaceDataSources []types.DataSourceType
 
 	// A description for the workspace. This is used only to help you identify this
@@ -119,12 +121,9 @@ type UpdateWorkspaceInput struct {
 	// organization.
 	WorkspaceOrganizationalUnits []string
 
-	// The workspace needs an IAM role that grants permissions to the Amazon Web
-	// Services resources that the workspace will view data from. If you already have a
-	// role that you want to use, specify it here. If you omit this field and you
-	// specify some Amazon Web Services resources in workspaceDataSources or
-	// workspaceNotificationDestinations, a new IAM role with the necessary permissions
-	// is automatically created.
+	// Specifies an IAM role that grants permissions to Amazon Web Services resources
+	// that the workspace accesses, such as data sources and notification channels. If
+	// this workspace has permissionTypeCUSTOMER_MANAGED, then this role is required.
 	WorkspaceRoleArn *string
 
 	noSmithyDocumentSerde

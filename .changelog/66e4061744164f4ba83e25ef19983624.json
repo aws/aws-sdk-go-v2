@@ -1,0 +1,8 @@
+{
+    "id": "66e40617-4416-4f4b-a83e-25ef19983624",
+    "type": "feature",
+    "description": "This release enables the customers to choose whether to use Private Link for Metadata and Authorization call when using a private Salesforce connections",
+    "modules": [
+        "service/appflow"
+    ]
+}

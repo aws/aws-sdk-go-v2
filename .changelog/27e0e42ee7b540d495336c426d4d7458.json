@@ -1,0 +1,8 @@
+{
+    "id": "27e0e42e-e7b5-40d4-9533-6c426d4d7458",
+    "type": "feature",
+    "description": "In this release, we add additional capabilities for the FUOTA which allows user to configure the fragment size, the sending interval and the redundancy ratio of the FUOTA tasks",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

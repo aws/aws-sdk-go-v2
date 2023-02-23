@@ -210,6 +210,26 @@ func (m *validateOpCreateGeofenceCollection) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateKey struct {
+}
+
+func (*validateOpCreateKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMap struct {
 }
 
@@ -310,6 +330,26 @@ func (m *validateOpDeleteGeofenceCollection) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteKey struct {
+}
+
+func (*validateOpDeleteKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMap struct {
 }
 
@@ -405,6 +445,26 @@ func (m *validateOpDescribeGeofenceCollection) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeGeofenceCollectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeKey struct {
+}
+
+func (*validateOpDescribeKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +950,26 @@ func (m *validateOpUpdateGeofenceCollection) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKey struct {
+}
+
+func (*validateOpUpdateKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMap struct {
 }
 
@@ -1010,6 +1090,10 @@ func addOpCreateGeofenceCollectionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateGeofenceCollection{}, middleware.After)
 }
 
+func addOpCreateKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKey{}, middleware.After)
+}
+
 func addOpCreateMapValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMap{}, middleware.After)
 }
@@ -1030,6 +1114,10 @@ func addOpDeleteGeofenceCollectionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteGeofenceCollection{}, middleware.After)
 }
 
+func addOpDeleteKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKey{}, middleware.After)
+}
+
 func addOpDeleteMapValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMap{}, middleware.After)
 }
@@ -1048,6 +1136,10 @@ func addOpDeleteTrackerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeGeofenceCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGeofenceCollection{}, middleware.After)
+}
+
+func addOpDescribeKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeKey{}, middleware.After)
 }
 
 func addOpDescribeMapValidationMiddleware(stack *middleware.Stack) error {
@@ -1146,6 +1238,10 @@ func addOpUpdateGeofenceCollectionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpUpdateGeofenceCollection{}, middleware.After)
 }
 
+func addOpUpdateKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKey{}, middleware.After)
+}
+
 func addOpUpdateMapValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMap{}, middleware.After)
 }
@@ -1160,6 +1256,24 @@ func addOpUpdateRouteCalculatorValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateTrackerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTracker{}, middleware.After)
+}
+
+func validateApiKeyRestrictions(v *types.ApiKeyRestrictions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApiKeyRestrictions"}
+	if v.AllowActions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowActions"))
+	}
+	if v.AllowResources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowResources"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBatchPutGeofenceRequestEntry(v *types.BatchPutGeofenceRequestEntry) error {
@@ -1504,6 +1618,28 @@ func validateOpCreateGeofenceCollectionInput(v *CreateGeofenceCollectionInput) e
 	}
 }
 
+func validateOpCreateKeyInput(v *CreateKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKeyInput"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.Restrictions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Restrictions"))
+	} else if v.Restrictions != nil {
+		if err := validateApiKeyRestrictions(v.Restrictions); err != nil {
+			invalidParams.AddNested("Restrictions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMapInput(v *CreateMapInput) error {
 	if v == nil {
 		return nil
@@ -1592,6 +1728,21 @@ func validateOpDeleteGeofenceCollectionInput(v *DeleteGeofenceCollectionInput) e
 	}
 }
 
+func validateOpDeleteKeyInput(v *DeleteKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKeyInput"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMapInput(v *DeleteMapInput) error {
 	if v == nil {
 		return nil
@@ -1659,6 +1810,21 @@ func validateOpDescribeGeofenceCollectionInput(v *DescribeGeofenceCollectionInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeGeofenceCollectionInput"}
 	if v.CollectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeKeyInput(v *DescribeKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeKeyInput"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2077,6 +2243,26 @@ func validateOpUpdateGeofenceCollectionInput(v *UpdateGeofenceCollectionInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGeofenceCollectionInput"}
 	if v.CollectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateKeyInput(v *UpdateKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKeyInput"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.Restrictions != nil {
+		if err := validateApiKeyRestrictions(v.Restrictions); err != nil {
+			invalidParams.AddNested("Restrictions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

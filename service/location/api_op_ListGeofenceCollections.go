@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists geofence collections in your AWS account.
+// Lists geofence collections in your Amazon Web Services account.
 func (c *Client) ListGeofenceCollections(ctx context.Context, params *ListGeofenceCollectionsInput, optFns ...func(*Options)) (*ListGeofenceCollectionsOutput, error) {
 	if params == nil {
 		params = &ListGeofenceCollectionsInput{}
@@ -43,7 +43,7 @@ type ListGeofenceCollectionsInput struct {
 
 type ListGeofenceCollectionsOutput struct {
 
-	// Lists the geofence collections that exist in your AWS account.
+	// Lists the geofence collections that exist in your Amazon Web Services account.
 	//
 	// This member is required.
 	Entries []types.ListGeofenceCollectionsResponseEntry

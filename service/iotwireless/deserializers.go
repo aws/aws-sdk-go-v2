@@ -5181,6 +5181,32 @@ func awsRestjson1_deserializeOpDocumentGetFuotaTaskOutput(v **GetFuotaTaskOutput
 				sv.FirmwareUpdateRole = ptr.String(jtv)
 			}
 
+		case "FragmentIntervalMS":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FragmentIntervalMS to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FragmentIntervalMS = ptr.Int32(int32(i64))
+			}
+
+		case "FragmentSizeBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FragmentSizeBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FragmentSizeBytes = ptr.Int32(int32(i64))
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5202,6 +5228,19 @@ func awsRestjson1_deserializeOpDocumentGetFuotaTaskOutput(v **GetFuotaTaskOutput
 					return fmt.Errorf("expected FuotaTaskName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "RedundancyPercent":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RedundancyPercent to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RedundancyPercent = ptr.Int32(int32(i64))
 			}
 
 		case "Status":

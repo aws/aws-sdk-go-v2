@@ -909,6 +909,16 @@ func awsRestjson1_serializeOpDocumentCreateFuotaTaskInput(v *CreateFuotaTaskInpu
 		ok.String(*v.FirmwareUpdateRole)
 	}
 
+	if v.FragmentIntervalMS != nil {
+		ok := object.Key("FragmentIntervalMS")
+		ok.Integer(*v.FragmentIntervalMS)
+	}
+
+	if v.FragmentSizeBytes != nil {
+		ok := object.Key("FragmentSizeBytes")
+		ok.Integer(*v.FragmentSizeBytes)
+	}
+
 	if v.LoRaWAN != nil {
 		ok := object.Key("LoRaWAN")
 		if err := awsRestjson1_serializeDocumentLoRaWANFuotaTask(v.LoRaWAN, ok); err != nil {
@@ -919,6 +929,11 @@ func awsRestjson1_serializeOpDocumentCreateFuotaTaskInput(v *CreateFuotaTaskInpu
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.RedundancyPercent != nil {
+		ok := object.Key("RedundancyPercent")
+		ok.Integer(*v.RedundancyPercent)
 	}
 
 	if v.Tags != nil {
@@ -6357,6 +6372,16 @@ func awsRestjson1_serializeOpDocumentUpdateFuotaTaskInput(v *UpdateFuotaTaskInpu
 		ok.String(*v.FirmwareUpdateRole)
 	}
 
+	if v.FragmentIntervalMS != nil {
+		ok := object.Key("FragmentIntervalMS")
+		ok.Integer(*v.FragmentIntervalMS)
+	}
+
+	if v.FragmentSizeBytes != nil {
+		ok := object.Key("FragmentSizeBytes")
+		ok.Integer(*v.FragmentSizeBytes)
+	}
+
 	if v.LoRaWAN != nil {
 		ok := object.Key("LoRaWAN")
 		if err := awsRestjson1_serializeDocumentLoRaWANFuotaTask(v.LoRaWAN, ok); err != nil {
@@ -6367,6 +6392,11 @@ func awsRestjson1_serializeOpDocumentUpdateFuotaTaskInput(v *UpdateFuotaTaskInpu
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.RedundancyPercent != nil {
+		ok := object.Key("RedundancyPercent")
+		ok.Integer(*v.RedundancyPercent)
 	}
 
 	return nil

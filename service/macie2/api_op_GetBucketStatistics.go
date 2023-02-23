@@ -42,8 +42,8 @@ type GetBucketStatisticsOutput struct {
 	// The total number of buckets.
 	BucketCount int64
 
-	// The total number of buckets that are publicly accessible based on a combination
-	// of permissions settings for each bucket.
+	// The total number of buckets that are publicly accessible due to a combination of
+	// permissions settings for each bucket.
 	BucketCountByEffectivePermission *types.BucketCountByEffectivePermission
 
 	// The total number of buckets that use certain types of server-side encryption to
@@ -55,8 +55,9 @@ type GetBucketStatisticsOutput struct {
 	// server-side encryption of objects when objects are uploaded to the buckets.
 	BucketCountByObjectEncryptionRequirement *types.BucketCountPolicyAllowsUnencryptedObjectUploads
 
-	// The total number of buckets that are or aren't shared with another Amazon Web
-	// Services account.
+	// The total number of buckets that are or aren't shared with other Amazon Web
+	// Services accounts, Amazon CloudFront origin access identities (OAIs), or
+	// CloudFront origin access controls (OACs).
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
 	// The aggregated sensitive data discovery statistics for the buckets. If automated
@@ -78,8 +79,7 @@ type GetBucketStatisticsOutput struct {
 	ClassifiableSizeInBytes int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently retrieved both bucket and object metadata from Amazon S3 for the
-	// buckets.
+	// recently retrieved bucket or object metadata from Amazon S3 for the buckets.
 	LastUpdated *time.Time
 
 	// The total number of objects in the buckets.
