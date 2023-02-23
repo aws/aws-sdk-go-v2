@@ -48,7 +48,7 @@
                 "ResponseInspection": {
                     "target": "com.amazonaws.wafv2#ResponseInspection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
                     }
                 }
             },
@@ -232,7 +232,7 @@
                     "name": "wafv2"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to an Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync\n      GraphQL API, or Amazon Cognito user pool. WAF also lets you control access to your content,\n      to protect the Amazon Web Services resource that WAF is monitoring. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the protected resource responds to requests with either the requested content, an HTTP 403 status code\n         (Forbidden), or with a custom response. </p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and guidance for configuring and using \n         WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to an Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync\n      GraphQL API, Amazon Cognito user pool, or App Runner service. WAF also lets you control access to your content,\n      to protect the Amazon Web Services resource that WAF is monitoring. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the protected resource responds to requests with either the requested content, an HTTP 403 status code\n         (Forbidden), or with a custom response. </p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and guidance for configuring and using \n         WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS WAFV2",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
@@ -1091,9 +1091,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1104,9 +1104,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1117,9 +1117,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1130,9 +1130,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1143,9 +1143,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1156,9 +1156,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1169,9 +1169,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1182,9 +1182,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1195,9 +1195,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1208,9 +1208,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1221,9 +1221,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1234,9 +1234,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1247,9 +1247,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1260,9 +1260,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1273,9 +1273,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1286,9 +1286,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1299,9 +1299,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -1312,9 +1312,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -1325,9 +1325,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1338,9 +1338,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1351,9 +1351,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1364,9 +1364,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1377,9 +1377,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1390,9 +1390,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1403,9 +1403,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1416,9 +1416,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1429,9 +1429,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1442,9 +1442,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1455,9 +1455,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1468,9 +1468,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1481,9 +1481,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1494,9 +1494,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1507,9 +1507,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1520,9 +1520,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1533,9 +1533,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1546,9 +1546,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1559,9 +1559,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1572,9 +1572,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1585,9 +1585,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -1598,9 +1598,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -1611,9 +1611,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1624,9 +1624,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1637,9 +1637,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1650,9 +1650,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1663,9 +1663,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1676,9 +1676,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1689,9 +1689,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1702,9 +1702,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1715,9 +1715,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -1728,9 +1728,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -1741,9 +1741,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1754,9 +1754,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1767,9 +1767,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1780,9 +1780,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1793,9 +1793,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -1806,9 +1806,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -1819,9 +1819,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1832,9 +1832,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1845,9 +1845,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1858,9 +1858,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1871,9 +1871,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1884,9 +1884,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1897,9 +1897,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1922,9 +1922,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1934,9 +1934,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2073,7 +2073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a web ACL with a regional application resource, to protect the resource.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         associate a web ACL, in the CloudFront call <code>UpdateDistribution</code>, set the web ACL ID\n         to the Amazon Resource Name (ARN) of the web ACL. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>\n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
+                "smithy.api#documentation": "<p>Associates a web ACL with a regional application resource, to protect the resource.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         associate a web ACL, in the CloudFront call <code>UpdateDistribution</code>, set the web ACL ID\n         to the Amazon Resource Name (ARN) of the web ACL. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>\n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
             }
         },
         "com.amazonaws.wafv2#AssociateWebACLRequest": {
@@ -2089,7 +2089,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to associate with the web ACL. </p>\n         <p>The ARN must be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon API Gateway REST API: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AppSync GraphQL API: <code>arn:aws:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon Cognito user pool: <code>arn:aws:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to associate with the web ACL. </p>\n         <p>The ARN must be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon API Gateway REST API: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AppSync GraphQL API: <code>arn:aws:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon Cognito user pool: <code>arn:aws:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an App Runner service: <code>arn:aws:apprunner:<i>region</i>:<i>account-id</i>:service/<i>apprunner-service-name</i>/<i>apprunner-service-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2362,7 +2362,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4125,7 +4125,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4225,7 +4225,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4327,7 +4327,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4442,7 +4442,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <a>WebACL</a> per the specifications provided.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>"
+                "smithy.api#documentation": "<p>Creates a <a>WebACL</a> per the specifications provided.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner service.  </p>"
             }
         },
         "com.amazonaws.wafv2#CreateWebACLRequest": {
@@ -4458,7 +4458,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4804,7 +4804,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4981,7 +4981,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5062,7 +5062,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5143,7 +5143,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5225,7 +5225,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5314,7 +5314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the specified regional application resource from any existing web ACL\n         association. A resource can have at most one web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         disassociate a web ACL, provide an empty web ACL ID in the CloudFront call\n            <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified regional application resource from any existing web ACL\n         association. A resource can have at most one web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         disassociate a web ACL, provide an empty web ACL ID in the CloudFront call\n            <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>"
             }
         },
         "com.amazonaws.wafv2#DisassociateWebACLRequest": {
@@ -5323,7 +5323,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL. </p>\n         <p>The ARN must be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon API Gateway REST API: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AppSync GraphQL API: <code>arn:aws:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon Cognito user pool: <code>arn:aws:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL. </p>\n         <p>The ARN must be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon API Gateway REST API: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AppSync GraphQL API: <code>arn:aws:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon Cognito user pool: <code>arn:aws:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an App Runner service: <code>arn:aws:apprunner:<i>region</i>:<i>account-id</i>:service/<i>apprunner-service-name</i>/<i>apprunner-service-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5879,7 +5879,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6009,7 +6009,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6191,7 +6191,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6286,7 +6286,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6360,7 +6360,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -6443,7 +6443,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6555,7 +6555,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve. </p>\n         <p>The ARN must be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon API Gateway REST API: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AppSync GraphQL API: <code>arn:aws:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon Cognito user pool: <code>arn:aws:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve. </p>\n         <p>The ARN must be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon API Gateway REST API: <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AppSync GraphQL API: <code>arn:aws:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon Cognito user pool: <code>arn:aws:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an App Runner service: <code>arn:aws:apprunner:<i>region</i>:<i>account-id</i>:service/<i>apprunner-service-name</i>/<i>apprunner-service-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6591,7 +6591,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7252,7 +7252,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7328,7 +7328,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7398,7 +7398,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7468,7 +7468,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7538,7 +7538,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7688,7 +7688,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7768,7 +7768,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.wafv2#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used for web ACLs that are scoped for regional applications.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. </p>\n         <note>\n            <p>If you don't provide a resource type, the call uses the resource type <code>APPLICATION_LOAD_BALANCER</code>. </p>\n         </note>\n         <p>Default: <code>APPLICATION_LOAD_BALANCER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Used for web ACLs that are scoped for regional applications.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service. </p>\n         <note>\n            <p>If you don't provide a resource type, the call uses the resource type <code>APPLICATION_LOAD_BALANCER</code>. </p>\n         </note>\n         <p>Default: <code>APPLICATION_LOAD_BALANCER</code>\n         </p>"
                     }
                 }
             },
@@ -7819,7 +7819,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7968,7 +7968,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8051,7 +8051,7 @@
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>xxx</code>. </p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n               <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and\n               <code>JsonBody</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code>. </p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n               <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and\n               <code>JsonBody</code>.</p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -8158,7 +8158,7 @@
                 "AWSManagedRulesATPRuleSet": {
                     "target": "com.amazonaws.wafv2#AWSManagedRulesATPRuleSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration for using the account takeover prevention (ATP) managed rule group, <code>AWSManagedRulesATPRuleSet</code>. \n       Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide\n           the information about how your distribution responds to login requests. </p>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>\n         <p>This configuration replaces the individual configuration fields in <code>ManagedRuleGroupConfig</code> and provides additional feature configuration. </p>\n         <p>For information \n       about using the ATP managed rule group, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html\">WAF Fraud Control account takeover prevention (ATP) rule group</a> \n               and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html\">WAF Fraud Control account takeover prevention (ATP)</a>\n               in the <i>WAF Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Additional configuration for using the account takeover prevention (ATP) managed rule group, <code>AWSManagedRulesATPRuleSet</code>. \n       Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide\n           the information about how your distribution responds to login requests. </p>\n         <p>This configuration replaces the individual configuration fields in <code>ManagedRuleGroupConfig</code> and provides additional feature configuration. </p>\n         <p>For information \n       about using the ATP managed rule group, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html\">WAF Fraud Control account takeover prevention (ATP) rule group</a> \n               and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html\">WAF Fraud Control account takeover prevention (ATP)</a>\n               in the <i>WAF Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -9238,7 +9238,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9713,6 +9713,12 @@
                     "traits": {
                         "smithy.api#enumValue": "COGNITO_USER_POOL"
                     }
+                },
+                "APP_RUNNER_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APP_RUNNER_SERVICE"
+                    }
                 }
             }
         },
@@ -9770,18 +9776,18 @@
                 "BodyContains": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionBodyContains",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures inspection of the response body.  </p>"
+                        "smithy.api#documentation": "<p>Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. </p>"
                     }
                 },
                 "Json": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures inspection of the response JSON. </p>"
+                        "smithy.api#documentation": "<p>Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>Enable login response inspection by configuring exactly one component of the response to inspect. You can't configure more than one. If you don't configure any of the response inspection options, response inspection is disabled. </p>"
+                "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>Enable login response inspection by configuring exactly one component of the response to inspect. You can't configure more than one. If you don't configure any of the response inspection options, response inspection is disabled. </p>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionBodyContains": {
@@ -9803,7 +9809,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response body. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionBodyContainsFailureStrings": {
@@ -9856,7 +9862,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response header. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response header. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionHeaderFailureValues": {
@@ -9919,7 +9925,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response JSON. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionJsonFailureValues": {
@@ -9965,7 +9971,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response status code. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <note>\n            <p>For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response status code. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionStatusCodeFailureCodes": {
@@ -11198,7 +11204,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11290,7 +11296,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11401,7 +11407,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11508,7 +11514,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11617,7 +11623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. </p>\n            <p>To modify a web ACL, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetWebACL</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete web ACL specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>"
+                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. </p>\n            <p>To modify a web ACL, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetWebACL</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete web ACL specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner service.  </p>"
             }
         },
         "com.amazonaws.wafv2#UpdateWebACLRequest": {
@@ -11633,7 +11639,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12164,7 +12170,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, or an Amazon Cognito user pool.  </p>"
+                "smithy.api#documentation": "<p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner service.  </p>"
             }
         },
         "com.amazonaws.wafv2#WebACLSummaries": {

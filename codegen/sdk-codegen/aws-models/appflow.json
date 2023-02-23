@@ -2010,7 +2010,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new connector profile associated with your Amazon Web Services account. There\n      is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more\n      connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you\n      create, you can provide the credentials and properties for only one connector.</p>",
+                "smithy.api#documentation": "<p> Creates a new connector profile associated with your Amazon Web Services account. There is\n      a soft quota of 100 connector profiles per Amazon Web Services account. If you need more\n      connector profiles than this quota allows, you can submit a request to the Amazon AppFlow\n      team through the Amazon AppFlow support channel. In each connector profile that you\n      create, you can provide the credentials and properties for only one connector.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-connector-profile",
@@ -2061,6 +2061,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#CreateConnectorProfileResponse": {
@@ -2072,6 +2075,9 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the connector profile. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#CreateFlow": {
@@ -2160,7 +2166,7 @@
                 "tasks": {
                     "target": "com.amazonaws.appflow#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the\n      flow run. </p>",
+                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the flow\n      run. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2173,9 +2179,12 @@
                 "metadataCatalogConfig": {
                     "target": "com.amazonaws.appflow#MetadataCatalogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data\n      that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a\n      flow, it stores metadata in a data catalog.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's\n      transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it\n      stores metadata in a data catalog.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#CreateFlowResponse": {
@@ -2193,6 +2202,9 @@
                         "smithy.api#documentation": "<p> Indicates the current status of the flow. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#CreatedBy": {
@@ -2737,11 +2749,17 @@
                         "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the profile, even if it is currently\n      in use in one or more flows. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DeleteConnectorProfileResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appflow#DeleteFlow": {
             "type": "operation",
@@ -2788,11 +2806,17 @@
                         "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the flow, even if it is currently in\n      use. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DeleteFlowResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appflow#DescribeConnector": {
             "type": "operation",
@@ -2884,6 +2908,9 @@
                         "smithy.api#documentation": "<p>The version of the API that's used by the connector.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectorEntityResponse": {
@@ -2896,6 +2923,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectorProfiles": {
@@ -2961,6 +2991,9 @@
                         "smithy.api#documentation": "<p> The pagination token for the next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectorProfilesResponse": {
@@ -2978,6 +3011,9 @@
                         "smithy.api#documentation": "<p> The pagination token for the next page of data. If <code>nextToken=null</code>, this\n      means that all records have been fetched. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectorRequest": {
@@ -2996,6 +3032,9 @@
                         "smithy.api#documentation": "<p>The label of the connector. The label is unique for each\n        <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if\n      calling for CUSTOMCONNECTOR connector type/.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectorResponse": {
@@ -3007,6 +3046,9 @@
                         "smithy.api#documentation": "<p>Configuration info of all the connectors that the user requested.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectors": {
@@ -3060,6 +3102,9 @@
                         "smithy.api#documentation": "<p> The pagination token for the next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DescribeConnectorsResponse": {
@@ -3083,6 +3128,9 @@
                         "smithy.api#documentation": "<p> The pagination token for the next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#DescribeFlow": {
@@ -3165,6 +3213,9 @@
                         "smithy.api#documentation": "<p> The pagination token for the next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DescribeFlowExecutionRecordsResponse": {
@@ -3182,6 +3233,9 @@
                         "smithy.api#documentation": "<p> The pagination token for the next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#DescribeFlowRequest": {
@@ -3194,6 +3248,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#DescribeFlowResponse": {
@@ -3244,7 +3301,7 @@
                 "destinationFlowConfigList": {
                     "target": "com.amazonaws.appflow#DestinationFlowConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the\n      destination connector. </p>"
+                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the destination\n      connector. </p>"
                     }
                 },
                 "lastRunExecutionDetails": {
@@ -3262,7 +3319,7 @@
                 "tasks": {
                     "target": "com.amazonaws.appflow#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the\n      flow run. </p>"
+                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the flow\n      run. </p>"
                     }
                 },
                 "createdAt": {
@@ -3298,7 +3355,7 @@
                 "metadataCatalogConfig": {
                     "target": "com.amazonaws.appflow#MetadataCatalogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data\n      that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a\n      flow, it stores metadata in a data catalog.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's\n      transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it\n      stores metadata in a data catalog.</p>"
                     }
                 },
                 "lastRunMetadataCatalogDetails": {
@@ -3313,6 +3370,9 @@
                         "smithy.api#documentation": "<p>The version number of your data schema. Amazon AppFlow assigns this version number.\n      The version number increases by one when you change any of the following settings in your flow\n      configuration:</p>\n         <ul>\n            <li>\n               <p>Source-to-destination field mappings</p>\n            </li>\n            <li>\n               <p>Field data types</p>\n            </li>\n            <li>\n               <p>Partition keys</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#Description": {
@@ -3727,7 +3787,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the destination. For example, this setting would determine if the flow should fail after\n      one insertion error, or continue and attempt to insert every record regardless of the initial\n      failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.\n    </p>"
+                "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in\n      the destination. For example, this setting would determine if the flow should fail after one\n      insertion error, or continue and attempt to insert every record regardless of the initial\n      failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.\n    </p>"
             }
         },
         "com.amazonaws.appflow#ErrorInfo": {
@@ -4240,7 +4300,7 @@
                 "databaseName": {
                     "target": "com.amazonaws.appflow#GlueDataCatalogDatabaseName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Data Catalog database that stores the metadata tables that\n        Amazon AppFlow creates in your Amazon Web Services account. These tables contain\n      metadata for the data that's transferred by the flow that you configure with this\n      parameter.</p>\n         <note>\n            <p>When you configure a new flow with this parameter, you must specify an existing\n        database.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the Data Catalog database that stores the metadata tables that Amazon AppFlow creates in your Amazon Web Services account. These tables contain metadata for\n      the data that's transferred by the flow that you configure with this parameter.</p>\n         <note>\n            <p>When you configure a new flow with this parameter, you must specify an existing\n        database.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4253,7 +4313,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data with\n      the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores\n      metadata in Data Catalog tables. This metadata represents the data that's transferred\n      by the flow that you configure with these settings.</p>\n         <note>\n            <p>You can configure a flow with these settings only when the flow destination is Amazon S3.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data with\n      the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores metadata\n      in Data Catalog tables. This metadata represents the data that's transferred by the\n      flow that you configure with these settings.</p>\n         <note>\n            <p>You can configure a flow with these settings only when the flow destination is Amazon S3.</p>\n         </note>"
             }
         },
         "com.amazonaws.appflow#GlueDataCatalogDatabaseName": {
@@ -4799,6 +4859,9 @@
                         "smithy.api#documentation": "<p>A token that was provided by your prior <code>ListConnectorEntities</code> operation if\n      the response was too big for the page size. You specify this token to get the next page of\n      results in paginated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#ListConnectorEntitiesResponse": {
@@ -4817,6 +4880,9 @@
                         "smithy.api#documentation": "<p>A token that you specify in your next <code>ListConnectorEntities</code> operation to get\n      the next page of results in paginated response. The <code>ListConnectorEntities</code>\n      operation provides this token if the response is too big for the page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#ListConnectors": {
@@ -4864,6 +4930,9 @@
                         "smithy.api#documentation": "<p>The pagination token for the next page of data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#ListConnectorsResponse": {
@@ -4881,6 +4950,9 @@
                         "smithy.api#documentation": "<p>The pagination token for the next page of data. If nextToken=null, this means that all\n      records have been fetched.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#ListEntitiesMaxResults": {
@@ -4937,6 +5009,9 @@
                         "smithy.api#documentation": "<p> The pagination token for next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#ListFlowsResponse": {
@@ -4954,6 +5029,9 @@
                         "smithy.api#documentation": "<p> The pagination token for next page of data. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#ListTagsForResource": {
@@ -4995,6 +5073,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#ListTagsForResourceResponse": {
@@ -5006,6 +5087,9 @@
                         "smithy.api#documentation": "<p> The tags used to organize, track, or control access for your flow. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#LogoURL": {
@@ -5248,7 +5332,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data.\n      When Amazon AppFlow catalogs your data, it stores metadata in a data catalog.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data. When\n        Amazon AppFlow catalogs your data, it stores metadata in a data catalog.</p>"
             }
         },
         "com.amazonaws.appflow#MetadataCatalogDetail": {
@@ -5257,13 +5341,13 @@
                 "catalogType": {
                     "target": "com.amazonaws.appflow#CatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of metadata catalog that Amazon AppFlow used for the associated flow run.\n      This parameter returns the following value:</p>\n         <dl>\n            <dt>GLUE</dt>\n            <dd>\n               <p>The metadata catalog is provided by the Glue Data Catalog. Glue includes the Glue Data Catalog as a component.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The type of metadata catalog that Amazon AppFlow used for the associated flow run.\n      This parameter returns the following value:</p>\n         <dl>\n            <dt>GLUE</dt>\n            <dd>\n               <p>The metadata catalog is provided by the Glue Data Catalog. Glue\n            includes the Glue Data Catalog as a component.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "tableName": {
                     "target": "com.amazonaws.appflow#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table that stores the metadata for the associated flow run. The table\n      stores metadata that represents the data that the flow transferred. Amazon AppFlow\n      stores the table in the metadata catalog.</p>"
+                        "smithy.api#documentation": "<p>The name of the table that stores the metadata for the associated flow run. The table\n      stores metadata that represents the data that the flow transferred. Amazon AppFlow stores\n      the table in the metadata catalog.</p>"
                     }
                 },
                 "tableRegistrationOutput": {
@@ -6123,7 +6207,7 @@
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether the connector profile applies to a sandbox or production environment.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the connector profile applies to a sandbox or production\n      environment.</p>"
                     }
                 },
                 "businessUnitId": {
@@ -6485,7 +6569,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The connector-specific profile credentials required when using Amazon Redshift.\n    </p>"
+                "smithy.api#documentation": "<p> The connector-specific profile credentials required when using Amazon Redshift. </p>"
             }
         },
         "com.amazonaws.appflow#RedshiftConnectorProfileProperties": {
@@ -6579,7 +6663,7 @@
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the Amazon Redshift destination. For example, this setting would determine if the flow\n      should fail after one insertion error, or continue and attempt to insert every record\n      regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the\n      destination connector details. </p>"
+                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in\n      the Amazon Redshift destination. For example, this setting would determine if the flow\n      should fail after one insertion error, or continue and attempt to insert every record\n      regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the\n      destination connector details. </p>"
                     }
                 }
             },
@@ -6693,6 +6777,9 @@
                         "smithy.api#documentation": "<p>The provisioning type of the connector. Currently the only supported value is\n      LAMBDA.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#RegisterConnectorResponse": {
@@ -6704,6 +6791,9 @@
                         "smithy.api#documentation": "<p>The ARN of the connector being registered.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#RegisteredBy": {
@@ -6739,7 +6829,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of an attempt from Amazon AppFlow to register a\n      resource.</p>\n         <p>When you run a flow that you've configured to use a metadata catalog, Amazon AppFlow\n      registers a metadata table and data partitions with that catalog. This operation provides the\n      status of that registration attempt. The operation also indicates how many related resources\n        Amazon AppFlow created or updated.</p>"
+                "smithy.api#documentation": "<p>Describes the status of an attempt from Amazon AppFlow to register a resource.</p>\n         <p>When you run a flow that you've configured to use a metadata catalog, Amazon AppFlow\n      registers a metadata table and data partitions with that catalog. This operation provides the\n      status of that registration attempt. The operation also indicates how many related resources\n        Amazon AppFlow created or updated.</p>"
             }
         },
         "com.amazonaws.appflow#ResourceNotFoundException": {
@@ -6958,7 +7048,7 @@
                 "fileType": {
                     "target": "com.amazonaws.appflow#FileType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Amazon S3\n      bucket. </p>"
+                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket.\n    </p>"
                     }
                 },
                 "prefixConfig": {
@@ -7440,6 +7530,13 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether the connector profile applies to a sandbox or production environment.\n    </p>"
                     }
+                },
+                "usePrivateLinkForMetadataAndAuthorization": {
+                    "target": "com.amazonaws.appflow#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If the connection mode for the connector profile is private, this parameter sets whether\n        Amazon AppFlow uses the private network to send metadata and authorization calls to\n      Salesforce. Amazon AppFlow sends private calls through Amazon Web Services PrivateLink. These\n      calls travel through Amazon Web Services infrastructure without being exposed to the public\n      internet.</p>\n         <p>Set either of the following values:</p>\n         <dl>\n            <dt>true</dt>\n            <dd>\n               <p>Amazon AppFlow sends all calls to Salesforce over the private network.</p>\n               <p>These private calls are:</p>\n               <ul>\n                  <li>\n                     <p>Calls to get metadata about your Salesforce records. This metadata describes\n                your Salesforce objects and their fields.</p>\n                  </li>\n                  <li>\n                     <p>Calls to get or refresh access tokens that allow Amazon AppFlow to access\n                your Salesforce records.</p>\n                  </li>\n                  <li>\n                     <p>Calls to transfer your Salesforce records as part of a flow run.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>false</dt>\n            <dd>\n               <p>The default value. Amazon AppFlow sends some calls to Salesforce privately and\n            other calls over the public internet.</p>\n               <p>The public calls are: </p>\n               <ul>\n                  <li>\n                     <p>Calls to get metadata about your Salesforce records.</p>\n                  </li>\n                  <li>\n                     <p>Calls to get or refresh access tokens.</p>\n                  </li>\n               </ul>\n               <p>The private calls are:</p>\n               <ul>\n                  <li>\n                     <p>Calls to transfer your Salesforce records as part of a flow run.</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
+                    }
                 }
             },
             "traits": {
@@ -7494,7 +7591,7 @@
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the Salesforce destination. For example, this setting would determine if the flow should\n      fail after one insertion error, or continue and attempt to insert every record regardless of\n      the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
+                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in\n      the Salesforce destination. For example, this setting would determine if the flow should fail\n      after one insertion error, or continue and attempt to insert every record regardless of the\n      initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
                     }
                 },
                 "writeOperationType": {
@@ -7655,14 +7752,14 @@
                     "name": "appflow"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API\n          operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to\n      the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
+                "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow\n        User Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to\n      the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
                 "smithy.api#title": "Amazon Appflow",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -7691,15 +7788,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -7708,7 +7857,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -7718,22 +7867,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://appflow-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://appflow-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -7746,134 +8030,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://appflow.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://appflow-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -7881,7 +8083,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://appflow-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://appflow.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -7890,74 +8092,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://appflow.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://appflow.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -7965,305 +8106,6 @@
                 },
                 "smithy.rules#endpointTests": {
                     "testCases": [
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
-                            }
-                        },
                         {
                             "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
@@ -8275,253 +8117,6 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -8538,94 +8133,29 @@
                             }
                         },
                         {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://appflow-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.sa-east-1.amazonaws.com"
+                                    "url": "https://appflow.ap-northeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://appflow-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-southeast-1.amazonaws.com"
+                                    "url": "https://appflow.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -8642,45 +8172,6 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
                             "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -8691,6 +8182,136 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -8733,72 +8354,163 @@
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://appflow.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://appflow-fips.us-east-2.api.aws"
+                                    "url": "https://appflow-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://appflow-fips.us-east-2.amazonaws.com"
+                                    "url": "https://appflow-fips.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://appflow.us-east-2.api.aws"
+                                    "url": "https://appflow.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://appflow.us-east-2.amazonaws.com"
+                                    "url": "https://appflow.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appflow.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -8808,6 +8520,19 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -9611,7 +9336,7 @@
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the Snowflake destination. For example, this setting would determine if the flow should\n      fail after one insertion error, or continue and attempt to insert every record regardless of\n      the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
+                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in\n      the Snowflake destination. For example, this setting would determine if the flow should fail\n      after one insertion error, or continue and attempt to insert every record regardless of the\n      initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
                     }
                 }
             },
@@ -9863,6 +9588,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#StartFlowResponse": {
@@ -9886,6 +9614,9 @@
                         "smithy.api#documentation": "<p> Returns the internal execution ID of an on-demand flow when the flow is started. For\n      scheduled or event-triggered flows, this value is null. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#StopFlow": {
@@ -9929,6 +9660,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#StopFlowResponse": {
@@ -9946,6 +9680,9 @@
                         "smithy.api#documentation": "<p> Indicates the current status of the flow. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#String": {
@@ -10110,11 +9847,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appflow#TagValue": {
             "type": "string",
@@ -10542,11 +10285,17 @@
                         "smithy.api#documentation": "<p>Indicates whether Amazon AppFlow should unregister the connector, even if it is\n      currently in use in one or more connector profiles. The default value is false.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#UnregisterConnectorResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appflow#UnsupportedOperationException": {
             "type": "structure",
@@ -10608,11 +10357,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appflow#UpdateConnectorProfile": {
             "type": "operation",
@@ -10672,6 +10427,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#UpdateConnectorProfileResponse": {
@@ -10683,6 +10441,9 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the connector profile. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#UpdateConnectorRegistration": {
@@ -10750,6 +10511,9 @@
                 "connectorProvisioningConfig": {
                     "target": "com.amazonaws.appflow#ConnectorProvisioningConfig"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#UpdateConnectorRegistrationResponse": {
@@ -10761,6 +10525,9 @@
                         "smithy.api#documentation": "<p>The ARN of the connector being updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#UpdateFlow": {
@@ -10835,23 +10602,26 @@
                 "destinationFlowConfigList": {
                     "target": "com.amazonaws.appflow#DestinationFlowConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the\n      destination connector. </p>",
+                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the destination\n      connector. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tasks": {
                     "target": "com.amazonaws.appflow#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the\n      flow run. </p>",
+                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the flow\n      run. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "metadataCatalogConfig": {
                     "target": "com.amazonaws.appflow#MetadataCatalogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data\n      that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a\n      flow, it stores metadata in a data catalog.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's\n      transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it\n      stores metadata in a data catalog.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appflow#UpdateFlowResponse": {
@@ -10863,6 +10633,9 @@
                         "smithy.api#documentation": "<p>Indicates the current status of the flow. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appflow#UpdatedBy": {
@@ -10926,7 +10699,7 @@
                 "fileType": {
                     "target": "com.amazonaws.appflow#FileType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. </p>"
+                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3\n      bucket. </p>"
                     }
                 },
                 "prefixConfig": {
