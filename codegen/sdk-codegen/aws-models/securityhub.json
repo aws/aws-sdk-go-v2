@@ -482,6 +482,23 @@
                 "target": "com.amazonaws.securityhub#AssociatedStandard"
             }
         },
+        "com.amazonaws.securityhub#AssociationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#AutoEnableStandards": {
             "type": "enum",
             "members": {
@@ -1879,7 +1896,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ARN that uniquely identifies the Amazon SNS topic for a backup vault’s events.\n      </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the Amazon SNS topic for\n         a backup vault's events. </p>"
                     }
                 }
             },
@@ -5098,7 +5115,7 @@
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n         The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>A high value, such as <code>999999</code>, turns off price protection.</p>"
+                        "smithy.api#documentation": "<p> The price protection threshold for On-Demand Instances. This is the maximum you'll pay\n         for an On-Demand Instance, expressed as a percentage above the least expensive current\n         generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects\n         instance types with your attributes, it excludes instance types priced above your\n         threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>A high value, such as <code>999999</code>, turns off price protection.</p>"
                     }
                 },
                 "RequireHibernateSupport": {
@@ -5112,7 +5129,7 @@
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n         The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a \n         percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When \n         Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold.\n      </p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>A high value, such as <code>999999</code>, turns off price protection.</p>"
+                        "smithy.api#documentation": "<p> The price protection threshold for Spot Instances. This is the maximum you'll pay for a\n         Spot Instance, expressed as a percentage above the least expensive current generation M, C,\n         or R instance type with your specified attributes. When Amazon EC2 selects instance\n         types with your attributes, it excludes instance types priced above your threshold. </p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>A high value, such as <code>999999</code>, turns off price protection.</p>"
                     }
                 },
                 "TotalLocalStorageGB": {
@@ -5282,7 +5299,7 @@
                 "HttpEndpoint": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled, and you won’t be able to access your instance metadata.\n      </p>"
+                        "smithy.api#documentation": "<p> Enables or disables the HTTP metadata endpoint on your instances. If the parameter is\n         not specified, the default state is enabled, and you won't be able to access your instance\n         metadata. </p>"
                     }
                 },
                 "HttpProtocolIpv6": {
@@ -13979,7 +13996,7 @@
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of days that manual snapshots are retained in the destination region after\n         they are copied from a source region.</p>\n         <p>If the value is <code>-1</code>,\n         then the manual snapshot is retained indefinitely.</p>\n         <p>Valid values: Either <code>-1</code>\n         or an integer between 1 and 3,653</p>"
+                        "smithy.api#documentation": "<p>The number of days that manual snapshots are retained in the destination Region after\n         they are copied from a source Region.</p>\n         <p>If the value is <code>-1</code>,\n         then the manual snapshot is retained indefinitely.</p>\n         <p>Valid values: Either <code>-1</code>\n         or an integer between 1 and 3,653</p>"
                     }
                 },
                 "RetentionPeriod": {
@@ -13997,7 +14014,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a cross-Region snapshot copy.</p>"
+                "smithy.api#documentation": "<p>You can configure Amazon Redshift to copy snapshots for a cluster to another Amazon Web Services Region. This parameter \n         provides information about a cross-Region snapshot copy.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRedshiftClusterDeferredMaintenanceWindow": {
@@ -18042,6 +18059,140 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#BatchGetSecurityControls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#BatchGetSecurityControlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#BatchGetSecurityControlsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Provides details about a batch of security controls for the current Amazon Web Services account and Amazon Web Services Region.\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/securityControls/batchGet",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetSecurityControlsRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityControlIds": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of security controls (identified with <code>SecurityControlId</code>,\n            <code>SecurityControlArn</code>, or a mix of both parameters). The security control ID\n         or Amazon Resource Name (ARN) is the same across standards. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetSecurityControlsResponse": {
+            "type": "structure",
+            "members": {
+                "SecurityControls": {
+                    "target": "com.amazonaws.securityhub#SecurityControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An array that returns the identifier, Amazon Resource Name (ARN), and other details about a security control. \n         The same information is returned whether the request includes <code>SecurityControlId</code> or <code>SecurityControlArn</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnprocessedIds": {
+                    "target": "com.amazonaws.securityhub#UnprocessedSecurityControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) for which \n         details cannot be returned.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetStandardsControlAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#BatchGetStandardsControlAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#BatchGetStandardsControlAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         For a batch of security controls and standards, identifies whether each control is currently enabled or disabled in a standard.\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/associations/batchGet",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetStandardsControlAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "StandardsControlAssociationIds": {
+                    "target": "com.amazonaws.securityhub#StandardsControlAssociationIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard. \n         This field is used to query the enablement status of a control in a specified standard. The security control ID or ARN is the same across standards.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetStandardsControlAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "StandardsControlAssociationDetails": {
+                    "target": "com.amazonaws.securityhub#StandardsControlAssociationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the enablement status of a security control in a specified standard and other details for the control in relation to \n         the specified standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnprocessedAssociations": {
+                    "target": "com.amazonaws.securityhub#UnprocessedStandardsControlAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) whose enablement \n         status in a specified standard cannot be returned.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#BatchImportFindings": {
             "type": "operation",
             "input": {
@@ -18284,6 +18435,66 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#BatchUpdateFindingsUnprocessedFinding"
+            }
+        },
+        "com.amazonaws.securityhub#BatchUpdateStandardsControlAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#BatchUpdateStandardsControlAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#BatchUpdateStandardsControlAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         For a batch of security controls and standards, this operation updates the enablement status of a control in a standard.\n      </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/associations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#BatchUpdateStandardsControlAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "StandardsControlAssociationUpdates": {
+                    "target": "com.amazonaws.securityhub#StandardsControlAssociationUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Updates the enablement status of a security control in a specified standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#BatchUpdateStandardsControlAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "UnprocessedAssociationUpdates": {
+                    "target": "com.amazonaws.securityhub#UnprocessedStandardsControlAssociationUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) whose enablement status in a specified standard couldn't be updated.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.securityhub#Boolean": {
@@ -18589,6 +18800,23 @@
                 "smithy.api#documentation": "<p>Container details related to a finding.</p>"
             }
         },
+        "com.amazonaws.securityhub#ControlFindingGenerator": {
+            "type": "enum",
+            "members": {
+                "STANDARD_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD_CONTROL"
+                    }
+                },
+                "SECURITY_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_CONTROL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#ControlStatus": {
             "type": "enum",
             "members": {
@@ -18695,7 +18923,7 @@
                 "ActionTargetArn": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the custom action target.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the custom action target.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -19228,7 +19456,7 @@
                 "ActionTargetArn": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the custom action target to delete.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom action target to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -19658,6 +19886,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to automatically enable new controls when they are added to standards that are\n         enabled.</p>\n         <p>If set to <code>true</code>, then new controls for enabled standards are enabled\n         automatically. If set to <code>false</code>, then new controls are not enabled.</p>"
+                    }
+                },
+                "ControlFindingGenerator": {
+                    "target": "com.amazonaws.securityhub#ControlFindingGenerator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to \n         <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n         applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n         for a control check when the check applies to multiple enabled standards.</p>\n         <p>The value for this field in a member account matches the value in the administrator\n         account. For accounts that aren't part of an organization, the default value of this field\n         is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9,\n         2023.</p>"
                     }
                 }
             },
@@ -20491,6 +20725,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to enable the security standards that Security Hub has designated as automatically\n         enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set\n         to <code>true</code>. To not enable the automatically enabled standards, set\n            <code>EnableDefaultStandards</code> to <code>false</code>.</p>"
+                    }
+                },
+                "ControlFindingGenerator": {
+                    "target": "com.amazonaws.securityhub#ControlFindingGenerator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. \n      If the value for this field is set to \n      <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n      applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n      for a control check when the check applies to multiple enabled standards.</p>\n         <p>The value for this field in a member account matches the value in the administrator\n         account. For accounts that aren't part of an organization, the default value of this field\n         is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9,\n         2023.</p>"
                     }
                 }
             },
@@ -22286,6 +22526,183 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#ListSecurityControlDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListSecurityControlDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListSecurityControlDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Lists all of the security controls that apply to a specified standard. \n      </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/securityControls/definitions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SecurityControlDefinitions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListSecurityControlDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "StandardsArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the standard that you want to view controls for.\n      </p>",
+                        "smithy.api#httpQuery": "StandardsArn"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Optional pagination parameter.\n      </p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p> An optional parameter that limits the total results of the API response to the\n         specified number. If this parameter isn't provided in the request, the results include the\n         first 25 security controls that apply to the specified standard. The results also include a\n            <code>NextToken</code> parameter that you can use in a subsequent API call to get the\n         next 25 controls. This repeats until all controls for the standard are returned. </p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListSecurityControlDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "SecurityControlDefinitions": {
+                    "target": "com.amazonaws.securityhub#SecurityControlDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An array of controls that apply to the specified standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination parameter that's included in the response only if it was included in the\n         request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListStandardsControlAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListStandardsControlAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListStandardsControlAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Specifies whether a control is currently enabled or disabled in each enabled standard in the calling account.\n      </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/associations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "StandardsControlAssociationSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListStandardsControlAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) that you \n         want to determine the enablement status of in each enabled standard. \n      </p>",
+                        "smithy.api#httpQuery": "SecurityControlId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Optional pagination parameter.\n      </p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p> An optional parameter that limits the total results of the API response to the\n         specified number. If this parameter isn't provided in the request, the results include the\n         first 25 standard and control associations. The results also include a\n            <code>NextToken</code> parameter that you can use in a subsequent API call to get the\n         next 25 associations. This repeats until all associations for the specified control are\n         returned. The number of results is limited by the number of supported Security Hub\n         standards that you've enabled in the calling account. </p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListStandardsControlAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "StandardsControlAssociationSummaries": {
+                    "target": "com.amazonaws.securityhub#StandardsControlAssociationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array that provides the enablement status and other details for each security\n         control that applies to each enabled standard. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination parameter that's included in the response only if it was included in the\n         request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -23482,6 +23899,23 @@
                 "target": "com.amazonaws.securityhub#Record"
             }
         },
+        "com.amazonaws.securityhub#RegionAvailabilityStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#RelatedFinding": {
             "type": "structure",
             "members": {
@@ -24651,6 +25085,125 @@
                 "smithy.api#documentation": "<p>A list of port ranges.</p>"
             }
         },
+        "com.amazonaws.securityhub#SecurityControl": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a \n         number, such as APIGateway.3.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a security control across standards, such as\n            <code>arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1</code>. This\n         parameter doesn't mention a specific standard. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of a security control.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The description of a security control across standards. This typically summarizes how\n            Security Hub evaluates the control and the conditions under which it produces a\n         failed finding. This parameter doesn't reference a specific standard. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RemediationUrl": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A link to Security Hub documentation that explains how to remediate a failed finding for a security control.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SeverityRating": {
+                    "target": "com.amazonaws.securityhub#SeverityRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The severity of a security control. For more information about how Security Hub determines control severity, see \n         <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity\">Assigning severity to control findings</a> in the \n         <i>Security Hub User Guide</i>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlStatus": {
+                    "target": "com.amazonaws.securityhub#ControlStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of a security control based on the compliance status of its findings. For more information about how control \n         status is determined, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html\">Determining the overall status of a control from its findings</a> in the \n         <i>Security Hub User Guide</i>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A security control in Security Hub describes a security best practice related to a specific resource. \n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControlDefinition": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of a security control across standards. Values for this field typically consist of an \n         Amazon Web Service name and a number (for example, APIGateway.3). This parameter differs from \n         <code>SecurityControlArn</code>, which is a unique Amazon Resource Name (ARN) assigned to a control. The \n         ARN references the security control ID (for example, arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3).\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The title of a security control.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The description of a security control across standards. This typically summarizes how\n            Security Hub evaluates the control and the conditions under which it produces a\n         failed finding. This parameter doesn't reference a specific standard. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RemediationUrl": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A link to Security Hub documentation that explains how to remediate a failed finding for a security control.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SeverityRating": {
+                    "target": "com.amazonaws.securityhub#SeverityRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The severity of a security control. For more information about how Security Hub determines control severity, \n         see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity\">Assigning severity to control findings</a> in the \n         <i>Security Hub User Guide</i>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CurrentRegionAvailability": {
+                    "target": "com.amazonaws.securityhub#RegionAvailabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies whether a security control is available in the current Amazon Web Services Region.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Provides metadata for a security control, including its unique standard-agnostic identifier, title, description, \n         severity, availability in Amazon Web Services Regions, and a link to remediation steps.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControlDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SecurityControlDefinition"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SecurityControl"
+            }
+        },
         "com.amazonaws.securityhub#SecurityGroups": {
             "type": "list",
             "member": {
@@ -24674,10 +25227,19 @@
                     "target": "com.amazonaws.securityhub#BatchEnableStandards"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#BatchGetSecurityControls"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#BatchGetStandardsControlAssociations"
+                },
+                {
                     "target": "com.amazonaws.securityhub#BatchImportFindings"
                 },
                 {
                     "target": "com.amazonaws.securityhub#BatchUpdateFindings"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#BatchUpdateStandardsControlAssociations"
                 },
                 {
                     "target": "com.amazonaws.securityhub#CreateActionTarget"
@@ -24800,6 +25362,12 @@
                     "target": "com.amazonaws.securityhub#ListOrganizationAdminAccounts"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#ListSecurityControlDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ListStandardsControlAssociations"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ListTagsForResource"
                 },
                 {
@@ -24842,7 +25410,7 @@
                     "name": "securityhub"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status\n         of your environment based on controls from supported security standards. Security Hub collects\n         security data from Amazon Web Services accounts, services, and integrated third-party products and helps\n         you analyze security trends in your environment to identify the highest priority security\n         issues. For more information about Security Hub, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">\n               <i>Security HubUser\n            Guide</i>\n            </a>.</p>\n         <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services\n         Region that is currently active or in the specific Amazon Web Services Region that you specify in your\n         request. Any configuration or settings change that results from the operation is applied\n         only to that Region. To make the same change in other Regions, execute the same command for\n         each Region to apply the change to.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of\n         the member account with the administrator account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1\n               request per second, <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of\n               1 request per second, <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of\n         your Amazon Web Services environment and resources. It also provides you with the readiness\n         status of your environment based on controls from supported security standards. Security Hub collects security data from Amazon Web Services accounts, services, and\n         integrated third-party products and helps you analyze security trends in your environment\n         to identify the highest priority security issues. For more information about Security Hub, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">Security HubUser\n            Guide</a>.</p>\n         <p>When you use operations in the Security Hub API, the requests are executed only in\n         the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change\n         that results from the operation is applied only to that Region. To make the same change in\n         other Regions, run the same command for each Region in which you want to apply the change.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of\n         the member account with the administrator account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS SecurityHub",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -25204,9 +25772,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -25217,9 +25785,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -25230,9 +25798,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -25243,9 +25811,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -25256,9 +25824,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -25269,9 +25837,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -25282,9 +25850,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -25295,9 +25863,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -25308,9 +25876,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -25321,9 +25889,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -25334,9 +25902,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -25347,9 +25915,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -25360,9 +25928,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -25373,9 +25941,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -25386,9 +25954,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -25399,9 +25967,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -25412,9 +25980,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -25425,9 +25993,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -25438,9 +26006,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -25451,9 +26019,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -25464,9 +26032,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -25477,9 +26045,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -25490,9 +26058,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -25503,9 +26071,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -25516,9 +26084,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -25529,9 +26097,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -25542,9 +26110,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -25555,9 +26123,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -25568,9 +26136,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -25581,9 +26149,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -25594,9 +26162,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -25607,9 +26175,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -25620,9 +26188,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -25633,9 +26201,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -25646,9 +26214,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -25659,9 +26227,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -25672,9 +26240,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -25685,9 +26253,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -25698,9 +26266,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -25711,9 +26279,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -25724,9 +26292,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -25737,9 +26305,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -25750,9 +26318,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -25763,9 +26331,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -25788,9 +26356,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -25800,9 +26368,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -25908,7 +26476,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The severity of the finding.</p>\n         <p>The finding provider can provide the initial severity. The finding provider can only\n         update the severity if it has not been updated using\n         <code>BatchUpdateFindings</code>.</p>\n         <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If\n         only one of these attributes is populated, then Security Hub automatically populates the other\n         one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is\n         the preferred attribute.</p>"
+                "smithy.api#documentation": "<p>The severity of the finding.</p>\n         <p>The finding provider can provide the initial severity. The finding provider can only\n         update the severity if it hasn't been updated using\n         <code>BatchUpdateFindings</code>.</p>\n         <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If\n         only one of these attributes is populated, then Security Hub automatically populates the other\n         one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is\n         the preferred attribute.</p>"
             }
         },
         "com.amazonaws.securityhub#SeverityLabel": {
@@ -26243,6 +26811,231 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for an individual security standard control.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationDetail": {
+            "type": "structure",
+            "members": {
+                "StandardsArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of a security standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service \n         name and a number, such as APIGateway.3.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ARN of a security control across standards, such as\n            <code>arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1</code>. This\n         parameter doesn't mention a specific standard. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#AssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies whether a control is enabled or disabled in a specified standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RelatedRequirements": {
+                    "target": "com.amazonaws.securityhub#RelatedRequirementsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The requirement that underlies a control in the compliance framework related to the standard.\n      </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The time at which the enablement status of the control in the specified standard was last updated.\n      </p>"
+                    }
+                },
+                "UpdatedReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The reason for updating the enablement status of a control in a specified standard.\n      </p>"
+                    }
+                },
+                "StandardsControlTitle": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The title of a control. This field may reference a specific standard.\n      </p>"
+                    }
+                },
+                "StandardsControlDescription": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The description of a control. This typically summarizes how Security Hub evaluates the control and the \n         conditions under which it produces a failed finding. This parameter may reference a specific standard. \n      </p>"
+                    }
+                },
+                "StandardsControlArns": {
+                    "target": "com.amazonaws.securityhub#StandardsControlArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Provides the input parameter that Security Hub uses to call the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html\">UpdateStandardsControl</a> API. This API can be used to enable or disable a control\n         in a specified standard. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Provides details about a control's enablement status in a specified standard. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#StandardsControlAssociationDetail"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationId": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) of a security \n         control across standards.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StandardsArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of a standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) \n         and the Amazon Resource Name (ARN) of a standard. The security control ID or ARN is the same across standards.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#StandardsControlAssociationId"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#StandardsControlAssociationSummary"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "StandardsArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of a standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A unique standard-agnostic identifier for a control. Values for this field typically consist of an \n         Amazon Web Service and a number, such as APIGateway.5. This field doesn't reference a specific standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ARN of a control, such as\n            <code>arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1</code>. This\n         parameter doesn't mention a specific standard. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#AssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The enablement status of a control in a specific standard.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RelatedRequirements": {
+                    "target": "com.amazonaws.securityhub#RelatedRequirementsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The requirement that underlies this control in the compliance framework related to the standard.\n      </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The last time that a control's enablement status in a specified standard was updated. </p>"
+                    }
+                },
+                "UpdatedReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The reason for updating the control's enablement status in a specified standard. </p>"
+                    }
+                },
+                "StandardsControlTitle": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The title of a control. \n      </p>"
+                    }
+                },
+                "StandardsControlDescription": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The description of a control. This typically summarizes how Security Hub evaluates the control and the \n         conditions under which it produces a failed finding. The parameter may reference a specific standard.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> An array that provides the enablement status and other details for each control that\n         applies to each enabled standard. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationUpdate": {
+            "type": "structure",
+            "members": {
+                "StandardsArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the standard in which you want to update the\n         control's enablement status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the security control whose enablement status you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#AssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired enablement status of the control in the standard.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for updating the control's enablement status in the standard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of requested updates to the enablement status of controls in specified\n         standards. The objects in the array include a security control ID, the Amazon Resource Name (ARN) of the standard, the requested\n         enablement status, and the reason for updating the enablement status.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsControlAssociationUpdates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#StandardsControlAssociationUpdate"
             }
         },
         "com.amazonaws.securityhub#StandardsControls": {
@@ -26893,6 +27686,137 @@
                 "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
+        "com.amazonaws.securityhub#UnprocessedErrorCode": {
+            "type": "enum",
+            "members": {
+                "INVALID_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_INPUT"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_FOUND"
+                    }
+                },
+                "LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedSecurityControl": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The control (identified with <code>SecurityControlId</code>,\n            <code>SecurityControlArn</code>, or a mix of both parameters) for which a response\n         couldn't be returned. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.securityhub#UnprocessedErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The error code for the unprocessed security control.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The reason why the security control was unprocessed.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Provides details about a security control for which a response couldn't be returned. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedSecurityControls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#UnprocessedSecurityControl"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedStandardsControlAssociation": {
+            "type": "structure",
+            "members": {
+                "StandardsControlAssociationId": {
+                    "target": "com.amazonaws.securityhub#StandardsControlAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array with one or more objects that includes a security control (identified with\n            <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both\n         parameters) and the Amazon Resource Name (ARN) of a standard. This parameter shows the\n         specific controls for which the enablement status couldn't be retrieved in specified standards when\n         calling <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html\">BatchUpdateStandardsControlAssociations</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.securityhub#UnprocessedErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the unprocessed standard and control association.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the standard and control association was unprocessed. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Provides details about which\n         control's enablement status couldn't be retrieved in a specified standard when calling <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html\">BatchUpdateStandardsControlAssociations</a>. This parameter also provides details\n         about why the request was unprocessed. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedStandardsControlAssociationUpdate": {
+            "type": "structure",
+            "members": {
+                "StandardsControlAssociationUpdate": {
+                    "target": "com.amazonaws.securityhub#StandardsControlAssociationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of control and standard associations for which an update failed when calling \n         <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html\">BatchUpdateStandardsControlAssociations</a>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.securityhub#UnprocessedErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the unprocessed update of the control's enablement status in the\n         specified standard.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a control's enablement status in the specified standard couldn't be updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about which control's enablement status could not be updated in a\n         specified standard when calling the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html\">BatchUpdateStandardsControlAssociations</a> API. This parameter also provides\n         details about why the request was unprocessed. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedStandardsControlAssociationUpdates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#UnprocessedStandardsControlAssociationUpdate"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedStandardsControlAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#UnprocessedStandardsControlAssociation"
+            }
+        },
         "com.amazonaws.securityhub#UntagResource": {
             "type": "operation",
             "input": {
@@ -27360,6 +28284,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to automatically enable new controls when they are added to standards that are\n         enabled.</p>\n         <p>By default, this is set to <code>true</code>, and new controls are enabled\n         automatically. To not automatically enable new controls, set this to <code>false</code>.\n      </p>"
+                    }
+                },
+                "ControlFindingGenerator": {
+                    "target": "com.amazonaws.securityhub#ControlFindingGenerator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates whether the calling account has consolidated control findings turned on. \n      If the value for this field is set to \n      <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n      applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n      for a control check when the check applies to multiple enabled standards.</p>\n         <p>For accounts that are part of an organization, this value can only be updated in the administrator account.</p>"
                     }
                 }
             },
