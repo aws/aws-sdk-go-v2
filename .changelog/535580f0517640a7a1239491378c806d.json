@@ -1,8 +1,0 @@
-{
-    "id": "535580f0-5176-40a7-a123-9491378c806d",
-    "type": "feature",
-    "description": "StartTaskContact API now supports linked task creation with a new optional RelatedContactId parameter",
-    "modules": [
-        "service/connect"
-    ]
-}

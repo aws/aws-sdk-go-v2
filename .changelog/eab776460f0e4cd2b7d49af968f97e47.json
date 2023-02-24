@@ -1,8 +1,0 @@
-{
-    "id": "eab77646-0f0e-4cd2-b7d4-9af968f97e47",
-    "type": "documentation",
-    "description": "Documentation updates for Service Catalog",
-    "modules": [
-        "service/servicecatalog"
-    ]
-}

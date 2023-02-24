@@ -1,3 +1,7 @@
+# v1.16.5 (2023-02-24)
+
+* **Documentation**: Documentation updates for Service Catalog
+
 # v1.16.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

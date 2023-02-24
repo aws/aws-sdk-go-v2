@@ -1,3 +1,17 @@
+# Release (2023-02-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.48.0](service/connect/CHANGELOG.md#v1480-2023-02-24)
+  * **Feature**: StartTaskContact API now supports linked task creation with a new optional RelatedContactId parameter
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.3.0](service/connectcases/CHANGELOG.md#v130-2023-02-24)
+  * **Feature**: This release adds the ability to delete domains through the DeleteDomain API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.27.5](service/redshift/CHANGELOG.md#v1275-2023-02-24)
+  * **Documentation**: Documentation updates for Redshift API bringing it in line with IAM best practices.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.29.0](service/securityhub/CHANGELOG.md#v1290-2023-02-24)
+  * **Feature**: New Security Hub APIs and updates to existing APIs that help you consolidate control findings and enable and disable controls across all supported standards
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.16.5](service/servicecatalog/CHANGELOG.md#v1165-2023-02-24)
+  * **Documentation**: Documentation updates for Service Catalog
+
 # Release (2023-02-23)
 
 ## Module Highlights

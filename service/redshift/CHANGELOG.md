@@ -1,3 +1,7 @@
+# v1.27.5 (2023-02-24)
+
+* **Documentation**: Documentation updates for Redshift API bringing it in line with IAM best practices.
+
 # v1.27.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

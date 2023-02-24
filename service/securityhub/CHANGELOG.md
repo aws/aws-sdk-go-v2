@@ -1,3 +1,7 @@
+# v1.29.0 (2023-02-24)
+
+* **Feature**: New Security Hub APIs and updates to existing APIs that help you consolidate control findings and enable and disable controls across all supported standards
+
 # v1.28.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
