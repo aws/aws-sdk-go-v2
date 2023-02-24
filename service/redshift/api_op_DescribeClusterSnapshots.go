@@ -86,7 +86,7 @@ type DescribeClusterSnapshotsInput struct {
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
 	// records by retrying the command with the returned marker value. Default: 100
-	// Constraints: minimum 20, maximum 100.
+	// Constraints: minimum 20, maximum 500.
 	MaxRecords *int32
 
 	// The Amazon Web Services account used to create or copy the snapshot. Use this
@@ -231,7 +231,7 @@ type DescribeClusterSnapshotsPaginatorOptions struct {
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
 	// records by retrying the command with the returned marker value. Default: 100
-	// Constraints: minimum 20, maximum 100.
+	// Constraints: minimum 20, maximum 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

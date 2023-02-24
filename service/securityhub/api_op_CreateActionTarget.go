@@ -51,7 +51,7 @@ type CreateActionTargetInput struct {
 
 type CreateActionTargetOutput struct {
 
-	// The ARN for the custom action target.
+	// The Amazon Resource Name (ARN) for the custom action target.
 	//
 	// This member is required.
 	ActionTargetArn *string

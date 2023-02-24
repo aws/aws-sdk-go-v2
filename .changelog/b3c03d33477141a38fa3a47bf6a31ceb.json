@@ -1,0 +1,8 @@
+{
+    "id": "b3c03d33-4771-41a3-8fa3-a47bf6a31ceb",
+    "type": "documentation",
+    "description": "Documentation updates for Redshift API bringing it in line with IAM best practices.",
+    "modules": [
+        "service/redshift"
+    ]
+}

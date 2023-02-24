@@ -43,9 +43,9 @@ type DeleteClusterSnapshotInput struct {
 	SnapshotIdentifier *string
 
 	// The unique identifier of the cluster the snapshot was created from. This
-	// parameter is required if your IAM user has a policy containing a snapshot
-	// resource element that specifies anything other than * for the cluster name.
-	// Constraints: Must be the name of valid cluster.
+	// parameter is required if your IAM user or role has a policy containing a
+	// snapshot resource element that specifies anything other than * for the cluster
+	// name. Constraints: Must be the name of valid cluster.
 	SnapshotClusterIdentifier *string
 
 	noSmithyDocumentSerde

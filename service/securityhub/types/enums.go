@@ -20,6 +20,24 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AssociationStatus string
+
+// Enum values for AssociationStatus
+const (
+	AssociationStatusEnabled  AssociationStatus = "ENABLED"
+	AssociationStatusDisabled AssociationStatus = "DISABLED"
+)
+
+// Values returns all known values for AssociationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationStatus) Values() []AssociationStatus {
+	return []AssociationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AutoEnableStandards string
 
 // Enum values for AutoEnableStandards
@@ -94,6 +112,24 @@ func (ComplianceStatus) Values() []ComplianceStatus {
 		"WARNING",
 		"FAILED",
 		"NOT_AVAILABLE",
+	}
+}
+
+type ControlFindingGenerator string
+
+// Enum values for ControlFindingGenerator
+const (
+	ControlFindingGeneratorStandardControl ControlFindingGenerator = "STANDARD_CONTROL"
+	ControlFindingGeneratorSecurityControl ControlFindingGenerator = "SECURITY_CONTROL"
+)
+
+// Values returns all known values for ControlFindingGenerator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ControlFindingGenerator) Values() []ControlFindingGenerator {
+	return []ControlFindingGenerator{
+		"STANDARD_CONTROL",
+		"SECURITY_CONTROL",
 	}
 }
 
@@ -289,6 +325,24 @@ func (RecordState) Values() []RecordState {
 	}
 }
 
+type RegionAvailabilityStatus string
+
+// Enum values for RegionAvailabilityStatus
+const (
+	RegionAvailabilityStatusAvailable   RegionAvailabilityStatus = "AVAILABLE"
+	RegionAvailabilityStatusUnavailable RegionAvailabilityStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for RegionAvailabilityStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RegionAvailabilityStatus) Values() []RegionAvailabilityStatus {
+	return []RegionAvailabilityStatus{
+		"AVAILABLE",
+		"UNAVAILABLE",
+	}
+}
+
 type SeverityLabel string
 
 // Enum values for SeverityLabel
@@ -476,6 +530,28 @@ func (ThreatIntelIndicatorType) Values() []ThreatIntelIndicatorType {
 		"MUTEX",
 		"PROCESS",
 		"URL",
+	}
+}
+
+type UnprocessedErrorCode string
+
+// Enum values for UnprocessedErrorCode
+const (
+	UnprocessedErrorCodeInvalidInput  UnprocessedErrorCode = "INVALID_INPUT"
+	UnprocessedErrorCodeAccessDenied  UnprocessedErrorCode = "ACCESS_DENIED"
+	UnprocessedErrorCodeNotFound      UnprocessedErrorCode = "NOT_FOUND"
+	UnprocessedErrorCodeLimitExceeded UnprocessedErrorCode = "LIMIT_EXCEEDED"
+)
+
+// Values returns all known values for UnprocessedErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UnprocessedErrorCode) Values() []UnprocessedErrorCode {
+	return []UnprocessedErrorCode{
+		"INVALID_INPUT",
+		"ACCESS_DENIED",
+		"NOT_FOUND",
+		"LIMIT_EXCEEDED",
 	}
 }
 

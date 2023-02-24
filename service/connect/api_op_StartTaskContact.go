@@ -78,6 +78,11 @@ type StartTaskContactInput struct {
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	References map[string]types.Reference
 
+	// The contactId that is related
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks)
+	// to this contact.
+	RelatedContactId *string
+
 	// The timestamp, in Unix Epoch seconds format, at which to start running the
 	// inbound flow. The scheduled time cannot be in the past. It must be within up to
 	// 6 days in future.

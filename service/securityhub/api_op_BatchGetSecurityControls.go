@@ -6,44 +6,52 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom action target from Security Hub. Deleting a custom action
-// target does not affect any findings or insights that were already sent to Amazon
-// CloudWatch Events using the custom action.
-func (c *Client) DeleteActionTarget(ctx context.Context, params *DeleteActionTargetInput, optFns ...func(*Options)) (*DeleteActionTargetOutput, error) {
+// Provides details about a batch of security controls for the current Amazon Web
+// Services account and Amazon Web Services Region.
+func (c *Client) BatchGetSecurityControls(ctx context.Context, params *BatchGetSecurityControlsInput, optFns ...func(*Options)) (*BatchGetSecurityControlsOutput, error) {
 	if params == nil {
-		params = &DeleteActionTargetInput{}
+		params = &BatchGetSecurityControlsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteActionTarget", params, optFns, c.addOperationDeleteActionTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetSecurityControls", params, optFns, c.addOperationBatchGetSecurityControlsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteActionTargetOutput)
+	out := result.(*BatchGetSecurityControlsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteActionTargetInput struct {
+type BatchGetSecurityControlsInput struct {
 
-	// The Amazon Resource Name (ARN) of the custom action target to delete.
+	// A list of security controls (identified with SecurityControlId,
+	// SecurityControlArn, or a mix of both parameters). The security control ID or
+	// Amazon Resource Name (ARN) is the same across standards.
 	//
 	// This member is required.
-	ActionTargetArn *string
+	SecurityControlIds []string
 
 	noSmithyDocumentSerde
 }
 
-type DeleteActionTargetOutput struct {
+type BatchGetSecurityControlsOutput struct {
 
-	// The ARN of the custom action target that was deleted.
+	// An array that returns the identifier, Amazon Resource Name (ARN), and other
+	// details about a security control. The same information is returned whether the
+	// request includes SecurityControlId or SecurityControlArn.
 	//
 	// This member is required.
-	ActionTargetArn *string
+	SecurityControls []types.SecurityControl
+
+	// A security control (identified with SecurityControlId, SecurityControlArn, or a
+	// mix of both parameters) for which details cannot be returned.
+	UnprocessedIds []types.UnprocessedSecurityControl
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,12 +59,12 @@ type DeleteActionTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteActionTarget{}, middleware.After)
+func (c *Client) addOperationBatchGetSecurityControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSecurityControls{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteActionTarget{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSecurityControls{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -96,10 +104,10 @@ func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteActionTargetValidationMiddleware(stack); err != nil {
+	if err = addOpBatchGetSecurityControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteActionTarget(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSecurityControls(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -114,11 +122,11 @@ func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteActionTarget(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchGetSecurityControls(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securityhub",
-		OperationName: "DeleteActionTarget",
+		OperationName: "BatchGetSecurityControls",
 	}
 }

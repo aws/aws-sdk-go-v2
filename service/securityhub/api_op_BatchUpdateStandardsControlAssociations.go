@@ -6,44 +6,44 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom action target from Security Hub. Deleting a custom action
-// target does not affect any findings or insights that were already sent to Amazon
-// CloudWatch Events using the custom action.
-func (c *Client) DeleteActionTarget(ctx context.Context, params *DeleteActionTargetInput, optFns ...func(*Options)) (*DeleteActionTargetOutput, error) {
+// For a batch of security controls and standards, this operation updates the
+// enablement status of a control in a standard.
+func (c *Client) BatchUpdateStandardsControlAssociations(ctx context.Context, params *BatchUpdateStandardsControlAssociationsInput, optFns ...func(*Options)) (*BatchUpdateStandardsControlAssociationsOutput, error) {
 	if params == nil {
-		params = &DeleteActionTargetInput{}
+		params = &BatchUpdateStandardsControlAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteActionTarget", params, optFns, c.addOperationDeleteActionTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateStandardsControlAssociations", params, optFns, c.addOperationBatchUpdateStandardsControlAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteActionTargetOutput)
+	out := result.(*BatchUpdateStandardsControlAssociationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteActionTargetInput struct {
+type BatchUpdateStandardsControlAssociationsInput struct {
 
-	// The Amazon Resource Name (ARN) of the custom action target to delete.
+	// Updates the enablement status of a security control in a specified standard.
 	//
 	// This member is required.
-	ActionTargetArn *string
+	StandardsControlAssociationUpdates []types.StandardsControlAssociationUpdate
 
 	noSmithyDocumentSerde
 }
 
-type DeleteActionTargetOutput struct {
+type BatchUpdateStandardsControlAssociationsOutput struct {
 
-	// The ARN of the custom action target that was deleted.
-	//
-	// This member is required.
-	ActionTargetArn *string
+	// A security control (identified with SecurityControlId, SecurityControlArn, or a
+	// mix of both parameters) whose enablement status in a specified standard couldn't
+	// be updated.
+	UnprocessedAssociationUpdates []types.UnprocessedStandardsControlAssociationUpdate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,12 +51,12 @@ type DeleteActionTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteActionTarget{}, middleware.After)
+func (c *Client) addOperationBatchUpdateStandardsControlAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateStandardsControlAssociations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteActionTarget{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateStandardsControlAssociations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -96,10 +96,10 @@ func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteActionTargetValidationMiddleware(stack); err != nil {
+	if err = addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteActionTarget(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateStandardsControlAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -114,11 +114,11 @@ func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteActionTarget(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchUpdateStandardsControlAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securityhub",
-		OperationName: "DeleteActionTarget",
+		OperationName: "BatchUpdateStandardsControlAssociations",
 	}
 }

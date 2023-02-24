@@ -10022,6 +10022,11 @@ func awsRestjson1_serializeOpDocumentStartTaskContactInput(v *StartTaskContactIn
 		}
 	}
 
+	if v.RelatedContactId != nil {
+		ok := object.Key("RelatedContactId")
+		ok.String(*v.RelatedContactId)
+	}
+
 	if v.ScheduledTime != nil {
 		ok := object.Key("ScheduledTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.ScheduledTime))

@@ -219,8 +219,8 @@ type RestoreFromClusterSnapshotInput struct {
 	SnapshotArn *string
 
 	// The name of the cluster the source snapshot was created from. This parameter is
-	// required if your IAM user has a policy containing a snapshot resource element
-	// that specifies anything other than * for the cluster name.
+	// required if your IAM user or role has a policy containing a snapshot resource
+	// element that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
 
 	// The name of the snapshot from which to create the new cluster. This parameter

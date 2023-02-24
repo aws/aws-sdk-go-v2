@@ -90,6 +90,46 @@ func (m *validateOpBatchEnableStandards) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetSecurityControls struct {
+}
+
+func (*validateOpBatchGetSecurityControls) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetSecurityControls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetSecurityControlsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetSecurityControlsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetStandardsControlAssociations struct {
+}
+
+func (*validateOpBatchGetStandardsControlAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetStandardsControlAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetStandardsControlAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetStandardsControlAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchImportFindings struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpBatchUpdateFindings) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchUpdateFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateStandardsControlAssociations struct {
+}
+
+func (*validateOpBatchUpdateStandardsControlAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateStandardsControlAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateStandardsControlAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateStandardsControlAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +590,26 @@ func (m *validateOpInviteMembers) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListStandardsControlAssociations struct {
+}
+
+func (*validateOpListStandardsControlAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStandardsControlAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStandardsControlAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStandardsControlAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -726,12 +806,24 @@ func addOpBatchEnableStandardsValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpBatchEnableStandards{}, middleware.After)
 }
 
+func addOpBatchGetSecurityControlsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetSecurityControls{}, middleware.After)
+}
+
+func addOpBatchGetStandardsControlAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetStandardsControlAssociations{}, middleware.After)
+}
+
 func addOpBatchImportFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchImportFindings{}, middleware.After)
 }
 
 func addOpBatchUpdateFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchUpdateFindings{}, middleware.After)
+}
+
+func addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateStandardsControlAssociations{}, middleware.After)
 }
 
 func addOpCreateActionTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -812,6 +904,10 @@ func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
+}
+
+func addOpListStandardsControlAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStandardsControlAssociations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1205,6 +1301,79 @@ func validateResourceList(v []types.Resource) error {
 	}
 }
 
+func validateStandardsControlAssociationId(v *types.StandardsControlAssociationId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandardsControlAssociationId"}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if v.StandardsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StandardsArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStandardsControlAssociationIds(v []types.StandardsControlAssociationId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandardsControlAssociationIds"}
+	for i := range v {
+		if err := validateStandardsControlAssociationId(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStandardsControlAssociationUpdate(v *types.StandardsControlAssociationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandardsControlAssociationUpdate"}
+	if v.StandardsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StandardsArn"))
+	}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if len(v.AssociationStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStandardsControlAssociationUpdates(v []types.StandardsControlAssociationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandardsControlAssociationUpdates"}
+	for i := range v {
+		if err := validateStandardsControlAssociationUpdate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStandardsSubscriptionRequest(v *types.StandardsSubscriptionRequest) error {
 	if v == nil {
 		return nil
@@ -1391,6 +1560,40 @@ func validateOpBatchEnableStandardsInput(v *BatchEnableStandardsInput) error {
 	}
 }
 
+func validateOpBatchGetSecurityControlsInput(v *BatchGetSecurityControlsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSecurityControlsInput"}
+	if v.SecurityControlIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetStandardsControlAssociationsInput(v *BatchGetStandardsControlAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetStandardsControlAssociationsInput"}
+	if v.StandardsControlAssociationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StandardsControlAssociationIds"))
+	} else if v.StandardsControlAssociationIds != nil {
+		if err := validateStandardsControlAssociationIds(v.StandardsControlAssociationIds); err != nil {
+			invalidParams.AddNested("StandardsControlAssociationIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchImportFindingsInput(v *BatchImportFindingsInput) error {
 	if v == nil {
 		return nil
@@ -1430,6 +1633,25 @@ func validateOpBatchUpdateFindingsInput(v *BatchUpdateFindingsInput) error {
 	if v.RelatedFindings != nil {
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
 			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateStandardsControlAssociationsInput(v *BatchUpdateStandardsControlAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateStandardsControlAssociationsInput"}
+	if v.StandardsControlAssociationUpdates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StandardsControlAssociationUpdates"))
+	} else if v.StandardsControlAssociationUpdates != nil {
+		if err := validateStandardsControlAssociationUpdates(v.StandardsControlAssociationUpdates); err != nil {
+			invalidParams.AddNested("StandardsControlAssociationUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1747,6 +1969,21 @@ func validateOpInviteMembersInput(v *InviteMembersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InviteMembersInput"}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStandardsControlAssociationsInput(v *ListStandardsControlAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStandardsControlAssociationsInput"}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

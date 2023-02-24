@@ -1,0 +1,8 @@
+{
+    "id": "1c1be7fd-27fa-4076-a2c3-3398ea74a243",
+    "type": "feature",
+    "description": "This release adds the ability to delete domains through the DeleteDomain API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html",
+    "modules": [
+        "service/connectcases"
+    ]
+}
