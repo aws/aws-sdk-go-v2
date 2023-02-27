@@ -248,7 +248,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -277,15 +277,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -294,7 +346,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -304,22 +356,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lambda-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lambda-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -332,134 +519,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lambda.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://lambda-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -467,7 +572,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://lambda-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://lambda.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -476,74 +581,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://lambda.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://lambda.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -552,648 +596,15 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.ap-south-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-south-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-south-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-south-2.amazonaws.com"
+                                    "url": "https://lambda.af-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-south-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-south-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-south-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-south-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-south-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.me-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "me-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.me-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "me-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.me-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "me-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.me-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "me-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-iso-west-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-iso-west-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-central-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-central-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-central-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-central-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "af-south-1"
                             }
                         },
@@ -1211,509 +622,15 @@
                             }
                         },
                         {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.af-south-1.amazonaws.com"
+                                    "url": "https://lambda.ap-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "ap-east-1"
                             }
                         },
@@ -1731,145 +648,119 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.ap-east-1.amazonaws.com"
+                                    "url": "https://lambda.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://lambda.ap-northeast-1.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.cn-north-1.amazonaws.com.cn"
+                                    "url": "https://lambda.ap-northeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-gov-west-1.api.aws"
+                                    "url": "https://lambda.ap-northeast-2.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.us-gov-west-1.amazonaws.com"
+                                    "url": "https://lambda.ap-northeast-3.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-1.api.aws"
+                                    "url": "https://lambda.ap-northeast-3.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-1.amazonaws.com"
+                                    "url": "https://lambda.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-1"
                             }
                         },
@@ -1887,41 +778,15 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.ap-southeast-1.amazonaws.com"
+                                    "url": "https://lambda.ap-southeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "ap-southeast-2"
                             }
                         },
@@ -1939,89 +804,15 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.ap-southeast-2.amazonaws.com"
+                                    "url": "https://lambda.ap-southeast-3.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "ap-southeast-3"
                             }
                         },
@@ -2039,80 +830,249 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.ap-southeast-3.amazonaws.com"
+                                    "url": "https://lambda.ca-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ca-central-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-4.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-4"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.ap-southeast-4.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-4"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.ap-southeast-4.api.aws"
+                                    "url": "https://lambda.ca-central-1.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ca-central-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.ap-southeast-4.amazonaws.com"
+                                    "url": "https://lambda.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "eu-central-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.us-east-1.api.aws"
+                                    "url": "https://lambda.eu-central-1.api.aws"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -2143,28 +1103,15 @@
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.us-east-1.amazonaws.com"
+                                    "url": "https://lambda.us-east-2.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
                                 "Region": "us-east-2"
                             }
                         },
@@ -2195,41 +1142,132 @@
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.us-east-2.amazonaws.com"
+                                    "url": "https://lambda.us-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-west-1"
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda-fips.cn-northwest-1.amazonaws.com.cn"
+                                    "url": "https://lambda-fips.us-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "cn-northwest-1"
                             }
                         },
@@ -2247,26 +1285,158 @@
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lambda.cn-northwest-1.amazonaws.com.cn"
+                                    "url": "https://lambda-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-gov-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-gov-east-1.api.aws"
+                                }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -2284,31 +1454,7 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lambda.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -2318,6 +1464,19 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2514,6 +1673,9 @@
                         "smithy.api#httpQuery": "RevisionId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#AddLayerVersionPermissionResponse": {
@@ -2531,6 +1693,9 @@
                         "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#AddPermission": {
@@ -2645,9 +1810,12 @@
                 "FunctionUrlAuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#AddPermissionResponse": {
@@ -2659,6 +1827,9 @@
                         "smithy.api#documentation": "<p>The permission statement that's added to the function policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#AdditionalVersion": {
@@ -3028,6 +2199,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.lambda#CollectionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 57
+                },
+                "smithy.api#pattern": "^(^(?!(system\\x2e)))(^[_a-zA-Z0-9])([^$]*)$"
+            }
+        },
         "com.amazonaws.lambda#CompatibleArchitectures": {
             "type": "list",
             "member": {
@@ -3178,6 +2359,9 @@
                         "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing\">routing\n        configuration</a> of the alias.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#CreateCodeSigningConfig": {
@@ -3227,6 +2411,9 @@
                         "smithy.api#documentation": "<p>The code signing policies define the actions to take if the validation checks fail. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#CreateCodeSigningConfigResponse": {
@@ -3239,6 +2426,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#CreateEventSourceMapping": {
@@ -3410,7 +2600,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency\">Configuring maximum concurrency for Amazon SQS event sources</a>.</p>"
                     }
+                },
+                "DocumentDBEventSourceConfig": {
+                    "target": "com.amazonaws.lambda#DocumentDBEventSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific configuration settings for a DocumentDB event source.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#CreateFunction": {
@@ -3472,7 +2671,7 @@
                 "Runtime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.\n        </p>"
+                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
                     }
                 },
                 "Role": {
@@ -3547,7 +2746,7 @@
                 "KMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) key that's used to encrypt your function's environment\n      variables. If it's not provided, Lambda uses a default service key.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.</p>"
                     }
                 },
                 "TracingConfig": {
@@ -3604,6 +2803,9 @@
                         "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html\">SnapStart</a> setting.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#CreateFunctionUrlConfig": {
@@ -3661,7 +2863,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3671,6 +2873,9 @@
                         "smithy.api#documentation": "<p>The <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS\">cross-origin resource sharing (CORS)</a> settings\n  for your function URL.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#CreateFunctionUrlConfigResponse": {
@@ -3693,7 +2898,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3710,6 +2915,19 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lambda#DatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[^ /\\.$\\x22]*$"
             }
         },
         "com.amazonaws.lambda#Date": {
@@ -3779,6 +2997,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteCodeSigningConfig": {
@@ -3823,11 +3044,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteCodeSigningConfigResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lambda#DeleteEventSourceMapping": {
             "type": "operation",
@@ -3874,6 +3101,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteFunction": {
@@ -3958,6 +3188,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteFunctionConcurrency": {
@@ -4005,6 +3238,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteFunctionEventInvokeConfig": {
@@ -4059,6 +3295,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteFunctionRequest": {
@@ -4079,6 +3318,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteFunctionUrlConfig": {
@@ -4130,6 +3372,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteLayerVersion": {
@@ -4177,6 +3422,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#DeleteProvisionedConcurrencyConfig": {
@@ -4232,6 +3480,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#Description": {
@@ -4271,6 +3522,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A configuration object that specifies the destination of an event after Lambda processes it.</p>"
+            }
+        },
+        "com.amazonaws.lambda#DocumentDBEventSourceConfig": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.lambda#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the database to consume within the DocumentDB cluster.\n    </p>"
+                    }
+                },
+                "CollectionName": {
+                    "target": "com.amazonaws.lambda#CollectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.\n    </p>"
+                    }
+                },
+                "FullDocument": {
+                    "target": "com.amazonaws.lambda#FullDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Specific configuration settings for a DocumentDB event source.\n    </p>"
             }
         },
         "com.amazonaws.lambda#EC2AccessDeniedException": {
@@ -4716,6 +3993,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency\">Configuring maximum concurrency for Amazon SQS event sources</a>.</p>"
                     }
+                },
+                "DocumentDBEventSourceConfig": {
+                    "target": "com.amazonaws.lambda#DocumentDBEventSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific configuration settings for a DocumentDB event source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4837,6 +4120,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lambda#Filter"
+            }
+        },
+        "com.amazonaws.lambda#FullDocument": {
+            "type": "enum",
+            "members": {
+                "UpdateLookup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateLookup"
+                    }
+                },
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                }
             }
         },
         "com.amazonaws.lambda#FunctionArn": {
@@ -5018,7 +4318,7 @@
                 "KMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key that's used to encrypt the function's environment variables. This key is\n      returned only if you've configured a customer managed key.</p>"
+                        "smithy.api#documentation": "<p>The KMS key that's used to encrypt the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, this key is also used to encrypt the function's snapshot. This key is\n      returned only if you've configured a customer managed key.</p>"
                     }
                 },
                 "TracingConfig": {
@@ -5286,7 +4586,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5349,7 +4649,10 @@
         },
         "com.amazonaws.lambda#GetAccountSettingsRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lambda#GetAccountSettingsResponse": {
             "type": "structure",
@@ -5366,6 +4669,9 @@
                         "smithy.api#documentation": "<p>The number of functions and amount of storage in use.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetAlias": {
@@ -5418,6 +4724,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetCodeSigningConfig": {
@@ -5459,6 +4768,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetCodeSigningConfigResponse": {
@@ -5471,6 +4783,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetEventSourceMapping": {
@@ -5515,6 +4830,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunction": {
@@ -5681,6 +4999,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionCodeSigningConfigResponse": {
@@ -5700,6 +5021,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionConcurrency": {
@@ -5744,6 +5068,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionConcurrencyResponse": {
@@ -5755,6 +5082,9 @@
                         "smithy.api#documentation": "<p>The number of simultaneous executions that are reserved for the function.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionConfiguration": {
@@ -5916,6 +5246,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionEventInvokeConfig": {
@@ -5967,6 +5300,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionRequest": {
@@ -5987,6 +5323,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionResponse": {
@@ -6016,6 +5355,9 @@
                         "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">reserved\n        concurrency</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionUrlConfig": {
@@ -6067,6 +5409,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetFunctionUrlConfigResponse": {
@@ -6089,7 +5434,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6113,6 +5458,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetLayerVersion": {
@@ -6188,6 +5536,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetLayerVersionPolicy": {
@@ -6241,6 +5592,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetLayerVersionPolicyResponse": {
@@ -6258,6 +5612,9 @@
                         "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetLayerVersionRequest": {
@@ -6280,6 +5637,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetLayerVersionResponse": {
@@ -6391,6 +5751,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetPolicyResponse": {
@@ -6408,6 +5771,9 @@
                         "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetProvisionedConcurrencyConfig": {
@@ -6463,6 +5829,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetProvisionedConcurrencyConfigResponse": {
@@ -6504,6 +5873,9 @@
                         "smithy.api#documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#GetRuntimeManagementConfig": {
@@ -6541,7 +5913,7 @@
             "type": "structure",
             "members": {
                 "FunctionName": {
-                    "target": "com.amazonaws.lambda#FunctionName",
+                    "target": "com.amazonaws.lambda#NamespacedFunctionName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Lambda function.</p>\n         <p class=\"title\">\n            <b>Name formats</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function name</b> – <code>my-function</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Function ARN</b> – <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Partial ARN</b> – <code>123456789012:function:my-function</code>.</p>\n            </li>\n         </ul>\n         <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64\n      characters in length.</p>",
                         "smithy.api#httpLabel": {},
@@ -6555,6 +5927,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#GetRuntimeManagementConfigResponse": {
@@ -6569,9 +5944,18 @@
                 "RuntimeVersionArn": {
                     "target": "com.amazonaws.lambda#RuntimeVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the runtime the function is configured to use. If the runtime update mode is <b>Manual</b>, the ARN is returned, otherwise <code>null</code> \n    is returned.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the runtime the function is configured to use. If the runtime update mode is <b>Manual</b>, the ARN is returned, otherwise <code>null</code> \n      is returned.</p>"
+                    }
+                },
+                "FunctionArn": {
+                    "target": "com.amazonaws.lambda#NameSpacedFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of your function.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#Handler": {
@@ -6854,6 +6238,9 @@
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#InvocationResponse": {
@@ -6895,6 +6282,9 @@
                         "smithy.api#httpHeader": "X-Amz-Executed-Version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#InvocationType": {
@@ -7082,7 +6472,8 @@
                 }
             },
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#InvokeAsyncResponse": {
@@ -7099,7 +6490,8 @@
             },
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>A success response (<code>202 Accepted</code>) indicates that the request is queued for invocation.</p>"
+                "smithy.api#documentation": "<p>A success response (<code>202 Accepted</code>) indicates that the request is queued for invocation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#KMSAccessDeniedException": {
@@ -7664,6 +7056,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListAliasesResponse": {
@@ -7681,6 +7076,9 @@
                         "smithy.api#documentation": "<p>A list of aliases.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListCodeSigningConfigs": {
@@ -7731,6 +7129,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListCodeSigningConfigsResponse": {
@@ -7748,6 +7149,9 @@
                         "smithy.api#documentation": "<p>The code signing configurations</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListEventSourceMappings": {
@@ -7818,6 +7222,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListEventSourceMappingsResponse": {
@@ -7835,6 +7242,9 @@
                         "smithy.api#documentation": "<p>A list of event source mappings.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionEventInvokeConfigs": {
@@ -7899,6 +7309,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionEventInvokeConfigsResponse": {
@@ -7916,6 +7329,9 @@
                         "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionUrlConfigs": {
@@ -7980,6 +7396,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionUrlConfigsResponse": {
@@ -7998,6 +7417,9 @@
                         "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListFunctions": {
@@ -8093,6 +7515,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionsByCodeSigningConfigResponse": {
@@ -8110,6 +7535,9 @@
                         "smithy.api#documentation": "<p>The function ARNs. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionsRequest": {
@@ -8143,6 +7571,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListFunctionsResponse": {
@@ -8162,7 +7593,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of Lambda functions.</p>"
+                "smithy.api#documentation": "<p>A list of Lambda functions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListLayerVersions": {
@@ -8241,6 +7673,9 @@
                         "smithy.api#httpQuery": "CompatibleArchitecture"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListLayerVersionsResponse": {
@@ -8258,6 +7693,9 @@
                         "smithy.api#documentation": "<p>A list of versions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListLayers": {
@@ -8325,6 +7763,9 @@
                         "smithy.api#httpQuery": "CompatibleArchitecture"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListLayersResponse": {
@@ -8342,6 +7783,9 @@
                         "smithy.api#documentation": "<p>A list of function layers.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListProvisionedConcurrencyConfigs": {
@@ -8406,6 +7850,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListProvisionedConcurrencyConfigsResponse": {
@@ -8423,6 +7870,9 @@
                         "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListTags": {
@@ -8467,6 +7917,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListTagsResponse": {
@@ -8478,6 +7931,9 @@
                         "smithy.api#documentation": "<p>The function's tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#ListVersionsByFunction": {
@@ -8542,6 +7998,9 @@
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#ListVersionsByFunctionResponse": {
@@ -8559,6 +8018,9 @@
                         "smithy.api#documentation": "<p>A list of Lambda function versions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#LocalMountPath": {
@@ -9078,6 +8540,9 @@
                         "smithy.api#documentation": "<p>A list of compatible  \n<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PublishLayerVersionResponse": {
@@ -9138,6 +8603,9 @@
                         "smithy.api#documentation": "<p>A list of compatible  \n<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#PublishVersion": {
@@ -9209,6 +8677,9 @@
                         "smithy.api#documentation": "<p>Only update the function if the revision ID matches the ID that's specified. Use this option to avoid\n      publishing a version if the function configuration has changed since you last updated it.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PutFunctionCodeSigningConfig": {
@@ -9266,6 +8737,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PutFunctionCodeSigningConfigResponse": {
@@ -9285,6 +8759,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#PutFunctionConcurrency": {
@@ -9339,6 +8816,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PutFunctionEventInvokeConfig": {
@@ -9411,6 +8891,9 @@
                         "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of an SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of an SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PutProvisionedConcurrencyConfig": {
@@ -9473,6 +8956,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PutProvisionedConcurrencyConfigResponse": {
@@ -9514,6 +9000,9 @@
                         "smithy.api#documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#PutRuntimeManagementConfig": {
@@ -9581,6 +9070,9 @@
                         "smithy.api#documentation": "<p>The ARN of the runtime version you want the function to use.</p>\n         <note>\n            <p>This is only required if you're using the <b>Manual</b> runtime update mode.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#PutRuntimeManagementConfigResponse": {
@@ -9606,6 +9098,9 @@
                         "smithy.api#documentation": "<p>The ARN of the runtime the function is configured to use. If the runtime update mode is <b>manual</b>, the ARN is returned, otherwise <code>null</code> \n      is returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#Qualifier": {
@@ -9709,6 +9204,9 @@
                         "smithy.api#httpQuery": "RevisionId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#RemovePermission": {
@@ -9778,6 +9276,9 @@
                         "smithy.api#httpQuery": "RevisionId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#RequestTooLargeException": {
@@ -10743,6 +10244,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#TagValue": {
@@ -10998,6 +10502,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateAlias": {
@@ -11080,6 +10587,9 @@
                         "smithy.api#documentation": "<p>Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying\n      an alias that has changed since you last read it.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateCodeSigningConfig": {
@@ -11139,6 +10649,9 @@
                         "smithy.api#documentation": "<p>The code signing policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateCodeSigningConfigResponse": {
@@ -11151,6 +10664,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#UpdateEventSourceMapping": {
@@ -11284,7 +10800,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency\">Configuring maximum concurrency for Amazon SQS event sources</a>.</p>"
                     }
+                },
+                "DocumentDBEventSourceConfig": {
+                    "target": "com.amazonaws.lambda#DocumentDBEventSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific configuration settings for a DocumentDB event source.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateFunctionCode": {
@@ -11403,6 +10928,9 @@
                         "smithy.api#documentation": "<p>The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64).\n     The default value is <code>x86_64</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateFunctionConfiguration": {
@@ -11507,7 +11035,7 @@
                 "Runtime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.\n        </p>"
+                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
                     }
                 },
                 "DeadLetterConfig": {
@@ -11519,7 +11047,7 @@
                 "KMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) key that's used to encrypt your function's environment\n      variables. If it's not provided, Lambda uses a default service key.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.</p>"
                     }
                 },
                 "TracingConfig": {
@@ -11564,6 +11092,9 @@
                         "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html\">SnapStart</a> setting.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateFunctionEventInvokeConfig": {
@@ -11636,6 +11167,9 @@
                         "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of an SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of an SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateFunctionUrlConfig": {
@@ -11693,7 +11227,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>"
                     }
                 },
                 "Cors": {
@@ -11702,6 +11236,9 @@
                         "smithy.api#documentation": "<p>The <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS\">cross-origin resource sharing (CORS)</a> settings\n  for your function URL.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lambda#UpdateFunctionUrlConfigResponse": {
@@ -11724,7 +11261,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.lambda#FunctionUrlAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated\n  users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information,\n  see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Security and auth model for Lambda function URLs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11748,6 +11285,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lambda#UpdateRuntimeOn": {
