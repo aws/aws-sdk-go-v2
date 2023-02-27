@@ -2,7 +2,6 @@ package config
 
 import (
 	"context"
-	"fmt"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"os"
@@ -23,7 +22,7 @@ func TestResolveWebIdentityWithOptions(t *testing.T) {
 		os.Setenv("AWS_WEB_IDENTITY_TOKEN_FILE", tokenFile)
 		os.Setenv("AWS_REGION", "us-east-1")
 
-		config, err := LoadDefaultConfig(context.Background(),
+		_, err := LoadDefaultConfig(context.Background(),
 			WithWebIdentityRoleCredentialOptions(func(options *stscreds.WebIdentityRoleOptions) {
 				options.RoleARN = "test-arn"
 			}),
@@ -32,9 +31,6 @@ func TestResolveWebIdentityWithOptions(t *testing.T) {
 		if err != nil {
 			t.Fatalf("expect no error, got %v", err)
 		}
-
-		fmt.Println(config.Credentials)
-
 	})
 
 	t.Run("token from profile", func(t *testing.T) {

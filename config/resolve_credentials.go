@@ -384,7 +384,11 @@ func assumeWebIdentity(ctx context.Context, cfg *aws.Config, filepath string, ro
 		return fmt.Errorf("token file path is not set")
 	}
 
-	var optFns []func(*stscreds.WebIdentityRoleOptions)
+	optFns := []func(*stscreds.WebIdentityRoleOptions){
+		func(options *stscreds.WebIdentityRoleOptions) {
+			options.RoleSessionName = sessionName
+		},
+	}
 
 	optFn, found, err := getWebIdentityCredentialProviderOptions(ctx, configs)
 	if err != nil {
@@ -396,8 +400,7 @@ func assumeWebIdentity(ctx context.Context, cfg *aws.Config, filepath string, ro
 	}
 
 	opts := stscreds.WebIdentityRoleOptions{
-		RoleARN:         roleARN,
-		RoleSessionName: sessionName,
+		RoleARN: roleARN,
 	}
 
 	for _, fn := range optFns {
