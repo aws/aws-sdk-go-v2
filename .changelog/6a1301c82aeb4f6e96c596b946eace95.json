@@ -1,0 +1,8 @@
+{
+    "id": "6a1301c8-2aeb-4f6e-96c5-96b946eace95",
+    "type": "feature",
+    "description": "This release adds the ability to ingest batched historical data or migrate data in bulk from S3 into Timestream using CSV files.",
+    "modules": [
+        "service/timestreamwrite"
+    ]
+}

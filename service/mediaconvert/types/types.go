@@ -921,6 +921,35 @@ type AvcIntraUhdSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The Bandwidth reduction filter increases the video quality of your output
+// relative to its bitrate. Use to lower the bitrate of your constant quality QVBR
+// output, with little or no perceptual decrease in quality. Or, use to increase
+// the video quality of outputs with other rate control modes relative to the
+// bitrate that you specify. Bandwidth reduction increases further when your input
+// is low quality or noisy.Outputs that use this feature incur pro-tier
+// pricing.When you include Bandwidth reduction filter, you cannot include the
+// Noise reducer preprocessor.
+type BandwidthReductionFilter struct {
+
+	// Optionally specify the level of sharpening to apply when you use the Bandwidth
+	// reduction filter. Sharpening adds contrast to the edges of your video content
+	// and can reduce softness. Keep the default value Off to apply no sharpening. Set
+	// Sharpening strength to Low to apply a minimal amount of sharpening, or High to
+	// apply a maximum amount of sharpening.
+	Sharpening BandwidthReductionFilterSharpening
+
+	// Specify the strength of the Bandwidth reduction filter. For most workflows, we
+	// recommend that you choose Auto. Your output bandwidth will be reduced by at
+	// least 8 percent with no perceptual decrease in video quality. If your output
+	// bandwidth isn't constrained, set Filter strength to Low or Medium. Low results
+	// in minimal to no impact in perceptual quality. For more bandwidth reduction,
+	// choose High. The filter helps equalize quality between all scenes and increases
+	// video softness. We recommend that you choose High for low bitrate outputs.
+	Strength BandwidthReductionFilterStrength
+
+	noSmithyDocumentSerde
+}
+
 // Burn-in is a captions delivery method, rather than a captions format. Burn-in
 // writes the captions directly on your video frames, replacing pixels of video
 // content with the captions. Set up burn-in captions in the same output as your
@@ -1810,14 +1839,14 @@ type CmfcSettings struct {
 	TimedMetadataBoxVersion CmfcTimedMetadataBoxVersion
 
 	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3 timed
-	// metadata in your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+	// metadata in your output. For more information, see ISO/IEC 23009-1:2022 section
 	// 5.10.3.3.4 Semantics. Leave blank to use the default value:
 	// https://aomedia.org/emsg/ID3 When you specify a value for ID3 metadata scheme ID
 	// URI, you must also set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataSchemeIdUri *string
 
 	// Specify the event message box (eMSG) value for ID3 timed metadata in your
-	// output. For more informaiton, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
+	// output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
 	// Semantics. When you specify a value for ID3 Metadata Value, you must also set
 	// ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataValue *string
@@ -1862,6 +1891,19 @@ type ColorCorrector struct {
 	// space. For more information about MediaConvert HDR jobs, see
 	// https://docs.aws.amazon.com/console/mediaconvert/hdr.
 	Hdr10Metadata *Hdr10Metadata
+
+	// Specify how MediaConvert maps brightness and colors from your HDR input to your
+	// SDR output. The mode that you select represents a creative choice, with
+	// different tradeoffs in the details and tones of your output. To maintain details
+	// in bright or saturated areas of your output: Choose Preserve details. For some
+	// sources, your SDR output may look less bright and less saturated when compared
+	// to your HDR source. MediaConvert automatically applies this mode for HLG
+	// sources, regardless of your choice. For a bright and saturated output: Choose
+	// Vibrant. We recommend that you choose this mode when any of your source content
+	// is HDR10, and for the best results when it is mastered for 1000 nits. You may
+	// notice loss of details in bright or saturated areas of your output. HDR to SDR
+	// tone mapping has no effect when your input is SDR.
+	HdrToSdrToneMapper HDRToSDRToneMapper
 
 	// Hue in degrees.
 	Hue int32
@@ -2948,9 +2990,9 @@ type EsamSignalProcessingNotification struct {
 // Content Advisory.
 type ExtendedDataServices struct {
 
-	// The action to take on content advisory XDS packets. If you select PASSTHROUGH,
-	// packets will not be changed. If you select STRIP, any packets will be removed in
-	// output captions.
+	// The action to take on copy and redistribution control XDS packets. If you select
+	// PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will
+	// be removed in output captions.
 	CopyProtectionAction CopyProtectionAction
 
 	// The action to take on content advisory XDS packets. If you select PASSTHROUGH,
@@ -3145,6 +3187,16 @@ type H264Settings struct {
 	// H264FlickerAdaptiveQuantization, H264SpatialAdaptiveQuantization, and
 	// H264TemporalAdaptiveQuantization.
 	AdaptiveQuantization H264AdaptiveQuantization
+
+	// The Bandwidth reduction filter increases the video quality of your output
+	// relative to its bitrate. Use to lower the bitrate of your constant quality QVBR
+	// output, with little or no perceptual decrease in quality. Or, use to increase
+	// the video quality of outputs with other rate control modes relative to the
+	// bitrate that you specify. Bandwidth reduction increases further when your input
+	// is low quality or noisy.Outputs that use this feature incur pro-tier
+	// pricing.When you include Bandwidth reduction filter, you cannot include the
+	// Noise reducer preprocessor.
+	BandwidthReductionFilter *BandwidthReductionFilter
 
 	// Specify the average bitrate in bits per second. Required for VBR and CBR. For MS
 	// Smooth outputs, bitrates must be unique when rounded down to the nearest
@@ -5938,14 +5990,14 @@ type MpdSettings struct {
 	TimedMetadataBoxVersion MpdTimedMetadataBoxVersion
 
 	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3 timed
-	// metadata in your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+	// metadata in your output. For more information, see ISO/IEC 23009-1:2022 section
 	// 5.10.3.3.4 Semantics. Leave blank to use the default value:
 	// https://aomedia.org/emsg/ID3 When you specify a value for ID3 metadata scheme ID
 	// URI, you must also set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataSchemeIdUri *string
 
 	// Specify the event message box (eMSG) value for ID3 timed metadata in your
-	// output. For more informaiton, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
+	// output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
 	// Semantics. When you specify a value for ID3 Metadata Value, you must also set
 	// ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataValue *string
@@ -6493,11 +6545,11 @@ type NielsenNonLinearWatermarkSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Enable the Noise reducer (NoiseReducer) feature to remove noise from your video
-// output if necessary. Enable or disable this feature for each output
-// individually. This setting is disabled by default. When you enable Noise reducer
-// (NoiseReducer), you must also select a value for Noise reducer filter
-// (NoiseReducerFilter).
+// Enable the Noise reducer feature to remove noise from your video output if
+// necessary. Enable or disable this feature for each output individually. This
+// setting is disabled by default. When you enable Noise reducer, you must also
+// select a value for Noise reducer filter. For AVC outputs, when you include Noise
+// reducer, you cannot include the Bandwidth reduction filter.
 type NoiseReducer struct {
 
 	// Use Noise reducer filter (NoiseReducerFilter) to select one of the following
@@ -7858,9 +7910,11 @@ type VideoPreprocessor struct {
 	// setting is disabled by default.
 	ImageInserter *ImageInserter
 
-	// Enable the Noise reducer (NoiseReducer) feature to remove noise from your video
-	// output if necessary. Enable or disable this feature for each output
-	// individually. This setting is disabled by default.
+	// Enable the Noise reducer feature to remove noise from your video output if
+	// necessary. Enable or disable this feature for each output individually. This
+	// setting is disabled by default. When you enable Noise reducer, you must also
+	// select a value for Noise reducer filter. For AVC outputs, when you include Noise
+	// reducer, you cannot include the Bandwidth reduction filter.
 	NoiseReducer *NoiseReducer
 
 	// If you work with a third party video watermarking partner, use the group of

@@ -74,6 +74,24 @@ func (EventSourcePosition) Values() []EventSourcePosition {
 	}
 }
 
+type FullDocument string
+
+// Enum values for FullDocument
+const (
+	FullDocumentUpdateLookup FullDocument = "UpdateLookup"
+	FullDocumentDefault      FullDocument = "Default"
+)
+
+// Values returns all known values for FullDocument. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FullDocument) Values() []FullDocument {
+	return []FullDocument{
+		"UpdateLookup",
+		"Default",
+	}
+}
+
 type FunctionResponseType string
 
 // Enum values for FunctionResponseType

@@ -159,6 +159,9 @@ type CreateEventSourceMappingInput struct {
 	// records.
 	DestinationConfig *types.DestinationConfig
 
+	// Specific configuration settings for a DocumentDB event source.
+	DocumentDBEventSourceConfig *types.DocumentDBEventSourceConfig
+
 	// When true, the event source mapping is active. When false, Lambda pauses polling
 	// and invocation. Default: True
 	Enabled *bool
@@ -275,6 +278,9 @@ type CreateEventSourceMappingOutput struct {
 	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded
 	// records.
 	DestinationConfig *types.DestinationConfig
+
+	// Specific configuration settings for a DocumentDB event source.
+	DocumentDBEventSourceConfig *types.DocumentDBEventSourceConfig
 
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string

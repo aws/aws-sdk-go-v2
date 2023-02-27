@@ -6707,7 +6707,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAFFLLAACCFFLLAAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAFFLLAACCAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3Https to be of type string, got %T instead", value)
 				}
 				sv.ExternalAudioFileInput = ptr.String(jtv)
 			}
@@ -7493,6 +7493,55 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBandwidthReductionFilter(v **types.BandwidthReductionFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BandwidthReductionFilter
+	if *v == nil {
+		sv = &types.BandwidthReductionFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sharpening":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BandwidthReductionFilterSharpening to be of type string, got %T instead", value)
+				}
+				sv.Sharpening = types.BandwidthReductionFilterSharpening(jtv)
+			}
+
+		case "strength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BandwidthReductionFilterStrength to be of type string, got %T instead", value)
+				}
+				sv.Strength = types.BandwidthReductionFilterStrength(jtv)
 			}
 
 		default:
@@ -9054,6 +9103,15 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 		case "hdr10Metadata":
 			if err := awsRestjson1_deserializeDocumentHdr10Metadata(&sv.Hdr10Metadata, value); err != nil {
 				return err
+			}
+
+		case "hdrToSdrToneMapper":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HDRToSDRToneMapper to be of type string, got %T instead", value)
+				}
+				sv.HdrToSdrToneMapper = types.HDRToSDRToneMapper(jtv)
 			}
 
 		case "hue":
@@ -11905,6 +11963,11 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.AdaptiveQuantization = types.H264AdaptiveQuantization(jtv)
 			}
 
+		case "bandwidthReductionFilter":
+			if err := awsRestjson1_deserializeDocumentBandwidthReductionFilter(&sv.BandwidthReductionFilter, value); err != nil {
+				return err
+			}
+
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14273,7 +14336,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAFFLLAACCFFLLAAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAFFLLAACCAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3Https to be of type string, got %T instead", value)
 				}
 				sv.FileInput = ptr.String(jtv)
 			}

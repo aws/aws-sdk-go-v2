@@ -64,6 +64,9 @@ type GetEventSourceMappingOutput struct {
 	// records.
 	DestinationConfig *types.DestinationConfig
 
+	// Specific configuration settings for a DocumentDB event source.
+	DocumentDBEventSourceConfig *types.DocumentDBEventSourceConfig
+
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
 

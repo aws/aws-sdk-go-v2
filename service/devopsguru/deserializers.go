@@ -8443,6 +8443,15 @@ func awsRestjson1_deserializeDocumentProactiveAnomaly(v **types.ProactiveAnomaly
 				sv.AssociatedInsightId = ptr.String(jtv)
 			}
 
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnomalyDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8593,6 +8602,15 @@ func awsRestjson1_deserializeDocumentProactiveAnomalySummary(v **types.Proactive
 					return fmt.Errorf("expected InsightId to be of type string, got %T instead", value)
 				}
 				sv.AssociatedInsightId = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnomalyDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "Id":

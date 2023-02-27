@@ -232,6 +232,25 @@ type DestinationConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Specific configuration settings for a DocumentDB event source.
+type DocumentDBEventSourceConfig struct {
+
+	// The name of the collection to consume within the database. If you do not specify
+	// a collection, Lambda consumes all collections.
+	CollectionName *string
+
+	// The name of the database to consume within the DocumentDB cluster.
+	DatabaseName *string
+
+	// Determines what DocumentDB sends to your event stream during document update
+	// operations. If set to UpdateLookup, DocumentDB sends a delta describing the
+	// changes, along with a copy of the entire document. Otherwise, DocumentDB sends
+	// only a partial document that contains the changes.
+	FullDocument FullDocument
+
+	noSmithyDocumentSerde
+}
+
 // A function's environment variable settings. You can use environment variables to
 // adjust your function's behavior without updating code. An environment variable
 // is a pair of strings that are stored in a function's version-specific
@@ -308,6 +327,9 @@ type EventSourceMappingConfiguration struct {
 	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded
 	// records.
 	DestinationConfig *DestinationConfig
+
+	// Specific configuration settings for a DocumentDB event source.
+	DocumentDBEventSourceConfig *DocumentDBEventSourceConfig
 
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
@@ -537,8 +559,12 @@ type FunctionConfiguration struct {
 	// The function's image configuration values.
 	ImageConfigResponse *ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
+	// When Lambda SnapStart
+	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
+	// activated, this key is also used to encrypt the function's snapshot. This key is
+	// returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format
@@ -655,9 +681,9 @@ type FunctionEventInvokeConfig struct {
 type FunctionUrlConfig struct {
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
-	// want to restrict access to authenticated IAM users only. Set to NONE if you want
-	// to bypass IAM authentication to create a public endpoint. For more information,
-	// see Security and auth model for Lambda function URLs
+	// want to restrict access to authenticated users only. Set to NONE if you want to
+	// bypass IAM authentication to create a public endpoint. For more information, see
+	// Security and auth model for Lambda function URLs
 	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
 	//
 	// This member is required.

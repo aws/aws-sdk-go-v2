@@ -899,6 +899,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				return err
 			}
 
+		case "DocumentDBEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentDocumentDBEventSourceConfig(&sv.DocumentDBEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "EventSourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2116,6 +2121,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 
 		case "DestinationConfig":
 			if err := awsRestjson1_deserializeDocumentDestinationConfig(&sv.DestinationConfig, value); err != nil {
+				return err
+			}
+
+		case "DocumentDBEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentDocumentDBEventSourceConfig(&sv.DocumentDBEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -3706,6 +3716,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 
 		case "DestinationConfig":
 			if err := awsRestjson1_deserializeDocumentDestinationConfig(&sv.DestinationConfig, value); err != nil {
+				return err
+			}
+
+		case "DocumentDBEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentDocumentDBEventSourceConfig(&sv.DocumentDBEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -6412,6 +6427,15 @@ func awsRestjson1_deserializeOpDocumentGetRuntimeManagementConfigOutput(v **GetR
 
 	for key, value := range shape {
 		switch key {
+		case "FunctionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameSpacedFunctionArn to be of type string, got %T instead", value)
+				}
+				sv.FunctionArn = ptr.String(jtv)
+			}
+
 		case "RuntimeVersionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11295,6 +11319,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				return err
 			}
 
+		case "DocumentDBEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentDocumentDBEventSourceConfig(&sv.DocumentDBEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "EventSourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15284,6 +15313,64 @@ func awsRestjson1_deserializeDocumentDestinationConfig(v **types.DestinationConf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDocumentDBEventSourceConfig(v **types.DocumentDBEventSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentDBEventSourceConfig
+	if *v == nil {
+		sv = &types.DocumentDBEventSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CollectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CollectionName to be of type string, got %T instead", value)
+				}
+				sv.CollectionName = ptr.String(jtv)
+			}
+
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "FullDocument":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FullDocument to be of type string, got %T instead", value)
+				}
+				sv.FullDocument = types.FullDocument(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEC2AccessDeniedException(v **types.EC2AccessDeniedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15976,6 +16063,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 
 		case "DestinationConfig":
 			if err := awsRestjson1_deserializeDocumentDestinationConfig(&sv.DestinationConfig, value); err != nil {
+				return err
+			}
+
+		case "DocumentDBEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentDocumentDBEventSourceConfig(&sv.DocumentDBEventSourceConfig, value); err != nil {
 				return err
 			}
 

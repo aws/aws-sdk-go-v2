@@ -1,0 +1,8 @@
+{
+    "id": "f7a00de7-b5fd-46ee-80de-c2a791b38697",
+    "type": "feature",
+    "description": "The AWS Elemental MediaConvert SDK has added support for HDR10 to SDR tone mapping, and animated GIF video input sources.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

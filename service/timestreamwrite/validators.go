@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateBatchLoadTask struct {
+}
+
+func (*validateOpCreateBatchLoadTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBatchLoadTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBatchLoadTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBatchLoadTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDatabase struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpDeleteTable) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeBatchLoadTask struct {
+}
+
+func (*validateOpDescribeBatchLoadTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBatchLoadTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBatchLoadTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBatchLoadTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDatabase struct {
 }
 
@@ -145,6 +185,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResumeBatchLoadTask struct {
+}
+
+func (*validateOpResumeBatchLoadTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResumeBatchLoadTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResumeBatchLoadTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResumeBatchLoadTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,10 @@ func (m *validateOpWriteRecords) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateBatchLoadTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBatchLoadTask{}, middleware.After)
+}
+
 func addOpCreateDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDatabase{}, middleware.After)
 }
@@ -266,6 +330,10 @@ func addOpDeleteTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTable{}, middleware.After)
 }
 
+func addOpDescribeBatchLoadTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBatchLoadTask{}, middleware.After)
+}
+
 func addOpDescribeDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDatabase{}, middleware.After)
 }
@@ -276,6 +344,10 @@ func addOpDescribeTableValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpResumeBatchLoadTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResumeBatchLoadTask{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -296,6 +368,85 @@ func addOpUpdateTableValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpWriteRecordsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpWriteRecords{}, middleware.After)
+}
+
+func validateDataModel(v *types.DataModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataModel"}
+	if v.DimensionMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionMappings"))
+	}
+	if v.MultiMeasureMappings != nil {
+		if err := validateMultiMeasureMappings(v.MultiMeasureMappings); err != nil {
+			invalidParams.AddNested("MultiMeasureMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MixedMeasureMappings != nil {
+		if err := validateMixedMeasureMappingList(v.MixedMeasureMappings); err != nil {
+			invalidParams.AddNested("MixedMeasureMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataModelConfiguration(v *types.DataModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataModelConfiguration"}
+	if v.DataModel != nil {
+		if err := validateDataModel(v.DataModel); err != nil {
+			invalidParams.AddNested("DataModel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfiguration"}
+	if v.DataSourceS3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceS3Configuration"))
+	} else if v.DataSourceS3Configuration != nil {
+		if err := validateDataSourceS3Configuration(v.DataSourceS3Configuration); err != nil {
+			invalidParams.AddNested("DataSourceS3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.DataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceS3Configuration(v *types.DataSourceS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceS3Configuration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDimension(v *types.Dimension) error {
@@ -386,6 +537,94 @@ func validateMeasureValues(v []types.MeasureValue) error {
 	}
 }
 
+func validateMixedMeasureMapping(v *types.MixedMeasureMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MixedMeasureMapping"}
+	if len(v.MeasureValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MeasureValueType"))
+	}
+	if v.MultiMeasureAttributeMappings != nil {
+		if err := validateMultiMeasureAttributeMappingList(v.MultiMeasureAttributeMappings); err != nil {
+			invalidParams.AddNested("MultiMeasureAttributeMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMixedMeasureMappingList(v []types.MixedMeasureMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MixedMeasureMappingList"}
+	for i := range v {
+		if err := validateMixedMeasureMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureAttributeMapping(v *types.MultiMeasureAttributeMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureAttributeMapping"}
+	if v.SourceColumn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceColumn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureAttributeMappingList(v []types.MultiMeasureAttributeMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureAttributeMappingList"}
+	for i := range v {
+		if err := validateMultiMeasureAttributeMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureMappings(v *types.MultiMeasureMappings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureMappings"}
+	if v.MultiMeasureAttributeMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiMeasureAttributeMappings"))
+	} else if v.MultiMeasureAttributeMappings != nil {
+		if err := validateMultiMeasureAttributeMappingList(v.MultiMeasureAttributeMappings); err != nil {
+			invalidParams.AddNested("MultiMeasureAttributeMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRecord(v *types.Record) error {
 	if v == nil {
 		return nil
@@ -417,6 +656,38 @@ func validateRecords(v []types.Record) error {
 		if err := validateRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReportConfiguration(v *types.ReportConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportConfiguration"}
+	if v.ReportS3Configuration != nil {
+		if err := validateReportS3Configuration(v.ReportS3Configuration); err != nil {
+			invalidParams.AddNested("ReportS3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReportS3Configuration(v *types.ReportS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportS3Configuration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -464,6 +735,43 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBatchLoadTaskInput(v *CreateBatchLoadTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBatchLoadTaskInput"}
+	if v.DataModelConfiguration != nil {
+		if err := validateDataModelConfiguration(v.DataModelConfiguration); err != nil {
+			invalidParams.AddNested("DataModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceConfiguration"))
+	} else if v.DataSourceConfiguration != nil {
+		if err := validateDataSourceConfiguration(v.DataSourceConfiguration); err != nil {
+			invalidParams.AddNested("DataSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportConfiguration"))
+	} else if v.ReportConfiguration != nil {
+		if err := validateReportConfiguration(v.ReportConfiguration); err != nil {
+			invalidParams.AddNested("ReportConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDatabaseName"))
+	}
+	if v.TargetTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetTableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -558,6 +866,21 @@ func validateOpDeleteTableInput(v *DeleteTableInput) error {
 	}
 }
 
+func validateOpDescribeBatchLoadTaskInput(v *DescribeBatchLoadTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBatchLoadTaskInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDatabaseInput(v *DescribeDatabaseInput) error {
 	if v == nil {
 		return nil
@@ -598,6 +921,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResumeBatchLoadTaskInput(v *ResumeBatchLoadTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResumeBatchLoadTaskInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

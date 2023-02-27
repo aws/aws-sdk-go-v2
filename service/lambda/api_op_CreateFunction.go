@@ -147,9 +147,13 @@ type CreateFunctionInput struct {
 	// that override the values in the container image Dockerfile.
 	ImageConfig *types.ImageConfig
 
-	// The ARN of the Key Management Service (KMS) key that's used to encrypt your
-	// function's environment variables. If it's not provided, Lambda uses a default
-	// service key.
+	// The ARN of the Key Management Service (KMS) customer managed key that's used to
+	// encrypt your function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
+	// When Lambda SnapStart
+	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
+	// activated, this key is also used to encrypt your function's snapshot. If you
+	// don't provide a customer managed key, Lambda uses a default service key.
 	KMSKeyArn *string
 
 	// A list of function layers
@@ -173,7 +177,10 @@ type CreateFunctionInput struct {
 
 	// The identifier of the function's runtime
 	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is
-	// required if the deployment package is a .zip file archive.
+	// required if the deployment package is a .zip file archive. The following list
+	// includes deprecated runtimes. For more information, see Runtime deprecation
+	// policy
+	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy).
 	Runtime types.Runtime
 
 	// The function's SnapStart
@@ -249,8 +256,12 @@ type CreateFunctionOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
+	// When Lambda SnapStart
+	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
+	// activated, this key is also used to encrypt the function's snapshot. This key is
+	// returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format

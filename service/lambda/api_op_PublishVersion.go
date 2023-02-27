@@ -116,8 +116,12 @@ type PublishVersionOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
+	// When Lambda SnapStart
+	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
+	// activated, this key is also used to encrypt the function's snapshot. This key is
+	// returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format

@@ -6711,6 +6711,15 @@ func awsRestjson1_deserializeDocumentDataReplicationInfo(v **types.DataReplicati
 				return err
 			}
 
+		case "stagingAvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAvailabilityZone to be of type string, got %T instead", value)
+				}
+				sv.StagingAvailabilityZone = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7733,6 +7742,15 @@ func awsRestjson1_deserializeDocumentLifeCycleLastLaunch(v **types.LifeCycleLast
 				return err
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.LaunchStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8219,6 +8237,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstance(v **types.RecoveryInstance
 				sv.JobID = ptr.String(jtv)
 			}
 
+		case "originAvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAvailabilityZone to be of type string, got %T instead", value)
+				}
+				sv.OriginAvailabilityZone = ptr.String(jtv)
+			}
+
 		case "originEnvironment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8385,6 +8412,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstanceDataReplicationInfo(v **typ
 		case "replicatedDisks":
 			if err := awsRestjson1_deserializeDocumentRecoveryInstanceDataReplicationInfoReplicatedDisks(&sv.ReplicatedDisks, value); err != nil {
 				return err
+			}
+
+		case "stagingAvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAvailabilityZone to be of type string, got %T instead", value)
+				}
+				sv.StagingAvailabilityZone = ptr.String(jtv)
 			}
 
 		default:

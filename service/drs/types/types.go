@@ -81,6 +81,9 @@ type DataReplicationInfo struct {
 	// The disks that should be replicated.
 	ReplicatedDisks []DataReplicationInfoReplicatedDisk
 
+	// AWS Availability zone into which data is being replicated.
+	StagingAvailabilityZone *string
+
 	noSmithyDocumentSerde
 }
 
@@ -329,6 +332,9 @@ type LifeCycleLastLaunch struct {
 	// a Source Server.
 	Initiated *LifeCycleLastLaunchInitiated
 
+	// Status of Source Server's last launch.
+	Status LaunchStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -440,6 +446,9 @@ type RecoveryInstance struct {
 	// The ID of the Job that created the Recovery Instance.
 	JobID *string
 
+	// AWS availability zone associated with the recovery instance.
+	OriginAvailabilityZone *string
+
 	// Environment (On Premises / AWS) of the instance that the recovery instance
 	// originated from.
 	OriginEnvironment OriginEnvironment
@@ -495,6 +504,9 @@ type RecoveryInstanceDataReplicationInfo struct {
 
 	// The disks that should be replicated.
 	ReplicatedDisks []RecoveryInstanceDataReplicationInfoReplicatedDisk
+
+	// AWS Availability zone into which data is being replicated.
+	StagingAvailabilityZone *string
 
 	noSmithyDocumentSerde
 }
@@ -666,9 +678,8 @@ type ReplicationConfigurationReplicatedDisk struct {
 	// Whether to boot from this disk or not.
 	IsBootDisk *bool
 
-	// When stagingDiskType is set to Auto, this field shows the current staging disk
-	// EBS volume type as it is constantly updated by the service. This is a read-only
-	// field.
+	// The Staging Disk EBS volume type to be used during replication when
+	// stagingDiskType is set to Auto. This is a read-only field.
 	OptimizedStagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
 
 	// The Staging Disk EBS volume type to be used during replication.
