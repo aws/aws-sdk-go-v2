@@ -1,8 +1,0 @@
-{
-    "id": "c4628965-48e4-4bce-8201-cb43c8a41f42",
-    "type": "feature",
-    "description": "This release adds the description field on ListAnomaliesForInsight and DescribeAnomaly API responses for proactive anomalies.",
-    "modules": [
-        "service/devopsguru"
-    ]
-}

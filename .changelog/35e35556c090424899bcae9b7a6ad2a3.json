@@ -1,8 +1,0 @@
-{
-    "id": "35e35556-c090-4248-99bc-ae9b7a6ad2a3",
-    "type": "feature",
-    "description": "New fields were added to reflect availability zone data in source server and recovery instance description commands responses, as well as source server launch status.",
-    "modules": [
-        "service/drs"
-    ]
-}

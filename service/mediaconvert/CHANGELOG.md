@@ -1,3 +1,7 @@
+# v1.32.0 (2023-02-27)
+
+* **Feature**: The AWS Elemental MediaConvert SDK has added support for HDR10 to SDR tone mapping, and animated GIF video input sources.
+
 # v1.31.3 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

@@ -1,3 +1,7 @@
+# v1.16.0 (2023-02-27)
+
+* **Feature**: This release adds the ability to ingest batched historical data or migrate data in bulk from S3 into Timestream using CSV files.
+
 # v1.15.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

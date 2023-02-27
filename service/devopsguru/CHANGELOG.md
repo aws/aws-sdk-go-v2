@@ -1,3 +1,7 @@
+# v1.23.0 (2023-02-27)
+
+* **Feature**: This release adds the description field on ListAnomaliesForInsight and DescribeAnomaly API responses for proactive anomalies.
+
 # v1.22.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

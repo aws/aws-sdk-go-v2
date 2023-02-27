@@ -1,3 +1,20 @@
+# Release (2023-02-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.23.0](service/devopsguru/CHANGELOG.md#v1230-2023-02-27)
+  * **Feature**: This release adds the description field on ListAnomaliesForInsight and DescribeAnomaly API responses for proactive anomalies.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.11.0](service/drs/CHANGELOG.md#v1110-2023-02-27)
+  * **Feature**: New fields were added to reflect availability zone data in source server and recovery instance description commands responses, as well as source server launch status.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.0.0](service/internetmonitor/CHANGELOG.md#v100-2023-02-27)
+  * **Release**: New AWS service client module
+  * **Feature**: CloudWatch Internet Monitor is a a new service within CloudWatch that will help application developers and network engineers continuously monitor internet performance metrics such as availability and performance between their AWS-hosted applications and end-users of these applications
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.30.0](service/lambda/CHANGELOG.md#v1300-2023-02-27)
+  * **Feature**: This release adds the ability to create ESMs with Document DB change streams as event source. For more information see  https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.32.0](service/mediaconvert/CHANGELOG.md#v1320-2023-02-27)
+  * **Feature**: The AWS Elemental MediaConvert SDK has added support for HDR10 to SDR tone mapping, and animated GIF video input sources.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.16.0](service/timestreamwrite/CHANGELOG.md#v1160-2023-02-27)
+  * **Feature**: This release adds the ability to ingest batched historical data or migrate data in bulk from S3 into Timestream using CSV files.
+
 # Release (2023-02-24)
 
 ## Module Highlights

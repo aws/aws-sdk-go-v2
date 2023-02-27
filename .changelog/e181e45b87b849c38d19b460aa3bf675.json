@@ -1,8 +1,0 @@
-{
-    "id": "e181e45b-87b8-49c3-8d19-b460aa3bf675",
-    "type": "feature",
-    "description": "CloudWatch Internet Monitor is a a new service within CloudWatch that will help application developers and network engineers continuously monitor internet performance metrics such as availability and performance between their AWS-hosted applications and end-users of these applications",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.34.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.6
 	github.com/aws/aws-sdk-go-v2/service/kms v1.20.5
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.29.4
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.19.4
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/sts v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/support v1.14.4
-	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.15.4
+	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.4
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.4
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.5
