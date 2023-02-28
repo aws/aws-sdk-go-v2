@@ -3,4 +3,4 @@
 package omics
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.1.4"
+const goModuleVersion = "1.2.0"

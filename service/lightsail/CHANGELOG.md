@@ -1,3 +1,7 @@
+# v1.26.0 (2023-02-28)
+
+* **Feature**: This release adds Lightsail for Research feature support, such as GUI session access, cost estimates, stop instance on idle, and disk auto mount.
+
 # v1.25.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

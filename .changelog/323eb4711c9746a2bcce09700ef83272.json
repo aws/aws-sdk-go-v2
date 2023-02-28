@@ -1,8 +1,0 @@
-{
-    "id": "323eb471-1c97-46a2-bcce-09700ef83272",
-    "type": "feature",
-    "description": "Amazon Comprehend now supports flywheels to help you train and manage new model versions for custom models.",
-    "modules": [
-        "service/comprehend"
-    ]
-}

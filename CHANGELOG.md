@@ -1,3 +1,19 @@
+# Release (2023-02-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.22.0](service/comprehend/CHANGELOG.md#v1220-2023-02-28)
+  * **Feature**: Amazon Comprehend now supports flywheels to help you train and manage new model versions for custom models.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.87.0](service/ec2/CHANGELOG.md#v1870-2023-02-28)
+  * **Feature**: This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.20.6](service/kms/CHANGELOG.md#v1206-2023-02-28)
+  * **Documentation**: AWS KMS is deprecating the RSAES_PKCS1_V1_5 wrapping algorithm option in the GetParametersForImport API that is used in the AWS KMS Import Key Material feature. AWS KMS will end support for this wrapping algorithm by October 1, 2023.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.26.0](service/lightsail/CHANGELOG.md#v1260-2023-02-28)
+  * **Feature**: This release adds Lightsail for Research feature support, such as GUI session access, cost estimates, stop instance on idle, and disk auto mount.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.15.0](service/managedblockchain/CHANGELOG.md#v1150-2023-02-28)
+  * **Feature**: This release adds support for tagging to the accessor resource in Amazon Managed Blockchain
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.2.0](service/omics/CHANGELOG.md#v120-2023-02-28)
+  * **Feature**: Minor model changes to accomodate batch imports feature
+
 # Release (2023-02-27)
 
 ## Module Highlights

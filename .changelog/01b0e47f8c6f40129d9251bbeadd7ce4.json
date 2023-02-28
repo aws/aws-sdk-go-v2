@@ -1,8 +1,0 @@
-{
-    "id": "01b0e47f-8c6f-4012-9d92-51bbeadd7ce4",
-    "type": "feature",
-    "description": "This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.",
-    "modules": [
-        "service/ec2"
-    ]
-}

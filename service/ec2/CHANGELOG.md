@@ -1,3 +1,7 @@
+# v1.87.0 (2023-02-28)
+
+* **Feature**: This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
+
 # v1.86.1 (2023-02-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

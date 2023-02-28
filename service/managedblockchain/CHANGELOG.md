@@ -1,3 +1,7 @@
+# v1.15.0 (2023-02-28)
+
+* **Feature**: This release adds support for tagging to the accessor resource in Amazon Managed Blockchain
+
 # v1.14.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

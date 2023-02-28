@@ -1,8 +1,0 @@
-{
-    "id": "149a390e-581c-4941-9606-1b4062652f7b",
-    "type": "feature",
-    "description": "This release adds support for tagging to the accessor resource in Amazon Managed Blockchain",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}

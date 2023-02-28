@@ -1,8 +1,0 @@
-{
-    "id": "013c0ad0-f2fd-4df7-a168-1bd85bbfbe3e",
-    "type": "feature",
-    "description": "Minor model changes to accomodate batch imports feature",
-    "modules": [
-        "service/omics"
-    ]
-}
