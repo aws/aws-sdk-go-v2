@@ -86,7 +86,7 @@ type GetWorkflowOutput struct {
 	// The workflow's status message.
 	StatusMessage *string
 
-	// The workflow's storage capacity.
+	// The workflow's storage capacity in gigabytes.
 	StorageCapacity *int32
 
 	// The workflow's tags.

@@ -71,10 +71,14 @@ type StartEntitiesDetectionJobInput struct {
 	// for a custom entity recognition job.
 	EntityRecognizerArn *string
 
+	// The Amazon Resource Number (ARN) of the flywheel associated with the model to
+	// use.
+	FlywheelArn *string
+
 	// The identifier of the job.
 	JobName *string
 
-	// Tags to be associated with the entities detection job. A tag is a key-value pair
+	// Tags to associate with the entities detection job. A tag is a key-value pair
 	// that adds metadata to a resource used by Amazon Comprehend. For example, a tag
 	// with "Sales" as the key might be added to a resource to indicate its use by the
 	// sales department.
@@ -102,6 +106,9 @@ type StartEntitiesDetectionJobInput struct {
 }
 
 type StartEntitiesDetectionJobOutput struct {
+
+	// The ARN of the custom entity recognition model.
+	EntityRecognizerArn *string
 
 	// The Amazon Resource Name (ARN) of the entities detection job. It is a unique,
 	// fully qualified identifier for the job. It includes the AWS account, Region, and

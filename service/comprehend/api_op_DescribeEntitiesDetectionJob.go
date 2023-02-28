@@ -30,8 +30,8 @@ func (c *Client) DescribeEntitiesDetectionJob(ctx context.Context, params *Descr
 
 type DescribeEntitiesDetectionJobInput struct {
 
-	// The identifier that Amazon Comprehend generated for the job. The operation
-	// returns this identifier in its response.
+	// The identifier that Amazon Comprehend generated for the job. The
+	// StartEntitiesDetectionJob operation returns this identifier in its response.
 	//
 	// This member is required.
 	JobId *string

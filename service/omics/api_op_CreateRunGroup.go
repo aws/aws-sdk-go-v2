@@ -29,7 +29,8 @@ func (c *Client) CreateRunGroup(ctx context.Context, params *CreateRunGroupInput
 
 type CreateRunGroupInput struct {
 
-	// A request ID for the group.
+	// To ensure that requests don't run multiple times, specify a unique ID for each
+	// request.
 	//
 	// This member is required.
 	RequestId *string
@@ -37,7 +38,7 @@ type CreateRunGroupInput struct {
 	// The maximum number of CPUs to use in the group.
 	MaxCpus *int32
 
-	// A max duration for the group.
+	// A maximum run time for the group in minutes.
 	MaxDuration *int32
 
 	// The maximum number of concurrent runs for the group.

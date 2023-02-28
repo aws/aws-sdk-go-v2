@@ -37,7 +37,7 @@ type UpdateRunGroupInput struct {
 	// The maximum number of CPUs to use.
 	MaxCpus *int32
 
-	// The maximum amount of time to run.
+	// A maximum run time for the group in minutes.
 	MaxDuration *int32
 
 	// The maximum number of concurrent runs for the group.

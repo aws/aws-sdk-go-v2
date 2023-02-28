@@ -69,7 +69,7 @@ type GetReferenceImportJobOutput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The job's sources.
+	// The job's source files.
 	//
 	// This member is required.
 	Sources []types.ImportReferenceSourceItem

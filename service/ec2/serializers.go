@@ -61105,6 +61105,13 @@ func awsEc2query_serializeOpDocumentModifyImageAttributeInput(v *ModifyImageAttr
 		objectKey.String(*v.ImageId)
 	}
 
+	if v.ImdsSupport != nil {
+		objectKey := object.Key("ImdsSupport")
+		if err := awsEc2query_serializeDocumentAttributeValue(v.ImdsSupport, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.LaunchPermission != nil {
 		objectKey := object.Key("LaunchPermission")
 		if err := awsEc2query_serializeDocumentLaunchPermissionModifications(v.LaunchPermission, objectKey); err != nil {

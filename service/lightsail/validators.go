@@ -430,6 +430,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateGUISessionAccessDetails struct {
+}
+
+func (*validateOpCreateGUISessionAccessDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGUISessionAccessDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGUISessionAccessDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGUISessionAccessDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInstancesFromSnapshot struct {
 }
 
@@ -1290,6 +1310,26 @@ func (m *validateOpGetContainerServiceMetricData) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCostEstimate struct {
+}
+
+func (*validateOpGetCostEstimate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCostEstimate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCostEstimateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCostEstimateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDisk struct {
 }
 
@@ -2010,6 +2050,26 @@ func (m *validateOpSetResourceAccessForBucket) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartGUISession struct {
+}
+
+func (*validateOpStartGUISession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartGUISession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartGUISessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartGUISessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartInstance struct {
 }
 
@@ -2045,6 +2105,26 @@ func (m *validateOpStartRelationalDatabase) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartRelationalDatabaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopGUISession struct {
+}
+
+func (*validateOpStopGUISession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopGUISession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopGUISessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopGUISessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2414,6 +2494,10 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreateGUISessionAccessDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGUISessionAccessDetails{}, middleware.After)
+}
+
 func addOpCreateInstancesFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInstancesFromSnapshot{}, middleware.After)
 }
@@ -2586,6 +2670,10 @@ func addOpGetContainerServiceMetricDataValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetContainerServiceMetricData{}, middleware.After)
 }
 
+func addOpGetCostEstimateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCostEstimate{}, middleware.After)
+}
+
 func addOpGetDiskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDisk{}, middleware.After)
 }
@@ -2730,12 +2818,20 @@ func addOpSetResourceAccessForBucketValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpSetResourceAccessForBucket{}, middleware.After)
 }
 
+func addOpStartGUISessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartGUISession{}, middleware.After)
+}
+
 func addOpStartInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartInstance{}, middleware.After)
 }
 
 func addOpStartRelationalDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartRelationalDatabase{}, middleware.After)
+}
+
+func addOpStopGUISessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopGUISession{}, middleware.After)
 }
 
 func addOpStopInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -3311,6 +3407,21 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGUISessionAccessDetailsInput(v *CreateGUISessionAccessDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGUISessionAccessDetailsInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4071,6 +4182,27 @@ func validateOpGetContainerServiceMetricDataInput(v *GetContainerServiceMetricDa
 	}
 }
 
+func validateOpGetCostEstimateInput(v *GetCostEstimateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCostEstimateInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDiskInput(v *GetDiskInput) error {
 	if v == nil {
 		return nil
@@ -4716,6 +4848,21 @@ func validateOpSetResourceAccessForBucketInput(v *SetResourceAccessForBucketInpu
 	}
 }
 
+func validateOpStartGUISessionInput(v *StartGUISessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartGUISessionInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartInstanceInput(v *StartInstanceInput) error {
 	if v == nil {
 		return nil
@@ -4738,6 +4885,21 @@ func validateOpStartRelationalDatabaseInput(v *StartRelationalDatabaseInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "StartRelationalDatabaseInput"}
 	if v.RelationalDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopGUISessionInput(v *StopGUISessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopGUISessionInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

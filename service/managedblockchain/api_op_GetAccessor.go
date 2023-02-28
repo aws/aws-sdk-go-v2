@@ -11,11 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The token based access feature is in preview release for Ethereum on Amazon
-// Managed Blockchain and is subject to change. We recommend that you use this
-// feature only with test scenarios, and not in production environments. Returns
-// detailed information about an accessor. An accessor object is a container that
-// has the information required for token based access to your Ethereum nodes.
+// Returns detailed information about an accessor. An accessor object is a
+// container that has the information required for token based access to your
+// Ethereum nodes.
 func (c *Client) GetAccessor(ctx context.Context, params *GetAccessorInput, optFns ...func(*Options)) (*GetAccessorOutput, error) {
 	if params == nil {
 		params = &GetAccessorInput{}

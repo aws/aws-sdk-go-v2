@@ -44,7 +44,7 @@ type ListEntityRecognizerSummariesOutput struct {
 	// The list entity recognizer summaries.
 	EntityRecognizerSummariesList []types.EntityRecognizerSummary
 
-	// The list entity recognizer summaries.
+	// Identifies the next page of results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

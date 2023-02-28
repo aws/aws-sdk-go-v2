@@ -13,7 +13,8 @@ import (
 	"time"
 )
 
-// Starts a read set activation job.
+// Activates an archived read set. To reduce storage charges, Amazon Omics archives
+// unused read sets after 30 days.
 func (c *Client) StartReadSetActivationJob(ctx context.Context, params *StartReadSetActivationJobInput, optFns ...func(*Options)) (*StartReadSetActivationJobOutput, error) {
 	if params == nil {
 		params = &StartReadSetActivationJobInput{}
@@ -36,7 +37,7 @@ type StartReadSetActivationJobInput struct {
 	// This member is required.
 	SequenceStoreId *string
 
-	// The job's sources.
+	// The job's source files.
 	//
 	// This member is required.
 	Sources []types.StartReadSetActivationJobSourceItem

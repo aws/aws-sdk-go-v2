@@ -47,10 +47,17 @@ type UpdateEndpointInput struct {
 	// The ARN of the new model to use when updating an existing endpoint.
 	DesiredModelArn *string
 
+	// The Amazon Resource Number (ARN) of the flywheel
+	FlywheelArn *string
+
 	noSmithyDocumentSerde
 }
 
 type UpdateEndpointOutput struct {
+
+	// The Amazon Resource Number (ARN) of the new model.
+	DesiredModelArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

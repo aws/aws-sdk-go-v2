@@ -36,8 +36,8 @@ func (c *Client) CreateDocumentClassifier(ctx context.Context, params *CreateDoc
 
 type CreateDocumentClassifierInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
-	// that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role that grants Amazon Comprehend read access to your input data.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -52,10 +52,8 @@ type CreateDocumentClassifierInput struct {
 	// This member is required.
 	InputDataConfig *types.DocumentClassifierInputDataConfig
 
-	// The language of the input documents. You can specify any of the following
-	// languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish
-	// ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must
-	// be in the same language.
+	// The language of the input documents. You can specify any of the languages
+	// supported by Amazon Comprehend. All documents must be in the same language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -98,10 +96,10 @@ type CreateDocumentClassifierInput struct {
 	// classifier jobs.
 	OutputDataConfig *types.DocumentClassifierOutputDataConfig
 
-	// Tags to be associated with the document classifier being created. A tag is a
-	// key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
-	// For example, a tag with "Sales" as the key might be added to a resource to
-	// indicate its use by the sales department.
+	// Tags to associate with the document classifier. A tag is a key-value pair that
+	// adds as a metadata to a resource used by Amazon Comprehend. For example, a tag
+	// with "Sales" as the key might be added to a resource to indicate its use by the
+	// sales department.
 	Tags []types.Tag
 
 	// The version name given to the newly created classifier. Version names can have a

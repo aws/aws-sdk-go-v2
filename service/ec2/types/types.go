@@ -2485,8 +2485,8 @@ type DescribeFastLaunchImagesSuccessItem struct {
 	// launches Windows instances from pre-provisioned snapshots.
 	LaunchTemplate *FastLaunchLaunchTemplateSpecificationResponse
 
-	// The maximum number of parallel instances that are launched for creating
-	// resources.
+	// The maximum number of instances that Amazon EC2 can launch at the same time to
+	// create pre-provisioned snapshots for Windows faster launching.
 	MaxParallelLaunches *int32
 
 	// The owner ID for the fast-launch enabled Windows AMI.
@@ -4134,8 +4134,8 @@ type FleetLaunchTemplateOverrides struct {
 	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirements
 
-	// The instance type. If you specify InstanceType, you can't specify
-	// InstanceRequirements.
+	// The instance type. mac1.metal is not supported as a launch template override. If
+	// you specify InstanceType, you can't specify InstanceRequirements.
 	InstanceType InstanceType
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -4184,8 +4184,8 @@ type FleetLaunchTemplateOverridesRequest struct {
 	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirementsRequest
 
-	// The instance type. If you specify InstanceType, you can't specify
-	// InstanceRequirements.
+	// The instance type. mac1.metal is not supported as a launch template override. If
+	// you specify InstanceType, you can't specify InstanceRequirements.
 	InstanceType InstanceType
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -8219,7 +8219,8 @@ type LaunchSpecification struct {
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string
 
-	// The Base64-encoded user data for the instance.
+	// The base64-encoded user data that instances use when starting up. User data is
+	// limited to 16 KB.
 	UserData *string
 
 	noSmithyDocumentSerde
@@ -12000,7 +12001,8 @@ type RequestSpotLaunchSpecification struct {
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string
 
-	// The Base64-encoded user data for the instance. User data is limited to 16 KB.
+	// The base64-encoded user data that instances use when starting up. User data is
+	// limited to 16 KB.
 	UserData *string
 
 	noSmithyDocumentSerde
@@ -13849,7 +13851,8 @@ type SpotFleetLaunchSpecification struct {
 	// The tags to apply during creation.
 	TagSpecifications []SpotFleetTagSpecification
 
-	// The Base64-encoded user data that instances use when starting up.
+	// The base64-encoded user data that instances use when starting up. User data is
+	// limited to 16 KB.
 	UserData *string
 
 	// The number of units provided by the specified instance type. These are the same

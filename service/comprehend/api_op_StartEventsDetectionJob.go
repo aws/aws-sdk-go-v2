@@ -63,10 +63,10 @@ type StartEventsDetectionJobInput struct {
 	// The identifier of the events detection job.
 	JobName *string
 
-	// Tags to be associated with the events detection job. A tag is a key-value pair
-	// that adds metadata to a resource used by Amazon Comprehend. For example, a tag
-	// with "Sales" as the key might be added to a resource to indicate its use by the
-	// sales department.
+	// Tags to associate with the events detection job. A tag is a key-value pair that
+	// adds metadata to a resource used by Amazon Comprehend. For example, a tag with
+	// "Sales" as the key might be added to a resource to indicate its use by the sales
+	// department.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

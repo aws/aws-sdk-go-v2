@@ -135,6 +135,9 @@ func awsRestjson1_deserializeOpErrorCreateAccessor(response *smithyhttp.Response
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyTagsException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4277,6 +4280,11 @@ func awsRestjson1_deserializeDocumentAccessor(v **types.Accessor, value interfac
 					return fmt.Errorf("expected AccessorStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.AccessorStatus(jtv)
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentOutputTagMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "Type":

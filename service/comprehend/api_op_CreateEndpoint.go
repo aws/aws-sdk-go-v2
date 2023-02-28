@@ -45,25 +45,27 @@ type CreateEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// The Amazon Resource Number (ARN) of the model to which the endpoint will be
-	// attached.
-	//
-	// This member is required.
-	ModelArn *string
-
 	// An idempotency token provided by the customer. If this token matches a previous
 	// endpoint creation request, Amazon Comprehend will not return a
 	// ResourceInUseException.
 	ClientRequestToken *string
 
-	// The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM)
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend read access to trained custom models
 	// encrypted with a customer managed key (ModelKmsKeyId).
 	DataAccessRoleArn *string
 
-	// Tags associated with the endpoint being created. A tag is a key-value pair that
-	// adds metadata to the endpoint. For example, a tag with "Sales" as the key might
-	// be added to an endpoint to indicate its use by the sales department.
+	// The Amazon Resource Number (ARN) of the flywheel to which the endpoint will be
+	// attached.
+	FlywheelArn *string
+
+	// The Amazon Resource Number (ARN) of the model to which the endpoint will be
+	// attached.
+	ModelArn *string
+
+	// Tags to associate with the endpoint. A tag is a key-value pair that adds
+	// metadata to the endpoint. For example, a tag with "Sales" as the key might be
+	// added to an endpoint to indicate its use by the sales department.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -73,6 +75,9 @@ type CreateEndpointOutput struct {
 
 	// The Amazon Resource Number (ARN) of the endpoint being created.
 	EndpointArn *string
+
+	// The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+	ModelArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

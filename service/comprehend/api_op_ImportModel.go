@@ -39,9 +39,9 @@ type ImportModelInput struct {
 	// This member is required.
 	SourceModelArn *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
-	// that allows Amazon Comprehend to use Amazon Key Management Service (KMS) to
-	// encrypt or decrypt the custom model.
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role that grants Amazon Comprehend permission to use Amazon Key Management
+	// Service (KMS) to encrypt or decrypt the custom model.
 	DataAccessRoleArn *string
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
@@ -59,8 +59,8 @@ type ImportModelInput struct {
 	// this import.
 	ModelName *string
 
-	// Tags to be associated with the custom model that is created by this import. A
-	// tag is a key-value pair that adds as a metadata to a resource used by Amazon
+	// Tags to associate with the custom model that is created by this import. A tag is
+	// a key-value pair that adds as a metadata to a resource used by Amazon
 	// Comprehend. For example, a tag with "Sales" as the key might be added to a
 	// resource to indicate its use by the sales department.
 	Tags []types.Tag

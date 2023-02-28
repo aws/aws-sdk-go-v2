@@ -11,6 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// To import your virtual machines (VMs) with a console-based experience, you can
+// use the Import virtual machine images to Amazon Web Services template in the
+// Migration Hub Orchestrator console
+// (https://console.aws.amazon.com/migrationhub/orchestrator). For more
+// information, see the  Migration Hub Orchestrator User Guide
+// (https://docs.aws.amazon.com/migrationhub-orchestrator/latest/userguide/import-vm-images.html).
 // Import single or multi-volume disk images or EBS snapshots into an Amazon
 // Machine Image (AMI). Amazon Web Services VM Import/Export strongly recommends
 // specifying a value for either the --license-type or --usage-operation parameter

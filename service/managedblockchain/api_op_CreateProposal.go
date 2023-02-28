@@ -64,11 +64,10 @@ type CreateProposalInput struct {
 	// "Proposal to add Example Corp. as member."
 	Description *string
 
-	// Tags to assign to the proposal. Each tag consists of a key and optional value.
-	// When specifying tags during creation, you can specify multiple key-value pairs
-	// in a single request, with an overall maximum of 50 tags added to each resource.
-	// If the proposal is for a network invitation, the invitation inherits the tags
-	// added to the proposal. For more information about tags, see Tagging Resources
+	// Tags to assign to the proposal. Each tag consists of a key and an optional
+	// value. You can specify multiple key-value pairs in a single request with an
+	// overall maximum of 50 tags allowed per resource. For more information about
+	// tags, see Tagging Resources
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)

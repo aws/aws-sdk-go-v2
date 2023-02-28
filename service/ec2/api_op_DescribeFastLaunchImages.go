@@ -54,12 +54,14 @@ type DescribeFastLaunchImagesInput struct {
 	// Details for one or more Windows AMI image IDs.
 	ImageIds []string
 
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another request with the returned NextToken value. If
-	// this parameter is not specified, then all results are returned.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
+	// information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The token for the next set of results.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -71,8 +73,8 @@ type DescribeFastLaunchImagesOutput struct {
 	// the requested criteria.
 	FastLaunchImages []types.DescribeFastLaunchImagesSuccessItem
 
-	// The token to use for the next set of results. This value is null when there are
-	// no more results to return.
+	// The token to include in another request to get the next page of items. This
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -152,9 +154,10 @@ var _ DescribeFastLaunchImagesAPIClient = (*Client)(nil)
 // DescribeFastLaunchImagesPaginatorOptions is the paginator options for
 // DescribeFastLaunchImages
 type DescribeFastLaunchImagesPaginatorOptions struct {
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another request with the returned NextToken value. If
-	// this parameter is not specified, then all results are returned.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
+	// information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

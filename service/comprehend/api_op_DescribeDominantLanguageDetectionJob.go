@@ -30,8 +30,9 @@ func (c *Client) DescribeDominantLanguageDetectionJob(ctx context.Context, param
 
 type DescribeDominantLanguageDetectionJobInput struct {
 
-	// The identifier that Amazon Comprehend generated for the job. The operation
-	// returns this identifier in its response.
+	// The identifier that Amazon Comprehend generated for the job. The
+	// StartDominantLanguageDetectionJob operation returns this identifier in its
+	// response.
 	//
 	// This member is required.
 	JobId *string

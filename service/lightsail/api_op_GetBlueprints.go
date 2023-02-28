@@ -36,6 +36,10 @@ func (c *Client) GetBlueprints(ctx context.Context, params *GetBlueprintsInput, 
 
 type GetBlueprintsInput struct {
 
+	// Returns a list of blueprints that are specific to Lightsail for Research. You
+	// must use this parameter to view Lightsail for Research blueprints.
+	AppCategory types.AppCategory
+
 	// A Boolean value that indicates whether to include inactive (unavailable)
 	// blueprints in the response of your request.
 	IncludeInactive *bool

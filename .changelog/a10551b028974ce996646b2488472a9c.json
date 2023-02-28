@@ -1,0 +1,8 @@
+{
+    "id": "a10551b0-2897-4ce9-9664-6b2488472a9c",
+    "type": "feature",
+    "description": "This release adds Lightsail for Research feature support, such as GUI session access, cost estimates, stop instance on idle, and disk auto mount.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

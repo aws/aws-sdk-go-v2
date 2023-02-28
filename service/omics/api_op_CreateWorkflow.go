@@ -30,7 +30,8 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 
 type CreateWorkflowInput struct {
 
-	// A request ID for the workflow.
+	// To ensure that requests don't run multiple times, specify a unique ID for each
+	// request.
 	//
 	// This member is required.
 	RequestId *string
@@ -56,7 +57,7 @@ type CreateWorkflowInput struct {
 	// A parameter template for the workflow.
 	ParameterTemplate map[string]types.WorkflowParameter
 
-	// A storage capacity for the workflow.
+	// A storage capacity for the workflow in gigabytes.
 	StorageCapacity *int32
 
 	// Tags for the workflow.

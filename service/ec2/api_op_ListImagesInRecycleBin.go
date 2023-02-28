@@ -43,14 +43,14 @@ type ListImagesInRecycleBinInput struct {
 	// are in the Recycle Bin. You can specify up to 20 IDs in a single request.
 	ImageIds []string
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If you
-	// do not specify a value for MaxResults, the request returns 1,000 items per page
-	// by default. For more information, see  Pagination
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
+	// information, see Pagination
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The token for the next page of results.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -61,8 +61,8 @@ type ListImagesInRecycleBinOutput struct {
 	// Information about the AMIs.
 	Images []types.ImageRecycleBinInfo
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to include in another request to get the next page of items. This
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,10 +142,9 @@ var _ ListImagesInRecycleBinAPIClient = (*Client)(nil)
 // ListImagesInRecycleBinPaginatorOptions is the paginator options for
 // ListImagesInRecycleBin
 type ListImagesInRecycleBinPaginatorOptions struct {
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If you
-	// do not specify a value for MaxResults, the request returns 1,000 items per page
-	// by default. For more information, see  Pagination
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. For more
+	// information, see Pagination
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 

@@ -58,7 +58,7 @@ type GetRunTaskOutput struct {
 	// The task's log stream.
 	LogStream *string
 
-	// The task's memory setting.
+	// The task's memory use in gigabytes.
 	Memory *int32
 
 	// The task's name.

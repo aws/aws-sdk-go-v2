@@ -31,7 +31,8 @@ func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...
 
 type StartRunInput struct {
 
-	// A request ID for the run.
+	// To ensure that requests don't run multiple times, specify a unique ID for each
+	// request.
 	//
 	// This member is required.
 	RequestId *string
@@ -62,7 +63,7 @@ type StartRunInput struct {
 	// The run's ID.
 	RunId *string
 
-	// A storage capacity for the run.
+	// A storage capacity for the run in gigabytes.
 	StorageCapacity *int32
 
 	// Tags for the run.

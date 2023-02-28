@@ -69,7 +69,7 @@ type GetReadSetImportJobOutput struct {
 	// This member is required.
 	SequenceStoreId *string
 
-	// The job's sources.
+	// The job's source files.
 	//
 	// This member is required.
 	Sources []types.ImportReadSetSourceItem

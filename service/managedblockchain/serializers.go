@@ -84,6 +84,13 @@ func awsRestjson1_serializeOpDocumentCreateAccessorInput(v *CreateAccessorInput,
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentInputTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

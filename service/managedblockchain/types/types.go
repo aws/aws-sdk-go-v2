@@ -7,10 +7,7 @@ import (
 	"time"
 )
 
-// The token based access feature is in preview release for Ethereum on Amazon
-// Managed Blockchain and is subject to change. We recommend that you use this
-// feature only with test scenarios, and not in production environments. The
-// properties of the Accessor.
+// The properties of the Accessor.
 type Accessor struct {
 
 	// The Amazon Resource Name (ARN) of the accessor. For more information about ARNs
@@ -33,6 +30,14 @@ type Accessor struct {
 	// The current status of the accessor.
 	Status AccessorStatus
 
+	// The tags assigned to the Accessor. For more information about tags, see Tagging
+	// Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]string
+
 	// The type of the accessor. Currently accessor type is restricted to
 	// BILLING_TOKEN.
 	Type AccessorType
@@ -40,10 +45,7 @@ type Accessor struct {
 	noSmithyDocumentSerde
 }
 
-// The token based access feature is in preview release for Ethereum on Amazon
-// Managed Blockchain and is subject to change. We recommend that you use this
-// feature only with test scenarios, and not in production environments. A summary
-// of accessor properties.
+// A summary of accessor properties.
 type AccessorSummary struct {
 
 	// The Amazon Resource Name (ARN) of the accessor. For more information about ARNs
@@ -251,6 +253,8 @@ type Member struct {
 
 	// Tags assigned to the member. Tags consist of a key and optional value. For more
 	// information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
@@ -300,12 +304,14 @@ type MemberConfiguration struct {
 	// Managed Blockchain network.
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
 
-	// Tags assigned to the member. Tags consist of a key and optional value. For more
-	// information about tags, see Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When
+	// Tags assigned to the member. Tags consist of a key and optional value. When
 	// specifying tags during creation, you can specify multiple key-value pairs in a
-	// single request, with an overall maximum of 50 tags added to each resource.
+	// single request, with an overall maximum of 50 tags added to each resource. For
+	// more information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

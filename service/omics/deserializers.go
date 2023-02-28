@@ -16230,6 +16230,15 @@ func awsRestjson1_deserializeDocumentVariantImportItemDetail(v **types.VariantIm
 				sv.Source = ptr.String(jtv)
 			}
 
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobStatusMsg to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

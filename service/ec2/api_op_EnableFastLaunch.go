@@ -52,8 +52,9 @@ type EnableFastLaunchInput struct {
 	// launch template, but not both.
 	LaunchTemplate *types.FastLaunchLaunchTemplateSpecificationRequest
 
-	// The maximum number of parallel instances to launch for creating resources. Value
-	// must be 6 or greater.
+	// The maximum number of instances that Amazon EC2 can launch at the same time to
+	// create pre-provisioned snapshots for Windows faster launching. Value must be 6
+	// or greater.
 	MaxParallelLaunches *int32
 
 	// The type of resource to use for pre-provisioning the Windows AMI for faster
@@ -78,7 +79,8 @@ type EnableFastLaunchOutput struct {
 	// pre-provisioned snapshots.
 	LaunchTemplate *types.FastLaunchLaunchTemplateSpecificationResponse
 
-	// The maximum number of parallel instances to launch for creating resources.
+	// The maximum number of instances that Amazon EC2 can launch at the same time to
+	// create pre-provisioned snapshots for Windows faster launching.
 	MaxParallelLaunches *int32
 
 	// The owner ID for the Windows AMI for which faster launching was enabled.
@@ -88,9 +90,9 @@ type EnableFastLaunchOutput struct {
 	// faster launching.
 	ResourceType types.FastLaunchResourceType
 
-	// The configuration settings that were defined for creating and managing the
-	// pre-provisioned snapshots for faster launching of the Windows AMI. This property
-	// is returned when the associated resourceType is snapshot.
+	// Settings to create and manage the pre-provisioned snapshots that Amazon EC2 uses
+	// for faster launches from the Windows AMI. This property is returned when the
+	// associated resourceType is snapshot.
 	SnapshotConfiguration *types.FastLaunchSnapshotConfigurationResponse
 
 	// The current state of faster launching for the specified Windows AMI.
