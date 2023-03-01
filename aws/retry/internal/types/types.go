@@ -1,4 +1,4 @@
-package mock
+package types
 
 // NoSuchBucketException is a mock error
 type NoSuchBucketException struct{}

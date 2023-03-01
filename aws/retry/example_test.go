@@ -8,9 +8,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	config "github.com/aws/aws-sdk-go-v2/aws/retry/internal/mock"
-	s3 "github.com/aws/aws-sdk-go-v2/aws/retry/internal/mock"
-	types "github.com/aws/aws-sdk-go-v2/aws/retry/internal/mock"
+	"github.com/aws/aws-sdk-go-v2/aws/retry/internal/config"
+	"github.com/aws/aws-sdk-go-v2/aws/retry/internal/s3"
+	"github.com/aws/aws-sdk-go-v2/aws/retry/internal/types"
 )
 
 func Example_overrideForAllClients() {
@@ -55,7 +55,7 @@ func Example_overrideSpecificOperation() {
 	_, err = client.GetObject(context.Background(), &s3.GetObjectInput{
 		Bucket: aws.String("my-bucket"),
 		Key:    aws.String("my-key"),
-	}, func(options *types.Options) {
+	}, func(options *s3.Options) {
 		options.Retryer = retry.AddWithErrorCodes(options.Retryer, (*types.NoSuchBucketException)(nil).ErrorCode())
 	})
 	if err != nil {
