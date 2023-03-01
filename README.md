@@ -1,6 +1,6 @@
 # AWS SDK for Go v2
 
-[![Go Build status](https://github.com/aws/aws-sdk-go-v2/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/aws/aws-sdk-go-v2/actions/workflows/go.yml)[![Codegen Build status](https://github.com/aws/aws-sdk-go-v2/actions/workflows/codegen.yml/badge.svg?branch=main)](https://github.com/aws/aws-sdk-go-v2/actions/workflows/codegen.yml) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://aws.github.io/aws-sdk-go-v2/docs/) [![Migration Guide](https://img.shields.io/badge/Migration-Guide-blue)](https://aws.github.io/aws-sdk-go-v2/docs/migrating/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
+[![Go Build status](https://github.com/aws/aws-sdk-go-v2/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/aws/aws-sdk-go-v2/actions/workflows/go.yml)[![Codegen Build status](https://github.com/aws/aws-sdk-go-v2/actions/workflows/codegen.yml/badge.svg?branch=main)](https://github.com/aws/aws-sdk-go-v2/actions/workflows/codegen.yml) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://aws.github.io/aws-sdk-go-v2/docs/) [![Migration Guide](https://img.shields.io/badge/Migration-Guide-blue)](https://aws.github.io/aws-sdk-go-v2/docs/migrating/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/main/LICENSE.txt)
 
 
 `aws-sdk-go-v2` is the v2 AWS SDK for the Go programming language.
@@ -151,7 +151,7 @@ services may supply helpful samples to look out for.
 [Dep]: https://github.com/golang/dep
 [Issues]: https://github.com/aws/aws-sdk-go-v2/issues
 [Projects]: https://github.com/aws/aws-sdk-go-v2/projects
-[CHANGELOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
+[CHANGELOG]: https://github.com/aws/aws-sdk-go-v2/blob/main/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
-[design]: https://github.com/aws/aws-sdk-go-v2/blob/master/DESIGN.md  
+[design]: https://github.com/aws/aws-sdk-go-v2/blob/main/DESIGN.md  
 [license]: http://aws.amazon.com/apache2.0/
