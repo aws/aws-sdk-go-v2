@@ -1,3 +1,13 @@
+# Release (2023-03-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.2.0](service/codecatalyst/CHANGELOG.md#v120-2023-03-01)
+  * **Feature**: Published Dev Environments StopDevEnvironmentSession API
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.19.0](service/pricing/CHANGELOG.md#v1190-2023-03-01)
+  * **Feature**: This release adds 2 new APIs - ListPriceLists which returns a list of applicable price lists, and GetPriceListFileUrl which outputs a URL to retrieve your price lists from the generated file from ListPriceLists
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.15.0](service/s3outposts/CHANGELOG.md#v1150-2023-03-01)
+  * **Feature**: S3 on Outposts introduces a new API ListOutpostsWithS3, with this API you can list all your Outposts with S3 capacity.
+
 # Release (2023-02-28)
 
 ## Module Highlights

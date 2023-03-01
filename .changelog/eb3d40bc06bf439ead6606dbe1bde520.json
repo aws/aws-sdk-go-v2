@@ -1,8 +1,0 @@
-{
-    "id": "eb3d40bc-06bf-439e-ad66-06dbe1bde520",
-    "type": "feature",
-    "description": "This release adds 2 new APIs - ListPriceLists which returns a list of applicable price lists, and GetPriceListFileUrl which outputs a URL to retrieve your price lists from the generated file from ListPriceLists",
-    "modules": [
-        "service/pricing"
-    ]
-}

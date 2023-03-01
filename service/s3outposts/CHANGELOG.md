@@ -1,3 +1,7 @@
+# v1.15.0 (2023-03-01)
+
+* **Feature**: S3 on Outposts introduces a new API ListOutpostsWithS3, with this API you can list all your Outposts with S3 capacity.
+
 # v1.14.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

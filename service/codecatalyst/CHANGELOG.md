@@ -1,3 +1,7 @@
+# v1.2.0 (2023-03-01)
+
+* **Feature**: Published Dev Environments StopDevEnvironmentSession API
+
 # v1.1.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

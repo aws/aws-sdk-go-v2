@@ -1,8 +1,0 @@
-{
-    "id": "3d17ba73-56ac-4ac9-893e-1703ea2de693",
-    "type": "feature",
-    "description": "S3 on Outposts introduces a new API ListOutpostsWithS3, with this API you can list all your Outposts with S3 capacity.",
-    "modules": [
-        "service/s3outposts"
-    ]
-}

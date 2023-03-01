@@ -1,8 +1,0 @@
-{
-    "id": "6d1e102f-12cc-41a9-b90a-b48fa8b2e798",
-    "type": "feature",
-    "description": "Published Dev Environments StopDevEnvironmentSession API",
-    "modules": [
-        "service/codecatalyst"
-    ]
-}
