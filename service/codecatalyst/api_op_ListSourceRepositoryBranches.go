@@ -59,6 +59,8 @@ type ListSourceRepositoryBranchesInput struct {
 type ListSourceRepositoryBranchesOutput struct {
 
 	// Information about the source branches.
+	//
+	// This member is required.
 	Items []types.ListSourceRepositoryBranchesItem
 
 	// A token returned from a call to this API to indicate the next batch of results

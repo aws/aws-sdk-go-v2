@@ -30,6 +30,7 @@
         "api_op_StartDevEnvironment.go",
         "api_op_StartDevEnvironmentSession.go",
         "api_op_StopDevEnvironment.go",
+        "api_op_StopDevEnvironmentSession.go",
         "api_op_UpdateDevEnvironment.go",
         "api_op_VerifySession.go",
         "deserializers.go",

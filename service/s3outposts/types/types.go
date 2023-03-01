@@ -61,4 +61,23 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details for the Outpost object.
+type Outpost struct {
+
+	// The Amazon S3 capacity of the outpost in bytes.
+	CapacityInBytes int64
+
+	// Specifies the unique Amazon Resource Name (ARN) for the outpost.
+	OutpostArn *string
+
+	// Specifies the unique identifier for the outpost.
+	OutpostId *string
+
+	// Returns the Amazon Web Services account ID of the outpost owner. Useful for
+	// comparing owned versus shared outposts.
+	OwnerId *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

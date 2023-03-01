@@ -37,13 +37,47 @@ type Filter struct {
 	// This member is required.
 	Type FilterType
 
-	// The service code or attribute value that you want to filter by. If you are
+	// The service code or attribute value that you want to filter by. If you're
 	// filtering by service code this is the actual service code, such as AmazonEC2. If
-	// you are filtering by attribute name, this is the attribute value that you want
+	// you're filtering by attribute name, this is the attribute value that you want
 	// the returned products to match, such as a Provisioned IOPS volume.
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// This feature is in preview release and is subject to change. Your use of Amazon
+// Web Services Price List API is subject to the Beta Service Participation terms
+// of the Amazon Web Services Service Terms (https://aws.amazon.com/service-terms/)
+// (Section 1.10). This is the type of price list references that match your
+// request.
+type PriceList struct {
+
+	// The three alphabetical character ISO-4217 currency code the Price List files are
+	// denominated in.
+	CurrencyCode *string
+
+	// The format you want to retrieve your Price List files. The FileFormat can be
+	// obtained from the ListPriceList
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html)
+	// response.
+	FileFormats []string
+
+	// The unique identifier that maps to where your Price List files are located.
+	// PriceListArn can be obtained from the ListPriceList
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html)
+	// response.
+	PriceListArn *string
+
+	// This is used to filter the Price List by Amazon Web Services Region. For
+	// example, to get the price list only for the US East (N. Virginia) Region, use
+	// us-east-1. If nothing is specified, you retrieve price lists for all applicable
+	// Regions. The available RegionCode list can be retrieved from GetAttributeValues
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html)
+	// API.
+	RegionCode *string
 
 	noSmithyDocumentSerde
 }

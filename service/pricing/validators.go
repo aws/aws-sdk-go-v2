@@ -30,6 +30,26 @@ func (m *validateOpGetAttributeValues) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPriceListFileUrl struct {
+}
+
+func (*validateOpGetPriceListFileUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPriceListFileUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPriceListFileUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPriceListFileUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProducts struct {
 }
 
@@ -50,12 +70,40 @@ func (m *validateOpGetProducts) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPriceLists struct {
+}
+
+func (*validateOpListPriceLists) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPriceLists) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPriceListsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPriceListsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpGetAttributeValuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAttributeValues{}, middleware.After)
 }
 
+func addOpGetPriceListFileUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPriceListFileUrl{}, middleware.After)
+}
+
 func addOpGetProductsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProducts{}, middleware.After)
+}
+
+func addOpListPriceListsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPriceLists{}, middleware.After)
 }
 
 func validateFilter(v *types.Filter) error {
@@ -114,6 +162,24 @@ func validateOpGetAttributeValuesInput(v *GetAttributeValuesInput) error {
 	}
 }
 
+func validateOpGetPriceListFileUrlInput(v *GetPriceListFileUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPriceListFileUrlInput"}
+	if v.PriceListArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PriceListArn"))
+	}
+	if v.FileFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProductsInput(v *GetProductsInput) error {
 	if v == nil {
 		return nil
@@ -126,6 +192,27 @@ func validateOpGetProductsInput(v *GetProductsInput) error {
 		if err := validateFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPriceListsInput(v *ListPriceListsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPriceListsInput"}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
+	}
+	if v.EffectiveDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EffectiveDate"))
+	}
+	if v.CurrencyCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrencyCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

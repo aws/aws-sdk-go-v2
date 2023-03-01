@@ -12,8 +12,10 @@ import (
 
 // Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev
 // Environment that you can use to quickly work on the code stored in the source
-// repositories of your project. By default, a Dev Environment is configured to
-// have a 2 core processor, 4GB of RAM, and 16GB of persistent storage.
+// repositories of your project. When created in the Amazon CodeCatalyst console,
+// by default a Dev Environment is configured to have a 2 core processor, 4GB of
+// RAM, and 16GB of persistent storage. None of these defaults apply to a Dev
+// Environment created programmatically.
 func (c *Client) CreateDevEnvironment(ctx context.Context, params *CreateDevEnvironmentInput, optFns ...func(*Options)) (*CreateDevEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateDevEnvironmentInput{}
@@ -37,9 +39,10 @@ type CreateDevEnvironmentInput struct {
 	InstanceType types.InstanceType
 
 	// Information about the amount of storage allocated to the Dev Environment. By
-	// default, a Dev Environment is configured to have 16GB of persistent storage.
-	// Valid values for persistent storage are based on memory sizes in 16GB
-	// increments. Valid values are 16, 32, and 64.
+	// default, a Dev Environment is configured to have 16GB of persistent storage when
+	// created from the Amazon CodeCatalyst console, but there is no default when
+	// programmatically creating a Dev Environment. Valid values for persistent storage
+	// are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.
 	//
 	// This member is required.
 	PersistentStorage *types.PersistentStorageConfiguration
