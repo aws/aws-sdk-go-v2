@@ -211,6 +211,23 @@
                 }
             }
         },
+        "com.amazonaws.codecatalyst#ActionTestVersion": {
+            "type": "resource",
+            "identifiers": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "sourceBranchName": {
+                    "target": "smithy.api#String"
+                },
+                "sourceRepositoryName": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
         "com.amazonaws.codecatalyst#ActionVersion": {
             "type": "resource",
             "identifiers": {
@@ -538,7 +555,7 @@
                     "endpointPrefix": "codecatalyst"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<note>\n            <p>\n               <b>Amazon CodeCatalyst is in preview release and subject to change.</b>\n            </p>\n         </note>\n         <p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst \n      API to work with the following objects. </p>\n         <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateDevEnvironment</a>, which creates a Dev Environment, \n       where you can quickly work on the code stored in the source repositories of your project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateProject</a> which creates a project in a specified space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetProject</a>, which returns information about a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source\n       repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes \n       and the billing plan for the space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironments</a>, which retrives a list of Dev Environments in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListProjects</a>, which retrieves a list of projects in a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSpaces</a>, which retrieves a list of spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p>\n            </li>\n         </ul>\n         <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>\n               <b>Amazon CodeCatalyst is in preview release and subject to change.</b>\n            </p>\n         </note>\n         <p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst \n      API to work with the following objects. </p>\n         <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateDevEnvironment</a>, which creates a Dev Environment, \n       where you can quickly work on the code stored in the source repositories of your project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateProject</a> which creates a project in a specified space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetProject</a>, which returns information about a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source\n       repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes \n       and the billing plan for the space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironments</a>, which retrives a list of Dev Environments in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListProjects</a>, which retrieves a list of projects in a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSpaces</a>, which retrieves a list of spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p>\n            </li>\n         </ul>\n         <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p>\n            </li>\n         </ul>",
                 "smithy.api#httpBearerAuth": {},
                 "smithy.api#title": "Amazon CodeCatalyst",
                 "smithy.rules#endpointRuleSet": {
@@ -1044,14 +1061,23 @@
                 "name": {
                     "target": "com.amazonaws.codecatalyst#AccessTokenName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name of the personal access token.</p>"
+                        "smithy.api#documentation": "<p>The friendly name of the personal access token.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "expiresTime": {
                     "target": "com.amazonaws.codecatalyst#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>. If not specified, the default is one year from creation.</p>",
+                        "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "accessTokenId": {
+                    "target": "com.amazonaws.codecatalyst#AccessTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the access token.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1065,7 +1091,7 @@
                 "target": "com.amazonaws.codecatalyst#CreateDevEnvironmentResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project. \n      By default, a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. </p>",
+                "smithy.api#documentation": "<p>Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project. \n      </p>\n         <note>\n            <p>When created in the Amazon CodeCatalyst console, by default a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. None of these\n      defaults apply to a Dev Environment created programmatically.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments",
@@ -1139,7 +1165,7 @@
                 "persistentStorage": {
                     "target": "com.amazonaws.codecatalyst#PersistentStorageConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the amount of storage allocated to the Dev Environment. By default, a\n      Dev Environment is configured to have 16GB of persistent storage.</p>\n         <note>\n            <p>Valid values for persistent storage are based on memory sizes in 16GB increments. Valid\n        values are 16, 32, and 64.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Information about the amount of storage allocated to the Dev Environment. </p>\n         <note>\n            <p>By default, a Dev Environment is configured to have 16GB of persistent storage when created from the Amazon CodeCatalyst console, but there is no default when programmatically\n        creating a Dev Environment. \n        Valid values for persistent storage are based on memory sizes in 16GB increments. Valid\n        values are 16, 32, and 64.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1493,6 +1519,9 @@
                 },
                 {
                     "target": "com.amazonaws.codecatalyst#StopDevEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.codecatalyst#StopDevEnvironmentSession"
                 }
             ]
         },
@@ -2631,7 +2660,7 @@
                 "runtime": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A link to the IDE runtime image.</p>",
+                        "smithy.api#documentation": "<p>A link to the IDE runtime image. </p>\n         <note>\n            <p>This parameter is not required for <code>VSCode</code>.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 400
@@ -2641,7 +2670,7 @@
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IDE.</p>",
+                        "smithy.api#documentation": "<p>The name of the IDE. Valid values include <code>Cloud9</code>, <code>IntelliJ</code>, <code>PyCharm</code>, <code>GoLand</code>, and <code>VSCode</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -2731,7 +2760,7 @@
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
                 "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
+                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
                 },
                 "issueId": {
                     "target": "com.amazonaws.codecatalyst#IssueId"
@@ -2793,7 +2822,7 @@
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
                 "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
+                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
                 }
             },
             "resources": [
@@ -2821,7 +2850,7 @@
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
                 "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
+                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
                 },
                 "issueStoreLabelId": {
                     "target": "com.amazonaws.codecatalyst#Uuid"
@@ -2866,7 +2895,7 @@
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
                 "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
+                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
                 }
             }
         },
@@ -2880,7 +2909,7 @@
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
                 "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
+                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
                 },
                 "issueStoreStatusId": {
                     "target": "com.amazonaws.codecatalyst#Uuid"
@@ -3524,7 +3553,8 @@
                 "items": {
                     "target": "com.amazonaws.codecatalyst#ListSourceRepositoryBranchesItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the source branches.</p>"
+                        "smithy.api#documentation": "<p>Information about the source branches.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -3778,6 +3808,9 @@
                     "target": "com.amazonaws.codecatalyst#Action"
                 },
                 {
+                    "target": "com.amazonaws.codecatalyst#ActionTestVersion"
+                },
+                {
                     "target": "com.amazonaws.codecatalyst#ActionVersion"
                 },
                 {
@@ -3842,6 +3875,9 @@
                 },
                 {
                     "target": "com.amazonaws.codecatalyst#SoftwareCompositionAnalysisReport"
+                },
+                {
+                    "target": "com.amazonaws.codecatalyst#SoftwareQualityReportsLogEntries"
                 },
                 {
                     "target": "com.amazonaws.codecatalyst#SoftwareTestingReport"
@@ -4254,6 +4290,20 @@
                 },
                 "softwareCompositionAnalysisReportId": {
                     "target": "com.amazonaws.codecatalyst#Uuid"
+                }
+            }
+        },
+        "com.amazonaws.codecatalyst#SoftwareQualityReportsLogEntries": {
+            "type": "resource",
+            "identifiers": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "reportStatusId": {
+                    "target": "smithy.api#String"
                 }
             }
         },
@@ -4709,7 +4759,7 @@
                 "name": {
                     "target": "com.amazonaws.codecatalyst#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>We need to know what this is and the basic usage information so that third-party developers know how to use this data type.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4962,8 +5012,8 @@
                 "projectName": {
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
-                "findingId": {
-                    "target": "smithy.api#String"
+                "staticAnalysisFindingId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid"
                 }
             }
         },
@@ -4976,8 +5026,8 @@
                 "projectName": {
                     "target": "com.amazonaws.codecatalyst#NameString"
                 },
-                "reportId": {
-                    "target": "smithy.api#String"
+                "staticAnalysisReportId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid"
                 }
             }
         },
@@ -5077,6 +5127,104 @@
                     "target": "com.amazonaws.codecatalyst#DevEnvironmentStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the Dev Environment. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codecatalyst#StopDevEnvironmentSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codecatalyst#StopDevEnvironmentSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codecatalyst#StopDevEnvironmentSessionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a session for a specified Dev Environment.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session/{sessionId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#StopDevEnvironmentSessionRequest": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the Dev Environment. To obtain this ID, use <a>ListDevEnvironments</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "devEnvironmentId"
+                    }
+                },
+                "sessionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the Dev Environment session. This ID is returned by <a>StartDevEnvironmentSession</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 96
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codecatalyst#StopDevEnvironmentSessionResponse": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the Dev Environment.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "devEnvironmentId"
+                    }
+                },
+                "sessionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the Dev Environment session.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 96
+                        },
                         "smithy.api#required": {}
                     }
                 }
@@ -5229,10 +5377,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user-specified alias for the Dev Environment. Changing this value will not cause a restart.</p>",
                         "smithy.api#length": {
-                            "min": 1,
                             "max": 128
                         },
-                        "smithy.api#pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
+                        "smithy.api#pattern": "^$|^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
                     }
                 },
                 "ides": {
@@ -5487,9 +5634,6 @@
                 },
                 "projectName": {
                     "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
                 },
                 "workflowRunId": {
                     "target": "com.amazonaws.codecatalyst#Uuid"
