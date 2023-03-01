@@ -170,9 +170,9 @@ This will result in a patch version change.
 * `SDK Bugs` - For minor changes that resolve an issue. This will result in a
 patch version change.
 
-[issues]: https://github.com/aws/aws-sdk-go/issues
-[pr]: https://github.com/aws/aws-sdk-go/pulls
+[issues]: https://github.com/aws/aws-sdk-go-v2/issues
+[pr]: https://github.com/aws/aws-sdk-go-v2/pulls
 [license]: http://aws.amazon.com/apache2.0/
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
-[releasenotes]: https://github.com/aws/aws-sdk-go/releases
+[releasenotes]: https://github.com/aws/aws-sdk-go-v2/releases
 
