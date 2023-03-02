@@ -1,8 +1,0 @@
-{
-    "id": "d94e73c3-9976-4856-b889-0433bf941db9",
-    "type": "feature",
-    "description": "A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.",
-    "modules": [
-        "service/iot"
-    ]
-}

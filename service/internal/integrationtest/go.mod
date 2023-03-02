@@ -18,7 +18,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.5
-	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.5
+	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.13.4
@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.4
-	github.com/aws/aws-sdk-go-v2/service/iot v1.34.4
+	github.com/aws/aws-sdk-go-v2/service/iot v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.6
 	github.com/aws/aws-sdk-go-v2/service/kms v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.30.0
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.30.5
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.29.4
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.18.6
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.5

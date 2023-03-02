@@ -1,8 +1,0 @@
-{
-    "id": "74819eff-b9a8-4782-8a55-7df813965079",
-    "type": "feature",
-    "description": "This release updates the File Import API to allow importing servers already discovered by customers with reduced pre-requisites.",
-    "modules": [
-        "service/migrationhubstrategy"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.2.0 (2023-03-02)
+
+* **Feature**: This release fixes some input parameter range and patterns.
+
 # v1.1.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

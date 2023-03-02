@@ -1,3 +1,19 @@
+# Release (2023-03-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.35.0](service/iot/CHANGELOG.md#v1350-2023-03-02)
+  * **Feature**: A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.8.0](service/migrationhubstrategy/CHANGELOG.md#v180-2023-03-02)
+  * **Feature**: This release updates the File Import API to allow importing servers already discovered by customers with reduced pre-requisites.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.19.0](service/organizations/CHANGELOG.md#v1190-2023-03-02)
+  * **Feature**: This release introduces a new reason code, ACCOUNT_CREATION_NOT_COMPLETE, to ConstraintViolationException in CreateOrganization API.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.17.0](service/pi/CHANGELOG.md#v1170-2023-03-02)
+  * **Feature**: This release adds a new field PeriodAlignment to allow the customer specifying the returned timestamp of time periods to be either the start or end time.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.2.0](service/pipes/CHANGELOG.md#v120-2023-03-02)
+  * **Feature**: This release fixes some input parameter range and patterns.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.69.0](service/sagemaker/CHANGELOG.md#v1690-2023-03-02)
+  * **Feature**: Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.
+
 # Release (2023-03-01)
 
 ## Module Highlights

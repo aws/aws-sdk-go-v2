@@ -1,8 +1,0 @@
-{
-    "id": "dda92709-b038-4b00-812b-410ad0a7fe98",
-    "type": "feature",
-    "description": "This release fixes some input parameter range and patterns.",
-    "modules": [
-        "service/pipes"
-    ]
-}

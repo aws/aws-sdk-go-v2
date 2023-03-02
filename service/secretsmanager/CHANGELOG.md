@@ -1,3 +1,7 @@
+# v1.18.7 (2023-03-02)
+
+* No change notes available for this release.
+
 # v1.18.6 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

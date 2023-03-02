@@ -1,3 +1,7 @@
+# v1.17.0 (2023-03-02)
+
+* **Feature**: This release adds a new field PeriodAlignment to allow the customer specifying the returned timestamp of time periods to be either the start or end time.
+
 # v1.16.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

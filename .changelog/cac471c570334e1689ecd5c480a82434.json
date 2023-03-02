@@ -1,8 +1,0 @@
-{
-    "id": "cac471c5-7033-4e16-89ec-d5c480a82434",
-    "type": "feature",
-    "description": "This release introduces a new reason code, ACCOUNT_CREATION_NOT_COMPLETE, to ConstraintViolationException in CreateOrganization API.",
-    "modules": [
-        "service/organizations"
-    ]
-}
