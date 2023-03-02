@@ -280,8 +280,9 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeAds DataSourceType = "ApplicationDiscoveryService"
-	DataSourceTypeMpa DataSourceType = "MPA"
+	DataSourceTypeAds    DataSourceType = "ApplicationDiscoveryService"
+	DataSourceTypeMpa    DataSourceType = "MPA"
+	DataSourceTypeImport DataSourceType = "Import"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -291,6 +292,7 @@ func (DataSourceType) Values() []DataSourceType {
 	return []DataSourceType{
 		"ApplicationDiscoveryService",
 		"MPA",
+		"Import",
 	}
 }
 
@@ -298,7 +300,8 @@ type GroupName string
 
 // Enum values for GroupName
 const (
-	GroupNameExternalId GroupName = "ExternalId"
+	GroupNameExternalId         GroupName = "ExternalId"
+	GroupNameExternalSourceType GroupName = "ExternalSourceType"
 )
 
 // Values returns all known values for GroupName. Note that this can be expanded in
@@ -307,6 +310,7 @@ const (
 func (GroupName) Values() []GroupName {
 	return []GroupName{
 		"ExternalId",
+		"ExternalSourceType",
 	}
 }
 

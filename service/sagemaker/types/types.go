@@ -4941,24 +4941,25 @@ type FileSystemDataSource struct {
 // A conditional statement for a search expression that includes a resource
 // property, a Boolean operator, and a value. Resources that match the statement
 // are returned in the results from the Search API. If you specify a Value, but not
-// an Operator, Amazon SageMaker uses the equals operator. In search, there are
-// several property types: Metrics To define a metric filter, enter a value using
-// the form "Metrics.", where  is a metric name. For example, the following filter
-// searches for training jobs with an "accuracy" metric greater than "0.9": {
+// an Operator, SageMaker uses the equals operator. In search, there are several
+// property types: Metrics To define a metric filter, enter a value using the form
+// "Metrics.", where  is a metric name. For example, the following filter searches
 //
-// "Name": "Metrics.accuracy",
+//	for training jobs with an "accuracy" metric greater than "0.9": {
+//	    "Name":
+//
+// "Metrics.accuracy",
 //
 //	"Operator": "GreaterThan",
 //
-//	"Value":
+//	"Value": "0.9"
 //
-// "0.9"
-//
-// } HyperParameters To define a hyperparameter filter, enter a value with
-// the form "HyperParameters.". Decimal hyperparameter values are treated as a
-// decimal in a comparison if the specified Value is also a decimal value. If the
-// specified Value is an integer, the decimal hyperparameter values are treated as
-// integers. For example, the following filter is satisfied by training jobs with a
+// }
+// HyperParameters To define a hyperparameter filter, enter a value with the form
+// "HyperParameters.". Decimal hyperparameter values are treated as a decimal in a
+// comparison if the specified Value is also a decimal value. If the specified
+// Value is an integer, the decimal hyperparameter values are treated as integers.
+// For example, the following filter is satisfied by training jobs with a
 //
 //	"learning_rate" hyperparameter that is less than "0.5":  {
 //	    "Name":
@@ -7647,7 +7648,7 @@ type InferenceRecommendationsJob struct {
 
 // A returned array object for the Steps response field in the
 // ListInferenceRecommendationsJobSteps
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html)
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html)
 // API command.
 type InferenceRecommendationsJobStep struct {
 
@@ -12396,7 +12397,7 @@ type PropertyNameQuery struct {
 type PropertyNameSuggestion struct {
 
 	// A suggested property name based on what you entered in the search textbox in the
-	// Amazon SageMaker console.
+	// SageMaker console.
 	PropertyName *string
 
 	noSmithyDocumentSerde
@@ -12809,6 +12810,9 @@ type RecommendationJobInferenceBenchmark struct {
 	// The endpoint configuration made by Inference Recommender during a recommendation
 	// job.
 	EndpointConfiguration *EndpointOutputConfiguration
+
+	// The metrics for an existing endpoint compared in an Inference Recommender job.
+	EndpointMetrics *InferenceMetrics
 
 	// The reason why a benchmark failed.
 	FailureReason *string
@@ -13243,8 +13247,7 @@ type ResourceLimits struct {
 	// The maximum number of training jobs that a hyperparameter tuning job can launch.
 	MaxNumberOfTrainingJobs *int32
 
-	// The maximum time in seconds that a training job launched by a hyperparameter
-	// tuning job can run.
+	// The maximum time in seconds that a hyperparameter tuning job can run.
 	MaxRuntimeInSeconds *int32
 
 	noSmithyDocumentSerde

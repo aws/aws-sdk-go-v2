@@ -13855,6 +13855,11 @@ func awsRestjson1_deserializeOpDocumentDescribeJobTemplateOutput(v **DescribeJob
 				sv.JobTemplateId = ptr.String(jtv)
 			}
 
+		case "maintenanceWindows":
+			if err := awsRestjson1_deserializeDocumentMaintenanceWindows(&sv.MaintenanceWindows, value); err != nil {
+				return err
+			}
+
 		case "presignedUrlConfig":
 			if err := awsRestjson1_deserializeDocumentPresignedUrlConfig(&sv.PresignedUrlConfig, value); err != nil {
 				return err
@@ -45304,6 +45309,11 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.ReasonCode = ptr.String(jtv)
 			}
 
+		case "scheduledJobRollouts":
+			if err := awsRestjson1_deserializeDocumentScheduledJobRolloutList(&sv.ScheduledJobRollouts, value); err != nil {
+				return err
+			}
+
 		case "schedulingConfig":
 			if err := awsRestjson1_deserializeDocumentSchedulingConfig(&sv.SchedulingConfig, value); err != nil {
 				return err
@@ -46903,6 +46913,93 @@ func awsRestjson1_deserializeDocumentMachineLearningDetectionConfig(v **types.Ma
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWindow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MaintenanceWindow
+	if *v == nil {
+		sv = &types.MaintenanceWindow{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "durationInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "startTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CronExpression to be of type string, got %T instead", value)
+				}
+				sv.StartTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMaintenanceWindows(v *[]types.MaintenanceWindow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MaintenanceWindow
+	if *v == nil {
+		cv = []types.MaintenanceWindow{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MaintenanceWindow
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMaintenanceWindow(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -51041,6 +51138,80 @@ func awsRestjson1_deserializeDocumentScheduledAuditMetadataList(v *[]types.Sched
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScheduledJobRollout(v **types.ScheduledJobRollout, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScheduledJobRollout
+	if *v == nil {
+		sv = &types.ScheduledJobRollout{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "startTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringDateTime to be of type string, got %T instead", value)
+				}
+				sv.StartTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScheduledJobRolloutList(v *[]types.ScheduledJobRollout, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ScheduledJobRollout
+	if *v == nil {
+		cv = []types.ScheduledJobRollout{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ScheduledJobRollout
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScheduledJobRollout(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSchedulingConfig(v **types.SchedulingConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51079,6 +51250,11 @@ func awsRestjson1_deserializeDocumentSchedulingConfig(v **types.SchedulingConfig
 					return fmt.Errorf("expected StringDateTime to be of type string, got %T instead", value)
 				}
 				sv.EndTime = ptr.String(jtv)
+			}
+
+		case "maintenanceWindows":
+			if err := awsRestjson1_deserializeDocumentMaintenanceWindows(&sv.MaintenanceWindows, value); err != nil {
+				return err
 			}
 
 		case "startTime":

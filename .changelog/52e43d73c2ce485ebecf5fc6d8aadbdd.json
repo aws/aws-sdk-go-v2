@@ -1,0 +1,8 @@
+{
+    "id": "52e43d73-c2ce-485e-becf-5fc6d8aadbdd",
+    "type": "feature",
+    "description": "This release adds a new field PeriodAlignment to allow the customer specifying the returned timestamp of time periods to be either the start or end time.",
+    "modules": [
+        "service/pi"
+    ]
+}

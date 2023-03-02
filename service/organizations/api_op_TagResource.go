@@ -62,8 +62,9 @@ type TagResourceInput struct {
 
 	// A list of tags to add to the specified resource. For each tag in the list, you
 	// must specify both a tag key and a value. The value can be an empty string, but
-	// you can't set it to null. If any one of the tags is invalid or if you exceed the
-	// maximum allowed number of tags for a resource, then the entire request fails.
+	// you can't set it to null. If any one of the tags is not valid or if you exceed
+	// the maximum allowed number of tags for a resource, then the entire request
+	// fails.
 	//
 	// This member is required.
 	Tags []types.Tag

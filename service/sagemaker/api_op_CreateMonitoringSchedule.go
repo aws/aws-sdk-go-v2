@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to
-// monitor the data captured for an Amazon SageMaker Endoint.
+// monitor the data captured for an Amazon SageMaker Endpoint.
 func (c *Client) CreateMonitoringSchedule(ctx context.Context, params *CreateMonitoringScheduleInput, optFns ...func(*Options)) (*CreateMonitoringScheduleOutput, error) {
 	if params == nil {
 		params = &CreateMonitoringScheduleInput{}

@@ -111,9 +111,13 @@ type CreateModelPackageInput struct {
 	// unversioned models. It is not applicable to versioned models.
 	ModelPackageName *string
 
-	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload are
+	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload is
 	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
-	// suffix).
+	// suffix). This archive can hold multiple files that are all equally used in the
+	// load test. Each file in the archive must satisfy the size constraints of the
+	// InvokeEndpoint
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax)
+	// call.
 	SamplePayloadUrl *string
 
 	// Details about the algorithm that was used to create the model package.

@@ -65,6 +65,10 @@ type CreateJobTemplateInput struct {
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
 
+	// Allows you to configure an optional maintenance window for the rollout of a job
+	// document to all devices in the target group for a job.
+	MaintenanceWindows []types.MaintenanceWindow
+
 	// Configuration for pre-signed S3 URLs.
 	PresignedUrlConfig *types.PresignedUrlConfig
 

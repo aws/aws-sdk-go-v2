@@ -62920,6 +62920,11 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInferenceBenchmark(v **typ
 				return err
 			}
 
+		case "EndpointMetrics":
+			if err := awsAwsjson11_deserializeDocumentInferenceMetrics(&sv.EndpointMetrics, value); err != nil {
+				return err
+			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -1,0 +1,8 @@
+{
+    "id": "99a1f56b-be95-4059-a6d3-3f52877cff2a",
+    "type": "feature",
+    "description": "Add a new field \"EndpointMetrics\" in SageMaker Inference Recommender \"ListInferenceRecommendationsJobSteps\" API response.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

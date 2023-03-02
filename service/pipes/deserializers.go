@@ -4278,7 +4278,7 @@ func awsRestjson1_deserializeDocumentPipeSourceDynamoDBStreamParameters(v **type
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected LimitMax1000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LimitMax10000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

@@ -134,6 +134,7 @@ const (
 	ConstraintViolationExceptionReasonCloseAccountRequestsLimitExceeded                 ConstraintViolationExceptionReason = "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED"
 	ConstraintViolationExceptionReasonServiceAccessNotEnabled                           ConstraintViolationExceptionReason = "SERVICE_ACCESS_NOT_ENABLED"
 	ConstraintViolationExceptionReasonInvalidPaymentInstrument                          ConstraintViolationExceptionReason = "INVALID_PAYMENT_INSTRUMENT"
+	ConstraintViolationExceptionReasonAccountCreationNotComplete                        ConstraintViolationExceptionReason = "ACCOUNT_CREATION_NOT_COMPLETE"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -175,6 +176,7 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED",
 		"SERVICE_ACCESS_NOT_ENABLED",
 		"INVALID_PAYMENT_INSTRUMENT",
+		"ACCOUNT_CREATION_NOT_COMPLETE",
 	}
 }
 

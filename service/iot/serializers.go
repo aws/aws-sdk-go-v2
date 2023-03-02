@@ -2335,6 +2335,13 @@ func awsRestjson1_serializeOpDocumentCreateJobTemplateInput(v *CreateJobTemplate
 		}
 	}
 
+	if v.MaintenanceWindows != nil {
+		ok := object.Key("maintenanceWindows")
+		if err := awsRestjson1_serializeDocumentMaintenanceWindows(v.MaintenanceWindows, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PresignedUrlConfig != nil {
 		ok := object.Key("presignedUrlConfig")
 		if err := awsRestjson1_serializeDocumentPresignedUrlConfig(v.PresignedUrlConfig, ok); err != nil {
@@ -19281,6 +19288,36 @@ func awsRestjson1_serializeDocumentMachineLearningDetectionConfig(v *types.Machi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMaintenanceWindow(v *types.MaintenanceWindow, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInMinutes != nil {
+		ok := object.Key("durationInMinutes")
+		ok.Integer(*v.DurationInMinutes)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.String(*v.StartTime)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMaintenanceWindows(v []types.MaintenanceWindow, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMaintenanceWindow(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMetricDimension(v *types.MetricDimension, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20119,6 +20156,13 @@ func awsRestjson1_serializeDocumentSchedulingConfig(v *types.SchedulingConfig, v
 	if v.EndTime != nil {
 		ok := object.Key("endTime")
 		ok.String(*v.EndTime)
+	}
+
+	if v.MaintenanceWindows != nil {
+		ok := object.Key("maintenanceWindows")
+		if err := awsRestjson1_serializeDocumentMaintenanceWindows(v.MaintenanceWindows, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StartTime != nil {

@@ -368,17 +368,21 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // attempted to exceed the number of accounts that you can create in one day.
 //
 // *
-// ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
-// of accounts in an organization. If you need more accounts, contact Amazon Web
-// Services Support (https://docs.aws.amazon.com/support/home#/) to request an
-// increase in your limit. Or the number of invitations that you tried to send
-// would cause you to exceed the limit of accounts in your organization. Send fewer
-// invitations or contact Amazon Web Services Support to request an increase in the
-// number of accounts. Deleted and closed accounts still count toward your limit.
-// If you get this exception when running a command immediately after creating the
-// organization, wait one hour and try again. After an hour, if the command
-// continues to fail with this error, contact Amazon Web Services Support
-// (https://docs.aws.amazon.com/support/home#/).
+// ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your account
+// isn't fully active. You must complete the account setup before you create an
+// organization.
+//
+// * ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the
+// limit on the number of accounts in an organization. If you need more accounts,
+// contact Amazon Web Services Support (https://docs.aws.amazon.com/support/home#/)
+// to request an increase in your limit. Or the number of invitations that you
+// tried to send would cause you to exceed the limit of accounts in your
+// organization. Send fewer invitations or contact Amazon Web Services Support to
+// request an increase in the number of accounts. Deleted and closed accounts still
+// count toward your limit. If you get this exception when running a command
+// immediately after creating the organization, wait one hour and try again. After
+// an hour, if the command continues to fail with this error, contact Amazon Web
+// Services Support (https://docs.aws.amazon.com/support/home#/).
 //
 // *
 // CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register the

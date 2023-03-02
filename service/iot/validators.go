@@ -5458,6 +5458,41 @@ func validateMachineLearningDetectionConfig(v *types.MachineLearningDetectionCon
 	}
 }
 
+func validateMaintenanceWindow(v *types.MaintenanceWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MaintenanceWindow"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.DurationInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMaintenanceWindows(v []types.MaintenanceWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MaintenanceWindows"}
+	for i := range v {
+		if err := validateMaintenanceWindow(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricDimension(v *types.MetricDimension) error {
 	if v == nil {
 		return nil
@@ -5764,6 +5799,23 @@ func validateSalesforceAction(v *types.SalesforceAction) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchedulingConfig(v *types.SchedulingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchedulingConfig"}
+	if v.MaintenanceWindows != nil {
+		if err := validateMaintenanceWindows(v.MaintenanceWindows); err != nil {
+			invalidParams.AddNested("MaintenanceWindows", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6605,6 +6657,11 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 			invalidParams.AddNested("JobExecutionsRetryConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SchedulingConfig != nil {
+		if err := validateSchedulingConfig(v.SchedulingConfig); err != nil {
+			invalidParams.AddNested("SchedulingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6641,6 +6698,11 @@ func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
 	if v.JobExecutionsRetryConfig != nil {
 		if err := validateJobExecutionsRetryConfig(v.JobExecutionsRetryConfig); err != nil {
 			invalidParams.AddNested("JobExecutionsRetryConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceWindows != nil {
+		if err := validateMaintenanceWindows(v.MaintenanceWindows); err != nil {
+			invalidParams.AddNested("MaintenanceWindows", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
