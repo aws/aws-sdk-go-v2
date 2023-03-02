@@ -8945,7 +8945,7 @@
                 "SamplePayloadUrl": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path must point \n    to a single gzip compressed tar archive (.tar.gz suffix).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point \n          to a single gzip compressed tar archive (.tar.gz suffix). This archive can hold multiple files\n          that are all equally used in the load test. Each file in the archive must satisfy the size constraints of the\n          <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax\">InvokeEndpoint</a> call.</p>"
                     }
                 },
                 "AdditionalInferenceSpecifications": {
@@ -9095,7 +9095,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data\n         captured for an Amazon SageMaker Endoint.</p>"
+                "smithy.api#documentation": "<p>Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data\n         captured for an Amazon SageMaker Endpoint.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateMonitoringScheduleRequest": {
@@ -23498,7 +23498,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A conditional statement for a search expression that includes a resource property, a\n      Boolean operator, and a value. Resources that match the statement are returned in the\n      results from the <a>Search</a> API.</p>\n         <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the\n      equals operator.</p>\n         <p>In search, there are several property types:</p>\n         <dl>\n            <dt>Metrics</dt>\n            <dd>\n               <p>To define a metric filter, enter a value using the form\n            <code>\"Metrics.<name>\"</code>, where <code><name></code> is\n            a metric name. For example, the following filter searches for training jobs\n            with an <code>\"accuracy\"</code> metric greater than\n            <code>\"0.9\"</code>:</p>\n               <p>\n                  <code>{</code>\n               </p>\n               <p>\n                  <code>\"Name\": \"Metrics.accuracy\",</code>\n               </p>\n               <p>\n                  <code>\"Operator\": \"GreaterThan\",</code>\n               </p>\n               <p>\n                  <code>\"Value\": \"0.9\"</code>\n               </p>\n               <p>\n                  <code>}</code>\n               </p>\n            </dd>\n            <dt>HyperParameters</dt>\n            <dd>\n               <p>To define a hyperparameter filter, enter a value with the form\n            <code>\"HyperParameters.<name>\"</code>. Decimal hyperparameter\n            values are treated as a decimal in a comparison if the specified\n            <code>Value</code> is also a decimal value. If the specified\n            <code>Value</code> is an integer, the decimal hyperparameter values are\n            treated as integers. For example, the following filter is satisfied by\n            training jobs with a <code>\"learning_rate\"</code> hyperparameter that is\n            less than <code>\"0.5\"</code>:</p>\n               <p>\n                  <code> {</code>\n               </p>\n               <p>\n                  <code> \"Name\": \"HyperParameters.learning_rate\",</code>\n               </p>\n               <p>\n                  <code> \"Operator\": \"LessThan\",</code>\n               </p>\n               <p>\n                  <code> \"Value\": \"0.5\"</code>\n               </p>\n               <p>\n                  <code> }</code>\n               </p>\n            </dd>\n            <dt>Tags</dt>\n            <dd>\n               <p>To define a tag filter, enter a value with the form\n            <code>Tags.<key></code>.</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>A conditional statement for a search expression that includes a resource property, a\n      Boolean operator, and a value. Resources that match the statement are returned in the\n      results from the <a>Search</a> API.</p>\n         <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, SageMaker uses the\n      equals operator.</p>\n         <p>In search, there are several property types:</p>\n         <dl>\n            <dt>Metrics</dt>\n            <dd>\n               <p>To define a metric filter, enter a value using the form\n            <code>\"Metrics.<name>\"</code>, where <code><name></code> is\n            a metric name. For example, the following filter searches for training jobs\n            with an <code>\"accuracy\"</code> metric greater than\n            <code>\"0.9\"</code>:</p>\n               <p>\n                  <code>{</code>\n               </p>\n               <p>\n                  <code>\"Name\": \"Metrics.accuracy\",</code>\n               </p>\n               <p>\n                  <code>\"Operator\": \"GreaterThan\",</code>\n               </p>\n               <p>\n                  <code>\"Value\": \"0.9\"</code>\n               </p>\n               <p>\n                  <code>}</code>\n               </p>\n            </dd>\n            <dt>HyperParameters</dt>\n            <dd>\n               <p>To define a hyperparameter filter, enter a value with the form\n            <code>\"HyperParameters.<name>\"</code>. Decimal hyperparameter\n            values are treated as a decimal in a comparison if the specified\n            <code>Value</code> is also a decimal value. If the specified\n            <code>Value</code> is an integer, the decimal hyperparameter values are\n            treated as integers. For example, the following filter is satisfied by\n            training jobs with a <code>\"learning_rate\"</code> hyperparameter that is\n            less than <code>\"0.5\"</code>:</p>\n               <p>\n                  <code> {</code>\n               </p>\n               <p>\n                  <code> \"Name\": \"HyperParameters.learning_rate\",</code>\n               </p>\n               <p>\n                  <code> \"Operator\": \"LessThan\",</code>\n               </p>\n               <p>\n                  <code> \"Value\": \"0.5\"</code>\n               </p>\n               <p>\n                  <code> }</code>\n               </p>\n            </dd>\n            <dt>Tags</dt>\n            <dd>\n               <p>To define a tag filter, enter a value with the form\n            <code>Tags.<key></code>.</p>\n            </dd>\n         </dl>"
             }
         },
         "com.amazonaws.sagemaker#FilterList": {
@@ -24088,7 +24088,7 @@
                 "target": "com.amazonaws.sagemaker#GetSearchSuggestionsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An auto-complete API for the search functionality in the Amazon SageMaker console. It returns\n      suggestions of possible matches for the property name to use in <code>Search</code>\n      queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and\n      <code>Metrics</code>.</p>"
+                "smithy.api#documentation": "<p>An auto-complete API for the search functionality in the SageMaker console. It returns\n      suggestions of possible matches for the property name to use in <code>Search</code>\n      queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and\n      <code>Metrics</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#GetSearchSuggestionsRequest": {
@@ -24097,7 +24097,7 @@
                 "Resource": {
                     "target": "com.amazonaws.sagemaker#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon SageMaker resource to search for.</p>",
+                        "smithy.api#documentation": "<p>The name of the SageMaker resource to search for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -27059,7 +27059,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A returned array object for the <code>Steps</code> response field in the\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html\">ListInferenceRecommendationsJobSteps</a> API command.</p>"
+                "smithy.api#documentation": "<p>A returned array object for the <code>Steps</code> response field in the\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html\">ListInferenceRecommendationsJobSteps</a> API command.</p>"
             }
         },
         "com.amazonaws.sagemaker#InferenceRecommendationsJobSteps": {
@@ -44656,7 +44656,7 @@
                 "PropertyName": {
                     "target": "com.amazonaws.sagemaker#ResourcePropertyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A suggested property name based on what you entered in the search textbox in the Amazon SageMaker\n      console.</p>"
+                        "smithy.api#documentation": "<p>A suggested property name based on what you entered in the search textbox in the SageMaker\n      console.</p>"
                     }
                 }
             },
@@ -45370,6 +45370,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The reason why a benchmark failed.</p>"
                     }
+                },
+                "EndpointMetrics": {
+                    "target": "com.amazonaws.sagemaker#InferenceMetrics"
                 }
             },
             "traits": {
@@ -46296,7 +46299,7 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningMaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time in seconds that a training job launched by a hyperparameter tuning job can run.</p>"
+                        "smithy.api#documentation": "<p>The maximum time in seconds that a hyperparameter tuning job can run.</p>"
                     }
                 }
             },
@@ -48152,9 +48155,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -48165,9 +48168,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -48178,9 +48181,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -48191,9 +48194,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -48204,9 +48207,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -48217,9 +48220,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -48230,9 +48233,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -48243,9 +48246,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -48256,9 +48259,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -48269,9 +48272,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -48282,9 +48285,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -48295,9 +48298,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -48308,9 +48311,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -48321,9 +48324,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -48334,9 +48337,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -48347,9 +48350,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -48360,9 +48363,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -48373,9 +48376,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -48386,9 +48389,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -48399,9 +48402,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -48412,9 +48415,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -48425,9 +48428,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -48438,9 +48441,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -48451,9 +48454,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -48464,9 +48467,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -48477,9 +48480,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -48490,9 +48493,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -48503,9 +48506,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -48516,9 +48519,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -48529,9 +48532,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -48542,9 +48545,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -48555,9 +48558,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -48568,9 +48571,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -48581,9 +48584,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -48594,9 +48597,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -48607,9 +48610,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -48620,9 +48623,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -48633,9 +48636,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -48646,9 +48649,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -48659,9 +48662,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -48672,9 +48675,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -48685,9 +48688,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -48698,9 +48701,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48723,9 +48726,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48735,9 +48738,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -48850,7 +48853,7 @@
                 "target": "com.amazonaws.sagemaker#SearchResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Finds Amazon SageMaker resources that match a search query. Matching resources are returned\n      as a list of <code>SearchRecord</code> objects in the response. You can sort the search\n      results by any resource property in a ascending or descending order.</p>\n         <p>You can query against the following value types: numeric, text, Boolean, and\n      timestamp.</p>",
+                "smithy.api#documentation": "<p>Finds SageMaker resources that match a search query. Matching resources are returned\n      as a list of <code>SearchRecord</code> objects in the response. You can sort the search\n      results by any resource property in a ascending or descending order.</p>\n         <p>You can query against the following value types: numeric, text, Boolean, and\n      timestamp.</p>\n         <note>\n            <p>The Search API may provide access to otherwise restricted data. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">Amazon SageMaker \n      API Permissions: Actions, Permissions, and Resources Reference</a> for more\n        information.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -48986,7 +48989,7 @@
                 "Resource": {
                     "target": "com.amazonaws.sagemaker#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon SageMaker resource to search for.</p>",
+                        "smithy.api#documentation": "<p>The name of the SageMaker resource to search for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -56528,7 +56531,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.sagemaker#TrialComponentParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Replaces all of the component's hyperparameters with the specified hyperparameters.</p>"
+                        "smithy.api#documentation": "<p>Replaces all of the component's hyperparameters with the specified hyperparameters or add new hyperparameters. Existing hyperparameters are replaced if the trial component is updated with an identical hyperparameter key.</p>"
                     }
                 },
                 "ParametersToRemove": {
@@ -56540,7 +56543,7 @@
                 "InputArtifacts": {
                     "target": "com.amazonaws.sagemaker#TrialComponentArtifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Replaces all of the component's input artifacts with the specified artifacts.</p>"
+                        "smithy.api#documentation": "<p>Replaces all of the component's input artifacts with the specified artifacts or adds new input artifacts. Existing input artifacts are replaced if the trial component is updated with an identical input artifact key.</p>"
                     }
                 },
                 "InputArtifactsToRemove": {
@@ -56552,7 +56555,7 @@
                 "OutputArtifacts": {
                     "target": "com.amazonaws.sagemaker#TrialComponentArtifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Replaces all of the component's output artifacts with the specified artifacts.</p>"
+                        "smithy.api#documentation": "<p>Replaces all of the component's output artifacts with the specified artifacts or adds new output artifacts. Existing output artifacts are replaced if the trial component is updated with an identical output artifact key.</p>"
                     }
                 },
                 "OutputArtifactsToRemove": {
