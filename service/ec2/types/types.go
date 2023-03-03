@@ -5380,7 +5380,11 @@ type Instance struct {
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The boot mode of the instance. For more information, see Boot modes
+	// The boot mode that was specified by the AMI. If the value is uefi-preferred, the
+	// AMI supports both UEFI and Legacy BIOS. The currentInstanceBootMode parameter is
+	// the boot mode that is used to boot the instance at launch or start. The
+	// operating system contained in the AMI must be configured to support the
+	// specified boot mode. For more information, see Boot modes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
 	// Amazon EC2 User Guide.
 	BootMode BootModeValues
@@ -5397,6 +5401,12 @@ type Instance struct {
 
 	// The CPU options for the instance.
 	CpuOptions *CpuOptions
+
+	// The boot mode that is used to boot the instance at launch or start. For more
+	// information, see Boot modes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
+	// Amazon EC2 User Guide.
+	CurrentInstanceBootMode InstanceBootModeValues
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This
 	// optimization provides dedicated throughput to Amazon EBS and an optimized

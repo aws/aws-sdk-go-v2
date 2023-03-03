@@ -9452,6 +9452,11 @@ func awsRestjson1_serializeDocumentNielsenNaesIiNw(v *types.NielsenNaesIiNw, val
 		}
 	}
 
+	if len(v.Timezone) > 0 {
+		ok := object.Key("timezone")
+		ok.String(string(v.Timezone))
+	}
+
 	return nil
 }
 

@@ -43,15 +43,13 @@ func (c *Client) CreateCustomerGateway(ctx context.Context, params *CreateCustom
 // Contains the parameters for CreateCustomerGateway.
 type CreateCustomerGatewayInput struct {
 
-	// For devices that support BGP, the customer gateway's BGP ASN. Default: 65000
-	//
-	// This member is required.
-	BgpAsn *int32
-
 	// The type of VPN connection that this customer gateway supports (ipsec.1).
 	//
 	// This member is required.
 	Type types.GatewayType
+
+	// For devices that support BGP, the customer gateway's BGP ASN. Default: 65000
+	BgpAsn *int32
 
 	// The Amazon Resource Name (ARN) for the customer gateway certificate.
 	CertificateArn *string

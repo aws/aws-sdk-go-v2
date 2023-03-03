@@ -41,7 +41,7 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 type DeleteItemInput struct {
 
 	// A map of attribute names to AttributeValue objects, representing the primary key
-	// of the item to delete. For the primary key, you must provide all of the
+	// of the item to delete. For the primary key, you must provide all of the key
 	// attributes. For example, with a simple primary key, you only need to provide a
 	// value for the partition key. For a composite primary key, you must provide
 	// values for both the partition key and the sort key.
@@ -194,7 +194,7 @@ type DeleteItemOutput struct {
 	// includes the total provisioned throughput consumed, along with statistics for
 	// the table and any indexes involved in the operation. ConsumedCapacity is only
 	// returned if the ReturnConsumedCapacity parameter was specified. For more
-	// information, see Provisioned Mode
+	// information, see Provisioned Throughput
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity

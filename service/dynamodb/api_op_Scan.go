@@ -240,10 +240,12 @@ type ScanInput struct {
 	// ALL_ATTRIBUTES.
 	//
 	// * COUNT - Returns the number of matching items, rather than the
-	// matching items themselves.
+	// matching items themselves. Note that this uses the same quantity of read
+	// capacity units as getting the items, and is subject to the same item size
+	// calculations.
 	//
-	// * SPECIFIC_ATTRIBUTES - Returns only the attributes
-	// listed in ProjectionExpression. This return value is equivalent to specifying
+	// * SPECIFIC_ATTRIBUTES - Returns only the attributes listed in
+	// ProjectionExpression. This return value is equivalent to specifying
 	// ProjectionExpression without specifying any value for Select. If you query or
 	// scan a local secondary index and request only attributes that are projected into
 	// that index, the operation reads only the index and not the table. If any of the
@@ -286,7 +288,7 @@ type ScanOutput struct {
 	// and any indexes involved in the operation. ConsumedCapacity is only returned if
 	// the ReturnConsumedCapacity parameter was specified. For more information, see
 	// Provisioned Throughput
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
 

@@ -141,8 +141,8 @@ type GetItemOutput struct {
 	// the total provisioned throughput consumed, along with statistics for the table
 	// and any indexes involved in the operation. ConsumedCapacity is only returned if
 	// the ReturnConsumedCapacity parameter was specified. For more information, see
-	// Read/Write Capacity Mode
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// Provisioned Throughput
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
 

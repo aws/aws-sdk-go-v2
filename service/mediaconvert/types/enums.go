@@ -1905,6 +1905,7 @@ const (
 	ColorSpaceHlg2020  ColorSpace = "HLG_2020"
 	ColorSpaceP3dci    ColorSpace = "P3DCI"
 	ColorSpaceP3d65Sdr ColorSpace = "P3D65_SDR"
+	ColorSpaceP3d65Hdr ColorSpace = "P3D65_HDR"
 )
 
 // Values returns all known values for ColorSpace. Note that this can be expanded
@@ -1919,6 +1920,7 @@ func (ColorSpace) Values() []ColorSpace {
 		"HLG_2020",
 		"P3DCI",
 		"P3D65_SDR",
+		"P3D65_HDR",
 	}
 }
 
@@ -1933,6 +1935,7 @@ const (
 	ColorSpaceConversionForceHlg2020  ColorSpaceConversion = "FORCE_HLG_2020"
 	ColorSpaceConversionForceP3dci    ColorSpaceConversion = "FORCE_P3DCI"
 	ColorSpaceConversionForceP3d65Sdr ColorSpaceConversion = "FORCE_P3D65_SDR"
+	ColorSpaceConversionForceP3d65Hdr ColorSpaceConversion = "FORCE_P3D65_HDR"
 )
 
 // Values returns all known values for ColorSpaceConversion. Note that this can be
@@ -1947,6 +1950,7 @@ func (ColorSpaceConversion) Values() []ColorSpaceConversion {
 		"FORCE_HLG_2020",
 		"FORCE_P3DCI",
 		"FORCE_P3D65_SDR",
+		"FORCE_P3D65_HDR",
 	}
 }
 

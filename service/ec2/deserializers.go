@@ -77248,6 +77248,19 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 				return err
 			}
 
+		case strings.EqualFold("currentInstanceBootMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CurrentInstanceBootMode = types.InstanceBootModeValues(xtv)
+			}
+
 		case strings.EqualFold("ebsOptimized", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

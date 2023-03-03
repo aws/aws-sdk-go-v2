@@ -1,0 +1,8 @@
+{
+    "id": "10b90d54-80a6-4d2f-928c-adafdf527a4e",
+    "type": "documentation",
+    "description": "Documentation updates for Amazon Macie",
+    "modules": [
+        "service/macie2"
+    ]
+}

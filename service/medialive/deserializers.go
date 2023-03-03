@@ -25158,6 +25158,15 @@ func awsRestjson1_deserializeDocumentNielsenNaesIiNw(v **types.NielsenNaesIiNw, 
 				}
 			}
 
+		case "timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenWatermarkTimezones to be of type string, got %T instead", value)
+				}
+				sv.Timezone = types.NielsenWatermarkTimezones(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

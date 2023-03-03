@@ -4194,6 +4194,40 @@ func (NielsenWatermarksDistributionTypes) Values() []NielsenWatermarksDistributi
 	}
 }
 
+type NielsenWatermarkTimezones string
+
+// Enum values for NielsenWatermarkTimezones
+const (
+	NielsenWatermarkTimezonesAmericaPuertoRico NielsenWatermarkTimezones = "AMERICA_PUERTO_RICO"
+	NielsenWatermarkTimezonesUsAlaska          NielsenWatermarkTimezones = "US_ALASKA"
+	NielsenWatermarkTimezonesUsArizona         NielsenWatermarkTimezones = "US_ARIZONA"
+	NielsenWatermarkTimezonesUsCentral         NielsenWatermarkTimezones = "US_CENTRAL"
+	NielsenWatermarkTimezonesUsEastern         NielsenWatermarkTimezones = "US_EASTERN"
+	NielsenWatermarkTimezonesUsHawaii          NielsenWatermarkTimezones = "US_HAWAII"
+	NielsenWatermarkTimezonesUsMountain        NielsenWatermarkTimezones = "US_MOUNTAIN"
+	NielsenWatermarkTimezonesUsPacific         NielsenWatermarkTimezones = "US_PACIFIC"
+	NielsenWatermarkTimezonesUsSamoa           NielsenWatermarkTimezones = "US_SAMOA"
+	NielsenWatermarkTimezonesUtc               NielsenWatermarkTimezones = "UTC"
+)
+
+// Values returns all known values for NielsenWatermarkTimezones. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NielsenWatermarkTimezones) Values() []NielsenWatermarkTimezones {
+	return []NielsenWatermarkTimezones{
+		"AMERICA_PUERTO_RICO",
+		"US_ALASKA",
+		"US_ARIZONA",
+		"US_CENTRAL",
+		"US_EASTERN",
+		"US_HAWAII",
+		"US_MOUNTAIN",
+		"US_PACIFIC",
+		"US_SAMOA",
+		"UTC",
+	}
+}
+
 type OfferingDurationUnits string
 
 // Enum values for OfferingDurationUnits

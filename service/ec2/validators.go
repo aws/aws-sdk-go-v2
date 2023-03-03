@@ -11796,9 +11796,6 @@ func validateOpCreateCustomerGatewayInput(v *CreateCustomerGatewayInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomerGatewayInput"}
-	if v.BgpAsn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BgpAsn"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}

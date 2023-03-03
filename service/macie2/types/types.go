@@ -314,26 +314,28 @@ type BucketCountByEffectivePermission struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the number of S3 buckets that use certain types of
-// server-side encryption by default or don't encrypt new objects by default. For
-// detailed information about these settings, see Setting default server-side
-// encryption behavior for Amazon S3 buckets
+// Provides information about the number of S3 buckets whose settings do or don't
+// specify default server-side encryption behavior for objects that are added to
+// the buckets. For detailed information about these settings, see Setting default
+// server-side encryption behavior for Amazon S3 buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
 // in the Amazon Simple Storage Service User Guide.
 type BucketCountByEncryptionType struct {
 
-	// The total number of buckets that use an KMS key to encrypt new objects by
-	// default, either an Amazon Web Services managed key or a customer managed key.
-	// These buckets use KMS encryption (SSE-KMS) by default.
+	// The total number of buckets whose default encryption settings are configured to
+	// encrypt new objects with an Amazon Web Services managed KMS key or a customer
+	// managed KMS key. By default, these buckets encrypt new objects automatically
+	// using SSE-KMS encryption.
 	KmsManaged int64
 
-	// The total number of buckets that use an Amazon S3 managed key to encrypt new
-	// objects by default. These buckets use Amazon S3 managed encryption (SSE-S3) by
-	// default.
+	// The total number of buckets whose default encryption settings are configured to
+	// encrypt new objects with an Amazon S3 managed key. By default, these buckets
+	// encrypt new objects automatically using SSE-S3 encryption.
 	S3Managed int64
 
-	// The total number of buckets that don't encrypt new objects by default. Default
-	// encryption is disabled for these buckets.
+	// The total number of buckets that don't specify default server-side encryption
+	// behavior for new objects. Default encryption settings aren't configured for
+	// these buckets.
 	Unencrypted int64
 
 	// The total number of buckets that Amazon Macie doesn't have current encryption
@@ -353,9 +355,8 @@ type BucketCountByEncryptionType struct {
 type BucketCountBySharedAccessType struct {
 
 	// The total number of buckets that are shared with one or more of the following or
-	// any combination of the following: an Amazon Web Services account that isn't in
-	// the same Amazon Macie organization, an Amazon CloudFront OAI, or a CloudFront
-	// OAC.
+	// any combination of the following: an Amazon CloudFront OAI, a CloudFront OAC, or
+	// an Amazon Web Services account that isn't in the same Amazon Macie organization.
 	External int64
 
 	// The total number of buckets that are shared with one or more Amazon Web Services
@@ -376,7 +377,7 @@ type BucketCountBySharedAccessType struct {
 }
 
 // Provides information about the number of S3 buckets whose bucket policies do or
-// don't require server-side encryption of objects when objects are uploaded to the
+// don't require server-side encryption of objects when objects are added to the
 // buckets.
 type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 
@@ -469,7 +470,7 @@ type BucketMetadata struct {
 	AccountId *string
 
 	// Specifies whether the bucket policy for the bucket requires server-side
-	// encryption of objects when objects are uploaded to the bucket. Possible values
+	// encryption of objects when objects are added to the bucket. Possible values
 	// are:
 	//
 	// * FALSE - The bucket policy requires server-side encryption of new
@@ -567,8 +568,7 @@ type BucketMetadata struct {
 	// currently disabled for your account.
 	SensitivityScore int32
 
-	// Specifies whether the bucket encrypts new objects by default and, if so, the
-	// type of server-side encryption that's used.
+	// The default server-side encryption settings for the bucket.
 	ServerSideEncryption *BucketServerSideEncryption
 
 	// Specifies whether the bucket is shared with another Amazon Web Services account,
@@ -576,9 +576,9 @@ type BucketMetadata struct {
 	// control (OAC). Possible values are:
 	//
 	// * EXTERNAL - The bucket is shared with one
-	// or more of the following or any combination of the following: an Amazon Web
-	// Services account that isn't part of your Amazon Macie organization, a CloudFront
-	// OAI, or a CloudFront OAC.
+	// or more of the following or any combination of the following: a CloudFront OAI,
+	// a CloudFront OAC, or an Amazon Web Services account that isn't part of your
+	// Amazon Macie organization.
 	//
 	// * INTERNAL - The bucket is shared with one or more
 	// Amazon Web Services accounts that are part of your Amazon Macie organization. It
@@ -689,12 +689,12 @@ type BucketServerSideEncryption struct {
 
 	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key
 	// that's used by default to encrypt objects that are added to the bucket. This
-	// value is null if the bucket uses an Amazon S3 managed key to encrypt new objects
-	// or the bucket doesn't encrypt new objects by default.
+	// value is null if the bucket is configured to use an Amazon S3 managed key to
+	// encrypt new objects.
 	KmsMasterKeyId *string
 
-	// The type of server-side encryption that's used by default when storing new
-	// objects in the bucket. Possible values are:
+	// The server-side encryption algorithm that's used by default to encrypt objects
+	// that are added to the bucket. Possible values are:
 	//
 	// * AES256 - New objects are
 	// encrypted with an Amazon S3 managed key. They use SSE-S3 encryption.
@@ -704,8 +704,8 @@ type BucketServerSideEncryption struct {
 	// Web Services managed key or a customer managed key. They use SSE-KMS
 	// encryption.
 	//
-	// * NONE - New objects aren't encrypted by default. Default
-	// encryption is disabled for the bucket.
+	// * NONE - The bucket's default encryption settings don't specify
+	// server-side encryption behavior for new objects.
 	Type Type
 
 	noSmithyDocumentSerde
@@ -1418,7 +1418,7 @@ type IamUser struct {
 	// The unique identifier for the IAM user who performed the action.
 	PrincipalId *string
 
-	// The user name of the IAM user who performed the action.
+	// The username of the IAM user who performed the action.
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -1984,7 +1984,7 @@ type ObjectCountByEncryptionType struct {
 	// The objects use Amazon S3 managed encryption (SSE-S3).
 	S3Managed int64
 
-	// The total number of objects that aren't encrypted or use client-side encryption.
+	// The total number of objects that use client-side encryption or aren't encrypted.
 	Unencrypted int64
 
 	// The total number of objects that Amazon Macie doesn't have current encryption
@@ -2289,7 +2289,7 @@ type RevealConfiguration struct {
 type S3Bucket struct {
 
 	// Specifies whether the bucket policy for the bucket requires server-side
-	// encryption of objects when objects are uploaded to the bucket. Possible values
+	// encryption of objects when objects are added to the bucket. Possible values
 	// are:
 	//
 	// * FALSE - The bucket policy requires server-side encryption of new
@@ -2319,8 +2319,7 @@ type S3Bucket struct {
 	// created or last updated.
 	CreatedAt *time.Time
 
-	// The type of server-side encryption that's used by default to encrypt objects in
-	// the bucket.
+	// The default server-side encryption settings for the bucket.
 	DefaultServerSideEncryption *ServerSideEncryption
 
 	// The name of the bucket.
@@ -2537,7 +2536,7 @@ type S3Object struct {
 	// permissions settings that apply to the object.
 	PublicAccess bool
 
-	// The type of server-side encryption that's used to encrypt the object.
+	// The type of server-side encryption that was used to encrypt the object.
 	ServerSideEncryption *ServerSideEncryption
 
 	// The total storage size, in bytes, of the object.
@@ -2841,23 +2840,23 @@ type SensitivityInspectionTemplateIncludes struct {
 // sensitive data discovery for the account.
 type SensitivityInspectionTemplatesEntry struct {
 
-	// The unique identifier for the sensitivity inspection template for the account.
+	// The unique identifier for the sensitivity inspection template.
 	Id *string
 
-	// The name of the sensitivity inspection template for the account:
+	// The name of the sensitivity inspection template:
 	// automated-sensitive-data-discovery.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides information about the server-side encryption settings for an S3 bucket
-// or S3 object.
+// Provides information about the default server-side encryption settings for an S3
+// bucket or the encryption settings for an S3 object.
 type ServerSideEncryption struct {
 
 	// The server-side encryption algorithm that's used when storing data in the bucket
-	// or object. If default encryption is disabled for the bucket or the object isn't
-	// encrypted using server-side encryption, this value is NONE.
+	// or object. If default encryption settings aren't configured for the bucket or
+	// the object isn't encrypted using server-side encryption, this value is NONE.
 	EncryptionType EncryptionType
 
 	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key

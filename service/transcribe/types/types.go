@@ -396,7 +396,7 @@ type InputDataConfig struct {
 // * A lack of
 // interruptions
 //
-// See Rule criteria for batch categories
+// See Rule criteria for post-call categories
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // for usage examples.
 type InterruptionFilter struct {
@@ -436,9 +436,8 @@ type JobExecutionSettings struct {
 	// are placed in a queue until the number of jobs falls below the concurrent
 	// request limit. If AllowDeferredExecution is set to false and the number of
 	// transcription job requests exceed the concurrent request limit, you get a
-	// LimitExceededException error. Note that job queuing is enabled by default for
-	// Call Analytics jobs. If you include AllowDeferredExecution in your request, you
-	// must also include DataAccessRoleArn.
+	// LimitExceededException error. If you include AllowDeferredExecution in your
+	// request, you must also include DataAccessRoleArn.
 	AllowDeferredExecution *bool
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
@@ -524,11 +523,27 @@ type LanguageIdSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a custom language model, including the base model
-// name, when the model was created, the location of the files used to train the
-// model, when the model was last modified, the name you chose for the model, its
-// language, its processing state, and if there is an upgrade available for the
-// base model.
+// Provides information about a custom language model, including:
+//
+// * The base model
+// name
+//
+// * When the model was created
+//
+// * The location of the files used to train
+// the model
+//
+// * When the model was last modified
+//
+// * The name you chose for the
+// model
+//
+// * The model's language
+//
+// * The model's processing state
+//
+// * Any available
+// upgrades for the base model
 type LanguageModel struct {
 
 	// The Amazon Transcribe standard language model, or base model, used to create
@@ -903,8 +918,8 @@ type ModelSettings struct {
 // * The presence
 // of speech at specified periods throughout the call
 //
-// See Rule criteria for batch
-// categories
+// See Rule criteria for
+// post-call categories
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // for usage examples.
 type NonTalkTimeFilter struct {
@@ -965,9 +980,9 @@ type RelativeTimeRange struct {
 // A rule is a set of criteria that you can specify to flag an attribute in your
 // Call Analytics output. Rules define a Call Analytics category. Rules can include
 // these parameters: , , , and . To learn more about Call Analytics rules and
-// categories, see Creating categories for batch transcriptions
+// categories, see Creating categories for post-call transcriptions
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html) and
-// Creating categories for streaming transcriptions
+// Creating categories for real-time transcriptions
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html).
 // To learn more about Call Analytics, see Analyzing call center audio with Call
 // Analytics
@@ -1041,7 +1056,7 @@ func (*RuleMemberTranscriptFilter) isRule() {}
 // mixed sentiment felt by the customer, the agent, or both at specified points in
 // the call
 //
-// See Rule criteria for batch categories
+// See Rule criteria for post-call categories
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // for usage examples.
 type SentimentFilter struct {
@@ -1257,7 +1272,7 @@ type Transcript struct {
 // Custom words or phrases that occur at a specific time frame
 //
 // See Rule criteria
-// for batch categories
+// for post-call categories
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // and Rule criteria for streaming categories
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream)

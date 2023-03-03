@@ -60,6 +60,16 @@ type CreateVocabularyInput struct {
 	// This member is required.
 	VocabularyName *string
 
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
+	// Amazon S3 bucket that contains your input files (in this case, your custom
+	// vocabulary). If the role that you specify doesn’t have the appropriate
+	// permissions to access the specified Amazon S3 location, your request fails. IAM
+	// role ARNs have the format arn:partition:iam::account:role/role-name-with-path.
+	// For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM
+	// ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	DataAccessRoleArn *string
+
 	// Use this parameter if you want to create your custom vocabulary by including all
 	// desired terms, as comma-separated values, within your request. The other option
 	// for creating your custom vocabulary is to save your entries in a text file and

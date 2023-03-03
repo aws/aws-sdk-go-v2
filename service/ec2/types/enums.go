@@ -606,8 +606,9 @@ type BootModeValues string
 
 // Enum values for BootModeValues
 const (
-	BootModeValuesLegacyBios BootModeValues = "legacy-bios"
-	BootModeValuesUefi       BootModeValues = "uefi"
+	BootModeValuesLegacyBios    BootModeValues = "legacy-bios"
+	BootModeValuesUefi          BootModeValues = "uefi"
+	BootModeValuesUefiPreferred BootModeValues = "uefi-preferred"
 )
 
 // Values returns all known values for BootModeValues. Note that this can be
@@ -617,6 +618,7 @@ func (BootModeValues) Values() []BootModeValues {
 	return []BootModeValues{
 		"legacy-bios",
 		"uefi",
+		"uefi-preferred",
 	}
 }
 
@@ -2462,6 +2464,24 @@ func (InstanceAutoRecoveryState) Values() []InstanceAutoRecoveryState {
 	return []InstanceAutoRecoveryState{
 		"disabled",
 		"default",
+	}
+}
+
+type InstanceBootModeValues string
+
+// Enum values for InstanceBootModeValues
+const (
+	InstanceBootModeValuesLegacyBios InstanceBootModeValues = "legacy-bios"
+	InstanceBootModeValuesUefi       InstanceBootModeValues = "uefi"
+)
+
+// Values returns all known values for InstanceBootModeValues. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceBootModeValues) Values() []InstanceBootModeValues {
+	return []InstanceBootModeValues{
+		"legacy-bios",
+		"uefi",
 	}
 }
 
@@ -5939,6 +5959,14 @@ func (ResourceType) Values() []ResourceType {
 }
 
 type RIProductDescription string
+
+// Enum values for RIProductDescription
+const (
+	RIProductDescriptionLinuxUnix          RIProductDescription = "Linux/UNIX"
+	RIProductDescriptionLinuxUnixAmazonVpc RIProductDescription = "Linux/UNIX (Amazon VPC)"
+	RIProductDescriptionWindows            RIProductDescription = "Windows"
+	RIProductDescriptionWindowsAmazonVpc   RIProductDescription = "Windows (Amazon VPC)"
+)
 
 // Values returns all known values for RIProductDescription. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

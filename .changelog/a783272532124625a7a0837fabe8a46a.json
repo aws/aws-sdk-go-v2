@@ -1,0 +1,8 @@
+{
+    "id": "a7832725-3212-4625-a7a0-837fabe8a46a",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive adds support for Nielsen watermark timezones.",
+    "modules": [
+        "service/medialive"
+    ]
+}

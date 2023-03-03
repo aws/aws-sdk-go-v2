@@ -14,23 +14,25 @@ import (
 )
 
 // Modifies the provisioned throughput settings, global secondary indexes, or
-// DynamoDB Streams settings for a given table. You can only perform one of the
-// following operations at once:
+// DynamoDB Streams settings for a given table. This operation only applies to
+// Version 2019.11.21 (Current)
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+// of global tables. You can only perform one of the following operations at
+// once:
 //
-// * Modify the provisioned throughput settings of
-// the table.
+// * Modify the provisioned throughput settings of the table.
 //
-// * Remove a global secondary index from the table.
+// * Remove a
+// global secondary index from the table.
 //
-// * Create a new
-// global secondary index on the table. After the index begins backfilling, you can
-// use UpdateTable to perform other operations.
+// * Create a new global secondary index on
+// the table. After the index begins backfilling, you can use UpdateTable to
+// perform other operations.
 //
-// UpdateTable is an asynchronous
-// operation; while it is executing, the table status changes from ACTIVE to
-// UPDATING. While it is UPDATING, you cannot issue another UpdateTable request.
-// When the table returns to the ACTIVE state, the UpdateTable operation is
-// complete.
+// UpdateTable is an asynchronous operation; while it is
+// executing, the table status changes from ACTIVE to UPDATING. While it is
+// UPDATING, you cannot issue another UpdateTable request. When the table returns
+// to the ACTIVE state, the UpdateTable operation is complete.
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -99,7 +101,7 @@ type UpdateTableInput struct {
 	ProvisionedThroughput *types.ProvisionedThroughput
 
 	// A list of replica update actions (create, delete, or update) for the table. This
-	// property only applies to Version 2019.11.21
+	// property only applies to Version 2019.11.21 (Current)
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 	// of global tables.
 	ReplicaUpdates []types.ReplicationGroupUpdate

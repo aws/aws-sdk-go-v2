@@ -520,7 +520,10 @@ type AvailBlanking struct {
 // Avail Configuration
 type AvailConfiguration struct {
 
-	// Ad avail settings.
+	// Controls how SCTE-35 messages create cues. Splice Insert mode treats all
+	// segmentation signals traditionally. With Time Signal APOS mode only Time Signal
+	// Placement Opportunity and Break messages create segment breaks. With ESAM mode,
+	// signals are forwarded to an ESAM server for possible update.
 	AvailSettings *AvailSettings
 
 	noSmithyDocumentSerde
@@ -532,10 +535,12 @@ type AvailSettings struct {
 	// Esam
 	Esam *Esam
 
-	// Scte35 Splice Insert
+	// Typical configuration that applies breaks on splice inserts in addition to time
+	// signal placement opportunities, breaks, and advertisements.
 	Scte35SpliceInsert *Scte35SpliceInsert
 
-	// Scte35 Time Signal Apos
+	// Atypical configuration that applies segment breaks only on SCTE-35 time signal
+	// placement opportunities and breaks.
 	Scte35TimeSignalApos *Scte35TimeSignalApos
 
 	noSmithyDocumentSerde
@@ -901,8 +906,7 @@ type CaptionRectangle struct {
 	noSmithyDocumentSerde
 }
 
-// Output groups for this Live Event. Output groups contain information about where
-// streams should be distributed.
+// Caption Selector
 type CaptionSelector struct {
 
 	// Name identifier for a caption selector. This name is used to associate this
@@ -2257,7 +2261,8 @@ type HlsAkamaiSettings struct {
 	HttpTransferMode HlsAkamaiHttpTransferMode
 
 	// Number of retry attempts that will be made before the Live Event is put into an
-	// error state.
+	// error state. Applies only if the CDN destination URI begins with "s3" or
+	// "mediastore". For other URIs, the value is always 3.
 	NumRetries int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
@@ -2284,7 +2289,8 @@ type HlsBasicPutSettings struct {
 	FilecacheDuration int32
 
 	// Number of retry attempts that will be made before the Live Event is put into an
-	// error state.
+	// error state. Applies only if the CDN destination URI begins with "s3" or
+	// "mediastore". For other URIs, the value is always 3.
 	NumRetries int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
@@ -2610,7 +2616,8 @@ type HlsMediaStoreSettings struct {
 	MediaStoreStorageClass HlsMediaStoreStorageClass
 
 	// Number of retry attempts that will be made before the Live Event is put into an
-	// error state.
+	// error state. Applies only if the CDN destination URI begins with "s3" or
+	// "mediastore". For other URIs, the value is always 3.
 	NumRetries int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
@@ -2696,7 +2703,8 @@ type HlsWebdavSettings struct {
 	HttpTransferMode HlsWebdavHttpTransferMode
 
 	// Number of retry attempts that will be made before the Live Event is put into an
-	// error state.
+	// error state. Applies only if the CDN destination URI begins with "s3" or
+	// "mediastore". For other URIs, the value is always 3.
 	NumRetries int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
@@ -4419,6 +4427,10 @@ type NielsenNaesIiNw struct {
 	// This member is required.
 	Sid float64
 
+	// Choose the timezone for the time stamps in the watermark. If not provided, the
+	// timestamps will be in Coordinated Universal Time (UTC)
+	Timezone NielsenWatermarkTimezones
+
 	noSmithyDocumentSerde
 }
 
@@ -5175,7 +5187,8 @@ type Scte35SegmentationDescriptor struct {
 	noSmithyDocumentSerde
 }
 
-// Scte35 Splice Insert
+// Typical configuration that applies breaks on splice inserts in addition to time
+// signal placement opportunities, breaks, and advertisements.
 type Scte35SpliceInsert struct {
 
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail PTS
@@ -5213,7 +5226,8 @@ type Scte35SpliceInsertScheduleActionSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Scte35 Time Signal Apos
+// Atypical configuration that applies segment breaks only on SCTE-35 time signal
+// placement opportunities and breaks.
 type Scte35TimeSignalApos struct {
 
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail PTS
