@@ -1,8 +1,0 @@
-{
-    "id": "aaf0ad38-72df-41ce-bbd0-d6ff1b46f386",
-    "type": "feature",
-    "description": "The AWS Elemental MediaConvert SDK has improved handling for different input and output color space combinations.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

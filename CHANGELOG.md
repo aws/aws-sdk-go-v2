@@ -1,3 +1,22 @@
+# Release (2023-03-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.18.6](service/dynamodb/CHANGELOG.md#v1186-2023-03-03)
+  * **Documentation**: Documentation updates for DynamoDB.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.88.0](service/ec2/CHANGELOG.md#v1880-2023-03-03)
+  * **Feature**: This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.27.1](service/macie2/CHANGELOG.md#v1271-2023-03-03)
+  * **Documentation**: Documentation updates for Amazon Macie
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.33.0](service/mediaconvert/CHANGELOG.md#v1330-2023-03-03)
+  * **Feature**: The AWS Elemental MediaConvert SDK has improved handling for different input and output color space combinations.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.30.0](service/medialive/CHANGELOG.md#v1300-2023-03-03)
+  * **Feature**: AWS Elemental MediaLive adds support for Nielsen watermark timezones.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.26.0](service/transcribe/CHANGELOG.md#v1260-2023-03-03)
+  * **Feature**: Amazon Transcribe now supports role access for these API operations: CreateVocabulary, UpdateVocabulary, CreateVocabularyFilter, and UpdateVocabularyFilter.
+
 # Release (2023-03-02)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.30.0 (2023-03-03)
+
+* **Feature**: AWS Elemental MediaLive adds support for Nielsen watermark timezones.
+
 # v1.29.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

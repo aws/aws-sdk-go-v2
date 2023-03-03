@@ -1,8 +1,0 @@
-{
-    "id": "8acbe48a-9aa9-43d2-85bf-e0bf99f777b0",
-    "type": "feature",
-    "description": "This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.",
-    "modules": [
-        "service/ec2"
-    ]
-}

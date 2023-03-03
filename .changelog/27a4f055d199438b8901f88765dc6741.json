@@ -1,8 +1,0 @@
-{
-    "id": "27a4f055-d199-438b-8901-f88765dc6741",
-    "type": "feature",
-    "description": "Amazon Transcribe now supports role access for these API operations: CreateVocabulary, UpdateVocabulary, CreateVocabularyFilter, and UpdateVocabularyFilter.",
-    "modules": [
-        "service/transcribe"
-    ]
-}

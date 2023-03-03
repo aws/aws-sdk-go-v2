@@ -1,3 +1,7 @@
+# v1.88.0 (2023-03-03)
+
+* **Feature**: This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
+
 # v1.87.0 (2023-02-28)
 
 * **Feature**: This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
