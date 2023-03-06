@@ -309,7 +309,9 @@ type Stream struct {
 	// returned as a string.
 	StartTime *time.Time
 
-	// The stream’s state.
+	// The stream’s state. Do not rely on the OFFLINE state, as the API may not return
+	// it; instead, a "NotBroadcasting" error will indicate that the stream is not
+	// live.
 	State StreamState
 
 	// Unique identifier for a live or previously live stream in the specified channel.
@@ -461,7 +463,9 @@ type StreamSummary struct {
 	// returned as a string.
 	StartTime *time.Time
 
-	// The stream’s state.
+	// The stream’s state. Do not rely on the OFFLINE state, as the API may not return
+	// it; instead, a "NotBroadcasting" error will indicate that the stream is not
+	// live.
 	State StreamState
 
 	// Unique identifier for a live or previously live stream in the specified channel.

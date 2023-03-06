@@ -99,8 +99,8 @@ type Region struct {
 	noSmithyDocumentSerde
 }
 
-// The input failed to meet the constraints specified by the AWS service in a
-// specified field.
+// The input failed to meet the constraints specified by the Amazon Web Services
+// service in a specified field.
 type ValidationExceptionField struct {
 
 	// A message about the validation exception.

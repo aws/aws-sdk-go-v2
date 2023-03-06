@@ -1,0 +1,8 @@
+{
+    "id": "b4b42f00-b4bc-4725-8720-a556e51f4ae9",
+    "type": "documentation",
+    "description": "Updated text description in DeleteChannel, Stream, and StreamSummary.",
+    "modules": [
+        "service/ivs"
+    ]
+}
