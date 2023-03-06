@@ -1,3 +1,7 @@
+# v1.10.0 (2023-03-06)
+
+* **Feature**: AWS Account alternate contact email addresses can now have a length of 254 characters and contain the character "|".
+
 # v1.9.3 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

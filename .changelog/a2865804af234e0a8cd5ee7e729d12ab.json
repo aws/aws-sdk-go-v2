@@ -1,8 +1,0 @@
-{
-    "id": "a2865804-af23-4e0a-8cd5-ee7e729d12ab",
-    "type": "feature",
-    "description": "AWS Account alternate contact email addresses can now have a length of 254 characters and contain the character \"|\".",
-    "modules": [
-        "service/account"
-    ]
-}

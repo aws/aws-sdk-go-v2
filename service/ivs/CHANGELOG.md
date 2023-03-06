@@ -1,3 +1,7 @@
+# v1.20.6 (2023-03-06)
+
+* **Documentation**: Updated text description in DeleteChannel, Stream, and StreamSummary.
+
 # v1.20.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

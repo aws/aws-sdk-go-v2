@@ -1,3 +1,11 @@
+# Release (2023-03-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.10.0](service/account/CHANGELOG.md#v1100-2023-03-06)
+  * **Feature**: AWS Account alternate contact email addresses can now have a length of 254 characters and contain the character "|".
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.20.6](service/ivs/CHANGELOG.md#v1206-2023-03-06)
+  * **Documentation**: Updated text description in DeleteChannel, Stream, and StreamSummary.
+
 # Release (2023-03-03)
 
 ## General Highlights
