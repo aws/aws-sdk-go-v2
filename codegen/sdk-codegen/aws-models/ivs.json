@@ -1052,7 +1052,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -1176,7 +1176,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -1185,18 +1185,20 @@
             }
         },
         "com.amazonaws.ivs#ChannelType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BASIC",
-                        "name": "BasicChannelType"
-                    },
-                    {
-                        "value": "STANDARD",
-                        "name": "StandardChannelType"
+            "type": "enum",
+            "members": {
+                "BasicChannelType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
                     }
-                ]
+                },
+                "StandardChannelType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
             }
         },
         "com.amazonaws.ivs#Channels": {
@@ -1485,7 +1487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified channel and its associated stream keys.</p>\n         <p>If you try to delete a live channel, you will get an error (409 ConflictException). To\n      delete a channel that is live, call <a>StopStream</a>, wait for the Amazon\n      EventBridge \"Stream End\" event (to verify that the stream's state was changed from Live to\n      Offline), then call DeleteChannel. (See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html\"> Using EventBridge with Amazon IVS</a>.)\n    </p>",
+                "smithy.api#documentation": "<p>Deletes the specified channel and its associated stream keys.</p>\n         <p>If you try to delete a live channel, you will get an error (409 ConflictException). To\n      delete a channel that is live, call <a>StopStream</a>, wait for the Amazon\n      EventBridge \"Stream End\" event (to verify that the stream's state is no longer Live), then\n      call DeleteChannel. (See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html\"> Using EventBridge with Amazon IVS</a>.) </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteChannel",
@@ -2683,7 +2685,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -2738,7 +2740,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -2837,7 +2839,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 },
                 "thumbnailConfiguration": {
@@ -2936,7 +2938,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -3115,7 +3117,7 @@
                 "state": {
                     "target": "com.amazonaws.ivs#StreamState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The stream’s state.</p>"
+                        "smithy.api#documentation": "<p>The stream’s state. Do not rely on the <code>OFFLINE</code> state, as the API may not\n      return it; instead, a \"NotBroadcasting\" error will indicate that the stream is not\n      live.</p>"
                     }
                 },
                 "health": {
@@ -3240,7 +3242,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -3294,7 +3296,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
                 }
             },
@@ -3457,7 +3459,7 @@
                 "state": {
                     "target": "com.amazonaws.ivs#StreamState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The stream’s state.</p>"
+                        "smithy.api#documentation": "<p>The stream’s state. Do not rely on the <code>OFFLINE</code> state, as the API may not return it;\n      instead, a \"NotBroadcasting\" error will indicate that the stream is not live.</p>"
                     }
                 },
                 "health": {
