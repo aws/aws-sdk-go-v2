@@ -395,6 +395,7 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
+				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 2,
@@ -416,6 +417,7 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
+				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 2,
@@ -437,6 +439,7 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
+				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 2,

@@ -6,10 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"sync"
-	"sync/atomic"
 	"time"
 
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -26,8 +24,6 @@ type tokenProvider struct {
 
 	token    *apiToken
 	tokenMux sync.RWMutex
-
-	disabled uint32 // Atomic updated
 }
 
 func newTokenProvider(client *Client, ttl time.Duration) *tokenProvider {
@@ -60,18 +56,11 @@ func (t *tokenProvider) ID() string { return "APITokenProvider" }
 // token is not cached, it will be retrieved in a separate API call, getToken.
 //
 // For retry attempts, handler must be added after attempt retryer.
-//
-// If request for getToken fails the token provider may be disabled from future
-// requests, depending on the response status code.
 func (t *tokenProvider) HandleFinalize(
 	ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	if !t.enabled() {
-		// short-circuits to insecure data flow if token provider is disabled.
-		return next.HandleFinalize(ctx, input)
-	}
 
 	req, ok := input.Request.(*smithyhttp.Request)
 	if !ok {
@@ -116,7 +105,6 @@ func (t *tokenProvider) HandleDeserialize(
 
 	if resp.StatusCode == http.StatusUnauthorized { // unauthorized
 		err = &retryableError{Err: err}
-		t.enable()
 	}
 
 	return out, metadata, err
@@ -131,12 +119,6 @@ func (*retryableError) RetryableError() bool { return true }
 func (e *retryableError) Error() string { return e.Err.Error() }
 
 func (t *tokenProvider) getToken(ctx context.Context) (tok *apiToken, err error) {
-	if !t.enabled() {
-		return nil, &bypassTokenRetrievalError{
-			Err: fmt.Errorf("cannot get API token, provider disabled"),
-		}
-	}
-
 	t.tokenMux.RLock()
 	tok = t.token
 	t.tokenMux.RUnlock()
@@ -167,29 +149,13 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 		TokenTTL: t.tokenTTL,
 	})
 	if err != nil {
-		// change the disabled flag on token provider to true, when error is request timeout error.
 		var statusErr interface{ HTTPStatusCode() int }
 		if errors.As(err, &statusErr) {
 			switch statusErr.HTTPStatusCode() {
-
-			// Disable get token if failed because of 403, 404, or 405
-			case http.StatusForbidden,
-				http.StatusNotFound,
-				http.StatusMethodNotAllowed:
-
-				t.disable()
-
 			// 400 errors are terminal, and need to be upstreamed
 			case http.StatusBadRequest:
 				return nil, err
 			}
-		}
-
-		// Disable if request send failed or timed out getting response
-		var re *smithyhttp.RequestSendError
-		var ce *smithy.CanceledError
-		if errors.As(err, &re) || errors.As(err, &ce) {
-			atomic.StoreUint32(&t.disabled, 1)
 		}
 
 		// Token couldn't be retrieved, but bypass this, and allow the
@@ -215,23 +181,3 @@ func (e *bypassTokenRetrievalError) Error() string {
 }
 
 func (e *bypassTokenRetrievalError) Unwrap() error { return e.Err }
-
-// enabled returns if the token provider is current enabled or not.
-func (t *tokenProvider) enabled() bool {
-	return atomic.LoadUint32(&t.disabled) == 0
-}
-
-// disable disables the token provider and it will no longer attempt to inject
-// the token, nor request updates.
-func (t *tokenProvider) disable() {
-	atomic.StoreUint32(&t.disabled, 1)
-}
-
-// enable enables the token provide to start refreshing tokens, and adding them
-// to the pending request.
-func (t *tokenProvider) enable() {
-	t.tokenMux.Lock()
-	t.token = nil
-	t.tokenMux.Unlock()
-	atomic.StoreUint32(&t.disabled, 0)
-}
