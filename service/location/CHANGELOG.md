@@ -1,3 +1,7 @@
+# v1.22.1 (2023-03-07)
+
+* **Documentation**: Documentation update for the release of 3 additional map styles for use with Open Data Maps: Open Data Standard Dark, Open Data Visualization Light & Open Data Visualization Dark.
+
 # v1.22.0 (2023-02-23)
 
 * **Feature**: This release adds support for using Maps APIs with an API Key in addition to AWS Cognito. This includes support for adding, listing, updating and deleting API Keys.

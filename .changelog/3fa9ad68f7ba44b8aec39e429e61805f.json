@@ -1,8 +1,0 @@
-{
-    "id": "3fa9ad68-f7ba-44b8-aec3-9e429e61805f",
-    "type": "feature",
-    "description": "This release adds DMS Fleet Advisor Target Recommendation APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to start Target Recommendation calculation.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

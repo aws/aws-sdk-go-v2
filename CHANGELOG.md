@@ -1,3 +1,11 @@
+# Release (2023-03-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.24.0](service/databasemigrationservice/CHANGELOG.md#v1240-2023-03-07)
+  * **Feature**: This release adds DMS Fleet Advisor Target Recommendation APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to start Target Recommendation calculation.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.22.1](service/location/CHANGELOG.md#v1221-2023-03-07)
+  * **Documentation**: Documentation update for the release of 3 additional map styles for use with Open Data Maps: Open Data Standard Dark, Open Data Visualization Light & Open Data Visualization Dark.
+
 # Release (2023-03-06)
 
 ## Module Highlights

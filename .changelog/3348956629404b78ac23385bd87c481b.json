@@ -1,8 +1,0 @@
-{
-    "id": "33489566-2940-4b78-ac23-385bd87c481b",
-    "type": "documentation",
-    "description": "Documentation update for the release of 3 additional map styles for use with Open Data Maps: Open Data Standard Dark, Open Data Visualization Light \u0026 Open Data Visualization Dark.",
-    "modules": [
-        "service/location"
-    ]
-}
