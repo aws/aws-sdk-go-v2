@@ -37,6 +37,22 @@ type AvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the errors that occurred during the analysis of the
+// source database.
+type BatchStartRecommendationsErrorEntry struct {
+
+	// The code of an error that occurred during the analysis of the source database.
+	Code *string
+
+	// The identifier of the source database.
+	DatabaseId *string
+
+	// The information about the error.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The SSL certificate that can be used to encrypt connections between the
 // endpoints and the replication instance.
 type Certificate struct {
@@ -731,10 +747,10 @@ type GcpMySQLSettings struct {
 	// of a file containing the script.
 	AfterConnectScript *string
 
-	// Adjusts the behavior of DMS when migrating from an SQL Server source database
-	// that is hosted as part of an Always On availability group cluster. If you need
-	// DMS to poll all the nodes in the Always On cluster for transaction backups, set
-	// this attribute to false.
+	// Cleans and recreates table metadata information on the replication instance when
+	// a mismatch occurs. For example, in a situation where running an alter DDL on the
+	// table could result in different information about the table cached in the
+	// replication instance.
 	CleanSourceMetadataOnMismatch *bool
 
 	// Database name for the endpoint. For a MySQL source or target endpoint, don't
@@ -764,7 +780,7 @@ type GcpMySQLSettings struct {
 	// Endpoint connection password.
 	Password *string
 
-	//
+	// Endpoint TCP port.
 	Port *int32
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
@@ -786,7 +802,7 @@ type GcpMySQLSettings struct {
 	// contains the MySQL endpoint connection details.
 	SecretsManagerSecretId *string
 
-	// Endpoint TCP port.
+	// The MySQL host name.
 	ServerName *string
 
 	// Specifies the time zone for the source MySQL database. Example:
@@ -1021,6 +1037,44 @@ type KinesisSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the limitations of target Amazon Web Services
+// engines. Your source database might include features that the target Amazon Web
+// Services engine doesn't support. Fleet Advisor lists these features as
+// limitations. You should consider these limitations during database migration.
+// For each limitation, Fleet Advisor recommends an action that you can take to
+// address or avoid this limitation.
+type Limitation struct {
+
+	// The identifier of the source database.
+	DatabaseId *string
+
+	// A description of the limitation. Provides additional information about the
+	// limitation, and includes recommended actions that you can take to address or
+	// avoid this limitation.
+	Description *string
+
+	// The name of the target engine that Fleet Advisor should use in the target engine
+	// recommendation. Valid values include "rds-aurora-mysql",
+	// "rds-aurora-postgresql", "rds-mysql", "rds-oracle", "rds-sql-server", and
+	// "rds-postgresql".
+	EngineName *string
+
+	// The impact of the limitation. You can use this parameter to prioritize
+	// limitations that you want to address. Valid values include "Blocker", "High",
+	// "Medium", and "Low".
+	Impact *string
+
+	// The name of the limitation. Describes unsupported database features, migration
+	// action items, and other limitations.
+	Name *string
+
+	// The type of the limitation, such as action required, upgrade required, and
+	// limited feature.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines a Microsoft SQL Server endpoint.
 type MicrosoftSQLServerSettings struct {
 
@@ -1088,7 +1142,12 @@ type MicrosoftSQLServerSettings struct {
 	// contains the SQL Server endpoint connection details.
 	SecretsManagerSecretId *string
 
-	// Fully qualified domain name of the endpoint.
+	// Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server
+	// instance, this is the output of DescribeDBInstances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
+	// in the Endpoint
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
+	// field.
 	ServerName *string
 
 	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
@@ -1193,10 +1252,10 @@ type MySQLSettings struct {
 	// of a file containing the script.
 	AfterConnectScript *string
 
-	// Adjusts the behavior of DMS when migrating from an SQL Server source database
-	// that is hosted as part of an Always On availability group cluster. If you need
-	// DMS to poll all the nodes in the Always On cluster for transaction backups, set
-	// this attribute to false.
+	// Cleans and recreates table metadata information on the replication instance when
+	// a mismatch occurs. For example, in a situation where running an alter DDL on the
+	// table could result in different information about the table cached in the
+	// replication instance.
 	CleanSourceMetadataOnMismatch *bool
 
 	// Database name for the endpoint. For a MySQL source or target endpoint, don't
@@ -1248,7 +1307,14 @@ type MySQLSettings struct {
 	// contains the MySQL endpoint connection details.
 	SecretsManagerSecretId *string
 
-	// Fully qualified domain name of the endpoint.
+	// The host name of the endpoint database. For an Amazon RDS MySQL instance, this
+	// is the output of DescribeDBInstances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
+	// in the Endpoint
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
+	// field. For an Aurora MySQL instance, this is the output of DescribeDBClusters
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html),
+	// in the Endpoint field.
 	ServerName *string
 
 	// Specifies the time zone for the source MySQL database. Example:
@@ -1534,7 +1600,12 @@ type OracleSettings struct {
 	// in the Database Migration Service User Guide.
 	SecurityDbEncryptionName *string
 
-	// Fully qualified domain name of the endpoint.
+	// Fully qualified domain name of the endpoint. For an Amazon RDS Oracle instance,
+	// this is the output of DescribeDBInstances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
+	// in the Endpoint
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
+	// field.
 	ServerName *string
 
 	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS
@@ -1752,7 +1823,15 @@ type PostgreSQLSettings struct {
 	// contains the PostgreSQL endpoint connection details.
 	SecretsManagerSecretId *string
 
-	// Fully qualified domain name of the endpoint.
+	// The host name of the endpoint database. For an Amazon RDS PostgreSQL instance,
+	// this is the output of DescribeDBInstances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
+	// in the Endpoint
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
+	// field. For an Aurora PostgreSQL instance, this is the output of
+	// DescribeDBClusters
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html),
+	// in the Endpoint field.
 	ServerName *string
 
 	// Sets the name of a previously created logical replication slot for a change data
@@ -1779,6 +1858,161 @@ type PostgreSQLSettings struct {
 
 	// Endpoint connection user name.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that describes the configuration of the recommended target
+// engine on Amazon RDS.
+type RdsConfiguration struct {
+
+	// Describes the deployment option for the recommended Amazon RDS DB instance. The
+	// deployment options include Multi-AZ and Single-AZ deployments. Valid values
+	// include "MULTI_AZ" and "SINGLE_AZ".
+	DeploymentOption *string
+
+	// Describes the recommended target Amazon RDS engine edition.
+	EngineEdition *string
+
+	// Describes the memory on the recommended Amazon RDS DB instance that meets your
+	// requirements.
+	InstanceMemory *float64
+
+	// Describes the recommended target Amazon RDS instance type.
+	InstanceType *string
+
+	// Describes the number of virtual CPUs (vCPU) on the recommended Amazon RDS DB
+	// instance that meets your requirements.
+	InstanceVcpu *float64
+
+	// Describes the number of I/O operations completed each second (IOPS) on the
+	// recommended Amazon RDS DB instance that meets your requirements.
+	StorageIops *int32
+
+	// Describes the storage size of the recommended Amazon RDS DB instance that meets
+	// your requirements.
+	StorageSize *int32
+
+	// Describes the storage type of the recommended Amazon RDS DB instance that meets
+	// your requirements. Amazon RDS provides three storage types: General Purpose SSD
+	// (also known as gp2 and gp3), Provisioned IOPS SSD (also known as io1), and
+	// magnetic (also known as standard).
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that describes a recommendation of a target engine on
+// Amazon RDS.
+type RdsRecommendation struct {
+
+	// Supplemental information about the requirements to the recommended target
+	// database on Amazon RDS.
+	RequirementsToTarget *RdsRequirements
+
+	// Supplemental information about the configuration of the recommended target
+	// database on Amazon RDS.
+	TargetConfiguration *RdsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that describes the requirements to the target engine on
+// Amazon RDS.
+type RdsRequirements struct {
+
+	// The required deployment option for the Amazon RDS DB instance. Valid values
+	// include "MULTI_AZ" for Multi-AZ deployments and "SINGLE_AZ" for Single-AZ
+	// deployments.
+	DeploymentOption *string
+
+	// The required target Amazon RDS engine edition.
+	EngineEdition *string
+
+	// The required memory on the Amazon RDS DB instance.
+	InstanceMemory *float64
+
+	// The required number of virtual CPUs (vCPU) on the Amazon RDS DB instance.
+	InstanceVcpu *float64
+
+	// The required number of I/O operations completed each second (IOPS) on your
+	// Amazon RDS DB instance.
+	StorageIops *int32
+
+	// The required Amazon RDS DB instance storage size.
+	StorageSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that describes a recommendation of a target engine. A
+// recommendation is a set of possible Amazon Web Services target engines that you
+// can choose to migrate your source on-premises database. In this set, Fleet
+// Advisor suggests a single target engine as the right sized migration
+// destination. To determine this rightsized migration destination, Fleet Advisor
+// uses the inventory metadata and metrics from data collector. You can use
+// recommendations before the start of migration to save costs and reduce risks.
+// With recommendations, you can explore different target options and compare
+// metrics, so you can make an informed decision when you choose the migration
+// target.
+type Recommendation struct {
+
+	// The date when Fleet Advisor created the target engine recommendation.
+	CreatedDate *string
+
+	// The recommendation of a target engine for the specified source database.
+	Data *RecommendationData
+
+	// The identifier of the source database for which Fleet Advisor provided this
+	// recommendation.
+	DatabaseId *string
+
+	// The name of the target engine. Valid values include "rds-aurora-mysql",
+	// "rds-aurora-postgresql", "rds-mysql", "rds-oracle", "rds-sql-server", and
+	// "rds-postgresql".
+	EngineName *string
+
+	// Indicates that this target is the rightsized migration destination.
+	Preferred *bool
+
+	// The settings in JSON format for the preferred target engine parameters. These
+	// parameters include capacity, resource utilization, and the usage type
+	// (production, development, or testing).
+	Settings *RecommendationSettings
+
+	// The status of the target engine recommendation. Valid values include
+	// "alternate", "in-progress", "not-viable", and "recommended".
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the target engine for the specified source database.
+type RecommendationData struct {
+
+	// The recommendation of a target Amazon RDS database engine.
+	RdsEngine *RdsRecommendation
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the required target engine settings.
+type RecommendationSettings struct {
+
+	// The size of your target instance. Fleet Advisor calculates this value based on
+	// your data collection type, such as total capacity and resource utilization.
+	// Valid values include "total-capacity" and "utilization".
+	//
+	// This member is required.
+	InstanceSizingType *string
+
+	// The deployment option for your target engine. For production databases, Fleet
+	// Advisor chooses Multi-AZ deployment. For development or test databases, Fleet
+	// Advisor chooses Single-AZ deployment. Valid values include "development" and
+	// "production".
+	//
+	// This member is required.
+	WorkloadType *string
 
 	noSmithyDocumentSerde
 }
@@ -2262,7 +2496,7 @@ type ReplicationTask struct {
 	// Indicates when you want a change data capture (CDC) operation to stop. The value
 	// can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
 	CdcStopPosition *string
 
 	// The last error (failure) message generated for the replication task.
@@ -3123,6 +3357,23 @@ type ServerShortInfoResponse struct {
 
 	// The name address of a server in a Fleet Advisor collector inventory.
 	ServerName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the source database to analyze and provide target
+// recommendations according to the specified requirements.
+type StartRecommendationsRequestEntry struct {
+
+	// The identifier of the source database.
+	//
+	// This member is required.
+	DatabaseId *string
+
+	// The required target engine settings.
+	//
+	// This member is required.
+	Settings *RecommendationSettings
 
 	noSmithyDocumentSerde
 }

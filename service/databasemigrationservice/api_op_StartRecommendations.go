@@ -11,58 +11,59 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds metadata tags to an DMS resource, including replication instance, endpoint,
-// subnet group, and migration task. These tags can also be used with cost
-// allocation reporting to track cost associated with DMS resources, or used in a
-// Condition statement in an IAM policy for DMS. For more information, see Tag
-// (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html) data type
-// description.
-func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
+// Starts the analysis of your source database to provide recommendations of target
+// engines. You can create recommendations for multiple source databases using
+// BatchStartRecommendations
+// (https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html).
+func (c *Client) StartRecommendations(ctx context.Context, params *StartRecommendationsInput, optFns ...func(*Options)) (*StartRecommendationsOutput, error) {
 	if params == nil {
-		params = &AddTagsToResourceInput{}
+		params = &StartRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddTagsToResource", params, optFns, c.addOperationAddTagsToResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartRecommendations", params, optFns, c.addOperationStartRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*AddTagsToResourceOutput)
+	out := result.(*StartRecommendationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// Associates a set of tags with an DMS resource.
-type AddTagsToResourceInput struct {
+type StartRecommendationsInput struct {
 
-	// Identifies the DMS resource to which tags should be added. The value for this
-	// parameter is an Amazon Resource Name (ARN). For DMS, you can tag a replication
-	// instance, an endpoint, or a replication task.
+	// The identifier of the source database to analyze and provide recommendations
+	// for.
 	//
 	// This member is required.
-	ResourceArn *string
+	DatabaseId *string
 
-	// One or more tags to be assigned to the resource.
+	// The settings in JSON format that Fleet Advisor uses to determine target engine
+	// recommendations. These parameters include target instance sizing and
+	// availability and durability settings. For target instance sizing, Fleet Advisor
+	// supports the following two options: total capacity and resource utilization. For
+	// availability and durability, Fleet Advisor supports the following two options:
+	// production (Multi-AZ deployments) and Dev/Test (Single-AZ deployments).
 	//
 	// This member is required.
-	Tags []types.Tag
+	Settings *types.RecommendationSettings
 
 	noSmithyDocumentSerde
 }
 
-type AddTagsToResourceOutput struct {
+type StartRecommendationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddTagsToResource{}, middleware.After)
+func (c *Client) addOperationStartRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddTagsToResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -102,10 +103,10 @@ func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpAddTagsToResourceValidationMiddleware(stack); err != nil {
+	if err = addOpStartRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddTagsToResource(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -120,11 +121,11 @@ func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opAddTagsToResource(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "dms",
-		OperationName: "AddTagsToResource",
+		OperationName: "StartRecommendations",
 	}
 }

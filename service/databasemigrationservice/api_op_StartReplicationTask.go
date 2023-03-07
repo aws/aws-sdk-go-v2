@@ -40,11 +40,14 @@ type StartReplicationTaskInput struct {
 
 	// The type of replication task to start. When the migration type is full-load or
 	// full-load-and-cdc, the only valid value for the first run of the task is
-	// start-replication. You use reload-target to restart the task and
-	// resume-processing to resume the task. When the migration type is cdc, you use
-	// start-replication to start or restart the task, and resume-processing to resume
-	// the task. reload-target is not a valid value for a task with migration type of
-	// cdc.
+	// start-replication. This option will start the migration. You can also use
+	// ReloadTables to reload specific tables that failed during migration instead of
+	// restarting the task. The resume-processing option isn't applicable for a
+	// full-load task, because you can't resume partially loaded tables during the full
+	// load phase. For a full-load-and-cdc task, DMS migrates table data, and then
+	// applies data changes that occur on the source. To load all the tables again, and
+	// start capturing source changes, use reload-target. Otherwise use
+	// resume-processing, to replicate the changes from the last stop position.
 	//
 	// This member is required.
 	StartReplicationTaskType types.StartReplicationTaskTypeValue
@@ -73,7 +76,7 @@ type StartReplicationTaskInput struct {
 	// Indicates when you want a change data capture (CDC) operation to stop. The value
 	// can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
 	CdcStopPosition *string
 
 	noSmithyDocumentSerde

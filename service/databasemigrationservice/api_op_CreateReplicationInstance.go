@@ -68,7 +68,12 @@ type CreateReplicationInstanceInput struct {
 
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the replication instance during the maintenance window. This parameter
-	// defaults to true. Default: true
+	// defaults to true. Default: true When AutoMinorVersionUpgrade is enabled, DMS
+	// uses the current default engine version when you create a replication instance.
+	// For example, if you set EngineVersion to a lower version number than the current
+	// default version, DMS uses the default version. If AutoMinorVersionUpgrade isn’t
+	// enabled when you create a replication instance, DMS uses the engine version
+	// specified by the EngineVersion parameter.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone where the replication instance will be created. The
