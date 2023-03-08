@@ -396,7 +396,6 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
-				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 2,
@@ -418,7 +417,6 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
-				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 2,
@@ -440,7 +438,6 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
-				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 2,
@@ -458,7 +455,7 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectContent: []byte("hello"),
 		},
 
-		// Token failure, fallback for one call, successful token then secure flow for following requests
+		// Token disabled and becomes re-enabled
 		"unauthorized 401 re-enable": {
 			ExpectTrace: []string{
 				getTokenPath,
@@ -537,6 +534,24 @@ func TestRequestGetToken(t *testing.T) {
 				return newTestServeMux(t,
 					newInsecureAPIHandler(t,
 						500,
+						http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+							t.Errorf("expected no call to API handler")
+							http.Error(w, "", 400)
+						}),
+					))
+			},
+			ExpectErr:       "failed to get API token",
+			DisableFallback: true,
+		},
+		"insecure 403 fallback disabled": {
+			ExpectTrace: []string{
+				getTokenPath,
+			},
+			APICallCount: 1,
+			GetHandler: func(t *testing.T) http.Handler {
+				return newTestServeMux(t,
+					newInsecureAPIHandler(t,
+						403,
 						http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 							t.Errorf("expected no call to API handler")
 							http.Error(w, "", 400)
