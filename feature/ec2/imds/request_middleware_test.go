@@ -5,13 +5,10 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/smithy-go/logging"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"strings"
 	"testing"
 	"time"
@@ -567,8 +564,6 @@ func TestRequestGetToken(t *testing.T) {
 			client := New(Options{
 				Endpoint:        server.URL,
 				DisableFallback: c.DisableFallback,
-				ClientLogMode:   aws.LogRequest | aws.LogRetries,
-				Logger:          logging.NewStandardLogger(os.Stdout),
 			})
 
 			ctx := context.Background()
