@@ -1,0 +1,8 @@
+{
+    "id": "ed77672e-86b3-4eea-b227-343186e23d70",
+    "type": "feature",
+    "description": "This release adds two new API support \"GetDataCellsFiler\" and \"UpdateDataCellsFilter\", and also updates the corresponding documentation.",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

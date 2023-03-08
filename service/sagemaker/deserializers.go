@@ -47961,6 +47961,64 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningResourceConfig(v **type
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIamIdentity(v **types.IamIdentity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamIdentity
+	if *v == nil {
+		sv = &types.IamIdentity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "PrincipalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PrincipalId = ptr.String(jtv)
+			}
+
+		case "SourceIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceIdentity = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -70025,6 +70083,11 @@ func awsAwsjson11_deserializeDocumentUserContext(v **types.UserContext, value in
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "IamIdentity":
+			if err := awsAwsjson11_deserializeDocumentIamIdentity(&sv.IamIdentity, value); err != nil {
+				return err
 			}
 
 		case "UserProfileArn":

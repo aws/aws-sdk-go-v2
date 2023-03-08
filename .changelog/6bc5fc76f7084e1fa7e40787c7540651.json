@@ -1,0 +1,8 @@
+{
+    "id": "6bc5fc76-f708-4e1f-a7e4-0787c7540651",
+    "type": "feature",
+    "description": "Adds deletion protection support to DynamoDB tables. Tables with deletion protection enabled cannot be deleted. Deletion protection is disabled by default, can be enabled via the CreateTable or UpdateTable APIs, and is visible in TableDescription. This setting is not replicated for Global Tables.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

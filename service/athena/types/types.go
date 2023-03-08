@@ -236,7 +236,9 @@ type Database struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a data catalog in an Amazon Web Services account.
+// Contains information about a data catalog in an Amazon Web Services account. In
+// the Athena console, data catalogs are listed as "data sources" on the Data
+// sources page under the Data source name column.
 type DataCatalog struct {
 
 	// The name of the data catalog. The catalog name must be unique for the Amazon Web
@@ -377,7 +379,7 @@ type EngineVersion struct {
 	EffectiveEngineVersion *string
 
 	// The engine version requested by the user. Possible values are determined by the
-	// output of ListEngineVersions, including Auto. The default is Auto.
+	// output of ListEngineVersions, including AUTO. The default is AUTO.
 	SelectedEngineVersion *string
 
 	noSmithyDocumentSerde
@@ -568,6 +570,9 @@ type QueryExecution struct {
 	// The completion date, current state, submission time, and state change reason (if
 	// applicable) for the query execution.
 	Status *QueryExecutionStatus
+
+	// The kind of query statement that was run.
+	SubstatementType *string
 
 	// The name of the workgroup in which the query ran.
 	WorkGroup *string

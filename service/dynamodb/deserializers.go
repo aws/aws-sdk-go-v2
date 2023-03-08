@@ -8106,7 +8106,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingTargetTrackingScalingPolicyConfi
 					sv.TargetValue = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected DoubleObject to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -10325,7 +10325,7 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescription(v **types.G
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -10347,7 +10347,7 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescription(v **types.G
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -11200,7 +11200,7 @@ func awsAwsjson10_deserializeDocumentImportTableDescription(v **types.ImportTabl
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -12265,7 +12265,7 @@ func awsAwsjson10_deserializeDocumentLocalSecondaryIndexDescription(v **types.Lo
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -12278,7 +12278,7 @@ func awsAwsjson10_deserializeDocumentLocalSecondaryIndexDescription(v **types.Lo
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -14240,7 +14240,7 @@ func awsAwsjson10_deserializeDocumentSourceTableDetails(v **types.SourceTableDet
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -14808,6 +14808,15 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 				}
 			}
 
+		case "DeletionProtectionEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtectionEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.DeletionProtectionEnabled = ptr.Bool(jtv)
+			}
+
 		case "GlobalSecondaryIndexes":
 			if err := awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescriptionList(&sv.GlobalSecondaryIndexes, value); err != nil {
 				return err
@@ -14826,7 +14835,7 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -14924,7 +14933,7 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

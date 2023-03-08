@@ -7347,6 +7347,22 @@ type HyperParameterTuningResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The IAM Identity details associated with the user. These details are associated
+// with model package groups, model packages and project entities only.
+type IamIdentity struct {
+
+	// The Amazon Resource Name (ARN) of the IAM identity.
+	Arn *string
+
+	// The ID of the principal that assumes the IAM identity.
+	PrincipalId *string
+
+	// The person or application which assumes the IAM identity.
+	SourceIdentity *string
+
+	noSmithyDocumentSerde
+}
+
 // A SageMaker image. A SageMaker image represents a set of container images that
 // are derived from a common base container image. Each of these container images
 // is represented by a SageMaker ImageVersion.
@@ -15583,6 +15599,10 @@ type UserContext struct {
 
 	// The domain associated with the user.
 	DomainId *string
+
+	// The IAM Identity details associated with the user. These details are associated
+	// with model package groups, model packages, and project entities only.
+	IamIdentity *IamIdentity
 
 	// The Amazon Resource Name (ARN) of the user's profile.
 	UserProfileArn *string

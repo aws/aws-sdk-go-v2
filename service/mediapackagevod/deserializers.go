@@ -181,6 +181,15 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsOutput(v **ConfigureLogsOutp
 				return err
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "domainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -610,6 +619,15 @@ func awsRestjson1_deserializeOpDocumentCreatePackagingConfigurationOutput(v **Cr
 				return err
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "dashPackage":
 			if err := awsRestjson1_deserializeDocumentDashPackage(&sv.DashPackage, value); err != nil {
 				return err
@@ -817,6 +835,15 @@ func awsRestjson1_deserializeOpDocumentCreatePackagingGroupOutput(v **CreatePack
 		case "authorization":
 			if err := awsRestjson1_deserializeDocumentAuthorization(&sv.Authorization, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "domainName":
@@ -1542,6 +1569,15 @@ func awsRestjson1_deserializeOpDocumentDescribePackagingConfigurationOutput(v **
 				return err
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "dashPackage":
 			if err := awsRestjson1_deserializeDocumentDashPackage(&sv.DashPackage, value); err != nil {
 				return err
@@ -1762,6 +1798,15 @@ func awsRestjson1_deserializeOpDocumentDescribePackagingGroupOutput(v **Describe
 		case "authorization":
 			if err := awsRestjson1_deserializeDocumentAuthorization(&sv.Authorization, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "domainName":
@@ -2803,6 +2848,15 @@ func awsRestjson1_deserializeOpDocumentUpdatePackagingGroupOutput(v **UpdatePack
 		case "authorization":
 			if err := awsRestjson1_deserializeDocumentAuthorization(&sv.Authorization, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "domainName":
@@ -4516,6 +4570,15 @@ func awsRestjson1_deserializeDocumentPackagingConfiguration(v **types.PackagingC
 				return err
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "dashPackage":
 			if err := awsRestjson1_deserializeDocumentDashPackage(&sv.DashPackage, value); err != nil {
 				return err
@@ -4610,6 +4673,15 @@ func awsRestjson1_deserializeDocumentPackagingGroup(v **types.PackagingGroup, va
 		case "authorization":
 			if err := awsRestjson1_deserializeDocumentAuthorization(&sv.Authorization, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "domainName":

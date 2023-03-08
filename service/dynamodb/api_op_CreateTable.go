@@ -101,6 +101,10 @@ type CreateTableInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
 	BillingMode types.BillingMode
 
+	// Indicates whether deletion protection is to be enabled (true) or disabled
+	// (false) on the table.
+	DeletionProtectionEnabled *bool
+
 	// One or more global secondary indexes (the maximum is 20) to be created on the
 	// table. Each global secondary index in the array includes the following:
 	//

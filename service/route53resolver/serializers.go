@@ -3555,6 +3555,11 @@ func awsAwsjson11_serializeDocumentIpAddressRequest(v *types.IpAddressRequest, v
 		ok.String(*v.Ip)
 	}
 
+	if v.Ipv6 != nil {
+		ok := object.Key("Ipv6")
+		ok.String(*v.Ipv6)
+	}
+
 	if v.SubnetId != nil {
 		ok := object.Key("SubnetId")
 		ok.String(*v.SubnetId)
@@ -3575,6 +3580,11 @@ func awsAwsjson11_serializeDocumentIpAddressUpdate(v *types.IpAddressUpdate, val
 	if v.IpId != nil {
 		ok := object.Key("IpId")
 		ok.String(*v.IpId)
+	}
+
+	if v.Ipv6 != nil {
+		ok := object.Key("Ipv6")
+		ok.String(*v.Ipv6)
 	}
 
 	if v.SubnetId != nil {
@@ -3670,6 +3680,11 @@ func awsAwsjson11_serializeDocumentTargetAddress(v *types.TargetAddress, value s
 		ok.String(*v.Ip)
 	}
 
+	if v.Ipv6 != nil {
+		ok := object.Key("Ipv6")
+		ok.String(*v.Ipv6)
+	}
+
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
@@ -3685,6 +3700,36 @@ func awsAwsjson11_serializeDocumentTargetList(v []types.TargetAddress, value smi
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentTargetAddress(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateIpAddress(v *types.UpdateIpAddress, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IpId != nil {
+		ok := object.Key("IpId")
+		ok.String(*v.IpId)
+	}
+
+	if v.Ipv6 != nil {
+		ok := object.Key("Ipv6")
+		ok.String(*v.Ipv6)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateIpAddresses(v []types.UpdateIpAddress, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentUpdateIpAddress(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3922,6 +3967,11 @@ func awsAwsjson11_serializeOpDocumentCreateResolverEndpointInput(v *CreateResolv
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.ResolverEndpointType) > 0 {
+		ok := object.Key("ResolverEndpointType")
+		ok.String(string(v.ResolverEndpointType))
 	}
 
 	if v.SecurityGroupIds != nil {
@@ -4970,6 +5020,18 @@ func awsAwsjson11_serializeOpDocumentUpdateResolverEndpointInput(v *UpdateResolv
 	if v.ResolverEndpointId != nil {
 		ok := object.Key("ResolverEndpointId")
 		ok.String(*v.ResolverEndpointId)
+	}
+
+	if len(v.ResolverEndpointType) > 0 {
+		ok := object.Key("ResolverEndpointType")
+		ok.String(string(v.ResolverEndpointType))
+	}
+
+	if v.UpdateIpAddresses != nil {
+		ok := object.Key("UpdateIpAddresses")
+		if err := awsAwsjson11_serializeDocumentUpdateIpAddresses(v.UpdateIpAddresses, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

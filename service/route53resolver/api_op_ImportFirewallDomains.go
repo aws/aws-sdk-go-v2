@@ -71,7 +71,7 @@ type ImportFirewallDomainsOutput struct {
 	// The name of the domain list.
 	Name *string
 
-	//
+	// Status of the import request.
 	Status types.FirewallDomainListStatus
 
 	// Additional information about the status of the list, if available.

@@ -75,6 +75,11 @@ type CreateResolverEndpointInput struct {
 	// dashboard in the Route 53 console.
 	Name *string
 
+	// For the endpoint type you can choose either IPv4, IPv6. or dual-stack. A
+	// dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This
+	// endpoint type is applied to all IP addresses.
+	ResolverEndpointType types.ResolverEndpointType
+
 	// A list of the tag keys and values that you want to associate with the endpoint.
 	Tags []types.Tag
 
