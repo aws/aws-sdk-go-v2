@@ -5,10 +5,13 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/smithy-go/logging"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -330,11 +333,12 @@ func (h *successAPIResponseHandler) ServeHTTP(w http.ResponseWriter, r *http.Req
 
 func TestRequestGetToken(t *testing.T) {
 	cases := map[string]struct {
-		GetHandler    func(*testing.T) http.Handler
-		APICallCount  int
-		ExpectTrace   []string
-		ExpectContent []byte
-		ExpectErr     string
+		GetHandler      func(*testing.T) http.Handler
+		APICallCount    int
+		ExpectTrace     []string
+		ExpectContent   []byte
+		ExpectErr       string
+		DisableFallback bool
 	}{
 		"secure": {
 			ExpectTrace: []string{
@@ -457,7 +461,7 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectContent: []byte("hello"),
 		},
 
-		// Token disabled and becomes re-enabled
+		// Token failure, fallback for one call, successful token then secure flow for following requests
 		"unauthorized 401 re-enable": {
 			ExpectTrace: []string{
 				getTokenPath,
@@ -499,8 +503,51 @@ func TestRequestGetToken(t *testing.T) {
 						}),
 					))
 			},
+			ExpectErr: "failed to get API token",
+		},
+
+		// retryable token error with fallback enabled (default)
+		"token failure fallback enabled": {
+			ExpectTrace: []string{
+				getTokenPath,
+				getTokenPath,
+				getTokenPath,
+				"/latest/foo",
+			},
+			APICallCount: 1,
+			GetHandler: func(t *testing.T) http.Handler {
+				return newTestServeMux(t,
+					newInsecureAPIHandler(t,
+						500,
+						&successAPIResponseHandler{t: t,
+							path:   "/latest/foo",
+							method: "GET",
+							body:   []byte("hello"),
+						},
+					))
+			},
 			ExpectContent: []byte("hello"),
-			ExpectErr:     "EC2 IMDS failed",
+		},
+		// retryable token error with fallback disabled
+		"token failure fallback disabled": {
+			ExpectTrace: []string{
+				getTokenPath,
+				getTokenPath,
+				getTokenPath,
+			},
+			APICallCount: 1,
+			GetHandler: func(t *testing.T) http.Handler {
+				return newTestServeMux(t,
+					newInsecureAPIHandler(t,
+						500,
+						http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+							t.Errorf("expected no call to API handler")
+							http.Error(w, "", 400)
+						}),
+					))
+			},
+			ExpectErr:       "failed to get API token",
+			DisableFallback: true,
 		},
 	}
 
@@ -518,7 +565,10 @@ func TestRequestGetToken(t *testing.T) {
 			defer server.Close()
 
 			client := New(Options{
-				Endpoint: server.URL,
+				Endpoint:        server.URL,
+				DisableFallback: c.DisableFallback,
+				ClientLogMode:   aws.LogRequest | aws.LogRetries,
+				Logger:          logging.NewStandardLogger(os.Stdout),
 			})
 
 			ctx := context.Background()

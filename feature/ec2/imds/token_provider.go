@@ -104,19 +104,11 @@ func (t *tokenProvider) HandleDeserialize(
 	}
 
 	if resp.StatusCode == http.StatusUnauthorized { // unauthorized
-		err = &retryableError{Err: err}
+		err = &retryableError{Err: err, isRetryable: true}
 	}
 
 	return out, metadata, err
 }
-
-type retryableError struct {
-	Err error
-}
-
-func (*retryableError) RetryableError() bool { return true }
-
-func (e *retryableError) Error() string { return e.Err.Error() }
 
 func (t *tokenProvider) getToken(ctx context.Context) (tok *apiToken, err error) {
 	t.tokenMux.RLock()
@@ -129,7 +121,7 @@ func (t *tokenProvider) getToken(ctx context.Context) (tok *apiToken, err error)
 
 	tok, err = t.updateToken(ctx)
 	if err != nil {
-		return nil, fmt.Errorf("cannot get API token, %w", err)
+		return nil, err
 	}
 
 	return tok, nil
@@ -158,8 +150,19 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 			}
 		}
 
-		// Token couldn't be retrieved, but bypass this, and allow the
-		// request to continue.
+		if t.client.options.DisableFallback {
+			// do not fallback to IMDSv1 insecure flow if token retrieval fails
+			//
+			// NOTE: getToken() is an implementation detail of some outer operation
+			// (e.g. GetMetadata). It has its own retries that have already been exhausted.
+			// Mark the underlying error as a terminal error.
+			err = &retryableError{Err: err, isRetryable: false}
+			return nil, err
+		}
+
+		// Token couldn't be retrieved, fallback to IMDSv1 insecure flow for this request
+		// and allow the request to proceed. Future requests will re-attempt fetching a
+		// token.
 		return nil, &bypassTokenRetrievalError{Err: err}
 	}
 
@@ -181,3 +184,12 @@ func (e *bypassTokenRetrievalError) Error() string {
 }
 
 func (e *bypassTokenRetrievalError) Unwrap() error { return e.Err }
+
+type retryableError struct {
+	Err         error
+	isRetryable bool
+}
+
+func (e *retryableError) RetryableError() bool { return e.isRetryable }
+
+func (e *retryableError) Error() string { return e.Err.Error() }
