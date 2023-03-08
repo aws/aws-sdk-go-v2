@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -330,12 +331,12 @@ func (h *successAPIResponseHandler) ServeHTTP(w http.ResponseWriter, r *http.Req
 
 func TestRequestGetToken(t *testing.T) {
 	cases := map[string]struct {
-		GetHandler      func(*testing.T) http.Handler
-		APICallCount    int
-		ExpectTrace     []string
-		ExpectContent   []byte
-		ExpectErr       string
-		DisableFallback bool
+		GetHandler     func(*testing.T) http.Handler
+		APICallCount   int
+		ExpectTrace    []string
+		ExpectContent  []byte
+		ExpectErr      string
+		EnableFallback aws.Ternary
 	}{
 		"secure": {
 			ExpectTrace: []string{
@@ -540,8 +541,8 @@ func TestRequestGetToken(t *testing.T) {
 						}),
 					))
 			},
-			ExpectErr:       "failed to get API token",
-			DisableFallback: true,
+			ExpectErr:      "failed to get API token",
+			EnableFallback: aws.BoolTernary(false),
 		},
 		"insecure 403 fallback disabled": {
 			ExpectTrace: []string{
@@ -558,8 +559,8 @@ func TestRequestGetToken(t *testing.T) {
 						}),
 					))
 			},
-			ExpectErr:       "failed to get API token",
-			DisableFallback: true,
+			ExpectErr:      "failed to get API token",
+			EnableFallback: aws.BoolTernary(false),
 		},
 	}
 
@@ -577,8 +578,8 @@ func TestRequestGetToken(t *testing.T) {
 			defer server.Close()
 
 			client := New(Options{
-				Endpoint:        server.URL,
-				DisableFallback: c.DisableFallback,
+				Endpoint:       server.URL,
+				EnableFallback: c.EnableFallback,
 			})
 
 			ctx := context.Background()

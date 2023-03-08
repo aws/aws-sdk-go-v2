@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go"
 	"net/http"
 	"sync"
@@ -68,7 +69,7 @@ func (t *tokenProvider) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	if !t.enabled() {
+	if t.fallbackEnabled() && !t.enabled() {
 		// short-circuits to insecure data flow if token provider is disabled.
 		return next.HandleFinalize(ctx, input)
 	}
@@ -123,7 +124,7 @@ func (t *tokenProvider) HandleDeserialize(
 }
 
 func (t *tokenProvider) getToken(ctx context.Context) (tok *apiToken, err error) {
-	if !t.enabled() {
+	if t.fallbackEnabled() && !t.enabled() {
 		return nil, &bypassTokenRetrievalError{
 			Err: fmt.Errorf("cannot get API token, provider disabled"),
 		}
@@ -182,11 +183,10 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 			atomic.StoreUint32(&t.disabled, 1)
 		}
 
-		if t.client.options.DisableFallback {
+		if !t.fallbackEnabled() {
 			// do not fallback to IMDSv1 insecure flow if token retrieval fails
 			atomic.StoreUint32(&t.disabled, 0)
 
-			//
 			// NOTE: getToken() is an implementation detail of some outer operation
 			// (e.g. GetMetadata). It has its own retries that have already been exhausted.
 			// Mark the underlying error as a terminal error.
@@ -212,6 +212,16 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 // enabled returns if the token provider is current enabled or not.
 func (t *tokenProvider) enabled() bool {
 	return atomic.LoadUint32(&t.disabled) == 0
+}
+
+// fallbackEnabled returns false if EnableFallback is [aws.FalseTernary], true otherwise
+func (t *tokenProvider) fallbackEnabled() bool {
+	switch t.client.options.EnableFallback {
+	case aws.FalseTernary:
+		return false
+	default:
+		return true
+	}
 }
 
 // disable disables the token provider and it will no longer attempt to inject
