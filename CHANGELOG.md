@@ -1,3 +1,26 @@
+# Release (2023-03-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.23.0](service/athena/CHANGELOG.md#v1230-2023-03-08)
+  * **Feature**: A new field SubstatementType is added to GetQueryExecution API, so customers have an error free way to detect the query type and interpret the result.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.19.0](service/dynamodb/CHANGELOG.md#v1190-2023-03-08)
+  * **Feature**: Adds deletion protection support to DynamoDB tables. Tables with deletion protection enabled cannot be deleted. Deletion protection is disabled by default, can be enabled via the CreateTable or UpdateTable APIs, and is visible in TableDescription. This setting is not replicated for Global Tables.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.89.0](service/ec2/CHANGELOG.md#v1890-2023-03-08)
+  * **Feature**: Introducing Amazon EC2 C7g, M7g and R7g instances, powered by the latest generation AWS Graviton3 processors and deliver up to 25% better performance over Graviton2-based instances.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.20.0](service/lakeformation/CHANGELOG.md#v1200-2023-03-08)
+  * **Feature**: This release adds two new API support "GetDataCellsFiler" and "UpdateDataCellsFilter", and also updates the corresponding documentation.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.21.0](service/mediapackage/CHANGELOG.md#v1210-2023-03-08)
+  * **Feature**: This release provides the date and time live resources were created.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.22.0](service/mediapackagevod/CHANGELOG.md#v1220-2023-03-08)
+  * **Feature**: This release provides the date and time VOD resources were created.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.17.0](service/route53resolver/CHANGELOG.md#v1170-2023-03-08)
+  * **Feature**: Add dual-stack and IPv6 support for Route 53 Resolver Endpoint,Add IPv6 target IP in Route 53 Resolver Forwarding Rule
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.70.0](service/sagemaker/CHANGELOG.md#v1700-2023-03-08)
+  * **Feature**: There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
 # Release (2023-03-07)
 
 ## Module Highlights

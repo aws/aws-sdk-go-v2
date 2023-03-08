@@ -1,8 +1,0 @@
-{
-    "id": "ba2e469c-5af4-4ac4-b1dd-260528814d80",
-    "type": "feature",
-    "description": "This release provides the date and time live resources were created.",
-    "modules": [
-        "service/mediapackage"
-    ]
-}

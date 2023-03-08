@@ -1,8 +1,0 @@
-{
-    "id": "15989238-0b5f-4a69-8267-577735a0a975",
-    "type": "feature",
-    "description": "This release provides the date and time VOD resources were created.",
-    "modules": [
-        "service/mediapackagevod"
-    ]
-}

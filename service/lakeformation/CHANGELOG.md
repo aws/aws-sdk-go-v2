@@ -1,3 +1,7 @@
+# v1.20.0 (2023-03-08)
+
+* **Feature**: This release adds two new API support "GetDataCellsFiler" and "UpdateDataCellsFilter", and also updates the corresponding documentation.
+
 # v1.19.5 (2023-02-23)
 
 * No change notes available for this release.

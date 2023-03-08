@@ -1,8 +1,0 @@
-{
-    "id": "fffa7532-90c2-4661-91f3-212ce8ab8430",
-    "type": "feature",
-    "description": "There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.21.0 (2023-03-08)
+
+* **Feature**: This release provides the date and time live resources were created.
+
 # v1.20.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

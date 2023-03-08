@@ -1,3 +1,7 @@
+# v1.70.0 (2023-03-08)
+
+* **Feature**: There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
 # v1.69.0 (2023-03-02)
 
 * **Feature**: Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.

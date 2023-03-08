@@ -1,8 +1,0 @@
-{
-    "id": "3c7064c2-729f-4a84-8c61-4b38e694075d",
-    "type": "feature",
-    "description": "Add dual-stack and IPv6 support for Route 53 Resolver Endpoint,Add IPv6 target IP in Route 53 Resolver Forwarding Rule",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

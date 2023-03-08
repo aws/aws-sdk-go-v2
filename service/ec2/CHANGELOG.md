@@ -1,3 +1,7 @@
+# v1.89.0 (2023-03-08)
+
+* **Feature**: Introducing Amazon EC2 C7g, M7g and R7g instances, powered by the latest generation AWS Graviton3 processors and deliver up to 25% better performance over Graviton2-based instances.
+
 # v1.88.0 (2023-03-03)
 
 * **Feature**: This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
