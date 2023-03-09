@@ -283,6 +283,9 @@ func (c *Client) addOperationListPartsMiddlewares(stack *middleware.Stack, optio
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addListPartsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

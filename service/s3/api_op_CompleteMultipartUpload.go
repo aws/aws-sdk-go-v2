@@ -379,6 +379,9 @@ func (c *Client) addOperationCompleteMultipartUploadMiddlewares(stack *middlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addCompleteMultipartUploadUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

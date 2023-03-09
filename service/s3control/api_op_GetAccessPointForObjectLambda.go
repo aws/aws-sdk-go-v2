@@ -136,6 +136,9 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addGetAccessPointForObjectLambdaUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

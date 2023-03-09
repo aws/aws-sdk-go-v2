@@ -129,6 +129,9 @@ func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middl
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addPutStorageLensConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

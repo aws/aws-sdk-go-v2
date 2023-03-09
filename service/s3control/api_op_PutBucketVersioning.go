@@ -173,6 +173,9 @@ func (c *Client) addOperationPutBucketVersioningMiddlewares(stack *middleware.St
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addPutBucketVersioningUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

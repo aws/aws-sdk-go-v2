@@ -530,6 +530,10 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
+func add100Continue(stack *middleware.Stack) error {
+	return s3shared.Add100Continue(stack)
+}
+
 // ComputedInputChecksumsMetadata provides information about the algorithms used to
 // compute the checksum(s) of the input payload.
 type ComputedInputChecksumsMetadata struct {

@@ -145,6 +145,9 @@ func (c *Client) addOperationGetBucketMetricsConfigurationMiddlewares(stack *mid
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addGetBucketMetricsConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

@@ -148,6 +148,9 @@ func (c *Client) addOperationDeleteObjectTaggingMiddlewares(stack *middleware.St
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addDeleteObjectTaggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

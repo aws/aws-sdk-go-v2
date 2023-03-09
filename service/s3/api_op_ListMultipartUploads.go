@@ -256,6 +256,9 @@ func (c *Client) addOperationListMultipartUploadsMiddlewares(stack *middleware.S
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addListMultipartUploadsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

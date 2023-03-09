@@ -119,6 +119,9 @@ func (c *Client) addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares(s
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = add100Continue(stack); err != nil {
+		return err
+	}
 	if err = addDeleteAccessPointPolicyForObjectLambdaUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
