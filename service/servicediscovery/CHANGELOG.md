@@ -1,3 +1,7 @@
+# v1.20.0 (2023-03-09)
+
+* **Feature**: Updated all AWS Cloud Map APIs to provide consistent throttling exception (RequestLimitExceeded)
+
 # v1.19.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

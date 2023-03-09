@@ -1,3 +1,25 @@
+# Release (2023-03-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.17.0](service/codeartifact/CHANGELOG.md#v1170-2023-03-09)
+  * **Feature**: This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.49.0](service/connect/CHANGELOG.md#v1490-2023-03-09)
+  * **Feature**: This release adds a new API, GetMetricDataV2, which returns metric data for Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.11.0](service/evidently/CHANGELOG.md#v1110-2023-03-09)
+  * **Feature**: Updated entity override documentation
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.17.5](service/networkmanager/CHANGELOG.md#v1175-2023-03-09)
+  * **Documentation**: This update provides example usage for TransitGatewayRouteTableArn.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.33.0](service/quicksight/CHANGELOG.md#v1330-2023-03-09)
+  * **Feature**: This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.19.0](service/redshiftdata/CHANGELOG.md#v1190-2023-03-09)
+  * **Feature**: Added support for Redshift Serverless workgroup-arn wherever the WorkgroupName parameter is available.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.71.0](service/sagemaker/CHANGELOG.md#v1710-2023-03-09)
+  * **Feature**: Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.20.0](service/servicediscovery/CHANGELOG.md#v1200-2023-03-09)
+  * **Feature**: Updated all AWS Cloud Map APIs to provide consistent throttling exception (RequestLimitExceeded)
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.17.0](service/sesv2/CHANGELOG.md#v1170-2023-03-09)
+  * **Feature**: This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects missing or misconfigured Brand Indicator for Message Identification (BIMI) DNS records for customer sending identities.
+
 # Release (2023-03-08)
 
 ## General Highlights

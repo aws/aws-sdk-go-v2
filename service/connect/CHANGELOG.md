@@ -1,3 +1,7 @@
+# v1.49.0 (2023-03-09)
+
+* **Feature**: This release adds a new API, GetMetricDataV2, which returns metric data for Amazon Connect.
+
 # v1.48.0 (2023-02-24)
 
 * **Feature**: StartTaskContact API now supports linked task creation with a new optional RelatedContactId parameter

@@ -1,8 +1,0 @@
-{
-    "id": "5c758757-3a5e-4c09-8027-028a6b6d3c1b",
-    "type": "feature",
-    "description": "Updated entity override documentation",
-    "modules": [
-        "service/evidently"
-    ]
-}

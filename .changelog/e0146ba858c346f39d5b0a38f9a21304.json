@@ -1,8 +1,0 @@
-{
-    "id": "e0146ba8-58c3-46f3-9d5b-0a38f9a21304",
-    "type": "feature",
-    "description": "Amazon SageMaker Inference now allows SSM access to customer's model container by setting the \"EnableSSMAccess\" parameter for a ProductionVariant in CreateEndpointConfig API.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

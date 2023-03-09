@@ -1,3 +1,7 @@
+# v1.33.0 (2023-03-09)
+
+* **Feature**: This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.
+
 # v1.32.2 (2023-03-03)
 
 * No change notes available for this release.
