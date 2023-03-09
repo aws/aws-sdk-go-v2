@@ -51445,6 +51445,15 @@ func awsRestjson1_deserializeDocumentPivotTableOptions(v **types.PivotTableOptio
 				return err
 			}
 
+		case "CollapsedRowDimensionsVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.CollapsedRowDimensionsVisibility = types.Visibility(jtv)
+			}
+
 		case "ColumnHeaderStyle":
 			if err := awsRestjson1_deserializeDocumentTableCellStyle(&sv.ColumnHeaderStyle, value); err != nil {
 				return err

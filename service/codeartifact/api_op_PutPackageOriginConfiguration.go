@@ -90,6 +90,9 @@ type PutPackageOriginConfigurationInput struct {
 	// *
 	// Python and NuGet packages do not contain a corresponding component, packages of
 	// those formats do not have a namespace.
+	//
+	// * The namespace of a generic package is
+	// it’s namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde

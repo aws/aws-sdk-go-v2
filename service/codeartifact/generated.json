@@ -38,6 +38,7 @@
         "api_op_ListRepositories.go",
         "api_op_ListRepositoriesInDomain.go",
         "api_op_ListTagsForResource.go",
+        "api_op_PublishPackageVersion.go",
         "api_op_PutDomainPermissionsPolicy.go",
         "api_op_PutPackageOriginConfiguration.go",
         "api_op_PutRepositoryPermissionsPolicy.go",

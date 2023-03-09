@@ -1,0 +1,8 @@
+{
+    "id": "1287fc48-879b-4331-967b-a0319ddc38ef",
+    "type": "feature",
+    "description": "Updated all AWS Cloud Map APIs to provide consistent throttling exception (RequestLimitExceeded)",
+    "modules": [
+        "service/servicediscovery"
+    ]
+}

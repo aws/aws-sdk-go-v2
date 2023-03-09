@@ -1,0 +1,8 @@
+{
+    "id": "1775f4e2-8119-472c-a65a-29c228f10d6d",
+    "type": "feature",
+    "description": "Added support for Redshift Serverless workgroup-arn wherever the WorkgroupName parameter is available.",
+    "modules": [
+        "service/redshiftdata"
+    ]
+}

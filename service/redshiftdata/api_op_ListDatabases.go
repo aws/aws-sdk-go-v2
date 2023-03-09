@@ -80,9 +80,9 @@ type ListDatabasesInput struct {
 	// parameter is required when authenticating using Secrets Manager.
 	SecretArn *string
 
-	// The serverless workgroup name. This parameter is required when connecting to a
-	// serverless workgroup and authenticating using either Secrets Manager or
-	// temporary credentials.
+	// The serverless workgroup name or Amazon Resource Name (ARN). This parameter is
+	// required when connecting to a serverless workgroup and authenticating using
+	// either Secrets Manager or temporary credentials.
 	WorkgroupName *string
 
 	noSmithyDocumentSerde

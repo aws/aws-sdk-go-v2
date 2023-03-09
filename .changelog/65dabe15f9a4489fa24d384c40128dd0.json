@@ -1,0 +1,8 @@
+{
+    "id": "65dabe15-f9a4-489f-a24d-384c40128dd0",
+    "type": "feature",
+    "description": "This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

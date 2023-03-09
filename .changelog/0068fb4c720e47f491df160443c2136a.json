@@ -1,0 +1,8 @@
+{
+    "id": "0068fb4c-720e-47f4-91df-160443c2136a",
+    "type": "documentation",
+    "description": "This update provides example usage for TransitGatewayRouteTableArn.",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

@@ -5062,12 +5062,17 @@ type FinalAutoMLJobObjectiveMetric struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the final value for the objective metric for a training job that was
-// launched by a hyperparameter tuning job. You define the objective metric in the
+// Shows the latest objective metric emitted by a training job that was launched by
+// a hyperparameter tuning job. You define the objective metric in the
 // HyperParameterTuningJobObjective parameter of HyperParameterTuningJobConfig.
 type FinalHyperParameterTuningJobObjectiveMetric struct {
 
-	// The name of the objective metric.
+	// The name of the objective metric. For SageMaker built-in algorithms, metrics are
+	// defined per algorithm. See the metrics for XGBoost
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-tuning.html) as an
+	// example. You can also use a custom algorithm for training and define your own
+	// metrics. For more information, see Define metrics and environment variables
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html).
 	//
 	// This member is required.
 	MetricName *string
@@ -5077,8 +5082,8 @@ type FinalHyperParameterTuningJobObjectiveMetric struct {
 	// This member is required.
 	Value float32
 
-	// Whether to minimize or maximize the objective metric. Valid values are Minimize
-	// and Maximize.
+	// Select if you want to minimize or maximize the objective metric during
+	// hyperparameter tuning.
 	Type HyperParameterTuningJobObjectiveType
 
 	noSmithyDocumentSerde
@@ -10843,40 +10848,40 @@ type OnlineStoreConfig struct {
 // The security configuration for OnlineStore.
 type OnlineStoreSecurityConfig struct {
 
-	// The ID of the Amazon Web Services Key Management Service (Amazon Web Services
-	// KMS) key that SageMaker Feature Store uses to encrypt the Amazon S3 objects at
-	// rest using Amazon S3 server-side encryption. The caller (either IAM user or IAM
-	// role) of CreateFeatureGroup must have below permissions to the
-	// OnlineStoreKmsKeyId:
+	// The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker
+	// Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3
+	// server-side encryption. The caller (either IAM user or IAM role) of
+	// CreateFeatureGroup must have below permissions to the OnlineStoreKmsKeyId:
 	//
-	// * "kms:Encrypt"
+	// *
+	// "kms:Encrypt"
 	//
 	// * "kms:Decrypt"
 	//
 	// * "kms:DescribeKey"
 	//
-	// *
-	// "kms:CreateGrant"
+	// * "kms:CreateGrant"
 	//
-	// * "kms:RetireGrant"
+	// *
+	// "kms:RetireGrant"
 	//
 	// * "kms:ReEncryptFrom"
 	//
-	// *
-	// "kms:ReEncryptTo"
+	// * "kms:ReEncryptTo"
 	//
-	// * "kms:GenerateDataKey"
+	// *
+	// "kms:GenerateDataKey"
 	//
 	// * "kms:ListAliases"
 	//
+	// * "kms:ListGrants"
+	//
 	// *
-	// "kms:ListGrants"
+	// "kms:RevokeGrant"
 	//
-	// * "kms:RevokeGrant"
-	//
-	// The caller (either user or IAM role) to
-	// all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the
-	// following permissions to the KmsKeyId:
+	// The caller (either user or IAM role) to all DataPlane
+	// operations (PutRecord, GetRecord, DeleteRecord) must have the following
+	// permissions to the KmsKeyId:
 	//
 	// * "kms:Decrypt"
 	KmsKeyId *string
@@ -12001,7 +12006,9 @@ type ProcessingStoppingCondition struct {
 
 // Identifies a model that you want to host and the resources chosen to deploy for
 // hosting it. If you are deploying multiple models, tell SageMaker how to
-// distribute traffic among the models by specifying variant weights.
+// distribute traffic among the models by specifying variant weights. For more
+// information on production variants, check  Production variants
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html).
 type ProductionVariant struct {
 
 	// The name of the model that you want to host. This is the name that you specified
@@ -12030,6 +12037,13 @@ type ProductionVariant struct {
 	// Specifies configuration for a core dump from the model container when the
 	// process crashes.
 	CoreDumpConfig *ProductionVariantCoreDumpConfig
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager
+	// (SSM) access for a production variant behind an endpoint. By default, SSM access
+	// is disabled for all production variants behind an endpoints. You can turn on or
+	// turn off SSM access for a production variant behind an existing endpoint by
+	// creating a new endpoint configuration and calling UpdateEndpoint.
+	EnableSSMAccess *bool
 
 	// Number of instances to launch initially.
 	InitialInstanceCount *int32
@@ -13465,7 +13479,7 @@ type S3StorageConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// The Amazon Web Services Key Management Service (KMS) key ID of the key used to
+	// The Amazon Web Services Key Management Service (KMS) key ARN of the key used to
 	// encrypt any objects written into the OfflineStore S3 location. The IAM roleARN
 	// that is passed as a parameter to CreateFeatureGroup must have below permissions
 	// to the KmsKeyId:

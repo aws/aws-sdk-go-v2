@@ -1,0 +1,8 @@
+{
+    "id": "aaa3ca21-1cd2-4cd1-a0af-6971763dda7a",
+    "type": "feature",
+    "description": "This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.",
+    "modules": [
+        "service/codeartifact"
+    ]
+}

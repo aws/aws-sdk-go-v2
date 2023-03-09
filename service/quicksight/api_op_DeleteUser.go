@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the Amazon QuickSight user that is associated with the identity of the
-// Identity and Access Management (IAM) user or role that's making the call. The
-// IAM user isn't deleted as a result of this call.
+// IAM user or role that's making the call. The IAM user isn't deleted as a result
+// of this call.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

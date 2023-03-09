@@ -98,10 +98,11 @@ type PackageFormat string
 
 // Enum values for PackageFormat
 const (
-	PackageFormatNpm   PackageFormat = "npm"
-	PackageFormatPypi  PackageFormat = "pypi"
-	PackageFormatMaven PackageFormat = "maven"
-	PackageFormatNuget PackageFormat = "nuget"
+	PackageFormatNpm     PackageFormat = "npm"
+	PackageFormatPypi    PackageFormat = "pypi"
+	PackageFormatMaven   PackageFormat = "maven"
+	PackageFormatNuget   PackageFormat = "nuget"
+	PackageFormatGeneric PackageFormat = "generic"
 )
 
 // Values returns all known values for PackageFormat. Note that this can be
@@ -113,6 +114,7 @@ func (PackageFormat) Values() []PackageFormat {
 		"pypi",
 		"maven",
 		"nuget",
+		"generic",
 	}
 }
 

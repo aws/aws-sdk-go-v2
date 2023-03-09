@@ -91,9 +91,9 @@ type ExecuteStatementInput struct {
 	// bus after the SQL statement runs.
 	WithEvent *bool
 
-	// The serverless workgroup name. This parameter is required when connecting to a
-	// serverless workgroup and authenticating using either Secrets Manager or
-	// temporary credentials.
+	// The serverless workgroup name or Amazon Resource Name (ARN). This parameter is
+	// required when connecting to a serverless workgroup and authenticating using
+	// either Secrets Manager or temporary credentials.
 	WorkgroupName *string
 
 	noSmithyDocumentSerde
@@ -121,8 +121,8 @@ type ExecuteStatementOutput struct {
 	// The name or ARN of the secret that enables access to the database.
 	SecretArn *string
 
-	// The serverless workgroup name. This element is not returned when connecting to a
-	// provisioned cluster.
+	// The serverless workgroup name or Amazon Resource Name (ARN). This element is not
+	// returned when connecting to a provisioned cluster.
 	WorkgroupName *string
 
 	// Metadata pertaining to the operation's result.

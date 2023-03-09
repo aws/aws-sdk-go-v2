@@ -61269,6 +61269,15 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				return err
 			}
 
+		case "EnableSSMAccess":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantSSMAccess to be of type *bool, got %T instead", value)
+				}
+				sv.EnableSSMAccess = ptr.Bool(jtv)
+			}
+
 		case "InitialInstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)

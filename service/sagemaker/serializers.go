@@ -22907,6 +22907,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		}
 	}
 
+	if v.EnableSSMAccess != nil {
+		ok := object.Key("EnableSSMAccess")
+		ok.Boolean(*v.EnableSSMAccess)
+	}
+
 	if v.InitialInstanceCount != nil {
 		ok := object.Key("InitialInstanceCount")
 		ok.Integer(*v.InitialInstanceCount)
