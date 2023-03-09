@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/logging"
 	"net/http"
 	"sync"
 	"sync/atomic"
@@ -168,7 +169,10 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 				http.StatusNotFound,
 				http.StatusMethodNotAllowed:
 
-				t.disable()
+				if t.fallbackEnabled() {
+					t.client.options.Logger.Logf(logging.Warn, "falling back to IMDSv1: %v", err)
+					t.disable()
+				}
 
 			// 400 errors are terminal, and need to be upstreamed
 			case http.StatusBadRequest:
@@ -184,9 +188,6 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 		}
 
 		if !t.fallbackEnabled() {
-			// do not fallback to IMDSv1 insecure flow if token retrieval fails
-			atomic.StoreUint32(&t.disabled, 0)
-
 			// NOTE: getToken() is an implementation detail of some outer operation
 			// (e.g. GetMetadata). It has its own retries that have already been exhausted.
 			// Mark the underlying error as a terminal error.
