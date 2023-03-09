@@ -170,7 +170,8 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 				http.StatusMethodNotAllowed:
 
 				if t.fallbackEnabled() {
-					t.client.options.Logger.Logf(logging.Warn, "falling back to IMDSv1: %v", err)
+					logger := middleware.GetLogger(ctx)
+					logger.Logf(logging.Warn, "falling back to IMDSv1: %v", err)
 					t.disable()
 				}
 
