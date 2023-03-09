@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException": {
             "type": "structure",
@@ -86,6 +86,7 @@
                 "Used": {
                     "target": "smithy.api#PrimitiveLong",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current amount that has been spent, in US dollars.</p>",
                         "smithy.api#required": {}
                     }
@@ -93,6 +94,7 @@
                 "Max": {
                     "target": "smithy.api#PrimitiveLong",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The Amazon Web Services set limit for that resource type, in US dollars.</p>",
                         "smithy.api#required": {}
                     }
@@ -955,6 +957,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients.</p>"
                     }
                 },
@@ -967,6 +970,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
@@ -979,12 +983,14 @@
                 "SharedRoutesEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether shared routes are enabled for the pool.</p>"
                     }
                 },
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.\n        </p>"
                     }
                 },
@@ -1517,6 +1523,7 @@
                 "EndUserOptedOut": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This is true if it was the end user who requested their phone number be removed.\n        </p>"
                     }
                 }
@@ -1596,6 +1603,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients.</p>"
                     }
                 },
@@ -1608,6 +1616,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
@@ -1620,6 +1629,7 @@
                 "SharedRoutesEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether shared routes are enabled for the pool.</p>"
                     }
                 },
@@ -3195,7 +3205,6 @@
         "com.amazonaws.pinpointsmsvoicev2#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3226,7 +3235,6 @@
         "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000000000
@@ -3462,6 +3470,7 @@
                 "EndUserOptedOut": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This is set to true if it was the end recipient that opted out.</p>",
                         "smithy.api#required": {}
                     }
@@ -3705,6 +3714,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients using the TwoWayChannelArn.</p>",
                         "smithy.api#required": {}
                     }
@@ -3718,6 +3728,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to false an end recipient sends a message that begins with HELP or STOP to\n            one of your dedicated numbers, Amazon Pinpoint automatically replies with a\n            customizable message and adds the end recipient to the OptOutList. When set to true\n            you're responsible for responding to HELP and STOP requests. You're also responsible for\n            tracking and honoring opt-out request. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out\">Self-managed opt-outs</a>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3732,6 +3743,7 @@
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true the phone number can't be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -3782,24 +3794,6 @@
         },
         "com.amazonaws.pinpointsmsvoicev2#PinpointSMSVoiceV2": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Pinpoint SMS Voice V2",
-                    "endpointPrefix": "sms-voice",
-                    "arnNamespace": "sms-voice"
-                },
-                "aws.auth#sigv4": {
-                    "name": "sms-voice"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i>.\n            This guide provides information about Amazon Pinpoint SMS and Voice, version 2 API\n            resources, including supported HTTP methods, parameters, and schemas.</p>\n        <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with\n            your recipients across multiple messaging channels. The Amazon Pinpoint SMS and\n            Voice, version 2 API provides programmatic access to options that are unique to the SMS\n            and voice channels and supplements the resources provided by the Amazon Pinpoint\n            API.</p>\n        <p>If you're new to Amazon Pinpoint, it's also helpful to review the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">\n                Amazon Pinpoint Developer Guide</a>. The <i>Amazon Pinpoint\n                Developer Guide</i> provides tutorials, code samples, and procedures that\n            demonstrate how to use Amazon Pinpoint features programmatically and how to integrate\n                Amazon Pinpoint functionality into mobile apps and other types of applications.\n            The guide also provides key information, such as Amazon Pinpoint integration with\n            other Amazon Web Services services, and the quotas that apply to use of the\n            service.</p>",
-                "smithy.api#paginated": {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults"
-                },
-                "smithy.api#title": "Amazon Pinpoint SMS Voice V2"
-            },
             "version": "2022-03-31",
             "operations": [
                 {
@@ -3931,7 +3925,769 @@
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdatePool"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Pinpoint SMS Voice V2",
+                    "endpointPrefix": "sms-voice",
+                    "arnNamespace": "sms-voice"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sms-voice"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i>.\n            This guide provides information about Amazon Pinpoint SMS and Voice, version 2 API\n            resources, including supported HTTP methods, parameters, and schemas.</p>\n        <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with\n            your recipients across multiple messaging channels. The Amazon Pinpoint SMS and\n            Voice, version 2 API provides programmatic access to options that are unique to the SMS\n            and voice channels and supplements the resources provided by the Amazon Pinpoint\n            API.</p>\n        <p>If you're new to Amazon Pinpoint, it's also helpful to review the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">\n                Amazon Pinpoint Developer Guide</a>. The <i>Amazon Pinpoint\n                Developer Guide</i> provides tutorials, code samples, and procedures that\n            demonstrate how to use Amazon Pinpoint features programmatically and how to integrate\n                Amazon Pinpoint functionality into mobile apps and other types of applications.\n            The guide also provides key information, such as Amazon Pinpoint integration with\n            other Amazon Web Services services, and the quotas that apply to use of the\n            service.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#title": "Amazon Pinpoint SMS Voice V2",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://sms-voice-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://sms-voice-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://sms-voice.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://sms-voice.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.pinpointsmsvoicev2#PoolFilter": {
             "type": "structure",
@@ -4056,6 +4812,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true you can receive incoming text messages from your end recipients using\n            the TwoWayChannelArn.</p>",
                         "smithy.api#required": {}
                     }
@@ -4069,6 +4826,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to false, an end recipient sends a message that begins with HELP or STOP to\n            one of your dedicated numbers, Amazon Pinpoint automatically replies with a\n            customizable message and adds the end recipient to the OptOutList. When set to true\n            you're responsible for responding to HELP and STOP requests. You're also responsible for\n            tracking and honoring opt-out requests. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out\">Self-managed opt-outs</a>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -4083,6 +4841,7 @@
                 "SharedRoutesEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Allows you to enable shared routes on your pool.</p>\n        <p>By default, this is set to <code>False</code>. If you set this value to\n                <code>True</code>, your messages are sent using phone numbers or sender IDs\n            (depending on the country) that are shared with other Amazon Pinpoint users. In some\n            countries, such as the United States, senders aren't allowed to use shared routes and\n            must use a dedicated phone number or short code.</p>",
                         "smithy.api#required": {}
                     }
@@ -4090,6 +4849,7 @@
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true the pool can't be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4359,6 +5119,7 @@
                 "EndUserOptedOut": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This is true if it was the end user who requested their phone number be removed.\n        </p>"
                     }
                 }
@@ -4478,6 +5239,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients.</p>"
                     }
                 },
@@ -4490,6 +5252,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
@@ -4672,6 +5435,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients.</p>"
                     }
                 },
@@ -4684,6 +5448,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
@@ -4696,6 +5461,7 @@
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true the phone number can't be deleted.\n        </p>"
                     }
                 },
@@ -4911,6 +5677,7 @@
                 "DryRun": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n            recipient.</p>"
                     }
                 }
@@ -5024,6 +5791,7 @@
                 "DryRun": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n            recipient.</p>"
                     }
                 }
@@ -5549,6 +6317,7 @@
                 "EnforcedLimit": {
                     "target": "smithy.api#PrimitiveLong",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum amount of money, in US dollars, that you want to be able to spend sending\n            messages each month. This value has to be less than or equal to the amount in\n                <code>MaxLimit</code>. To use this custom limit, <code>Overridden</code> must be set\n            to true.</p>",
                         "smithy.api#required": {}
                     }
@@ -5556,6 +6325,7 @@
                 "MaxLimit": {
                     "target": "smithy.api#PrimitiveLong",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p> The maximum amount of money that you are able to spend to send messages each month,\n            in US dollars.</p>",
                         "smithy.api#required": {}
                     }
@@ -5563,6 +6333,7 @@
                 "Overridden": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to <code>True</code>, the value that has been specified in the\n                <code>EnforcedLimit</code> is used to determine the maximum amount in US dollars\n            that can be spent to send messages each month, in US dollars.</p>",
                         "smithy.api#required": {}
                     }
@@ -5750,7 +6521,6 @@
         "com.amazonaws.pinpointsmsvoicev2#TimeToLive": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 259200
@@ -6057,6 +6827,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients.</p>"
                     }
                 },
@@ -6069,6 +6840,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This is true if self managed opt-out are enabled.</p>"
                     }
                 },
@@ -6081,6 +6853,7 @@
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true the phone number can't be deleted.</p>"
                     }
                 },
@@ -6202,6 +6975,7 @@
                 "TwoWayEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text\n            messages from your end recipients.</p>"
                     }
                 },
@@ -6214,6 +6988,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When an end recipient sends a message that begins with HELP or STOP to one of your\n            dedicated numbers, Amazon Pinpoint automatically replies with a customizable message\n            and adds the end recipient to the OptOutList. When set to true you're responsible for\n            responding to HELP and STOP requests. You're also responsible for tracking and honoring\n            opt-out requests.</p>"
                     }
                 },
@@ -6226,12 +7001,14 @@
                 "SharedRoutesEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether shared routes are enabled for the pool.</p>"
                     }
                 },
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true the pool can't be deleted.</p>"
                     }
                 },

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.kafkaconnect#ApacheKafkaCluster": {
             "type": "structure",
@@ -49,6 +49,7 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of workers allocated to the connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -56,6 +57,7 @@
                 "mcuCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>",
                         "smithy.api#required": {}
                     }
@@ -63,6 +65,7 @@
                 "minWorkerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of workers allocated to the connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -90,18 +93,21 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of workers allocated to the connector.</p>"
                     }
                 },
                 "mcuCount": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>"
                     }
                 },
                 "minWorkerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of workers allocated to the connector.</p>"
                     }
                 },
@@ -128,6 +134,7 @@
                 "maxWorkerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target maximum number of workers allocated to the connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -135,6 +142,7 @@
                 "mcuCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target number of microcontroller units (MCUs) allocated to each connector worker.\n         The valid values are 1,2,4,8.</p>",
                         "smithy.api#required": {}
                     }
@@ -142,6 +150,7 @@
                 "minWorkerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target minimum number of workers allocated to the connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -244,6 +253,7 @@
                 "enabled": {
                     "target": "com.amazonaws.kafkaconnect#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether log delivery to Amazon CloudWatch Logs is enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -265,6 +275,7 @@
                 "enabled": {
                     "target": "com.amazonaws.kafkaconnect#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether log delivery to Amazon CloudWatch Logs is enabled.</p>"
                     }
                 },
@@ -668,6 +679,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the custom plugin.</p>"
                     }
                 }
@@ -783,6 +795,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__longMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the custom plugin.</p>",
                         "smithy.api#required": {}
                     }
@@ -819,6 +832,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the custom plugin.</p>"
                     }
                 }
@@ -839,6 +853,7 @@
                 "fileSize": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size in bytes of the custom plugin file. You can use it to validate the file.</p>"
                     }
                 }
@@ -912,6 +927,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the custom plugin.</p>"
                     }
                 }
@@ -1507,6 +1523,7 @@
                 "enabled": {
                     "target": "com.amazonaws.kafkaconnect#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>",
                         "smithy.api#required": {}
                     }
@@ -1528,6 +1545,7 @@
                 "enabled": {
                     "target": "com.amazonaws.kafkaconnect#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>"
                     }
                 }
@@ -1681,29 +1699,6 @@
         },
         "com.amazonaws.kafkaconnect#KafkaConnect": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "KafkaConnect",
-                    "name": "kafkaconnect",
-                    "arnNamespace": "kafkaconnect",
-                    "cloudFormationName": "KafkaConnect",
-                    "cloudTrailEventSource": "kafkaconnect.amazonaws.com",
-                    "endpointPrefix": "kafkaconnect"
-                },
-                "aws.auth#sigv4": {
-                    "name": "kafkaconnect"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "X-Api-Key",
-                        "Content-Type",
-                        "Content-Length"
-                    ]
-                },
-                "smithy.api#documentation": "<p/>",
-                "smithy.api#title": "Managed Streaming for Kafka Connect"
-            },
             "version": "2021-09-14",
             "operations": [
                 {
@@ -1742,7 +1737,839 @@
                 {
                     "target": "com.amazonaws.kafkaconnect#UpdateConnector"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "KafkaConnect",
+                    "name": "kafkaconnect",
+                    "arnNamespace": "kafkaconnect",
+                    "cloudFormationName": "KafkaConnect",
+                    "cloudTrailEventSource": "kafkaconnect.amazonaws.com",
+                    "endpointPrefix": "kafkaconnect"
+                },
+                "aws.auth#sigv4": {
+                    "name": "kafkaconnect"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "X-Api-Key",
+                        "Content-Type",
+                        "Content-Length"
+                    ]
+                },
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#title": "Managed Streaming for Kafka Connect",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://kafkaconnect-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://kafkaconnect-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://kafkaconnect.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://kafkaconnect.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kafkaconnect.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.kafkaconnect#ListConnectors": {
             "type": "operation",
@@ -1804,6 +2631,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.kafkaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of connectors to list in one response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1887,6 +2715,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.kafkaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of custom plugins to list in one response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1970,6 +2799,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.kafkaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of worker configurations to list in one response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2032,6 +2862,7 @@
         "com.amazonaws.kafkaconnect#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2086,6 +2917,7 @@
                 "mcuCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>",
                         "smithy.api#required": {}
                     }
@@ -2093,6 +2925,7 @@
                 "workerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of workers that are allocated to the connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -2108,12 +2941,14 @@
                 "mcuCount": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>"
                     }
                 },
                 "workerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of workers that are allocated to the connector.</p>"
                     }
                 }
@@ -2128,6 +2963,7 @@
                 "mcuCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>",
                         "smithy.api#required": {}
                     }
@@ -2135,6 +2971,7 @@
                 "workerCount": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of workers that are allocated to the connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -2210,6 +3047,7 @@
                 "enabled": {
                     "target": "com.amazonaws.kafkaconnect#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>",
                         "smithy.api#required": {}
                     }
@@ -2237,6 +3075,7 @@
                 "enabled": {
                     "target": "com.amazonaws.kafkaconnect#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>"
                     }
                 },
@@ -2257,6 +3096,7 @@
                 "cpuUtilizationPercentage": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the CPU utilization percentage threshold at which you want connector scale in\n         to be triggered.</p>",
                         "smithy.api#required": {}
                     }
@@ -2272,6 +3112,7 @@
                 "cpuUtilizationPercentage": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the CPU utilization percentage threshold at which you want connector scale in\n         to be triggered.</p>"
                     }
                 }
@@ -2286,6 +3127,7 @@
                 "cpuUtilizationPercentage": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target CPU utilization percentage threshold at which you want connector scale in to\n         be triggered.</p>",
                         "smithy.api#required": {}
                     }
@@ -2301,6 +3143,7 @@
                 "cpuUtilizationPercentage": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The CPU utilization percentage threshold at which you want connector scale out to be\n         triggered.</p>",
                         "smithy.api#required": {}
                     }
@@ -2316,6 +3159,7 @@
                 "cpuUtilizationPercentage": {
                     "target": "com.amazonaws.kafkaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The CPU utilization percentage threshold at which you want connector scale out to be\n         triggered.</p>"
                     }
                 }
@@ -2330,6 +3174,7 @@
                 "cpuUtilizationPercentage": {
                     "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target CPU utilization percentage threshold at which you want connector scale out to\n         be triggered.</p>",
                         "smithy.api#required": {}
                     }
@@ -2531,6 +3376,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__longMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the worker configuration.</p>",
                         "smithy.api#required": {}
                     }
@@ -2553,6 +3399,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the worker configuration.</p>"
                     }
                 },
@@ -2591,6 +3438,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The description of a revision of the worker configuration.</p>"
                     }
                 }
@@ -2617,6 +3465,7 @@
                 "revision": {
                     "target": "com.amazonaws.kafkaconnect#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of a worker configuration.</p>"
                     }
                 }
@@ -2716,14 +3565,21 @@
             }
         },
         "com.amazonaws.kafkaconnect#__boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.kafkaconnect#__integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.kafkaconnect#__integerMin1Max10": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -2733,6 +3589,7 @@
         "com.amazonaws.kafkaconnect#__integerMin1Max100": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2742,6 +3599,7 @@
         "com.amazonaws.kafkaconnect#__integerMin1Max8": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 8
@@ -2785,11 +3643,15 @@
             }
         },
         "com.amazonaws.kafkaconnect#__long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.kafkaconnect#__longMin1": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 9223372036854775807
