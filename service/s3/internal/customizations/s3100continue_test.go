@@ -1,4 +1,4 @@
-package s3shared
+package customizations_test
 
 import (
 	"context"
@@ -12,6 +12,7 @@ import (
 	"testing"
 )
 
+// unit test for service/internal/s3shared/s3100continue.go
 func TestAdd100ContinueHttpHeader(t *testing.T) {
 	const HeaderKey = "Expect"
 	HeaderValue := "100-continue"
@@ -20,7 +21,6 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 
 	cases := map[string]struct {
 		Handler          func(*testing.T) http.Handler
-		HttpMethod       string
 		Input            interface{}
 		ExpectValueFound string
 	}{
@@ -28,16 +28,12 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 			Handler: func(t *testing.T) http.Handler {
 				return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 					if diff := cmp.Diff(request.Header.Get(HeaderKey), ""); len(diff) > 0 {
-						t.Error("ContentLength: ", request.ContentLength)
-						t.Error(request.Header)
-						t.Error("Request Method: ", request.Method)
 						t.Error(diff)
 					}
 
 					writer.WriteHeader(200)
 				})
 			},
-			HttpMethod: "PUT",
 			Input: &s3.PutObjectInput{
 				Bucket:        &testBucket,
 				Key:           &testKey,
@@ -50,16 +46,12 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 			Handler: func(t *testing.T) http.Handler {
 				return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 					if diff := cmp.Diff(request.Header.Get(HeaderKey), HeaderValue); len(diff) > 0 {
-						t.Error("ContentLength: ", request.ContentLength)
-						t.Error(request.Header)
-						t.Error("Request Method: ", request.Method)
 						t.Error(diff)
 					}
 
 					writer.WriteHeader(200)
 				})
 			},
-			HttpMethod: "PUT",
 			Input: &s3.PutObjectInput{
 				Bucket:        &testBucket,
 				Key:           &testKey,
@@ -68,20 +60,16 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 			},
 			ExpectValueFound: HeaderValue,
 		},
-		"http put request with unknown -1 size": {
+		"http put request with unknown -1 ContentLength": {
 			Handler: func(t *testing.T) http.Handler {
 				return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 					if diff := cmp.Diff(request.Header.Get(HeaderKey), HeaderValue); len(diff) > 0 {
-						t.Error("ContentLength: ", request.ContentLength)
-						t.Error(request.Header)
-						t.Error("Request Method: ", request.Method)
 						t.Error(diff)
 					}
 
 					writer.WriteHeader(200)
 				})
 			},
-			HttpMethod: "PUT",
 			Input: &s3.PutObjectInput{
 				Bucket:        &testBucket,
 				Key:           &testKey,
@@ -90,20 +78,16 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 			},
 			ExpectValueFound: HeaderValue,
 		},
-		"http put request with non-nil body": {
+		"http put request with 0 ContentLength but unknown non-nil body": {
 			Handler: func(t *testing.T) http.Handler {
 				return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 					if diff := cmp.Diff(request.Header.Get(HeaderKey), HeaderValue); len(diff) > 0 {
-						t.Error("ContentLength: ", request.ContentLength)
-						t.Error(request.Header)
-						t.Error("Request Method: ", request.Method)
 						t.Error(diff)
 					}
 
 					writer.WriteHeader(200)
 				})
 			},
-			HttpMethod: "PUT",
 			Input: &s3.PutObjectInput{
 				Bucket:        &testBucket,
 				Key:           &testKey,
@@ -116,16 +100,12 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 			Handler: func(t *testing.T) http.Handler {
 				return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 					if diff := cmp.Diff(request.Header.Get(HeaderKey), ""); len(diff) > 0 {
-						t.Error("ContentLength: ", request.ContentLength)
-						t.Error(request.Header)
-						t.Error("Request Method: ", request.Method)
 						t.Error(diff)
 					}
 
 					writer.WriteHeader(200)
 				})
 			},
-			HttpMethod: "GET",
 			Input: &s3.GetObjectInput{
 				Bucket: &testBucket,
 				Key:    &testKey,
@@ -156,8 +136,8 @@ func TestAdd100ContinueHttpHeader(t *testing.T) {
 				}),
 			})
 
-			switch tt.HttpMethod {
-			case "PUT":
+			switch tt.Input.(type) {
+			case *s3.PutObjectInput:
 				_, err := client.PutObject(context.Background(), tt.Input.(*s3.PutObjectInput))
 				if err != nil {
 					t.Fatalf("expect no error, got %v", err)
