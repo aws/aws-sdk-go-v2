@@ -1,3 +1,7 @@
+# v1.19.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-03-02)
 
 * **Feature**: This release introduces a new reason code, ACCOUNT_CREATION_NOT_COMPLETE, to ConstraintViolationException in CreateOrganization API.

@@ -1,3 +1,7 @@
+# v1.21.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-03-08)
 
 * **Feature**: This release provides the date and time live resources were created.

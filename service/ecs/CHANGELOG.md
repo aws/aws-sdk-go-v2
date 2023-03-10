@@ -1,3 +1,7 @@
+# v1.24.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-02-23)
 
 * **Feature**: This release supports deleting Amazon ECS task definitions that are in the INACTIVE state.

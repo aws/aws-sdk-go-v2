@@ -1,3 +1,14 @@
+# Release (2023-03-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.4.0](service/ivschat/CHANGELOG.md#v140-2023-03-10)
+  * **Feature**: This release adds a new exception returned when calling AWS IVS chat UpdateLoggingConfiguration. Now UpdateLoggingConfiguration can return ConflictException when invalid updates are made in sequence to Logging Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.19.0](service/secretsmanager/CHANGELOG.md#v1190-2023-03-10)
+  * **Feature**: The type definitions of SecretString and SecretBinary now have a minimum length of 1 in the model to match the exception thrown when you pass in empty values.
+
 # Release (2023-03-09)
 
 ## Module Highlights

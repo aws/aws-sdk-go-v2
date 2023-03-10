@@ -1,3 +1,7 @@
+# v1.10.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2023-02-22)
 
 * **Feature**: CloudWatch RUM now supports CloudWatch Custom Metrics

@@ -1,3 +1,7 @@
+# v1.15.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2023-02-28)
 
 * **Feature**: This release adds support for tagging to the accessor resource in Amazon Managed Blockchain

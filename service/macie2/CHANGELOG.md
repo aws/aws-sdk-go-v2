@@ -1,3 +1,7 @@
+# v1.27.2 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.1 (2023-03-03)
 
 * **Documentation**: Documentation updates for Amazon Macie

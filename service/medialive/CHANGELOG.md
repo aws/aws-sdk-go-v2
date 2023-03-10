@@ -1,3 +1,7 @@
+# v1.30.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2023-03-03)
 
 * **Feature**: AWS Elemental MediaLive adds support for Nielsen watermark timezones.

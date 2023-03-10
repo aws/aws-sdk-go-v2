@@ -1,8 +1,0 @@
-{
-    "id": "f72f9305-5689-4c0b-a7d0-cc31073ba007",
-    "type": "feature",
-    "description": "The type definitions of SecretString and SecretBinary now have a minimum length of 1 in the model to match the exception thrown when you pass in empty values.",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}

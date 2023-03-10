@@ -1,3 +1,7 @@
+# v1.17.6 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.5 (2023-03-09)
 
 * **Documentation**: This update provides example usage for TransitGatewayRouteTableArn.

@@ -1,3 +1,7 @@
+# v1.8.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2023-03-02)
 
 * **Feature**: This release updates the File Import API to allow importing servers already discovered by customers with reduced pre-requisites.
