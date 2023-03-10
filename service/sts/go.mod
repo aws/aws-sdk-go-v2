@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/sts
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.5
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.29
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.23
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.23
+	github.com/aws/aws-sdk-go-v2 v1.17.6
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.30
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.24
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.24
 	github.com/aws/smithy-go v1.13.5
 )
 

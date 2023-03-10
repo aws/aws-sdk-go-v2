@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.5
-	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.10.17
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.0
+	github.com/aws/aws-sdk-go-v2 v1.17.6
+	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.10.18
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.1
 	github.com/google/go-cmp v0.5.8
 )
 
