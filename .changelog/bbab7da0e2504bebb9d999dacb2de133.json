@@ -1,0 +1,9 @@
+{
+    "id": "bbab7da0-e250-4beb-b9d9-99dacb2de133",
+    "type": "feature",
+    "description": "port v1 sdk's 100-continue http header customization for s3 http PUT request",
+    "modules": [
+        "service/internal/s3shared",
+        "service/s3"
+    ]
+}
