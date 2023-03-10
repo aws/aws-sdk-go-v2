@@ -8,9 +8,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/retry/internal/config"
-	"github.com/aws/aws-sdk-go-v2/aws/retry/internal/s3"
-	"github.com/aws/aws-sdk-go-v2/aws/retry/internal/types"
+	config "github.com/aws/aws-sdk-go-v2/aws/retry/internal/mock"
+	s3 "github.com/aws/aws-sdk-go-v2/aws/retry/internal/mock"
+	types "github.com/aws/aws-sdk-go-v2/aws/retry/internal/mock"
 )
 
 func Example_overrideForAllClients() {
