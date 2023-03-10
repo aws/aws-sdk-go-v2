@@ -108,7 +108,7 @@ public final class EndpointGenerator implements Runnable {
             EndpointOption.builder()
                     .name(LOG_DEPRECATED_OPTION)
                     .documentation(String.format("""
-                                                 %s indicates that deprecated endpoints should be logged to the 
+                                                 %s indicates that deprecated endpoints should be logged to the
                                                  provided logger.""", LOG_DEPRECATED_OPTION))
                     .type(SymbolUtils.createValueSymbolBuilder("bool")
                             .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
@@ -291,12 +291,12 @@ public final class EndpointGenerator implements Runnable {
                 FINALIZE_CLIENT_ENDPOINT_RESOLVER_OPTIONS, () -> {
                     writer.write("""
                                  options.EndpointOptions.$logDepOption:L = options.ClientLogMode.IsDeprecatedUsage()
-                                                                  
+
                                  if len(options.EndpointOptions.ResolvedRegion) == 0 {
                                      const fipsInfix = "-fips-"
                                      const fipsPrefix = "fips-"
                                      const fipsSuffix = "-fips"
-                                     
+
                                      if ($contains:T(options.Region, fipsInfix) ||
                                          $contains:T(options.Region, fipsPrefix) ||
                                          $contains:T(options.Region, fipsSuffix)) {
@@ -409,11 +409,11 @@ public final class EndpointGenerator implements Runnable {
                          if err == nil {
                              return endpoint, nil
                          }
-                                                  
+
                          if nf := (&$T{}); !errors.As(err, &nf) {
                              return endpoint, err
                          }
-                                                  
+
                          fallback:
                          if w.resolver == nil {
                              return endpoint, $T("default endpoint resolver provided was nil")
@@ -427,11 +427,11 @@ public final class EndpointGenerator implements Runnable {
                 AwsGoDependency.AWS_CORE).build();
         writer.write("""
                      type $L func(service, region string) ($T, error)
-                                          
+
                      func (a $L) ResolveEndpoint(service, region string, options ...interface{}) ($T, error) {
                          return a(service, region)
                      }
-                                          
+
                      var _ $T = $L(nil)
                      """, AWS_ENDPOINT_RESOLVER_ADAPTOR, endpoint, AWS_ENDPOINT_RESOLVER_ADAPTOR,
                 endpoint, endpointResolverWithOptions, AWS_ENDPOINT_RESOLVER_ADAPTOR);
@@ -440,19 +440,19 @@ public final class EndpointGenerator implements Runnable {
         // with the clients EndpointResolver interface.
         writer.write("""
                      // $L returns an EndpointResolver that first delegates endpoint resolution to the awsResolver.
-                     // If awsResolver returns aws.EndpointNotFoundError error, the resolver will use the the provided 
+                     // If awsResolver returns aws.EndpointNotFoundError error, the resolver will use the the provided
                      // fallbackResolver for resolution.
                      //
                      // fallbackResolver must not be nil
                      func $L(awsResolver $T, awsResolverWithOptions $T, fallbackResolver $T) $T {
                          var resolver $T
-                         
+
                          if awsResolverWithOptions != nil {
                              resolver = awsResolverWithOptions
                          } else if awsResolver != nil {
                              resolver = $L(awsResolver.ResolveEndpoint)
                          }
-                                          
+
                          return &$T{
                              awsResolver: resolver,
                              resolver: fallbackResolver,

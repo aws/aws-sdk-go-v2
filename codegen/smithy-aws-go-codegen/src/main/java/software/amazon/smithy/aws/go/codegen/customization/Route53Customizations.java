@@ -53,7 +53,6 @@ public class Route53Customizations implements GoIntegration {
         );
     }
 
-
     public void writeAdditionalFiles(
             GoSettings settings,
             Model model,

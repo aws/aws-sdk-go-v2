@@ -22,7 +22,6 @@ public class S3ErrorWith200Status implements GoIntegration {
     private static Set<String> customizedOperations = SetUtils.of(
             "CopyObject", "UploadPartCopy", "CompleteMultipartUpload");
 
-
     @Override
     public byte getOrder() {
         // The associated customization ordering is relative to operation deserializers

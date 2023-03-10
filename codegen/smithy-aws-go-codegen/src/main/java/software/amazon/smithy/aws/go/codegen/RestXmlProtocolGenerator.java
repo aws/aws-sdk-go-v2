@@ -1,6 +1,5 @@
 package software.amazon.smithy.aws.go.codegen;
 
-
 import static software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils.isShapeWithResponseBindings;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeXmlDecoder;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.handleDecodeError;
@@ -70,7 +69,6 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected TimestampFormatTrait.Format getDocumentTimestampFormat() {
         return TimestampFormatTrait.Format.DATE_TIME;
     }
-
 
     @Override
     protected void generateOperationDocumentSerializer(GenerationContext context, OperationShape operation) {

@@ -168,7 +168,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                                                        + "service.")
                                         .deprecated("""
                                                     Set dual-stack by setting UseDualStackEndpoint on
-                                                    EndpointResolverOptions. When EndpointResolverOptions' 
+                                                    EndpointResolverOptions. When EndpointResolverOptions'
                                                     UseDualStackEndpoint field is set it overrides this field value.""")
                                         .build(),
                                 ConfigField.builder()
@@ -184,7 +184,6 @@ public class S3UpdateEndpoint implements GoIntegration {
         runtimeClientPlugins.addAll(S3.getClientPlugins());
         return runtimeClientPlugins;
     }
-
 
     /*
      * s3 class is the private class handling s3 goIntegration for endpoint mutations
@@ -378,7 +377,6 @@ public class S3UpdateEndpoint implements GoIntegration {
 
             // add operation to set denoting operation supports bucket input member
             SUPPORT_BUCKET_AS_INPUT.add(operationName);
-
 
             writer.writeDocs(
                     String.format("%s returns a pointer to string denoting a provided bucket member value"

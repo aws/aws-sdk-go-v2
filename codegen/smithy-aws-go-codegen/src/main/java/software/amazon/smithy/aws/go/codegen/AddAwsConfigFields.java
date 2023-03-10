@@ -120,7 +120,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             When creating a new API Clients this member will only be used if the
                             Retryer Options member is nil. This value will be ignored if
                             Retryer is not nil.
-                                                        
+
                             If specified in an operation call's functional options with a value that
                             is different than the constructed client's Options, the Client's Retryer
                             will be wrapped to use the operation's specific RetryMaxAttempts value.
@@ -146,7 +146,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             When creating a new API Clients this member will only be used if the
                             Retryer Options member is nil. This value will be ignored if
                             Retryer is not nil.
-                                                        
+
                             Currently does not support per operation call overrides, may in the future.
                             """)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MODE)
@@ -372,7 +372,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     if v := o.RetryMaxAttempts; v == 0 || v == client.options.RetryMaxAttempts {
                         return
                     }
-                    
+
                     o.Retryer = $withMaxAttempts:T(o.Retryer, o.RetryMaxAttempts)
                 }
                 """);
@@ -411,7 +411,6 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("nopCloser", SymbolUtils.createValueSymbolBuilder("NopCloser",
                 SmithyGoDependency.IOUTIL).build());
 
-
         writer.addUseImports(SmithyGoDependency.TESTING);
         writer.write("""
                 func Test$retryModeOptions:L(t *testing.T) {
@@ -422,7 +421,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             Body: $nopCloser:T($newStringReader:T("")),
                         }, nil
                     })
-                    
+
                     cases := map[string]struct{
                         defaultsMode       $defaultsModeType:T
                         retryer            $retryerType:T
@@ -636,7 +635,6 @@ public class AddAwsConfigFields implements GoIntegration {
                             writer.write("$L: cfg.$L,", field.getName(), field.getName());
                         }
                     });
-
 
                     List<AwsConfigField> configFields = new ArrayList<>(AWS_CONFIG_FIELDS);
                     // add client specific config fields
