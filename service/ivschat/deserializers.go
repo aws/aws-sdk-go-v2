@@ -2521,6 +2521,9 @@ func awsRestjson1_deserializeOpErrorUpdateLoggingConfiguration(response *smithyh
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("PendingVerification", errorCode):
 		return awsRestjson1_deserializeErrorPendingVerification(response, errorBody)
 
