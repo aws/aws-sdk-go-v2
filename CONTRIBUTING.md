@@ -14,15 +14,14 @@ Jump To:
 * [Feature Requests](#feature-requests)
 * [Code Contributions](#code-contributions)
 
-
 ## How to contribute
 
 *Before you send us a pull request, please be sure that:*
 
 1. You're working from the latest source on the `main` branch.
-2. You check existing open, and recently closed, pull requests to be sure 
+2. You check existing open, and recently closed, pull requests to be sure
    that someone else hasn't already addressed the problem.
-3. You create an issue before working on a contribution that will take a 
+3. You create an issue before working on a contribution that will take a
    significant amount of your time.
 
 *Creating a Pull Request*
@@ -32,11 +31,11 @@ Jump To:
 3. Commit the change to your fork, using a clear and descriptive commit message.
 4. Create a pull request, answering any questions in the pull request form.
 
-For contributions that will take a significant amount of time, open a new 
-issue to pitch your idea before you get started. Explain the problem and 
-describe the content you want to see added to the documentation. Let us know 
-if you'll write it yourself or if you'd like us to help. We'll discuss your 
-proposal with you and let you know whether we're likely to accept it.   
+For contributions that will take a significant amount of time, open a new
+issue to pitch your idea before you get started. Explain the problem and
+describe the content you want to see added to the documentation. Let us know
+if you'll write it yourself or if you'd like us to help. We'll discuss your
+proposal with you and let you know whether we're likely to accept it.
 
 ## Bug Reports
 
@@ -74,9 +73,9 @@ guidelines prior to filing a bug report.
 
 Open an [issue][issues] with the following:
 
-* A short, descriptive title. Ideally, other community members should be able 
+* A short, descriptive title. Ideally, other community members should be able
    to get a good idea of the feature just from reading the title.
-* A detailed description of the the proposed feature. 
+* A detailed description of the the proposed feature.
     * Why it should be added to the SDK.
     *  If possible, example code to illustrate how it should work.
 * Use Markdown to make the request easier to read;
@@ -97,7 +96,7 @@ Please be aware of the following notes prior to opening a pull request:
 
 3. Wherever possible, pull requests should contain tests as appropriate.
    Bugfixes should contain tests that exercise the corrected behavior (i.e., the
-   test should fail without the bugfix and pass with it), and new features 
+   test should fail without the bugfix and pass with it), and new features
    should be accompanied by tests exercising the feature.
 
 4. Pull requests that contain failing tests will not be merged until the test
@@ -112,7 +111,7 @@ Please be aware of the following notes prior to opening a pull request:
 
 ### Testing
 
-To run the tests locally, running the `make unit` command will `go get` the 
+To run the tests locally, running the `make unit` command will `go get` the
 SDK's testing dependencies, and run vet, link and unit tests for the SDK.
 
 ```
@@ -129,7 +128,7 @@ go test -tags codegen ./private/...
 
 See the `Makefile` for additional testing tags that can be used in testing.
 
-To test on multiple platform the SDK includes several DockerFiles under the 
+To test on multiple platform the SDK includes several DockerFiles under the
 `awstesting/sandbox` folder, and associated make recipes to to execute
 unit testing within environments configured for specific Go versions.
 

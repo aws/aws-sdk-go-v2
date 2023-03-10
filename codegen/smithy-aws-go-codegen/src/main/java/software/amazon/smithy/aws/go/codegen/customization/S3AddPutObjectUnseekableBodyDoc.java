@@ -79,7 +79,6 @@ public class S3AddPutObjectUnseekableBodyDoc implements GoIntegration {
                                 "https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#unseekable-streaming-input"));
             });
 
-
             builder.addShape(parentBuilder.build());
         }
 

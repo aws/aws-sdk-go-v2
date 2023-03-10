@@ -86,7 +86,6 @@ public class APIGatewayAcceptHeader implements GoIntegration {
         );
     }
 
-
     private static boolean isAPIGatewayService(Model model, ServiceShape service) {
         return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("API Gateway");
     }

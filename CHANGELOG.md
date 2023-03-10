@@ -8574,7 +8574,7 @@
   * Fixes [issue#1191](https://github.com/aws/aws-sdk-go-v2/issues/1191)
 * Refactored internal endpoints model for accessors
 * Feature: updated to latest models
-* New services 
+* New services
   * `service/location` - v1.0.0
   * `service/lookoutmetrics` - v1.0.0
 ## Core SDK Highlights
@@ -8658,7 +8658,7 @@ of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 
 
 ## Breaking Changes
 * `aws`: Updated Config.Retryer member to be a func that returns aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
-    * Updates the SDK's references to Config.Retryer to be a function that returns aws.Retryer value. This ensures that custom retry options specified in the `aws.Config` are scoped to individual client instances. 
+    * Updates the SDK's references to Config.Retryer to be a function that returns aws.Retryer value. This ensures that custom retry options specified in the `aws.Config` are scoped to individual client instances.
     * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
     * Removes duplicate `Retryer` interface from `retry` package. Single definition is `aws.Retryer` now.
 * `aws/middleware`: Updates `AddAttemptClockSkewMiddleware` to use appropriate `AddRecordResponseTiming` naming ([#1031](https://github.com/aws/aws-sdk-go-v2/pull/1031))
@@ -8666,7 +8666,7 @@ of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 
 * `config`: Updated the `WithRetryer` helper to take a function that returns an aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
     * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
 * `API Clients`: Fix SDK's API client enum constant name generation to have expected casing ([#1020](https://github.com/aws/aws-sdk-go-v2/pull/1020))
-    * This updates of the generated enum const value names in API client's `types` package to have the expected casing. Prior to this, enum names were being generated with lowercase names instead of camel case. 
+    * This updates of the generated enum const value names in API client's `types` package to have the expected casing. Prior to this, enum names were being generated with lowercase names instead of camel case.
 * `API Clients`: Updates SDK's API client request middleware stack values to be scoped to individual operation call ([#1019](https://github.com/aws/aws-sdk-go-v2/pull/1019))
     * The API client request middleware stack values were mistakenly allowed to escape to nested API operation calls. This broke the SDK's presigners.
     * Stack values that should not escape are not scoped to the individual operation call.
@@ -8678,7 +8678,7 @@ of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 
     * Adds a PresignClient to the `sts` API client module. Use PresignGetCallerIdentity to obtain presigned URLs for the create presigned URLs for the GetCallerIdentity operation.
     * Fixes [#1021](https://github.com/aws/aws-sdk-go-v2/issues/1021)
 * `aws/retry`: Add package documentation for retry package ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
-    * Adds documentation for the retry package 
+    * Adds documentation for the retry package
 
 ## Bug Fixes
 * `Multiple API Clients`: Fix SDK's generated serde for unmodeled operation input/output ([#1050](https://github.com/aws/aws-sdk-go-v2/pull/1050))
@@ -8776,7 +8776,6 @@ feedback and to take advantage of modern Go language features.
     * Add support for reading `s3_use_arn_region` from shared config file ([#991](https://github.com/aws/aws-sdk-go-v2/pull/991))
     * Add Utility for getting RequestID and HostID of response ([#983](https://github.com/aws/aws-sdk-go-v2/pull/983))
 
-
 ## Other changes
 * Updates branch `HEAD` points from `master` to `main`.
     * This should not impact your application, but if you have pull requests or forks of the SDK you may need to update the upstream branch your fork is based off of.
@@ -8806,7 +8805,6 @@ The `aws/signer/v4` package's `Signer.SignHTTP` and `Signer.PresignHTTP` methods
 The `config#LoadDefaultConfig` function has been updated to require a `context.Context` as the first parameter, with additional optional function options as variadic additional arguments. Your application will need to update its usage of `LoadDefaultConfig` to pass in `context.Context` as the first parameter. If your application used the `With...` helpers those should continue to work without issue.
 
 The v2 SDK corrects its behavior to be inline with the AWS CLI and other AWS SDKs. Refer to https://docs.aws.amazon.com/credref/latest/refdocs/overview.html for more information how to use the shared config and credentials files.
-
 
 # Release 2020-11-30
 
@@ -8967,7 +8965,6 @@ The `config` module's exported types were trimmed down to add clarity and reduce
 * `credentials` module released at `v0.1.1`
 * `ec2imds` module released at `v0.1.1`
 
-
 # Release 2020-09-28
 ## Announcements
 We’re happy to share the updated clients for the v0.25.0 preview version of the AWS SDK for Go V2.
@@ -9007,7 +9004,6 @@ As a part of the refactoring done to v2 preview SDK some components have not bee
 
 We expect additional breaking changes to the v2 preview SDK in the coming releases. We expect these changes to focus on organizational, naming, and hardening the SDK's design for future feature capabilities after it is released for general availability.
 
-
 #### Relocated Packages
 
 In this release packages within the SDK were relocated, and in some cases those packages were converted to Go modules. The following is a list of packages have were relocated.
@@ -9022,7 +9018,6 @@ The `github.com/aws/aws-sdk-go-v2/credentials` module contains refactored creden
 * `github.com/aws/aws-sdk-go-v2/processcreds` => `github.com/aws/aws-sdk-go-v2/credentials/processcreds`
 * `github.com/aws/aws-sdk-go-v2/stscreds` => `github.com/aws/aws-sdk-go-v2/credentials/stscreds`
 
-
 #### Modularization
 
 New modules were added to the v2 preview SDK to allow the components to be versioned independently from each other. This allows your application to depend on specific versions of an API client module, and take discrete updates from the SDK core and other API client modules as desired.
@@ -9030,7 +9025,6 @@ New modules were added to the v2 preview SDK to allow the components to be versi
 * [github.com/aws/aws-sdk-go-v2/config](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config)
 * [github.com/aws/aws-sdk-go-v2/credentials](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/credentials)
 * Module for each API client, e.g. [github.com/aws/aws-sdk-go-v2/service/s3](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3)
-
 
 #### API Clients
 
@@ -9051,13 +9045,11 @@ result, err := client.Scan(context.TODO(), &dynamodb.ScanInput{
 })
 ```
 
-
 #### Configuration
 
 In addition to the `github.com/aws/aws-sdk-go-v2/aws/external` package being made a module at `github.com/aws/aws-sdk-go-v2/config`, the `LoadDefaultAWSConfig` function was renamed to `LoadDefaultConfig`.
 
 The `github.com/aws/aws-sdk-go-v2/aws/defaults` package has been removed. Its components have been migrated to the `github.com/aws/aws-sdk-go-v2/aws` package, and `github.com/aws/aws-sdk-go-v2/config` module.
-
 
 #### Error Handling
 
@@ -9100,7 +9092,6 @@ if err != nil {
 Logging an error value will include information from each wrapped error. For example, the following is a mock error logged for a Scan operation call that failed because the table was not found.
 
 > 2020/10/15 16:03:37 operation error DynamoDB: Scan, https response error StatusCode: 400, RequestID: ABCREQUESTID123, ResourceNotFoundException: Requested resource not found
-
 
 #### Endpoints
 
