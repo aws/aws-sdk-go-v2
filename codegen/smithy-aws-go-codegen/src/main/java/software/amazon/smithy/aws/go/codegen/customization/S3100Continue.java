@@ -14,8 +14,8 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 
 /**
- * Retrieves S3 specific metadata such as host id, request id from Deserialized response, and
- * sets it on middleware's metadata.
+ * Add middleware, which adds {Expect: 100-continue} header for s3 client HTTP PUT request larger than 2MB
+ * or with unknown size streaming bodies, during operation builder step
  */
 public class S3100Continue implements GoIntegration {
     private static final String ADD_100Continue_Header = "add100Continue";

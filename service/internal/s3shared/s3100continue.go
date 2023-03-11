@@ -9,10 +9,9 @@ import (
 
 const s3100ContinueID = "S3100Continue"
 
-// Add100Continue AddMiddleware adds request id, host id retriever middleware
+// Add100Continue add middleware, which adds {Expect: 100-continue} header for s3 client HTTP PUT request larger than 2MB
+// or with unknown size streaming bodies, during operation builder step
 func Add100Continue(stack *middleware.Stack) error {
-	// add middleware, which adds {Expect: 100-continue} header for s3 client HTTP PUT request larger than 2MB or with unknown size streaming bodies,
-	// during operation builder
 	return stack.Build.Add(&s3100Continue{}, middleware.After)
 }
 
