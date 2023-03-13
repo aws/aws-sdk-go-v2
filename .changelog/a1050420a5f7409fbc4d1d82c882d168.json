@@ -1,0 +1,8 @@
+{
+    "id": "a1050420-a5f7-409f-bc4d-1d82c882d168",
+    "type": "feature",
+    "description": "Add flag to disable IMDSv1 fallback",
+    "modules": [
+        "feature/ec2/imds"
+    ]
+}
