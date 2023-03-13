@@ -24,7 +24,7 @@ import (
 // clusters. This request creates an empty network package container with an ID.
 // Once you create a network package, you can upload the network package content
 // using PutSolNetworkPackageContent
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html).
 func (c *Client) CreateSolNetworkPackage(ctx context.Context, params *CreateSolNetworkPackageInput, optFns ...func(*Options)) (*CreateSolNetworkPackageOutput, error) {
 	if params == nil {
 		params = &CreateSolNetworkPackageInput{}

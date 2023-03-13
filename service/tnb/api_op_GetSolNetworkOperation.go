@@ -32,7 +32,7 @@ func (c *Client) GetSolNetworkOperation(ctx context.Context, params *GetSolNetwo
 
 type GetSolNetworkOperationInput struct {
 
-	// The identifier of the operation occurrence.
+	// The identifier of the network operation.
 	//
 	// This member is required.
 	NsLcmOpOccId *string
@@ -47,7 +47,7 @@ type GetSolNetworkOperationOutput struct {
 	// This member is required.
 	Arn *string
 
-	// Error related to this specific network operation occurence.
+	// Error related to this specific network operation occurrence.
 	Error *types.ProblemDetails
 
 	// ID of this network operation occurrence.

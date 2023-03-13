@@ -99,7 +99,7 @@ type GetSolNetworkInstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata related to a network operation occurence. A network operation is any
+// Metadata related to a network operation occurrence. A network operation is any
 // operation that is done to your network, such as network instance instantiation
 // or termination.
 type GetSolNetworkOperationMetadata struct {
@@ -211,7 +211,7 @@ type GetSolVnfInfo struct {
 // management operations are deploy, update, or delete operations.
 type LcmOperationInfo struct {
 
-	// The identifier of the latest network lifecycle management operation occurrence.
+	// The identifier of the network operation.
 	//
 	// This member is required.
 	NsLcmOpOccId *string

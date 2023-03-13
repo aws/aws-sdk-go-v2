@@ -84,6 +84,13 @@ func awsRestjson1_serializeOpDocumentCreateDataIntegrationInput(v *CreateDataInt
 		ok.String(*v.Description)
 	}
 
+	if v.FileConfiguration != nil {
+		ok := object.Key("FileConfiguration")
+		if err := awsRestjson1_serializeDocumentFileConfiguration(v.FileConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KmsKey != nil {
 		ok := object.Key("KmsKey")
 		ok.String(*v.KmsKey)
@@ -92,6 +99,13 @@ func awsRestjson1_serializeOpDocumentCreateDataIntegrationInput(v *CreateDataInt
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.ObjectConfiguration != nil {
+		ok := object.Key("ObjectConfiguration")
+		if err := awsRestjson1_serializeDocumentObjectConfiguration(v.ObjectConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScheduleConfig != nil {
@@ -1072,6 +1086,81 @@ func awsRestjson1_serializeDocumentEventFilter(v *types.EventFilter, value smith
 		ok.String(*v.Source)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFieldsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFieldsMap(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentFieldsList(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFileConfiguration(v *types.FileConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentFieldsMap(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Folders != nil {
+		ok := object.Key("Folders")
+		if err := awsRestjson1_serializeDocumentFolderList(v.Folders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFolderList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentObjectConfiguration(v map[string]map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentFieldsMap(v[key], om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

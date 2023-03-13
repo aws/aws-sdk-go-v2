@@ -15,7 +15,7 @@ import (
 // Web Services infrastructure you want to deploy them on. To delete a network
 // package, the package must be in a disable state. To disable a network package,
 // see UpdateSolNetworkPackage
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolNetworkPackage.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html).
 func (c *Client) DeleteSolNetworkPackage(ctx context.Context, params *DeleteSolNetworkPackageInput, optFns ...func(*Options)) (*DeleteSolNetworkPackageOutput, error) {
 	if params == nil {
 		params = &DeleteSolNetworkPackageInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "7f44fbe5-ae7f-498f-80ce-5c0eec642a7d",
+    "type": "feature",
+    "description": "This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField",
+    "modules": [
+        "service/wisdom"
+    ]
+}

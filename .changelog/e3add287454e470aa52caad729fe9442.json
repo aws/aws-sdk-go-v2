@@ -1,0 +1,8 @@
+{
+    "id": "e3add287-454e-470a-a52c-aad729fe9442",
+    "type": "documentation",
+    "description": "This release updates the documentation regarding Get/Update DataCellsFilter",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

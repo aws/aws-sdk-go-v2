@@ -13,7 +13,7 @@ import (
 
 // Validates network package content. This can be used as a dry run before
 // uploading network package content with PutSolNetworkPackageContent
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html).
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
 // the function packages you want to deploy and the Amazon Web Services
 // infrastructure you want to deploy them on.
