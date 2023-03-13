@@ -65,7 +65,7 @@
                 "nsLcmOpOccId": {
                     "target": "com.amazonaws.tnb#NsLcmOpOccId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a network operation occurrence.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the network operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -101,7 +101,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html\">Function packages</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. \n      </p>\n         <p>Creating a function package is the first step for creating a network in AWS TNB. This request creates an empty container with an ID. The next step is to upload the actual CSAR zip file into that empty container. To upload function package content, see <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html\">Function packages</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. \n      </p>\n         <p>Creating a function package is the first step for creating a network in AWS TNB. This request creates an empty container with an ID. The next step is to upload the actual CSAR zip file into that empty container. To upload function package content, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Sol function package",
@@ -221,7 +221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network package. For more information about network instances, <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>.</p>\n         <p>Once you create a network instance, you can instantiate it. To instantiate a network, see <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_InstantiateSolNetworkInstance.html\">InstantiateSolNetworkInstance</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network package. For more information about network instances, <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>.</p>\n         <p>Once you create a network instance, you can instantiate it. To instantiate a network, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html\">InstantiateSolNetworkInstance</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Sol Network Instance",
@@ -267,7 +267,7 @@
                         "smithy.api#documentation": "<p>Network instance name.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 80
+                            "max": 100
                         },
                         "smithy.api#required": {}
                     }
@@ -277,8 +277,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Network instance description.</p>",
                         "smithy.api#length": {
-                            "min": 1,
-                            "max": 124
+                            "min": 0,
+                            "max": 255
                         }
                     }
                 },
@@ -361,7 +361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. \n      </p>\n         <p>A network package consists of a network service descriptor (NSD) file (required) and any additional files (optional), such as scripts specific to your needs. For example, if you have multiple function packages in your network package, you can use the NSD to define which network functions should run in certain VPCs, subnets, or EKS clusters.</p>\n         <p>This request creates an empty network package container with an ID. Once you create a network package, you can upload the network package content using <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. \n      </p>\n         <p>A network package consists of a network service descriptor (NSD) file (required) and any additional files (optional), such as scripts specific to your needs. For example, if you have multiple function packages in your network package, you can use the NSD to define which network functions should run in certain VPCs, subnets, or EKS clusters.</p>\n         <p>This request creates an empty network package container with an ID. Once you create a network package, you can upload the network package content using <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Sol network package",
@@ -478,7 +478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>\n         <p>To delete a function package, the package must be in a disabled state. To disable a function package, see <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolFunctionPackage.html\">UpdateSolFunctionPackage</a>.\n      </p>",
+                "smithy.api#documentation": "<p>Deletes a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>\n         <p>To delete a function package, the package must be in a disabled state. To disable a function package, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html\">UpdateSolFunctionPackage</a>.\n      </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a function package",
@@ -537,7 +537,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>To delete a network instance, the instance must be in a stopped or terminated state. To terminate a network instance, see <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_TerminateSolNetworkInstance.html\">TerminateSolNetworkInstance</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>To delete a network instance, the instance must be in a stopped or terminated state. To terminate a network instance, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html\">TerminateSolNetworkInstance</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a Sol Network Instance.",
@@ -596,7 +596,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>\n         <p>To delete a network package, the package must be in a disable state. To disable a network package, see <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolNetworkPackage.html\">UpdateSolNetworkPackage</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>\n         <p>To delete a network package, the package must be in a disable state. To disable a network package, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html\">UpdateSolNetworkPackage</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a Sol network package",
@@ -1548,7 +1548,7 @@
                 "nsLcmOpOccId": {
                     "target": "com.amazonaws.tnb#NsLcmOpOccId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the operation occurrence.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the network operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1579,7 +1579,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata related to a network operation occurence.</p>\n         <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>"
+                "smithy.api#documentation": "<p>Metadata related to a network operation occurrence.</p>\n         <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>"
             }
         },
         "com.amazonaws.tnb#GetSolNetworkOperationOutput": {
@@ -1619,7 +1619,7 @@
                 "error": {
                     "target": "com.amazonaws.tnb#ProblemDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Error related to this specific network operation occurence.</p>"
+                        "smithy.api#documentation": "<p>Error related to this specific network operation occurrence.</p>"
                     }
                 },
                 "metadata": {
@@ -2169,15 +2169,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Instantiates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>Before you can instantiate a network instance, you have to create a network instance. For more information, see <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_CreateSolNetworkInstance.html\">CreateSolNetworkInstance</a>.</p>",
+                "smithy.api#documentation": "<p>Instantiates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>Before you can instantiate a network instance, you have to create a network instance. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_CreateSolNetworkInstance.html\">CreateSolNetworkInstance</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Instantiate a Sol Network Instance",
                         "input": {
-                            "nsInstanceId": "ni-0d5b823eb5c2a9241"
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                            "tags": {
+                                "Name": "Resource"
+                            }
                         },
                         "output": {
-                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241"
+                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241",
+                            "tags": {
+                                "Name": "Resource"
+                            }
                         }
                     },
                     {
@@ -2224,6 +2230,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides values for the configurable properties.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.tnb#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2236,8 +2248,14 @@
                 "nsLcmOpOccId": {
                     "target": "com.amazonaws.tnb#NsLcmOpOccId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the network instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the network operation.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.tnb#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -2267,7 +2285,7 @@
                 "nsLcmOpOccId": {
                     "target": "com.amazonaws.tnb#NsLcmOpOccId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the latest network lifecycle management operation occurrence.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the network operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5188,10 +5206,16 @@
                     {
                         "title": "Terminate a Sol Network Instance",
                         "input": {
-                            "nsInstanceId": "ni-0d5b823eb5c2a9241"
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                            "tags": {
+                                "Name": "Resource"
+                            }
                         },
                         "output": {
-                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241"
+                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241",
+                            "tags": {
+                                "Name": "Resource"
+                            }
                         }
                     }
                 ],
@@ -5212,6 +5236,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.tnb#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5224,7 +5254,13 @@
                 "nsLcmOpOccId": {
                     "target": "com.amazonaws.tnb#NsLcmOpOccId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the operation occurrence.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the network operation.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.tnb#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -5468,10 +5504,16 @@
                                     "pcf.port": "8080",
                                     "pcf.pods": "10"
                                 }
+                            },
+                            "tags": {
+                                "Name": "Resource"
                             }
                         },
                         "output": {
-                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241"
+                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241",
+                            "tags": {
+                                "Name": "Resource"
+                            }
                         }
                     }
                 ],
@@ -5505,6 +5547,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the network function information parameters and/or the configurable properties of the network function to be modified.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.tnb#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5517,7 +5565,13 @@
                 "nsLcmOpOccId": {
                     "target": "com.amazonaws.tnb#NsLcmOpOccId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the network instance operation occurrence.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the network operation.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.tnb#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -5694,7 +5748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Validates function package content. This can be used as a dry run before uploading function package content with <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>",
+                "smithy.api#documentation": "<p>Validates function package content. This can be used as a dry run before uploading function package content with <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Validate a Function Package content",
@@ -5843,7 +5897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Validates network package content. This can be used as a dry run before uploading network package content with <a href=\"https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>",
+                "smithy.api#documentation": "<p>Validates network package content. This can be used as a dry run before uploading network package content with <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Validate the network package content of a NSD archive",
