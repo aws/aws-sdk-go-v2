@@ -9,11 +9,11 @@ import (
 // Summary information about the DataIntegration association.
 type DataIntegrationAssociationSummary struct {
 
-	// The identifier for teh client that is associated with the DataIntegration
+	// The identifier for the client that is associated with the DataIntegration
 	// association.
 	ClientId *string
 
-	// The Amazon Resource Name (ARN)of the DataIntegration.
+	// The Amazon Resource Name (ARN) of the DataIntegration.
 	DataIntegrationArn *string
 
 	// The Amazon Resource Name (ARN) of the DataIntegration association.
@@ -66,7 +66,8 @@ type EventIntegration struct {
 	// The name of the event integration.
 	Name *string
 
-	// The tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -96,17 +97,34 @@ type EventIntegrationAssociation struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for what files should be pulled from the source.
+type FileConfiguration struct {
+
+	// Identifiers for the source folders to pull all files from recursively.
+	//
+	// This member is required.
+	Folders []string
+
+	// Restrictions for what files should be pulled from the source.
+	Filters map[string][]string
+
+	noSmithyDocumentSerde
+}
+
 // The name of the data and how often it should be pulled from the source.
 type ScheduleConfiguration struct {
 
-	// The start date for objects to import in the first flow run.
+	// How often the data should be pulled from data source.
+	//
+	// This member is required.
+	ScheduleExpression *string
+
+	// The start date for objects to import in the first flow run as an Unix/epoch
+	// timestamp in milliseconds or in ISO-8601 format.
 	FirstExecutionFrom *string
 
 	// The name of the object to pull from the data source.
 	Object *string
-
-	// How often the data should be pulled from data source.
-	ScheduleExpression *string
 
 	noSmithyDocumentSerde
 }

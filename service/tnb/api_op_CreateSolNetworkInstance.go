@@ -19,7 +19,7 @@ import (
 // Web Services Telco Network Builder User Guide. Once you create a network
 // instance, you can instantiate it. To instantiate a network, see
 // InstantiateSolNetworkInstance
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_InstantiateSolNetworkInstance.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html).
 func (c *Client) CreateSolNetworkInstance(ctx context.Context, params *CreateSolNetworkInstanceInput, optFns ...func(*Options)) (*CreateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &CreateSolNetworkInstanceInput{}

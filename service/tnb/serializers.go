@@ -1094,6 +1094,13 @@ func awsRestjson1_serializeOpDocumentInstantiateSolNetworkInstanceInput(v *Insta
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1707,6 +1714,17 @@ func (m *awsRestjson1_serializeOpTerminateSolNetworkInstance) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentTerminateSolNetworkInstanceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1724,6 +1742,20 @@ func awsRestjson1_serializeOpHttpBindingsTerminateSolNetworkInstanceInput(v *Ter
 	}
 	if v.NsInstanceId != nil {
 		if err := encoder.SetURI("nsInstanceId").String(*v.NsInstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentTerminateSolNetworkInstanceInput(v *TerminateSolNetworkInstanceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
 	}
@@ -1952,6 +1984,13 @@ func awsRestjson1_serializeOpDocumentUpdateSolNetworkInstanceInput(v *UpdateSolN
 	if v.ModifyVnfInfoData != nil {
 		ok := object.Key("modifyVnfInfoData")
 		if err := awsRestjson1_serializeDocumentUpdateSolNetworkModify(v.ModifyVnfInfoData, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
 	}

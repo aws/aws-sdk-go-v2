@@ -2930,6 +2930,11 @@ func awsRestjson1_deserializeOpDocumentInstantiateSolNetworkInstanceOutput(v **I
 				sv.NsLcmOpOccId = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4588,6 +4593,11 @@ func awsRestjson1_deserializeOpDocumentTerminateSolNetworkInstanceOutput(v **Ter
 				sv.NsLcmOpOccId = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5010,6 +5020,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSolNetworkInstanceOutput(v **Update
 					return fmt.Errorf("expected NsLcmOpOccId to be of type string, got %T instead", value)
 				}
 				sv.NsLcmOpOccId = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		default:

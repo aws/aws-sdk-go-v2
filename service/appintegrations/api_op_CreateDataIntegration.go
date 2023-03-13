@@ -33,28 +33,44 @@ func (c *Client) CreateDataIntegration(ctx context.Context, params *CreateDataIn
 
 type CreateDataIntegrationInput struct {
 
+	// The KMS key for the DataIntegration.
+	//
+	// This member is required.
+	KmsKey *string
+
 	// The name of the DataIntegration.
 	//
 	// This member is required.
 	Name *string
 
+	// The name of the data and how often it should be pulled from the source.
+	//
+	// This member is required.
+	ScheduleConfig *types.ScheduleConfiguration
+
+	// The URI of the data source.
+	//
+	// This member is required.
+	SourceURI *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
 	// A description of the DataIntegration.
 	Description *string
 
-	// The KMS key for the DataIntegration.
-	KmsKey *string
+	// The configuration for what files should be pulled from the source.
+	FileConfiguration *types.FileConfiguration
 
-	// The name of the data and how often it should be pulled from the source.
-	ScheduleConfig *types.ScheduleConfiguration
+	// The configuration for what data should be pulled from the source.
+	ObjectConfiguration map[string]map[string][]string
 
-	// The URI of the data source.
-	SourceURI *string
-
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -66,11 +82,17 @@ type CreateDataIntegrationOutput struct {
 	Arn *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
 	// A description of the DataIntegration.
 	Description *string
+
+	// The configuration for what files should be pulled from the source.
+	FileConfiguration *types.FileConfiguration
 
 	// A unique identifier.
 	Id *string
@@ -81,13 +103,17 @@ type CreateDataIntegrationOutput struct {
 	// The name of the DataIntegration.
 	Name *string
 
+	// The configuration for what data should be pulled from the source.
+	ObjectConfiguration map[string]map[string][]string
+
 	// The name of the data and how often it should be pulled from the source.
 	ScheduleConfiguration *types.ScheduleConfiguration
 
 	// The URI of the data source.
 	SourceURI *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

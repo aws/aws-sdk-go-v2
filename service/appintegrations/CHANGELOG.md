@@ -1,3 +1,7 @@
+# v1.15.0 (2023-03-13)
+
+* **Feature**: Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint.
+
 # v1.14.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

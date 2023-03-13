@@ -104,7 +104,7 @@
                     "name": "app-integrations"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations service enables you to configure and reuse connections to external\n      applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built\n      integrations</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-wisdom.html\">Deliver information to agents using Amazon Connect Wisdom</a>\n       in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations service enables you to configure and reuse connections to external\n      applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see\n        <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built\n        integrations</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-wisdom.html\">Deliver information to agents\n        using Amazon Connect Wisdom</a> in the <i>Amazon Connect Administrator\n        Guide</i>.</p>",
                 "smithy.api#title": "Amazon AppIntegrations Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -467,8 +467,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -480,8 +480,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -493,8 +493,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -506,8 +506,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -519,8 +519,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -532,8 +532,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -545,8 +545,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -558,8 +558,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -571,8 +571,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -584,8 +584,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -597,8 +597,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -610,8 +610,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -623,8 +623,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -636,8 +636,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -649,8 +649,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -662,8 +662,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -675,8 +675,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -688,8 +688,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -701,8 +701,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -714,8 +714,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -727,8 +727,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -740,8 +740,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -753,8 +753,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -766,8 +766,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -779,8 +779,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -792,8 +792,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -805,8 +805,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -817,8 +817,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -829,8 +829,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -897,7 +897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and persists a DataIntegration resource.</p>\n         <note>\n            <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  \n      Use a different DataIntegration, or recreate the DataIntegration using the \n      <code>CreateDataIntegration</code> API.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates and persists a DataIntegration resource.</p>\n         <note>\n            <p>You cannot create a DataIntegration association for a DataIntegration that has been\n        previously associated. Use a different DataIntegration, or recreate the DataIntegration\n        using the <code>CreateDataIntegration</code> API.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dataIntegrations",
@@ -924,34 +924,52 @@
                 "KmsKey": {
                     "target": "com.amazonaws.appintegrations#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key for the DataIntegration.</p>"
+                        "smithy.api#documentation": "<p>The KMS key for the DataIntegration.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "SourceURI": {
-                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "target": "com.amazonaws.appintegrations#SourceURI",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the data source.</p>"
+                        "smithy.api#documentation": "<p>The URI of the data source.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ScheduleConfig": {
                     "target": "com.amazonaws.appintegrations#ScheduleConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data and how often it should be pulled from the source.</p>"
+                        "smithy.api#documentation": "<p>The name of the data and how often it should be pulled from the source.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.appintegrations#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "FileConfiguration": {
+                    "target": "com.amazonaws.appintegrations#FileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for what files should be pulled from the source.</p>"
+                    }
+                },
+                "ObjectConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ObjectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#CreateDataIntegrationResponse": {
@@ -988,7 +1006,7 @@
                     }
                 },
                 "SourceURI": {
-                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "target": "com.amazonaws.appintegrations#SourceURI",
                     "traits": {
                         "smithy.api#documentation": "<p>The URI of the data source.</p>"
                     }
@@ -1002,15 +1020,30 @@
                 "Tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.appintegrations#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+                    }
+                },
+                "FileConfiguration": {
+                    "target": "com.amazonaws.appintegrations#FileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for what files should be pulled from the source.</p>"
+                    }
+                },
+                "ObjectConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ObjectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#CreateEventIntegration": {
@@ -1042,7 +1075,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an EventIntegration, given a specified name, description, and a reference to an\n      Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No\n      objects are created in the your account, only metadata that is persisted on the\n      EventIntegration control plane.</p>",
+                "smithy.api#documentation": "<p>Creates an EventIntegration, given a specified name, description, and a reference to an\n        Amazon EventBridge bus in your account and a partner event source that pushes events to\n      that bus. No objects are created in the your account, only metadata that is persisted on the\n      EventIntegration control plane.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/eventIntegrations",
@@ -1083,16 +1116,19 @@
                 "ClientToken": {
                     "target": "com.amazonaws.appintegrations#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#CreateEventIntegrationResponse": {
@@ -1104,6 +1140,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event integration. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#DataIntegrationAssociationSummary": {
@@ -1118,13 +1157,13 @@
                 "DataIntegrationArn": {
                     "target": "com.amazonaws.appintegrations#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN)of the DataIntegration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DataIntegration.</p>"
                     }
                 },
                 "ClientId": {
                     "target": "com.amazonaws.appintegrations#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for teh client that is associated with the DataIntegration\n      association.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the client that is associated with the DataIntegration\n      association.</p>"
                     }
                 }
             },
@@ -1160,7 +1199,7 @@
                     }
                 },
                 "SourceURI": {
-                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "target": "com.amazonaws.appintegrations#SourceURI",
                     "traits": {
                         "smithy.api#documentation": "<p>The URI of the data source.</p>"
                     }
@@ -1227,11 +1266,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#DeleteDataIntegrationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appintegrations#DeleteEventIntegration": {
             "type": "operation",
@@ -1278,11 +1323,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#DeleteEventIntegrationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appintegrations#Description": {
             "type": "string",
@@ -1378,7 +1429,7 @@
                 "Tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -1454,6 +1505,70 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#Fields": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#FieldsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#Fields"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#FieldsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.appintegrations#NonBlankString"
+            },
+            "value": {
+                "target": "com.amazonaws.appintegrations#FieldsList"
+            }
+        },
+        "com.amazonaws.appintegrations#FileConfiguration": {
+            "type": "structure",
+            "members": {
+                "Folders": {
+                    "target": "com.amazonaws.appintegrations#FolderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifiers for the source folders to pull all files from recursively.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.appintegrations#FieldsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Restrictions for what files should be pulled from the source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for what files should be pulled from the source.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#FolderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#NonBlankLongString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.appintegrations#GetDataIntegration": {
             "type": "operation",
             "input": {
@@ -1499,6 +1614,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#GetDataIntegrationResponse": {
@@ -1535,7 +1653,7 @@
                     }
                 },
                 "SourceURI": {
-                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "target": "com.amazonaws.appintegrations#SourceURI",
                     "traits": {
                         "smithy.api#documentation": "<p>The URI of the data source.</p>"
                     }
@@ -1549,9 +1667,24 @@
                 "Tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                },
+                "FileConfiguration": {
+                    "target": "com.amazonaws.appintegrations#FileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for what files should be pulled from the source.</p>"
+                    }
+                },
+                "ObjectConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ObjectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#GetEventIntegration": {
@@ -1599,6 +1732,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#GetEventIntegrationResponse": {
@@ -1637,9 +1773,12 @@
                 "Tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#IdempotencyToken": {
@@ -1747,6 +1886,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#ListDataIntegrationAssociationsResponse": {
@@ -1764,6 +1906,9 @@
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#ListDataIntegrations": {
@@ -1814,6 +1959,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#ListDataIntegrationsResponse": {
@@ -1831,6 +1979,9 @@
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#ListEventIntegrationAssociations": {
@@ -1892,6 +2043,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#ListEventIntegrationAssociationsResponse": {
@@ -1909,6 +2063,9 @@
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#ListEventIntegrations": {
@@ -1959,6 +2116,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#ListEventIntegrationsResponse": {
@@ -1976,6 +2136,9 @@
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#ListTagsForResource": {
@@ -2020,6 +2183,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#ListTagsForResourceResponse": {
@@ -2031,6 +2197,9 @@
                         "smithy.api#documentation": "<p>Information about the tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#MaxResults": {
@@ -2065,6 +2234,16 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.appintegrations#NonBlankLongString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.appintegrations#NonBlankString": {
             "type": "string",
             "traits": {
@@ -2083,6 +2262,18 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#ObjectConfiguration": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.appintegrations#NonBlankString"
+            },
+            "value": {
+                "target": "com.amazonaws.appintegrations#FieldsMap"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
             }
         },
         "com.amazonaws.appintegrations#ResourceNotFoundException": {
@@ -2111,23 +2302,13 @@
                 "smithy.api#httpError": 429
             }
         },
-        "com.amazonaws.appintegrations#Schedule": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 255
-                },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
-            }
-        },
         "com.amazonaws.appintegrations#ScheduleConfiguration": {
             "type": "structure",
             "members": {
                 "FirstExecutionFrom": {
                     "target": "com.amazonaws.appintegrations#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start date for objects to import in the first flow run.</p>"
+                        "smithy.api#documentation": "<p>The start date for objects to import in the first flow run as an Unix/epoch timestamp in\n      milliseconds or in ISO-8601 format.</p>"
                     }
                 },
                 "Object": {
@@ -2137,9 +2318,10 @@
                     }
                 },
                 "ScheduleExpression": {
-                    "target": "com.amazonaws.appintegrations#Schedule",
+                    "target": "com.amazonaws.appintegrations#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the data should be pulled from data source.</p>"
+                        "smithy.api#documentation": "<p>How often the data should be pulled from data source.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -2155,6 +2337,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^aws\\.partner\\/.*$"
+            }
+        },
+        "com.amazonaws.appintegrations#SourceURI": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)$"
             }
         },
         "com.amazonaws.appintegrations#TagKey": {
@@ -2239,15 +2431,21 @@
                 "tags": {
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags. </p>",
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appintegrations#TagValue": {
             "type": "string",
@@ -2327,11 +2525,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appintegrations#UpdateDataIntegration": {
             "type": "operation",
@@ -2390,11 +2594,17 @@
                         "smithy.api#documentation": "<p>A description of the DataIntegration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#UpdateDataIntegrationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appintegrations#UpdateEventIntegration": {
             "type": "operation",
@@ -2447,11 +2657,17 @@
                         "smithy.api#documentation": "<p>The description of the event inegration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.appintegrations#UpdateEventIntegrationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         }
     }
 }

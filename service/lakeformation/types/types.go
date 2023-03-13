@@ -162,6 +162,7 @@ type DataCellsFilter struct {
 	// A PartiQL predicate.
 	RowFilter *RowFilter
 
+	// The ID of the data cells filter version.
 	VersionId *string
 
 	noSmithyDocumentSerde

@@ -45,13 +45,25 @@ type UpdateSolNetworkInstanceInput struct {
 	// properties of the network function to be modified.
 	ModifyVnfInfoData *types.UpdateSolNetworkModify
 
+	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+	// consists of a key and an optional value. When you use this API, the tags are
+	// transferred to the network operation that is created. Use tags to search and
+	// filter your resources or track your Amazon Web Services costs.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
 type UpdateSolNetworkInstanceOutput struct {
 
-	// The identifier of the network instance operation occurrence.
+	// The identifier of the network operation.
 	NsLcmOpOccId *string
+
+	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+	// consists of a key and an optional value. When you use this API, the tags are
+	// transferred to the network operation that is created. Use tags to search and
+	// filter your resources or track your Amazon Web Services costs.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

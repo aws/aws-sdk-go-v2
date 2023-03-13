@@ -50,6 +50,9 @@ type GetDataIntegrationOutput struct {
 	// The KMS key for the DataIntegration.
 	Description *string
 
+	// The configuration for what files should be pulled from the source.
+	FileConfiguration *types.FileConfiguration
+
 	// A unique identifier.
 	Id *string
 
@@ -59,13 +62,17 @@ type GetDataIntegrationOutput struct {
 	// The name of the DataIntegration.
 	Name *string
 
+	// The configuration for what data should be pulled from the source.
+	ObjectConfiguration map[string]map[string][]string
+
 	// The name of the data and how often it should be pulled from the source.
 	ScheduleConfiguration *types.ScheduleConfiguration
 
 	// The URI of the data source.
 	SourceURI *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
