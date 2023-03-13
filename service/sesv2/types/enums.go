@@ -540,6 +540,7 @@ const (
 	RecommendationTypeDkim  RecommendationType = "DKIM"
 	RecommendationTypeDmarc RecommendationType = "DMARC"
 	RecommendationTypeSpf   RecommendationType = "SPF"
+	RecommendationTypeBimi  RecommendationType = "BIMI"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -550,6 +551,7 @@ func (RecommendationType) Values() []RecommendationType {
 		"DKIM",
 		"DMARC",
 		"SPF",
+		"BIMI",
 	}
 }
 

@@ -12,7 +12,7 @@ import (
 
 const instanceIdentityDocument = `{
 	"devpayProductCodes" : ["abc","123"],
-	"marketplaceProductCodes" : [ "1a2bc3" ], 
+	"marketplaceProductCodes" : [ "1a2bc3" ],
 	"availabilityZone" : "us-east-1d",
 	"privateIp" : "10.158.112.84",
 	"version" : "2010-08-31",

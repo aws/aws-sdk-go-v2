@@ -3,8 +3,8 @@ module github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2/config v1.18.15
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.23
+	github.com/aws/aws-sdk-go-v2/config v1.18.16
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.24
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

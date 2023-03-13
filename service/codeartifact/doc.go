@@ -95,9 +95,12 @@
 // DeleteDomainPermissionsPolicy: Deletes the resource policy that is set on a
 // domain.
 //
-// * DeletePackageVersions: Deletes versions of a package. After a package
-// has been deleted, it can be republished, but its assets and metadata cannot be
-// restored because they have been permanently removed from storage.
+// * DeletePackage: Deletes a package and all associated package
+// versions.
+//
+// * DeletePackageVersions: Deletes versions of a package. After a
+// package has been deleted, it can be republished, but its assets and metadata
+// cannot be restored because they have been permanently removed from storage.
 //
 // *
 // DeleteRepository: Deletes a repository.
@@ -184,11 +187,14 @@
 // ListRepositoriesInDomain: Returns a list of the repositories in a domain.
 //
 // *
-// PutDomainPermissionsPolicy: Attaches a resource policy to a domain.
+// PublishPackageVersion: Creates a new package version containing one or more
+// assets.
 //
-// *
-// PutPackageOriginConfiguration: Sets the package origin configuration for a
-// package, which determine how new versions of the package can be added to a
+// * PutDomainPermissionsPolicy: Attaches a resource policy to a
+// domain.
+//
+// * PutPackageOriginConfiguration: Sets the package origin configuration
+// for a package, which determine how new versions of the package can be added to a
 // specific repository.
 //
 // * PutRepositoryPermissionsPolicy: Sets the resource policy

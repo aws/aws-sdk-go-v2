@@ -77,6 +77,9 @@ type ListPackageVersionDependenciesInput struct {
 	// * Python and NuGet package
 	// versions do not contain a corresponding component, package versions of those
 	// formats do not have a namespace.
+	//
+	// * The namespace of a generic package is it’s
+	// namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous

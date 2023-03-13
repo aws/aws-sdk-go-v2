@@ -1,3 +1,11 @@
+# v1.11.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.0 (2023-03-09)
+
+* **Feature**: Updated entity override documentation
+
 # v1.10.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

@@ -444,7 +444,6 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
         return operation.expectTrait(ClientDiscoveredEndpointTrait.class).isRequired();
     }
 
-
     // ============================Trait info retriever/analyzer==============
 
     // Return operation shape id of the operation to use for making endpoint discovery call.
@@ -493,7 +492,6 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                         .resolver(ENDPOINT_CACHE_RESOLVER)
                         .build())
                 .build());
-
 
         for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             String helperFuncName = generateAddDiscoverEndpointMiddlewareName(service, operation);

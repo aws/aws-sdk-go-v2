@@ -136,7 +136,7 @@ type DescribeStatementOutput struct {
 	// updated. An example is the time the status last changed.
 	UpdatedAt *time.Time
 
-	// The serverless workgroup name.
+	// The serverless workgroup name or Amazon Resource Name (ARN).
 	WorkgroupName *string
 
 	// Metadata pertaining to the operation's result.

@@ -365,7 +365,6 @@ public class PresignURLAutoFill implements GoIntegration {
         Symbol addMiddleware = SymbolUtils.createValueSymbolBuilder("AddMiddleware",
                 AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
 
-
         // generate middleware mutator to wire up presign client with accessors and custom middleware.
         writer.openBlock("func $L(stack $P, options Options) error {", "}",
                 addPresignMiddlewareFuncName(operationSymbol.getName()),
@@ -388,7 +387,6 @@ public class PresignURLAutoFill implements GoIntegration {
                     });
                 });
     }
-
 
     private void writeAutofillPresignClient(
             GoWriter writer,

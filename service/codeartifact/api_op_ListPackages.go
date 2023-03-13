@@ -54,18 +54,22 @@ type ListPackagesInput struct {
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The namespace used to filter requested packages. Only packages with the provided
-	// namespace will be returned. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace prefix used to filter requested packages. Only packages with a
+	// namespace that starts with the provided string value are returned. Note that
+	// although this option is called --namespace and not --namespace-prefix, it has
+	// prefix-matching behavior. Each package format uses namespace as follows:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The
+	// namespace of a Maven package is its groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package
+	// is its scope.
 	//
-	// * Python and NuGet
-	// packages do not contain a corresponding component, packages of those formats do
-	// not have a namespace.
+	// * Python and NuGet packages do not contain a corresponding
+	// component, packages of those formats do not have a namespace.
+	//
+	// * The namespace
+	// of a generic package is it’s namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous

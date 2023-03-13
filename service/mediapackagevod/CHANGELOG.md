@@ -1,3 +1,7 @@
+# v1.22.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-03-08)
 
 * **Feature**: This release provides the date and time VOD resources were created.

@@ -87,7 +87,6 @@ public final class XmlProtocolUtils {
         });
     }
 
-
     /**
      * Generates XML Attributes as per xmlNamespace and xmlAttribute traits.
      *

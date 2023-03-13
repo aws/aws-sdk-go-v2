@@ -293,7 +293,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         });
     }
 
-
     // Write middleware that delegates to deserializers for shapes that have implicit payload and deserializer
     private void writeMiddlewareDocumentBindingDeserializerDelegator(
             GenerationContext context,

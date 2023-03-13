@@ -73,7 +73,7 @@ var testPartitions = Partitions{
 	{
 		ID: "part-id-1",
 		RegionRegex: func() *regexp.Regexp {
-			reg, _ := regexp.Compile("^(us)\\-\\w+\\-\\d+$")
+			reg, _ := regexp.Compile(`^(us)\-\w+\-\d+$`)
 			return reg
 		}(),
 		Defaults: Endpoint{
@@ -98,7 +98,7 @@ var testPartitions = Partitions{
 	{
 		ID: "part-id-2",
 		RegionRegex: func() *regexp.Regexp {
-			reg, _ := regexp.Compile("^(cn)\\-\\w+\\-\\d+$")
+			reg, _ := regexp.Compile(`^(cn)\-\w+\-\d+$`)
 			return reg
 		}(),
 		Defaults: Endpoint{
@@ -128,7 +128,7 @@ var testPartitions = Partitions{
 	{
 		ID: "part-id-3",
 		RegionRegex: func() *regexp.Regexp {
-			reg, _ := regexp.Compile("^(eu)\\-\\w+\\-\\d+$")
+			reg, _ := regexp.Compile(`^(eu)\-\w+\-\d+$`)
 			return reg
 		}(),
 		Defaults: Endpoint{

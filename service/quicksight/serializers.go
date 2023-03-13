@@ -22179,6 +22179,11 @@ func awsRestjson1_serializeDocumentPivotTableOptions(v *types.PivotTableOptions,
 		}
 	}
 
+	if len(v.CollapsedRowDimensionsVisibility) > 0 {
+		ok := object.Key("CollapsedRowDimensionsVisibility")
+		ok.String(string(v.CollapsedRowDimensionsVisibility))
+	}
+
 	if v.ColumnHeaderStyle != nil {
 		ok := object.Key("ColumnHeaderStyle")
 		if err := awsRestjson1_serializeDocumentTableCellStyle(v.ColumnHeaderStyle, ok); err != nil {
@@ -23119,13 +23124,48 @@ func awsRestjson1_serializeDocumentReferenceLineValueLabelConfiguration(v *types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRegisteredUserConsoleFeatureConfigurations(v *types.RegisteredUserConsoleFeatureConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StatePersistence != nil {
+		ok := object.Key("StatePersistence")
+		if err := awsRestjson1_serializeDocumentStatePersistenceConfigurations(v.StatePersistence, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRegisteredUserDashboardEmbeddingConfiguration(v *types.RegisteredUserDashboardEmbeddingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
+	if v.FeatureConfigurations != nil {
+		ok := object.Key("FeatureConfigurations")
+		if err := awsRestjson1_serializeDocumentRegisteredUserDashboardFeatureConfigurations(v.FeatureConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InitialDashboardId != nil {
 		ok := object.Key("InitialDashboardId")
 		ok.String(*v.InitialDashboardId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegisteredUserDashboardFeatureConfigurations(v *types.RegisteredUserDashboardFeatureConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StatePersistence != nil {
+		ok := object.Key("StatePersistence")
+		if err := awsRestjson1_serializeDocumentStatePersistenceConfigurations(v.StatePersistence, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -23195,6 +23235,13 @@ func awsRestjson1_serializeDocumentRegisteredUserQSearchBarEmbeddingConfiguratio
 func awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v *types.RegisteredUserQuickSightConsoleEmbeddingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FeatureConfigurations != nil {
+		ok := object.Key("FeatureConfigurations")
+		if err := awsRestjson1_serializeDocumentRegisteredUserConsoleFeatureConfigurations(v.FeatureConfigurations, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InitialPath != nil {
 		ok := object.Key("InitialPath")
@@ -24749,6 +24796,18 @@ func awsRestjson1_serializeDocumentSslProperties(v *types.SslProperties, value s
 	if v.DisableSsl {
 		ok := object.Key("DisableSsl")
 		ok.Boolean(v.DisableSsl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStatePersistenceConfigurations(v *types.StatePersistenceConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil

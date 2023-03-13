@@ -38,8 +38,7 @@ type GetPackageVersionReadmeInput struct {
 	Domain *string
 
 	// A format that specifies the type of the package version with the requested
-	// readme file. Although maven is listed as a valid value, CodeArtifact does not
-	// support displaying readme files for Maven packages.
+	// readme file.
 	//
 	// This member is required.
 	Format types.PackageFormat

@@ -1,3 +1,7 @@
+# v1.26.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-02-23)
 
 * **Feature**: You can now associate an AWS WAF v2 web ACL with an AWS App Runner service.

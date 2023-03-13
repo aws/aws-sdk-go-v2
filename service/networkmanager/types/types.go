@@ -1300,7 +1300,9 @@ type TransitGatewayRouteTableAttachment struct {
 	// The ID of the peering attachment.
 	PeeringId *string
 
-	// The ARN of the transit gateway attachment route table.
+	// The ARN of the transit gateway attachment route table. For example,
+	// "TransitGatewayRouteTableArn":
+	// "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456".
 	TransitGatewayRouteTableArn *string
 
 	noSmithyDocumentSerde

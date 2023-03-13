@@ -84,6 +84,8 @@ type CopyPackageVersionsInput struct {
 	// * Python and NuGet package versions do not contain a
 	// corresponding component, package versions of those formats do not have a
 	// namespace.
+	//
+	// * The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// A list of key-value pairs. The keys are package versions and the values are

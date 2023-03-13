@@ -6145,6 +6145,115 @@ func awsRestjson1_serializeOpDocumentGetMetricDataInput(v *GetMetricDataInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpGetMetricDataV2 struct {
+}
+
+func (*awsRestjson1_serializeOpGetMetricDataV2) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetMetricDataV2) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMetricDataV2Input)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/metrics/data")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetMetricDataV2Input(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetMetricDataV2Input(v *GetMetricDataV2Input, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetMetricDataV2Input(v *GetMetricDataV2Input, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentFiltersV2List(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Groupings != nil {
+		ok := object.Key("Groupings")
+		if err := awsRestjson1_serializeDocumentGroupingsV2(v.Groupings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Metrics != nil {
+		ok := object.Key("Metrics")
+		if err := awsRestjson1_serializeDocumentMetricsV2(v.Metrics, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetTaskTemplate struct {
 }
 
@@ -14308,6 +14417,49 @@ func awsRestjson1_serializeDocumentFilters(v *types.Filters, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFiltersV2List(v []types.FilterV2, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFilterV2(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterV2(v *types.FilterV2, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FilterKey != nil {
+		ok := object.Key("FilterKey")
+		ok.String(*v.FilterKey)
+	}
+
+	if v.FilterValues != nil {
+		ok := object.Key("FilterValues")
+		if err := awsRestjson1_serializeDocumentFilterValueList(v.FilterValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGroupings(v []types.Grouping, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -14315,6 +14467,17 @@ func awsRestjson1_serializeDocumentGroupings(v []types.Grouping, value smithyjso
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGroupingsV2(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -14662,6 +14825,88 @@ func awsRestjson1_serializeDocumentMediaConcurrency(v *types.MediaConcurrency, v
 	{
 		ok := object.Key("Concurrency")
 		ok.Integer(v.Concurrency)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricFiltersV2List(v []types.MetricFilterV2, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMetricFilterV2(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricFilterV2(v *types.MetricFilterV2, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricFilterKey != nil {
+		ok := object.Key("MetricFilterKey")
+		ok.String(*v.MetricFilterKey)
+	}
+
+	if v.MetricFilterValues != nil {
+		ok := object.Key("MetricFilterValues")
+		if err := awsRestjson1_serializeDocumentMetricFilterValueList(v.MetricFilterValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricsV2(v []types.MetricV2, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMetricV2(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricV2(v *types.MetricV2, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricFilters != nil {
+		ok := object.Key("MetricFilters")
+		if err := awsRestjson1_serializeDocumentMetricFiltersV2List(v.MetricFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Threshold != nil {
+		ok := object.Key("Threshold")
+		if err := awsRestjson1_serializeDocumentThresholdCollections(v.Threshold, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -15663,6 +15908,49 @@ func awsRestjson1_serializeDocumentThreshold(v *types.Threshold, value smithyjso
 	if len(v.Comparison) > 0 {
 		ok := object.Key("Comparison")
 		ok.String(string(v.Comparison))
+	}
+
+	if v.ThresholdValue != nil {
+		ok := object.Key("ThresholdValue")
+		switch {
+		case math.IsNaN(*v.ThresholdValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThresholdValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThresholdValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThresholdValue)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentThresholdCollections(v []types.ThresholdV2, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentThresholdV2(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentThresholdV2(v *types.ThresholdV2, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Comparison != nil {
+		ok := object.Key("Comparison")
+		ok.String(*v.Comparison)
 	}
 
 	if v.ThresholdValue != nil {

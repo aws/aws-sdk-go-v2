@@ -292,7 +292,7 @@ type AnalysisError struct {
 	// The type of the analysis error.
 	Type AnalysisErrorType
 
-	//
+	// Lists the violated entities that caused the analysis error
 	ViolatedEntities []Entity
 
 	noSmithyDocumentSerde
@@ -8161,6 +8161,11 @@ type PivotTableOptions struct {
 	// The table cell style of cells.
 	CellStyle *TableCellStyle
 
+	// The visibility setting of a pivot table's collapsed row dimension fields. If the
+	// value of this structure is HIDDEN, all collapsed columns in a pivot table are
+	// automatically hidden. The default value is VISIBLE.
+	CollapsedRowDimensionsVisibility Visibility
+
 	// The table cell style of the column header.
 	ColumnHeaderStyle *TableCellStyle
 
@@ -8744,6 +8749,15 @@ type ReferenceLineValueLabelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The feature configurations of an embedded Amazon QuickSight console.
+type RegisteredUserConsoleFeatureConfigurations struct {
+
+	// The state persistence configurations of an embedded Amazon QuickSight console.
+	StatePersistence *StatePersistenceConfigurations
+
+	noSmithyDocumentSerde
+}
+
 // Information about the dashboard you want to embed.
 type RegisteredUserDashboardEmbeddingConfiguration struct {
 
@@ -8755,6 +8769,18 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 	//
 	// This member is required.
 	InitialDashboardId *string
+
+	// The feature configurations of an embbedded Amazon QuickSight dashboard.
+	FeatureConfigurations *RegisteredUserDashboardFeatureConfigurations
+
+	noSmithyDocumentSerde
+}
+
+// The feature configuration for an embedded dashboard.
+type RegisteredUserDashboardFeatureConfigurations struct {
+
+	// The state persistence settings of an embedded dashboard.
+	StatePersistence *StatePersistenceConfigurations
 
 	noSmithyDocumentSerde
 }
@@ -8847,6 +8873,9 @@ type RegisteredUserQSearchBarEmbeddingConfiguration struct {
 
 // Information about the Amazon QuickSight console that you want to embed.
 type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
+
+	// The embedding configuration of an embedded Amazon QuickSight console.
+	FeatureConfigurations *RegisteredUserConsoleFeatureConfigurations
 
 	// The initial URL path for the Amazon QuickSight console. InitialPath is required.
 	// The entry point URL is constrained to the following paths:
@@ -9958,6 +9987,18 @@ type SslProperties struct {
 
 	// A Boolean option to control whether SSL should be disabled.
 	DisableSsl bool
+
+	noSmithyDocumentSerde
+}
+
+// The state perssitence configuration of an embedded dashboard.
+type StatePersistenceConfigurations struct {
+
+	// Determines if a Amazon QuickSight dashboard's state persistence settings are
+	// turned on or off.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -11685,7 +11726,7 @@ type UploadSettings struct {
 // A registered user of Amazon QuickSight.
 type User struct {
 
-	// The active status of user. When you create an Amazon QuickSight user that’s not
+	// The active status of user. When you create an Amazon QuickSight user that's not
 	// an IAM user or an Active Directory user, that user is inactive until they sign
 	// in and provide a password.
 	Active bool
