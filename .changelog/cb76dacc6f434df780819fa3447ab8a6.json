@@ -1,8 +1,0 @@
-{
-    "id": "cb76dacc-6f43-4df7-8081-9fa3447ab8a6",
-    "type": "feature",
-    "description": "Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}

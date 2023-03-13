@@ -1,3 +1,17 @@
+# Release (2023-03-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.15.0](service/appintegrations/CHANGELOG.md#v1150-2023-03-13)
+  * **Feature**: Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.20.2](service/lakeformation/CHANGELOG.md#v1202-2023-03-13)
+  * **Documentation**: This release updates the documentation regarding Get/Update DataCellsFilter
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.30.0](service/s3control/CHANGELOG.md#v1300-2023-03-13)
+  * **Feature**: Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.1.0](service/tnb/CHANGELOG.md#v110-2023-03-13)
+  * **Feature**: This release adds tagging support to the following Network Instance APIs : Instantiate, Update, Terminate.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.13.0](service/wisdom/CHANGELOG.md#v1130-2023-03-13)
+  * **Feature**: This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField
+
 # Release (2023-03-10)
 
 ## General Highlights

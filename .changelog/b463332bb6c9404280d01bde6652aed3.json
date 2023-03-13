@@ -1,8 +1,0 @@
-{
-    "id": "b463332b-b6c9-4042-80d0-1bde6652aed3",
-    "type": "feature",
-    "description": "This release adds tagging support to the following Network Instance APIs : Instantiate, Update, Terminate.",
-    "modules": [
-        "service/tnb"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "cc575d90-7c66-4771-a36b-40e4108f8889",
-    "type": "feature",
-    "description": "Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.",
-    "modules": [
-        "service/s3control"
-    ]
-}

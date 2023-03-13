@@ -1,3 +1,7 @@
+# v1.20.2 (2023-03-13)
+
+* **Documentation**: This release updates the documentation regarding Get/Update DataCellsFilter
+
 # v1.20.1 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

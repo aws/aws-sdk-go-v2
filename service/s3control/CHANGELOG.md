@@ -1,3 +1,7 @@
+# v1.30.0 (2023-03-13)
+
+* **Feature**: Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+
 # v1.29.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions
