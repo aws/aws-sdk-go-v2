@@ -56,7 +56,1267 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>AWS IAM Identity Center (successor to AWS Single Sign-On) OpenID Connect (OIDC) is a web service that enables a client (such as AWS CLI\n      or a native application) to register with IAM Identity Center. The service also enables the client to\n      fetch the user’s access token upon successful authentication and authorization with\n      IAM Identity Center.</p>\n         <note>\n            <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and\n        <code>identitystore</code> API namespaces will continue to retain their original name for\n        backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">IAM Identity Center rename</a>.</p>\n         </note>\n         <p>\n            <b>Considerations for Using This Guide</b>\n         </p>\n         <p>Before you begin using this guide, we recommend that you first review the following\n      important information about how the IAM Identity Center OIDC service works.</p>\n         <ul>\n            <li>\n               <p>The IAM Identity Center OIDC service currently implements only the portions of the OAuth 2.0\n          Device Authorization Grant standard (<a href=\"https://tools.ietf.org/html/rfc8628\">https://tools.ietf.org/html/rfc8628</a>) that are necessary to enable single\n          sign-on authentication with the AWS CLI. Support for other OIDC flows frequently needed\n          for native applications, such as Authorization Code Flow (+ PKCE), will be addressed in\n          future releases.</p>\n            </li>\n            <li>\n               <p>The service emits only OIDC access tokens, such that obtaining a new token (For\n          example, token refresh) requires explicit user re-authentication.</p>\n            </li>\n            <li>\n               <p>The access tokens provided by this service grant access to all AWS account\n          entitlements assigned to an IAM Identity Center user, not just a particular application.</p>\n            </li>\n            <li>\n               <p>The documentation in this guide does not describe the mechanism to convert the access\n          token into AWS Auth (“sigv4”) credentials for use with IAM-protected AWS service\n          endpoints. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/PortalAPIReference/API_GetRoleCredentials.html\">GetRoleCredentials</a> in the <i>IAM Identity Center Portal API Reference\n            Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>For general information about IAM Identity Center, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">What is\n        IAM Identity Center?</a> in the <i>IAM Identity Center User Guide</i>.</p>",
-                "smithy.api#title": "AWS SSO OIDC"
+                "smithy.api#title": "AWS SSO OIDC",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://oidc-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://oidc-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://oidc.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-northeast-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-northeast-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-3"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-northeast-3.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-south-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-south-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-southeast-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-southeast-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-southeast-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ap-southeast-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ca-central-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.ca-central-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-central-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.eu-central-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-north-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.eu-north-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-south-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.eu-south-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.eu-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.eu-west-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-3"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.eu-west-3.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "me-south-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.me-south-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "sa-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.sa-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.us-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-east-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.us-east-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-west-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.us-west-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.us-gov-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.us-gov-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oidc.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.ssooidc#AccessDeniedException": {

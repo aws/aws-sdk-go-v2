@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -442,6 +442,7 @@
                 "Revision": {
                     "target": "com.amazonaws.mq#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision number of the configuration.</p>",
                         "smithy.api#jsonName": "revision"
                     }
@@ -472,6 +473,7 @@
                 "Revision": {
                     "target": "com.amazonaws.mq#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Required. The revision number of the configuration.</p>",
                         "smithy.api#jsonName": "revision",
                         "smithy.api#required": {}
@@ -582,6 +584,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.</p>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade",
                         "smithy.api#required": {}
@@ -673,6 +676,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables connections from applications outside of the VPC that hosts the broker's subnets. Set to false by default, if no value is provided.</p>",
                         "smithy.api#jsonName": "publiclyAccessible",
                         "smithy.api#required": {}
@@ -964,6 +968,7 @@
                 "ConsoleAccess": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables access to the ActiveMQ Web Console for the ActiveMQ user.</p>",
                         "smithy.api#jsonName": "consoleAccess"
                     }
@@ -1291,6 +1296,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1317,6 +1323,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#__integerMin5Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -1378,6 +1385,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1411,6 +1419,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#__integerMin5Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -1457,6 +1466,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.</p>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
@@ -1604,6 +1614,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables connections from applications outside of the VPC that hosts the broker's subnets.</p>",
                         "smithy.api#jsonName": "publiclyAccessible"
                     }
@@ -1914,6 +1925,7 @@
                 "ConsoleAccess": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables access to the the ActiveMQ Web Console for the ActiveMQ user.</p>",
                         "smithy.api#jsonName": "consoleAccess"
                     }
@@ -1954,6 +1966,7 @@
                 "UseAwsOwnedKey": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.</p>",
                         "smithy.api#jsonName": "useAwsOwnedKey",
                         "smithy.api#required": {}
@@ -2080,6 +2093,7 @@
                 "RoleSearchSubtree": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The directory search scope for the role. If set to true, scope is to search the entire subtree.</p>",
                         "smithy.api#jsonName": "roleSearchSubtree"
                     }
@@ -2126,6 +2140,7 @@
                 "UserSearchSubtree": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The directory search scope for the user. If set to true, scope is to search the entire subtree.</p>",
                         "smithy.api#jsonName": "userSearchSubtree"
                     }
@@ -2172,6 +2187,7 @@
                 "RoleSearchSubtree": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The directory search scope for the role. If set to true, scope is to search the entire subtree.</p>",
                         "smithy.api#jsonName": "roleSearchSubtree"
                     }
@@ -2210,6 +2226,7 @@
                 "UserSearchSubtree": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The directory search scope for the user. If set to true, scope is to search the entire subtree.</p>",
                         "smithy.api#jsonName": "userSearchSubtree"
                     }
@@ -2259,6 +2276,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2336,6 +2354,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2362,6 +2381,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -2416,6 +2436,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2442,6 +2463,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -2556,6 +2578,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2582,6 +2605,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mq#__integerMin5Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -2608,6 +2632,7 @@
                 "Audit": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.</p>",
                         "smithy.api#jsonName": "audit"
                     }
@@ -2615,6 +2640,7 @@
                 "General": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables general logging.</p>",
                         "smithy.api#jsonName": "general"
                     }
@@ -2630,6 +2656,7 @@
                 "Audit": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.</p>",
                         "smithy.api#jsonName": "audit"
                     }
@@ -2644,6 +2671,7 @@
                 "General": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables general logging.</p>",
                         "smithy.api#jsonName": "general",
                         "smithy.api#required": {}
@@ -2672,6 +2700,7 @@
         "com.amazonaws.mq#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2708,6 +2737,7 @@
                 "Audit": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.</p>",
                         "smithy.api#jsonName": "audit"
                     }
@@ -2715,6 +2745,7 @@
                 "General": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables general logging.</p>",
                         "smithy.api#jsonName": "general"
                     }
@@ -2893,6 +2924,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.</p>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
@@ -2972,6 +3004,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The new boolean value that specifies whether broker engines automatically upgrade to new minor versions as new versions are released and supported by Amazon MQ.</p>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
@@ -3194,6 +3227,7 @@
                 "ConsoleAccess": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables access to the the ActiveMQ Web Console for the ActiveMQ user.</p>",
                         "smithy.api#jsonName": "consoleAccess"
                     }
@@ -3235,6 +3269,7 @@
                 "ConsoleAccess": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not apply to RabbitMQ brokers.</p>",
                         "smithy.api#jsonName": "consoleAccess"
                     }
@@ -3273,6 +3308,7 @@
                 "ConsoleAccess": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables access to the the ActiveMQ Web Console for the ActiveMQ user.</p>",
                         "smithy.api#jsonName": "consoleAccess"
                     }
@@ -3352,14 +3388,21 @@
             }
         },
         "com.amazonaws.mq#__boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.mq#__integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.mq#__integerMin5Max100": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 5,
                     "max": 100
@@ -3476,21 +3519,6 @@
         },
         "com.amazonaws.mq#mq": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "mq",
-                    "arnNamespace": "mq",
-                    "cloudFormationName": "AmazonMQ",
-                    "cloudTrailEventSource": "mq.amazonaws.com",
-                    "endpointPrefix": "mq"
-                },
-                "aws.auth#sigv4": {
-                    "name": "mq"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.</p>",
-                "smithy.api#title": "AmazonMQ"
-            },
             "version": "2017-11-27",
             "operations": [
                 {
@@ -3559,7 +3587,987 @@
                 {
                     "target": "com.amazonaws.mq#UpdateUser"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "mq",
+                    "arnNamespace": "mq",
+                    "cloudFormationName": "AmazonMQ",
+                    "cloudTrailEventSource": "mq.amazonaws.com",
+                    "endpointPrefix": "mq"
+                },
+                "aws.auth#sigv4": {
+                    "name": "mq"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.</p>",
+                "smithy.api#title": "AmazonMQ",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://mq-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://mq-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://mq.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mq.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mq.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         }
     }
 }

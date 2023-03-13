@@ -4352,6 +4352,51 @@
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
                                                     ]
                                                 },
                                                 {
@@ -4469,10 +4514,10 @@
                             }
                         },
                         {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wisdom.eu-central-1.amazonaws.com"
+                                    "url": "https://wisdom.eu-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -4508,10 +4553,10 @@
                             }
                         },
                         {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wisdom.us-west-2.amazonaws.com"
+                                    "url": "https://wisdom-fips.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -4751,6 +4796,8 @@
                                 "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4763,6 +4810,8 @@
                                 "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }

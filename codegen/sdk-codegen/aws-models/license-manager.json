@@ -235,13 +235,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -249,23 +248,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -274,19 +270,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://license-manager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://license-manager-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -299,134 +477,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://license-manager.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://license-manager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -434,7 +530,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://license-manager-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://license-manager.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -443,74 +539,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://license-manager.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://license-manager.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -519,409 +554,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -929,516 +561,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "af-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1449,152 +574,61 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://license-manager.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.cn-north-1.amazonaws.com.cn"
+                                    "url": "https://license-manager.ap-northeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://license-manager.ap-northeast-3.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager.cn-north-1.amazonaws.com.cn"
+                                    "url": "https://license-manager.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1605,48 +639,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1657,96 +652,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-southeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.ap-southeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.ap-southeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1757,48 +665,126 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.us-east-1.api.aws"
+                                    "url": "https://license-manager.ca-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.us-east-1.amazonaws.com"
+                                    "url": "https://license-manager.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager.us-east-1.api.aws"
+                                    "url": "https://license-manager.eu-north-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1809,48 +795,22 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.us-east-2.api.aws"
+                                    "url": "https://license-manager-fips.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://license-manager.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1861,48 +821,113 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://license-manager-fips.us-east-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.cn-northwest-1.amazonaws.com.cn"
+                                    "url": "https://license-manager.us-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://license-manager-fips.us-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1913,44 +938,152 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://license-manager-fips.us-isob-east-1.sc2s.sgov.gov"
+                                    "url": "https://license-manager-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
                             "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.cn-north-1.amazonaws.com.cn"
+                                }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1961,22 +1094,48 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1986,9 +1145,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1998,9 +1157,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }

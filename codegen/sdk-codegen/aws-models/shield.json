@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,24 +31,6 @@
     "shapes": {
         "com.amazonaws.shield#AWSShield_20160616": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Shield",
-                    "arnNamespace": "shield",
-                    "cloudFormationName": "Shield",
-                    "cloudTrailEventSource": "shield.amazonaws.com",
-                    "endpointPrefix": "shield"
-                },
-                "aws.auth#sigv4": {
-                    "name": "shield"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Shield Advanced</fullname>\n         <p>This is the <i>Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the Shield Advanced API actions,\n         data types, and errors. For detailed information about WAF and Shield Advanced features and an overview of how to use the WAF and Shield Advanced APIs, see the\n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF and Shield Developer Guide</a>.</p>",
-                "smithy.api#title": "AWS Shield",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ddp.amazonaws.com/doc/2016-06-02/"
-                }
-            },
             "version": "2016-06-02",
             "operations": [
                 {
@@ -159,7 +141,982 @@
                 {
                     "target": "com.amazonaws.shield#UpdateSubscription"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Shield",
+                    "arnNamespace": "shield",
+                    "cloudFormationName": "Shield",
+                    "cloudTrailEventSource": "shield.amazonaws.com",
+                    "endpointPrefix": "shield"
+                },
+                "aws.auth#sigv4": {
+                    "name": "shield"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Shield Advanced</fullname>\n         <p>This is the <i>Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the Shield Advanced API actions,\n         data types, and errors. For detailed information about WAF and Shield Advanced features and an overview of how to use the WAF and Shield Advanced APIs, see the\n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF and Shield Developer Guide</a>.</p>",
+                "smithy.api#title": "AWS Shield",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ddp.amazonaws.com/doc/2016-06-02/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseDualStack"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                true,
+                                                                                {
+                                                                                    "fn": "getAttr",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "ref": "PartitionResult"
+                                                                                        },
+                                                                                        "supportsFIPS"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                true,
+                                                                                {
+                                                                                    "fn": "getAttr",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "ref": "PartitionResult"
+                                                                                        },
+                                                                                        "supportsDualStack"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield-fips.{Region}.api.aws",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                                    "type": "error"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseFIPS"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                true,
+                                                                                {
+                                                                                    "fn": "getAttr",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "ref": "PartitionResult"
+                                                                                        },
+                                                                                        "supportsFIPS"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield-fips.us-east-1.amazonaws.com",
+                                                                                "properties": {
+                                                                                    "authSchemes": [
+                                                                                        {
+                                                                                            "name": "sigv4",
+                                                                                            "signingName": "shield",
+                                                                                            "signingRegion": "us-east-1"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                                    "type": "error"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "UseDualStack"
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                true,
+                                                                                {
+                                                                                    "fn": "getAttr",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "ref": "PartitionResult"
+                                                                                        },
+                                                                                        "supportsDualStack"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield.{Region}.api.aws",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                                    "type": "error"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://shield.us-east-1.amazonaws.com",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingName": "shield",
+                                                                            "signingRegion": "us-east-1"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "ref": "Region"
+                                                                                        },
+                                                                                        "aws-global"
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield-fips.us-east-1.amazonaws.com",
+                                                                                "properties": {
+                                                                                    "authSchemes": [
+                                                                                        {
+                                                                                            "name": "sigv4",
+                                                                                            "signingName": "shield",
+                                                                                            "signingRegion": "us-east-1"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://shield.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "aws-global"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://shield.us-east-1.amazonaws.com",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingName": "shield",
+                                                                            "signingRegion": "us-east-1"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://shield.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region aws-global with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "shield",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://shield.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-global",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region aws-global with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "shield",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://shield-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-global",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "shield",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://shield-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "shield",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://shield.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://shield.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.shield#AccessDeniedException": {
             "type": "structure",
@@ -541,6 +1498,7 @@
                 "Total": {
                     "target": "com.amazonaws.shield#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total contributions made to this Shield event by all contributors.</p>"
                     }
                 }
@@ -600,6 +1558,7 @@
                 "AttackCount": {
                     "target": "com.amazonaws.shield#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of attacks detected during the time period. This is always present, but might be zero. </p>",
                         "smithy.api#required": {}
                     }
@@ -715,6 +1674,7 @@
                 "Max": {
                     "target": "com.amazonaws.shield#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum attack volume observed for the given unit.</p>",
                         "smithy.api#required": {}
                     }
@@ -768,6 +1728,7 @@
                 "Value": {
                     "target": "com.amazonaws.shield#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.</p>"
                     }
                 }
@@ -1587,11 +2548,15 @@
             "members": {}
         },
         "com.amazonaws.shield#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.shield#DurationInSeconds": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -1849,7 +2814,10 @@
             }
         },
         "com.amazonaws.shield#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.shield#InternalErrorException": {
             "type": "structure",
@@ -1935,6 +2903,7 @@
                 "Max": {
                     "target": "com.amazonaws.shield#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of protections that can be created for the specified <code>Type</code>.</p>"
                     }
                 }
@@ -1944,7 +2913,10 @@
             }
         },
         "com.amazonaws.shield#LimitNumber": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.shield#LimitType": {
             "type": "string"
@@ -1970,6 +2942,7 @@
                 "Limit": {
                     "target": "com.amazonaws.shield#LimitNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The threshold that would be exceeded.</p>"
                     }
                 }
@@ -2349,12 +3322,14 @@
             }
         },
         "com.amazonaws.shield#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.shield#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 10000
@@ -2606,6 +3581,7 @@
                 "MaxMembers": {
                     "target": "com.amazonaws.shield#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of resources you can specify for a single arbitrary pattern in a protection group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2643,6 +3619,7 @@
                 "MaxProtectionGroups": {
                     "target": "com.amazonaws.shield#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of protection groups that you can have at one time. </p>",
                         "smithy.api#required": {}
                     }
@@ -2950,6 +3927,7 @@
                 "TimeCommitmentInSeconds": {
                     "target": "com.amazonaws.shield#DurationInSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The length, in seconds, of the Shield Advanced subscription for the account.</p>"
                     }
                 },
@@ -3065,24 +4043,28 @@
                 "Max": {
                     "target": "com.amazonaws.shield#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum value of the counter for a specified time period.</p>"
                     }
                 },
                 "Average": {
                     "target": "com.amazonaws.shield#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The average value of the counter for a specified time period.</p>"
                     }
                 },
                 "Sum": {
                     "target": "com.amazonaws.shield#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total of counter values for a specified time period.</p>"
                     }
                 },
                 "N": {
                     "target": "com.amazonaws.shield#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of counters for a specified time period.</p>"
                     }
                 },

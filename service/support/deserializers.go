@@ -3036,7 +3036,7 @@ func awsAwsjson11_deserializeDocumentSeverityLevelsList(v *[]types.SeverityLevel
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStringList(v *[]string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentStringList(v *[]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3049,21 +3049,21 @@ func awsAwsjson11_deserializeDocumentStringList(v *[]string, value interface{}) 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []string
+	var cv []*string
 	if *v == nil {
-		cv = []string{}
+		cv = []*string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col string
+		var col *string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			col = jtv
+			col = ptr.String(jtv)
 		}
 		cv = append(cv, col)
 
