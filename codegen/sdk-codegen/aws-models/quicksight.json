@@ -43,7 +43,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You don't have access to this item. The provided credentials couldn't be\n\t\t\tvalidated. You might not be authorized to carry out the request. Make sure that your\n\t\t\taccount is authorized to use the Amazon QuickSight service, that your policies have the\n\t\t\tcorrect permissions, and that you are using the correct access keys.</p>",
+                "smithy.api#documentation": "<p>You don't have access to this item. The provided credentials couldn't be\n\t\t\tvalidated. You might not be authorized to carry out the request. Make sure that your\n\t\t\taccount is authorized to use the Amazon QuickSight service, that your policies have the\n\t\t\tcorrect permissions, and that you are using the correct credentials.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 401
             }
@@ -472,7 +472,7 @@
                 "ViolatedEntities": {
                     "target": "com.amazonaws.quicksight#EntityList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Lists the violated entities that caused the analysis error</p>"
                     }
                 }
             },
@@ -11246,7 +11246,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Amazon QuickSight user that is associated with the identity of the\n\t\t\tIdentity and Access Management (IAM) user or role that's making the call. The IAM user\n\t\t\tisn't deleted as a result of this call. </p>",
+                "smithy.api#documentation": "<p>Deletes the Amazon QuickSight user that is associated with the identity of the\n\t\t\tIAM user or role that's making the call. The IAM user\n\t\t\tisn't deleted as a result of this call. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}",
@@ -18264,7 +18264,7 @@
                 "UserArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.\n\t\t\tYou can use this for any type of Amazon QuickSight users in your account (readers, authors, or\n\t\t\tadmins). They need to be authenticated as one of the following:</p>\n         <ol>\n            <li>\n               <p>Active Directory (AD) users or group members</p>\n            </li>\n            <li>\n               <p>Invited nonfederated users</p>\n            </li>\n            <li>\n               <p>Identity and Access Management (IAM) users and IAM role-based sessions authenticated\n                    through Federated Single Sign-On using SAML, OpenID Connect, or IAM\n                    federation</p>\n            </li>\n         </ol>\n         <p>Omit this parameter for users in the third group, IAM users and IAM role-based\n            sessions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.\n\t\t\tYou can use this for any type of Amazon QuickSight users in your account (readers, authors, or\n\t\t\tadmins). They need to be authenticated as one of the following:</p>\n         <ol>\n            <li>\n               <p>Active Directory (AD) users or group members</p>\n            </li>\n            <li>\n               <p>Invited nonfederated users</p>\n            </li>\n            <li>\n               <p>IAM users and IAM role-based sessions authenticated\n                    through Federated Single Sign-On using SAML, OpenID Connect, or IAM\n                    federation</p>\n            </li>\n         </ol>\n         <p>Omit this parameter for users in the third group, IAM users and IAM role-based\n            sessions.</p>",
                         "smithy.api#httpQuery": "user-arn"
                     }
                 }
@@ -26932,6 +26932,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The row alternate color options (widget status, row alternate colors).</p>"
                     }
+                },
+                "CollapsedRowDimensionsVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility setting of a pivot table's collapsed row dimension fields. If the value of this structure is <code>HIDDEN</code>, all collapsed columns in a pivot table are automatically hidden. The default value is <code>VISIBLE</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -28204,8 +28210,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28217,8 +28223,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28230,8 +28236,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28243,8 +28249,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28256,8 +28262,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28269,8 +28275,8 @@
                             },
                             "params": {
                                 "Region": "api",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28282,8 +28288,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28295,8 +28301,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28308,8 +28314,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28321,8 +28327,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28334,8 +28340,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28347,8 +28353,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28360,8 +28366,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28373,8 +28379,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28386,8 +28392,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28399,8 +28405,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28412,8 +28418,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28425,8 +28431,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28438,8 +28444,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28451,8 +28457,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28464,8 +28470,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28477,8 +28483,8 @@
                             },
                             "params": {
                                 "Region": "api",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28490,8 +28496,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28503,8 +28509,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28516,8 +28522,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28529,8 +28535,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28542,8 +28548,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28555,8 +28561,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28568,8 +28574,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28581,8 +28587,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -28594,8 +28600,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -28607,8 +28613,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -28620,8 +28626,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -28632,8 +28638,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -28644,8 +28650,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -29494,6 +29500,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#RegisteredUserConsoleFeatureConfigurations": {
+            "type": "structure",
+            "members": {
+                "StatePersistence": {
+                    "target": "com.amazonaws.quicksight#StatePersistenceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state persistence configurations of an embedded Amazon QuickSight console.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The feature configurations of an embedded Amazon QuickSight console.</p>"
+            }
+        },
         "com.amazonaws.quicksight#RegisteredUserDashboardEmbeddingConfiguration": {
             "type": "structure",
             "members": {
@@ -29503,10 +29523,30 @@
                         "smithy.api#documentation": "<p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard if the user has permissions to view it.</p>\n         <p>If the user does not have permission to view this dashboard, they see a permissions error message.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "FeatureConfigurations": {
+                    "target": "com.amazonaws.quicksight#RegisteredUserDashboardFeatureConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature configurations of an embbedded Amazon QuickSight dashboard.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the dashboard you want to embed.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RegisteredUserDashboardFeatureConfigurations": {
+            "type": "structure",
+            "members": {
+                "StatePersistence": {
+                    "target": "com.amazonaws.quicksight#StatePersistenceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state persistence settings of an embedded dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The feature configuration for an embedded dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#RegisteredUserDashboardVisualEmbeddingConfiguration": {
@@ -29577,6 +29617,12 @@
                     "target": "com.amazonaws.quicksight#EntryPath",
                     "traits": {
                         "smithy.api#documentation": "<p>The initial URL path for the Amazon QuickSight console. <code>InitialPath</code> is required.</p>\n         <p>The entry point URL is constrained to the following paths:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/start</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/start/analyses</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/start/dashboards</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/start/favorites</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/dashboards/DashboardId</code>. <i>DashboardId</i> is the actual ID key from the Amazon QuickSight console URL of the dashboard.</p>\n            </li>\n            <li>\n               <p>\n                  <code>/analyses/AnalysisId</code>. <i>AnalysisId</i> is the actual ID key from the Amazon QuickSight console URL of the analysis.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FeatureConfigurations": {
+                    "target": "com.amazonaws.quicksight#RegisteredUserConsoleFeatureConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The embedding configuration of an embedded Amazon QuickSight console.</p>"
                     }
                 }
             },
@@ -32842,6 +32888,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StatePersistenceConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines if a Amazon QuickSight dashboard's state persistence settings are turned on or off.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state perssitence configuration of an embedded dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#Status": {
@@ -36511,7 +36573,7 @@
                 "DefaultNamespace": {
                     "target": "com.amazonaws.quicksight#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default namespace for this Amazon Web Services account. Currently, the default is\n                <code>default</code>. Identity and Access Management (IAM) users that\n            register for the first time with Amazon QuickSight provide an email address that becomes\n            associated with the default namespace.\n        </p>",
+                        "smithy.api#documentation": "<p>The default namespace for this Amazon Web Services account. Currently, the default is\n                <code>default</code>. IAM users that\n            register for the first time with Amazon QuickSight provide an email address that becomes\n            associated with the default namespace.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39321,7 +39383,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>The active status of user. When you create an Amazon QuickSight user that’s not an IAM\n            user or an Active Directory user, that user is inactive until they sign in and provide a\n            password.</p>"
+                        "smithy.api#documentation": "<p>The active status of user. When you create an Amazon QuickSight user that's not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a\n            password.</p>"
                     }
                 },
                 "PrincipalId": {
