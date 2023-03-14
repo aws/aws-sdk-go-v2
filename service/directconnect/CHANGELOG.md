@@ -1,3 +1,7 @@
+# v1.18.7 (2023-03-14)
+
+* **Documentation**: describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.
+
 # v1.18.6 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

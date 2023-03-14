@@ -1,3 +1,7 @@
+# v1.2.0 (2023-03-14)
+
+* **Feature**: Adding support for client-side timestamps
+
 # v1.1.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

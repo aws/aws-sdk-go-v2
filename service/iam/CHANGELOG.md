@@ -1,3 +1,7 @@
+# v1.19.6 (2023-03-14)
+
+* **Documentation**: Documentation only updates to correct customer-reported issues
+
 # v1.19.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "0f5dd0f8-fd8b-49f8-8e6e-94695a9221ad",
-    "type": "announcement",
-    "description": "Model regenerated with support for null string values to properly implement `support` service operations `DescribeTrustedAdvisorCheckRefreshStatuses` and `DescribeTrustedAdvisorCheckSummaries`",
-    "modules": [
-        "service/support"
-    ]
-}

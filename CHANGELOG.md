@@ -1,3 +1,26 @@
+# Release (2023-03-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/ec2/imds`: [v1.13.0](feature/ec2/imds/CHANGELOG.md#v1130-2023-03-14)
+  * **Feature**: Add flag to disable IMDSv1 fallback
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.18.0](service/applicationautoscaling/CHANGELOG.md#v1180-2023-03-14)
+  * **Feature**: Application Auto Scaling customers can now use mathematical functions to customize the metric used with Target Tracking policies within the policy configuration itself, saving the cost and effort of publishing the customizations as a separate metric.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.19.0](service/dataexchange/CHANGELOG.md#v1190-2023-03-14)
+  * **Feature**: This release enables data providers to license direct access to S3 objects encrypted with Customer Managed Keys (CMK) in AWS KMS through AWS Data Exchange. Subscribers can use these keys to decrypt, then use the encrypted S3 objects shared with them, without creating or managing copies.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.18.7](service/directconnect/CHANGELOG.md#v1187-2023-03-14)
+  * **Documentation**: describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.90.0](service/ec2/CHANGELOG.md#v1900-2023-03-14)
+  * **Feature**: This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.6](service/iam/CHANGELOG.md#v1196-2023-03-14)
+  * **Documentation**: Documentation only updates to correct customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.2.0](service/keyspaces/CHANGELOG.md#v120-2023-03-14)
+  * **Feature**: Adding support for client-side timestamps
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.14.6](service/support/CHANGELOG.md#v1146-2023-03-14)
+  * **Announcement**: Model regenerated with support for null string values to properly implement `support` service operations `DescribeTrustedAdvisorCheckRefreshStatuses` and `DescribeTrustedAdvisorCheckSummaries`
+
 # Release (2023-03-13)
 
 ## Module Highlights

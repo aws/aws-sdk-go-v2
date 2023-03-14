@@ -1,8 +1,0 @@
-{
-    "id": "31298cdb-4154-432e-9fcd-d060de189ea6",
-    "type": "documentation",
-    "description": "describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.",
-    "modules": [
-        "service/directconnect"
-    ]
-}

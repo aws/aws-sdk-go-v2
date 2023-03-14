@@ -1,3 +1,7 @@
+# v1.14.6 (2023-03-14)
+
+* **Announcement**: Model regenerated with support for null string values to properly implement `support` service operations `DescribeTrustedAdvisorCheckRefreshStatuses` and `DescribeTrustedAdvisorCheckSummaries`
+
 # v1.14.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

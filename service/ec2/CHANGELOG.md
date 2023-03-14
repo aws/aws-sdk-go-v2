@@ -1,3 +1,7 @@
+# v1.90.0 (2023-03-14)
+
+* **Feature**: This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.
+
 # v1.89.1 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

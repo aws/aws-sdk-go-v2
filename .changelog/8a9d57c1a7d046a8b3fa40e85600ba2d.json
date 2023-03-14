@@ -1,8 +1,0 @@
-{
-    "id": "8a9d57c1-a7d0-46a8-b3fa-40e85600ba2d",
-    "type": "feature",
-    "description": "Adding support for client-side timestamps",
-    "modules": [
-        "service/keyspaces"
-    ]
-}
