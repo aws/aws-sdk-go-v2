@@ -61,7 +61,10 @@ type CreateRoleInput struct {
 
 	// The name of the role to create. IAM user, group, role, and policy names must be
 	// unique within the account. Names are not distinguished by case. For example, you
-	// cannot create resources named both "MyResource" and "myresource".
+	// cannot create resources named both "MyResource" and "myresource". This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	RoleName *string

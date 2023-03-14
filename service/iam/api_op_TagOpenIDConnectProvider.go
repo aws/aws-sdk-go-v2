@@ -25,15 +25,16 @@ import (
 // key name Cost Center and the value 41200.
 //
 // * Access control - Include tags in
-// IAM user-based and resource-based policies. You can use tags to restrict access
-// to only an OIDC provider that has a specified tag attached. For examples of
-// policies that show how to use tags to control access, see Control access using
-// IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in
-// the IAM User Guide.
+// IAM identity-based and resource-based policies. You can use tags to restrict
+// access to only an OIDC provider that has a specified tag attached. For examples
+// of policies that show how to use tags to control access, see Control access
+// using IAM tags
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in the IAM
+// User Guide.
 //
-// * If any one of the tags is invalid or if you exceed the
-// allowed maximum number of tags, then the entire request fails and the resource
-// is not created. For more information about tagging, see Tagging IAM resources
+// * If any one of the tags is invalid or if you exceed the allowed
+// maximum number of tags, then the entire request fails and the resource is not
+// created. For more information about tagging, see Tagging IAM resources
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 // Guide.
 //

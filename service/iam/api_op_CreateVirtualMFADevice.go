@@ -41,11 +41,11 @@ func (c *Client) CreateVirtualMFADevice(ctx context.Context, params *CreateVirtu
 
 type CreateVirtualMFADeviceInput struct {
 
-	// The name of the virtual MFA device. Use with path to uniquely identify a virtual
-	// MFA device. This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
-	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: _+=,.@-
+	// The name of the virtual MFA device, which must be unique. Use with path to
+	// uniquely identify a virtual MFA device. This parameter allows (through its regex
+	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
+	// upper and lowercase alphanumeric characters with no spaces. You can also include
+	// any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	VirtualMFADeviceName *string

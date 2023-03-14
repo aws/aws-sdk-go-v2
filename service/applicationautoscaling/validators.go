@@ -255,19 +255,15 @@ func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecificatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedMetricSpecification"}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
 	if v.Dimensions != nil {
 		if err := validateMetricDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	if v.Metrics != nil {
+		if err := validateTargetTrackingMetricDataQueries(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -367,6 +363,117 @@ func validateStepScalingPolicyConfiguration(v *types.StepScalingPolicyConfigurat
 		if err := validateStepAdjustments(v.StepAdjustments); err != nil {
 			invalidParams.AddNested("StepAdjustments", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetric(v *types.TargetTrackingMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetric"}
+	if v.Dimensions != nil {
+		if err := validateTargetTrackingMetricDimensions(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDataQueries(v []types.TargetTrackingMetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDataQueries"}
+	for i := range v {
+		if err := validateTargetTrackingMetricDataQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDataQuery(v *types.TargetTrackingMetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDataQuery"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MetricStat != nil {
+		if err := validateTargetTrackingMetricStat(v.MetricStat); err != nil {
+			invalidParams.AddNested("MetricStat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDimension(v *types.TargetTrackingMetricDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDimension"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDimensions(v []types.TargetTrackingMetricDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDimensions"}
+	for i := range v {
+		if err := validateTargetTrackingMetricDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricStat(v *types.TargetTrackingMetricStat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricStat"}
+	if v.Metric == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	} else if v.Metric != nil {
+		if err := validateTargetTrackingMetric(v.Metric); err != nil {
+			invalidParams.AddNested("Metric", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Stat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

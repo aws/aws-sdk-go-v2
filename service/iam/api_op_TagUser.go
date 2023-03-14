@@ -22,8 +22,8 @@ import (
 // search for all resources with the key name Cost Center and the value 41200.
 //
 // *
-// Access control - Include tags in IAM user-based and resource-based policies. You
-// can use tags to restrict access to only an IAM requesting user that has a
+// Access control - Include tags in IAM identity-based and resource-based policies.
+// You can use tags to restrict access to only an IAM requesting user that has a
 // specified tag attached. You can also restrict access to only those resources
 // that have a certain tag attached. For examples of policies that show how to use
 // tags to control access, see Control access using IAM tags

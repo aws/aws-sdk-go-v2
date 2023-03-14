@@ -582,6 +582,13 @@ func awsAwsjson11_serializeDocumentCustomizedMetricSpecification(v *types.Custom
 		ok.String(*v.MetricName)
 	}
 
+	if v.Metrics != nil {
+		ok := object.Key("Metrics")
+		if err := awsAwsjson11_serializeDocumentTargetTrackingMetricDataQueries(v.Metrics, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Namespace != nil {
 		ok := object.Key("Namespace")
 		ok.String(*v.Namespace)
@@ -787,6 +794,131 @@ func awsAwsjson11_serializeDocumentSuspendedState(v *types.SuspendedState, value
 	if v.ScheduledScalingSuspended != nil {
 		ok := object.Key("ScheduledScalingSuspended")
 		ok.Boolean(*v.ScheduledScalingSuspended)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetTrackingMetric(v *types.TargetTrackingMetric, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("Dimensions")
+		if err := awsAwsjson11_serializeDocumentTargetTrackingMetricDimensions(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricName != nil {
+		ok := object.Key("MetricName")
+		ok.String(*v.MetricName)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		ok.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetTrackingMetricDataQueries(v []types.TargetTrackingMetricDataQuery, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTargetTrackingMetricDataQuery(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetTrackingMetricDataQuery(v *types.TargetTrackingMetricDataQuery, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		ok.String(*v.Expression)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Label != nil {
+		ok := object.Key("Label")
+		ok.String(*v.Label)
+	}
+
+	if v.MetricStat != nil {
+		ok := object.Key("MetricStat")
+		if err := awsAwsjson11_serializeDocumentTargetTrackingMetricStat(v.MetricStat, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReturnData != nil {
+		ok := object.Key("ReturnData")
+		ok.Boolean(*v.ReturnData)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetTrackingMetricDimension(v *types.TargetTrackingMetricDimension, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetTrackingMetricDimensions(v []types.TargetTrackingMetricDimension, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTargetTrackingMetricDimension(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetTrackingMetricStat(v *types.TargetTrackingMetricStat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Metric != nil {
+		ok := object.Key("Metric")
+		if err := awsAwsjson11_serializeDocumentTargetTrackingMetric(v.Metric, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Stat != nil {
+		ok := object.Key("Stat")
+		ok.String(*v.Stat)
+	}
+
+	if v.Unit != nil {
+		ok := object.Key("Unit")
+		ok.String(*v.Unit)
 	}
 
 	return nil

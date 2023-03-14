@@ -36,7 +36,7 @@ type AccessDetail struct {
 	// The path of the Organizations entity (root, organizational unit, or account)
 	// from which an authenticated principal last attempted to access the service.
 	// Amazon Web Services does not report unauthenticated requests. This field is null
-	// if no principals (IAM users, IAM roles, or root users) in the reported
+	// if no principals (IAM users, IAM roles, or root user) in the reported
 	// Organizations entity attempted to access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	EntityPath *string
@@ -55,7 +55,7 @@ type AccessDetail struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	Region *string
 
-	// The number of accounts with authenticated principals (root users, IAM users, and
+	// The number of accounts with authenticated principals (root user, IAM users, and
 	// IAM roles) that attempted to access the service in the tracking period.
 	TotalAuthenticatedEntities *int32
 
@@ -1125,7 +1125,7 @@ type Role struct {
 	// might have been used more than 400 days ago. For more information, see Regions
 	// where data is tracked
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period)
-	// in the IAM User Guide.
+	// in the IAM user Guide.
 	RoleLastUsed *RoleLastUsed
 
 	// A list of tags that are attached to the role. For more information about
@@ -1214,7 +1214,7 @@ type RoleDetail struct {
 // might have been used more than 400 days ago. For more information, see Regions
 // where data is tracked
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period)
-// in the IAM User Guide. This data type is returned as a response element in the
+// in the IAM user Guide. This data type is returned as a response element in the
 // GetRole and GetAccountAuthorizationDetails operations.
 type RoleLastUsed struct {
 

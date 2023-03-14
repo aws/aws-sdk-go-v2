@@ -2537,6 +2537,18 @@ func awsRestjson1_serializeDocumentImportAssetsFromS3RequestDetails(v *types.Imp
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKmsKeyToGrant(v *types.KmsKeyToGrant, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLFTag(v *types.LFTag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2600,6 +2612,19 @@ func awsRestjson1_serializeDocumentListOfDatabaseLFTagPolicyPermissions(v []type
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfKmsKeysToGrant(v []types.KmsKeyToGrant, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKmsKeyToGrant(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -2811,6 +2836,13 @@ func awsRestjson1_serializeDocumentS3DataAccessAssetSourceEntry(v *types.S3DataA
 	if v.Keys != nil {
 		ok := object.Key("Keys")
 		if err := awsRestjson1_serializeDocumentListOf__string(v.Keys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeysToGrant != nil {
+		ok := object.Key("KmsKeysToGrant")
+		if err := awsRestjson1_serializeDocumentListOfKmsKeysToGrant(v.KmsKeysToGrant, ok); err != nil {
 			return err
 		}
 	}

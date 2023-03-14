@@ -7559,6 +7559,46 @@ func awsRestjson1_deserializeDocumentJobError(v **types.JobError, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKmsKeyToGrant(v **types.KmsKeyToGrant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KmsKeyToGrant
+	if *v == nil {
+		sv = &types.KmsKeyToGrant{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLakeFormationDataPermissionAsset(v **types.LakeFormationDataPermissionAsset, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8094,6 +8134,40 @@ func awsRestjson1_deserializeDocumentListOfJobError(v *[]types.JobError, value i
 		var col types.JobError
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentJobError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOfKmsKeysToGrant(v *[]types.KmsKeyToGrant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.KmsKeyToGrant
+	if *v == nil {
+		cv = []types.KmsKeyToGrant{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.KmsKeyToGrant
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentKmsKeyToGrant(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -8919,6 +8993,11 @@ func awsRestjson1_deserializeDocumentS3DataAccessAsset(v **types.S3DataAccessAss
 				return err
 			}
 
+		case "KmsKeysToGrant":
+			if err := awsRestjson1_deserializeDocumentListOfKmsKeysToGrant(&sv.KmsKeysToGrant, value); err != nil {
+				return err
+			}
+
 		case "S3AccessPointAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8984,6 +9063,11 @@ func awsRestjson1_deserializeDocumentS3DataAccessAssetSourceEntry(v **types.S3Da
 
 		case "Keys":
 			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.Keys, value); err != nil {
+				return err
+			}
+
+		case "KmsKeysToGrant":
+			if err := awsRestjson1_deserializeDocumentListOfKmsKeysToGrant(&sv.KmsKeysToGrant, value); err != nil {
 				return err
 			}
 
