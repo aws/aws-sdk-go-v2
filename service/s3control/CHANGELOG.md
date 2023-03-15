@@ -1,3 +1,7 @@
+# v1.31.0 (2023-03-15)
+
+* **Feature**: Added support for S3 Object Lambda aliases.
+
 # v1.30.0 (2023-03-13)
 
 * **Feature**: Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.

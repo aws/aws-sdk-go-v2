@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/emr v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.18.6
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.6
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/glue v1.43.3
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.30.6
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.30.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.16.6
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.4

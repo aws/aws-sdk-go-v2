@@ -1,3 +1,7 @@
+# v1.3.0 (2023-03-15)
+
+* **Feature**: Make Create/Get/ListSubscribers APIs return resource share ARN and name so they can be used to validate the RAM resource share to accept. GetDatalake can be used to track status of UpdateDatalake and DeleteDatalake requests.
+
 # v1.2.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

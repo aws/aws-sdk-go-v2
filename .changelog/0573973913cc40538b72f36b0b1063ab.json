@@ -1,8 +1,0 @@
-{
-    "id": "05739739-13cc-4053-8b72-f36b0b1063ab",
-    "type": "feature",
-    "description": "This release adds the binary analysis that analyzes IIS application DLLs on Windows and Java applications on Linux to provide anti-pattern report without configuring access to the source code.",
-    "modules": [
-        "service/migrationhubstrategy"
-    ]
-}

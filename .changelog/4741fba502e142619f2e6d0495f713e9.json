@@ -1,8 +1,0 @@
-{
-    "id": "4741fba5-02e1-4261-9f2e-6d0495f713e9",
-    "type": "feature",
-    "description": "Make Create/Get/ListSubscribers APIs return resource share ARN and name so they can be used to validate the RAM resource share to accept. GetDatalake can be used to track status of UpdateDatalake and DeleteDatalake requests.",
-    "modules": [
-        "service/securitylake"
-    ]
-}

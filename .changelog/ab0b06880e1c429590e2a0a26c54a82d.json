@@ -1,8 +1,0 @@
-{
-    "id": "ab0b0688-0e1c-4295-90e2-a0a26c54a82d",
-    "type": "feature",
-    "description": "Added support for S3 Object Lambda aliases.",
-    "modules": [
-        "service/s3control"
-    ]
-}
