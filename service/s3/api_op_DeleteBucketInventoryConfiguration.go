@@ -134,9 +134,6 @@ func (c *Client) addOperationDeleteBucketInventoryConfigurationMiddlewares(stack
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addDeleteBucketInventoryConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

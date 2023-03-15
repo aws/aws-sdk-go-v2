@@ -167,7 +167,7 @@ func (c *Client) addOperationPutObjectRetentionMiddlewares(stack *middleware.Sta
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
+	if err = add100Continue(stack, options); err != nil {
 		return err
 	}
 	if err = addPutObjectRetentionInputChecksumMiddlewares(stack, options); err != nil {

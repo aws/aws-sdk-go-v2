@@ -467,10 +467,6 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
-func add100Continue(stack *middleware.Stack) error {
-	return s3shared.Add100Continue(stack)
-}
-
 // nopGetOutpostIDFromInput provides a nop accessor function to be used when
 // endpoint customization behavior is not based on presence of outpost id member if
 // any

@@ -101,9 +101,6 @@ func (c *Client) addOperationListBucketsMiddlewares(stack *middleware.Stack, opt
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addListBucketsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

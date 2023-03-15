@@ -123,9 +123,6 @@ func (c *Client) addOperationGetBucketLoggingMiddlewares(stack *middleware.Stack
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addGetBucketLoggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

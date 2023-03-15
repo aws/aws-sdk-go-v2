@@ -152,9 +152,6 @@ func (c *Client) addOperationListBucketIntelligentTieringConfigurationsMiddlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addListBucketIntelligentTieringConfigurationsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

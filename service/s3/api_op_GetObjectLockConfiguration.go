@@ -127,9 +127,6 @@ func (c *Client) addOperationGetObjectLockConfigurationMiddlewares(stack *middle
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addGetObjectLockConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

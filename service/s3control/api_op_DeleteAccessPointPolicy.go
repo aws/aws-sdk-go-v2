@@ -134,9 +134,6 @@ func (c *Client) addOperationDeleteAccessPointPolicyMiddlewares(stack *middlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addDeleteAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

@@ -118,9 +118,6 @@ func (c *Client) addOperationGetBucketRequestPaymentMiddlewares(stack *middlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addGetBucketRequestPaymentUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

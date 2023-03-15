@@ -148,9 +148,6 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack); err != nil {
-		return err
-	}
 	if err = addListJobsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

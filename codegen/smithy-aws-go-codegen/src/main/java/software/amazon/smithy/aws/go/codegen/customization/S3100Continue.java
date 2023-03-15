@@ -1,17 +1,20 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
-import java.util.List;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.traits.HttpTrait;
 import software.amazon.smithy.utils.ListUtils;
+
+import java.util.List;
 
 /**
  * Add middleware, which adds {Expect: 100-continue} header for s3 client HTTP PUT request larger than 2MB
@@ -20,6 +23,18 @@ import software.amazon.smithy.utils.ListUtils;
 public class S3100Continue implements GoIntegration {
     private static final String ADD_100Continue_Header = "add100Continue";
     private static final String ADD_100Continue_Header_INTERNAL = "Add100Continue";
+    private static final String ADD_100Continue_Header_Option = "AddContinueOption";
+    private static final String Continue_Client_Option = "ContinueHeaderThresholdBytes";
+
+    /**
+     * Return true if service is Amazon S3.
+     *
+     * @param model   is the generation model.
+     * @param service is the service shape being audited.
+     */
+    private static boolean isS3Service(Model model, ServiceShape service) {
+        return S3ModelUtils.isServiceS3(model, service);
+    }
 
     /**
      * Gets the sort order of the customization from -128 to 127, with lowest
@@ -40,7 +55,7 @@ public class S3100Continue implements GoIntegration {
             GoDelegator goDelegator
     ) {
         ServiceShape service = settings.getService(model);
-        if (!requiresS3Customization(model, service)) {
+        if (!isS3Service(model, service)) {
             return;
         }
 
@@ -48,11 +63,16 @@ public class S3100Continue implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_100Continue_Header, () -> {
-            writer.write("return $T(stack)",
+        writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}", ADD_100Continue_Header, () -> {
+            writer.openBlock("return $T(stack, $T{", "})",
                     SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header_INTERNAL,
-                            AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build()
-            );
+                            AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build(),
+                    SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header_Option,
+                            AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build(), () -> {
+                        writer.write("ContinueHeaderThresholdBytes: options.ContinueHeaderThresholdBytes,"
+                        );
+                    }
+                    );
         });
         writer.insertTrailingNewline();
     }
@@ -61,17 +81,28 @@ public class S3100Continue implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
-                        .servicePredicate(S3100Continue::requiresS3Customization)
+                        .operationPredicate((model, service, operation) -> isS3Service(model, service) && operation.
+                                getTrait(HttpTrait.class).get().getMethod().equals("PUT"))
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header).build())
-                                .build())
+                                .useClientOptions()
+                                .build()
+                        )
+                        .build(),
+                RuntimeClientPlugin.builder()
+                        .servicePredicate(S3100Continue::isS3Service)
+                        .configFields(ListUtils.of(
+                            ConfigField.builder()
+                                    .name(Continue_Client_Option)
+                                    .type(SymbolUtils.createValueSymbolBuilder("int64")
+                                            .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
+                                            .build())
+                                    .documentation("The threshold ContentLength for HTTP PUT request to receive {Expect: 100-continue} header. " +
+                                            "When set to -1, this header will be opt out of the operation request; when set to 0, the threshold" +
+                                            "will be set to default 2MB")
+                                    .build()
+                        ))
                         .build()
         );
     }
-
-    // returns true if service is either s3 or s3 control and needs s3 customization
-    private static boolean requiresS3Customization(Model model, ServiceShape service) {
-        return S3ModelUtils.isServiceS3(model, service) || S3ModelUtils.isServiceS3Control(model, service);
-    }
 }
-

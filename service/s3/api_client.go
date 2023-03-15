@@ -80,6 +80,11 @@ type Options struct {
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
+	// The threshold ContentLength for HTTP PUT request to receive {Expect:
+	// 100-continue} header. When set to -1, this header will be opt out of the
+	// operation request; when set to 0, the thresholdwill be set to default 2MB
+	ContinueHeaderThresholdBytes int64
+
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
 
@@ -530,8 +535,10 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
-func add100Continue(stack *middleware.Stack) error {
-	return s3shared.Add100Continue(stack)
+func add100Continue(stack *middleware.Stack, options Options) error {
+	return s3shared.Add100Continue(stack, s3shared.AddContinueOption{
+		ContinueHeaderThresholdBytes: options.ContinueHeaderThresholdBytes,
+	})
 }
 
 // ComputedInputChecksumsMetadata provides information about the algorithms used to
