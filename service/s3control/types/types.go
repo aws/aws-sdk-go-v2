@@ -883,7 +883,7 @@ type LifecycleRule struct {
 	// Specifies the days since the initiation of an incomplete multipart upload that
 	// Amazon S3 waits before permanently removing all parts of the upload. For more
 	// information, see  Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
-	// Policy
+	// Configuration
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 	// in the Amazon S3 User Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
@@ -1167,8 +1167,28 @@ type ObjectLambdaAccessPoint struct {
 	// This member is required.
 	Name *string
 
+	// The alias of the Object Lambda Access Point.
+	Alias *ObjectLambdaAccessPointAlias
+
 	// Specifies the ARN for the Object Lambda Access Point.
 	ObjectLambdaAccessPointArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The alias of an Object Lambda Access Point. For more information, see How to use
+// a bucket-style alias for your S3 bucket Object Lambda Access Point
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias).
+type ObjectLambdaAccessPointAlias struct {
+
+	// The status of the Object Lambda Access Point alias. If the status is
+	// PROVISIONING, the Object Lambda Access Point is provisioning the alias and the
+	// alias is not ready for use yet. If the status is READY, the Object Lambda Access
+	// Point alias is successfully provisioned and ready for use.
+	Status ObjectLambdaAccessPointAliasStatus
+
+	// The alias value of the Object Lambda Access Point.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1516,7 +1536,7 @@ type ReplicationRule struct {
 	// according to all replication rules. However, if there are two or more rules with
 	// the same destination Outposts bucket, then objects will be replicated according
 	// to the rule with the highest priority. The higher the number, the higher the
-	// priority. For more information, see Creating replication rules between Outposts
+	// priority. For more information, see Creating replication rules on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html)
 	// in the Amazon S3 User Guide.
 	Priority *int32

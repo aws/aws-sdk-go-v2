@@ -301,6 +301,12 @@ func awsRestxml_deserializeOpDocumentCreateAccessPointForObjectLambdaOutput(v **
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("Alias", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentObjectLambdaAccessPointAlias(&sv.Alias, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("ObjectLambdaAccessPointArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -2713,6 +2719,12 @@ func awsRestxml_deserializeOpDocumentGetAccessPointForObjectLambdaOutput(v **Get
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("Alias", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentObjectLambdaAccessPointAlias(&sv.Alias, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("CreationDate", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -13106,6 +13118,12 @@ func awsRestxml_deserializeDocumentObjectLambdaAccessPoint(v **types.ObjectLambd
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("Alias", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentObjectLambdaAccessPointAlias(&sv.Alias, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Name", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -13130,6 +13148,68 @@ func awsRestxml_deserializeDocumentObjectLambdaAccessPoint(v **types.ObjectLambd
 			{
 				xtv := string(val)
 				sv.ObjectLambdaAccessPointArn = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentObjectLambdaAccessPointAlias(v **types.ObjectLambdaAccessPointAlias, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ObjectLambdaAccessPointAlias
+	if *v == nil {
+		sv = &types.ObjectLambdaAccessPointAlias{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.ObjectLambdaAccessPointAliasStatus(xtv)
+			}
+
+		case strings.EqualFold("Value", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Value = ptr.String(xtv)
 			}
 
 		default:

@@ -23,7 +23,7 @@ import (
 // S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 // Amazon S3 User Guide. For information about S3 replication on Outposts
-// configuration, see Replicating objects for Amazon Web Services Outposts
+// configuration, see Replicating objects for S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html)
 // in the Amazon S3 User Guide. It can take a while to propagate PUT or DELETE
 // requests for a replication configuration to all S3 on Outposts systems.

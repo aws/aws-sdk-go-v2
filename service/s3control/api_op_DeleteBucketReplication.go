@@ -40,7 +40,7 @@ import (
 // Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html#API_control_DeleteBucketReplication_Examples)
 // section. For information about S3 replication on Outposts configuration, see
-// Replicating objects for Amazon Web Services Outposts
+// Replicating objects for S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html)
 // in the Amazon S3 User Guide. The following operations are related to
 // DeleteBucketReplication:

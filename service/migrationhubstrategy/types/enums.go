@@ -2,6 +2,28 @@
 
 package types
 
+type AnalysisType string
+
+// Enum values for AnalysisType
+const (
+	AnalysisTypeSourceCodeAnalysis AnalysisType = "SOURCE_CODE_ANALYSIS"
+	AnalysisTypeDatabaseAnalysis   AnalysisType = "DATABASE_ANALYSIS"
+	AnalysisTypeRuntimeAnalysis    AnalysisType = "RUNTIME_ANALYSIS"
+	AnalysisTypeBinaryAnalysis     AnalysisType = "BINARY_ANALYSIS"
+)
+
+// Values returns all known values for AnalysisType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AnalysisType) Values() []AnalysisType {
+	return []AnalysisType{
+		"SOURCE_CODE_ANALYSIS",
+		"DATABASE_ANALYSIS",
+		"RUNTIME_ANALYSIS",
+		"BINARY_ANALYSIS",
+	}
+}
+
 type AntipatternReportStatus string
 
 // Enum values for AntipatternReportStatus
@@ -213,6 +235,24 @@ func (AwsManagedTargetDestination) Values() []AwsManagedTargetDestination {
 		"None specified",
 		"AWS Elastic BeanStalk",
 		"AWS Fargate",
+	}
+}
+
+type BinaryAnalyzerName string
+
+// Enum values for BinaryAnalyzerName
+const (
+	BinaryAnalyzerNameDllAnalyzer      BinaryAnalyzerName = "DLL_ANALYZER"
+	BinaryAnalyzerNameBytecodeAnalyzer BinaryAnalyzerName = "BYTECODE_ANALYZER"
+)
+
+// Values returns all known values for BinaryAnalyzerName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BinaryAnalyzerName) Values() []BinaryAnalyzerName {
+	return []BinaryAnalyzerName{
+		"DLL_ANALYZER",
+		"BYTECODE_ANALYZER",
 	}
 }
 
@@ -555,6 +595,30 @@ func (RuntimeAnalysisStatus) Values() []RuntimeAnalysisStatus {
 	}
 }
 
+type RunTimeAnalyzerName string
+
+// Enum values for RunTimeAnalyzerName
+const (
+	RunTimeAnalyzerNameA2cAnalyzer      RunTimeAnalyzerName = "A2C_ANALYZER"
+	RunTimeAnalyzerNameRehostAnalyzer   RunTimeAnalyzerName = "REHOST_ANALYZER"
+	RunTimeAnalyzerNameEmpPaAnalyzer    RunTimeAnalyzerName = "EMP_PA_ANALYZER"
+	RunTimeAnalyzerNameDatabaseAnalyzer RunTimeAnalyzerName = "DATABASE_ANALYZER"
+	RunTimeAnalyzerNameSctAnalyzer      RunTimeAnalyzerName = "SCT_ANALYZER"
+)
+
+// Values returns all known values for RunTimeAnalyzerName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RunTimeAnalyzerName) Values() []RunTimeAnalyzerName {
+	return []RunTimeAnalyzerName{
+		"A2C_ANALYZER",
+		"REHOST_ANALYZER",
+		"EMP_PA_ANALYZER",
+		"DATABASE_ANALYZER",
+		"SCT_ANALYZER",
+	}
+}
+
 type RunTimeAssessmentStatus string
 
 // Enum values for RunTimeAssessmentStatus
@@ -716,6 +780,28 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
 		"DESC",
+	}
+}
+
+type SourceCodeAnalyzerName string
+
+// Enum values for SourceCodeAnalyzerName
+const (
+	SourceCodeAnalyzerNameCsharpAnalyzer   SourceCodeAnalyzerName = "CSHARP_ANALYZER"
+	SourceCodeAnalyzerNameJavaAnalyzer     SourceCodeAnalyzerName = "JAVA_ANALYZER"
+	SourceCodeAnalyzerNameBytecodeAnalyzer SourceCodeAnalyzerName = "BYTECODE_ANALYZER"
+	SourceCodeAnalyzerNamePortingAssistant SourceCodeAnalyzerName = "PORTING_ASSISTANT"
+)
+
+// Values returns all known values for SourceCodeAnalyzerName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceCodeAnalyzerName) Values() []SourceCodeAnalyzerName {
+	return []SourceCodeAnalyzerName{
+		"CSHARP_ANALYZER",
+		"JAVA_ANALYZER",
+		"BYTECODE_ANALYZER",
+		"PORTING_ASSISTANT",
 	}
 }
 

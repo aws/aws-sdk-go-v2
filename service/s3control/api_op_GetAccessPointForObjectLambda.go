@@ -63,6 +63,9 @@ type GetAccessPointForObjectLambdaInput struct {
 
 type GetAccessPointForObjectLambdaOutput struct {
 
+	// The alias of the Object Lambda Access Point.
+	Alias *types.ObjectLambdaAccessPointAlias
+
 	// The date and time when the specified Object Lambda Access Point was created.
 	CreationDate *time.Time
 

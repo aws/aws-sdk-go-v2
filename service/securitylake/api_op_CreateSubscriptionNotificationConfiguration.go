@@ -12,7 +12,8 @@ import (
 )
 
 // Notifies the subscriber when new data is written to the data lake for the
-// sources that the subscriber consumes in Security Lake.
+// sources that the subscriber consumes in Security Lake. You can create only one
+// subscriber notification per subscriber.
 func (c *Client) CreateSubscriptionNotificationConfiguration(ctx context.Context, params *CreateSubscriptionNotificationConfigurationInput, optFns ...func(*Options)) (*CreateSubscriptionNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateSubscriptionNotificationConfigurationInput{}
@@ -30,7 +31,7 @@ func (c *Client) CreateSubscriptionNotificationConfiguration(ctx context.Context
 
 type CreateSubscriptionNotificationConfigurationInput struct {
 
-	// The subscription ID for the notification subscription/
+	// The subscription ID for the notification subscription.
 	//
 	// This member is required.
 	SubscriptionId *string
@@ -48,7 +49,12 @@ type CreateSubscriptionNotificationConfigurationInput struct {
 	HttpsMethod types.HttpsMethod
 
 	// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that
-	// you created.
+	// you created. For more information about ARNs and how to use them in policies,
+	// see Managing data access
+	// (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
+	// and Amazon Web Services Managed Policies
+	// (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)
+	// in the Amazon Security Lake User Guide.
 	RoleArn *string
 
 	// The subscription endpoint in Security Lake. If you prefer notification with an

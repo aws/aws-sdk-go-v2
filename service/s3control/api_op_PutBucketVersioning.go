@@ -40,12 +40,12 @@ import (
 // noncurrent versions after a specified time period. For more information, see
 // Creating and managing a lifecycle configuration for your S3 on Outposts bucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsLifecycleManaging.html)
-// in the Amazon S3 User Guide. If you have an object expiration lifecycle policy
-// in your non-versioned bucket and you want to maintain the same permanent delete
-// behavior when you enable versioning, you must add a noncurrent expiration
-// policy. The noncurrent expiration lifecycle policy will manage the deletions of
-// the noncurrent object versions in the version-enabled bucket. For more
-// information, see Versioning
+// in the Amazon S3 User Guide. If you have an object expiration lifecycle
+// configuration in your non-versioned bucket and you want to maintain the same
+// permanent delete behavior when you enable versioning, you must add a noncurrent
+// expiration policy. The noncurrent expiration lifecycle configuration will manage
+// the deletes of the noncurrent object versions in the version-enabled bucket. For
+// more information, see Versioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html) in the
 // Amazon S3 User Guide. All Amazon S3 on Outposts REST API requests for this
 // action require an additional parameter of x-amz-outpost-id to be passed with the

@@ -69,6 +69,9 @@ type CreateAccessPointForObjectLambdaInput struct {
 
 type CreateAccessPointForObjectLambdaOutput struct {
 
+	// The alias of the Object Lambda Access Point.
+	Alias *types.ObjectLambdaAccessPointAlias
+
 	// Specifies the ARN for the Object Lambda Access Point.
 	ObjectLambdaAccessPointArn *string
 
