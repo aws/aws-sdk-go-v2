@@ -79,7 +79,7 @@
                     "name": "migrationhub-strategy"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Migration Hub Strategy Recommendations</fullname>\n\n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the AWS SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>",
+                "smithy.api#documentation": "<fullname>Migration Hub Strategy Recommendations</fullname>\n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the AWS SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>",
                 "smithy.api#title": "Migration Hub Strategy Recommendations",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -442,8 +442,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -455,8 +455,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -468,8 +468,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -481,8 +481,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -494,8 +494,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -507,8 +507,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -520,8 +520,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -533,8 +533,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -546,8 +546,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -559,8 +559,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -572,8 +572,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -585,8 +585,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -598,8 +598,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -611,8 +611,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -624,8 +624,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -637,8 +637,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -650,8 +650,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -663,8 +663,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -676,8 +676,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -689,8 +689,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -702,8 +702,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -715,8 +715,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -728,8 +728,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -741,8 +741,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -753,8 +753,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -765,8 +765,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -786,9 +786,113 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The AWS user account does not have permission to perform the action. Check the\n      AWS Identity and Access Management (IAM) policy associated with this account.</p>",
+                "smithy.api#documentation": "<p> The user does not have permission to perform the action. Check the\n      AWS Identity and Access Management (IAM) policy associated with this user.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AnalysisStatusUnion": {
+            "type": "union",
+            "members": {
+                "runtimeAnalysisStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#RuntimeAnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis.</p>"
+                    }
+                },
+                "srcCodeOrDbAnalysisStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#SrcCodeOrDbAnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the source code or database analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A combination of existing analysis statuses.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AnalysisType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SOURCE_CODE_ANALYSIS",
+                        "name": "SOURCE_CODE_ANALYSIS"
+                    },
+                    {
+                        "value": "DATABASE_ANALYSIS",
+                        "name": "DATABASE_ANALYSIS"
+                    },
+                    {
+                        "value": "RUNTIME_ANALYSIS",
+                        "name": "RUNTIME_ANALYSIS"
+                    },
+                    {
+                        "value": "BINARY_ANALYSIS",
+                        "name": "BINARY_ANALYSIS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AnalyzerNameUnion": {
+            "type": "union",
+            "members": {
+                "binaryAnalyzerName": {
+                    "target": "com.amazonaws.migrationhubstrategy#BinaryAnalyzerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The binary analyzer names.</p>"
+                    }
+                },
+                "runTimeAnalyzerName": {
+                    "target": "com.amazonaws.migrationhubstrategy#RunTimeAnalyzerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assessment analyzer names.</p>"
+                    }
+                },
+                "sourceCodeAnalyzerName": {
+                    "target": "com.amazonaws.migrationhubstrategy#SourceCodeAnalyzerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source code analyzer names.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The combination of the existing analyzers.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AntipatternReportResult": {
+            "type": "structure",
+            "members": {
+                "analyzerName": {
+                    "target": "com.amazonaws.migrationhubstrategy#AnalyzerNameUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analyzer name.</p>"
+                    }
+                },
+                "antiPatternReportS3Object": {
+                    "target": "com.amazonaws.migrationhubstrategy#S3Object"
+                },
+                "antipatternReportStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#AntipatternReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the anti-pattern report generation.</p>"
+                    }
+                },
+                "antipatternReportStatusMessage": {
+                    "target": "com.amazonaws.migrationhubstrategy#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the anti-pattern.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The anti-pattern report result.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AntipatternReportResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#AntipatternReportResult"
             }
         },
         "com.amazonaws.migrationhubstrategy#AntipatternReportStatus": {
@@ -1138,6 +1242,12 @@
                     "target": "com.amazonaws.migrationhubstrategy#AppUnitError",
                     "traits": {
                         "smithy.api#documentation": "<p>The error in the analysis of the source code or database.</p>"
+                    }
+                },
+                "resultList": {
+                    "target": "com.amazonaws.migrationhubstrategy#ResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the analysis results.</p>"
                     }
                 }
             },
@@ -1524,6 +1634,21 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#BinaryAnalyzerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DLL_ANALYZER",
+                        "name": "DLL_ANALYZER"
+                    },
+                    {
+                        "value": "BYTECODE_ANALYZER",
+                        "name": "BYTECODE_ANALYZER"
+                    }
+                ]
             }
         },
         "com.amazonaws.migrationhubstrategy#Boolean": {
@@ -3847,6 +3972,71 @@
                 ]
             }
         },
+        "com.amazonaws.migrationhubstrategy#Result": {
+            "type": "structure",
+            "members": {
+                "analysisType": {
+                    "target": "com.amazonaws.migrationhubstrategy#AnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error in server analysis.</p>"
+                    }
+                },
+                "analysisStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#AnalysisStatusUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error in server analysis.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.migrationhubstrategy#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error in server analysis.</p>"
+                    }
+                },
+                "antipatternReportResultList": {
+                    "target": "com.amazonaws.migrationhubstrategy#AntipatternReportResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error in server analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error in server analysis.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#Result"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#RunTimeAnalyzerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "A2C_ANALYZER",
+                        "name": "A2C_ANALYZER"
+                    },
+                    {
+                        "value": "REHOST_ANALYZER",
+                        "name": "REHOST_ANALYZER"
+                    },
+                    {
+                        "value": "EMP_PA_ANALYZER",
+                        "name": "EMP_PA_ANALYZER"
+                    },
+                    {
+                        "value": "DATABASE_ANALYZER",
+                        "name": "DATABASE_ANALYZER"
+                    },
+                    {
+                        "value": "SCT_ANALYZER",
+                        "name": "SCT_ANALYZER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.migrationhubstrategy#RunTimeAssessmentStatus": {
             "type": "string",
             "traits": {
@@ -4394,6 +4584,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Object containing source code information that is linked to an application component.\n    </p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#SourceCodeAnalyzerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CSHARP_ANALYZER",
+                        "name": "CSHARP_ANALYZER"
+                    },
+                    {
+                        "value": "JAVA_ANALYZER",
+                        "name": "JAVA_ANALYZER"
+                    },
+                    {
+                        "value": "BYTECODE_ANALYZER",
+                        "name": "BYTECODE_ANALYZER"
+                    },
+                    {
+                        "value": "PORTING_ASSISTANT",
+                        "name": "PORTING_ASSISTANT"
+                    }
+                ]
             }
         },
         "com.amazonaws.migrationhubstrategy#SourceCodeList": {
