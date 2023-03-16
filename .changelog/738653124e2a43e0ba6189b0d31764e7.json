@@ -1,0 +1,8 @@
+{
+    "id": "73865312-4e2a-43e0-ba61-89b0d31764e7",
+    "type": "bugfix",
+    "description": "Allow RoleARN to be set as functional option on STS WebIdentityRoleOptions. Fixes aws/aws-sdk-go-v2#2015.",
+    "modules": [
+        "config"
+    ]
+}

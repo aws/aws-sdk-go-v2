@@ -27,3 +27,6 @@ sso_start_url = https://127.0.0.1/start
 [profile webident]
 web_identity_token_file = .\testdata\wit.txt
 role_arn = webident_arn
+
+[profile webident-partial]
+web_identity_token_file = .\testdata\wit.txt
