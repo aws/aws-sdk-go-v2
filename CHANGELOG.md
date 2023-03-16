@@ -1,3 +1,18 @@
+# Release (2023-03-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.18.18](config/CHANGELOG.md#v11818-2023-03-16)
+  * **Bug Fix**: Allow RoleARN to be set as functional option on STS WebIdentityRoleOptions. Fixes aws/aws-sdk-go-v2#2015.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.18.0](service/guardduty/CHANGELOG.md#v1180-2023-03-16)
+  * **Feature**: Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.2.7](service/resourceexplorer2/CHANGELOG.md#v127-2023-03-16)
+  * **Documentation**: Documentation updates for APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.18.7](service/sagemakerruntime/CHANGELOG.md#v1187-2023-03-16)
+  * **Documentation**: Documentation updates for SageMaker Runtime
+
 # Release (2023-03-15)
 
 ## Module Highlights

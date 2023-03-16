@@ -1,8 +1,0 @@
-{
-    "id": "efda2f49-b544-4d7e-beb9-1367c4d73988",
-    "type": "documentation",
-    "description": "Documentation updates for SageMaker Runtime",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

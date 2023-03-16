@@ -1,8 +1,0 @@
-{
-    "id": "a1462106-ea6a-4771-8e50-431fb5f5fc2a",
-    "type": "documentation",
-    "description": "Documentation updates for APIs.",
-    "modules": [
-        "service/resourceexplorer2"
-    ]
-}
