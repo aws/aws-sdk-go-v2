@@ -43,10 +43,15 @@ type UpdateDetectorInput struct {
 	// Web Services Regions where GuardDuty is presently supported. For more
 	// information, see Regions and endpoints
 	// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurations
 
 	// Specifies whether the detector is enabled or not enabled.
 	Enable bool
+
+	// Provides the features that will be updated for the detector.
+	Features []types.DetectorFeatureConfiguration
 
 	// An enum value that specifies how frequently findings are exported, such as to
 	// CloudWatch Events.

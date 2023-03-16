@@ -62,7 +62,12 @@ type AccountFreeTrialInfo struct {
 	AccountId *string
 
 	// Describes the data source enabled for the GuardDuty member account.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *DataSourcesFreeTrial
+
+	// A list of features enabled for the GuardDuty account.
+	Features []FreeTrialFeatureConfigurationResult
 
 	noSmithyDocumentSerde
 }
@@ -96,6 +101,9 @@ type Action struct {
 
 	// Information about the PORT_PROBE action described in this finding.
 	PortProbeAction *PortProbeAction
+
+	// Information about RDS_LOGIN_ATTEMPT action described in this finding.
+	RdsLoginAttemptAction *RdsLoginAttemptAction
 
 	noSmithyDocumentSerde
 }
@@ -488,6 +496,33 @@ type DestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a GuardDuty feature.
+type DetectorFeatureConfiguration struct {
+
+	// The name of the feature.
+	Name DetectorFeature
+
+	// The status of the feature.
+	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a GuardDuty feature.
+type DetectorFeatureConfigurationResult struct {
+
+	// Indicates the name of the feature that can be enabled for the detector.
+	Name DetectorFeatureResult
+
+	// Indicates the status of the feature that is enabled for the detector.
+	Status FeatureStatus
+
+	// The timestamp at which the feature object was updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on the status of DNS logs as a data source.
 type DNSLogsConfigurationResult struct {
 
@@ -819,6 +854,18 @@ type FlowLogsConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the free trial period for a feature.
+type FreeTrialFeatureConfigurationResult struct {
+
+	// The number of the remaining free trial days for the feature.
+	FreeTrialDaysRemaining int32
+
+	// The name of the feature for which the free trial is configured.
+	Name FreeTrialFeatureResult
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the location of the remote IP address.
 type GeoLocation struct {
 
@@ -1093,6 +1140,26 @@ type LocalPortDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the login attempts.
+type LoginAttribute struct {
+
+	// Indicates the application name used to attempt log in.
+	Application *string
+
+	// Represents the sum of failed (unsuccessful) login attempts made to establish a
+	// connection to the database instance.
+	FailedLoginAttempts int32
+
+	// Represents the sum of successful connections (a correct combination of login
+	// attributes) made to the database instance by the actor.
+	SuccessfulLoginAttempts int32
+
+	// Indicates the user name which attempted to log in.
+	User *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes whether Malware Protection will be enabled as a data source.
 type MalwareProtectionConfiguration struct {
 
@@ -1195,8 +1262,38 @@ type MemberDataSourceConfiguration struct {
 
 	// Contains information on the status of data sources for the account.
 	//
-	// This member is required.
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *DataSourceConfigurationsResult
+
+	// Contains information about the status of the features for the member account.
+	Features []MemberFeaturesConfigurationResult
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the features for the member account.
+type MemberFeaturesConfiguration struct {
+
+	// The name of the feature.
+	Name OrgFeature
+
+	// The status of the feature.
+	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the features for the member account.
+type MemberFeaturesConfigurationResult struct {
+
+	// Indicates the name of the feature that is enabled for the detector.
+	Name OrgFeature
+
+	// Indicates the status of the feature that is enabled for the detector.
+	Status FeatureStatus
+
+	// The timestamp at which the feature object was updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1339,6 +1436,35 @@ type OrganizationEbsVolumesResult struct {
 	// An object that contains the status of whether scanning EBS volumes should be
 	// auto-enabled for new members joining the organization.
 	AutoEnable bool
+
+	noSmithyDocumentSerde
+}
+
+// A list of features which will be configured for the organization.
+type OrganizationFeatureConfiguration struct {
+
+	// The status of the feature that will be configured for the organization.
+	AutoEnable OrgFeatureStatus
+
+	// The name of the feature that will be configured for the organization.
+	Name OrgFeature
+
+	noSmithyDocumentSerde
+}
+
+// A list of features which will be configured for the organization.
+type OrganizationFeatureConfigurationResult struct {
+
+	// Describes how The status of the feature that are configured for the member
+	// accounts within the organization. If you set AutoEnable to NEW, a feature will
+	// be configured for only the new accounts when they join the organization. If you
+	// set AutoEnable to NONE, no feature will be configured for the accounts when they
+	// join the organization.
+	AutoEnable OrgFeatureStatus
+
+	// The name of the feature that is configured for the member accounts within the
+	// organization.
+	Name OrgFeature
 
 	noSmithyDocumentSerde
 }
@@ -1547,6 +1673,69 @@ type PublicAccess struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the resource type RDSDBInstance involved in a
+// GuardDuty finding.
+type RdsDbInstanceDetails struct {
+
+	// The identifier of the database cluster that contains the database instance ID
+	// involved in the finding.
+	DbClusterIdentifier *string
+
+	// The Amazon Resource Name (ARN) that identifies the database instance involved in
+	// the finding.
+	DbInstanceArn *string
+
+	// The identifier associated to the database instance that was involved in the
+	// finding.
+	DbInstanceIdentifier *string
+
+	// The database engine of the database instance involved in the finding.
+	Engine *string
+
+	// The version of the database engine that was involved in the finding.
+	EngineVersion *string
+
+	// Instance tag key-value pairs associated with the database instance ID.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the user and authentication details for a database
+// instance involved in the finding.
+type RdsDbUserDetails struct {
+
+	// The application name used in the anomalous login attempt.
+	Application *string
+
+	// The authentication method used by the user involved in the finding.
+	AuthMethod *string
+
+	// The name of the database instance involved in the anomalous login attempt.
+	Database *string
+
+	// The version of the Secure Socket Layer (SSL) used for the network.
+	Ssl *string
+
+	// The user name used in the anomalous login attempt.
+	User *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that a login attempt was made to the potentially compromised database
+// from a remote IP address.
+type RdsLoginAttemptAction struct {
+
+	// Indicates the login attributes used in the login attempt.
+	LoginAttributes []LoginAttribute
+
+	// Contains information about the remote IP address of the connection.
+	RemoteIpDetails *RemoteIpDetails
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the remote Amazon Web Services account that made the API
 // call.
 type RemoteAccountDetails struct {
@@ -1622,6 +1811,14 @@ type Resource struct {
 
 	// Details about the Kubernetes user and workload involved in a Kubernetes finding.
 	KubernetesDetails *KubernetesDetails
+
+	// Contains information about the database instance to which an anomalous login
+	// attempt was made.
+	RdsDbInstanceDetails *RdsDbInstanceDetails
+
+	// Contains information about the user details through which anomalous login
+	// attempt was made.
+	RdsDbUserDetails *RdsDbUserDetails
 
 	// The type of Amazon Web Services resource.
 	ResourceType *string
@@ -2098,13 +2295,16 @@ type UsageAccountResult struct {
 // Contains information about the criteria used to query usage statistics.
 type UsageCriteria struct {
 
-	// The data sources to aggregate usage statistics from.
-	//
-	// This member is required.
-	DataSources []DataSource
-
 	// The account IDs to aggregate usage statistics from.
 	AccountIds []string
+
+	// The data sources to aggregate usage statistics from.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources []DataSource
+
+	// The features to aggregate usage statistics from.
+	Features []UsageFeature
 
 	// The resources to aggregate usage statistics from. Only accepts exact resource
 	// names.
@@ -2120,6 +2320,18 @@ type UsageDataSourceResult struct {
 	DataSource DataSource
 
 	// Represents the total of usage for the specified data source.
+	Total *Total
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the result of the total usage based on the feature.
+type UsageFeatureResult struct {
+
+	// The feature that generated the usage cost.
+	Feature UsageFeature
+
+	// Contains the total usage with the corresponding currency unit for that value.
 	Total *Total
 
 	noSmithyDocumentSerde
@@ -2147,6 +2359,9 @@ type UsageStatistics struct {
 
 	// The usage statistic sum organized by on data source.
 	SumByDataSource []UsageDataSourceResult
+
+	// The usage statistic sum organized by feature.
+	SumByFeature []UsageFeatureResult
 
 	// The usage statistic sum organized by resource.
 	SumByResource []UsageResourceResult

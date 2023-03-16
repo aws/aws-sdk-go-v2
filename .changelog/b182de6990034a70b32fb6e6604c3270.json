@@ -1,0 +1,8 @@
+{
+    "id": "b182de69-9003-4a70-b32f-b6e6604c3270",
+    "type": "feature",
+    "description": "Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

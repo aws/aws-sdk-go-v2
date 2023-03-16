@@ -34,9 +34,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You tried to create a new view or index when one already exists, and you either
-// didn't specify or specified a different idempotency token as the original
-// request.
+// The request failed because either you specified parameters that didn’t match the
+// original request, or you attempted to create a view with a name that already
+// exists in this Amazon Web Services Region.
 type ConflictException struct {
 	Message *string
 

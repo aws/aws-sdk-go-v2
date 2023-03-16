@@ -44,7 +44,12 @@ type UpdateOrganizationConfigurationInput struct {
 	DetectorId *string
 
 	// Describes which data sources will be updated.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.OrganizationDataSourceConfigurations
+
+	// A list of features that will be configured for the organization.
+	Features []types.OrganizationFeatureConfiguration
 
 	noSmithyDocumentSerde
 }
