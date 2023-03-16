@@ -1636,6 +1636,11 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 				sv.MetricName = ptr.String(jtv)
 			}
 
+		case "Metrics":
+			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQueries(&sv.Metrics, value); err != nil {
+				return err
+			}
+
 		case "Namespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3109,6 +3114,303 @@ func awsAwsjson11_deserializeDocumentSuspendedState(v **types.SuspendedState, va
 					return fmt.Errorf("expected ScalingSuspended to be of type *bool, got %T instead", value)
 				}
 				sv.ScheduledScalingSuspended = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetTrackingMetric(v **types.TargetTrackingMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetTrackingMetric
+	if *v == nil {
+		sv = &types.TargetTrackingMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Dimensions":
+			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricDimensions(&sv.Dimensions, value); err != nil {
+				return err
+			}
+
+		case "MetricName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetTrackingMetricName to be of type string, got %T instead", value)
+				}
+				sv.MetricName = ptr.String(jtv)
+			}
+
+		case "Namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetTrackingMetricNamespace to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQueries(v *[]types.TargetTrackingMetricDataQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TargetTrackingMetricDataQuery
+	if *v == nil {
+		cv = []types.TargetTrackingMetricDataQuery{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TargetTrackingMetricDataQuery
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQuery(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQuery(v **types.TargetTrackingMetricDataQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetTrackingMetricDataQuery
+	if *v == nil {
+		sv = &types.TargetTrackingMetricDataQuery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Expression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "Label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		case "MetricStat":
+			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricStat(&sv.MetricStat, value); err != nil {
+				return err
+			}
+
+		case "ReturnData":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ReturnData to be of type *bool, got %T instead", value)
+				}
+				sv.ReturnData = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetTrackingMetricDimension(v **types.TargetTrackingMetricDimension, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetTrackingMetricDimension
+	if *v == nil {
+		sv = &types.TargetTrackingMetricDimension{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetTrackingMetricDimensionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetTrackingMetricDimensionValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetTrackingMetricDimensions(v *[]types.TargetTrackingMetricDimension, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TargetTrackingMetricDimension
+	if *v == nil {
+		cv = []types.TargetTrackingMetricDimension{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TargetTrackingMetricDimension
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricDimension(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetTrackingMetricStat(v **types.TargetTrackingMetricStat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetTrackingMetricStat
+	if *v == nil {
+		sv = &types.TargetTrackingMetricStat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Metric":
+			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetric(&sv.Metric, value); err != nil {
+				return err
+			}
+
+		case "Stat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.Stat = ptr.String(jtv)
+			}
+
+		case "Unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetTrackingMetricUnit to be of type string, got %T instead", value)
+				}
+				sv.Unit = ptr.String(jtv)
 			}
 
 		default:

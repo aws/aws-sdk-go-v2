@@ -84,6 +84,7 @@
         "api_op_GetCurrentUserData.go",
         "api_op_GetFederationToken.go",
         "api_op_GetMetricData.go",
+        "api_op_GetMetricDataV2.go",
         "api_op_GetTaskTemplate.go",
         "api_op_GetTrafficDistribution.go",
         "api_op_ListAgentStatuses.go",

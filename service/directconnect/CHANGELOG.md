@@ -1,3 +1,11 @@
+# v1.18.7 (2023-03-14)
+
+* **Documentation**: describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.
+
+# v1.18.6 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.5 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

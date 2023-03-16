@@ -923,6 +923,24 @@ func awsRestjson1_deserializeOpDocumentCreateSubscriberOutput(v **CreateSubscrib
 
 	for key, value := range shape {
 		switch key {
+		case "resourceShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceShareArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceShareArn = ptr.String(jtv)
+			}
+
+		case "resourceShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceShareName to be of type string, got %T instead", value)
+				}
+				sv.ResourceShareName = ptr.String(jtv)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4795,6 +4813,15 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode_ = ptr.String(jtv)
+			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5770,6 +5797,11 @@ func awsRestjson1_deserializeDocumentLakeConfigurationResponse(v **types.LakeCon
 				return err
 			}
 
+		case "updateStatus":
+			if err := awsRestjson1_deserializeDocumentUpdateStatus(&sv.UpdateStatus, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5811,6 +5843,55 @@ func awsRestjson1_deserializeDocumentLakeConfigurationResponseMap(v *map[string]
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLastUpdateFailure(v **types.LastUpdateFailure, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LastUpdateFailure
+	if *v == nil {
+		sv = &types.LastUpdateFailure{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6453,6 +6534,24 @@ func awsRestjson1_deserializeDocumentSubscriberResource(v **types.SubscriberReso
 				sv.ExternalId = ptr.String(jtv)
 			}
 
+		case "resourceShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceShareArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceShareArn = ptr.String(jtv)
+			}
+
+		case "resourceShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceShareName to be of type string, got %T instead", value)
+				}
+				sv.ResourceShareName = ptr.String(jtv)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6699,6 +6798,60 @@ func awsRestjson1_deserializeDocumentTwoDimensionsMap(v *map[string][]string, va
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpdateStatus(v **types.UpdateStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpdateStatus
+	if *v == nil {
+		sv = &types.UpdateStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lastUpdateFailure":
+			if err := awsRestjson1_deserializeDocumentLastUpdateFailure(&sv.LastUpdateFailure, value); err != nil {
+				return err
+			}
+
+		case "lastUpdateRequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LastUpdateRequestId = ptr.String(jtv)
+			}
+
+		case "lastUpdateStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected settingsStatus to be of type string, got %T instead", value)
+				}
+				sv.LastUpdateStatus = types.SettingsStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

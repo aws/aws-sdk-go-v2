@@ -22,7 +22,7 @@ import (
 // IP addresses, workers who attempt to access tasks using any IP address outside
 // the specified range are denied and get a Not Found error message on the worker
 // portal. To restrict access to all the workers in public internet, add the
-// SourceIpConfig CIDR value as "0.0.0.0/0". Amazon SageMaker does not support
+// SourceIpConfig CIDR value as "10.0.0.0/16". Amazon SageMaker does not support
 // Source Ip restriction for worker portals in VPC. Use OidcConfig to update the
 // configuration of a workforce created using your own OIDC IdP. You can only
 // update your OIDC IdP configuration when there are no work teams associated with

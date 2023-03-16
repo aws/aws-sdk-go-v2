@@ -15,7 +15,7 @@ import (
 // restored in your repository. If you want to remove a package version from your
 // repository and be able to restore it later, set its status to Archived. Archived
 // packages cannot be downloaded from a repository and don't show up with list
-// package APIs (for example, ListackageVersions
+// package APIs (for example, ListPackageVersions
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)),
 // but you can restore them using UpdatePackageVersionsStatus
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html).
@@ -81,6 +81,8 @@ type DeletePackageVersionsInput struct {
 	// * Python and NuGet package versions do not contain a
 	// corresponding component, package versions of those formats do not have a
 	// namespace.
+	//
+	// * The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde

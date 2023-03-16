@@ -2899,6 +2899,9 @@ type DnsOptions struct {
 	// The DNS records created for the endpoint.
 	DnsRecordIpType DnsRecordIpType
 
+	// Indicates whether to enable private DNS only for inbound endpoints.
+	PrivateDnsOnlyForInboundResolverEndpoint *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2907,6 +2910,12 @@ type DnsOptionsSpecification struct {
 
 	// The DNS records created for the endpoint.
 	DnsRecordIpType DnsRecordIpType
+
+	// Indicates whether to enable private DNS only for inbound endpoints. This option
+	// is available only for services that support both gateway and interface
+	// endpoints. It routes traffic that originates from the VPC to the gateway
+	// endpoint and traffic that originates from on-premises to the interface endpoint.
+	PrivateDnsOnlyForInboundResolverEndpoint *bool
 
 	noSmithyDocumentSerde
 }

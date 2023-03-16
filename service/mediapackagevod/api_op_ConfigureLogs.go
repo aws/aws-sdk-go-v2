@@ -49,6 +49,9 @@ type ConfigureLogsOutput struct {
 	// CDN Authorization credentials
 	Authorization *types.Authorization
 
+	// The time the PackagingGroup was created.
+	CreatedAt *string
+
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
 

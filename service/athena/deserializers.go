@@ -9474,6 +9474,15 @@ func awsAwsjson11_deserializeDocumentQueryExecution(v **types.QueryExecution, va
 				return err
 			}
 
+		case "SubstatementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SubstatementType = ptr.String(jtv)
+			}
+
 		case "WorkGroup":
 			if value != nil {
 				jtv, ok := value.(string)

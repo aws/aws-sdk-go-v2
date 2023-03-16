@@ -39006,6 +39006,11 @@ func awsEc2query_serializeDocumentDnsOptionsSpecification(v *types.DnsOptionsSpe
 		objectKey.String(string(v.DnsRecordIpType))
 	}
 
+	if v.PrivateDnsOnlyForInboundResolverEndpoint != nil {
+		objectKey := object.Key("PrivateDnsOnlyForInboundResolverEndpoint")
+		objectKey.Boolean(*v.PrivateDnsOnlyForInboundResolverEndpoint)
+	}
+
 	return nil
 }
 

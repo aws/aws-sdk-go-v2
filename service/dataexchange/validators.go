@@ -1024,6 +1024,21 @@ func validateImportAssetsFromS3RequestDetails(v *types.ImportAssetsFromS3Request
 	}
 }
 
+func validateKmsKeyToGrant(v *types.KmsKeyToGrant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsKeyToGrant"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLFTag(v *types.LFTag) error {
 	if v == nil {
 		return nil
@@ -1066,6 +1081,23 @@ func validateListOfAssetSourceEntry(v []types.AssetSourceEntry) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAssetSourceEntry"}
 	for i := range v {
 		if err := validateAssetSourceEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListOfKmsKeysToGrant(v []types.KmsKeyToGrant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfKmsKeysToGrant"}
+	for i := range v {
+		if err := validateKmsKeyToGrant(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1239,6 +1271,11 @@ func validateS3DataAccessAssetSourceEntry(v *types.S3DataAccessAssetSourceEntry)
 	invalidParams := smithy.InvalidParamsError{Context: "S3DataAccessAssetSourceEntry"}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.KmsKeysToGrant != nil {
+		if err := validateListOfKmsKeysToGrant(v.KmsKeysToGrant); err != nil {
+			invalidParams.AddNested("KmsKeysToGrant", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

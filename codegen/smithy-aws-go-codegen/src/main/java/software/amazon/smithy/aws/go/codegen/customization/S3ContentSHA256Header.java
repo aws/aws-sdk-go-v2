@@ -15,7 +15,6 @@ import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.utils.ListUtils;
 
-
 public class S3ContentSHA256Header implements GoIntegration {
 
     /**

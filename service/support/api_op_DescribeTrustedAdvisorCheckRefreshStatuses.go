@@ -57,7 +57,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	// InvalidParameterValue error.
 	//
 	// This member is required.
-	CheckIds []string
+	CheckIds []*string
 
 	noSmithyDocumentSerde
 }

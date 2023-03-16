@@ -120,8 +120,19 @@ type LicenseInfo struct {
 type PackageDependency struct {
 
 	// The type of a package dependency. The possible values depend on the package
-	// type. Example types are compile, runtime, and test for Maven packages, and dev,
-	// prod, and optional for npm packages.
+	// type.
+	//
+	// * npm: regular, dev, peer, optional
+	//
+	// * maven: optional, parent, compile,
+	// runtime, test, system, provided. Note that parent is not a regular Maven
+	// dependency type; instead this is extracted from the  element if one is defined
+	// in the package version's POM file.
+	//
+	// * nuget: The dependencyType field is never
+	// set for NuGet packages.
+	//
+	// * pypi: Requires-Dist
 	DependencyType *string
 
 	// The namespace of the package that this package depends on. The package component
@@ -168,6 +179,8 @@ type PackageDescription struct {
 	// * Python and NuGet
 	// packages do not contain a corresponding component, packages of those formats do
 	// not have a namespace.
+	//
+	// * The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// The package origin configuration for the package.
@@ -223,6 +236,8 @@ type PackageSummary struct {
 	// * Python and NuGet
 	// packages do not contain a corresponding component, packages of those formats do
 	// not have a namespace.
+	//
+	// * The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// A PackageOriginConfiguration
@@ -268,6 +283,8 @@ type PackageVersionDescription struct {
 	// * Python and NuGet package versions do not contain a
 	// corresponding component, package versions of those formats do not have a
 	// namespace.
+	//
+	// * The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// A PackageVersionOrigin

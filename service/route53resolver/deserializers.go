@@ -3263,6 +3263,9 @@ func awsAwsjson11_deserializeOpErrorGetResolverConfig(response *smithyhttp.Respo
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4232,6 +4235,9 @@ func awsAwsjson11_deserializeOpErrorGetResolverRulePolicy(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -5221,6 +5227,9 @@ func awsAwsjson11_deserializeOpErrorListResolverConfigs(response *smithyhttp.Res
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6575,6 +6584,9 @@ func awsAwsjson11_deserializeOpErrorPutResolverRulePolicy(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -7474,6 +7486,9 @@ func awsAwsjson11_deserializeOpErrorUpdateResolverConfig(response *smithyhttp.Re
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -9827,6 +9842,15 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				sv.IpId = ptr.String(jtv)
 			}
 
+		case "Ipv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6 to be of type string, got %T instead", value)
+				}
+				sv.Ipv6 = ptr.String(jtv)
+			}
+
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10228,6 +10252,15 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "ResolverEndpointType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResolverEndpointType to be of type string, got %T instead", value)
+				}
+				sv.ResolverEndpointType = types.ResolverEndpointType(jtv)
 			}
 
 		case "SecurityGroupIds":
@@ -11233,6 +11266,15 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 					return fmt.Errorf("expected Ip to be of type string, got %T instead", value)
 				}
 				sv.Ip = ptr.String(jtv)
+			}
+
+		case "Ipv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6 to be of type string, got %T instead", value)
+				}
+				sv.Ipv6 = ptr.String(jtv)
 			}
 
 		case "Port":

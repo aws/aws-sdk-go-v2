@@ -1,3 +1,11 @@
+# v1.21.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2023-03-08)
+
+* **Feature**: This release provides the date and time live resources were created.
+
 # v1.20.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

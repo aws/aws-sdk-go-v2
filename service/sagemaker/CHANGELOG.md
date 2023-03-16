@@ -1,3 +1,15 @@
+# v1.71.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.71.0 (2023-03-09)
+
+* **Feature**: Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+
+# v1.70.0 (2023-03-08)
+
+* **Feature**: There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
 # v1.69.0 (2023-03-02)
 
 * **Feature**: Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.

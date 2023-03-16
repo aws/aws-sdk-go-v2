@@ -53,7 +53,7 @@ type DescribeTrustedAdvisorCheckSummariesInput struct {
 	// The IDs of the Trusted Advisor checks.
 	//
 	// This member is required.
-	CheckIds []string
+	CheckIds []*string
 
 	noSmithyDocumentSerde
 }

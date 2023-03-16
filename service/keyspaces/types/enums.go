@@ -2,6 +2,22 @@
 
 package types
 
+type ClientSideTimestampsStatus string
+
+// Enum values for ClientSideTimestampsStatus
+const (
+	ClientSideTimestampsStatusEnabled ClientSideTimestampsStatus = "ENABLED"
+)
+
+// Values returns all known values for ClientSideTimestampsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientSideTimestampsStatus) Values() []ClientSideTimestampsStatus {
+	return []ClientSideTimestampsStatus{
+		"ENABLED",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType

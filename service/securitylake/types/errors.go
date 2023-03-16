@@ -18,6 +18,8 @@ type AccessDeniedException struct {
 
 	ErrorCodeOverride *string
 
+	ErrorCode_ *string
+
 	noSmithyDocumentSerde
 }
 

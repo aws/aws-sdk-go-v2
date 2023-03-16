@@ -127,14 +127,14 @@
                     "name": "application-autoscaling"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>With Application Auto Scaling, you can configure automatic scaling for the following\n      resources:</p>\n         <ul>\n            <li>\n               <p>Amazon AppStream 2.0 fleets</p>\n            </li>\n            <li>\n               <p>Amazon Aurora Replicas</p>\n            </li>\n            <li>\n               <p>Amazon Comprehend document classification and entity recognizer endpoints</p>\n            </li>\n            <li>\n               <p>Amazon DynamoDB tables and global secondary indexes throughput capacity</p>\n            </li>\n            <li>\n               <p>Amazon ECS services</p>\n            </li>\n            <li>\n               <p>Amazon ElastiCache for Redis clusters (replication groups)</p>\n            </li>\n            <li>\n               <p>Amazon EMR clusters</p>\n            </li>\n            <li>\n               <p>Amazon Keyspaces (for Apache Cassandra) tables</p>\n            </li>\n            <li>\n               <p>Lambda function provisioned concurrency</p>\n            </li>\n            <li>\n               <p>Amazon Managed Streaming for Apache Kafka broker storage</p>\n            </li>\n            <li>\n               <p>Amazon Neptune clusters</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker endpoint variants</p>\n            </li>\n            <li>\n               <p>Spot Fleets (Amazon EC2)</p>\n            </li>\n            <li>\n               <p>Custom resources provided by your own applications or services</p>\n            </li>\n         </ul>\n         <p>\n            <b>API Summary</b>\n         </p>\n         <p>The Application Auto Scaling service API includes three key sets of actions: </p>\n         <ul>\n            <li>\n               <p>Register and manage scalable targets - Register Amazon Web Services or custom resources as scalable\n          targets (a resource that Application Auto Scaling can scale), set minimum and maximum capacity limits, and\n          retrieve information on existing scalable targets.</p>\n            </li>\n            <li>\n               <p>Configure and manage automatic scaling - Define scaling policies to dynamically scale\n          your resources in response to CloudWatch alarms, schedule one-time or recurring scaling actions,\n          and retrieve your recent scaling activity history.</p>\n            </li>\n            <li>\n               <p>Suspend and resume scaling - Temporarily suspend and later resume automatic scaling by\n          calling the <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html\">RegisterScalableTarget</a> API action for any Application Auto Scaling scalable target. You can\n          suspend and resume (individually or in combination) scale-out activities that are\n          triggered by a scaling policy, scale-in activities that are triggered by a scaling policy,\n          and scheduled scaling.</p>\n            </li>\n         </ul>\n         <p>To learn more about Application Auto Scaling, including information about granting IAM users required\n      permissions for Application Auto Scaling actions, see the <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html\">Application Auto Scaling User\n        Guide</a>.</p>",
+                "smithy.api#documentation": "<p>With Application Auto Scaling, you can configure automatic scaling for the following\n      resources:</p>\n         <ul>\n            <li>\n               <p>Amazon AppStream 2.0 fleets</p>\n            </li>\n            <li>\n               <p>Amazon Aurora Replicas</p>\n            </li>\n            <li>\n               <p>Amazon Comprehend document classification and entity recognizer endpoints</p>\n            </li>\n            <li>\n               <p>Amazon DynamoDB tables and global secondary indexes throughput capacity</p>\n            </li>\n            <li>\n               <p>Amazon ECS services</p>\n            </li>\n            <li>\n               <p>Amazon ElastiCache for Redis clusters (replication groups)</p>\n            </li>\n            <li>\n               <p>Amazon EMR clusters</p>\n            </li>\n            <li>\n               <p>Amazon Keyspaces (for Apache Cassandra) tables</p>\n            </li>\n            <li>\n               <p>Lambda function provisioned concurrency</p>\n            </li>\n            <li>\n               <p>Amazon Managed Streaming for Apache Kafka broker storage</p>\n            </li>\n            <li>\n               <p>Amazon Neptune clusters</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker endpoint variants</p>\n            </li>\n            <li>\n               <p>Spot Fleets (Amazon EC2)</p>\n            </li>\n            <li>\n               <p>Custom resources provided by your own applications or services</p>\n            </li>\n         </ul>\n         <p>To learn more about Application Auto Scaling, see the <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html\">Application Auto Scaling User\n      Guide</a>.</p>\n         <p>\n            <b>API Summary</b>\n         </p>\n         <p>The Application Auto Scaling service API includes three key sets of actions: </p>\n         <ul>\n            <li>\n               <p>Register and manage scalable targets - Register Amazon Web Services or custom resources as scalable\n          targets (a resource that Application Auto Scaling can scale), set minimum and maximum capacity limits, and\n          retrieve information on existing scalable targets.</p>\n            </li>\n            <li>\n               <p>Configure and manage automatic scaling - Define scaling policies to dynamically scale\n          your resources in response to CloudWatch alarms, schedule one-time or recurring scaling actions,\n          and retrieve your recent scaling activity history.</p>\n            </li>\n            <li>\n               <p>Suspend and resume scaling - Temporarily suspend and later resume automatic scaling by\n          calling the <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html\">RegisterScalableTarget</a> API action for any Application Auto Scaling scalable target. You can\n          suspend and resume (individually or in combination) scale-out activities that are\n          triggered by a scaling policy, scale-in activities that are triggered by a scaling policy,\n          and scheduled scaling.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Application Auto Scaling",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -163,15 +163,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -180,7 +232,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -190,22 +242,182 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        "aws-us-gov",
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "name"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://application-autoscaling.{Region}.amazonaws.com",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -218,223 +430,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
-                                                        },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
                                                     "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
-                                                                    "fn": "stringEquals",
+                                                                    "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
+                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
                                                                                 {
                                                                                     "ref": "PartitionResult"
                                                                                 },
-                                                                                "name"
+                                                                                "supportsDualStack"
                                                                             ]
                                                                         }
                                                                     ]
                                                                 }
                                                             ],
-                                                            "endpoint": {
-                                                                "url": "https://application-autoscaling.{Region}.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
                                                         {
                                                             "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
                                                 },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -442,7 +483,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -451,28 +492,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [],
-                                            "endpoint": {
-                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dnsSuffix}",
-                                                "properties": {},
-                                                "headers": {}
-                                            },
-                                            "type": "endpoint"
-                                        }
-                                    ]
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -481,159 +507,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://application-autoscaling.us-iso-east-1.c2s.ic.gov"
+                                    "url": "https://application-autoscaling.af-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-iso-west-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -644,139 +527,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.ap-southeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -787,9 +540,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -800,9 +553,243 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -813,9 +800,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -826,9 +813,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -839,126 +826,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling-fips.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://application-autoscaling.cn-northwest-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -969,9 +839,22 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -982,9 +865,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -995,9 +878,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1008,13 +891,170 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://application-autoscaling-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -1023,7 +1063,6 @@
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1033,9 +1072,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1045,9 +1084,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1082,15 +1121,13 @@
                 "MetricName": {
                     "target": "com.amazonaws.applicationautoscaling#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric. To get the exact metric name, namespace, and dimensions, inspect\n         the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the metric. To get the exact metric name, namespace, and dimensions, inspect\n         the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>"
                     }
                 },
                 "Namespace": {
                     "target": "com.amazonaws.applicationautoscaling#MetricNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the metric.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The namespace of the metric.</p>"
                     }
                 },
                 "Dimensions": {
@@ -1102,8 +1139,7 @@
                 "Statistic": {
                     "target": "com.amazonaws.applicationautoscaling#MetricStatistic",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic of the metric.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The statistic of the metric.</p>"
                     }
                 },
                 "Unit": {
@@ -1111,10 +1147,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unit of the metric. For a complete list of the units that CloudWatch supports, see the\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a> data\n         type in the <i>Amazon CloudWatch API Reference</i>.</p>"
                     }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricDataQueries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics to include in the target tracking scaling policy, as a metric data query.\n         This can include both raw metric and metric math expressions.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing for a target tracking scaling policy to use\n         with Application Auto Scaling.</p>\n         <p>For information about the available metrics for a service, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services\n            services that publish CloudWatch metrics</a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>\n         <p>To create your customized metric specification:</p>\n         <ul>\n            <li>\n               <p>Add values for each required parameter from CloudWatch. You can use an existing metric,\n               or a new metric that you create. To use your own metric, you must first publish the\n               metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish custom\n                  metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Choose a metric that changes proportionally with capacity. The value of the metric\n               should increase or decrease in inverse proportion to the number of capacity units.\n               That is, the value of the metric should decrease when capacity increases, and\n               increase when capacity decreases. </p>\n            </li>\n         </ul>\n         <p>For an example of how creating new metrics can be useful, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html\">Scaling\n            based on Amazon SQS</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. This topic\n         mentions Auto Scaling groups, but the same scenario for Amazon SQS can apply to the target tracking\n         scaling policies that you create for a Spot Fleet by using the Application Auto Scaling API.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing for a target tracking scaling policy to use\n         with Application Auto Scaling.</p>\n         <p>For information about the available metrics for a service, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services\n            services that publish CloudWatch metrics</a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>\n         <p>To create your customized metric specification:</p>\n         <ul>\n            <li>\n               <p>Add values for each required parameter from CloudWatch. You can use an existing metric,\n               or a new metric that you create. To use your own metric, you must first publish the\n               metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish custom\n                  metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Choose a metric that changes proportionally with capacity. The value of the metric\n               should increase or decrease in inverse proportion to the number of capacity units.\n               That is, the value of the metric should decrease when capacity increases, and\n               increase when capacity decreases. </p>\n            </li>\n         </ul>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
             }
         },
         "com.amazonaws.applicationautoscaling#DeleteScalingPolicy": {
@@ -1708,6 +1750,16 @@
         "com.amazonaws.applicationautoscaling#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.applicationautoscaling#Expression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
         "com.amazonaws.applicationautoscaling#FailedResourceAccessException": {
             "type": "structure",
             "members": {
@@ -1723,6 +1775,16 @@
                 "smithy.api#documentation": "<p>Failed access to resources caused an exception. This exception is thrown when Application Auto Scaling\n         is unable to retrieve the alarms associated with a scaling policy due to a client error,\n         for example, if the role ARN specified for a scalable target does not have permission to\n         call the CloudWatch <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html\">DescribeAlarms</a> on your behalf.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.applicationautoscaling#Id": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.applicationautoscaling#IncludeNotScaledActivities": {
@@ -2459,6 +2521,9 @@
                 }
             }
         },
+        "com.amazonaws.applicationautoscaling#ReturnData": {
+            "type": "boolean"
+        },
         "com.amazonaws.applicationautoscaling#ScalableDimension": {
             "type": "enum",
             "members": {
@@ -2637,7 +2702,10 @@
                     }
                 },
                 "SuspendedState": {
-                    "target": "com.amazonaws.applicationautoscaling#SuspendedState"
+                    "target": "com.amazonaws.applicationautoscaling#SuspendedState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the scaling activities for a scalable target are in a suspended\n         state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3172,6 +3240,183 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies whether the scaling activities for a scalable target are in a suspended state.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetric": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions for the metric. For the list of available dimensions, see the Amazon Web Services\n         documentation available from the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services\n            services that publish CloudWatch metrics </a> in the <i>Amazon CloudWatch User\n            Guide</i>. </p>\n         <p>Conditional: If you published your metric with dimensions, you must specify the same\n         dimensions in your scaling policy.</p>"
+                    }
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric.</p>"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the metric. For more information, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services\n            services that publish CloudWatch metrics </a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a specific metric.</p>\n         <p>Metric is a property of the <a>TargetTrackingMetricStat</a> object.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricDataQueries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricDataQuery"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricDataQuery": {
+            "type": "structure",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.applicationautoscaling#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The math expression to perform on the returned data, if this object is performing a math\n         expression. This expression can use the <code>Id</code> of the other metrics to refer to\n         those metrics, and can also use the <code>Id</code> of other expressions to use the result\n         of those expressions. </p>\n         <p>Conditional: Within each <code>TargetTrackingMetricDataQuery</code> object, you must\n         specify either <code>Expression</code> or <code>MetricStat</code>, but not both.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.applicationautoscaling#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short name that identifies the object's results in the response. This name must be\n         unique among all <code>MetricDataQuery</code> objects specified for a single scaling\n         policy. If you are performing math expressions on this set of data, this name represents\n         that data and can serve as a variable in the mathematical expression. The valid characters\n         are letters, numbers, and underscores. The first character must be a lowercase letter.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Label": {
+                    "target": "com.amazonaws.applicationautoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable label for this metric or expression. This is especially useful if this\n         is a math expression, so that you know what the value represents.</p>"
+                    }
+                },
+                "MetricStat": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricStat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the metric data to return.</p>\n         <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either\n            <code>Expression</code> or <code>MetricStat</code>, but not both.</p>"
+                    }
+                },
+                "ReturnData": {
+                    "target": "com.amazonaws.applicationautoscaling#ReturnData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to return the timestamps and raw data values of this metric. </p>\n         <p>If you use any math expressions, specify <code>true</code> for this value for only the\n         final math expression that the metric specification is based on. You must specify\n            <code>false</code> for <code>ReturnData</code> for all the other metrics and expressions\n         used in the metric specification.</p>\n         <p>If you are only retrieving metrics and not performing any math expressions, do not\n         specify anything for <code>ReturnData</code>. This sets it to its default\n            (<code>true</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metric data to return. Also defines whether this call is returning data for one\n         metric only, or whether it is performing a math expression on the values of returned metric\n         statistics to create a new time series. A time series is a series of data points, each of\n         which is associated with a timestamp.</p>\n         <p>For more information and examples, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking-metric-math.html\">Create a target tracking scaling policy for Application Auto Scaling using metric math</a> in the\n         <i>Application Auto Scaling User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimension": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimensionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the dimension.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the dimension of a metric.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimensionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimensionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricDimension"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricStat": {
+            "type": "structure",
+            "members": {
+                "Metric": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get\n         the exact metric name, namespace, and dimensions, inspect the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is\n         returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stat": {
+                    "target": "com.amazonaws.applicationautoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For a\n         list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n         <p>The most commonly used metrics for scaling is <code>Average</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.applicationautoscaling#TargetTrackingMetricUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit to use for the returned data points. For a complete list of the units that CloudWatch\n         supports, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a> data\n         type in the <i>Amazon CloudWatch API Reference</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic, period, and\n         unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TargetTrackingMetricUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1023
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.applicationautoscaling#TargetTrackingScalingPolicyConfiguration": {

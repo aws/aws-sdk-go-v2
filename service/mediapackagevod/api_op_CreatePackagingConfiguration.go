@@ -66,6 +66,9 @@ type CreatePackagingConfigurationOutput struct {
 	// A CMAF packaging configuration.
 	CmafPackage *types.CmafPackage
 
+	// The time the PackagingConfiguration was created.
+	CreatedAt *string
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
 

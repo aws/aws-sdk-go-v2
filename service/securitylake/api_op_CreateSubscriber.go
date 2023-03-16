@@ -72,10 +72,18 @@ type CreateSubscriberOutput struct {
 	// This member is required.
 	SubscriptionId *string
 
+	// The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource
+	// share. Before accepting the RAM resource share invitation, you can view details
+	// related to the RAM resource share.
+	ResourceShareArn *string
+
+	// The name of the resource share.
+	ResourceShareName *string
+
 	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
-	// more information about ARNs and how to use them in policies, see IAM identifiers
-	// in the Identity and Access Management (IAM) User Guide
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html). .
+	// more information about ARNs and how to use them in policies, see Amazon Security
+	// Lake User Guide
+	// (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html).
 	RoleArn *string
 
 	// The ARN for the Amazon S3 bucket.

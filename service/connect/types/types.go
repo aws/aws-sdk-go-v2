@@ -711,6 +711,24 @@ type Filters struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the filter to apply when retrieving metrics with the GetMetricDataV2
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html)
+// API.
+type FilterV2 struct {
+
+	// The key to use for filtering data. For example, QUEUE, ROUTING_PROFILE, AGENT,
+	// CHANNEL, AGENT_HIERARCHY_LEVEL_ONE, AGENT_HIERARCHY_LEVEL_TWO,
+	// AGENT_HIERARCHY_LEVEL_THREE, AGENT_HIERARCHY_LEVEL_FOUR,
+	// AGENT_HIERARCHY_LEVEL_FIVE. There must be at least 1 key and a maximum 5 keys.
+	FilterKey *string
+
+	// The identifiers to use for filtering data. For example, if you have a filter key
+	// of QUEUE, you would add queue IDs or ARNs in FilterValues.
+	FilterValues []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a hierarchy group.
 type HierarchyGroup struct {
 
@@ -1283,6 +1301,64 @@ type MediaConcurrency struct {
 	//
 	// This member is required.
 	Concurrency int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains the name, thresholds, and metric filters.
+type MetricDataV2 struct {
+
+	// The metric name, thresholds, and metric filters of the returned metric.
+	Metric *MetricV2
+
+	// The corresponding value of the metric returned in the response.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the filter used when retrieving metrics.
+// MetricFiltersV2 can be used on the following metrics: AVG_AGENT_CONNECTING_TIME,
+// CONTACTS_CREATED, CONTACTS_HANDLED, SUM_CONTACTS_DISCONNECTED.
+type MetricFilterV2 struct {
+
+	// The key to use for filtering data. Valid metric filter keys: INITIATION_METHOD,
+	// DISCONNECT_REASON
+	MetricFilterKey *string
+
+	// The values to use for filtering data. Valid metric filter values for
+	// INITIATION_METHOD: INBOUND | OUTBOUND | TRANSFER | QUEUE_TRANSFER | CALLBACK |
+	// API Valid metric filter values for DISCONNECT_REASON: CUSTOMER_DISCONNECT |
+	// AGENT_DISCONNECT | THIRD_PARTY_DISCONNECT | TELECOM_PROBLEM | BARGED |
+	// CONTACT_FLOW_DISCONNECT | OTHER | EXPIRED | API
+	MetricFilterValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the metric results.
+type MetricResultV2 struct {
+
+	// The set of metrics.
+	Collections []MetricDataV2
+
+	// The dimension for the metrics.
+	Dimensions map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the metric.
+type MetricV2 struct {
+
+	// Contains the filters to be used when returning data.
+	MetricFilters []MetricFilterV2
+
+	// The name of the metric.
+	Name *string
+
+	// Contains information about the threshold for service level metrics.
+	Threshold []ThresholdV2
 
 	noSmithyDocumentSerde
 }
@@ -2545,6 +2621,18 @@ type Threshold struct {
 
 	// The type of comparison. Only "less than" (LT) comparisons are supported.
 	Comparison Comparison
+
+	// The threshold value to compare.
+	ThresholdValue *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the threshold for service level metrics.
+type ThresholdV2 struct {
+
+	// The type of comparison. Only "less than" (LT) comparisons are supported.
+	Comparison *string
 
 	// The threshold value to compare.
 	ThresholdValue *float64

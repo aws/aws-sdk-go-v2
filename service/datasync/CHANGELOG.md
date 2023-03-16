@@ -1,3 +1,7 @@
+# v1.23.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-02-22)
 
 * **Feature**: AWS DataSync has relaxed the minimum length constraint of AccessKey for Object Storage locations to 1.

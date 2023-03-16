@@ -15,7 +15,7 @@ import (
 // (like terminate, update, and delete) can be performed. To delete a network
 // instance, the instance must be in a stopped or terminated state. To terminate a
 // network instance, see TerminateSolNetworkInstance
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_TerminateSolNetworkInstance.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html).
 func (c *Client) DeleteSolNetworkInstance(ctx context.Context, params *DeleteSolNetworkInstanceInput, optFns ...func(*Options)) (*DeleteSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteSolNetworkInstanceInput{}

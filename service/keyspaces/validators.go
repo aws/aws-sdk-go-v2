@@ -313,6 +313,21 @@ func validateCapacitySpecification(v *types.CapacitySpecification) error {
 	}
 }
 
+func validateClientSideTimestamps(v *types.ClientSideTimestamps) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientSideTimestamps"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusteringKey(v *types.ClusteringKey) error {
 	if v == nil {
 		return nil
@@ -646,6 +661,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ClientSideTimestamps != nil {
+		if err := validateClientSideTimestamps(v.ClientSideTimestamps); err != nil {
+			invalidParams.AddNested("ClientSideTimestamps", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -871,6 +891,11 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 	if v.Ttl != nil {
 		if err := validateTimeToLive(v.Ttl); err != nil {
 			invalidParams.AddNested("Ttl", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientSideTimestamps != nil {
+		if err := validateClientSideTimestamps(v.ClientSideTimestamps); err != nil {
+			invalidParams.AddNested("ClientSideTimestamps", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

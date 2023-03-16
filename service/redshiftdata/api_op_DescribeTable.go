@@ -96,9 +96,9 @@ type DescribeTableInput struct {
 	// for all schemas in the database are returned
 	Table *string
 
-	// The serverless workgroup name. This parameter is required when connecting to a
-	// serverless workgroup and authenticating using either Secrets Manager or
-	// temporary credentials.
+	// The serverless workgroup name or Amazon Resource Name (ARN). This parameter is
+	// required when connecting to a serverless workgroup and authenticating using
+	// either Secrets Manager or temporary credentials.
 	WorkgroupName *string
 
 	noSmithyDocumentSerde

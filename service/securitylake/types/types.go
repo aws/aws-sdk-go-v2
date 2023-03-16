@@ -157,6 +157,24 @@ type LakeConfigurationResponse struct {
 	// consists of a key and an optional value, both of which you define.
 	TagsMap map[string]string
 
+	// The status of the last UpdateDatalake or DeleteDatalake API request.
+	UpdateStatus *UpdateStatus
+
+	noSmithyDocumentSerde
+}
+
+// The details of the last UpdateDatalake or DeleteDatalake API request which
+// failed.
+type LastUpdateFailure struct {
+
+	// The reason code for the failure of the last UpdateDatalake or DeleteDatalake API
+	// request.
+	Code *string
+
+	// The reason for the failure of the last UpdateDatalakeor DeleteDatalake API
+	// request.
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -278,6 +296,15 @@ type SubscriberResource struct {
 	// specific circumstances.
 	ExternalId *string
 
+	// The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource
+	// share. Before accepting the RAM resource share invitation, you can view details
+	// related to the RAM resource share. This field is available only for Lake
+	// Formation subscribers created after March 8, 2023.
+	ResourceShareArn *string
+
+	// The name of the resource share.
+	ResourceShareName *string
+
 	// The Amazon Resource Name (ARN) specifying the role of the subscriber.
 	RoleArn *string
 
@@ -305,6 +332,25 @@ type SubscriberResource struct {
 
 	// The date and time when the subscription was created.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The status of the last UpdateDatalake or DeleteDatalake API request. This is set
+// to Completed after the configuration is updated, or removed if deletion of the
+// data lake is successful.
+type UpdateStatus struct {
+
+	// The details of the last UpdateDatalakeor DeleteDatalake API request which
+	// failed.
+	LastUpdateFailure *LastUpdateFailure
+
+	// The unique ID for the UpdateDatalake or DeleteDatalake API request.
+	LastUpdateRequestId *string
+
+	// The status of the last UpdateDatalake or DeleteDatalake API request that was
+	// requested.
+	LastUpdateStatus SettingsStatus
 
 	noSmithyDocumentSerde
 }

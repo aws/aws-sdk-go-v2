@@ -1,3 +1,7 @@
+# v1.12.4 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.3 (2023-02-23)
 
 * **Documentation**: Doc-only update. Updated information on attached role policies for customer provided roles

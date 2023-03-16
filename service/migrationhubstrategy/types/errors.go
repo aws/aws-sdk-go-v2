@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The AWS user account does not have permission to perform the action. Check the
-// AWS Identity and Access Management (IAM) policy associated with this account.
+// The user does not have permission to perform the action. Check the AWS Identity
+// and Access Management (IAM) policy associated with this user.
 type AccessDeniedException struct {
 	Message *string
 

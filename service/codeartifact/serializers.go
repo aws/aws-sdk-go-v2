@@ -2256,6 +2256,108 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
+type awsRestjson1_serializeOpPublishPackageVersion struct {
+}
+
+func (*awsRestjson1_serializeOpPublishPackageVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPublishPackageVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PublishPackageVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/package/version/publish")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPublishPackageVersionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
+
+	if input.AssetContent != nil {
+		payload := input.AssetContent
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPublishPackageVersionInput(v *PublishPackageVersionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetName != nil {
+		encoder.SetQuery("asset").String(*v.AssetName)
+	}
+
+	if v.AssetSHA256 != nil && len(*v.AssetSHA256) > 0 {
+		locationName := "X-Amz-Content-Sha256"
+		encoder.SetHeader(locationName).String(*v.AssetSHA256)
+	}
+
+	if v.Domain != nil {
+		encoder.SetQuery("domain").String(*v.Domain)
+	}
+
+	if v.DomainOwner != nil {
+		encoder.SetQuery("domain-owner").String(*v.DomainOwner)
+	}
+
+	if len(v.Format) > 0 {
+		encoder.SetQuery("format").String(string(v.Format))
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
+	}
+
+	if v.Package != nil {
+		encoder.SetQuery("package").String(*v.Package)
+	}
+
+	if v.PackageVersion != nil {
+		encoder.SetQuery("version").String(*v.PackageVersion)
+	}
+
+	if v.Repository != nil {
+		encoder.SetQuery("repository").String(*v.Repository)
+	}
+
+	if v.Unfinished != nil {
+		encoder.SetQuery("unfinished").Boolean(*v.Unfinished)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutDomainPermissionsPolicy struct {
 }
 

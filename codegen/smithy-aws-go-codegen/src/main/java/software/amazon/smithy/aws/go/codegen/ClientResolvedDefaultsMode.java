@@ -45,7 +45,7 @@ public class ClientResolvedDefaultsMode implements GoIntegration {
                     The initial DefaultsMode used when the client options were constructed. If the
                     DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved value
                     was at that point in time.
-                            
+
                     Currently does not support per operation call overrides, may in the future.
                     """)
             .build();
@@ -73,14 +73,14 @@ public class ClientResolvedDefaultsMode implements GoIntegration {
                     if len(o.$resolvedOption:L) > 0 {
                         return
                     }
-                    
+
                     var mode $modeType:T
                     mode.SetFromString(string(o.$modeOption:L))
-                    
+
                     if mode == $autoMode:T {
                         mode = $autoResolve:T(o.$region:L, o.$envOption:L)
                     }
-                    
+
                     o.$resolvedOption:L = mode
                 }
                 """);

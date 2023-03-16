@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -199,6 +199,7 @@
                 "retryAfterSeconds": {
                     "target": "com.amazonaws.route53recoverycluster#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
@@ -264,7 +265,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoverycluster#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of routing controls objects that you want to return with this call. The default value is 500.</p>"
                     }
                 }
@@ -291,6 +292,7 @@
         "com.amazonaws.route53recoverycluster#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -339,6 +341,7 @@
         "com.amazonaws.route53recoverycluster#RetryAfterSeconds": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Advice to clients on when the call can be safely retried"
             }
         },
@@ -468,6 +471,7 @@
                 "retryAfterSeconds": {
                     "target": "com.amazonaws.route53recoverycluster#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
@@ -480,21 +484,6 @@
         },
         "com.amazonaws.route53recoverycluster#ToggleCustomerAPI": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Route53 Recovery Cluster",
-                    "arnNamespace": "route53-recovery-cluster",
-                    "cloudFormationName": "Route53RecoveryCluster",
-                    "cloudTrailEventSource": "route53recoverycluster.amazonaws.com",
-                    "endpointPrefix": "route53-recovery-cluster"
-                },
-                "aws.auth#sigv4": {
-                    "name": "route53-recovery-cluster"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Welcome to the Routing Control (Recovery Cluster) API Reference Guide for Amazon Route 53 Application Recovery Controller.</p>\n\t\t\t      <p>With Route 53 ARC, you can use routing control with extreme reliability to\n\t\t\trecover applications by rerouting traffic across\n\t\t\tAvailability Zones or Amazon Web Services Regions. Routing controls are simple on/off switches hosted\n\t\t\ton a highly available cluster in Route 53 ARC. A cluster provides a set of five redundant Regional endpoints against which you\n\t\t\tcan run API calls to get or update the state of routing controls. To implement failover, you set \n\t\t\tone routing control On and another one Off, to reroute traffic from one Availability Zone or Amazon Web Services Region \n\t\t\tto another. </p>\n\t\t\t      <p>\n            <i>Be aware that you must specify a Regional endpoint for a cluster when you work with API cluster operations \n\t\t\t\tto get or update routing control states in Route 53 ARC.</i> In addition, you must specify the US West (Oregon) Region \n\t\t\t\tfor Route 53 ARC API calls. For example, use the parameter <code>--region us-west-2</code> with AWS CLI commands.\n\t\t\t\tFor more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.api.html\">\n\t\t\t\t\tGet and update routing control states using the API</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n\t\t       <p>This API guide includes information about the API operations for how to get and update routing control states\n\t\t\tin Route 53 ARC. To work with routing control in Route 53 ARC, you must first create the required components (clusters, control \n\t\t\tpanels, and routing controls) using the recovery cluster configuration API.</p>\n\t\t\t      <p>For more information about working with routing control in Route 53 ARC, see the following:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Create clusters, control panels, and routing controls by using API operations. For more information, \n\t\t\t\t\tsee the <a href=\"https://docs.aws.amazon.com/recovery-cluster/latest/api/\">Recovery Control Configuration API Reference Guide for Amazon Route 53 Application Recovery Controller</a>.</p>\n\t\t\t         </li>\n            <li>\n               <p>Learn about the components in recovery control, including clusters,\n\t\t\t\trouting controls, and control panels, and how to work with Route 53 ARC in the Amazon Web Services console. For more \n\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/introduction-components.html#introduction-components-routing\">\n\t\t\t\t\tRecovery control components</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n            </li>\n            <li>\n\t\t\t\t           <p>Route 53 ARC also provides readiness checks that continually audit resources to help make sure that your\n\t\t\t\t\tapplications are scaled and ready to handle failover traffic. For more information about\n\t\t\t\t\tthe related API operations, see the <a href=\"https://docs.aws.amazon.com/recovery-readiness/latest/api/\">Recovery Readiness API Reference Guide for Amazon Route 53 Application Recovery Controller</a>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>For more information about creating resilient applications and preparing for\n\t\t\t\t\trecovery readiness with Route 53 ARC, see the <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/\">Amazon Route 53 Application Recovery Controller Developer Guide</a>.</p>\n\t\t\t         </li>\n         </ul>",
-                "smithy.api#title": "Route53 Recovery Cluster"
-            },
             "version": "2019-12-02",
             "operations": [
                 {
@@ -509,7 +498,636 @@
                 {
                     "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStates"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Route53 Recovery Cluster",
+                    "arnNamespace": "route53-recovery-cluster",
+                    "cloudFormationName": "Route53RecoveryCluster",
+                    "cloudTrailEventSource": "route53recoverycluster.amazonaws.com",
+                    "endpointPrefix": "route53-recovery-cluster"
+                },
+                "aws.auth#sigv4": {
+                    "name": "route53-recovery-cluster"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Welcome to the Routing Control (Recovery Cluster) API Reference Guide for Amazon Route 53 Application Recovery Controller.</p>\n\t\t\t      <p>With Route 53 ARC, you can use routing control with extreme reliability to\n\t\t\trecover applications by rerouting traffic across\n\t\t\tAvailability Zones or Amazon Web Services Regions. Routing controls are simple on/off switches hosted\n\t\t\ton a highly available cluster in Route 53 ARC. A cluster provides a set of five redundant Regional endpoints against which you\n\t\t\tcan run API calls to get or update the state of routing controls. To implement failover, you set \n\t\t\tone routing control On and another one Off, to reroute traffic from one Availability Zone or Amazon Web Services Region \n\t\t\tto another. </p>\n\t\t\t      <p>\n            <i>Be aware that you must specify a Regional endpoint for a cluster when you work with API cluster operations \n\t\t\t\tto get or update routing control states in Route 53 ARC.</i> In addition, you must specify the US West (Oregon) Region \n\t\t\t\tfor Route 53 ARC API calls. For example, use the parameter <code>--region us-west-2</code> with AWS CLI commands.\n\t\t\t\tFor more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.api.html\">\n\t\t\t\t\tGet and update routing control states using the API</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n\t\t       <p>This API guide includes information about the API operations for how to get and update routing control states\n\t\t\tin Route 53 ARC. To work with routing control in Route 53 ARC, you must first create the required components (clusters, control \n\t\t\tpanels, and routing controls) using the recovery cluster configuration API.</p>\n\t\t\t      <p>For more information about working with routing control in Route 53 ARC, see the following:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Create clusters, control panels, and routing controls by using API operations. For more information, \n\t\t\t\t\tsee the <a href=\"https://docs.aws.amazon.com/recovery-cluster/latest/api/\">Recovery Control Configuration API Reference Guide for Amazon Route 53 Application Recovery Controller</a>.</p>\n\t\t\t         </li>\n            <li>\n               <p>Learn about the components in recovery control, including clusters,\n\t\t\t\trouting controls, and control panels, and how to work with Route 53 ARC in the Amazon Web Services console. For more \n\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/introduction-components.html#introduction-components-routing\">\n\t\t\t\t\tRecovery control components</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n            </li>\n            <li>\n\t\t\t\t           <p>Route 53 ARC also provides readiness checks that continually audit resources to help make sure that your\n\t\t\t\t\tapplications are scaled and ready to handle failover traffic. For more information about\n\t\t\t\t\tthe related API operations, see the <a href=\"https://docs.aws.amazon.com/recovery-readiness/latest/api/\">Recovery Readiness API Reference Guide for Amazon Route 53 Application Recovery Controller</a>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>For more information about creating resilient applications and preparing for\n\t\t\t\t\trecovery readiness with Route 53 ARC, see the <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/\">Amazon Route 53 Application Recovery Controller Developer Guide</a>.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#title": "Route53 Recovery Cluster",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://route53-recovery-cluster-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://route53-recovery-cluster-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://route53-recovery-cluster.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://route53-recovery-cluster.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53-recovery-cluster.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.route53recoverycluster#UpdateRoutingControlState": {
             "type": "operation",

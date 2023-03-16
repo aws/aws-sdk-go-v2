@@ -1,3 +1,11 @@
+# v1.19.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.0 (2023-03-09)
+
+* **Feature**: Added support for Redshift Serverless workgroup-arn wherever the WorkgroupName parameter is available.
+
 # v1.18.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

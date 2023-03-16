@@ -62,7 +62,7 @@ type PutAccessPointPolicyInput struct {
 	// parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must
 	// specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
-	// point reports-ap through outpost my-outpost owned by account 123456789012 in
+	// point reports-ap through Outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2, use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
 	// The value must be URL encoded.

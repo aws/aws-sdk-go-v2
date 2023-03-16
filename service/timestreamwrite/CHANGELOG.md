@@ -1,3 +1,7 @@
+# v1.16.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-02-27)
 
 * **Feature**: This release adds the ability to ingest batched historical data or migrate data in bulk from S3 into Timestream using CSV files.

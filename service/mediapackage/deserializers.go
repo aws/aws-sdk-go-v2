@@ -176,6 +176,15 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsOutput(v **ConfigureLogsOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -378,6 +387,15 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "description":
@@ -835,6 +853,15 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 		case "cmafPackage":
 			if err := awsRestjson1_deserializeDocumentCmafPackage(&sv.CmafPackage, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "dashPackage":
@@ -1295,6 +1322,15 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1750,6 +1786,15 @@ func awsRestjson1_deserializeOpDocumentDescribeOriginEndpointOutput(v **Describe
 		case "cmafPackage":
 			if err := awsRestjson1_deserializeDocumentCmafPackage(&sv.CmafPackage, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "dashPackage":
@@ -2671,6 +2716,15 @@ func awsRestjson1_deserializeOpDocumentRotateChannelCredentialsOutput(v **Rotate
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2873,6 +2927,15 @@ func awsRestjson1_deserializeOpDocumentRotateIngestEndpointCredentialsOutput(v *
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "description":
@@ -3251,6 +3314,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3472,6 +3544,15 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 		case "cmafPackage":
 			if err := awsRestjson1_deserializeDocumentCmafPackage(&sv.CmafPackage, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "dashPackage":
@@ -4187,6 +4268,15 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "description":
@@ -5550,6 +5640,15 @@ func awsRestjson1_deserializeDocumentOriginEndpoint(v **types.OriginEndpoint, va
 		case "cmafPackage":
 			if err := awsRestjson1_deserializeDocumentCmafPackage(&sv.CmafPackage, value); err != nil {
 				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = ptr.String(jtv)
 			}
 
 		case "dashPackage":

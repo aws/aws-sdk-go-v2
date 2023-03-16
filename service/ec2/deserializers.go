@@ -66848,6 +66848,22 @@ func awsEc2query_deserializeDocumentDnsOptions(v **types.DnsOptions, decoder smi
 				sv.DnsRecordIpType = types.DnsRecordIpType(xtv)
 			}
 
+		case strings.EqualFold("privateDnsOnlyForInboundResolverEndpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.PrivateDnsOnlyForInboundResolverEndpoint = ptr.Bool(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

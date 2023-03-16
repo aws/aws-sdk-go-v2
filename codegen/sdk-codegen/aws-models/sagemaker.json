@@ -522,7 +522,7 @@
                 "TrainingImageConfig": {
                     "target": "com.amazonaws.sagemaker#TrainingImageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration to use an image from a private Docker registry for a training job.</p>"
+                        "smithy.api#documentation": "<p>The configuration to use an image from a private Docker registry for a training\n            job.</p>"
                     }
                 }
             },
@@ -3449,12 +3449,12 @@
                 "MaxNumberOfTrainingJobsNotImproving": {
                     "target": "com.amazonaws.sagemaker#MaxNumberOfTrainingJobsNotImproving",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of training jobs that have failed to improve model performance by 1% or greater over prior training jobs as evaluated against an objective function.</p>"
+                        "smithy.api#documentation": "<p>The number of training jobs that have failed to improve model performance by 1% or\n            greater over prior training jobs as evaluated against an objective function.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that keeps track of which training jobs launched by your hyperparameter tuning job are not improving model performance as evaluated against an objective function.</p>"
+                "smithy.api#documentation": "<p>A structure that keeps track of which training jobs launched by your hyperparameter\n            tuning job are not improving model performance as evaluated against an objective\n            function.</p>"
             }
         },
         "com.amazonaws.sagemaker#Bias": {
@@ -5640,7 +5640,7 @@
                 "ModelDataUrl": {
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3\n            path is required for SageMaker built-in algorithms, but not if you use your own algorithms.\n            For more information on built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Common\n                Parameters</a>. </p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model or endpoint you are creating.</p>\n         </note>\n         <p>If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token\n            Service to download model artifacts from the S3 path you provide. Amazon Web Services STS\n            is activated in your Amazon Web Services account by default. If you previously deactivated\n                Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS\n            for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <important>\n            <p>If you use a built-in algorithm to create a model, SageMaker requires that you provide\n                a S3 path to the model artifacts in <code>ModelDataUrl</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3\n            path is required for SageMaker built-in algorithms, but not if you use your own algorithms.\n            For more information on built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Common\n                Parameters</a>. </p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model or endpoint you are creating.</p>\n         </note>\n         <p>If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token\n            Service to download model artifacts from the S3 path you provide. Amazon Web Services STS\n            is activated in your Amazon Web Services account by default. If you previously\n            deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <important>\n            <p>If you use a built-in algorithm to create a model, SageMaker requires that you provide\n                a S3 path to the model artifacts in <code>ModelDataUrl</code>.</p>\n         </important>"
                     }
                 },
                 "Environment": {
@@ -5965,7 +5965,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A flag to indicating that automatic model tuning (AMT) has detected model convergence, defined as a lack of significant improvement (1% or less) against an objective metric.</p>"
+                "smithy.api#documentation": "<p>A flag to indicating that automatic model tuning (AMT) has detected model convergence,\n            defined as a lack of significant improvement (1% or less) against an objective\n            metric.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAction": {
@@ -7193,7 +7193,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n         <p> Use this API to deploy models using SageMaker hosting services. </p>\n         <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n         <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n         </note>\n         <p>The endpoint name must be unique within an Amazon Web Services Region in your\n                Amazon Web Services account. </p>\n         <p>When it receives the request, SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n         <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n         </note>\n         <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n         <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the\n            S3 path you provided. Amazon Web Services STS is activated in your Amazon Web Services account by\n            default. If you previously deactivated Amazon Web Services STS for a region, you need to\n            reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                  <p>Option 1: For a full SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n               </li>\n               <li>\n                  <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                  <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                  <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                  <p>\n                     <code>]</code>\n                  </p>\n                  <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n         <p> Use this API to deploy models using SageMaker hosting services. </p>\n         <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n         <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n         </note>\n         <p>The endpoint name must be unique within an Amazon Web Services Region in your\n                Amazon Web Services account. </p>\n         <p>When it receives the request, SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n         <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n         </note>\n         <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n         <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the\n            S3 path you provided. Amazon Web Services STS is activated in your Amazon Web Services\n            account by default. If you previously deactivated Amazon Web Services STS for a region,\n            you need to reactivate Amazon Web Services STS for that region. For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n         <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                  <p>Option 1: For a full SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n               </li>\n               <li>\n                  <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                  <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                  <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                  <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                  <p>\n                     <code>]</code>\n                  </p>\n                  <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateEndpointConfig": {
@@ -16107,7 +16107,7 @@
                 "TuningJobCompletionDetails": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobCompletionDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tuning job completion information returned as the response from a hyperparameter tuning job. This information tells if your tuning job has or has not converged. It also includes the number of training jobs that have not improved model performance as evaluated against the objective function.</p>"
+                        "smithy.api#documentation": "<p>Tuning job completion information returned as the response from a hyperparameter\n            tuning job. This information tells if your tuning job has or has not converged. It also\n            includes the number of training jobs that have not improved model performance as\n            evaluated against the objective function.</p>"
                     }
                 },
                 "ConsumedResources": {
@@ -23564,13 +23564,13 @@
                 "Type": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobObjectiveType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to\n            minimize\n            or maximize the objective metric. Valid values are Minimize and\n            Maximize.</p>"
+                        "smithy.api#documentation": "<p>Select if you want to minimize or maximize the objective metric during hyperparameter\n            tuning. </p>"
                     }
                 },
                 "MetricName": {
                     "target": "com.amazonaws.sagemaker#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the\n            objective\n            metric.</p>",
+                        "smithy.api#documentation": "<p>The name of the objective metric. For SageMaker built-in algorithms, metrics are defined\n            per algorithm. See the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-tuning.html\">metrics for XGBoost</a> as an\n            example. You can also use a custom algorithm for training and define your own metrics.\n            For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html\">Define metrics and environment variables</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23584,7 +23584,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Shows the final value for the\n            objective\n            metric for a training job that was launched by a hyperparameter\n            tuning job. You define the objective metric in the\n                <code>HyperParameterTuningJobObjective</code> parameter of <a>HyperParameterTuningJobConfig</a>.</p>"
+                "smithy.api#documentation": "<p>Shows the latest objective metric emitted by a training job that was launched by a\n            hyperparameter tuning job. You define the objective metric in the\n                <code>HyperParameterTuningJobObjective</code> parameter of <a>HyperParameterTuningJobConfig</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#FinalMetricDataList": {
@@ -25217,7 +25217,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTrainingJobEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An environment variable that you can pass into the SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API. You can use an existing <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment\">environment variable from the training container</a> or use your own. See\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html\">Define metrics\n                and variables</a> for more information.</p>\n         <note>\n            <p>The maximum number of items specified for <code>Map Entries</code> refers to the\n                maximum number of environment variables for each <code>TrainingJobDefinition</code>\n                and also the maximum for the hyperparameter tuning job itself. That is, the sum of\n                the number of environment variables for all the training job definitions can't\n                exceed the maximum number specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An environment variable that you can pass into the SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API. You can use an existing <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment\">environment variable from the training container</a> or use your own. See\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html\">Define metrics\n                and variables</a> for more information.</p>\n         <note>\n            <p>The maximum number of items specified for <code>Map Entries</code> refers to the\n                maximum number of environment variables for each <code>TrainingJobDefinition</code>\n                and also the maximum for the hyperparameter tuning job itself. That is, the sum of\n                the number of environment variables for all the training job definitions can't\n                exceed the maximum number specified.</p>\n         </note>"
                     }
                 }
             },
@@ -25444,18 +25444,18 @@
                     "target": "com.amazonaws.sagemaker#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of training jobs launched by a tuning job that are not improving (1% or less) as measured by model performance evaluated against an objective function.</p>"
+                        "smithy.api#documentation": "<p>The number of training jobs launched by a tuning job that are not improving (1% or\n            less) as measured by model performance evaluated against an objective function.</p>"
                     }
                 },
                 "ConvergenceDetectedTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time in timestamp format that AMT detected model convergence, as defined by a lack of significant improvement over time based on criteria developed over a wide range of diverse benchmarking tests.</p>"
+                        "smithy.api#documentation": "<p>The time in timestamp format that AMT detected model convergence, as defined by a lack\n            of significant improvement over time based on criteria developed over a wide range of\n            diverse benchmarking tests.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains runtime information about both current and completed hyperparameter tuning jobs.</p>"
+                "smithy.api#documentation": "<p>A structure that contains runtime information about both current and completed\n            hyperparameter tuning jobs.</p>"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterTuningJobConfig": {
@@ -26019,6 +26019,32 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#IamIdentity": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM identity.</p>"
+                    }
+                },
+                "PrincipalId": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the principal that assumes the IAM identity.</p>"
+                    }
+                },
+                "SourceIdentity": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The person or application which assumes the IAM identity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IAM Identity details associated with the user. These details are\n      associated with model package groups, model packages and project entities only.</p>"
             }
         },
         "com.amazonaws.sagemaker#IdempotencyToken": {
@@ -40696,7 +40722,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker Feature Store uses\n         to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p>\n         <p>The caller (either IAM user or IAM role) of <code>CreateFeatureGroup</code> must have\n         below permissions to the <code>OnlineStore</code>\n            <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Encrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:DescribeKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:CreateGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RetireGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptFrom\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptTo\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListAliases\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListGrants\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RevokeGrant\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>The caller (either user or IAM role) to all DataPlane operations\n            (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have\n         the following permissions to the <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker Feature Store uses\n         to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p>\n         <p>The caller (either IAM user or IAM role) of <code>CreateFeatureGroup</code> must have\n         below permissions to the <code>OnlineStore</code>\n            <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Encrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:DescribeKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:CreateGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RetireGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptFrom\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptTo\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListAliases\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListGrants\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RevokeGrant\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>The caller (either user or IAM role) to all DataPlane operations\n            (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have\n         the following permissions to the <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -43019,7 +43045,7 @@
                 "AcceleratorType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantAcceleratorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the Elastic Inference (EI) instance to use for the production variant. EI\n            instances provide on-demand GPU computing for inference. For more information, see\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html\">Using Elastic\n                Inference in Amazon SageMaker</a>.</p>"
+                        "smithy.api#documentation": "<p>The size of the Elastic Inference (EI) instance to use for the production variant. EI\n            instances provide on-demand GPU computing for inference. For more information, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html\">Using Elastic\n            Inference in Amazon SageMaker</a>.</p>"
                     }
                 },
                 "CoreDumpConfig": {
@@ -43051,10 +43077,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timeout value, in seconds, for your inference container to pass health check by\n            SageMaker Hosting. For more information about health check, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests\">How Your Container Should Respond to Health Check (Ping) Requests</a>.</p>"
                     }
+                },
+                "EnableSSMAccess": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantSSMAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM)\n            access for a production variant behind an endpoint. By default, SSM access is disabled\n            for all production variants behind an endpoints. You can turn on or turn off SSM access\n            for a production variant behind an existing endpoint by creating a new endpoint\n            configuration and calling <code>UpdateEndpoint</code>.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies a model that you want to host and the resources chosen to deploy for\n            hosting it. If you are deploying multiple models, tell SageMaker how to distribute traffic\n            among the models by specifying variant weights. </p>"
+                "smithy.api#documentation": "<p>\n            Identifies a model that you want to host and the resources chosen to deploy for\n            hosting it. If you are deploying multiple models, tell SageMaker how to distribute traffic\n            among the models by specifying variant weights. For more information on production\n            variants, check <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html\">\n            Production variants</a>.\n        </p>"
             }
         },
         "com.amazonaws.sagemaker#ProductionVariantAcceleratorType": {
@@ -43999,6 +44031,9 @@
                     "max": 3600
                 }
             }
+        },
+        "com.amazonaws.sagemaker#ProductionVariantSSMAccess": {
+            "type": "boolean"
         },
         "com.amazonaws.sagemaker#ProductionVariantServerlessConfig": {
             "type": "structure",
@@ -46799,7 +46834,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ID of the key used to encrypt any objects\n         written into the <code>OfflineStore</code> S3 location.</p>\n         <p>The IAM <code>roleARN</code> that is passed as a parameter to\n            <code>CreateFeatureGroup</code> must have below permissions to the\n         <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ARN of the key used to encrypt any objects\n         written into the <code>OfflineStore</code> S3 location.</p>\n         <p>The IAM <code>roleARN</code> that is passed as a parameter to\n            <code>CreateFeatureGroup</code> must have below permissions to the\n         <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResolvedOutputS3Uri": {
@@ -48155,9 +48190,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48168,9 +48203,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48181,9 +48216,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48194,9 +48229,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48207,9 +48242,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48220,9 +48255,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48233,9 +48268,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48246,9 +48281,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48259,9 +48294,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48272,9 +48307,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48285,9 +48320,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48298,9 +48333,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48311,9 +48346,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48324,9 +48359,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48337,9 +48372,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48350,9 +48385,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48363,9 +48398,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48376,9 +48411,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48389,9 +48424,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48402,9 +48437,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48415,9 +48450,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48428,9 +48463,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48441,9 +48476,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48454,9 +48489,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48467,9 +48502,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48480,9 +48515,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -48493,9 +48528,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -48506,9 +48541,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48519,9 +48554,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48532,9 +48567,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -48545,9 +48580,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48558,9 +48593,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -48571,9 +48606,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48584,9 +48619,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48597,9 +48632,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -48610,9 +48645,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48623,9 +48658,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -48636,9 +48671,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48649,9 +48684,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48662,9 +48697,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48675,9 +48710,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48688,9 +48723,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -48701,9 +48736,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48715,8 +48750,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48726,9 +48761,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -48738,9 +48773,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -54450,13 +54485,13 @@
                 "BestObjectiveNotImproving": {
                     "target": "com.amazonaws.sagemaker#BestObjectiveNotImproving",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag to stop your hyperparameter tuning job if model performance fails to improve as evaluated against an objective function.</p>"
+                        "smithy.api#documentation": "<p>A flag to stop your hyperparameter tuning job if model performance fails to improve as\n            evaluated against an objective function.</p>"
                     }
                 },
                 "ConvergenceDetected": {
                     "target": "com.amazonaws.sagemaker#ConvergenceDetected",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has detected that your model has converged as evaluated against your objective function.</p>"
+                        "smithy.api#documentation": "<p>A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has\n            detected that your model has converged as evaluated against your objective\n            function.</p>"
                     }
                 }
             },
@@ -56697,7 +56732,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to update your workforce. You can use this operation to \n        require that workers use specific IP addresses to work on tasks\n        and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.</p>\n         <p>The worker portal is now supported in VPC and public internet.</p>\n         <p> Use <code>SourceIpConfig</code> to restrict worker access to tasks to a specific range of IP addresses. \n        You specify allowed IP addresses by creating a list of up to ten <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>.\n        By default, a workforce isn't restricted to specific IP addresses. If you specify a\n            range of IP addresses, workers who attempt to access tasks using any IP address outside\n            the specified range are denied and get a <code>Not Found</code> error message on\n            the worker portal.</p>\n         <p>To restrict access to all the workers in public internet, add the <code>SourceIpConfig</code> CIDR value as \"0.0.0.0/0\".</p>\n         <important>\n            <p>Amazon SageMaker does not support Source Ip restriction for worker portals in VPC.</p>\n         </important>\n         <p>Use <code>OidcConfig</code> to update the configuration of a workforce created using\n            your own OIDC IdP. </p>\n         <important>\n            <p>You can only update your OIDC IdP configuration when there are no work teams\n                associated with your workforce. You can delete work teams using the  operation.</p>\n         </important>\n         <p>After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you\n        can view details about your update workforce using the \n            operation.</p>\n         <important>\n            <p>This operation only applies to private workforces.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Use this operation to update your workforce. You can use this operation to \n        require that workers use specific IP addresses to work on tasks\n        and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.</p>\n         <p>The worker portal is now supported in VPC and public internet.</p>\n         <p> Use <code>SourceIpConfig</code> to restrict worker access to tasks to a specific range of IP addresses. \n        You specify allowed IP addresses by creating a list of up to ten <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>.\n        By default, a workforce isn't restricted to specific IP addresses. If you specify a\n            range of IP addresses, workers who attempt to access tasks using any IP address outside\n            the specified range are denied and get a <code>Not Found</code> error message on\n            the worker portal.</p>\n         <p>To restrict access to all the workers in public internet, add the <code>SourceIpConfig</code> CIDR value as \"10.0.0.0/16\".</p>\n         <important>\n            <p>Amazon SageMaker does not support Source Ip restriction for worker portals in VPC.</p>\n         </important>\n         <p>Use <code>OidcConfig</code> to update the configuration of a workforce created using\n            your own OIDC IdP. </p>\n         <important>\n            <p>You can only update your OIDC IdP configuration when there are no work teams\n                associated with your workforce. You can delete work teams using the  operation.</p>\n         </important>\n         <p>After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you\n        can view details about your update workforce using the \n            operation.</p>\n         <important>\n            <p>This operation only applies to private workforces.</p>\n         </important>"
             }
         },
         "com.amazonaws.sagemaker#UpdateWorkforceRequest": {
@@ -56842,6 +56877,12 @@
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The domain associated with the user.</p>"
+                    }
+                },
+                "IamIdentity": {
+                    "target": "com.amazonaws.sagemaker#IamIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity details associated with the user. These details are\n      associated with model package groups, model packages, and project entities only.</p>"
                     }
                 }
             },

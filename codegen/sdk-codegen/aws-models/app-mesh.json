@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.appmesh#AccessLog": {
             "type": "union",
@@ -26,22 +26,6 @@
         },
         "com.amazonaws.appmesh#AppMesh": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "App Mesh",
-                    "arnNamespace": "appmesh",
-                    "cloudFormationName": "AppMesh",
-                    "cloudTrailEventSource": "appmesh.amazonaws.com",
-                    "endpointPrefix": "appmesh"
-                },
-                "aws.auth#sigv4": {
-                    "name": "appmesh"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to\n         monitor and control microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for\n         every microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS, Kubernetes on Amazon Web Services, and\n            Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery\n            naming for their components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n               Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
-                "smithy.api#title": "AWS App Mesh"
-            },
             "version": "2019-01-25",
             "operations": [
                 {
@@ -58,7 +42,1157 @@
                 {
                     "target": "com.amazonaws.appmesh#Mesh"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "App Mesh",
+                    "arnNamespace": "appmesh",
+                    "cloudFormationName": "AppMesh",
+                    "cloudTrailEventSource": "appmesh.amazonaws.com",
+                    "endpointPrefix": "appmesh"
+                },
+                "aws.auth#sigv4": {
+                    "name": "appmesh"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to\n         monitor and control microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for\n         every microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS, Kubernetes on Amazon Web Services, and\n            Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery\n            naming for their components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n               Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+                "smithy.api#title": "AWS App Mesh",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://appmesh-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://appmesh-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://appmesh.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://appmesh.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appmesh.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.appmesh#Arn": {
             "type": "string"
@@ -233,7 +1367,7 @@
                 "enforce": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>"
                     }
                 },
@@ -2358,7 +3492,6 @@
         "com.amazonaws.appmesh#DurationValue": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -2580,7 +3713,6 @@
         "com.amazonaws.appmesh#GatewayRoutePriority": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000
@@ -3239,7 +4371,6 @@
         "com.amazonaws.appmesh#HealthCheckIntervalMillis": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5000,
                     "max": 300000
@@ -3273,6 +4404,7 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The destination port for the health check request. This port must match the port defined\n         in the <a>PortMapping</a> for the listener.</p>"
                     }
                 },
@@ -3285,6 +4417,7 @@
                 "healthyThreshold": {
                     "target": "com.amazonaws.appmesh#HealthCheckThreshold",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive successful health checks that must occur before declaring\n         listener healthy.</p>",
                         "smithy.api#required": {}
                     }
@@ -3292,6 +4425,7 @@
                 "unhealthyThreshold": {
                     "target": "com.amazonaws.appmesh#HealthCheckThreshold",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive failed health checks that must occur before declaring a\n         virtual node unhealthy. </p>",
                         "smithy.api#required": {}
                     }
@@ -3304,6 +4438,7 @@
         "com.amazonaws.appmesh#HealthCheckThreshold": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2,
                     "max": 10
@@ -3313,7 +4448,6 @@
         "com.amazonaws.appmesh#HealthCheckTimeoutMillis": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 2000,
                     "max": 60000
@@ -4051,7 +5185,6 @@
         "com.amazonaws.appmesh#ListGatewayRoutesLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4145,7 +5278,6 @@
         "com.amazonaws.appmesh#ListMeshesLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4265,7 +5397,6 @@
         "com.amazonaws.appmesh#ListRoutesLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4472,7 +5603,6 @@
         "com.amazonaws.appmesh#ListVirtualGatewaysLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4581,7 +5711,6 @@
         "com.amazonaws.appmesh#ListVirtualNodesLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4693,7 +5822,6 @@
         "com.amazonaws.appmesh#ListVirtualRoutersLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4805,7 +5933,6 @@
         "com.amazonaws.appmesh#ListVirtualServicesLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4881,7 +6008,6 @@
         "com.amazonaws.appmesh#ListenerPort": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -5151,6 +6277,7 @@
         "com.amazonaws.appmesh#MaxConnections": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -5159,6 +6286,7 @@
         "com.amazonaws.appmesh#MaxPendingRequests": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -5167,6 +6295,7 @@
         "com.amazonaws.appmesh#MaxRequests": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -5175,7 +6304,6 @@
         "com.amazonaws.appmesh#MaxRetries": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5455,7 +6583,6 @@
         "com.amazonaws.appmesh#OutlierDetectionMaxEjectionPercent": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -5465,7 +6592,6 @@
         "com.amazonaws.appmesh#OutlierDetectionMaxServerErrors": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -5474,6 +6600,7 @@
         "com.amazonaws.appmesh#PercentInt": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -5486,6 +6613,7 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port used for the port mapping.</p>",
                         "smithy.api#required": {}
                     }
@@ -5505,6 +6633,7 @@
         "com.amazonaws.appmesh#PortNumber": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -5535,11 +6664,13 @@
             }
         },
         "com.amazonaws.appmesh#PortSet": {
-            "type": "set",
+            "type": "list",
             "member": {
                 "target": "com.amazonaws.appmesh#PortNumber"
             },
-            "traits": {}
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
         },
         "com.amazonaws.appmesh#QueryParameterMatch": {
             "type": "structure",
@@ -5738,7 +6869,6 @@
         "com.amazonaws.appmesh#RoutePriority": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000
@@ -6123,7 +7253,6 @@
         "com.amazonaws.appmesh#TagsLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -7242,7 +8371,7 @@
                 "enforce": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't\n         specified.</p>"
                     }
                 },
@@ -7390,6 +8519,7 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -7402,7 +8532,6 @@
         "com.amazonaws.appmesh#VirtualGatewayHealthCheckIntervalMillis": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5000,
                     "max": 300000
@@ -7436,6 +8565,7 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The destination port for the health check request. This port must match the port defined\n         in the <a>PortMapping</a> for the listener.</p>"
                     }
                 },
@@ -7448,6 +8578,7 @@
                 "healthyThreshold": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayHealthCheckThreshold",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive successful health checks that must occur before declaring the\n         listener healthy.</p>",
                         "smithy.api#required": {}
                     }
@@ -7455,6 +8586,7 @@
                 "unhealthyThreshold": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayHealthCheckThreshold",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive failed health checks that must occur before declaring a\n         virtual gateway unhealthy.</p>",
                         "smithy.api#required": {}
                     }
@@ -7467,6 +8599,7 @@
         "com.amazonaws.appmesh#VirtualGatewayHealthCheckThreshold": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2,
                     "max": 10
@@ -7476,7 +8609,6 @@
         "com.amazonaws.appmesh#VirtualGatewayHealthCheckTimeoutMillis": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 2000,
                     "max": 60000
@@ -7489,6 +8621,7 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -7504,6 +8637,7 @@
                 "maxConnections": {
                     "target": "com.amazonaws.appmesh#MaxConnections",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all\n         hosts in upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -7511,7 +8645,7 @@
                 "maxPendingRequests": {
                     "target": "com.amazonaws.appmesh#MaxPendingRequests",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to\n         upstream cluster.</p>"
                     }
                 }
@@ -7751,6 +8885,7 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port used for the port mapping. Specify one protocol.</p>",
                         "smithy.api#required": {}
                     }
@@ -8123,6 +9258,7 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8138,6 +9274,7 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8153,6 +9290,7 @@
                 "maxConnections": {
                     "target": "com.amazonaws.appmesh#MaxConnections",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all\n         hosts in upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8160,7 +9298,7 @@
                 "maxPendingRequests": {
                     "target": "com.amazonaws.appmesh#MaxPendingRequests",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to\n         upstream cluster.</p>"
                     }
                 }
@@ -8332,6 +9470,7 @@
                 "maxConnections": {
                     "target": "com.amazonaws.appmesh#MaxConnections",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all\n         hosts in upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8834,6 +9973,7 @@
                 "weight": {
                     "target": "com.amazonaws.appmesh#PercentInt",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The relative weight of the weighted target.</p>",
                         "smithy.api#required": {}
                     }

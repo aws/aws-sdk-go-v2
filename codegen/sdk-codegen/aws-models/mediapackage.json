@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -30,26 +30,32 @@
     },
     "shapes": {
         "com.amazonaws.mediapackage#AdMarkers": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "SCTE35_ENHANCED",
-                        "name": "SCTE35_ENHANCED"
-                    },
-                    {
-                        "value": "PASSTHROUGH",
-                        "name": "PASSTHROUGH"
-                    },
-                    {
-                        "value": "DATERANGE",
-                        "name": "DATERANGE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "SCTE35_ENHANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE35_ENHANCED"
+                    }
+                },
+                "PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSTHROUGH"
+                    }
+                },
+                "DATERANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATERANGE"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#AdTriggers": {
@@ -62,27 +68,35 @@
             }
         },
         "com.amazonaws.mediapackage#AdsOnDeliveryRestrictions": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to\ndetermine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become\nads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that\ncontain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35\nmessages of the types specified in AdTriggers that do not contain delivery restrictions will\nbe treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in\nAdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags\nand are always treated as ads if specified in AdTriggers.",
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "RESTRICTED",
-                        "name": "RESTRICTED"
-                    },
-                    {
-                        "value": "UNRESTRICTED",
-                        "name": "UNRESTRICTED"
-                    },
-                    {
-                        "value": "BOTH",
-                        "name": "BOTH"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "RESTRICTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTRICTED"
+                    }
+                },
+                "UNRESTRICTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNRESTRICTED"
+                    }
+                },
+                "BOTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to\ndetermine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become\nads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that\ncontain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35\nmessages of the types specified in AdTriggers that do not contain delivery restrictions will\nbe treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in\nAdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags\nand are always treated as ads if specified in AdTriggers."
             }
         },
         "com.amazonaws.mediapackage#Authorization": {
@@ -117,6 +131,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -181,6 +202,7 @@
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time (in seconds) between each encryption key rotation.",
                         "smithy.api#jsonName": "keyRotationIntervalSeconds"
                     }
@@ -198,19 +220,23 @@
             }
         },
         "com.amazonaws.mediapackage#CmafEncryptionMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "The encryption method to use.",
-                "smithy.api#enum": [
-                    {
-                        "value": "SAMPLE_AES",
-                        "name": "SAMPLE_AES"
-                    },
-                    {
-                        "value": "AES_CTR",
-                        "name": "AES_CTR"
+            "type": "enum",
+            "members": {
+                "SAMPLE_AES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAMPLE_AES"
                     }
-                ]
+                },
+                "AES_CTR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES_CTR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The encryption method to use."
             }
         },
         "com.amazonaws.mediapackage#CmafPackage": {
@@ -232,6 +258,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -273,6 +300,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -357,7 +385,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "the option to configure log subscription."
+                "smithy.api#documentation": "the option to configure log subscription.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#ConfigureLogsResponse": {
@@ -368,6 +397,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -408,6 +444,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#CreateChannel": {
@@ -473,7 +512,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A new Channel configuration."
+                "smithy.api#documentation": "A new Channel configuration.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#CreateChannelResponse": {
@@ -484,6 +524,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -524,6 +571,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#CreateHarvestJob": {
@@ -607,7 +657,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration parameters used to create a new HarvestJob."
+                "smithy.api#documentation": "Configuration parameters used to create a new HarvestJob.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#CreateHarvestJobResponse": {
@@ -630,7 +681,7 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.mediapackage#__string",
                     "traits": {
-                        "smithy.api#documentation": "The time the HarvestJob was submitted",
+                        "smithy.api#documentation": "The date and time the HarvestJob was submitted.",
                         "smithy.api#jsonName": "createdAt"
                     }
                 },
@@ -675,6 +726,9 @@
                         "smithy.api#jsonName": "status"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#CreateOriginEndpoint": {
@@ -787,6 +841,7 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -800,6 +855,7 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -813,7 +869,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration parameters used to create a new OriginEndpoint."
+                "smithy.api#documentation": "Configuration parameters used to create a new OriginEndpoint.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#CreateOriginEndpointResponse": {
@@ -843,6 +900,13 @@
                     "target": "com.amazonaws.mediapackage#CmafPackage",
                     "traits": {
                         "smithy.api#jsonName": "cmafPackage"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the OriginEndpoint was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "DashPackage": {
@@ -894,6 +958,7 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -907,6 +972,7 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -925,6 +991,9 @@
                         "smithy.api#jsonName": "whitelist"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#DashEncryption": {
@@ -933,6 +1002,7 @@
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time (in seconds) between each encryption key rotation.",
                         "smithy.api#jsonName": "keyRotationIntervalSeconds"
                     }
@@ -973,6 +1043,7 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -987,6 +1058,7 @@
                 "ManifestWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each manifest.",
                         "smithy.api#jsonName": "manifestWindowSeconds"
                     }
@@ -994,6 +1066,7 @@
                 "MinBufferTimeSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
                         "smithy.api#jsonName": "minBufferTimeSeconds"
                     }
@@ -1001,6 +1074,7 @@
                 "MinUpdatePeriodSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
                         "smithy.api#jsonName": "minUpdatePeriodSeconds"
                     }
@@ -1022,6 +1096,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -1042,6 +1117,7 @@
                 "SuggestedPresentationDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) to delay live content before presentation.",
                         "smithy.api#jsonName": "suggestedPresentationDelaySeconds"
                     }
@@ -1113,11 +1189,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#DeleteChannelResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mediapackage#DeleteOriginEndpoint": {
             "type": "operation",
@@ -1167,11 +1249,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#DeleteOriginEndpointResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mediapackage#DescribeChannel": {
             "type": "operation",
@@ -1221,6 +1309,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#DescribeChannelResponse": {
@@ -1231,6 +1322,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -1271,6 +1369,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#DescribeHarvestJob": {
@@ -1321,6 +1422,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#DescribeHarvestJobResponse": {
@@ -1343,7 +1447,7 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.mediapackage#__string",
                     "traits": {
-                        "smithy.api#documentation": "The time the HarvestJob was submitted",
+                        "smithy.api#documentation": "The date and time the HarvestJob was submitted.",
                         "smithy.api#jsonName": "createdAt"
                     }
                 },
@@ -1388,6 +1492,9 @@
                         "smithy.api#jsonName": "status"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#DescribeOriginEndpoint": {
@@ -1438,6 +1545,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#DescribeOriginEndpointResponse": {
@@ -1467,6 +1577,13 @@
                     "target": "com.amazonaws.mediapackage#CmafPackage",
                     "traits": {
                         "smithy.api#jsonName": "cmafPackage"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the OriginEndpoint was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "DashPackage": {
@@ -1518,6 +1635,7 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -1531,6 +1649,7 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -1549,6 +1668,9 @@
                         "smithy.api#jsonName": "whitelist"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#EgressAccessLogs": {
@@ -1591,18 +1713,20 @@
             }
         },
         "com.amazonaws.mediapackage#EncryptionMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AES_128",
-                        "name": "AES_128"
-                    },
-                    {
-                        "value": "SAMPLE_AES",
-                        "name": "SAMPLE_AES"
+            "type": "enum",
+            "members": {
+                "AES_128": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES_128"
                     }
-                ]
+                },
+                "SAMPLE_AES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAMPLE_AES"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#ForbiddenException": {
@@ -1641,7 +1765,7 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.mediapackage#__string",
                     "traits": {
-                        "smithy.api#documentation": "The time the HarvestJob was submitted",
+                        "smithy.api#documentation": "The date and time the HarvestJob was submitted.",
                         "smithy.api#jsonName": "createdAt"
                     }
                 },
@@ -1711,6 +1835,7 @@
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Interval (in seconds) between each encryption key rotation.",
                         "smithy.api#jsonName": "keyRotationIntervalSeconds"
                     }
@@ -1718,6 +1843,7 @@
                 "RepeatExtXKey": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
                         "smithy.api#jsonName": "repeatExtXKey"
                     }
@@ -1770,6 +1896,7 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -1791,6 +1918,7 @@
                 "PlaylistWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each parent manifest.",
                         "smithy.api#jsonName": "playlistWindowSeconds"
                     }
@@ -1798,6 +1926,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -1859,6 +1988,7 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -1880,6 +2010,7 @@
                 "PlaylistWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each parent manifest.",
                         "smithy.api#jsonName": "playlistWindowSeconds"
                     }
@@ -1887,6 +2018,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -1927,6 +2059,7 @@
                 "IncludeDvbSubtitles": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
                         "smithy.api#jsonName": "includeDvbSubtitles"
                     }
@@ -1934,6 +2067,7 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -1948,6 +2082,7 @@
                 "PlaylistWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each parent manifest.",
                         "smithy.api#jsonName": "playlistWindowSeconds"
                     }
@@ -1955,6 +2090,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -1962,6 +2098,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each fragment. Actual fragments will be\nrounded to the nearest multiple of the source fragment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -1975,6 +2112,7 @@
                 "UseAudioRenditionGroup": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, audio streams will be placed in rendition groups in the output.",
                         "smithy.api#jsonName": "useAudioRenditionGroup"
                     }
@@ -2100,6 +2238,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackage#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Upper bound on number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2111,6 +2250,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#ListChannelsResponse": {
@@ -2130,6 +2272,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#ListHarvestJobs": {
@@ -2195,6 +2340,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackage#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The upper bound on the number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2206,6 +2352,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#ListHarvestJobsResponse": {
@@ -2225,6 +2374,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#ListOriginEndpoints": {
@@ -2283,6 +2435,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackage#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The upper bound on the number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2294,6 +2447,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#ListOriginEndpointsResponse": {
@@ -2313,6 +2469,9 @@
                         "smithy.api#jsonName": "originEndpoints"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#ListTagsForResource": {
@@ -2341,6 +2500,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#ListTagsForResourceResponse": {
@@ -2352,26 +2514,32 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#ManifestLayout": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FULL",
-                        "name": "FULL"
-                    },
-                    {
-                        "value": "COMPACT",
-                        "name": "COMPACT"
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
                     }
-                ]
+                },
+                "COMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPACT"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -2380,21 +2548,6 @@
         },
         "com.amazonaws.mediapackage#MediaPackage": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "MediaPackage",
-                    "arnNamespace": "mediapackage",
-                    "cloudFormationName": "MediaPackage",
-                    "cloudTrailEventSource": "mediapackage.amazonaws.com",
-                    "endpointPrefix": "mediapackage"
-                },
-                "aws.auth#sigv4": {
-                    "name": "mediapackage"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "AWS Elemental MediaPackage",
-                "smithy.api#title": "AWS Elemental MediaPackage"
-            },
             "version": "2017-10-12",
             "operations": [
                 {
@@ -2454,7 +2607,818 @@
                 {
                     "target": "com.amazonaws.mediapackage#UpdateOriginEndpoint"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MediaPackage",
+                    "arnNamespace": "mediapackage",
+                    "cloudFormationName": "MediaPackage",
+                    "cloudTrailEventSource": "mediapackage.amazonaws.com",
+                    "endpointPrefix": "mediapackage"
+                },
+                "aws.auth#sigv4": {
+                    "name": "mediapackage"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "AWS Elemental MediaPackage",
+                "smithy.api#title": "AWS Elemental MediaPackage",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://mediapackage-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://mediapackage-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://mediapackage.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mediapackage.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://mediapackage.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.mediapackage#MssEncryption": {
             "type": "structure",
@@ -2483,6 +3447,7 @@
                 "ManifestWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The time window (in seconds) contained in each manifest.",
                         "smithy.api#jsonName": "manifestWindowSeconds"
                     }
@@ -2490,6 +3455,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The duration (in seconds) of each segment.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -2550,6 +3516,13 @@
                         "smithy.api#jsonName": "cmafPackage"
                     }
                 },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the OriginEndpoint was created.",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
                 "DashPackage": {
                     "target": "com.amazonaws.mediapackage#DashPackage",
                     "traits": {
@@ -2599,6 +3572,7 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -2612,6 +3586,7 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -2636,134 +3611,172 @@
             }
         },
         "com.amazonaws.mediapackage#Origination": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOW",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "DENY",
-                        "name": "DENY"
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
                     }
-                ]
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#PlaylistType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "EVENT",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "VOD",
-                        "name": "VOD"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                },
+                "VOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOD"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#PresetSpeke20Audio": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PRESET-AUDIO-1",
-                        "name": "PRESET_AUDIO_1"
-                    },
-                    {
-                        "value": "PRESET-AUDIO-2",
-                        "name": "PRESET_AUDIO_2"
-                    },
-                    {
-                        "value": "PRESET-AUDIO-3",
-                        "name": "PRESET_AUDIO_3"
-                    },
-                    {
-                        "value": "SHARED",
-                        "name": "SHARED"
-                    },
-                    {
-                        "value": "UNENCRYPTED",
-                        "name": "UNENCRYPTED"
+            "type": "enum",
+            "members": {
+                "PRESET_AUDIO_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-AUDIO-1"
                     }
-                ]
+                },
+                "PRESET_AUDIO_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-AUDIO-2"
+                    }
+                },
+                "PRESET_AUDIO_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-AUDIO-3"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "UNENCRYPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNENCRYPTED"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#PresetSpeke20Video": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PRESET-VIDEO-1",
-                        "name": "PRESET_VIDEO_1"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-2",
-                        "name": "PRESET_VIDEO_2"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-3",
-                        "name": "PRESET_VIDEO_3"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-4",
-                        "name": "PRESET_VIDEO_4"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-5",
-                        "name": "PRESET_VIDEO_5"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-6",
-                        "name": "PRESET_VIDEO_6"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-7",
-                        "name": "PRESET_VIDEO_7"
-                    },
-                    {
-                        "value": "PRESET-VIDEO-8",
-                        "name": "PRESET_VIDEO_8"
-                    },
-                    {
-                        "value": "SHARED",
-                        "name": "SHARED"
-                    },
-                    {
-                        "value": "UNENCRYPTED",
-                        "name": "UNENCRYPTED"
+            "type": "enum",
+            "members": {
+                "PRESET_VIDEO_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-1"
                     }
-                ]
+                },
+                "PRESET_VIDEO_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-2"
+                    }
+                },
+                "PRESET_VIDEO_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-3"
+                    }
+                },
+                "PRESET_VIDEO_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-4"
+                    }
+                },
+                "PRESET_VIDEO_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-5"
+                    }
+                },
+                "PRESET_VIDEO_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-6"
+                    }
+                },
+                "PRESET_VIDEO_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-7"
+                    }
+                },
+                "PRESET_VIDEO_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-8"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "UNENCRYPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNENCRYPTED"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#Profile": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "HBBTV_1_5",
-                        "name": "HBBTV_1_5"
-                    },
-                    {
-                        "value": "HYBRIDCAST",
-                        "name": "HYBRIDCAST"
-                    },
-                    {
-                        "value": "DVB_DASH_2014",
-                        "name": "DVB_DASH_2014"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "HBBTV_1_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HBBTV_1_5"
+                    }
+                },
+                "HYBRIDCAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYBRIDCAST"
+                    }
+                },
+                "DVB_DASH_2014": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVB_DASH_2014"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#RotateChannelCredentials": {
@@ -2819,7 +3832,8 @@
                 }
             },
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#RotateChannelCredentialsResponse": {
@@ -2830,6 +3844,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -2872,7 +3893,8 @@
                 }
             },
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#RotateIngestEndpointCredentials": {
@@ -2931,6 +3953,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#RotateIngestEndpointCredentialsResponse": {
@@ -2941,6 +3966,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -2981,6 +4013,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#S3Destination": {
@@ -3016,22 +4051,26 @@
             }
         },
         "com.amazonaws.mediapackage#SegmentTemplateFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NUMBER_WITH_TIMELINE",
-                        "name": "NUMBER_WITH_TIMELINE"
-                    },
-                    {
-                        "value": "TIME_WITH_TIMELINE",
-                        "name": "TIME_WITH_TIMELINE"
-                    },
-                    {
-                        "value": "NUMBER_WITH_DURATION",
-                        "name": "NUMBER_WITH_DURATION"
+            "type": "enum",
+            "members": {
+                "NUMBER_WITH_TIMELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_WITH_TIMELINE"
                     }
-                ]
+                },
+                "TIME_WITH_TIMELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_WITH_TIMELINE"
+                    }
+                },
+                "NUMBER_WITH_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_WITH_DURATION"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#ServiceUnavailableException": {
@@ -3104,41 +4143,49 @@
             }
         },
         "com.amazonaws.mediapackage#Status": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#StreamOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ORIGINAL",
-                        "name": "ORIGINAL"
-                    },
-                    {
-                        "value": "VIDEO_BITRATE_ASCENDING",
-                        "name": "VIDEO_BITRATE_ASCENDING"
-                    },
-                    {
-                        "value": "VIDEO_BITRATE_DESCENDING",
-                        "name": "VIDEO_BITRATE_DESCENDING"
+            "type": "enum",
+            "members": {
+                "ORIGINAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORIGINAL"
                     }
-                ]
+                },
+                "VIDEO_BITRATE_ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_BITRATE_ASCENDING"
+                    }
+                },
+                "VIDEO_BITRATE_DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_BITRATE_DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#StreamSelection": {
@@ -3147,6 +4194,7 @@
                 "MaxVideoBitsPerSecond": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum video bitrate (bps) to include in output.",
                         "smithy.api#jsonName": "maxVideoBitsPerSecond"
                     }
@@ -3154,6 +4202,7 @@
                 "MinVideoBitsPerSecond": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum video bitrate (bps) to include in output.",
                         "smithy.api#jsonName": "minVideoBitsPerSecond"
                     }
@@ -3203,6 +4252,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#Tags": {
@@ -3283,6 +4335,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#UpdateChannel": {
@@ -3342,7 +4397,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration parameters used to update the Channel."
+                "smithy.api#documentation": "Configuration parameters used to update the Channel.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#UpdateChannelResponse": {
@@ -3353,6 +4409,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
                         "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the Channel was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "Description": {
@@ -3393,6 +4456,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#UpdateOriginEndpoint": {
@@ -3497,6 +4563,7 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (in seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -3504,6 +4571,7 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (in seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -3517,7 +4585,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration parameters used to update an existing OriginEndpoint."
+                "smithy.api#documentation": "Configuration parameters used to update an existing OriginEndpoint.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mediapackage#UpdateOriginEndpointResponse": {
@@ -3547,6 +4616,13 @@
                     "target": "com.amazonaws.mediapackage#CmafPackage",
                     "traits": {
                         "smithy.api#jsonName": "cmafPackage"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time the OriginEndpoint was created.",
+                        "smithy.api#jsonName": "createdAt"
                     }
                 },
                 "DashPackage": {
@@ -3598,6 +4674,7 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -3611,6 +4688,7 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -3629,86 +4707,115 @@
                         "smithy.api#jsonName": "whitelist"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackage#UtcTiming": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "HTTP-HEAD",
-                        "name": "HTTP_HEAD"
-                    },
-                    {
-                        "value": "HTTP-ISO",
-                        "name": "HTTP_ISO"
-                    },
-                    {
-                        "value": "HTTP-XSDATE",
-                        "name": "HTTP_XSDATE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "HTTP_HEAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP-HEAD"
+                    }
+                },
+                "HTTP_ISO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP-ISO"
+                    }
+                },
+                "HTTP_XSDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP-XSDATE"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#__AdTriggersElement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SPLICE_INSERT",
-                        "name": "SPLICE_INSERT"
-                    },
-                    {
-                        "value": "BREAK",
-                        "name": "BREAK"
-                    },
-                    {
-                        "value": "PROVIDER_ADVERTISEMENT",
-                        "name": "PROVIDER_ADVERTISEMENT"
-                    },
-                    {
-                        "value": "DISTRIBUTOR_ADVERTISEMENT",
-                        "name": "DISTRIBUTOR_ADVERTISEMENT"
-                    },
-                    {
-                        "value": "PROVIDER_PLACEMENT_OPPORTUNITY",
-                        "name": "PROVIDER_PLACEMENT_OPPORTUNITY"
-                    },
-                    {
-                        "value": "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-                        "name": "DISTRIBUTOR_PLACEMENT_OPPORTUNITY"
-                    },
-                    {
-                        "value": "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-                        "name": "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"
-                    },
-                    {
-                        "value": "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-                        "name": "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+            "type": "enum",
+            "members": {
+                "SPLICE_INSERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPLICE_INSERT"
                     }
-                ]
+                },
+                "BREAK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BREAK"
+                    }
+                },
+                "PROVIDER_ADVERTISEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVIDER_ADVERTISEMENT"
+                    }
+                },
+                "DISTRIBUTOR_ADVERTISEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTRIBUTOR_ADVERTISEMENT"
+                    }
+                },
+                "PROVIDER_PLACEMENT_OPPORTUNITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVIDER_PLACEMENT_OPPORTUNITY"
+                    }
+                },
+                "DISTRIBUTOR_PLACEMENT_OPPORTUNITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTRIBUTOR_PLACEMENT_OPPORTUNITY"
+                    }
+                },
+                "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"
+                    }
+                },
+                "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackage#__PeriodTriggersElement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADS",
-                        "name": "ADS"
+            "type": "enum",
+            "members": {
+                "ADS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.mediapackage#__boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.mediapackage#__integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.mediapackage#__listOfChannel": {
             "type": "list",

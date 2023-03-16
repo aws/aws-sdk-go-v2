@@ -1,3 +1,7 @@
+# v1.26.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-03-03)
 
 * **Feature**: Amazon Transcribe now supports role access for these API operations: CreateVocabulary, UpdateVocabulary, CreateVocabularyFilter, and UpdateVocabularyFilter.

@@ -20,15 +20,14 @@
                 "appIntegrationArn": {
                     "target": "com.amazonaws.wisdom#GenericArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.</p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n            <code>objectFields</code> is not provided, including at least <code>id</code>,\n            <code>title</code>, <code>updated_at</code>, and <code>draft</code> as source fields.\n        </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index\"> SharePoint</a>, your AppIntegrations DataIntegration must have a FileConfiguration,\n          including only file extensions that are among <code>docx</code>, <code>pdf</code>,\n            <code>html</code>, <code>htm</code>, and <code>txt</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "objectFields": {
                     "target": "com.amazonaws.wisdom#ObjectFieldsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fields from the source that are made available to your agents in Wisdom. </p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, you must include at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, you must include at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code>. </p>\n            </li>\n         </ul>\n         <p>Make sure to include additional fields. These fields are indexed and used to source\n      recommendations. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The fields from the source that are made available to your agents in Wisdom. Optional if\n      ObjectConfiguration is included in the provided DataIntegration. </p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, you must include at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, you must include at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, you must include at least <code>id</code>, <code>title</code>,\n            <code>updated_at</code>, and <code>draft</code>. </p>\n            </li>\n         </ul>\n         <p>Make sure to include additional fields. These fields are indexed and used to source\n      recommendations. </p>"
                     }
                 }
             },
@@ -918,7 +917,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.wisdom#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -947,7 +946,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.wisdom#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1076,7 +1075,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.wisdom#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1122,7 +1121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a knowledge base.</p>\n         <note>\n            <p>When using this API, you cannot reuse <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html\">Amazon AppIntegrations</a>\n        DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do,\n        you'll get an <code>InvalidRequestException</code> error. </p>\n\n            <p>For example, you're programmatically managing your external knowledge base, and you want\n        to add or remove one of the fields that is being ingested from Salesforce. Do the\n        following:</p>\n            <ol>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html\">DeleteKnowledgeBase</a>.</p>\n               </li>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html\">DeleteDataIntegration</a>.</p>\n               </li>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html\">CreateDataIntegration</a> to recreate the DataIntegration or a create different\n            one.</p>\n               </li>\n               <li>\n                  <p>Call CreateKnowledgeBase.</p>\n               </li>\n            </ol>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a knowledge base.</p>\n         <note>\n            <p>When using this API, you cannot reuse <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html\">Amazon AppIntegrations</a>\n        DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do,\n        you'll get an <code>InvalidRequestException</code> error. </p>\n            <p>For example, you're programmatically managing your external knowledge base, and you want\n        to add or remove one of the fields that is being ingested from Salesforce. Do the\n        following:</p>\n            <ol>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html\">DeleteKnowledgeBase</a>.</p>\n               </li>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html\">DeleteDataIntegration</a>.</p>\n               </li>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html\">CreateDataIntegration</a> to recreate the DataIntegration or a create different\n            one.</p>\n               </li>\n               <li>\n                  <p>Call CreateKnowledgeBase.</p>\n               </li>\n            </ol>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases",
                     "method": "POST"
@@ -1136,7 +1135,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.wisdom#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1217,7 +1216,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a session. A session is a contextual container used for generating\n      recommendations. Amazon Connect creates a new Wisdom session for each contact on which Wisdom is\n      enabled.</p>",
+                "smithy.api#documentation": "<p>Creates a session. A session is a contextual container used for generating\n      recommendations. Amazon Connect creates a new Wisdom session for each contact on which\n      Wisdom is enabled.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/sessions",
                     "method": "POST"
@@ -1231,7 +1230,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.wisdom#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1452,7 +1451,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the knowledge base.</p>\n         <note>\n            <p>When you use this API to delete an external knowledge base such as Salesforce or\n        ServiceNow, you must also delete the <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html\">Amazon AppIntegrations</a> DataIntegration.\n        This is because you can't reuse the DataIntegration after it's been associated with an\n        external knowledge base. However, you can delete and recreate it. See <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html\">DeleteDataIntegration</a> and <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html\">CreateDataIntegration</a> in the <i>Amazon AppIntegrations API\n        Reference</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes the knowledge base.</p>\n         <note>\n            <p>When you use this API to delete an external knowledge base such as Salesforce or\n        ServiceNow, you must also delete the <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html\">Amazon AppIntegrations</a>\n        DataIntegration. This is because you can't reuse the DataIntegration after it's been\n        associated with an external knowledge base. However, you can delete and recreate it. See\n          <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html\">DeleteDataIntegration</a> and <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html\">CreateDataIntegration</a> in the <i>Amazon AppIntegrations API\n        Reference</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}",
                     "method": "DELETE",
@@ -3061,7 +3060,7 @@
                 "source": {
                     "target": "com.amazonaws.wisdom#RecommendationSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the recommendation trigger.</p>\n         <ul>\n            <li>\n               <p>ISSUE_DETECTION: The corresponding recommendations were triggered\n          by a Contact Lens issue.</p>\n            </li>\n            <li>\n               <p>RULE_EVALUATION: The corresponding recommendations were triggered\n          by a Contact Lens rule.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The source of the recommendation trigger.</p>\n         <ul>\n            <li>\n               <p>ISSUE_DETECTION: The corresponding recommendations were triggered by a Contact Lens\n          issue.</p>\n            </li>\n            <li>\n               <p>RULE_EVALUATION: The corresponding recommendations were triggered by a Contact Lens\n          rule.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3081,7 +3080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A recommendation trigger provides context on the event that produced the referenced recommendations.\n      Recommendations are only referenced in <code>recommendationIds</code> by a single RecommendationTrigger.</p>"
+                "smithy.api#documentation": "<p>A recommendation trigger provides context on the event that produced the referenced\n      recommendations. Recommendations are only referenced in <code>recommendationIds</code> by a\n      single RecommendationTrigger.</p>"
             }
         },
         "com.amazonaws.wisdom#RecommendationTriggerData": {
@@ -3205,7 +3204,7 @@
                 "templateUri": {
                     "target": "com.amazonaws.wisdom#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URI template containing exactly one variable in <code>${variableName} </code>format.\n      This can only be set for <code>EXTERNAL</code> knowledge bases. For Salesforce and ServiceNow,\n      the variable must be one of the following:</p>\n         <ul>\n            <li>\n               <p>Salesforce: <code>Id</code>, <code>ArticleNumber</code>, <code>VersionNumber</code>,\n            <code>Title</code>, <code>PublishStatus</code>, or <code>IsDeleted</code>\n               </p>\n            </li>\n            <li>\n               <p>ServiceNow: <code>number</code>, <code>short_description</code>,\n            <code>sys_mod_count</code>, <code>workflow_state</code>, or <code>active</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>The variable is replaced with the actual value for a piece of content when calling <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html\">GetContent</a>. </p>"
+                        "smithy.api#documentation": "<p>A URI template containing exactly one variable in <code>${variableName} </code>format.\n      This can only be set for <code>EXTERNAL</code> knowledge bases. For Salesforce, ServiceNow,\n      and Zendesk, the variable must be one of the following:</p>\n         <ul>\n            <li>\n               <p>Salesforce: <code>Id</code>, <code>ArticleNumber</code>, <code>VersionNumber</code>,\n            <code>Title</code>, <code>PublishStatus</code>, or <code>IsDeleted</code>\n               </p>\n            </li>\n            <li>\n               <p>ServiceNow: <code>number</code>, <code>short_description</code>,\n            <code>sys_mod_count</code>, <code>workflow_state</code>, or <code>active</code>\n               </p>\n            </li>\n            <li>\n               <p>Zendesk: <code>id</code>, <code>title</code>, <code>updated_at</code>, or\n            <code>draft</code>\n               </p>\n            </li>\n         </ul>\n         <p>The variable is replaced with the actual value for a piece of content when calling <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html\">GetContent</a>. </p>"
                     }
                 }
             },
@@ -3460,7 +3459,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.wisdom#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a>.</p>"
+                        "smithy.api#documentation": "<p>The KMS key. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers\n        (KeyId)</a>.</p>"
                     }
                 }
             },
@@ -4089,14 +4088,14 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Amazon Connect Wisdom delivers agents the information they need to solve customer issues as they're actively\n        speaking with customers. Agents can search across connected repositories from within their agent desktop\n        to find answers quickly. Use the Amazon Connect Wisdom APIs to create an assistant and a knowledge base, for example, or manage content by uploading custom files.</p>",
+                "smithy.api#documentation": "<p>Amazon Connect Wisdom delivers agents the information they need to solve customer issues as they're\n      actively speaking with customers. Agents can search across connected repositories from within\n      their agent desktop to find answers quickly. Use Amazon Connect Wisdom to create an assistant and a\n      knowledge base, for example, or manage content by uploading custom files.</p>",
                 "smithy.api#title": "Amazon Connect Wisdom Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -4125,15 +4124,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -4142,7 +4193,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -4152,22 +4203,202 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -4180,134 +4411,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://wisdom.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://wisdom-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -4315,7 +4464,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://wisdom.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -4324,74 +4473,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://wisdom.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://wisdom.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -4400,201 +4488,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
                             "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -4602,48 +4495,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wisdom.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -4654,21 +4508,47 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-2"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wisdom-fips.us-east-1.api.aws"
+                                    "url": "https://wisdom.eu-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4680,8 +4560,34 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4693,35 +4599,191 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wisdom.us-east-1.amazonaws.com"
+                                    "url": "https://wisdom-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wisdom.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4731,9 +4793,11 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4743,9 +4807,11 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }

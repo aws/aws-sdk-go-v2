@@ -700,6 +700,9 @@
                     "target": "com.amazonaws.connect#GetMetricData"
                 },
                 {
+                    "target": "com.amazonaws.connect#GetMetricDataV2"
+                },
+                {
                     "target": "com.amazonaws.connect#GetTaskTemplate"
                 },
                 {
@@ -1378,9 +1381,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1391,9 +1394,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1404,9 +1407,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1417,9 +1420,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1430,9 +1433,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1443,9 +1446,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1456,9 +1459,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1469,9 +1472,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1482,9 +1485,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1495,9 +1498,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1508,9 +1511,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1521,9 +1524,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1534,9 +1537,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1547,9 +1550,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1560,9 +1563,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1573,9 +1576,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1586,9 +1589,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1599,9 +1602,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1612,9 +1615,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1625,9 +1628,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1638,9 +1641,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1651,9 +1654,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1664,9 +1667,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1677,9 +1680,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1690,9 +1693,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1703,9 +1706,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1716,9 +1719,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1729,9 +1732,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1754,9 +1757,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1766,9 +1769,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -8173,6 +8176,21 @@
                 "smithy.api#documentation": "<p>Contains information about the dimensions for a set of metrics.</p>"
             }
         },
+        "com.amazonaws.connect#DimensionsV2Key": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#DimensionsV2Map": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#DimensionsV2Key"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#DimensionsV2Value"
+            }
+        },
+        "com.amazonaws.connect#DimensionsV2Value": {
+            "type": "string"
+        },
         "com.amazonaws.connect#DirectoryAlias": {
             "type": "string",
             "traits": {
@@ -8301,7 +8319,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Revokes authorization from the specified instance to access the specified Amazon Lex\n   or Amazon Lex V2 bot. </p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Revokes authorization from the specified instance to access the specified Amazon Lex or Amazon Lex V2\n   bot. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/instance/{InstanceId}/bot",
@@ -9017,6 +9035,38 @@
                 }
             }
         },
+        "com.amazonaws.connect#FilterV2": {
+            "type": "structure",
+            "members": {
+                "FilterKey": {
+                    "target": "com.amazonaws.connect#ResourceArnOrId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to use for filtering data. For example, <code>QUEUE</code>, <code>ROUTING_PROFILE,\n    AGENT</code>, <code>CHANNEL</code>, <code>AGENT_HIERARCHY_LEVEL_ONE</code>,\n    <code>AGENT_HIERARCHY_LEVEL_TWO</code>, <code>AGENT_HIERARCHY_LEVEL_THREE</code>,\n    <code>AGENT_HIERARCHY_LEVEL_FOUR</code>, <code>AGENT_HIERARCHY_LEVEL_FIVE</code>. There must be\n   at least 1 key and a maximum 5 keys. </p>"
+                    }
+                },
+                "FilterValues": {
+                    "target": "com.amazonaws.connect#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers to use for filtering data. For example, if you have a filter key of\n    <code>QUEUE</code>, you would add queue IDs or ARNs in <code>FilterValues</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the filter to apply when retrieving metrics with the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html\">GetMetricDataV2</a> API.</p>"
+            }
+        },
+        "com.amazonaws.connect#FilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ResourceArnOrId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.connect#Filters": {
             "type": "structure",
             "members": {
@@ -9041,6 +9091,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the filter to apply when retrieving metrics.</p>"
+            }
+        },
+        "com.amazonaws.connect#FiltersV2List": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#FilterV2"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.connect#FunctionArn": {
@@ -9558,6 +9620,127 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#GetMetricDataV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetMetricDataV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetMetricDataV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for last the 14 days, in 24-hour\n   intervals.</p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics\n    definitions</a> in the <i>Amazon Connect Administrator's Guide</i>.\n  </p>\n         <p>This API is not available in the Amazon Web Services GovCloud (US) Regions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/metrics/data",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#GetMetricDataV2Request": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. This includes the <code>instanceId</code> an Amazon Connect\n   instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the\n   retrieval of historical metrics data. The time must be before the end time timestamp. The time\n   range between the start and end time must be less than 24 hours. The start time cannot be earlier\n   than 14 days before the time of the request. Historical metrics are available for 14 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time\n   timestamp.</p>\n         <p>The time range between the start and end time must be less than 24 hours.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.connect#FiltersV2List",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to returned metrics. You can filter on the following resources:</p>\n         <ul>\n            <li>\n               <p>Queues</p>\n            </li>\n            <li>\n               <p>Routing profiles</p>\n            </li>\n            <li>\n               <p>Agents</p>\n            </li>\n            <li>\n               <p>Channels</p>\n            </li>\n            <li>\n               <p>User hierarchy groups</p>\n            </li>\n         </ul>\n         <p>At least one filter must be passed from queues, routing profiles, agents, or user hierarchy\n   groups.</p>\n         <p>To filter by phone number, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html\">Create a historical\n    metrics report</a> in the <i>Amazon Connect Administrator's\n   Guide</i>.</p>\n         <p>Note the following limits:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Filter keys</b>: A maximum of 5 filter keys are supported in\n     a single request. Valid filter keys: <code>QUEUE</code> | <code>ROUTING_PROFILE</code> |\n      <code>AGENT</code> | <code>CHANNEL</code> | <code>AGENT_HIERARCHY_LEVEL_ONE</code> |\n      <code>AGENT_HIERARCHY_LEVEL_TWO</code> | <code>AGENT_HIERARCHY_LEVEL_THREE</code> |\n      <code>AGENT_HIERARCHY_LEVEL_FOUR</code> | <code>AGENT_HIERARCHY_LEVEL_FIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Filter values</b>: A maximum of 100 filter values are\n     supported in a single request. For example, a <code>GetMetricDataV2</code> request can filter\n     by 50 queues, 35 agents, and 15 routing profiles for a total of 100 filter values.\n      <code>VOICE</code>, <code>CHAT</code>, and <code>TASK</code> are valid\n      <code>filterValue</code> for the <code>CHANNEL</code> filter key.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Groupings": {
+                    "target": "com.amazonaws.connect#GroupingsV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The grouping applied to the metrics that are returned. For example, when results are grouped\n   by queue, the metrics returned are grouped by queue. The values that are returned apply to the\n   metrics for each queue. They are not aggregated for all queues.</p>\n         <p>If no grouping is specified, a summary of all metrics is returned.</p>\n         <p>Valid grouping keys: <code>QUEUE</code> | <code>ROUTING_PROFILE</code> | <code>AGENT</code>\n   | <code>CHANNEL</code> | <code>AGENT_HIERARCHY_LEVEL_ONE</code> |\n    <code>AGENT_HIERARCHY_LEVEL_TWO</code> | <code>AGENT_HIERARCHY_LEVEL_THREE</code> |\n    <code>AGENT_HIERARCHY_LEVEL_FOUR</code> | <code>AGENT_HIERARCHY_LEVEL_FIVE</code>\n         </p>"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.connect#MetricsV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#GetMetricDataV2Response": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "MetricResults": {
+                    "target": "com.amazonaws.connect#MetricResultsV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the metrics requested in the API request If no grouping is specified, a\n   summary of metric data is returned. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#GetTaskTemplate": {
             "type": "operation",
             "input": {
@@ -9811,10 +9994,25 @@
                 }
             }
         },
+        "com.amazonaws.connect#GroupingV2": {
+            "type": "string"
+        },
         "com.amazonaws.connect#Groupings": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#Grouping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.connect#GroupingsV2": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#GroupingV2"
             },
             "traits": {
                 "smithy.api#length": {
@@ -14612,6 +14810,137 @@
         "com.amazonaws.connect#Message": {
             "type": "string"
         },
+        "com.amazonaws.connect#MetricDataCollectionsV2": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#MetricDataV2"
+            }
+        },
+        "com.amazonaws.connect#MetricDataV2": {
+            "type": "structure",
+            "members": {
+                "Metric": {
+                    "target": "com.amazonaws.connect#MetricV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric name, thresholds, and metric filters of the returned metric.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The corresponding value of the metric returned in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the name, thresholds, and metric filters.</p>"
+            }
+        },
+        "com.amazonaws.connect#MetricFilterV2": {
+            "type": "structure",
+            "members": {
+                "MetricFilterKey": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to use for filtering data. </p>\n         <p>Valid metric filter keys: <code>INITIATION_METHOD</code>,\n   <code>DISCONNECT_REASON</code>\n         </p>"
+                    }
+                },
+                "MetricFilterValues": {
+                    "target": "com.amazonaws.connect#MetricFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use for filtering data. </p>\n         <p>Valid metric filter values for <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n    <code>OUTBOUND</code> | <code>TRANSFER</code> | <code>QUEUE_TRANSFER</code> |\n    <code>CALLBACK</code> | <code>API</code>\n         </p>\n         <p>Valid metric filter values for <code>DISCONNECT_REASON</code>:\n    <code>CUSTOMER_DISCONNECT</code> | <code>AGENT_DISCONNECT</code> |\n    <code>THIRD_PARTY_DISCONNECT</code> | <code>TELECOM_PROBLEM</code> | <code>BARGED</code> |\n    <code>CONTACT_FLOW_DISCONNECT</code> | <code>OTHER</code> | <code>EXPIRED</code> |\n    <code>API</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the filter used when retrieving metrics.\n    <code>MetricFiltersV2</code> can be used on the following metrics:\n    <code>AVG_AGENT_CONNECTING_TIME</code>, <code>CONTACTS_CREATED</code>,\n    <code>CONTACTS_HANDLED</code>, <code>SUM_CONTACTS_DISCONNECTED</code>.</p>"
+            }
+        },
+        "com.amazonaws.connect#MetricFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#MetricFiltersV2List": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#MetricFilterV2"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.connect#MetricNameV2": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#MetricResultV2": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.connect#DimensionsV2Map",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension for the metrics.</p>"
+                    }
+                },
+                "Collections": {
+                    "target": "com.amazonaws.connect#MetricDataCollectionsV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the metric results.</p>"
+            }
+        },
+        "com.amazonaws.connect#MetricResultsV2": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#MetricResultV2"
+            }
+        },
+        "com.amazonaws.connect#MetricV2": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#MetricNameV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric.</p>"
+                    }
+                },
+                "Threshold": {
+                    "target": "com.amazonaws.connect#ThresholdCollections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the threshold for service level metrics.</p>"
+                    }
+                },
+                "MetricFilters": {
+                    "target": "com.amazonaws.connect#MetricFiltersV2List",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the filters to be used when returning data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the metric.</p>"
+            }
+        },
+        "com.amazonaws.connect#MetricsV2": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#MetricV2"
+            }
+        },
         "com.amazonaws.connect#MinutesLimit60": {
             "type": "integer",
             "traits": {
@@ -17856,6 +18185,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#RequiredFieldInfo"
+            }
+        },
+        "com.amazonaws.connect#ResourceArnOrId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
             }
         },
         "com.amazonaws.connect#ResourceConflictException": {
@@ -21205,6 +21543,38 @@
             "members": {
                 "Comparison": {
                     "target": "com.amazonaws.connect#Comparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of comparison. Only \"less than\" (LT) comparisons are supported.</p>"
+                    }
+                },
+                "ThresholdValue": {
+                    "target": "com.amazonaws.connect#ThresholdValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold value to compare.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the threshold for service level metrics.</p>"
+            }
+        },
+        "com.amazonaws.connect#ThresholdCollections": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ThresholdV2"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#ThresholdV2": {
+            "type": "structure",
+            "members": {
+                "Comparison": {
+                    "target": "com.amazonaws.connect#ResourceArnOrId",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of comparison. Only \"less than\" (LT) comparisons are supported.</p>"
                     }

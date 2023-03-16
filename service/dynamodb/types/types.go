@@ -2905,6 +2905,10 @@ type TableDescription struct {
 	// (http://www.epochconverter.com/) format.
 	CreationDateTime *time.Time
 
+	// Indicates whether deletion protection is enabled (true) or disabled (false) on
+	// the table.
+	DeletionProtectionEnabled *bool
+
 	// The global secondary indexes, if any, on the table. Each index is scoped to a
 	// given partition key value. Each element is composed of:
 	//

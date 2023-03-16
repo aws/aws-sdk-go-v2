@@ -1134,6 +1134,89 @@ func awsRestjson1_serializeOpDocumentExtendTransactionInput(v *ExtendTransaction
 	return nil
 }
 
+type awsRestjson1_serializeOpGetDataCellsFilter struct {
+}
+
+func (*awsRestjson1_serializeOpGetDataCellsFilter) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetDataCellsFilter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDataCellsFilterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetDataCellsFilter")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetDataCellsFilterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetDataCellsFilterInput(v *GetDataCellsFilterInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetDataCellsFilterInput(v *GetDataCellsFilterInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.TableCatalogId != nil {
+		ok := object.Key("TableCatalogId")
+		ok.String(*v.TableCatalogId)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetDataLakeSettings struct {
 }
 
@@ -3289,6 +3372,76 @@ func awsRestjson1_serializeOpDocumentStartTransactionInput(v *StartTransactionIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateDataCellsFilter struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateDataCellsFilter) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateDataCellsFilter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDataCellsFilterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/UpdateDataCellsFilter")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateDataCellsFilterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateDataCellsFilterInput(v *UpdateDataCellsFilterInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateDataCellsFilterInput(v *UpdateDataCellsFilterInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TableData != nil {
+		ok := object.Key("TableData")
+		if err := awsRestjson1_serializeDocumentDataCellsFilter(v.TableData, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateLFTag struct {
 }
 
@@ -3828,6 +3981,11 @@ func awsRestjson1_serializeDocumentDataCellsFilter(v *types.DataCellsFilter, val
 	if v.TableName != nil {
 		ok := object.Key("TableName")
 		ok.String(*v.TableName)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("VersionId")
+		ok.String(*v.VersionId)
 	}
 
 	return nil

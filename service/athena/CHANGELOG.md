@@ -1,3 +1,11 @@
+# v1.23.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2023-03-08)
+
+* **Feature**: A new field SubstatementType is added to GetQueryExecution API, so customers have an error free way to detect the query type and interpret the result.
+
 # v1.22.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

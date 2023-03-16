@@ -270,6 +270,26 @@ func (m *validateOpDescribeTransaction) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataCellsFilter struct {
+}
+
+func (*validateOpGetDataCellsFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataCellsFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataCellsFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataCellsFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEffectivePermissionsForPath struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpStartQueryPlanning) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataCellsFilter struct {
+}
+
+func (*validateOpUpdateDataCellsFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataCellsFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataCellsFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataCellsFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLFTag struct {
 }
 
@@ -822,6 +862,10 @@ func addOpDescribeTransactionValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeTransaction{}, middleware.After)
 }
 
+func addOpGetDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataCellsFilter{}, middleware.After)
+}
+
 func addOpGetEffectivePermissionsForPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEffectivePermissionsForPath{}, middleware.After)
 }
@@ -904,6 +948,10 @@ func addOpSearchTablesByLFTagsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpStartQueryPlanningValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartQueryPlanning{}, middleware.After)
+}
+
+func addOpUpdateDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataCellsFilter{}, middleware.After)
 }
 
 func addOpUpdateLFTagValidationMiddleware(stack *middleware.Stack) error {
@@ -1572,6 +1620,30 @@ func validateOpDescribeTransactionInput(v *DescribeTransactionInput) error {
 	}
 }
 
+func validateOpGetDataCellsFilterInput(v *GetDataCellsFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataCellsFilterInput"}
+	if v.TableCatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableCatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEffectivePermissionsForPathInput(v *GetEffectivePermissionsForPathInput) error {
 	if v == nil {
 		return nil
@@ -1955,6 +2027,25 @@ func validateOpStartQueryPlanningInput(v *StartQueryPlanningInput) error {
 	}
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDataCellsFilterInput(v *UpdateDataCellsFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataCellsFilterInput"}
+	if v.TableData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableData"))
+	} else if v.TableData != nil {
+		if err := validateDataCellsFilter(v.TableData); err != nil {
+			invalidParams.AddNested("TableData", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -434,6 +434,7 @@ type ReleaseStatusValues string
 // Enum values for ReleaseStatusValues
 const (
 	ReleaseStatusValuesBeta ReleaseStatusValues = "beta"
+	ReleaseStatusValuesProd ReleaseStatusValues = "prod"
 )
 
 // Values returns all known values for ReleaseStatusValues. Note that this can be
@@ -442,6 +443,7 @@ const (
 func (ReleaseStatusValues) Values() []ReleaseStatusValues {
 	return []ReleaseStatusValues{
 		"beta",
+		"prod",
 	}
 }
 

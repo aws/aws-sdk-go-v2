@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -404,6 +404,7 @@
                 "BypassGovernanceRetention": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set permissions to bypass governance retention. If the lock type of the archived tape is\n            <code>Governance</code>, the tape's archived age is not older than\n            <code>RetentionLockInDays</code>, and the user does not already have\n            <code>BypassGovernanceRetention</code>, setting this to TRUE enables the user to bypass\n         the retention lock. This parameter is set to true by default for calls from the\n         console.</p>\n\n         <p>Valid values: <code>TRUE</code> | <code>FALSE</code>\n         </p>"
                     }
                 }
@@ -668,6 +669,7 @@
                 "Worm": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> to indicate that tapes are to be archived as\n         write-once-read-many (WORM). Set to <code>false</code> when WORM is not enabled for\n         tapes.</p>"
                     }
                 }
@@ -710,7 +712,6 @@
         "com.amazonaws.storagegateway#BandwidthDownloadRateLimit": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 102400
                 }
@@ -795,20 +796,19 @@
         "com.amazonaws.storagegateway#BandwidthUploadRateLimit": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 51200
                 }
             }
         },
         "com.amazonaws.storagegateway#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.storagegateway#Boolean2": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.storagegateway#CacheAttributes": {
             "type": "structure",
@@ -825,10 +825,7 @@
             }
         },
         "com.amazonaws.storagegateway#CacheStaleTimeoutInSeconds": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.storagegateway#CachediSCSIVolume": {
             "type": "structure",
@@ -866,6 +863,7 @@
                 "VolumeSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size, in bytes, of the volume capacity.</p>"
                     }
                 },
@@ -1142,6 +1140,7 @@
                 "VolumeSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the volume in bytes.</p>",
                         "smithy.api#required": {}
                     }
@@ -1777,6 +1776,7 @@
                 "PreserveExistingData": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> if you want to preserve the data on the local disk. Otherwise,\n         set to <code>false</code> to create an empty volume.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1830,6 +1830,7 @@
                 "VolumeSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the volume in bytes.</p>"
                     }
                 },
@@ -1977,6 +1978,7 @@
                 "Worm": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>TRUE</code> if the tape you are creating is to be configured as a\n         write-once-read-many (WORM) tape.</p>"
                     }
                 },
@@ -2084,6 +2086,7 @@
                 "Worm": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>TRUE</code> if the tape you are creating is to be configured as a\n         write-once-read-many (WORM) tape.</p>"
                     }
                 },
@@ -2128,7 +2131,6 @@
         "com.amazonaws.storagegateway#DayOfMonth": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 28
@@ -2138,7 +2140,6 @@
         "com.amazonaws.storagegateway#DayOfWeek": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 6
@@ -2343,6 +2344,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this value is set to <code>true</code>, the operation deletes a file share\n         immediately and aborts all data uploads to Amazon Web Services. Otherwise, the file share is\n         not deleted until all data is uploaded to Amazon Web Services. This process aborts the data\n         upload process, and the file share enters the <code>FORCE_DELETING</code> status.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 }
@@ -2506,6 +2508,7 @@
                 "BypassGovernanceRetention": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>TRUE</code> to delete an archived tape that belongs to a custom pool with\n         tape retention lock. Only archived tapes with tape retention lock set to\n            <code>governance</code> can be deleted. Archived tapes with tape retention lock set to\n            <code>compliance</code> can't be deleted.</p>"
                     }
                 }
@@ -2548,6 +2551,7 @@
                 "BypassGovernanceRetention": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>TRUE</code> to delete an archived tape that belongs to a custom pool with\n         tape retention lock. Only archived tapes with tape retention lock set to\n            <code>governance</code> can be deleted. Archived tapes with tape retention lock set to\n            <code>compliance</code> can't be deleted.</p>"
                     }
                 }
@@ -2870,30 +2874,35 @@
                 "CacheAllocatedInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of cache in bytes allocated to a gateway.</p>"
                     }
                 },
                 "CacheUsedPercentage": {
                     "target": "com.amazonaws.storagegateway#double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Percent use of the gateway's cache storage. This metric applies only to the\n         gateway-cached volume setup. The sample is taken at the end of the reporting period.</p>"
                     }
                 },
                 "CacheDirtyPercentage": {
                     "target": "com.amazonaws.storagegateway#double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The file share's contribution to the overall percentage of the gateway's cache\n         that has not been persisted to Amazon Web Services. The sample is taken at the end of the\n         reporting period.</p>"
                     }
                 },
                 "CacheHitPercentage": {
                     "target": "com.amazonaws.storagegateway#double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Percent of application read operations from the file shares that are served from cache.\n         The sample is taken at the end of the reporting period.</p>"
                     }
                 },
                 "CacheMissPercentage": {
                     "target": "com.amazonaws.storagegateway#double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Percent of application read operations from the file shares that are not served from\n         cache. The sample is taken at the end of the reporting period.</p>"
                     }
                 }
@@ -3843,12 +3852,14 @@
                 "UploadBufferUsedInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of bytes being used in the gateway's upload buffer.</p>"
                     }
                 },
                 "UploadBufferAllocatedInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of bytes allocated in the gateway's as upload buffer.</p>"
                     }
                 }
@@ -3984,12 +3995,14 @@
                 "WorkingStorageUsedInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total working storage in bytes in use by the gateway. If no working storage is\n         configured for the gateway, this field returns 0.</p>"
                     }
                 },
                 "WorkingStorageAllocatedInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total working storage in bytes allocated for the gateway. If no working storage is\n         configured for the gateway, this field returns 0.</p>"
                     }
                 }
@@ -4089,12 +4102,14 @@
                 "NetworkInterfacePort": {
                     "target": "com.amazonaws.storagegateway#integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port used to communicate with iSCSI VTL device targets.</p>"
                     }
                 },
                 "ChapEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether mutual CHAP is enabled for the iSCSI target.</p>"
                     }
                 }
@@ -4184,6 +4199,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this value is set to true, the operation disassociates an Amazon FSx file\n         system immediately. It ends all data uploads to the file system, and the file system\n         association enters the <code>FORCE_DELETING</code> status. If this value is set to false,\n         the Amazon FSx file system does not disassociate until all data is uploaded.</p>"
                     }
                 }
@@ -4230,6 +4246,7 @@
                 "DiskSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The local disk size in bytes.</p>"
                     }
                 },
@@ -4335,10 +4352,7 @@
             }
         },
         "com.amazonaws.storagegateway#DoubleObject": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.storagegateway#Ec2InstanceId": {
             "type": "string"
@@ -5140,7 +5154,6 @@
         "com.amazonaws.storagegateway#HourOfDay": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 23
@@ -6074,7 +6087,6 @@
         "com.amazonaws.storagegateway#MinimumNumTapes": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -6084,7 +6096,6 @@
         "com.amazonaws.storagegateway#MinuteOfHour": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 59
@@ -6144,6 +6155,7 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
@@ -6351,7 +6363,6 @@
         "com.amazonaws.storagegateway#NumTapesToCreate": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -6412,7 +6423,6 @@
         "com.amazonaws.storagegateway#PermissionId": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 4294967294
@@ -6531,7 +6541,6 @@
         "com.amazonaws.storagegateway#PositiveIntObject": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -6540,7 +6549,6 @@
         "com.amazonaws.storagegateway#RecurrenceInHours": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 24
@@ -6724,7 +6732,6 @@
         "com.amazonaws.storagegateway#RetentionLockTimeInDays": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 36500
@@ -6890,6 +6897,7 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
@@ -7393,24 +7401,6 @@
         },
         "com.amazonaws.storagegateway#StorageGateway_20130630": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Storage Gateway",
-                    "arnNamespace": "storagegateway",
-                    "cloudFormationName": "StorageGateway",
-                    "cloudTrailEventSource": "storagegateway.amazonaws.com",
-                    "endpointPrefix": "storagegateway"
-                },
-                "aws.auth#sigv4": {
-                    "name": "storagegateway"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Storage Gateway Service</fullname>\n\n         <p>Storage Gateway is the service that connects an on-premises software appliance\n         with cloud-based storage to provide seamless and secure integration between an\n         organization's on-premises IT environment and the Amazon Web Services storage\n         infrastructure. The service enables you to securely upload data to the Amazon Web Services Cloud for cost effective backup and rapid disaster recovery.</p>\n\n         <p>Use the following links to get started using the <i>Storage Gateway\n            Service API Reference</i>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">Storage Gateway required request headers</a>: Describes the required\n               headers that you must send with every POST request to Storage Gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: Storage Gateway requires that you authenticate\n               every request you send; this topic describes how sign such a request.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about Storage Gateway errors.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway operations, their request parameters, response elements, possible errors, and\n               examples of requests and responses.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">Storage Gateway\n                  endpoints and quotas</a>: Provides a list of each Amazon Web Services Region\n               and the endpoints available for use with Storage Gateway.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs\n            with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change\n            your resource ID to lowercase to use it with the EC2 API. For example, in Storage\n            Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use\n            this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>.\n            Otherwise, the EC2 API might not behave as expected.</p>\n         </note>\n\n         <important>\n            <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway\n            volumes are changing to a longer format. Starting in December 2016, all new volumes and\n            snapshots will be created with a 17-character string. Starting in April 2016, you will\n            be able to use these longer IDs so you can test your systems with the new format. For\n            more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and\n               EBS resource IDs</a>.</p>\n\n            <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format\n            looks like the following:</p>\n\n            <p>\n               <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p>\n\n            <p>A snapshot ID with the longer ID format looks like the following:\n               <code>snap-78e226633445566ee</code>.</p>\n\n            <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement:\n               Heads-up – Longer Storage Gateway volume and snapshot IDs coming in\n            2016</a>.</p>\n         </important>",
-                "smithy.api#title": "AWS Storage Gateway",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://storagegateway.amazonaws.com/doc/2013-06-30"
-                }
-            },
             "version": "2013-06-30",
             "operations": [
                 {
@@ -7683,7 +7673,1003 @@
                 {
                     "target": "com.amazonaws.storagegateway#UpdateVTLDeviceType"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Storage Gateway",
+                    "arnNamespace": "storagegateway",
+                    "cloudFormationName": "StorageGateway",
+                    "cloudTrailEventSource": "storagegateway.amazonaws.com",
+                    "endpointPrefix": "storagegateway"
+                },
+                "aws.auth#sigv4": {
+                    "name": "storagegateway"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Storage Gateway Service</fullname>\n\n         <p>Storage Gateway is the service that connects an on-premises software appliance\n         with cloud-based storage to provide seamless and secure integration between an\n         organization's on-premises IT environment and the Amazon Web Services storage\n         infrastructure. The service enables you to securely upload data to the Amazon Web Services Cloud for cost effective backup and rapid disaster recovery.</p>\n\n         <p>Use the following links to get started using the <i>Storage Gateway\n            Service API Reference</i>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">Storage Gateway required request headers</a>: Describes the required\n               headers that you must send with every POST request to Storage Gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: Storage Gateway requires that you authenticate\n               every request you send; this topic describes how sign such a request.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about Storage Gateway errors.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway operations, their request parameters, response elements, possible errors, and\n               examples of requests and responses.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">Storage Gateway\n                  endpoints and quotas</a>: Provides a list of each Amazon Web Services Region\n               and the endpoints available for use with Storage Gateway.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs\n            with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change\n            your resource ID to lowercase to use it with the EC2 API. For example, in Storage\n            Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use\n            this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>.\n            Otherwise, the EC2 API might not behave as expected.</p>\n         </note>\n\n         <important>\n            <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway\n            volumes are changing to a longer format. Starting in December 2016, all new volumes and\n            snapshots will be created with a 17-character string. Starting in April 2016, you will\n            be able to use these longer IDs so you can test your systems with the new format. For\n            more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and\n               EBS resource IDs</a>.</p>\n\n            <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format\n            looks like the following:</p>\n\n            <p>\n               <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p>\n\n            <p>A snapshot ID with the longer ID format looks like the following:\n               <code>snap-78e226633445566ee</code>.</p>\n\n            <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement:\n               Heads-up – Longer Storage Gateway volume and snapshot IDs coming in\n            2016</a>.</p>\n         </important>",
+                "smithy.api#title": "AWS Storage Gateway",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://storagegateway.amazonaws.com/doc/2013-06-30"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://storagegateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://storagegateway-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://storagegateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://storagegateway.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://storagegateway.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.storagegateway#StorediSCSIVolume": {
             "type": "structure",
@@ -7721,6 +8707,7 @@
                 "VolumeSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the volume in bytes.</p>"
                     }
                 },
@@ -7745,6 +8732,7 @@
                 "PreservedExistingData": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if when the stored volume was created, existing data on the underlying local\n         disk was preserved.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
@@ -7908,6 +8896,7 @@
                 "Worm": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If the tape is archived as write-once-read-many (WORM), this value is\n         <code>true</code>.</p>"
                     }
                 },
@@ -8010,6 +8999,7 @@
                 "Worm": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> if the archived tape is stored as write-once-read-many\n         (WORM).</p>"
                     }
                 },
@@ -8175,10 +9165,7 @@
             "type": "string"
         },
         "com.amazonaws.storagegateway#TapeSize": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.storagegateway#TapeStatus": {
             "type": "string"
@@ -8199,10 +9186,7 @@
             }
         },
         "com.amazonaws.storagegateway#TapeUsage": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.storagegateway#Tapes": {
             "type": "list",
@@ -8235,7 +9219,6 @@
         "com.amazonaws.storagegateway#TimeoutInSeconds": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 3600
@@ -9426,6 +10409,7 @@
                 "VolumeSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the volume in bytes.</p>\n\n         <p>Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>"
                     }
                 },
@@ -9458,12 +10442,14 @@
                 "VolumeSizeInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the volume in bytes.</p>"
                     }
                 },
                 "VolumeUsageInBytes": {
                     "target": "com.amazonaws.storagegateway#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the data stored on the volume in bytes.</p>\n\n         <note>\n            <p>This value is not available for volumes created prior to May 13, 2015, until you\n            store data on the volume.</p>\n         </note>"
                     }
                 },
@@ -9503,10 +10489,7 @@
             }
         },
         "com.amazonaws.storagegateway#VolumeUsedInBytes": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.storagegateway#VolumeiSCSIAttributes": {
             "type": "structure",
@@ -9526,6 +10509,7 @@
                 "NetworkInterfacePort": {
                     "target": "com.amazonaws.storagegateway#integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port used to communicate with iSCSI targets.</p>"
                     }
                 },
@@ -9538,6 +10522,7 @@
                 "ChapEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether mutual CHAP is enabled for the iSCSI target.</p>"
                     }
                 }
@@ -9547,7 +10532,10 @@
             }
         },
         "com.amazonaws.storagegateway#double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.storagegateway#errorDetails": {
             "type": "map",
@@ -9559,10 +10547,16 @@
             }
         },
         "com.amazonaws.storagegateway#integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.storagegateway#long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.storagegateway#string": {
             "type": "string"

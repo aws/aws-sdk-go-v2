@@ -257,7 +257,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -286,15 +286,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -303,7 +355,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -313,22 +365,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://athena-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://athena-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -341,134 +528,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://athena.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://athena-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -476,7 +581,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://athena-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://athena.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -485,74 +590,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://athena.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://athena.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -561,409 +605,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -971,516 +612,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "af-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1491,152 +625,61 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-north-1",
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena-fips.us-gov-west-1.api.aws"
+                                    "url": "https://athena.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1",
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena.us-gov-west-1.api.aws"
+                                    "url": "https://athena.ap-northeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena-fips.ap-southeast-1.api.aws"
+                                    "url": "https://athena.ap-northeast-3.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena.ap-southeast-1.api.aws"
+                                    "url": "https://athena.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1647,48 +690,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1699,108 +703,229 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena-fips.us-iso-east-1.c2s.ic.gov"
+                                    "url": "https://athena.ca-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1",
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena.us-iso-east-1.c2s.ic.gov"
+                                    "url": "https://athena.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena-fips.ap-southeast-3.api.aws"
+                                    "url": "https://athena.eu-north-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.ap-southeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3",
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena.ap-southeast-3.api.aws"
+                                    "url": "https://athena.eu-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena.ap-southeast-3.amazonaws.com"
+                                    "url": "https://athena.eu-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1812,22 +937,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
                             }
                         },
                         {
@@ -1838,113 +950,22 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
                                 "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://athena-fips.us-east-2.amazonaws.com"
+                                    "url": "https://athena.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-2",
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena-fips.cn-northwest-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://athena.cn-northwest-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1955,20 +976,152 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-northwest-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                                "endpoint": {
+                                    "url": "https://athena-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://athena.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1979,20 +1132,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -2003,13 +1145,27 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -2017,7 +1173,6 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -2028,8 +1183,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -2040,8 +1195,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -2170,7 +1325,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an array of named query IDs.</p>"
+                "smithy.api#documentation": "<p>Contains an array of named query IDs.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#BatchGetNamedQueryOutput": {
@@ -2188,6 +1344,9 @@
                         "smithy.api#documentation": "<p>Information about provided query IDs.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#BatchGetPreparedStatement": {
@@ -2227,6 +1386,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#BatchGetPreparedStatementOutput": {
@@ -2244,6 +1406,9 @@
                         "smithy.api#documentation": "<p>A list of one or more prepared statements that were requested but could not be\n            returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#BatchGetQueryExecution": {
@@ -2278,7 +1443,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an array of query execution IDs.</p>"
+                "smithy.api#documentation": "<p>Contains an array of query execution IDs.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#BatchGetQueryExecutionOutput": {
@@ -2296,6 +1462,9 @@
                         "smithy.api#documentation": "<p>Information about the query executions that failed to run.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#Boolean": {
@@ -2762,11 +1931,17 @@
                         "smithy.api#documentation": "<p>A list of comma separated tags to add to the data catalog that is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#CreateDataCatalogOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#CreateNamedQuery": {
             "type": "operation",
@@ -2832,6 +2007,9 @@
                         "smithy.api#documentation": "<p>The name of the workgroup in which the named query is being created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#CreateNamedQueryOutput": {
@@ -2843,6 +2021,9 @@
                         "smithy.api#documentation": "<p>The unique ID of the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#CreateNotebook": {
@@ -2891,6 +2072,9 @@
                         "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the notebook is\n            idempotent (executes only once).</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for you. If you are not\n                using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#CreateNotebookOutput": {
@@ -2902,6 +2086,9 @@
                         "smithy.api#documentation": "<p>A unique identifier for the notebook.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#CreatePreparedStatement": {
@@ -2954,11 +2141,17 @@
                         "smithy.api#documentation": "<p>The description of the prepared statement.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#CreatePreparedStatementOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#CreatePresignedNotebookUrl": {
             "type": "operation",
@@ -2993,6 +2186,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#CreatePresignedNotebookUrlResponse": {
@@ -3019,6 +2215,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#CreateWorkGroup": {
@@ -3069,11 +2268,17 @@
                         "smithy.api#documentation": "<p>A list of comma separated tags to add to the workgroup that is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#CreateWorkGroupOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#CustomerContentEncryptionConfiguration": {
             "type": "structure",
@@ -3121,7 +2326,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a data catalog in an Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Contains information about a data catalog in an Amazon Web Services account.</p>\n         <note>\n            <p>In the Athena console, data catalogs are listed as \"data sources\" on the <b>Data sources</b> page under the <b>Data source name</b> column.</p>\n         </note>"
             }
         },
         "com.amazonaws.athena#DataCatalogSummary": {
@@ -3272,11 +2477,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#DeleteDataCatalogOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#DeleteNamedQuery": {
             "type": "operation",
@@ -3310,11 +2521,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#DeleteNamedQueryOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#DeleteNotebook": {
             "type": "operation",
@@ -3349,11 +2566,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#DeleteNotebookOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#DeletePreparedStatement": {
             "type": "operation",
@@ -3395,11 +2618,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#DeletePreparedStatementOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#DeleteWorkGroup": {
             "type": "operation",
@@ -3438,11 +2667,17 @@
                         "smithy.api#documentation": "<p>The option to delete the workgroup and its contents even if the workgroup contains any\n            named queries or query executions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#DeleteWorkGroupOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#DescriptionString": {
             "type": "string",
@@ -3539,7 +2774,7 @@
                 "SelectedEngineVersion": {
                     "target": "com.amazonaws.athena#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version requested by the user. Possible values are determined by the output\n            of <code>ListEngineVersions</code>, including Auto. The default is Auto.</p>"
+                        "smithy.api#documentation": "<p>The engine version requested by the user. Possible values are determined by the output\n            of <code>ListEngineVersions</code>, including AUTO. The default is AUTO.</p>"
                     }
                 },
                 "EffectiveEngineVersion": {
@@ -3774,6 +3009,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ExportNotebookOutput": {
@@ -3791,6 +3029,9 @@
                         "smithy.api#documentation": "<p>The content of the exported notebook.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ExpressionString": {
@@ -3872,6 +3113,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetCalculationExecutionCodeResponse": {
@@ -3883,6 +3127,9 @@
                         "smithy.api#documentation": "<p>A pre-signed URL to the code that executed the calculation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetCalculationExecutionRequest": {
@@ -3895,6 +3142,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetCalculationExecutionResponse": {
@@ -3942,6 +3192,9 @@
                         "smithy.api#documentation": "<p>Contains result information. This field is populated only if the calculation is\n            completed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetCalculationExecutionStatus": {
@@ -3977,6 +3230,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetCalculationExecutionStatusResponse": {
@@ -3994,6 +3250,9 @@
                         "smithy.api#documentation": "<p>Contains information about the DPU execution time and progress.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetDataCatalog": {
@@ -4026,6 +3285,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetDataCatalogOutput": {
@@ -4037,6 +3299,9 @@
                         "smithy.api#documentation": "<p>The data catalog returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetDatabase": {
@@ -4079,6 +3344,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetDatabaseOutput": {
@@ -4090,6 +3358,9 @@
                         "smithy.api#documentation": "<p>The database returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetNamedQuery": {
@@ -4122,6 +3393,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetNamedQueryOutput": {
@@ -4133,6 +3407,9 @@
                         "smithy.api#documentation": "<p>Information about the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetNotebookMetadata": {
@@ -4168,6 +3445,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetNotebookMetadataOutput": {
@@ -4179,6 +3459,9 @@
                         "smithy.api#documentation": "<p>The metadata that is returned for the specified notebook ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetPreparedStatement": {
@@ -4221,6 +3504,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetPreparedStatementOutput": {
@@ -4232,6 +3518,9 @@
                         "smithy.api#documentation": "<p>The name of the prepared statement that was retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetQueryExecution": {
@@ -4264,6 +3553,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetQueryExecutionOutput": {
@@ -4275,6 +3567,9 @@
                         "smithy.api#documentation": "<p>Information about the query execution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetQueryResults": {
@@ -4327,6 +3622,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results (rows) to return in this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetQueryResultsOutput": {
@@ -4350,6 +3648,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetQueryRuntimeStatistics": {
@@ -4382,6 +3683,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetQueryRuntimeStatisticsOutput": {
@@ -4393,6 +3697,9 @@
                         "smithy.api#documentation": "<p>Runtime statistics about the query execution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetSession": {
@@ -4428,6 +3735,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetSessionResponse": {
@@ -4487,6 +3797,9 @@
                         "smithy.api#documentation": "<p>Contains the DPU execution time.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetSessionStatus": {
@@ -4522,6 +3835,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetSessionStatusResponse": {
@@ -4539,6 +3855,9 @@
                         "smithy.api#documentation": "<p>Contains information about the status of the session.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetTableMetadata": {
@@ -4588,6 +3907,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetTableMetadataOutput": {
@@ -4599,6 +3921,9 @@
                         "smithy.api#documentation": "<p>An object that contains table metadata.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#GetWorkGroup": {
@@ -4631,6 +3956,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#GetWorkGroupOutput": {
@@ -4642,6 +3970,9 @@
                         "smithy.api#documentation": "<p>Information about the workgroup.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#IdempotencyToken": {
@@ -4713,6 +4044,9 @@
                         "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to import the notebook is\n            idempotent (executes only once).</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for you. If you are not\n                using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ImportNotebookOutput": {
@@ -4724,6 +4058,9 @@
                         "smithy.api#documentation": "<p>The ID of the notebook to import.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#Integer": {
@@ -4822,6 +4159,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListApplicationDPUSizesOutput": {
@@ -4839,6 +4179,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListCalculationExecutions": {
@@ -4897,6 +4240,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListCalculationExecutionsResponse": {
@@ -4914,6 +4260,9 @@
                         "smithy.api#documentation": "<p>A list of <a>CalculationSummary</a> objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListDataCatalogs": {
@@ -4933,7 +4282,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the data catalogs in the current Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists the data catalogs in the current Amazon Web Services account.</p>\n         <note>\n            <p>In the Athena console, data catalogs are listed as \"data sources\" on the <b>Data sources</b> page under the <b>Data source name</b> column.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4957,6 +4306,9 @@
                         "smithy.api#documentation": "<p>Specifies the maximum number of data catalogs to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListDataCatalogsOutput": {
@@ -4974,6 +4326,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the NextToken from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListDatabases": {
@@ -5027,6 +4382,9 @@
                         "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListDatabasesOutput": {
@@ -5044,6 +4402,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the NextToken from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListEngineVersions": {
@@ -5086,6 +4447,9 @@
                         "smithy.api#documentation": "<p>The maximum number of engine versions to return in this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListEngineVersionsOutput": {
@@ -5103,6 +4467,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListExecutors": {
@@ -5161,6 +4528,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListExecutorsResponse": {
@@ -5185,6 +4555,9 @@
                         "smithy.api#documentation": "<p>Contains summary information about the executor.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListNamedQueries": {
@@ -5233,6 +4606,9 @@
                         "smithy.api#documentation": "<p>The name of the workgroup from which the named queries are being returned. If a\n            workgroup is not specified, the saved queries for the primary workgroup are\n            returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListNamedQueriesOutput": {
@@ -5250,6 +4626,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListNotebookMetadata": {
@@ -5303,6 +4682,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListNotebookMetadataOutput": {
@@ -5320,6 +4702,9 @@
                         "smithy.api#documentation": "<p>The list of notebook metadata for the specified workgroup.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListNotebookSessions": {
@@ -5367,6 +4752,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListNotebookSessionsResponse": {
@@ -5385,6 +4773,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListPreparedStatements": {
@@ -5434,6 +4825,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListPreparedStatementsOutput": {
@@ -5451,6 +4845,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListQueryExecutions": {
@@ -5499,6 +4896,9 @@
                         "smithy.api#documentation": "<p>The name of the workgroup from which queries are being returned. If a workgroup is not\n            specified, a list of available query execution IDs for the queries in the primary\n            workgroup is returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListQueryExecutionsOutput": {
@@ -5516,6 +4916,9 @@
                         "smithy.api#documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListSessions": {
@@ -5574,6 +4977,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListSessionsResponse": {
@@ -5591,6 +4997,9 @@
                         "smithy.api#documentation": "<p>A list of sessions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListTableMetadata": {
@@ -5657,6 +5066,9 @@
                         "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListTableMetadataOutput": {
@@ -5674,6 +5086,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the NextToken from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListTagsForResource": {
@@ -5727,6 +5142,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request that lists the tags for the\n            resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListTagsForResourceOutput": {
@@ -5744,6 +5162,9 @@
                         "smithy.api#documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ListWorkGroups": {
@@ -5786,6 +5207,9 @@
                         "smithy.api#documentation": "<p>The maximum number of workgroups to return in this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#ListWorkGroupsOutput": {
@@ -5803,6 +5227,9 @@
                         "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the <code>NextToken</code> from the response object of the previous page call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#Long": {
@@ -6347,6 +5774,12 @@
                     "target": "com.amazonaws.athena#ExecutionParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of values for the parameters in a query. The values are applied sequentially to\n            the parameters in the query in the order in which the parameters occur.</p>"
+                    }
+                },
+                "SubstatementType": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The kind of query statement that was run.</p>"
                     }
                 }
             },
@@ -7271,6 +6704,9 @@
                         "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the calculation is\n            idempotent (executes only once). If another\n                <code>StartCalculationExecutionRequest</code> is received, the same response is\n            returned and another calculation is not created. If a parameter has changed, an error is\n            returned.</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for users. If you are\n                not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#StartCalculationExecutionResponse": {
@@ -7288,6 +6724,9 @@
                         "smithy.api#documentation": "<p>\n            <code>CREATING</code> - The calculation is in the process of being created.</p>\n         <p>\n            <code>CREATED</code> - The calculation has been created and is ready to run.</p>\n         <p>\n            <code>QUEUED</code> - The calculation has been queued for processing.</p>\n         <p>\n            <code>RUNNING</code> - The calculation is running.</p>\n         <p>\n            <code>CANCELING</code> - A request to cancel the calculation has been received and the\n            system is working to stop it.</p>\n         <p>\n            <code>CANCELED</code> - The calculation is no longer running as the result of a cancel\n            request.</p>\n         <p>\n            <code>COMPLETED</code> - The calculation has completed without error.</p>\n         <p>\n            <code>FAILED</code> - The calculation failed and is no longer running.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#StartQueryExecution": {
@@ -7361,6 +6800,9 @@
                         "smithy.api#documentation": "<p>Specifies the query result reuse behavior for the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#StartQueryExecutionOutput": {
@@ -7372,6 +6814,9 @@
                         "smithy.api#documentation": "<p>The unique ID of the query that ran as a result of this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#StartSession": {
@@ -7444,6 +6889,9 @@
                         "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the session is\n            idempotent (executes only once). If another <code>StartSessionRequest</code> is\n            received, the same response is returned and another session is not created. If a\n            parameter has changed, an error is returned.</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for users. If you are\n                not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#StartSessionResponse": {
@@ -7461,6 +6909,9 @@
                         "smithy.api#documentation": "<p>The state of the session. A description of each state follows.</p>\n         <p>\n            <code>CREATING</code> - The session is being started, including acquiring\n            resources.</p>\n         <p>\n            <code>CREATED</code> - The session has been started.</p>\n         <p>\n            <code>IDLE</code> - The session is able to accept a calculation.</p>\n         <p>\n            <code>BUSY</code> - The session is processing another task and is unable to accept a\n            calculation.</p>\n         <p>\n            <code>TERMINATING</code> - The session is in the process of shutting down.</p>\n         <p>\n            <code>TERMINATED</code> - The session and its resources are no longer running.</p>\n         <p>\n            <code>DEGRADED</code> - The session has no healthy coordinators.</p>\n         <p>\n            <code>FAILED</code> - Due to a failure, the session and its resources are no longer\n            running.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#StatementName": {
@@ -7529,6 +6980,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#StopCalculationExecutionResponse": {
@@ -7540,6 +6994,9 @@
                         "smithy.api#documentation": "<p>\n            <code>CREATING</code> - The calculation is in the process of being created.</p>\n         <p>\n            <code>CREATED</code> - The calculation has been created and is ready to run.</p>\n         <p>\n            <code>QUEUED</code> - The calculation has been queued for processing.</p>\n         <p>\n            <code>RUNNING</code> - The calculation is running.</p>\n         <p>\n            <code>CANCELING</code> - A request to cancel the calculation has been received and the\n            system is working to stop it.</p>\n         <p>\n            <code>CANCELED</code> - The calculation is no longer running as the result of a cancel\n            request.</p>\n         <p>\n            <code>COMPLETED</code> - The calculation has completed without error.</p>\n         <p>\n            <code>FAILED</code> - The calculation failed and is no longer running.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#StopQueryExecution": {
@@ -7574,11 +7031,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#StopQueryExecutionOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#String": {
             "type": "string"
@@ -7742,11 +7205,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#TagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#TagValue": {
             "type": "string",
@@ -7790,6 +7259,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#TerminateSessionResponse": {
@@ -7801,6 +7273,9 @@
                         "smithy.api#documentation": "<p>The state of the session. A description of each state follows.</p>\n         <p>\n            <code>CREATING</code> - The session is being started, including acquiring\n            resources.</p>\n         <p>\n            <code>CREATED</code> - The session has been started.</p>\n         <p>\n            <code>IDLE</code> - The session is able to accept a calculation.</p>\n         <p>\n            <code>BUSY</code> - The session is processing another task and is unable to accept a\n            calculation.</p>\n         <p>\n            <code>TERMINATING</code> - The session is in the process of shutting down.</p>\n         <p>\n            <code>TERMINATED</code> - The session and its resources are no longer running.</p>\n         <p>\n            <code>DEGRADED</code> - The session has no healthy coordinators.</p>\n         <p>\n            <code>FAILED</code> - Due to a failure, the session and its resources are no longer\n            running.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#ThrottleReason": {
@@ -7990,11 +7465,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UntagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#UpdateDataCatalog": {
             "type": "operation",
@@ -8045,11 +7526,17 @@
                         "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for updating the data\n            catalog. This is a mapping whose values depend on the catalog type. </p>\n         <ul>\n            <li>\n               <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n               <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n               <ul>\n                  <li>\n                     <p>If you have one Lambda function that processes metadata\n                            and another for reading the actual data, use the following syntax. Both\n                            parameters are required.</p>\n                     <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p> If you have a composite Lambda function that processes\n                            both metadata and data, use the following syntax to specify your Lambda function.</p>\n                     <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UpdateDataCatalogOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#UpdateNamedQuery": {
             "type": "operation",
@@ -8102,11 +7589,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UpdateNamedQueryOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#UpdateNotebook": {
             "type": "operation",
@@ -8167,6 +7660,9 @@
                         "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the notebook is\n            idempotent (executes only once).</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for you. If you are not\n                using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UpdateNotebookMetadata": {
@@ -8215,15 +7711,24 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UpdateNotebookMetadataOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#UpdateNotebookOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#UpdatePreparedStatement": {
             "type": "operation",
@@ -8278,11 +7783,17 @@
                         "smithy.api#documentation": "<p>The description of the prepared statement.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UpdatePreparedStatementOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#UpdateWorkGroup": {
             "type": "operation",
@@ -8332,11 +7843,17 @@
                         "smithy.api#documentation": "<p>The workgroup state that will be updated for the given workgroup.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.athena#UpdateWorkGroupOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.athena#WorkGroup": {
             "type": "structure",

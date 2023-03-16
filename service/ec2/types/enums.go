@@ -3359,6 +3359,25 @@ const (
 	InstanceTypeR6idn16xlarge   InstanceType = "r6idn.16xlarge"
 	InstanceTypeR6idn24xlarge   InstanceType = "r6idn.24xlarge"
 	InstanceTypeR6idn32xlarge   InstanceType = "r6idn.32xlarge"
+	InstanceTypeC7gMetal        InstanceType = "c7g.metal"
+	InstanceTypeM7gMedium       InstanceType = "m7g.medium"
+	InstanceTypeM7gLarge        InstanceType = "m7g.large"
+	InstanceTypeM7gXlarge       InstanceType = "m7g.xlarge"
+	InstanceTypeM7g2xlarge      InstanceType = "m7g.2xlarge"
+	InstanceTypeM7g4xlarge      InstanceType = "m7g.4xlarge"
+	InstanceTypeM7g8xlarge      InstanceType = "m7g.8xlarge"
+	InstanceTypeM7g12xlarge     InstanceType = "m7g.12xlarge"
+	InstanceTypeM7g16xlarge     InstanceType = "m7g.16xlarge"
+	InstanceTypeM7gMetal        InstanceType = "m7g.metal"
+	InstanceTypeR7gMedium       InstanceType = "r7g.medium"
+	InstanceTypeR7gLarge        InstanceType = "r7g.large"
+	InstanceTypeR7gXlarge       InstanceType = "r7g.xlarge"
+	InstanceTypeR7g2xlarge      InstanceType = "r7g.2xlarge"
+	InstanceTypeR7g4xlarge      InstanceType = "r7g.4xlarge"
+	InstanceTypeR7g8xlarge      InstanceType = "r7g.8xlarge"
+	InstanceTypeR7g12xlarge     InstanceType = "r7g.12xlarge"
+	InstanceTypeR7g16xlarge     InstanceType = "r7g.16xlarge"
+	InstanceTypeR7gMetal        InstanceType = "r7g.metal"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3985,6 +4004,25 @@ func (InstanceType) Values() []InstanceType {
 		"r6idn.16xlarge",
 		"r6idn.24xlarge",
 		"r6idn.32xlarge",
+		"c7g.metal",
+		"m7g.medium",
+		"m7g.large",
+		"m7g.xlarge",
+		"m7g.2xlarge",
+		"m7g.4xlarge",
+		"m7g.8xlarge",
+		"m7g.12xlarge",
+		"m7g.16xlarge",
+		"m7g.metal",
+		"r7g.medium",
+		"r7g.large",
+		"r7g.xlarge",
+		"r7g.2xlarge",
+		"r7g.4xlarge",
+		"r7g.8xlarge",
+		"r7g.12xlarge",
+		"r7g.16xlarge",
+		"r7g.metal",
 	}
 }
 

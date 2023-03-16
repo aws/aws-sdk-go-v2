@@ -34,6 +34,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested state transition isn't valid. For example, you can't delete a
+// firewall domain list if it is in the process of being deleted, or you can't
+// import domains into a domain list that is in the process of being deleted.
 type ConflictException struct {
 	Message *string
 
@@ -409,6 +412,8 @@ func (e *UnknownResourceException) ErrorCode() string {
 }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You have provided an invalid command. Supported values are ADD, REMOVE, or
+// REPLACE a domain.
 type ValidationException struct {
 	Message *string
 

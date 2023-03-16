@@ -1,3 +1,7 @@
+# v1.28.4 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.3 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

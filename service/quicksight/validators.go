@@ -10782,6 +10782,23 @@ func validateReferenceLineValueLabelConfiguration(v *types.ReferenceLineValueLab
 	}
 }
 
+func validateRegisteredUserConsoleFeatureConfigurations(v *types.RegisteredUserConsoleFeatureConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserConsoleFeatureConfigurations"}
+	if v.StatePersistence != nil {
+		if err := validateStatePersistenceConfigurations(v.StatePersistence); err != nil {
+			invalidParams.AddNested("StatePersistence", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRegisteredUserDashboardEmbeddingConfiguration(v *types.RegisteredUserDashboardEmbeddingConfiguration) error {
 	if v == nil {
 		return nil
@@ -10789,6 +10806,28 @@ func validateRegisteredUserDashboardEmbeddingConfiguration(v *types.RegisteredUs
 	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserDashboardEmbeddingConfiguration"}
 	if v.InitialDashboardId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialDashboardId"))
+	}
+	if v.FeatureConfigurations != nil {
+		if err := validateRegisteredUserDashboardFeatureConfigurations(v.FeatureConfigurations); err != nil {
+			invalidParams.AddNested("FeatureConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegisteredUserDashboardFeatureConfigurations(v *types.RegisteredUserDashboardFeatureConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserDashboardFeatureConfigurations"}
+	if v.StatePersistence != nil {
+		if err := validateStatePersistenceConfigurations(v.StatePersistence); err != nil {
+			invalidParams.AddNested("StatePersistence", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10826,9 +10865,31 @@ func validateRegisteredUserEmbeddingExperienceConfiguration(v *types.RegisteredU
 			invalidParams.AddNested("Dashboard", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.QuickSightConsole != nil {
+		if err := validateRegisteredUserQuickSightConsoleEmbeddingConfiguration(v.QuickSightConsole); err != nil {
+			invalidParams.AddNested("QuickSightConsole", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DashboardVisual != nil {
 		if err := validateRegisteredUserDashboardVisualEmbeddingConfiguration(v.DashboardVisual); err != nil {
 			invalidParams.AddNested("DashboardVisual", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegisteredUserQuickSightConsoleEmbeddingConfiguration(v *types.RegisteredUserQuickSightConsoleEmbeddingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserQuickSightConsoleEmbeddingConfiguration"}
+	if v.FeatureConfigurations != nil {
+		if err := validateRegisteredUserConsoleFeatureConfigurations(v.FeatureConfigurations); err != nil {
+			invalidParams.AddNested("FeatureConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11856,6 +11917,18 @@ func validateSqlServerParameters(v *types.SqlServerParameters) error {
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStatePersistenceConfigurations(v *types.StatePersistenceConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StatePersistenceConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

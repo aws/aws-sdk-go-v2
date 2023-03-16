@@ -1,3 +1,7 @@
+# v1.22.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-02-28)
 
 * **Feature**: Amazon Comprehend now supports flywheels to help you train and manage new model versions for custom models.

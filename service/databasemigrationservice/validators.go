@@ -50,6 +50,26 @@ func (m *validateOpApplyPendingMaintenanceAction) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchStartRecommendations struct {
+}
+
+func (*validateOpBatchStartRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchStartRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchStartRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchStartRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelReplicationTaskAssessmentRun struct {
 }
 
@@ -650,6 +670,46 @@ func (m *validateOpDescribePendingMaintenanceActions) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeRecommendationLimitations struct {
+}
+
+func (*validateOpDescribeRecommendationLimitations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRecommendationLimitations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRecommendationLimitationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRecommendationLimitationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRecommendations struct {
+}
+
+func (*validateOpDescribeRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeRefreshSchemasStatus struct {
 }
 
@@ -1050,6 +1110,26 @@ func (m *validateOpRemoveTagsFromResource) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartRecommendations struct {
+}
+
+func (*validateOpStartRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartReplicationTaskAssessment struct {
 }
 
@@ -1156,6 +1236,10 @@ func addOpAddTagsToResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpApplyPendingMaintenanceActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpApplyPendingMaintenanceAction{}, middleware.After)
+}
+
+func addOpBatchStartRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchStartRecommendations{}, middleware.After)
 }
 
 func addOpCancelReplicationTaskAssessmentRunValidationMiddleware(stack *middleware.Stack) error {
@@ -1278,6 +1362,14 @@ func addOpDescribePendingMaintenanceActionsValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDescribePendingMaintenanceActions{}, middleware.After)
 }
 
+func addOpDescribeRecommendationLimitationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRecommendationLimitations{}, middleware.After)
+}
+
+func addOpDescribeRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRecommendations{}, middleware.After)
+}
+
 func addOpDescribeRefreshSchemasStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRefreshSchemasStatus{}, middleware.After)
 }
@@ -1356,6 +1448,10 @@ func addOpReloadTablesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRemoveTagsFromResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTagsFromResource{}, middleware.After)
+}
+
+func addOpStartRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRecommendations{}, middleware.After)
 }
 
 func addOpStartReplicationTaskAssessmentValidationMiddleware(stack *middleware.Stack) error {
@@ -1464,6 +1560,24 @@ func validateNeptuneSettings(v *types.NeptuneSettings) error {
 	}
 }
 
+func validateRecommendationSettings(v *types.RecommendationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationSettings"}
+	if v.InstanceSizingType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceSizingType"))
+	}
+	if v.WorkloadType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedisSettings(v *types.RedisSettings) error {
 	if v == nil {
 		return nil
@@ -1471,6 +1585,45 @@ func validateRedisSettings(v *types.RedisSettings) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RedisSettings"}
 	if v.ServerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartRecommendationsRequestEntry(v *types.StartRecommendationsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRecommendationsRequestEntry"}
+	if v.DatabaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseId"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateRecommendationSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartRecommendationsRequestEntryList(v []types.StartRecommendationsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRecommendationsRequestEntryList"}
+	for i := range v {
+		if err := validateStartRecommendationsRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1545,6 +1698,23 @@ func validateOpApplyPendingMaintenanceActionInput(v *ApplyPendingMaintenanceActi
 	}
 	if v.OptInType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchStartRecommendationsInput(v *BatchStartRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchStartRecommendationsInput"}
+	if v.Data != nil {
+		if err := validateStartRecommendationsRequestEntryList(v.Data); err != nil {
+			invalidParams.AddNested("Data", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2089,6 +2259,40 @@ func validateOpDescribePendingMaintenanceActionsInput(v *DescribePendingMaintena
 	}
 }
 
+func validateOpDescribeRecommendationLimitationsInput(v *DescribeRecommendationLimitationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecommendationLimitationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRecommendationsInput(v *DescribeRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecommendationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeRefreshSchemasStatusInput(v *DescribeRefreshSchemasStatusInput) error {
 	if v == nil {
 		return nil
@@ -2435,6 +2639,28 @@ func validateOpRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput) error
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRecommendationsInput(v *StartRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRecommendationsInput"}
+	if v.DatabaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseId"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateRecommendationSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

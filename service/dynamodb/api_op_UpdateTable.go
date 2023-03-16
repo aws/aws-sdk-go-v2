@@ -78,6 +78,10 @@ type UpdateTableInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
 	BillingMode types.BillingMode
 
+	// Indicates whether deletion protection is to be enabled (true) or disabled
+	// (false) on the table.
+	DeletionProtectionEnabled *bool
+
 	// An array of one or more global secondary indexes for the table. For each index
 	// in the array, you can request one action:
 	//

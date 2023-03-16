@@ -131,11 +131,11 @@ public final class AwsEventStreamUtils {
 
         writer.write("""
                      type $keyType:T struct{}
-                                          
+
                      func $contextGetter:L(ctx $context:P) interface{} {
                          return ctx.Value($keyType:T{})
                      }
-                                          
+
                      func $contextSetter:L(ctx $context:P, value interface{}) $context:T {
                          return $withValue:T(ctx, $keyType:T{}, value)
                      }
@@ -162,7 +162,7 @@ public final class AwsEventStreamUtils {
                          Type string
                          Message $P
                      }
-                                         
+
                      // Error retruns the error message string.
                      func (e $P) Error() string {
                          return "unknown event stream message type, " + e.Type
@@ -218,17 +218,17 @@ public final class AwsEventStreamUtils {
                 getToggleEventStreamClientLogModeSymbol(), () -> {
                     writer.write("""
                                  mode := o.ClientLogMode
-                                                                  
+
                                  if request && mode.IsRequestWithBody() {
                                      mode.ClearRequestWithBody()
                                      mode |= $T
                                  }
-                                                                  
+
                                  if response && mode.IsResponseWithBody() {
                                      mode.ClearResponseWithBody()
                                      mode |= $T
                                  }
-                                                                  
+
                                  o.ClientLogMode = mode
                                  """, logRequest, logResponse
                     );
@@ -285,7 +285,7 @@ public final class AwsEventStreamUtils {
                                 }
                                 m.closeResponseBody(out)
                             }()
-                                                        
+
                             logger := $T(ctx)
                             """, getSymbol("GetLogger",
                             SmithyGoDependency.SMITHY_MIDDLEWARE, false));
@@ -365,7 +365,7 @@ public final class AwsEventStreamUtils {
                                     if !ok || params == nil {
                                         return out, metadata, $T("unexpected nil type: %T", params)
                                     }
-                                                                        
+
                                     reqSend := make(chan error, 1)
                                     go func() {
                                         defer close(reqSend)
@@ -409,7 +409,7 @@ public final class AwsEventStreamUtils {
                                 return out, metadata, $T("unknown transport type: %T", out.RawResponse)
                             }
                             _ = deserializeOutput
-                                                             
+
                             output, ok := out.Result.($P)
                             if out.Result != nil && !ok {
                                 return out, metadata, $T("unexpected output result type: %T", out.Result)
@@ -490,7 +490,7 @@ public final class AwsEventStreamUtils {
         var copy = getSymbol("Copy", SmithyGoDependency.IO);
         var discard = getSymbol("Discard", SmithyGoDependency.IOUTIL);
         writer.write("""
-                                          
+
                      func ($P) closeResponseBody(out $T) {
                          if resp, ok := out.RawResponse.($P); ok && resp != nil && resp.Body != nil {
                              _, _ = $T($T, resp.Body)
@@ -610,7 +610,7 @@ public final class AwsEventStreamUtils {
 
                     writer.write("""
                                  go w.readEventStream()
-                                                                    
+
                                  return w""");
                 }).write("");
 
@@ -645,7 +645,7 @@ public final class AwsEventStreamUtils {
                                              return
                                          }
                                      }
-                                                                  
+
                                      event, err := r.deserializeEventMessage(&decodedMessage)
                                      if err != nil {
                                          r.err.SetError(err)
@@ -715,7 +715,7 @@ public final class AwsEventStreamUtils {
                                                          if eventType == nil {
                                                              return nil, $T("%s event header not present", $T)
                                                          }
-                                                                                                                  
+
                                                          if eventType.String() == "initial-response" {
                                                              v, err := r.initialResponseDeserializer(msg)
                                                              if err != nil {
@@ -814,7 +814,7 @@ public final class AwsEventStreamUtils {
                      type $T struct {
                          Value $P
                      }
-                                              
+
                      func ($P) $L() {}
                      """, readerEventWrapperMessageType, eventUnionSymbol, readerEventWrapperMessageType,
                 interfaceMethod);
@@ -825,7 +825,7 @@ public final class AwsEventStreamUtils {
                      type $T struct {
                          Value interface{}
                      }
-                                              
+
                      func ($P) $L() {}
                      """, readerEventWrapperInitialResponseType, readerEventWrapperInitialResponseType,
                 interfaceMethod);
@@ -845,7 +845,6 @@ public final class AwsEventStreamUtils {
         var eventUnionSymbol = symbolProvider.toSymbol(eventStream);
         var asyncEventSymbol = getModuleSymbol(settings, getAsyncWriteReporterName(eventStream,
                 service));
-
 
         var eventSymbol = withInitialMessages ? getWriterEventWrapperInterface(symbolProvider,
                 eventStream, service) : eventUnionSymbol;
@@ -919,7 +918,7 @@ public final class AwsEventStreamUtils {
                 }).write("")
                 .write("""
                        go w.writeStream()
-                                              
+
                        return w
                        """)).write("");
 
@@ -941,9 +940,9 @@ public final class AwsEventStreamUtils {
                                  if err := w.err.Err(); err != nil {
                                      return err
                                  }
-                                                          
+
                                  resultCh := make(chan error)
-                                                          
+
                                  wrapped := $T{
                                      Event: event,
                                      Result: resultCh,
@@ -1052,7 +1051,7 @@ public final class AwsEventStreamUtils {
                                  if err := w.encoder.Encode(w.serializationBuffer, eventMessage); err != nil {
                                      return nil, err
                                  }
-                                                                  
+
                                  return w.serializationBuffer.Bytes(), nil""");
                 }).write("");
 
@@ -1128,7 +1127,7 @@ public final class AwsEventStreamUtils {
                      type $T struct {
                          Value $P
                      }
-                                              
+
                      func ($P) $L() {}
                      """, writerEventWrapperMessageType, eventUnionSymbol, writerEventWrapperMessageType,
                 interfaceMethod);
@@ -1139,7 +1138,7 @@ public final class AwsEventStreamUtils {
                      type $T struct {
                          Value interface{}
                      }
-                                              
+
                      func ($P) $L() {}
                      """, writerEventWrapperInitialRequestType, writerEventWrapperInitialRequestType, interfaceMethod);
     }
@@ -1712,7 +1711,7 @@ public final class AwsEventStreamUtils {
                                  if i == nil {
                                      return $T("event message serializer expects non-nil %T", ($P)(nil))
                                  }
-                                                                
+
                                  v, ok := i.($P)
                                  if !ok {
                                      return $T("unexpected serialization of %T", i)

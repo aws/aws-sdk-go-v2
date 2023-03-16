@@ -1,3 +1,7 @@
+# v1.19.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-03-01)
 
 * **Feature**: This release adds 2 new APIs - ListPriceLists which returns a list of applicable price lists, and GetPriceListFileUrl which outputs a URL to retrieve your price lists from the generated file from ListPriceLists

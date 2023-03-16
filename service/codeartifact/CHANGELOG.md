@@ -1,3 +1,11 @@
+# v1.17.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.0 (2023-03-09)
+
+* **Feature**: This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.
+
 # v1.16.4 (2023-02-22)
 
 * **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.

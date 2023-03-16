@@ -752,6 +752,18 @@ func awsAwsjson10_serializeDocumentCapacitySpecification(v *types.CapacitySpecif
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentClientSideTimestamps(v *types.ClientSideTimestamps, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentClusteringKey(v *types.ClusteringKey, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1006,6 +1018,13 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.CapacitySpecification != nil {
 		ok := object.Key("capacitySpecification")
 		if err := awsAwsjson10_serializeDocumentCapacitySpecification(v.CapacitySpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientSideTimestamps != nil {
+		ok := object.Key("clientSideTimestamps")
+		if err := awsAwsjson10_serializeDocumentClientSideTimestamps(v.ClientSideTimestamps, ok); err != nil {
 			return err
 		}
 	}
@@ -1301,6 +1320,13 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.CapacitySpecification != nil {
 		ok := object.Key("capacitySpecification")
 		if err := awsAwsjson10_serializeDocumentCapacitySpecification(v.CapacitySpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientSideTimestamps != nil {
+		ok := object.Key("clientSideTimestamps")
+		if err := awsAwsjson10_serializeDocumentClientSideTimestamps(v.ClientSideTimestamps, ok); err != nil {
 			return err
 		}
 	}

@@ -1,3 +1,114 @@
+# Release (2023-03-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.9.0](service/migrationhubstrategy/CHANGELOG.md#v190-2023-03-15)
+  * **Feature**: This release adds the binary analysis that analyzes IIS application DLLs on Windows and Java applications on Linux to provide anti-pattern report without configuring access to the source code.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.31.0](service/s3control/CHANGELOG.md#v1310-2023-03-15)
+  * **Feature**: Added support for S3 Object Lambda aliases.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.3.0](service/securitylake/CHANGELOG.md#v130-2023-03-15)
+  * **Feature**: Make Create/Get/ListSubscribers APIs return resource share ARN and name so they can be used to validate the RAM resource share to accept. GetDatalake can be used to track status of UpdateDatalake and DeleteDatalake requests.
+
+# Release (2023-03-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/ec2/imds`: [v1.13.0](feature/ec2/imds/CHANGELOG.md#v1130-2023-03-14)
+  * **Feature**: Add flag to disable IMDSv1 fallback
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.18.0](service/applicationautoscaling/CHANGELOG.md#v1180-2023-03-14)
+  * **Feature**: Application Auto Scaling customers can now use mathematical functions to customize the metric used with Target Tracking policies within the policy configuration itself, saving the cost and effort of publishing the customizations as a separate metric.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.19.0](service/dataexchange/CHANGELOG.md#v1190-2023-03-14)
+  * **Feature**: This release enables data providers to license direct access to S3 objects encrypted with Customer Managed Keys (CMK) in AWS KMS through AWS Data Exchange. Subscribers can use these keys to decrypt, then use the encrypted S3 objects shared with them, without creating or managing copies.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.18.7](service/directconnect/CHANGELOG.md#v1187-2023-03-14)
+  * **Documentation**: describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.90.0](service/ec2/CHANGELOG.md#v1900-2023-03-14)
+  * **Feature**: This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.6](service/iam/CHANGELOG.md#v1196-2023-03-14)
+  * **Documentation**: Documentation only updates to correct customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.2.0](service/keyspaces/CHANGELOG.md#v120-2023-03-14)
+  * **Feature**: Adding support for client-side timestamps
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.14.6](service/support/CHANGELOG.md#v1146-2023-03-14)
+  * **Announcement**: Model regenerated with support for null string values to properly implement `support` service operations `DescribeTrustedAdvisorCheckRefreshStatuses` and `DescribeTrustedAdvisorCheckSummaries`
+
+# Release (2023-03-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.15.0](service/appintegrations/CHANGELOG.md#v1150-2023-03-13)
+  * **Feature**: Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.20.2](service/lakeformation/CHANGELOG.md#v1202-2023-03-13)
+  * **Documentation**: This release updates the documentation regarding Get/Update DataCellsFilter
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.30.0](service/s3control/CHANGELOG.md#v1300-2023-03-13)
+  * **Feature**: Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.1.0](service/tnb/CHANGELOG.md#v110-2023-03-13)
+  * **Feature**: This release adds tagging support to the following Network Instance APIs : Instantiate, Update, Terminate.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.13.0](service/wisdom/CHANGELOG.md#v1130-2023-03-13)
+  * **Feature**: This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField
+
+# Release (2023-03-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.4.0](service/ivschat/CHANGELOG.md#v140-2023-03-10)
+  * **Feature**: This release adds a new exception returned when calling AWS IVS chat UpdateLoggingConfiguration. Now UpdateLoggingConfiguration can return ConflictException when invalid updates are made in sequence to Logging Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.19.0](service/secretsmanager/CHANGELOG.md#v1190-2023-03-10)
+  * **Feature**: The type definitions of SecretString and SecretBinary now have a minimum length of 1 in the model to match the exception thrown when you pass in empty values.
+
+# Release (2023-03-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.17.0](service/codeartifact/CHANGELOG.md#v1170-2023-03-09)
+  * **Feature**: This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.49.0](service/connect/CHANGELOG.md#v1490-2023-03-09)
+  * **Feature**: This release adds a new API, GetMetricDataV2, which returns metric data for Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.11.0](service/evidently/CHANGELOG.md#v1110-2023-03-09)
+  * **Feature**: Updated entity override documentation
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.17.5](service/networkmanager/CHANGELOG.md#v1175-2023-03-09)
+  * **Documentation**: This update provides example usage for TransitGatewayRouteTableArn.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.33.0](service/quicksight/CHANGELOG.md#v1330-2023-03-09)
+  * **Feature**: This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.19.0](service/redshiftdata/CHANGELOG.md#v1190-2023-03-09)
+  * **Feature**: Added support for Redshift Serverless workgroup-arn wherever the WorkgroupName parameter is available.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.71.0](service/sagemaker/CHANGELOG.md#v1710-2023-03-09)
+  * **Feature**: Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.20.0](service/servicediscovery/CHANGELOG.md#v1200-2023-03-09)
+  * **Feature**: Updated all AWS Cloud Map APIs to provide consistent throttling exception (RequestLimitExceeded)
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.17.0](service/sesv2/CHANGELOG.md#v1170-2023-03-09)
+  * **Feature**: This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects missing or misconfigured Brand Indicator for Message Identification (BIMI) DNS records for customer sending identities.
+
+# Release (2023-03-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.23.0](service/athena/CHANGELOG.md#v1230-2023-03-08)
+  * **Feature**: A new field SubstatementType is added to GetQueryExecution API, so customers have an error free way to detect the query type and interpret the result.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.19.0](service/dynamodb/CHANGELOG.md#v1190-2023-03-08)
+  * **Feature**: Adds deletion protection support to DynamoDB tables. Tables with deletion protection enabled cannot be deleted. Deletion protection is disabled by default, can be enabled via the CreateTable or UpdateTable APIs, and is visible in TableDescription. This setting is not replicated for Global Tables.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.89.0](service/ec2/CHANGELOG.md#v1890-2023-03-08)
+  * **Feature**: Introducing Amazon EC2 C7g, M7g and R7g instances, powered by the latest generation AWS Graviton3 processors and deliver up to 25% better performance over Graviton2-based instances.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.20.0](service/lakeformation/CHANGELOG.md#v1200-2023-03-08)
+  * **Feature**: This release adds two new API support "GetDataCellsFiler" and "UpdateDataCellsFilter", and also updates the corresponding documentation.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.21.0](service/mediapackage/CHANGELOG.md#v1210-2023-03-08)
+  * **Feature**: This release provides the date and time live resources were created.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.22.0](service/mediapackagevod/CHANGELOG.md#v1220-2023-03-08)
+  * **Feature**: This release provides the date and time VOD resources were created.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.17.0](service/route53resolver/CHANGELOG.md#v1170-2023-03-08)
+  * **Feature**: Add dual-stack and IPv6 support for Route 53 Resolver Endpoint,Add IPv6 target IP in Route 53 Resolver Forwarding Rule
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.70.0](service/sagemaker/CHANGELOG.md#v1700-2023-03-08)
+  * **Feature**: There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
+# Release (2023-03-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.24.0](service/databasemigrationservice/CHANGELOG.md#v1240-2023-03-07)
+  * **Feature**: This release adds DMS Fleet Advisor Target Recommendation APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to start Target Recommendation calculation.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.22.1](service/location/CHANGELOG.md#v1221-2023-03-07)
+  * **Documentation**: Documentation update for the release of 3 additional map styles for use with Open Data Maps: Open Data Standard Dark, Open Data Visualization Light & Open Data Visualization Dark.
+
 # Release (2023-03-06)
 
 ## Module Highlights
@@ -8574,7 +8685,7 @@
   * Fixes [issue#1191](https://github.com/aws/aws-sdk-go-v2/issues/1191)
 * Refactored internal endpoints model for accessors
 * Feature: updated to latest models
-* New services 
+* New services
   * `service/location` - v1.0.0
   * `service/lookoutmetrics` - v1.0.0
 ## Core SDK Highlights
@@ -8658,7 +8769,7 @@ of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 
 
 ## Breaking Changes
 * `aws`: Updated Config.Retryer member to be a func that returns aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
-    * Updates the SDK's references to Config.Retryer to be a function that returns aws.Retryer value. This ensures that custom retry options specified in the `aws.Config` are scoped to individual client instances. 
+    * Updates the SDK's references to Config.Retryer to be a function that returns aws.Retryer value. This ensures that custom retry options specified in the `aws.Config` are scoped to individual client instances.
     * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
     * Removes duplicate `Retryer` interface from `retry` package. Single definition is `aws.Retryer` now.
 * `aws/middleware`: Updates `AddAttemptClockSkewMiddleware` to use appropriate `AddRecordResponseTiming` naming ([#1031](https://github.com/aws/aws-sdk-go-v2/pull/1031))
@@ -8666,7 +8777,7 @@ of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 
 * `config`: Updated the `WithRetryer` helper to take a function that returns an aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
     * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
 * `API Clients`: Fix SDK's API client enum constant name generation to have expected casing ([#1020](https://github.com/aws/aws-sdk-go-v2/pull/1020))
-    * This updates of the generated enum const value names in API client's `types` package to have the expected casing. Prior to this, enum names were being generated with lowercase names instead of camel case. 
+    * This updates of the generated enum const value names in API client's `types` package to have the expected casing. Prior to this, enum names were being generated with lowercase names instead of camel case.
 * `API Clients`: Updates SDK's API client request middleware stack values to be scoped to individual operation call ([#1019](https://github.com/aws/aws-sdk-go-v2/pull/1019))
     * The API client request middleware stack values were mistakenly allowed to escape to nested API operation calls. This broke the SDK's presigners.
     * Stack values that should not escape are not scoped to the individual operation call.
@@ -8678,7 +8789,7 @@ of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 
     * Adds a PresignClient to the `sts` API client module. Use PresignGetCallerIdentity to obtain presigned URLs for the create presigned URLs for the GetCallerIdentity operation.
     * Fixes [#1021](https://github.com/aws/aws-sdk-go-v2/issues/1021)
 * `aws/retry`: Add package documentation for retry package ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
-    * Adds documentation for the retry package 
+    * Adds documentation for the retry package
 
 ## Bug Fixes
 * `Multiple API Clients`: Fix SDK's generated serde for unmodeled operation input/output ([#1050](https://github.com/aws/aws-sdk-go-v2/pull/1050))
@@ -8776,7 +8887,6 @@ feedback and to take advantage of modern Go language features.
     * Add support for reading `s3_use_arn_region` from shared config file ([#991](https://github.com/aws/aws-sdk-go-v2/pull/991))
     * Add Utility for getting RequestID and HostID of response ([#983](https://github.com/aws/aws-sdk-go-v2/pull/983))
 
-
 ## Other changes
 * Updates branch `HEAD` points from `master` to `main`.
     * This should not impact your application, but if you have pull requests or forks of the SDK you may need to update the upstream branch your fork is based off of.
@@ -8806,7 +8916,6 @@ The `aws/signer/v4` package's `Signer.SignHTTP` and `Signer.PresignHTTP` methods
 The `config#LoadDefaultConfig` function has been updated to require a `context.Context` as the first parameter, with additional optional function options as variadic additional arguments. Your application will need to update its usage of `LoadDefaultConfig` to pass in `context.Context` as the first parameter. If your application used the `With...` helpers those should continue to work without issue.
 
 The v2 SDK corrects its behavior to be inline with the AWS CLI and other AWS SDKs. Refer to https://docs.aws.amazon.com/credref/latest/refdocs/overview.html for more information how to use the shared config and credentials files.
-
 
 # Release 2020-11-30
 
@@ -8967,7 +9076,6 @@ The `config` module's exported types were trimmed down to add clarity and reduce
 * `credentials` module released at `v0.1.1`
 * `ec2imds` module released at `v0.1.1`
 
-
 # Release 2020-09-28
 ## Announcements
 We’re happy to share the updated clients for the v0.25.0 preview version of the AWS SDK for Go V2.
@@ -9007,7 +9115,6 @@ As a part of the refactoring done to v2 preview SDK some components have not bee
 
 We expect additional breaking changes to the v2 preview SDK in the coming releases. We expect these changes to focus on organizational, naming, and hardening the SDK's design for future feature capabilities after it is released for general availability.
 
-
 #### Relocated Packages
 
 In this release packages within the SDK were relocated, and in some cases those packages were converted to Go modules. The following is a list of packages have were relocated.
@@ -9022,7 +9129,6 @@ The `github.com/aws/aws-sdk-go-v2/credentials` module contains refactored creden
 * `github.com/aws/aws-sdk-go-v2/processcreds` => `github.com/aws/aws-sdk-go-v2/credentials/processcreds`
 * `github.com/aws/aws-sdk-go-v2/stscreds` => `github.com/aws/aws-sdk-go-v2/credentials/stscreds`
 
-
 #### Modularization
 
 New modules were added to the v2 preview SDK to allow the components to be versioned independently from each other. This allows your application to depend on specific versions of an API client module, and take discrete updates from the SDK core and other API client modules as desired.
@@ -9030,7 +9136,6 @@ New modules were added to the v2 preview SDK to allow the components to be versi
 * [github.com/aws/aws-sdk-go-v2/config](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config)
 * [github.com/aws/aws-sdk-go-v2/credentials](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/credentials)
 * Module for each API client, e.g. [github.com/aws/aws-sdk-go-v2/service/s3](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3)
-
 
 #### API Clients
 
@@ -9051,13 +9156,11 @@ result, err := client.Scan(context.TODO(), &dynamodb.ScanInput{
 })
 ```
 
-
 #### Configuration
 
 In addition to the `github.com/aws/aws-sdk-go-v2/aws/external` package being made a module at `github.com/aws/aws-sdk-go-v2/config`, the `LoadDefaultAWSConfig` function was renamed to `LoadDefaultConfig`.
 
 The `github.com/aws/aws-sdk-go-v2/aws/defaults` package has been removed. Its components have been migrated to the `github.com/aws/aws-sdk-go-v2/aws` package, and `github.com/aws/aws-sdk-go-v2/config` module.
-
 
 #### Error Handling
 
@@ -9100,7 +9203,6 @@ if err != nil {
 Logging an error value will include information from each wrapped error. For example, the following is a mock error logged for a Scan operation call that failed because the table was not found.
 
 > 2020/10/15 16:03:37 operation error DynamoDB: Scan, https response error StatusCode: 400, RequestID: ABCREQUESTID123, ResourceNotFoundException: Requested resource not found
-
 
 #### Endpoints
 

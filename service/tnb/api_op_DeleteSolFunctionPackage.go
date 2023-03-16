@@ -16,7 +16,7 @@ import (
 // TOSCA standard to describe how the network functions should run on your network.
 // To delete a function package, the package must be in a disabled state. To
 // disable a function package, see UpdateSolFunctionPackage
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolFunctionPackage.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html).
 func (c *Client) DeleteSolFunctionPackage(ctx context.Context, params *DeleteSolFunctionPackageInput, optFns ...func(*Options)) (*DeleteSolFunctionPackageOutput, error) {
 	if params == nil {
 		params = &DeleteSolFunctionPackageInput{}

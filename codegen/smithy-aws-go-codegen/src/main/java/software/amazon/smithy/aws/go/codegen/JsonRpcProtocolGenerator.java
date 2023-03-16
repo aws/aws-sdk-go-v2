@@ -133,7 +133,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         handleDecodeError(writer, "out, metadata, ");
     }
 
-
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
         JsonShapeDeserVisitor visitor = JsonShapeDeserVisitor.builder()
@@ -147,7 +146,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
             generatedDocumentBodyShapeDeserializers.add(shape.toShapeId());
         });
     }
-
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {

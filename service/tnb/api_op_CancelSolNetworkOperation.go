@@ -29,7 +29,7 @@ func (c *Client) CancelSolNetworkOperation(ctx context.Context, params *CancelSo
 
 type CancelSolNetworkOperationInput struct {
 
-	// The ID of a network operation occurrence.
+	// The identifier of the network operation.
 	//
 	// This member is required.
 	NsLcmOpOccId *string

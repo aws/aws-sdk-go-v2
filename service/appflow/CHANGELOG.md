@@ -1,3 +1,7 @@
+# v1.25.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2023-02-23)
 
 * **Feature**: This release enables the customers to choose whether to use Private Link for Metadata and Authorization call when using a private Salesforce connections

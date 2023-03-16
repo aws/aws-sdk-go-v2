@@ -1968,6 +1968,46 @@ func awsAwsjson10_deserializeDocumentCapacitySpecificationSummary(v **types.Capa
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentClientSideTimestamps(v **types.ClientSideTimestamps, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClientSideTimestamps
+	if *v == nil {
+		sv = &types.ClientSideTimestamps{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientSideTimestampsStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ClientSideTimestampsStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentClusteringKey(v **types.ClusteringKey, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3200,6 +3240,11 @@ func awsAwsjson10_deserializeOpDocumentGetTableOutput(v **GetTableOutput, value 
 		switch key {
 		case "capacitySpecification":
 			if err := awsAwsjson10_deserializeDocumentCapacitySpecificationSummary(&sv.CapacitySpecification, value); err != nil {
+				return err
+			}
+
+		case "clientSideTimestamps":
+			if err := awsAwsjson10_deserializeDocumentClientSideTimestamps(&sv.ClientSideTimestamps, value); err != nil {
 				return err
 			}
 

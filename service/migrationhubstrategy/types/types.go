@@ -7,6 +7,90 @@ import (
 	"time"
 )
 
+// A combination of existing analysis statuses.
+//
+// The following types satisfy this interface:
+//
+//	AnalysisStatusUnionMemberRuntimeAnalysisStatus
+//	AnalysisStatusUnionMemberSrcCodeOrDbAnalysisStatus
+type AnalysisStatusUnion interface {
+	isAnalysisStatusUnion()
+}
+
+// The status of the analysis.
+type AnalysisStatusUnionMemberRuntimeAnalysisStatus struct {
+	Value RuntimeAnalysisStatus
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalysisStatusUnionMemberRuntimeAnalysisStatus) isAnalysisStatusUnion() {}
+
+// The status of the source code or database analysis.
+type AnalysisStatusUnionMemberSrcCodeOrDbAnalysisStatus struct {
+	Value SrcCodeOrDbAnalysisStatus
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalysisStatusUnionMemberSrcCodeOrDbAnalysisStatus) isAnalysisStatusUnion() {}
+
+// The combination of the existing analyzers.
+//
+// The following types satisfy this interface:
+//
+//	AnalyzerNameUnionMemberBinaryAnalyzerName
+//	AnalyzerNameUnionMemberRunTimeAnalyzerName
+//	AnalyzerNameUnionMemberSourceCodeAnalyzerName
+type AnalyzerNameUnion interface {
+	isAnalyzerNameUnion()
+}
+
+// The binary analyzer names.
+type AnalyzerNameUnionMemberBinaryAnalyzerName struct {
+	Value BinaryAnalyzerName
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalyzerNameUnionMemberBinaryAnalyzerName) isAnalyzerNameUnion() {}
+
+// The assessment analyzer names.
+type AnalyzerNameUnionMemberRunTimeAnalyzerName struct {
+	Value RunTimeAnalyzerName
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalyzerNameUnionMemberRunTimeAnalyzerName) isAnalyzerNameUnion() {}
+
+// The source code analyzer names.
+type AnalyzerNameUnionMemberSourceCodeAnalyzerName struct {
+	Value SourceCodeAnalyzerName
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalyzerNameUnionMemberSourceCodeAnalyzerName) isAnalyzerNameUnion() {}
+
+// The anti-pattern report result.
+type AntipatternReportResult struct {
+
+	// The analyzer name.
+	AnalyzerName AnalyzerNameUnion
+
+	// Contains the S3 bucket name and the Amazon S3 key name.
+	AntiPatternReportS3Object *S3Object
+
+	// The status of the anti-pattern report generation.
+	AntipatternReportStatus AntipatternReportStatus
+
+	// The status message for the anti-pattern.
+	AntipatternReportStatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the summary of anti-patterns and their severity.
 type AntipatternSeveritySummary struct {
 
@@ -78,6 +162,9 @@ type ApplicationComponentDetail struct {
 
 	// The application component subtype.
 	ResourceSubType ResourceSubType
+
+	// A list of the analysis results.
+	ResultList []Result
 
 	// The status of the application unit.
 	RuntimeStatus RuntimeAnalysisStatus
@@ -662,6 +749,24 @@ type RemoteSourceCodeAnalysisServerInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The error in server analysis.
+type Result struct {
+
+	// The error in server analysis.
+	AnalysisStatus AnalysisStatusUnion
+
+	// The error in server analysis.
+	AnalysisType AnalysisType
+
+	// The error in server analysis.
+	AntipatternReportResultList []AntipatternReportResult
+
+	// The error in server analysis.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the S3 bucket name and the Amazon S3 key name.
 type S3Object struct {
 
@@ -928,5 +1033,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAnalysisStatusUnion()         {}
+func (*UnknownUnionMember) isAnalyzerNameUnion()           {}
 func (*UnknownUnionMember) isDatabaseMigrationPreference() {}
 func (*UnknownUnionMember) isManagementPreference()        {}

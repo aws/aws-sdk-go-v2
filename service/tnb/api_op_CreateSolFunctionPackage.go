@@ -22,7 +22,7 @@ import (
 // container with an ID. The next step is to upload the actual CSAR zip file into
 // that empty container. To upload function package content, see
 // PutSolFunctionPackageContent
-// (https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html).
+// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html).
 func (c *Client) CreateSolFunctionPackage(ctx context.Context, params *CreateSolFunctionPackageInput, optFns ...func(*Options)) (*CreateSolFunctionPackageOutput, error) {
 	if params == nil {
 		params = &CreateSolFunctionPackageInput{}

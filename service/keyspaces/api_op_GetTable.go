@@ -63,9 +63,16 @@ type GetTableOutput struct {
 	// This member is required.
 	TableName *string
 
-	// The read/write throughput capacity mode for a table. The options are: •
-	// throughputMode:PAY_PER_REQUEST • throughputMode:PROVISIONED
+	// The read/write throughput capacity mode for a table. The options are:
+	//
+	// *
+	// throughputMode:PAY_PER_REQUEST
+	//
+	// * throughputMode:PROVISIONED
 	CapacitySpecification *types.CapacitySpecificationSummary
+
+	// The client-side timestamps setting of the table.
+	ClientSideTimestamps *types.ClientSideTimestamps
 
 	// The the description of the specified table.
 	Comment *types.Comment
@@ -73,7 +80,7 @@ type GetTableOutput struct {
 	// The creation timestamp of the specified table.
 	CreationTimestamp *time.Time
 
-	// The default Time to Live settings of the specified table.
+	// The default Time to Live settings in seconds of the specified table.
 	DefaultTimeToLive *int32
 
 	// The encryption settings of the specified table.

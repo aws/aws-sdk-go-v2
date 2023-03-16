@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -30,7 +30,10 @@
     },
     "shapes": {
         "com.amazonaws.directconnect#ASN": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.directconnect#AcceptDirectConnectGatewayAssociationProposal": {
             "type": "operation",
@@ -82,6 +85,9 @@
                         "smithy.api#documentation": "<p>Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.</p>\n         <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>Direct Connect User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AcceptDirectConnectGatewayAssociationProposalResult": {
@@ -93,18 +99,20 @@
             }
         },
         "com.amazonaws.directconnect#AddressFamily": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ipv4",
-                        "name": "IPv4"
-                    },
-                    {
-                        "value": "ipv6",
-                        "name": "IPv6"
+            "type": "enum",
+            "members": {
+                "IPv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
                     }
-                ]
+                },
+                "IPv6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#AgreementList": {
@@ -177,10 +185,14 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The dedicated VLAN provisioned to the connection.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AllocateHostedConnection": {
@@ -243,6 +255,7 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The dedicated VLAN provisioned to the hosted connection.</p>",
                         "smithy.api#required": {}
                     }
@@ -253,6 +266,9 @@
                         "smithy.api#documentation": "<p>The tags associated with the connection.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AllocatePrivateVirtualInterface": {
@@ -305,6 +321,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AllocatePublicVirtualInterface": {
@@ -357,6 +376,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AllocateTransitVirtualInterface": {
@@ -409,6 +431,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AllocateTransitVirtualInterfaceResult": {
@@ -459,6 +484,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AssociateHostedConnection": {
@@ -498,6 +526,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AssociateMacSecKey": {
@@ -548,6 +579,9 @@
                         "smithy.api#documentation": "<p>The MAC Security (MACsec) CAK to associate with the dedicated connection.</p>\n         <p>You can create the CKN/CAK pair using an industry standard tool.</p>\n         <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p>\n         <p>If you use this request parameter, you must use the <code>ckn</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AssociateMacSecKeyResponse": {
@@ -565,6 +599,9 @@
                         "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys associated with the dedicated connection.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#AssociateVirtualInterface": {
@@ -604,6 +641,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#AssociatedGateway": {
@@ -680,6 +720,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
                     }
                 },
@@ -752,56 +793,71 @@
             }
         },
         "com.amazonaws.directconnect#BGPPeerState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "verifying",
-                        "name": "Verifying"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "Pending"
-                    },
-                    {
-                        "value": "available",
-                        "name": "Available"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "Deleted"
+            "type": "enum",
+            "members": {
+                "Verifying": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "verifying"
                     }
-                ]
+                },
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "Deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#BGPStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "up",
-                        "name": "Up"
-                    },
-                    {
-                        "value": "down",
-                        "name": "Down"
-                    },
-                    {
-                        "value": "unknown",
-                        "name": "Unknown"
+            "type": "enum",
+            "members": {
+                "Up": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "up"
                     }
-                ]
+                },
+                "Down": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "down"
+                    }
+                },
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#Bandwidth": {
             "type": "string"
         },
         "com.amazonaws.directconnect#BooleanFlag": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.directconnect#CIDR": {
             "type": "string"
@@ -842,6 +898,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmConnectionResponse": {
@@ -853,6 +912,9 @@
                         "smithy.api#documentation": "<p>The state of the connection. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ordering</code>: The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>requested</code>: The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: The connection has been approved and is being initialized.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: The network link is up and the connection is ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: The network link is down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The connection is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: The connection has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: A hosted connection in the <code>ordering</code> state enters the <code>rejected</code> state if it is deleted by the customer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the connection is not available.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmCustomerAgreement": {
@@ -884,6 +946,9 @@
                         "smithy.api#documentation": "<p>\n\n      The name of the customer agreement.\n\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmCustomerAgreementResponse": {
@@ -895,6 +960,9 @@
                         "smithy.api#documentation": "<p>\n      The status of the customer agreement when the connection was created. This will be either <code>signed</code> or <code>unsigned</code>.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmPrivateVirtualInterface": {
@@ -939,6 +1007,9 @@
                         "smithy.api#documentation": "<p>The ID of the Direct Connect gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmPrivateVirtualInterfaceResponse": {
@@ -947,9 +1018,12 @@
                 "virtualInterfaceState": {
                     "target": "com.amazonaws.directconnect#VirtualInterfaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmPublicVirtualInterface": {
@@ -982,6 +1056,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmPublicVirtualInterfaceResponse": {
@@ -990,9 +1067,12 @@
                 "virtualInterfaceState": {
                     "target": "com.amazonaws.directconnect#VirtualInterfaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmTransitVirtualInterface": {
@@ -1012,7 +1092,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts ownership of a transit virtual interface created by another Amazon Web Services account.</p>\n    \n         <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>"
+                "smithy.api#documentation": "<p>Accepts ownership of a transit virtual interface created by another Amazon Web Services account.</p>\n         <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>"
             }
         },
         "com.amazonaws.directconnect#ConfirmTransitVirtualInterfaceRequest": {
@@ -1032,6 +1112,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#ConfirmTransitVirtualInterfaceResponse": {
@@ -1040,9 +1123,12 @@
                 "virtualInterfaceState": {
                     "target": "com.amazonaws.directconnect#VirtualInterfaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#Connection": {
@@ -1093,6 +1179,7 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>"
                     }
                 },
@@ -1198,46 +1285,62 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#ConnectionState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ordering",
-                        "name": "ordering"
-                    },
-                    {
-                        "value": "requested",
-                        "name": "requested"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "available",
-                        "name": "available"
-                    },
-                    {
-                        "value": "down",
-                        "name": "down"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
-                    },
-                    {
-                        "value": "rejected",
-                        "name": "rejected"
-                    },
-                    {
-                        "value": "unknown",
-                        "name": "unknown"
+            "type": "enum",
+            "members": {
+                "ordering": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ordering"
                     }
-                ]
+                },
+                "requested": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "requested"
+                    }
+                },
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "down": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "down"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                },
+                "rejected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rejected"
+                    }
+                },
+                "unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#Connections": {
@@ -1252,7 +1355,10 @@
             }
         },
         "com.amazonaws.directconnect#Count": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.directconnect#CreateBGPPeer": {
             "type": "operation",
@@ -1271,7 +1377,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a BGP peer on the specified virtual interface.</p>\n         <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access Amazon Web Services resources that also use that address family.</p>\n         <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot \n      be in the same address family as an existing BGP peer on the virtual interface.</p>\n         <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from\n      the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>\n         <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already on the allow list for the virtual interface.</p>"
+                "smithy.api#documentation": "<p>Creates a BGP peer on the specified virtual interface.</p>\n         <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to\n      access Amazon Web Services resources that also use that address family.</p>\n         <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot \n      be in the same address family as an existing BGP peer on the virtual interface.</p>\n         <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from\n      the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>\n         <important>\n            <p>If you let Amazon Web Services auto-assign IPv4 addresses, a /30 CIDR will be allocated\n      from 169.254.0.0/16. Amazon Web Services does not recommend this option if you intend to use\n      the customer router peer IP address as the source and destination for traffic. Instead you\n      should use RFC 1918 or other addressing, and specify the address yourself. For more\n      information about RFC 1918 see <a href=\"https://datatracker.ietf.org/doc/html/rfc1918\">\n        Address Allocation for Private Internets</a>.</p>\n         </important>\n         <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already on the allow list for the virtual interface.</p>"
             }
         },
         "com.amazonaws.directconnect#CreateBGPPeerRequest": {
@@ -1289,6 +1395,9 @@
                         "smithy.api#documentation": "<p>Information about the BGP peer.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateBGPPeerResponse": {
@@ -1300,6 +1409,9 @@
                         "smithy.api#documentation": "<p>The virtual interface.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#CreateConnection": {
@@ -1325,7 +1437,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a connection between a customer network and a specific Direct Connect location.</p>\n\n         <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic \n      cable. One end of the cable is connected to your router, the other to an Direct Connect router.</p>\n         <p>To find the locations for your Region, use <a>DescribeLocations</a>.</p>\n         <p>You can automatically add the new connection to a link aggregation group (LAG) by\n      specifying a LAG ID in the request. This ensures that the new connection is allocated on the\n      same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, \n      the request fails and no connection is created.</p>"
+                "smithy.api#documentation": "<p>Creates a connection between a customer network and a specific Direct Connect location.</p>\n         <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic \n      cable. One end of the cable is connected to your router, the other to an Direct Connect router.</p>\n         <p>To find the locations for your Region, use <a>DescribeLocations</a>.</p>\n         <p>You can automatically add the new connection to a link aggregation group (LAG) by\n      specifying a LAG ID in the request. This ensures that the new connection is allocated on the\n      same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, \n      the request fails and no connection is created.</p>"
             }
         },
         "com.amazonaws.directconnect#CreateConnectionRequest": {
@@ -1376,6 +1488,9 @@
                         "smithy.api#documentation": "<p>Indicates whether you want the connection to support MAC Security (MACsec).</p>\n         <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateDirectConnectGateway": {
@@ -1474,6 +1589,9 @@
                         "smithy.api#documentation": "<p>The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateDirectConnectGatewayAssociationProposalResult": {
@@ -1515,6 +1633,9 @@
                         "smithy.api#documentation": "<p>The ID of the virtual private gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateDirectConnectGatewayAssociationResult": {
@@ -1544,6 +1665,9 @@
                         "smithy.api#documentation": "<p>The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured\n      on the Amazon side of the connection. The ASN must be in the private range of 64,512 to\n      65,534 or 4,200,000,000 to 4,294,967,294. The default is 64512.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateDirectConnectGatewayResult": {
@@ -1625,6 +1749,9 @@
                         "smithy.api#documentation": "<p>The name of the service provider associated with the interconnect.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateLag": {
@@ -1650,7 +1777,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a link aggregation group (LAG) with the specified number of bundled\n      physical dedicated connections between the customer network and a specific Direct Connect location.\n      A LAG is a logical interface that uses the Link Aggregation Control Protocol\n      (LACP) to aggregate multiple interfaces, enabling you to treat them as a single \n      interface.</p>\n        <p>All connections in a LAG must use the same bandwidth (either 1Gbps or 10Gbps) and must terminate at the same Direct Connect endpoint.</p>\n         <p>You can have up to 10 dedicated connections per LAG. Regardless of this limit, if you\n      request more connections for the LAG than Direct Connect can allocate on a single endpoint, no LAG is\n      created.</p>\n         <p>You can specify an existing physical dedicated connection or interconnect to include in\n      the LAG (which counts towards the total number of connections). Doing so interrupts the\n      current physical dedicated connection, and re-establishes them as a member of the LAG. The LAG\n      will be created on the same Direct Connect endpoint to which the dedicated connection terminates. Any\n      virtual interfaces associated with the dedicated connection are automatically disassociated\n      and re-associated with the LAG. The connection ID does not change.</p>\n         <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is \n      automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual \n      interfaces cannot be directly configured.</p>"
+                "smithy.api#documentation": "<p>Creates a link aggregation group (LAG) with the specified number of bundled\n      physical dedicated connections between the customer network and a specific Direct Connect location.\n      A LAG is a logical interface that uses the Link Aggregation Control Protocol\n      (LACP) to aggregate multiple interfaces, enabling you to treat them as a single \n      interface.</p>\n         <p>All connections in a LAG must use the same bandwidth (either 1Gbps or 10Gbps) and must terminate at the same Direct Connect endpoint.</p>\n         <p>You can have up to 10 dedicated connections per LAG. Regardless of this limit, if you\n      request more connections for the LAG than Direct Connect can allocate on a single endpoint, no LAG is\n      created.</p>\n         <p>You can specify an existing physical dedicated connection or interconnect to include in\n      the LAG (which counts towards the total number of connections). Doing so interrupts the\n      current physical dedicated connection, and re-establishes them as a member of the LAG. The LAG\n      will be created on the same Direct Connect endpoint to which the dedicated connection terminates. Any\n      virtual interfaces associated with the dedicated connection are automatically disassociated\n      and re-associated with the LAG. The connection ID does not change.</p>\n         <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is \n      automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual \n      interfaces cannot be directly configured.</p>"
             }
         },
         "com.amazonaws.directconnect#CreateLagRequest": {
@@ -1659,6 +1786,7 @@
                 "numberOfConnections": {
                     "target": "com.amazonaws.directconnect#Count",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of physical dedicated connections initially provisioned and bundled by the\n      LAG.</p>",
                         "smithy.api#required": {}
                     }
@@ -1714,6 +1842,9 @@
                         "smithy.api#documentation": "<p>Indicates whether the connection will support MAC Security (MACsec).</p>\n         <note>\n            <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreatePrivateVirtualInterface": {
@@ -1759,6 +1890,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreatePublicVirtualInterface": {
@@ -1804,6 +1938,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateTransitVirtualInterface": {
@@ -1829,7 +1966,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p>\n         <important>\n            <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p>\n         </important>\n         <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to\n      the underlying physical connection if it wasn't updated to support jumbo frames. Updating \n      the connection disrupts network connectivity for all virtual interfaces associated with \n      the connection for up to 30 seconds. To check whether your connection supports jumbo \n      frames, call <a>DescribeConnections</a>. To check whether your virtual \n      interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p>\n         <important>\n            <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p>\n         </important>\n         <p>A jumbo MTU value must be either 1500 or 8500. No other values will be accepted. Setting\n      the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying\n      physical connection if it wasn't updated to support jumbo frames. Updating the connection\n      disrupts network connectivity for all virtual interfaces associated with the connection for up\n      to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo\n      frames, call <a>DescribeVirtualInterfaces</a>.</p>"
             }
         },
         "com.amazonaws.directconnect#CreateTransitVirtualInterfaceRequest": {
@@ -1849,6 +1986,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#CreateTransitVirtualInterfaceResult": {
@@ -1914,6 +2054,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
                     }
                 },
@@ -1929,6 +2070,9 @@
                         "smithy.api#documentation": "<p>The ID of the BGP peer.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteBGPPeerResponse": {
@@ -1940,6 +2084,9 @@
                         "smithy.api#documentation": "<p>The virtual interface.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DeleteConnection": {
@@ -1972,6 +2119,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteDirectConnectGateway": {
@@ -2044,6 +2194,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteDirectConnectGatewayAssociationProposalResult": {
@@ -2078,6 +2231,9 @@
                         "smithy.api#documentation": "<p>The ID of the virtual private gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteDirectConnectGatewayAssociationResult": {
@@ -2101,6 +2257,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteDirectConnectGatewayResult": {
@@ -2144,6 +2303,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteInterconnectResponse": {
@@ -2155,6 +2317,9 @@
                         "smithy.api#documentation": "<p>The state of the interconnect. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>requested</code>: The initial state of an interconnect. The interconnect stays in the\n        requested state until the Letter of Authorization (LOA) is sent to the customer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: The interconnect is approved, and is being initialized.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: The network link is up, and the interconnect is ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: The network link is down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The interconnect is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: The interconnect is deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the interconnect is not available.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DeleteLag": {
@@ -2187,6 +2352,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteVirtualInterface": {
@@ -2219,6 +2387,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DeleteVirtualInterfaceResponse": {
@@ -2227,9 +2398,12 @@
                 "virtualInterfaceState": {
                     "target": "com.amazonaws.directconnect#VirtualInterfaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DescribeConnectionLoa": {
@@ -2275,6 +2449,9 @@
                         "smithy.api#documentation": "<p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeConnectionLoaResponse": {
@@ -2286,6 +2463,9 @@
                         "smithy.api#documentation": "<p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DescribeConnections": {
@@ -2339,6 +2519,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeConnectionsRequest": {
@@ -2350,10 +2533,16 @@
                         "smithy.api#documentation": "<p>The ID of the connection.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeCustomerMetadata": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.directconnect#DescribeCustomerMetadataResponse"
             },
@@ -2384,6 +2573,9 @@
                         "smithy.api#documentation": "<p>The type of network-to-network interface (NNI) partner. The partner type will be one of the following:</p>\n         <ul>\n            <li>\n               <p>V1: This partner can only allocate 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps subgigabit connections.</p>\n            </li>\n            <li>\n               <p>V2: This partner can only allocate 1GB, 2GB, 5GB, or 10GB hosted connections.</p>\n            </li>\n            <li>\n               <p>nonPartner: The customer is not a partner.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DescribeDirectConnectGatewayAssociationProposals": {
@@ -2430,7 +2622,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.directconnect#MaxResultSetSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n\t        <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
                     }
                 },
                 "nextToken": {
@@ -2439,6 +2631,9 @@
                         "smithy.api#documentation": "<p>The token for the next page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeDirectConnectGatewayAssociationProposalsResult": {
@@ -2502,7 +2697,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.directconnect#MaxResultSetSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n\t        <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
                     }
                 },
                 "nextToken": {
@@ -2517,6 +2712,9 @@
                         "smithy.api#documentation": "<p>The ID of the virtual private gateway or transit gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeDirectConnectGatewayAssociationsResult": {
@@ -2574,7 +2772,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.directconnect#MaxResultSetSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n\t        <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
                     }
                 },
                 "nextToken": {
@@ -2583,6 +2781,9 @@
                         "smithy.api#documentation": "<p>The token provided in the previous call to retrieve the next page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeDirectConnectGatewayAttachmentsResult": {
@@ -2634,7 +2835,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.directconnect#MaxResultSetSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n\t        <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
                     }
                 },
                 "nextToken": {
@@ -2643,6 +2844,9 @@
                         "smithy.api#documentation": "<p>The token provided in the previous call to retrieve the next page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeDirectConnectGatewaysResult": {
@@ -2692,6 +2896,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeInterconnectLoa": {
@@ -2737,6 +2944,9 @@
                         "smithy.api#documentation": "<p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeInterconnectLoaResponse": {
@@ -2748,6 +2958,9 @@
                         "smithy.api#documentation": "<p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DescribeInterconnects": {
@@ -2779,6 +2992,9 @@
                         "smithy.api#documentation": "<p>The ID of the interconnect.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeLags": {
@@ -2810,6 +3026,9 @@
                         "smithy.api#documentation": "<p>The ID of the LAG.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeLoa": {
@@ -2854,10 +3073,16 @@
                         "smithy.api#documentation": "<p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeLocations": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.directconnect#Locations"
             },
@@ -2911,7 +3136,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the details about a virtual interface's router.</p>"
+                "smithy.api#documentation": "<p>Provides the details about a virtual interface's router.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeRouterConfigurationResponse": {
@@ -2941,6 +3167,9 @@
                         "smithy.api#documentation": "<p>Provides the details about a virtual interface's router.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DescribeTags": {
@@ -2973,6 +3202,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DescribeTagsResponse": {
@@ -2984,10 +3216,16 @@
                         "smithy.api#documentation": "<p>Information about the tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DescribeVirtualGateways": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.directconnect#VirtualGateways"
             },
@@ -3038,6 +3276,9 @@
                         "smithy.api#documentation": "<p>The ID of the virtual interface.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DirectConnectClientException": {
@@ -3082,7 +3323,7 @@
                 "directConnectGatewayState": {
                     "target": "com.amazonaws.directconnect#DirectConnectGatewayState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the Direct Connect gateway. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>pending</code>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: The Direct Connect gateway is ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: The Direct Connect gateway is deleted and cannot pass traffic.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the Direct Connect gateway. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>pending</code>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: The Direct Connect gateway is ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: The Direct Connect gateway is deleted and cannot pass traffic.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "stateChangeError": {
@@ -3114,7 +3355,7 @@
                 "associationState": {
                     "target": "com.amazonaws.directconnect#DirectConnectGatewayAssociationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the association. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated</code>: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociated</code>: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the association. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated</code>: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociated</code>: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>updating</code>: The CIDR blocks for the virtual private gateway or transit gateway are currently being updated. This could\n          be new CIDR blocks added or current CIDR blocks removed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "stateChangeError": {
@@ -3233,49 +3474,61 @@
             }
         },
         "com.amazonaws.directconnect#DirectConnectGatewayAssociationProposalState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "requested",
-                        "name": "requested"
-                    },
-                    {
-                        "value": "accepted",
-                        "name": "accepted"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
+            "type": "enum",
+            "members": {
+                "requested": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "requested"
                     }
-                ]
+                },
+                "accepted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accepted"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#DirectConnectGatewayAssociationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "associating",
-                        "name": "associating"
-                    },
-                    {
-                        "value": "associated",
-                        "name": "associated"
-                    },
-                    {
-                        "value": "disassociating",
-                        "name": "disassociating"
-                    },
-                    {
-                        "value": "disassociated",
-                        "name": "disassociated"
-                    },
-                    {
-                        "value": "updating",
-                        "name": "updating"
+            "type": "enum",
+            "members": {
+                "associating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "associating"
                     }
-                ]
+                },
+                "associated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "associated"
+                    }
+                },
+                "disassociating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disassociating"
+                    }
+                },
+                "disassociated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disassociated"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "updating"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#DirectConnectGatewayAttachment": {
@@ -3335,41 +3588,49 @@
             }
         },
         "com.amazonaws.directconnect#DirectConnectGatewayAttachmentState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "attaching",
-                        "name": "attaching"
-                    },
-                    {
-                        "value": "attached",
-                        "name": "attached"
-                    },
-                    {
-                        "value": "detaching",
-                        "name": "detaching"
-                    },
-                    {
-                        "value": "detached",
-                        "name": "detached"
+            "type": "enum",
+            "members": {
+                "attaching": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "attaching"
                     }
-                ]
+                },
+                "attached": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "attached"
+                    }
+                },
+                "detaching": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "detaching"
+                    }
+                },
+                "detached": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "detached"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#DirectConnectGatewayAttachmentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TransitVirtualInterface",
-                        "name": "TransitVirtualInterface"
-                    },
-                    {
-                        "value": "PrivateVirtualInterface",
-                        "name": "PrivateVirtualInterface"
+            "type": "enum",
+            "members": {
+                "TransitVirtualInterface": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TransitVirtualInterface"
                     }
-                ]
+                },
+                "PrivateVirtualInterface": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PrivateVirtualInterface"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#DirectConnectGatewayId": {
@@ -3385,26 +3646,32 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#DirectConnectGatewayState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "pending",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "available",
-                        "name": "available"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#DirectConnectServerException": {
@@ -3457,6 +3724,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DisassociateMacSecKey": {
@@ -3496,6 +3766,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#DisassociateMacSecKeyResponse": {
@@ -3513,6 +3786,9 @@
                         "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys no longer associated with the dedicated connection.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DuplicateTagKeysException": {
@@ -3528,10 +3804,7 @@
             }
         },
         "com.amazonaws.directconnect#EnableSiteLink": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.directconnect#EncryptionMode": {
             "type": "string"
@@ -3552,37 +3825,43 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#GatewayType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "virtualPrivateGateway",
-                        "name": "VirtualPrivateGateway"
-                    },
-                    {
-                        "value": "transitGateway",
-                        "name": "TransitGateway"
+            "type": "enum",
+            "members": {
+                "VirtualPrivateGateway": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "virtualPrivateGateway"
                     }
-                ]
+                },
+                "TransitGateway": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transitGateway"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#HasLogicalRedundancy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "unknown",
-                        "name": "Unknown"
-                    },
-                    {
-                        "value": "yes",
-                        "name": "Yes"
-                    },
-                    {
-                        "value": "no",
-                        "name": "No"
+            "type": "enum",
+            "members": {
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
                     }
-                ]
+                },
+                "Yes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "yes"
+                    }
+                },
+                "No": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#Interconnect": {
@@ -3696,38 +3975,50 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#InterconnectState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "requested",
-                        "name": "requested"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "available",
-                        "name": "available"
-                    },
-                    {
-                        "value": "down",
-                        "name": "down"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
-                    },
-                    {
-                        "value": "unknown",
-                        "name": "unknown"
+            "type": "enum",
+            "members": {
+                "requested": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "requested"
                     }
-                ]
+                },
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "down": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "down"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                },
+                "unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#Interconnects": {
@@ -3742,10 +4033,7 @@
             }
         },
         "com.amazonaws.directconnect#JumboFrameCapable": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.directconnect#Lag": {
             "type": "structure",
@@ -3759,6 +4047,7 @@
                 "numberOfConnections": {
                     "target": "com.amazonaws.directconnect#Count",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of physical dedicated connections bundled by the LAG, up to a maximum of 10.</p>"
                     }
                 },
@@ -3783,7 +4072,7 @@
                 "lagState": {
                     "target": "com.amazonaws.directconnect#LagState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the LAG. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>requested</code>: The initial state of a LAG. The LAG stays in the\n                requested state until the Letter of Authorization (LOA) is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: The LAG has been approved and is being initialized.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: The network link is established and the LAG is ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: The network link is down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The LAG is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: The LAG is deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the LAG is not available.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the LAG. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>requested</code>: The initial state of a LAG. The LAG stays in the\n                requested state until the Letter of Authorization (LOA) is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: The LAG has been approved and is being initialized.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: The network link is established and the LAG is ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: The network link is down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The LAG is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: The LAG is deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the LAG is not available.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "location": {
@@ -3801,6 +4090,7 @@
                 "minimumLinks": {
                     "target": "com.amazonaws.directconnect#Count",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of physical dedicated connections that must be operational for the LAG itself to be operational.</p>"
                     }
                 },
@@ -3831,6 +4121,7 @@
                 "allowsHostedConnections": {
                     "target": "com.amazonaws.directconnect#BooleanFlag",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the LAG can host other connections.</p>"
                     }
                 },
@@ -3894,38 +4185,50 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#LagState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "requested",
-                        "name": "requested"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "available",
-                        "name": "available"
-                    },
-                    {
-                        "value": "down",
-                        "name": "down"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
-                    },
-                    {
-                        "value": "unknown",
-                        "name": "unknown"
+            "type": "enum",
+            "members": {
+                "requested": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "requested"
                     }
-                ]
+                },
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "down": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "down"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                },
+                "unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#Lags": {
@@ -3989,7 +4292,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.directconnect#MaxResultSetSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n\t        <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
                     }
                 },
                 "nextToken": {
@@ -3998,6 +4301,9 @@
                         "smithy.api#documentation": "<p>The token for the next page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#ListVirtualInterfaceTestHistoryResponse": {
@@ -4015,6 +4321,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#Loa": {
@@ -4041,14 +4350,14 @@
             "type": "blob"
         },
         "com.amazonaws.directconnect#LoaContentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "application/pdf",
-                        "name": "PDF"
+            "type": "enum",
+            "members": {
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "application/pdf"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.directconnect#LoaIssueTime": {
@@ -4122,22 +4431,13 @@
             }
         },
         "com.amazonaws.directconnect#LongAsn": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.directconnect#MTU": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.directconnect#MacSecCapable": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.directconnect#MacSecKey": {
             "type": "structure",
@@ -4178,10 +4478,7 @@
             }
         },
         "com.amazonaws.directconnect#MaxResultSetSize": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.directconnect#NewBGPPeer": {
             "type": "structure",
@@ -4189,6 +4486,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
                     }
                 },
@@ -4234,6 +4532,7 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>",
                         "smithy.api#required": {}
                     }
@@ -4241,6 +4540,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
                         "smithy.api#required": {}
                     }
@@ -4317,6 +4617,7 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>",
                         "smithy.api#required": {}
                     }
@@ -4324,6 +4625,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
                         "smithy.api#required": {}
                     }
@@ -4382,6 +4684,7 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>",
                         "smithy.api#required": {}
                     }
@@ -4389,6 +4692,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
                         "smithy.api#required": {}
                     }
@@ -4447,6 +4751,7 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>",
                         "smithy.api#required": {}
                     }
@@ -4454,6 +4759,7 @@
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
                         "smithy.api#required": {}
                     }
@@ -4511,12 +4817,14 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>"
                     }
                 },
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>"
                     }
                 },
@@ -4585,12 +4893,14 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>"
                     }
                 },
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>"
                     }
                 },
@@ -4636,44 +4946,30 @@
             }
         },
         "com.amazonaws.directconnect#NniPartnerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "v1",
-                        "name": "V1"
-                    },
-                    {
-                        "value": "v2",
-                        "name": "V2"
-                    },
-                    {
-                        "value": "nonPartner",
-                        "name": "NonPartner"
+            "type": "enum",
+            "members": {
+                "V1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "v1"
                     }
-                ]
+                },
+                "V2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "v2"
+                    }
+                },
+                "NonPartner": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nonPartner"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#OvertureService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Direct Connect",
-                    "arnNamespace": "directconnect",
-                    "cloudFormationName": "DirectConnect",
-                    "cloudTrailEventSource": "directconnect.amazonaws.com",
-                    "endpointPrefix": "directconnect"
-                },
-                "aws.auth#sigv4": {
-                    "name": "directconnect"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. \n      One end of the cable is connected to your router, the other to an Direct Connect router. With this connection\n      in place, you can create virtual interfaces directly to the Amazon Web Services Cloud (for example, to Amazon EC2 \n      and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A \n      connection provides access to all Amazon Web Services Regions except the China (Beijing) and (China) Ningxia Regions. \n      Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>",
-                "smithy.api#title": "AWS Direct Connect",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://directconnect.amazonaws.com/doc/2012-10-25/"
-                }
-            },
             "version": "2012-10-25",
             "operations": [
                 {
@@ -4865,7 +5161,1028 @@
                 {
                     "target": "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributes"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Direct Connect",
+                    "arnNamespace": "directconnect",
+                    "cloudFormationName": "DirectConnect",
+                    "cloudTrailEventSource": "directconnect.amazonaws.com",
+                    "endpointPrefix": "directconnect"
+                },
+                "aws.auth#sigv4": {
+                    "name": "directconnect"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. \n      One end of the cable is connected to your router, the other to an Direct Connect router. With this connection\n      in place, you can create virtual interfaces directly to the Amazon Web Services Cloud (for example, to Amazon EC2 \n      and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A \n      connection provides access to all Amazon Web Services Regions except the China (Beijing) and (China) Ningxia Regions. \n      Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>",
+                "smithy.api#title": "AWS Direct Connect",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://directconnect.amazonaws.com/doc/2012-10-25/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://directconnect-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://directconnect-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://directconnect.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://directconnect.us-gov-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://directconnect.us-gov-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://directconnect.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://directconnect-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.directconnect#OwnerAccount": {
             "type": "string"
@@ -4898,10 +6215,7 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#RequestMACSec": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.directconnect#ResourceArn": {
             "type": "string"
@@ -5012,10 +6326,7 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#SiteLinkEnabled": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.directconnect#Software": {
             "type": "string"
@@ -5037,7 +6348,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the virtual interface failover test that verifies your configuration meets your resiliency requirements by placing the BGP peering session in the DOWN state. You can then send traffic to verify that there are no outages.</p>\n         <p>You can run the test on public, private, transit, and hosted virtual interfaces.</p>\n         <p>You can use <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html\">ListVirtualInterfaceTestHistory</a> to view the virtual interface test history.</p> \n         <p>If you need to stop the test before the test interval completes, use <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html\">StopBgpFailoverTest</a>.</p>"
+                "smithy.api#documentation": "<p>Starts the virtual interface failover test that verifies your configuration meets your resiliency requirements by placing the BGP peering session in the DOWN state. You can then send traffic to verify that there are no outages.</p>\n         <p>You can run the test on public, private, transit, and hosted virtual interfaces.</p>\n         <p>You can use <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html\">ListVirtualInterfaceTestHistory</a> to view the virtual interface test history.</p>\n         <p>If you need to stop the test before the test interval completes, use <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html\">StopBgpFailoverTest</a>.</p>"
             }
         },
         "com.amazonaws.directconnect#StartBgpFailoverTestRequest": {
@@ -5059,9 +6370,12 @@
                 "testDurationInMinutes": {
                     "target": "com.amazonaws.directconnect#TestDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time in minutes that the virtual interface failover test will last.</p>\n         <p>Maximum value: 180 minutes (3 hours).</p>\n         <p>Default: 180 minutes (3 hours).</p>"
+                        "smithy.api#documentation": "<p>The time in minutes that the virtual interface failover test will last.</p>\n         <p>Maximum value: 4,320 minutes (72 hours).</p>\n         <p>Default: 180 minutes (3 hours).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#StartBgpFailoverTestResponse": {
@@ -5073,6 +6387,9 @@
                         "smithy.api#documentation": "<p>Information about the virtual interface failover test.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#StartOnDate": {
@@ -5126,6 +6443,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#StopBgpFailoverTestResponse": {
@@ -5137,6 +6457,9 @@
                         "smithy.api#documentation": "<p>Information about the virtual interface failover test.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#Tag": {
@@ -5230,11 +6553,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directconnect#TagValue": {
             "type": "string",
@@ -5247,10 +6576,7 @@
             }
         },
         "com.amazonaws.directconnect#TestDuration": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.directconnect#TestId": {
             "type": "string"
@@ -5304,11 +6630,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directconnect#UpdateConnection": {
             "type": "operation",
@@ -5352,6 +6684,9 @@
                         "smithy.api#documentation": "<p>The connection MAC Security (MACsec) encryption mode.</p>\n         <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#UpdateDirectConnectGateway": {
@@ -5415,6 +6750,9 @@
                         "smithy.api#documentation": "<p>The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#UpdateDirectConnectGatewayAssociationResult": {
@@ -5442,6 +6780,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#UpdateDirectConnectGatewayResponse": {
@@ -5450,6 +6791,9 @@
                 "directConnectGateway": {
                     "target": "com.amazonaws.directconnect#DirectConnectGateway"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#UpdateLag": {
@@ -5491,6 +6835,7 @@
                 "minimumLinks": {
                     "target": "com.amazonaws.directconnect#Count",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p>"
                     }
                 },
@@ -5500,6 +6845,9 @@
                         "smithy.api#documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p>\n         <p>Amazon Web Services applies the value to all connections which are part of the LAG.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributes": {
@@ -5550,10 +6898,16 @@
                         "smithy.api#documentation": "<p>The name of the virtual private interface.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directconnect#VLAN": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.directconnect#Vendor": {
             "type": "string"
@@ -5649,12 +7003,14 @@
                 "vlan": {
                     "target": "com.amazonaws.directconnect#VLAN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the VLAN.</p>"
                     }
                 },
                 "asn": {
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>"
                     }
                 },
@@ -5691,7 +7047,7 @@
                 "virtualInterfaceState": {
                     "target": "com.amazonaws.directconnect#VirtualInterfaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the virtual interface. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>available</code>: A virtual interface that is able to forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>down</code>: A virtual interface that is BGP down.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>: A virtual interface that cannot forward traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unknown</code>: The state of the virtual interface is not available.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "customerRouterConfig": {
@@ -5787,46 +7143,62 @@
             "type": "string"
         },
         "com.amazonaws.directconnect#VirtualInterfaceState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "confirming",
-                        "name": "confirming"
-                    },
-                    {
-                        "value": "verifying",
-                        "name": "verifying"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "available",
-                        "name": "available"
-                    },
-                    {
-                        "value": "down",
-                        "name": "down"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "deleted",
-                        "name": "deleted"
-                    },
-                    {
-                        "value": "rejected",
-                        "name": "rejected"
-                    },
-                    {
-                        "value": "unknown",
-                        "name": "unknown"
+            "type": "enum",
+            "members": {
+                "confirming": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "confirming"
                     }
-                ]
+                },
+                "verifying": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "verifying"
+                    }
+                },
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "down": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "down"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                },
+                "rejected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rejected"
+                    }
+                },
+                "unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.directconnect#VirtualInterfaceTestHistory": {

@@ -9,6 +9,12 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A coded string to provide more information about the access denied exception. You can use the error code to check the exception type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -830,7 +836,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.securitylake#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more\n         information about ARNs and how to use them in policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM identifiers in\n            the Identity and Access Management (IAM) User Guide</a>. .</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more\n         information about ARNs and how to use them in policies, see <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html\">Amazon Security Lake User\n            Guide</a>.</p>"
                     }
                 },
                 "snsArn": {
@@ -843,6 +849,18 @@
                     "target": "com.amazonaws.securitylake#S3BucketArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN for the Amazon S3 bucket. </p>"
+                    }
+                },
+                "resourceShareArn": {
+                    "target": "com.amazonaws.securitylake#ResourceShareArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before accepting the RAM resource share invitation, you can view details related to the RAM resource share.</p>"
+                    }
+                },
+                "resourceShareName": {
+                    "target": "com.amazonaws.securitylake#ResourceShareName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource share.</p>"
                     }
                 }
             }
@@ -879,7 +897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Notifies the subscriber when new data is written to the data lake for the sources that\n         the subscriber consumes in Security Lake.</p>",
+                "smithy.api#documentation": "<p>Notifies the subscriber when new data is written to the data lake for the sources that\n         the subscriber consumes in Security Lake. You can create only one subscriber notification per\n         subscriber.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/subscription-notifications/{subscriptionId}",
@@ -893,7 +911,7 @@
                 "subscriptionId": {
                     "target": "com.amazonaws.securitylake#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subscription ID for the notification subscription/</p>",
+                        "smithy.api#documentation": "<p>The subscription ID for the notification subscription.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -932,7 +950,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.securitylake#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you\n         created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you\n         created. For more information about ARNs and how to use them in policies, see <a href=\"https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html\">Managing data access</a> and <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html\">Amazon Web Services\n            Managed Policies</a> in the Amazon Security Lake User Guide.</p>"
                     }
                 }
             }
@@ -1174,7 +1192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Automatically deletes Amazon Security Lake to stop collecting security data. When you delete\n         Amazon Security Lake from your account, Security Lake is disabled in all Regions. Also, this API\n         automatically takes steps to remove the account from Security Lake . </p>\n         <p>This operation disables security data collection from sources, deletes data stored, and\n         stops making data accessible to subscribers. Security Lake also deletes all the existing\n         settings and resources that it stores or maintains for your Amazon Web Services account in\n         the current Region, including security log and event data. The <code>DeleteDatalake</code>\n         operation does not delete the Amazon S3 bucket, which is owned by your Amazon Web Services account. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html\">Amazon Security Lake User\n            Guide</a>.</p>",
+                "smithy.api#documentation": "<p>\n            <code>DeleteDatalakeAutoEnable</code> removes automatic enablement of configuration\n         settings for new member accounts (but keeps settings for the delegated administrator) from\n         Amazon Security Lake.  You must run this API using credentials of the delegated administrator.\n         When you run this API, new member accounts that are added after the organization enables\n         Security Lake won't contribute to the data lake.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/autoenable/delete",
@@ -1188,7 +1206,7 @@
                 "removeFromConfigurationForNewAccounts": {
                     "target": "com.amazonaws.securitylake#AutoEnableNewRegionConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Delete Amazon Security Lake with the specified configuration settings to stop ingesting\n         security data for new accounts in Security Lake. </p>",
+                        "smithy.api#documentation": "<p>Remove automatic enablement of configuration settings for new member accounts in\n         Security Lake. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2095,6 +2113,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Retrieves the status of the configuration operation for an account in Amazon Security Lake. </p>"
                     }
+                },
+                "updateStatus": {
+                    "target": "com.amazonaws.securitylake#UpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the last <code>UpdateDatalake </code>or <code>DeleteDatalake</code> API\n         request. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2108,6 +2132,26 @@
             },
             "value": {
                 "target": "com.amazonaws.securitylake#LakeConfigurationResponse"
+            }
+        },
+        "com.amazonaws.securitylake#LastUpdateFailure": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the failure of the last <code>UpdateDatalake</code>or\n            <code>DeleteDatalake</code> API request.</p>"
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason code for the failure of the last <code>UpdateDatalake</code> or\n            <code>DeleteDatalake</code> API request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the last <code>UpdateDatalake</code> or <code>DeleteDatalake</code>\n         API request which failed.</p>"
             }
         },
         "com.amazonaws.securitylake#ListDatalakeExceptions": {
@@ -2643,6 +2687,20 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.securitylake#ResourceShareArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::RAM::ResourceShare"
+                }
+            }
+        },
+        "com.amazonaws.securitylake#ResourceShareName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^LakeFormation(?:-V[0-9]+)-([a-zA-Z0-9]+)-([\\\\\\w\\-_:/.@=+]*)$"
+            }
+        },
         "com.amazonaws.securitylake#RetentionSetting": {
             "type": "structure",
             "members": {
@@ -2836,7 +2894,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2865,15 +2923,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -2882,7 +2992,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -2892,22 +3002,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://securitylake-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://securitylake-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -2920,212 +3165,75 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://securitylake.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://securitylake-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
+                                                    "type": "tree",
+                                                    "rules": [
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://securitylake.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
                                                         }
                                                     ]
                                                 }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://securitylake-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://securitylake.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://securitylake.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -3141,9 +3249,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3154,9 +3262,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3167,9 +3275,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3180,9 +3288,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3193,9 +3301,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3206,9 +3314,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3219,9 +3327,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3232,9 +3340,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3243,9 +3351,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3256,9 +3364,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3267,9 +3375,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3280,9 +3388,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3293,9 +3401,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3306,9 +3414,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3319,9 +3427,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3332,9 +3440,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3343,9 +3451,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3356,9 +3464,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3367,9 +3475,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3380,9 +3488,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3393,9 +3501,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3405,9 +3513,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3417,9 +3525,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3665,6 +3773,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the subscription was created. </p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "resourceShareArn": {
+                    "target": "com.amazonaws.securitylake#ResourceShareArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before\n         accepting the RAM resource share invitation, you can view details related to the RAM\n         resource share.</p>\n         <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
+                    }
+                },
+                "resourceShareName": {
+                    "target": "com.amazonaws.securitylake#ResourceShareName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource share.</p>"
                     }
                 }
             },
@@ -3973,6 +4093,32 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securitylake#UpdateStatus": {
+            "type": "structure",
+            "members": {
+                "lastUpdateRequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the <code>UpdateDatalake</code> or <code>DeleteDatalake</code> API\n         request.</p>"
+                    }
+                },
+                "lastUpdateStatus": {
+                    "target": "com.amazonaws.securitylake#settingsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the last <code>UpdateDatalake</code> or <code>DeleteDatalake</code> API\n         request that was requested.</p>"
+                    }
+                },
+                "lastUpdateFailure": {
+                    "target": "com.amazonaws.securitylake#LastUpdateFailure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the last <code>UpdateDatalake</code>or <code>DeleteDatalake</code> API\n         request which failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the last <code>UpdateDatalake</code> or <code>DeleteDatalake</code> API\n         request. This is set to Completed after the configuration is updated, or removed if\n         deletion of the data lake is successful.</p>"
+            }
+        },
         "com.amazonaws.securitylake#UpdateSubscriber": {
             "type": "operation",
             "input": {
@@ -4098,7 +4244,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new subscription notification or adds the existing subscription notification\n         setting for the specified subscription ID.</p>",
+                "smithy.api#documentation": "<p>Updates an existing notification method for the subscription (SQS or HTTPs endpoint) or\n         switches the notification subscription endpoint for a subscriber.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/subscription-notifications/{subscriptionId}",
@@ -4151,7 +4297,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.securitylake#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) specifying the role of the subscriber. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) specifying the role of the subscriber. For more information about ARNs and how to use them in policies, see, see the <a href=\"https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html\">Managing data access</a> and <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html\">Amazon Web Services Managed Policies</a>in the Amazon Security Lake User\n         Guide.</p>"
                     }
                 }
             }

@@ -1,3 +1,11 @@
+# v1.9.0 (2023-03-15)
+
+* **Feature**: This release adds the binary analysis that analyzes IIS application DLLs on Windows and Java applications on Linux to provide anti-pattern report without configuring access to the source code.
+
+# v1.8.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2023-03-02)
 
 * **Feature**: This release updates the File Import API to allow importing servers already discovered by customers with reduced pre-requisites.
