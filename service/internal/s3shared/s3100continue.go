@@ -53,6 +53,7 @@ func (m *s3100Continue) HandleBuild(
 	return next.HandleBuild(ctx, in)
 }
 
+// AddContinueOption passes user configuration of threshold size to trigger 100-continue header
 type AddContinueOption struct {
 	ContinueHeaderThresholdBytes int64
 }
