@@ -536,9 +536,7 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 }
 
 func add100Continue(stack *middleware.Stack, options Options) error {
-	return s3shared.Add100Continue(stack, s3shared.AddContinueOption{
-		ContinueHeaderThresholdBytes: options.ContinueHeaderThresholdBytes,
-	})
+	return s3shared.Add100Continue(stack, options.ContinueHeaderThresholdBytes)
 }
 
 // ComputedInputChecksumsMetadata provides information about the algorithms used to

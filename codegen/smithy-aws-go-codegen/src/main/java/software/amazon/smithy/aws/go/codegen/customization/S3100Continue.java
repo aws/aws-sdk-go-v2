@@ -64,15 +64,10 @@ public class S3100Continue implements GoIntegration {
 
     private void writeMiddlewareHelper(GoWriter writer) {
         writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}", ADD_100Continue_Header, () -> {
-            writer.openBlock("return $T(stack, $T{", "})",
+            writer.write("return $T(stack, options.ContinueHeaderThresholdBytes)",
                     SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header_INTERNAL,
-                            AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build(),
-                    SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header_Option,
-                            AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build(), () -> {
-                        writer.write("ContinueHeaderThresholdBytes: options.ContinueHeaderThresholdBytes,"
-                        );
-                    }
-                    );
+                            AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build()
+            );
         });
         writer.insertTrailingNewline();
     }

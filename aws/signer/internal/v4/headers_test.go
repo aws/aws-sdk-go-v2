@@ -33,3 +33,31 @@ func TestAllowedQueryHoisting(t *testing.T) {
 		})
 	}
 }
+
+func TestIgnoredHeaders(t *testing.T) {
+	cases := map[string]struct {
+		Header        string
+		ExpectIgnored bool
+	}{
+		"expect": {
+			Header:        "Expect",
+			ExpectIgnored: false,
+		},
+		"authorization": {
+			Header:        "Authorization",
+			ExpectIgnored: false,
+		},
+		"X-AMZ header": {
+			Header:        "X-Amz-Content-Sha256",
+			ExpectIgnored: true,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			if e, a := c.ExpectIgnored, IgnoredHeaders.IsValid(c.Header); e != a {
+				t.Errorf("expect ignored %v, was %v", e, a)
+			}
+		})
+	}
+}
