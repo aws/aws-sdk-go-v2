@@ -942,6 +942,11 @@ type KafkaSettings struct {
 	// throttling. The default is false.
 	PartitionIncludeSchemaTable *bool
 
+	// For SASL/SSL authentication, DMS supports the SCRAM-SHA-512 mechanism by
+	// default. DMS versions 3.5.0 and later also support the PLAIN mechanism. To use
+	// the PLAIN mechanism, set this parameter to PLAIN.
+	SaslMechanism KafkaSaslMechanism
+
 	// The secure password you created when you first set up your MSK cluster to
 	// validate a client identity and make an encrypted connection between server and
 	// client using SASL-SSL authentication.
@@ -1089,6 +1094,9 @@ type MicrosoftSQLServerSettings struct {
 	// Database name for the endpoint.
 	DatabaseName *string
 
+	// Forces LOB lookup on inline LOB.
+	ForceLobLookup *bool
+
 	// Endpoint connection password.
 	Password *string
 
@@ -1149,6 +1157,9 @@ type MicrosoftSQLServerSettings struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
 	// field.
 	ServerName *string
+
+	// Indicates the mode used to fetch CDC data.
+	TlogAccessMode TlogAccessMode
 
 	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
 	// data types during migration. The default value is true.
@@ -1454,6 +1465,9 @@ type OracleSettings struct {
 	// attribute to CHAR. Otherwise, the character column length is in bytes. Example:
 	// charLengthSemantics=CHAR;
 	CharLengthSemantics CharLengthSemantics
+
+	// When true, converts timestamps with the timezone datatype to their UTC value.
+	ConvertTimestampWithZoneToUTC *bool
 
 	// Database name for the endpoint.
 	DatabaseName *string
@@ -1790,6 +1804,10 @@ type PostgreSQLSettings struct {
 
 	// Sets the schema in which the heartbeat artifacts are created.
 	HeartbeatSchema *string
+
+	// When true, lets PostgreSQL migrate the boolean type as boolean. By default,
+	// PostgreSQL migrates booleans as varchar(5).
+	MapBooleanAsBoolean *bool
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to
 	// PostgreSQL. Example: maxFileSize=512
@@ -2151,6 +2169,10 @@ type RedshiftSettings struct {
 	// performed by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE,
 	// and UPDATE.
 	LoadTimeout *int32
+
+	// When true, lets Redshift migrate the boolean type as boolean. By default,
+	// Redshift migrates booleans as varchar(1).
+	MapBooleanAsBoolean *bool
 
 	// The maximum size (in KB) of any .csv file used to load data on an S3 bucket and
 	// transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).
@@ -3164,6 +3186,10 @@ type S3Settings struct {
 
 	// Specifies how tables are defined in the S3 source files only.
 	ExternalTableDefinition *string
+
+	// When true, allows Glue to catalog your S3 bucket. Creating an Glue catalog lets
+	// you use Athena to query your data.
+	GlueCatalogGeneration *bool
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. A
 	// value of 1 turns on the feature; a value of 0 turns off the feature. The default

@@ -32,9 +32,7 @@ import (
 // parameter, but not both. If you provide both Config uses the TemplateS3Uri
 // parameter and ignores the TemplateBody parameter. Config sets the state of a
 // conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the
-// conformance pack is created or updated.
-//
-// You cannot update a conformance pack
+// conformance pack is created or updated. You cannot update a conformance pack
 // while it is in this state.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {

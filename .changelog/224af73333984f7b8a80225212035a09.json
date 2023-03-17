@@ -1,0 +1,8 @@
+{
+    "id": "224af733-3398-4f7b-8a80-225212035a09",
+    "type": "feature",
+    "description": "This release adds a new filter to ListAccountAssociations API and a new filter to ListBillingGroups API.",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

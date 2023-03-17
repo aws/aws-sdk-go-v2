@@ -2647,6 +2647,17 @@ func awsRestjson1_serializeDocumentAccountGrouping(v *types.AccountGrouping, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAccountIdFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAccountIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2665,6 +2676,17 @@ func awsRestjson1_serializeDocumentBillingGroupArnList(v []string, value smithyj
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBillingGroupStatusList(v []types.BillingGroupStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -2871,6 +2893,13 @@ func awsRestjson1_serializeDocumentListAccountAssociationsFilter(v *types.ListAc
 		ok.String(*v.AccountId)
 	}
 
+	if v.AccountIds != nil {
+		ok := object.Key("AccountIds")
+		if err := awsRestjson1_serializeDocumentAccountIdFilterList(v.AccountIds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Association != nil {
 		ok := object.Key("Association")
 		ok.String(*v.Association)
@@ -2907,6 +2936,13 @@ func awsRestjson1_serializeDocumentListBillingGroupsFilter(v *types.ListBillingG
 	if v.PricingPlan != nil {
 		ok := object.Key("PricingPlan")
 		ok.String(*v.PricingPlan)
+	}
+
+	if v.Statuses != nil {
+		ok := object.Key("Statuses")
+		if err := awsRestjson1_serializeDocumentBillingGroupStatusList(v.Statuses, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

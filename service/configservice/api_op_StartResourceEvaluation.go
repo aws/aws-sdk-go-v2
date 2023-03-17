@@ -17,7 +17,16 @@ import (
 // an execution against the resource details with all of the Config rules in your
 // account that match with the specified proactive mode and resource type. Ensure
 // you have the cloudformation:DescribeType role setup to validate the resource
-// type schema.
+// type schema. You can find the Resource type schema
+// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
+// in "Amazon Web Services public extensions" within the CloudFormation registry or
+// with the following CLI commmand: aws cloudformation describe-type --type-name
+// "AWS::S3::Bucket" --type RESOURCE. For more information, see Managing extensions
+// through the CloudFormation registry
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view)
+// and Amazon Web Services resource and property types reference
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+// in the CloudFormation User Guide.
 func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResourceEvaluationInput, optFns ...func(*Options)) (*StartResourceEvaluationOutput, error) {
 	if params == nil {
 		params = &StartResourceEvaluationInput{}
@@ -35,7 +44,8 @@ func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResou
 
 type StartResourceEvaluationInput struct {
 
-	// The mode of an evaluation. The valid value for this API is Proactive.
+	// The mode of an evaluation. The valid values for this API are DETECTIVE and
+	// PROACTIVE.
 	//
 	// This member is required.
 	EvaluationMode types.EvaluationMode

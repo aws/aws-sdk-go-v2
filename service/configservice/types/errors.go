@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You have specified a template that is invalid or supported.
+// You have specified a template that is not valid or supported.
 type ConformancePackTemplateValidationException struct {
 	Message *string
 
@@ -166,7 +166,7 @@ func (e *InvalidConfigurationRecorderNameException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// The specified delivery channel name is invalid.
+// The specified delivery channel name is not valid.
 type InvalidDeliveryChannelNameException struct {
 	Message *string
 
@@ -246,7 +246,7 @@ func (e *InvalidLimitException) ErrorCode() string {
 }
 func (e *InvalidLimitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified next token is invalid. Specify the nextToken string that was
+// The specified next token is not valid. Specify the nextToken string that was
 // returned in the previous response to get the next page of results.
 type InvalidNextTokenException struct {
 	Message *string
@@ -273,8 +273,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more of the specified parameters are invalid. Verify that your parameters
-// are valid and try again.
+// One or more of the specified parameters are not valid. Verify that your
+// parameters are valid and try again.
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -301,7 +301,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Config throws an exception if the recording group does not contain a valid list
-// of resource types. Invalid values might also be incorrectly formatted.
+// of resource types. Values that are not valid might also be incorrectly
+// formatted.
 type InvalidRecordingGroupException struct {
 	Message *string
 
@@ -327,7 +328,7 @@ func (e *InvalidRecordingGroupException) ErrorCode() string {
 }
 func (e *InvalidRecordingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified ResultToken is invalid.
+// The specified ResultToken is not valid.
 type InvalidResultTokenException struct {
 	Message *string
 
@@ -379,7 +380,7 @@ func (e *InvalidRoleException) ErrorCode() string {
 }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon S3 key prefix is invalid.
+// The specified Amazon S3 key prefix is not valid.
 type InvalidS3KeyPrefixException struct {
 	Message *string
 
@@ -405,7 +406,7 @@ func (e *InvalidS3KeyPrefixException) ErrorCode() string {
 }
 func (e *InvalidS3KeyPrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon KMS Key ARN is invalid.
+// The specified Amazon KMS Key ARN is not valid.
 type InvalidS3KmsKeyArnException struct {
 	Message *string
 
@@ -457,7 +458,7 @@ func (e *InvalidSNSTopicARNException) ErrorCode() string {
 }
 func (e *InvalidSNSTopicARNException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified time range is invalid. The earlier time is not chronologically
+// The specified time range is not valid. The earlier time is not chronologically
 // before the later time.
 type InvalidTimeRangeException struct {
 	Message *string
@@ -917,8 +918,8 @@ func (e *NoSuchBucketException) ErrorCode() string {
 }
 func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Config rule in the request is invalid. Verify that the rule is an Config
-// Custom Policy rule, that the rule name is correct, and that valid Amazon Resouce
+// The Config rule in the request is not valid. Verify that the rule is an Config
+// Process Check rule, that the rule name is correct, and that valid Amazon Resouce
 // Names (ARNs) are used before trying again.
 type NoSuchConfigRuleException struct {
 	Message *string
@@ -1081,8 +1082,8 @@ func (e *NoSuchDeliveryChannelException) ErrorCode() string {
 }
 func (e *NoSuchDeliveryChannelException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Config rule in the request is invalid. Verify that the rule is an
-// organization Config Custom Policy rule, that the rule name is correct, and that
+// The Config rule in the request is not valid. Verify that the rule is an
+// organization Config Process Check rule, that the rule name is correct, and that
 // valid Amazon Resouce Names (ARNs) are used before trying again.
 type NoSuchOrganizationConfigRuleException struct {
 	Message *string
@@ -1305,7 +1306,7 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// You have specified a template that is invalid or supported.
+// You have specified a template that is not valid or supported.
 type OrganizationConformancePackTemplateValidationException struct {
 	Message *string
 
@@ -1550,11 +1551,12 @@ func (e *TooManyTagsException) ErrorCode() string {
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested action is invalid. For PutStoredQuery, you will see this exception
-// if there are missing required fields or if the input value fails the validation,
-// or if you are trying to create more than 300 queries. For GetStoredQuery,
-// ListStoredQuery, and DeleteStoredQuery you will see this exception if there are
-// missing required fields or if the input value fails the validation.
+// The requested action is not valid. For PutStoredQuery, you will see this
+// exception if there are missing required fields or if the input value fails the
+// validation, or if you are trying to create more than 300 queries. For
+// GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this
+// exception if there are missing required fields or if the input value fails the
+// validation.
 type ValidationException struct {
 	Message *string
 

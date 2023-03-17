@@ -38,8 +38,9 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// Filters the results by compliance. The allowed values are COMPLIANT,
-	// NON_COMPLIANT, and NOT_APPLICABLE.
+	// Filters the results by compliance. INSUFFICIENT_DATA is a valid ComplianceType
+	// that is returned when an Config rule cannot be evaluated. However,
+	// INSUFFICIENT_DATA cannot be used as a ComplianceType for filtering results.
 	ComplianceTypes []types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is

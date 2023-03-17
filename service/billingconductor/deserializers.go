@@ -6575,6 +6575,15 @@ func awsRestjson1_deserializeDocumentCustomLineItemVersionListElement(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomLineItemArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "AssociationSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6680,6 +6689,19 @@ func awsRestjson1_deserializeDocumentCustomLineItemVersionListElement(v **types.
 					return fmt.Errorf("expected BillingPeriod to be of type string, got %T instead", value)
 				}
 				sv.StartBillingPeriod = ptr.String(jtv)
+			}
+
+		case "StartTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Instant to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTime = i64
 			}
 
 		default:
@@ -7503,6 +7525,15 @@ func awsRestjson1_deserializeDocumentPricingRuleListElement(v **types.PricingRul
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Operation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Operation to be of type string, got %T instead", value)
+				}
+				sv.Operation = ptr.String(jtv)
+			}
+
 		case "Scope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7533,6 +7564,15 @@ func awsRestjson1_deserializeDocumentPricingRuleListElement(v **types.PricingRul
 					return fmt.Errorf("expected PricingRuleType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.PricingRuleType(jtv)
+			}
+
+		case "UsageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UsageType to be of type string, got %T instead", value)
+				}
+				sv.UsageType = ptr.String(jtv)
 			}
 
 		default:
