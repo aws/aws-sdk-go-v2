@@ -346,6 +346,13 @@ func awsRestjson1_serializeOpDocumentCreateDetectorInput(v *CreateDetectorInput,
 		ok.Boolean(v.Enable)
 	}
 
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsRestjson1_serializeDocumentDetectorFeatureConfigurations(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.FindingPublishingFrequency) > 0 {
 		ok := object.Key("findingPublishingFrequency")
 		ok.String(string(v.FindingPublishingFrequency))
@@ -1653,6 +1660,14 @@ func awsRestjson1_serializeOpHttpBindingsDescribeOrganizationConfigurationInput(
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -4307,6 +4322,13 @@ func awsRestjson1_serializeOpDocumentUpdateDetectorInput(v *UpdateDetectorInput,
 		ok.Boolean(v.Enable)
 	}
 
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsRestjson1_serializeDocumentDetectorFeatureConfigurations(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.FindingPublishingFrequency) > 0 {
 		ok := object.Key("findingPublishingFrequency")
 		ok.String(string(v.FindingPublishingFrequency))
@@ -4790,6 +4812,13 @@ func awsRestjson1_serializeOpDocumentUpdateMemberDetectorsInput(v *UpdateMemberD
 		}
 	}
 
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsRestjson1_serializeDocumentMemberFeaturesConfigurations(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4874,6 +4903,13 @@ func awsRestjson1_serializeOpDocumentUpdateOrganizationConfigurationInput(v *Upd
 	if v.DataSources != nil {
 		ok := object.Key("dataSources")
 		if err := awsRestjson1_serializeDocumentOrganizationDataSourceConfigurations(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsRestjson1_serializeDocumentOrganizationFeaturesConfigurations(v.Features, ok); err != nil {
 			return err
 		}
 	}
@@ -5259,6 +5295,36 @@ func awsRestjson1_serializeDocumentDestinationProperties(v *types.DestinationPro
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDetectorFeatureConfiguration(v *types.DetectorFeatureConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDetectorFeatureConfigurations(v []types.DetectorFeatureConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDetectorFeatureConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEq(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5449,6 +5515,36 @@ func awsRestjson1_serializeDocumentMapEquals(v []types.ScanConditionPair, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMemberFeaturesConfiguration(v *types.MemberFeaturesConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMemberFeaturesConfigurations(v []types.MemberFeaturesConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMemberFeaturesConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNeq(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5508,6 +5604,36 @@ func awsRestjson1_serializeDocumentOrganizationEbsVolumes(v *types.OrganizationE
 		ok.Boolean(v.AutoEnable)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationFeatureConfiguration(v *types.OrganizationFeatureConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AutoEnable) > 0 {
+		ok := object.Key("autoEnable")
+		ok.String(string(v.AutoEnable))
+	}
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationFeaturesConfigurations(v []types.OrganizationFeatureConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentOrganizationFeatureConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -5724,6 +5850,13 @@ func awsRestjson1_serializeDocumentUsageCriteria(v *types.UsageCriteria, value s
 		}
 	}
 
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsRestjson1_serializeDocumentUsageFeatureList(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Resources != nil {
 		ok := object.Key("resources")
 		if err := awsRestjson1_serializeDocumentResourceList(v.Resources, ok); err != nil {
@@ -5731,5 +5864,16 @@ func awsRestjson1_serializeDocumentUsageCriteria(v *types.UsageCriteria, value s
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUsageFeatureList(v []types.UsageFeature, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }

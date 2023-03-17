@@ -1730,21 +1730,6 @@ func validateScanResourceCriteria(v *types.ScanResourceCriteria) error {
 	}
 }
 
-func validateUsageCriteria(v *types.UsageCriteria) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UsageCriteria"}
-	if v.DataSources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSources"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpAcceptAdministratorInvitationInput(v *AcceptAdministratorInvitationInput) error {
 	if v == nil {
 		return nil
@@ -2424,10 +2409,6 @@ func validateOpGetUsageStatisticsInput(v *GetUsageStatisticsInput) error {
 	}
 	if v.UsageCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsageCriteria"))
-	} else if v.UsageCriteria != nil {
-		if err := validateUsageCriteria(v.UsageCriteria); err != nil {
-			invalidParams.AddNested("UsageCriteria", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -44,7 +44,12 @@ type UpdateMemberDetectorsInput struct {
 	DetectorId *string
 
 	// Describes which data sources will be updated.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurations
+
+	// A list of features that will be updated for the specified member accounts.
+	Features []types.MemberFeaturesConfiguration
 
 	noSmithyDocumentSerde
 }

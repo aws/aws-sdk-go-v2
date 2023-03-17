@@ -50,7 +50,12 @@ type CreateDetectorInput struct {
 	// Amazon Web Services Regions where GuardDuty is presently supported. For more
 	// information, see Regions and endpoints
 	// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurations
+
+	// A list of features that will be configured for the detector.
+	Features []types.DetectorFeatureConfiguration
 
 	// A value that specifies how frequently updated findings are exported.
 	FindingPublishingFrequency types.FindingPublishingFrequency

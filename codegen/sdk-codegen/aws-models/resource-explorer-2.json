@@ -229,7 +229,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You tried to create a new view or index when one already exists, and you either didn't\n            specify or specified a different idempotency token as the original request.</p>",
+                "smithy.api#documentation": "<p>The request failed because either you specified parameters that didn’t match the\n            original request, or you attempted to create a view with a name that already exists in\n            this Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }

@@ -57,7 +57,12 @@ type GetDetectorOutput struct {
 	CreatedAt *string
 
 	// Describes which data sources are enabled for the detector.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurationsResult
+
+	// Describes the features that have been enabled for the detector.
+	Features []types.DetectorFeatureConfigurationResult
 
 	// The publishing frequency of the finding.
 	FindingPublishingFrequency types.FindingPublishingFrequency
