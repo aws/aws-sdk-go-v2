@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the current status of the specified configuration recorder. If a
-// configuration recorder is not specified, this action returns the status of all
-// configuration recorders associated with the account. Currently, you can specify
-// only one configuration recorder per region in your account.
+// Returns the current status of the specified configuration recorder as well as
+// the status of the last recording event for the recorder. If a configuration
+// recorder is not specified, this action returns the status of all configuration
+// recorders associated with the account. Currently, you can specify only one
+// configuration recorder per region in your account. For a detailed status of
+// recording events over time, add your Config events to Amazon CloudWatch metrics
+// and use CloudWatch metrics.
 func (c *Client) DescribeConfigurationRecorderStatus(ctx context.Context, params *DescribeConfigurationRecorderStatusInput, optFns ...func(*Options)) (*DescribeConfigurationRecorderStatusOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationRecorderStatusInput{}

@@ -1,3 +1,13 @@
+# Release (2023-03-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.6.0](service/billingconductor/CHANGELOG.md#v160-2023-03-17)
+  * **Feature**: This release adds a new filter to ListAccountAssociations API and a new filter to ListBillingGroups API.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.30.0](service/configservice/CHANGELOG.md#v1300-2023-03-17)
+  * **Feature**: This release adds resourceType enums for types released from October 2022 through February 2023.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.25.0](service/databasemigrationservice/CHANGELOG.md#v1250-2023-03-17)
+  * **Feature**: S3 setting to create AWS Glue Data Catalog. Oracle setting to control conversion of timestamp column. Support for Kafka SASL Plain authentication. Setting to map boolean from PostgreSQL to Redshift. SQL Server settings to force lob lookup on inline LOBs and to control access of database logs.
+
 # Release (2023-03-16)
 
 ## General Highlights

@@ -51,8 +51,7 @@ func (c *Client) DescribeComplianceByResource(ctx context.Context, params *Descr
 
 type DescribeComplianceByResourceInput struct {
 
-	// Filters the results by compliance. The allowed values are COMPLIANT,
-	// NON_COMPLIANT, and INSUFFICIENT_DATA.
+	// Filters the results by compliance.
 	ComplianceTypes []types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is

@@ -268,6 +268,9 @@ type CustomLineItemPercentageChargeDetails struct {
 // A representation of a custom line item version.
 type CustomLineItemVersionListElement struct {
 
+	// A list of custom line item Amazon Resource Names (ARNs) to retrieve information.
+	Arn *string
+
 	// The number of resources that are associated with the custom line item.
 	AssociationSize int64
 
@@ -301,6 +304,9 @@ type CustomLineItemVersionListElement struct {
 
 	// The start billing period of the custom line item version.
 	StartBillingPeriod *string
+
+	// The inclusive start time.
+	StartTime int64
 
 	noSmithyDocumentSerde
 }
@@ -337,6 +343,10 @@ type ListAccountAssociationsFilter struct {
 	// The Amazon Web Services account ID to filter on.
 	AccountId *string
 
+	// The list of Amazon Web Services IDs to retrieve their associated billing group
+	// for a given time range.
+	AccountIds []string
+
 	// MONITORED: linked accounts that are associated to billing groups. UNMONITORED:
 	// linked accounts that are not associated to billing groups. Billing Group Arn:
 	// linked accounts that are associated to the provided Billing Group Arn.
@@ -364,6 +374,10 @@ type ListBillingGroupsFilter struct {
 
 	// The pricing plan Amazon Resource Names (ARNs) to retrieve information.
 	PricingPlan *string
+
+	// A list of billing groups to retrieve their current status for a specific time
+	// range
+	Statuses []BillingGroupStatus
 
 	noSmithyDocumentSerde
 }
@@ -556,6 +570,13 @@ type PricingRuleListElement struct {
 	// The name of a pricing rule.
 	Name *string
 
+	// Operation is the specific Amazon Web Services action covered by this line item.
+	// This describes the specific usage of the line item. If the Scope attribute is
+	// set to SKU, this attribute indicates which operation the PricingRule is
+	// modifying. For example, a value of RunInstances:0202 indicates the operation of
+	// running an Amazon EC2 instance.
+	Operation *string
+
 	// The scope of pricing rule that indicates if it is globally applicable, or if it
 	// is service-specific.
 	Scope PricingRuleScope
@@ -569,6 +590,13 @@ type PricingRuleListElement struct {
 
 	// The type of pricing rule.
 	Type PricingRuleType
+
+	// Usage type is the unit that each service uses to measure the usage of a specific
+	// type of resource. If the Scope attribute is set to SKU, this attribute indicates
+	// which usage type the PricingRule is modifying. For example,
+	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large instance
+	// in the US West (Oregon) Region.
+	UsageType *string
 
 	noSmithyDocumentSerde
 }

@@ -12285,6 +12285,15 @@ func awsAwsjson11_deserializeDocumentKafkaSettings(v **types.KafkaSettings, valu
 				sv.PartitionIncludeSchemaTable = ptr.Bool(jtv)
 			}
 
+		case "SaslMechanism":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaSaslMechanism to be of type string, got %T instead", value)
+				}
+				sv.SaslMechanism = types.KafkaSaslMechanism(jtv)
+			}
+
 		case "SaslPassword":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12939,6 +12948,15 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 				sv.DatabaseName = ptr.String(jtv)
 			}
 
+		case "ForceLobLookup":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ForceLobLookup = ptr.Bool(jtv)
+			}
+
 		case "Password":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13013,6 +13031,15 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = ptr.String(jtv)
+			}
+
+		case "TlogAccessMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TlogAccessMode to be of type string, got %T instead", value)
+				}
+				sv.TlogAccessMode = types.TlogAccessMode(jtv)
 			}
 
 		case "TrimSpaceInChar":
@@ -13618,6 +13645,15 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 					return fmt.Errorf("expected CharLengthSemantics to be of type string, got %T instead", value)
 				}
 				sv.CharLengthSemantics = types.CharLengthSemantics(jtv)
+			}
+
+		case "ConvertTimestampWithZoneToUTC":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ConvertTimestampWithZoneToUTC = ptr.Bool(jtv)
 			}
 
 		case "DatabaseName":
@@ -14369,6 +14405,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.HeartbeatSchema = ptr.String(jtv)
+			}
+
+		case "MapBooleanAsBoolean":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.MapBooleanAsBoolean = ptr.Bool(jtv)
 			}
 
 		case "MaxFileSize":
@@ -15284,6 +15329,15 @@ func awsAwsjson11_deserializeDocumentRedshiftSettings(v **types.RedshiftSettings
 					return err
 				}
 				sv.LoadTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "MapBooleanAsBoolean":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.MapBooleanAsBoolean = ptr.Bool(jtv)
 			}
 
 		case "MaxFileSize":
@@ -17706,6 +17760,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ExternalTableDefinition = ptr.String(jtv)
+			}
+
+		case "GlueCatalogGeneration":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.GlueCatalogGeneration = ptr.Bool(jtv)
 			}
 
 		case "IgnoreHeaderRows":

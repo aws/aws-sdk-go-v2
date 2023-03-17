@@ -272,6 +272,24 @@ func (EndpointSettingTypeValue) Values() []EndpointSettingTypeValue {
 	}
 }
 
+type KafkaSaslMechanism string
+
+// Enum values for KafkaSaslMechanism
+const (
+	KafkaSaslMechanismScramSha512 KafkaSaslMechanism = "scram-sha-512"
+	KafkaSaslMechanismPlain       KafkaSaslMechanism = "plain"
+)
+
+// Values returns all known values for KafkaSaslMechanism. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KafkaSaslMechanism) Values() []KafkaSaslMechanism {
+	return []KafkaSaslMechanism{
+		"scram-sha-512",
+		"plain",
+	}
+}
+
 type KafkaSecurityProtocol string
 
 // Enum values for KafkaSecurityProtocol
@@ -573,6 +591,28 @@ func (TargetDbType) Values() []TargetDbType {
 	return []TargetDbType{
 		"specific-database",
 		"multiple-databases",
+	}
+}
+
+type TlogAccessMode string
+
+// Enum values for TlogAccessMode
+const (
+	TlogAccessModeBackupOnly   TlogAccessMode = "BackupOnly"
+	TlogAccessModePreferBackup TlogAccessMode = "PreferBackup"
+	TlogAccessModePreferTlog   TlogAccessMode = "PreferTlog"
+	TlogAccessModeTlogOnly     TlogAccessMode = "TlogOnly"
+)
+
+// Values returns all known values for TlogAccessMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TlogAccessMode) Values() []TlogAccessMode {
+	return []TlogAccessMode{
+		"BackupOnly",
+		"PreferBackup",
+		"PreferTlog",
+		"TlogOnly",
 	}
 }
 

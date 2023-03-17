@@ -4215,6 +4215,11 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 		ok.Boolean(*v.PartitionIncludeSchemaTable)
 	}
 
+	if len(v.SaslMechanism) > 0 {
+		ok := object.Key("SaslMechanism")
+		ok.String(string(v.SaslMechanism))
+	}
+
 	if v.SaslPassword != nil {
 		ok := object.Key("SaslPassword")
 		ok.String(*v.SaslPassword)
@@ -4345,6 +4350,11 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.ForceLobLookup != nil {
+		ok := object.Key("ForceLobLookup")
+		ok.Boolean(*v.ForceLobLookup)
+	}
+
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
@@ -4383,6 +4393,11 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if len(v.TlogAccessMode) > 0 {
+		ok := object.Key("TlogAccessMode")
+		ok.String(string(v.TlogAccessMode))
 	}
 
 	if v.TrimSpaceInChar != nil {
@@ -4658,6 +4673,11 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.String(string(v.CharLengthSemantics))
 	}
 
+	if v.ConvertTimestampWithZoneToUTC != nil {
+		ok := object.Key("ConvertTimestampWithZoneToUTC")
+		ok.Boolean(*v.ConvertTimestampWithZoneToUTC)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
@@ -4867,6 +4887,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 		ok.String(*v.HeartbeatSchema)
 	}
 
+	if v.MapBooleanAsBoolean != nil {
+		ok := object.Key("MapBooleanAsBoolean")
+		ok.Boolean(*v.MapBooleanAsBoolean)
+	}
+
 	if v.MaxFileSize != nil {
 		ok := object.Key("MaxFileSize")
 		ok.Integer(*v.MaxFileSize)
@@ -5051,6 +5076,11 @@ func awsAwsjson11_serializeDocumentRedshiftSettings(v *types.RedshiftSettings, v
 	if v.LoadTimeout != nil {
 		ok := object.Key("LoadTimeout")
 		ok.Integer(*v.LoadTimeout)
+	}
+
+	if v.MapBooleanAsBoolean != nil {
+		ok := object.Key("MapBooleanAsBoolean")
+		ok.Boolean(*v.MapBooleanAsBoolean)
 	}
 
 	if v.MaxFileSize != nil {
@@ -5273,6 +5303,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.ExternalTableDefinition != nil {
 		ok := object.Key("ExternalTableDefinition")
 		ok.String(*v.ExternalTableDefinition)
+	}
+
+	if v.GlueCatalogGeneration != nil {
+		ok := object.Key("GlueCatalogGeneration")
+		ok.Boolean(*v.GlueCatalogGeneration)
 	}
 
 	if v.IgnoreHeaderRows != nil {

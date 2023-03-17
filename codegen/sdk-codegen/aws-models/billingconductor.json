@@ -1045,6 +1045,18 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.billingconductor#AccountIdFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.billingconductor#AccountIdList": {
             "type": "list",
             "member": {
@@ -1677,6 +1689,18 @@
                         "name": "PRIMARY_ACCOUNT_MISSING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.billingconductor#BillingGroupStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#BillingGroupStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.billingconductor#BillingGroupStatusReason": {
@@ -2700,6 +2724,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The end billing period of the custom line item version.</p>"
                     }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.billingconductor#CustomLineItemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of custom line item Amazon Resource Names (ARNs) to retrieve information.\n    </p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.billingconductor#Instant",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n      The inclusive start time.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -3199,6 +3236,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The Amazon Web Services account ID to filter on.\n    </p>"
                     }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.billingconductor#AccountIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of Amazon Web Services IDs to retrieve their associated billing group for a given time range.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -3400,6 +3443,12 @@
                     "target": "com.amazonaws.billingconductor#PricingPlanFullArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The pricing plan Amazon Resource Names (ARNs) to retrieve information. </p>"
+                    }
+                },
+                "Statuses": {
+                    "target": "com.amazonaws.billingconductor#BillingGroupStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of billing groups to retrieve their current status for a specific time range\n    </p>"
                     }
                 }
             },
@@ -4788,6 +4837,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
                     }
+                },
+                "UsageType": {
+                    "target": "com.amazonaws.billingconductor#UsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Usage type is the unit that each service uses to measure the usage of a specific type of resource.</p>\n         <p>If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which usage type the <code>PricingRule</code> is modifying. For example, <code>USW2-BoxUsage:m2.2xlarge</code> describes an<code> M2 High Memory Double Extra Large</code> instance in the US West (Oregon) Region. \n      \n    </p>"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.billingconductor#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Operation is the specific Amazon Web Services action covered by this line item. This describes the specific usage of the line item.</p>\n         <p>\n        If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4820,6 +4881,10 @@
                     {
                         "value": "BILLING_ENTITY",
                         "name": "BILLING_ENTITY"
+                    },
+                    {
+                        "value": "SKU",
+                        "name": "SKU"
                     }
                 ]
             }
@@ -6087,6 +6152,22 @@
                     {
                         "value": "ILLEGAL_TIERING_INPUT",
                         "name": "ILLEGAL_TIERING_INPUT"
+                    },
+                    {
+                        "value": "ILLEGAL_OPERATION",
+                        "name": "ILLEGAL_OPERATION"
+                    },
+                    {
+                        "value": "ILLEGAL_USAGE_TYPE",
+                        "name": "ILLEGAL_USAGE_TYPE"
+                    },
+                    {
+                        "value": "INVALID_SKU_COMBO",
+                        "name": "INVALID_SKU_COMBO"
+                    },
+                    {
+                        "value": "INVALID_FILTER",
+                        "name": "INVALID_FILTER"
                     }
                 ]
             }

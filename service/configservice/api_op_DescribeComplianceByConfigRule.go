@@ -50,8 +50,7 @@ func (c *Client) DescribeComplianceByConfigRule(ctx context.Context, params *Des
 
 type DescribeComplianceByConfigRuleInput struct {
 
-	// Filters the results by compliance. The allowed values are COMPLIANT and
-	// NON_COMPLIANT.
+	// Filters the results by compliance.
 	ComplianceTypes []types.ComplianceType
 
 	// Specify one or more Config rule names to filter the results by rule.
