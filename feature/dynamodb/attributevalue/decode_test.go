@@ -1172,5 +1172,44 @@ func TestUnmarshalMap_keyPtrTypes(t *testing.T) {
 			t.Errorf("expect %v key not found", *k)
 		}
 	}
+}
 
+func TestDecoderTypeUnmarshalers(t *testing.T) {
+	for name, c := range sharedTypeMarshalersTestCases {
+		t.Run(name, func(t *testing.T) {
+			called := false
+			dec := NewDecoder()
+			err := dec.RegisterUnmarshaler(reflect.TypeOf(c.expected), func(value types.AttributeValue) (interface{}, error) {
+				called = true
+				return c.expected, nil
+			})
+			if err != nil {
+				t.Errorf("expect nil, got %v", err)
+			}
+			err = dec.Decode(c.in, c.actual)
+			if !called {
+				t.Fatalf("expected unmarshaler to be called")
+			}
+			assertConvertTest(t, c.actual, c.expected, err, nil)
+		})
+	}
+}
+
+func TestDecoderNotSupportedUnmarshalerType(t *testing.T) {
+	cases := map[string]reflect.Type{
+		"pointer": reflect.TypeOf(new(string)),
+		"channel": reflect.TypeOf(make(chan int)),
+		"func":    reflect.TypeOf(func() {}),
+	}
+
+	for name, caseType := range cases {
+		t.Run(name, func(t *testing.T) {
+			err := NewDecoder().RegisterUnmarshaler(caseType, func(value types.AttributeValue) (interface{}, error) {
+				return nil, nil
+			})
+			if err == nil {
+				t.Errorf("expect error when registering unmarshaler for unsupported type %q", caseType)
+			}
+		})
+	}
 }

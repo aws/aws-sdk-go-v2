@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -384,7 +385,9 @@ type EncoderOptions struct {
 
 // An Encoder provides marshaling Go value types to AttributeValues.
 type Encoder struct {
-	options EncoderOptions
+	options        EncoderOptions
+	marshalersLock sync.RWMutex
+	marshalers     map[reflect.Type]func(interface{}) (types.AttributeValue, error)
 }
 
 // NewEncoder creates a new Encoder with default configuration. Use
@@ -414,6 +417,34 @@ func (e *Encoder) Encode(in interface{}) (types.AttributeValue, error) {
 	return e.encode(reflect.ValueOf(in), tag{})
 }
 
+// RegisterMarshaler registers a custom marshaler to use for a provided type.
+//
+// Precedence is given to registered marshalers that operate on concrete types,
+// then the MarshalDynamoDBAttributeValue method, and lastly the default behavior of Encode.
+func (e *Encoder) RegisterMarshaler(t reflect.Type, fn func(interface{}) (types.AttributeValue, error)) error {
+	if t == nil {
+		return fmt.Errorf("type can't be nil")
+	}
+	if fn == nil {
+		return fmt.Errorf("marshaller function can't be nil")
+	}
+	switch t.Kind() {
+	case reflect.Ptr, reflect.Chan, reflect.Invalid, reflect.Func, reflect.UnsafePointer:
+		return fmt.Errorf("not supported kind %q", t.Kind())
+	default:
+		e.marshalersLock.Lock()
+		defer e.marshalersLock.Unlock()
+		if e.marshalers == nil {
+			e.marshalers = map[reflect.Type]func(interface{}) (types.AttributeValue, error){t: fn}
+		} else if _, ok := e.marshalers[t]; ok {
+			return fmt.Errorf("marshaler has already been registered for type %q", t)
+		} else {
+			e.marshalers[t] = fn
+		}
+		return nil
+	}
+}
+
 func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
 	// Ignore fields explicitly marked to be skipped.
 	if fieldTag.Ignore {
@@ -433,12 +464,11 @@ func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, e
 			return encodeNull(), nil
 		}
 	}
-
 	// Handle both pointers and interface conversion into types
 	v = valueElem(v)
 
 	if v.Kind() != reflect.Invalid {
-		if av, err := tryMarshaler(v); err != nil {
+		if av, err := e.tryMarshaler(v); err != nil {
 			return nil, err
 		} else if av != nil {
 			return av, nil
@@ -714,7 +744,7 @@ func (e *Encoder) encodeScalar(v reflect.Value, fieldTag tag) (types.AttributeVa
 }
 
 func (e *Encoder) encodeNumber(v reflect.Value) (types.AttributeValue, error) {
-	if av, err := tryMarshaler(v); err != nil {
+	if av, err := e.tryMarshaler(v); err != nil {
 		return nil, err
 	} else if av != nil {
 		return av, nil
@@ -742,7 +772,7 @@ func (e *Encoder) encodeNumber(v reflect.Value) (types.AttributeValue, error) {
 }
 
 func (e *Encoder) encodeString(v reflect.Value) (types.AttributeValue, error) {
-	if av, err := tryMarshaler(v); err != nil {
+	if av, err := e.tryMarshaler(v); err != nil {
 		return nil, err
 	} else if av != nil {
 		return av, nil
@@ -756,6 +786,34 @@ func (e *Encoder) encodeString(v reflect.Value) (types.AttributeValue, error) {
 	default:
 		return nil, nil
 	}
+}
+
+func (e *Encoder) tryMarshaler(v reflect.Value) (types.AttributeValue, error) {
+	if av, err := e.tryTypeMarshaler(v); err != nil {
+		return nil, err
+	} else if av != nil {
+		return av, nil
+	}
+	if v.Kind() != reflect.Ptr && v.Type().Name() != "" && v.CanAddr() {
+		v = v.Addr()
+	}
+	if v.Type().NumMethod() == 0 {
+		return nil, nil
+	}
+	if m, ok := v.Interface().(Marshaler); ok {
+		return m.MarshalDynamoDBAttributeValue()
+	}
+
+	return nil, nil
+}
+
+func (e *Encoder) tryTypeMarshaler(v reflect.Value) (types.AttributeValue, error) {
+	e.marshalersLock.RLock()
+	defer e.marshalersLock.RUnlock()
+	if m, ok := e.marshalers[v.Type()]; ok {
+		return m(v.Interface())
+	}
+	return nil, nil
 }
 
 func encodeInt(i int64) string {
@@ -830,22 +888,6 @@ func isNullableZeroValue(v reflect.Value) bool {
 		return v.IsNil()
 	}
 	return false
-}
-
-func tryMarshaler(v reflect.Value) (types.AttributeValue, error) {
-	if v.Kind() != reflect.Ptr && v.Type().Name() != "" && v.CanAddr() {
-		v = v.Addr()
-	}
-
-	if v.Type().NumMethod() == 0 {
-		return nil, nil
-	}
-
-	if m, ok := v.Interface().(Marshaler); ok {
-		return m.MarshalDynamoDBAttributeValue()
-	}
-
-	return nil, nil
 }
 
 // An InvalidMarshalError is an error type representing an error

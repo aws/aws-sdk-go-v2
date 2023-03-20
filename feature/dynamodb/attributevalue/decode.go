@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -235,7 +236,9 @@ type DecoderOptions struct {
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
 type Decoder struct {
-	options DecoderOptions
+	options          DecoderOptions
+	unmarshalersLock sync.RWMutex
+	unmarshalers     map[reflect.Type]func(types.AttributeValue) (interface{}, error)
 }
 
 // NewDecoder creates a new Decoder with default configuration. Use
@@ -279,6 +282,34 @@ func (d *Decoder) Decode(av types.AttributeValue, out interface{}, opts ...func(
 	return d.decode(av, v, tag{})
 }
 
+// RegisterUnmarshaler registers a custom unmarshaler to use for a provided type.
+//
+// Precedence is given to registered unmarshalers that operate on concrete types,
+// then the UnmarshalDynamoDBAttributeValue method, and lastly the default behavior of Decode.
+func (d *Decoder) RegisterUnmarshaler(t reflect.Type, fn func(types.AttributeValue) (interface{}, error)) error {
+	if t == nil {
+		return fmt.Errorf("type can't be nil")
+	}
+	if fn == nil {
+		return fmt.Errorf("unmarshaler function can't be nil")
+	}
+	switch t.Kind() {
+	case reflect.Ptr, reflect.Chan, reflect.Invalid, reflect.Func, reflect.UnsafePointer:
+		return fmt.Errorf("not supported kind %q", t.Kind())
+	default:
+		d.unmarshalersLock.Lock()
+		defer d.unmarshalersLock.Unlock()
+		if d.unmarshalers == nil {
+			d.unmarshalers = map[reflect.Type]func(types.AttributeValue) (interface{}, error){t: fn}
+		} else if _, ok := d.unmarshalers[t]; ok {
+			return fmt.Errorf("unmarshaler has already been registered for type %q", t)
+		} else {
+			d.unmarshalers[t] = fn
+		}
+		return nil
+	}
+}
+
 var stringInterfaceMapType = reflect.TypeOf(map[string]interface{}(nil))
 var byteSliceType = reflect.TypeOf([]byte(nil))
 var byteSliceSliceType = reflect.TypeOf([][]byte(nil))
@@ -288,14 +319,14 @@ func (d *Decoder) decode(av types.AttributeValue, v reflect.Value, fieldTag tag)
 	var u Unmarshaler
 	_, isNull := av.(*types.AttributeValueMemberNULL)
 	if av == nil || isNull {
-		u, v = indirect(v, indirectOptions{decodeNull: true})
+		u, v = d.indirect(v, indirectOptions{decodeNull: true})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(av)
 		}
 		return d.decodeNull(v)
 	}
 
-	u, v = indirect(v, indirectOptions{})
+	u, v = d.indirect(v, indirectOptions{})
 	if u != nil {
 		return u.UnmarshalDynamoDBAttributeValue(av)
 	}
@@ -420,7 +451,7 @@ func (d *Decoder) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		u, elem := indirect(v.Index(i), indirectOptions{})
+		u, elem := d.indirect(v.Index(i), indirectOptions{})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberBS{Value: bs})
 		}
@@ -555,7 +586,7 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		u, elem := indirect(v.Index(i), indirectOptions{})
+		u, elem := d.indirect(v.Index(i), indirectOptions{})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberNS{Value: ns})
 		}
@@ -634,7 +665,7 @@ func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Val
 		for k, av := range avMap {
 			key := reflect.New(keyType).Elem()
 			// handle pointer keys
-			_, indirectKey := indirect(key, indirectOptions{skipUnmarshaler: true})
+			_, indirectKey := d.indirect(key, indirectOptions{skipUnmarshaler: true})
 			if err := decodeMapKey(k, indirectKey, tag{}); err != nil {
 				return &UnmarshalTypeError{
 					Value: fmt.Sprintf("map key %q", k),
@@ -777,7 +808,7 @@ func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		u, elem := indirect(v.Index(i), indirectOptions{})
+		u, elem := d.indirect(v.Index(i), indirectOptions{})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberSS{Value: ss})
 		}
@@ -820,12 +851,26 @@ type indirectOptions struct {
 	skipUnmarshaler bool
 }
 
+type typeUnmarshaler struct {
+	fn func(types.AttributeValue) (interface{}, error)
+	in reflect.Value
+}
+
+func (u typeUnmarshaler) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	if out, err := u.fn(av); err != nil {
+		return err
+	} else if out != nil {
+		u.in.Set(reflect.ValueOf(out))
+	}
+	return nil
+}
+
 // indirect will walk a value's interface or pointer value types. Returning
 // the final value or the value a unmarshaler is defined on.
 //
 // Based on the enoding/json type reflect value type indirection in Go Stdlib
 // https://golang.org/src/encoding/json/decode.go indirect func.
-func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value) {
+func (d *Decoder) indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value) {
 	// Issue #24153 indicates that it is generally not a guaranteed property
 	// that you may round-trip a reflect.Value by calling Value.Addr().Elem()
 	// and expect the value to still be settable for values derived from
@@ -879,6 +924,11 @@ func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value
 		if v.IsNil() {
 			v.Set(reflect.New(v.Type().Elem()))
 		}
+
+		if u := d.getTypeUnmarshaler(v); u != nil {
+			return u, reflect.Value{}
+		}
+
 		if !opts.skipUnmarshaler && v.Type().NumMethod() > 0 && v.CanInterface() {
 			if u, ok := v.Interface().(Unmarshaler); ok {
 				return u, reflect.Value{}
@@ -894,6 +944,19 @@ func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value
 	}
 
 	return nil, v
+}
+
+func (d *Decoder) getTypeUnmarshaler(v reflect.Value) Unmarshaler {
+	v = valueElem(v)
+	if v.Kind() == reflect.Invalid {
+		return nil
+	}
+	d.unmarshalersLock.RLock()
+	defer d.unmarshalersLock.RUnlock()
+	if fn, ok := d.unmarshalers[v.Type()]; ok {
+		return typeUnmarshaler{fn, v}
+	}
+	return nil
 }
 
 // A Number represents a Attributevalue number literal.

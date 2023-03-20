@@ -709,3 +709,100 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 
 	compareObjects(t, expected, actual)
 }
+
+func BenchmarkEncoderTypeMarshaler(b *testing.B) {
+	fieldCache = &fieldCacher{}
+
+	simple := simpleMarshalStruct{
+		String:  "abc",
+		Int:     123,
+		Uint:    123,
+		Float32: 123.321,
+		Float64: 123.321,
+		Bool:    true,
+	}
+
+	type MyCompositeStruct struct {
+		A simpleMarshalStruct `dynamodbav:"a"`
+	}
+
+	var marshalerFn = func(value string) func(i interface{}) (types.AttributeValue, error) {
+		return func(interface{}) (types.AttributeValue, error) {
+			return &types.AttributeValueMemberS{Value: value}, nil
+		}
+	}
+
+	fns := map[reflect.Type]func(i interface{}) (types.AttributeValue, error){
+		reflect.TypeOf("abc"):            marshalerFn("abc"),
+		reflect.TypeOf(123):              marshalerFn("123"),
+		reflect.TypeOf(uint(123)):        marshalerFn("uint(123)"),
+		reflect.TypeOf(float32(123.321)): marshalerFn("float32(123.321)"),
+		reflect.TypeOf(123.321):          marshalerFn("123.321"),
+		reflect.TypeOf(true):             marshalerFn("true"),
+	}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			enc := NewEncoder()
+			for t, fn := range fns {
+				if err := enc.RegisterMarshaler(t, fn); err != nil {
+					b.Error("unexpected error:", err)
+				}
+			}
+			if _, err := enc.Encode(MyCompositeStruct{
+				A: simple,
+			}); err != nil {
+				b.Error("unexpected error:", err)
+			}
+		}
+	})
+}
+
+func BenchmarkDecoderTypeUnmarshaler(b *testing.B) {
+	myStructAVMap, _ := Marshal(simpleMarshalStruct{
+		String:  "abc",
+		Int:     123,
+		Uint:    123,
+		Float32: 123.321,
+		Float64: 123.321,
+		Bool:    true,
+	})
+
+	type MyCompositeStructOne struct {
+		A simpleMarshalStruct `dynamodbav:"a"`
+	}
+
+	var unmarshalerFn = func(value interface{}) func(types.AttributeValue) (interface{}, error) {
+		return func(types.AttributeValue) (interface{}, error) {
+			return value, nil
+		}
+	}
+
+	fns := map[reflect.Type]func(types.AttributeValue) (interface{}, error){
+		reflect.TypeOf("abc"):            unmarshalerFn("abc"),
+		reflect.TypeOf(123):              unmarshalerFn(123),
+		reflect.TypeOf(uint(123)):        unmarshalerFn(uint(123)),
+		reflect.TypeOf(float32(123.321)): unmarshalerFn(float32(123.321)),
+		reflect.TypeOf(123.321):          unmarshalerFn(123.321),
+		reflect.TypeOf(true):             unmarshalerFn(true),
+	}
+
+	var out MyCompositeStructOne
+	avMap := map[string]types.AttributeValue{
+		"a": myStructAVMap,
+	}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			dec := NewDecoder()
+			for t, fn := range fns {
+				if err := dec.RegisterUnmarshaler(t, fn); err != nil {
+					b.Error("unexpected error:", err)
+				}
+			}
+			if err := dec.Decode(&types.AttributeValueMemberM{Value: avMap}, &out); err != nil {
+				b.Error("unexpected error:", err)
+			}
+		}
+	})
+}

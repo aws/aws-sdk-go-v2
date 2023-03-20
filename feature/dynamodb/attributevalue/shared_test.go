@@ -395,6 +395,71 @@ var sharedMapTestCases = map[string]struct {
 	},
 }
 
+var sharedTypeMarshalersTestCases = map[string]struct {
+	in               types.AttributeValue
+	actual, expected interface{}
+}{
+	"binary slice": {
+		in:       &types.AttributeValueMemberS{Value: "[]byte{48, 49}"},
+		actual:   &[]byte{},
+		expected: []byte{48, 49},
+	},
+	"binary slice pointer": {
+		in: &types.AttributeValueMemberS{Value: "[]byte{48, 49}"},
+		actual: func() **[]byte {
+			v := make([]byte, 0, 10)
+			v2 := &v
+			return &v2
+		}(),
+		expected: []byte{48, 49},
+	},
+	"bool": {
+		in:       &types.AttributeValueMemberS{Value: "true"},
+		actual:   new(bool),
+		expected: true,
+	},
+	"list": {
+		in:       &types.AttributeValueMemberS{Value: "[123]"},
+		actual:   &[]int{},
+		expected: []int{123},
+	},
+	"list, interface": {
+		in:       &types.AttributeValueMemberS{Value: "1, 2, 3"},
+		actual:   &[]interface{}{},
+		expected: []interface{}{1, "2", 3},
+	},
+	"map, interface": {
+		in:       &types.AttributeValueMemberS{Value: "{\"abc\": 123}"},
+		actual:   &map[string]int{},
+		expected: map[string]int{"abc": 123},
+	},
+	"map, struct": {
+		in:       &types.AttributeValueMemberS{Value: "{\"ABC\": 123}"},
+		actual:   &struct{ Abc int }{},
+		expected: struct{ Abc int }{Abc: 123},
+	},
+	"int": {
+		in:       &types.AttributeValueMemberS{Value: "123"},
+		actual:   new(int),
+		expected: 123,
+	},
+	"float": {
+		in:       &types.AttributeValueMemberS{Value: "123.1"},
+		actual:   new(float64),
+		expected: 123.1,
+	},
+	"string": {
+		in:       &types.AttributeValueMemberSS{Value: []string{"abc"}},
+		actual:   new(string),
+		expected: "abc",
+	},
+	"aliased string": {
+		in:       &types.AttributeValueMemberSS{Value: []string{"abc"}},
+		actual:   new(testAliasedString),
+		expected: testAliasedString("abc"),
+	},
+}
+
 func assertConvertTest(t *testing.T, actual, expected interface{}, err, expectedErr error) {
 	t.Helper()
 

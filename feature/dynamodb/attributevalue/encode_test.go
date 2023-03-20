@@ -619,3 +619,43 @@ func TestMarshalMap_keyTypes(t *testing.T) {
 		})
 	}
 }
+
+func TestEncoderTypesMarshalers(t *testing.T) {
+	for name, c := range sharedTypeMarshalersTestCases {
+		t.Run(name, func(t *testing.T) {
+			called := false
+			enc := NewEncoder()
+			err := enc.RegisterMarshaler(reflect.TypeOf(c.expected), func(i interface{}) (types.AttributeValue, error) {
+				called = true
+				return c.in, nil
+			})
+			if err != nil {
+				t.Errorf("expect nil, got %v", err)
+			}
+			av, err := enc.Encode(c.expected)
+			if !called {
+				t.Fatalf("expected marshaler to be called")
+			}
+			assertConvertTest(t, av, c.in, err, nil)
+		})
+	}
+}
+
+func TestEncoderNotSupportedMarshalerType(t *testing.T) {
+	cases := map[string]reflect.Type{
+		"pointer": reflect.TypeOf(new(string)),
+		"channel": reflect.TypeOf(make(chan int)),
+		"func":    reflect.TypeOf(func() {}),
+	}
+
+	for name, caseType := range cases {
+		t.Run(name, func(t *testing.T) {
+			err := NewEncoder().RegisterMarshaler(caseType, func(i interface{}) (types.AttributeValue, error) {
+				return nil, nil
+			})
+			if err == nil {
+				t.Errorf("expect error when registering marshaler for unsupported type %q", caseType)
+			}
+		})
+	}
+}
