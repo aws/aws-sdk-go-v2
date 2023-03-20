@@ -48,3 +48,4 @@ software.amazon.smithy.aws.go.codegen.customization.AdjustAwsRestJsonContentType
 software.amazon.smithy.aws.go.codegen.customization.SQSValidateMessageChecksum
 software.amazon.smithy.aws.go.codegen.EndpointDiscoveryGenerator
 software.amazon.smithy.aws.go.codegen.customization.S3100Continue
+software.amazon.smithy.aws.go.codegen.customization.ApiGatewayExportsNullabilityExceptionIntegration
