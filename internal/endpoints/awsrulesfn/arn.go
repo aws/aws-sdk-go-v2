@@ -3,7 +3,7 @@ package awsrulesfn
 import (
 	"fmt"
 	"strings"
-	smithyerrep "github.com/aws/smithy-go/error/endpoints"
+	smithyrulesfn "github.com/aws/smithy-go/private/endpoints/rulesfn"
 )
 
 // ARN provides AWS ARN components broken out into a data structure.
@@ -32,9 +32,9 @@ const (
 // ParseARN returns an [ARN] value parsed from the input string provided. If
 // the ARN cannot be parsed nil will be returned, and error added to
 // [ErrorCollector].
-func ParseARN(input string, ec *smithyerrep.ErrorCollector) *ARN {
+func ParseARN(input string, ec *smithyrulesfn.ErrorCollector) *ARN {
 	if !strings.HasPrefix(input, arnPrefix) {
-		ec.AddError(smithyerrep.FnError{
+		ec.AddError(smithyrulesfn.FnError{
 			Name: "ParseARN",
 			Err:  fmt.Errorf("invalid ARN prefix, %q", input),
 		})
@@ -43,7 +43,7 @@ func ParseARN(input string, ec *smithyerrep.ErrorCollector) *ARN {
 
 	sections := strings.SplitN(input, arnDelimiters, arnSections)
 	if numSections := len(sections); numSections != arnSections {
-		ec.AddError(smithyerrep.FnError{
+		ec.AddError(smithyrulesfn.FnError{
 			Name: "ParseARN",
 			Err: fmt.Errorf("invalid ARN, not enough sections, %q, %d",
 				input, numSections),
@@ -52,7 +52,7 @@ func ParseARN(input string, ec *smithyerrep.ErrorCollector) *ARN {
 	}
 
 	if sections[sectionPartition] == "" {
-		ec.AddError(smithyerrep.FnError{
+		ec.AddError(smithyrulesfn.FnError{
 			Name: "ParseARN",
 			Err: fmt.Errorf("invalid ARN, partition section cannot be empty, %v",
 				input),
@@ -60,7 +60,7 @@ func ParseARN(input string, ec *smithyerrep.ErrorCollector) *ARN {
 		return nil
 	}
 	if sections[sectionService] == "" {
-		ec.AddError(smithyerrep.FnError{
+		ec.AddError(smithyrulesfn.FnError{
 			Name: "ParseARN",
 			Err: fmt.Errorf("invalid ARN, service section cannot be empty, %v",
 				input),
@@ -68,7 +68,7 @@ func ParseARN(input string, ec *smithyerrep.ErrorCollector) *ARN {
 		return nil
 	}
 	if sections[sectionResource] == "" {
-		ec.AddError(smithyerrep.FnError{
+		ec.AddError(smithyrulesfn.FnError{
 			Name: "ParseARN",
 			Err: fmt.Errorf("invalid ARN, resource section cannot be empty, %v",
 				input),

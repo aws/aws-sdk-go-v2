@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	smithyerrep "github.com/aws/smithy-go/error/endpoints"
+	smithyrulesfn "github.com/aws/smithy-go/private/endpoints/rulesfn"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -75,7 +75,7 @@ func TestParseARN(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run(c.input, func(t *testing.T) {
-			ec := smithyerrep.NewErrorCollector()
+			ec := smithyrulesfn.NewErrorCollector()
 			actual := ParseARN(c.input, ec)
 			if c.expect != nil {
 				if e, a := c.expectErr, ec.Error(); !strings.Contains(a, e) {

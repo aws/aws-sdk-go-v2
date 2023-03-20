@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	smithyerrep "github.com/aws/smithy-go/error/endpoints"
+	smithyrulesfn "github.com/aws/smithy-go/private/endpoints/rulesfn"
 )
 
 func TestIsVirtualHostableS3Bucket(t *testing.T) {
@@ -70,7 +70,7 @@ func TestIsVirtualHostableS3Bucket(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			ec := smithyerrep.NewErrorCollector()
+			ec := smithyrulesfn.NewErrorCollector()
 			actual := IsVirtualHostableS3Bucket(c.input, c.allowSubDomains, ec)
 			if !c.expect {
 				if e, a := c.expectErr, ec.Error(); !strings.Contains(a, e) {
