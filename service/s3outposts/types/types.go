@@ -31,6 +31,9 @@ type Endpoint struct {
 	// The Amazon Resource Name (ARN) of the endpoint.
 	EndpointArn *string
 
+	// The failure reason, if any, for a create or delete endpoint operation.
+	FailedReason *FailedReason
+
 	// The network interface of the endpoint.
 	NetworkInterfaces []NetworkInterface
 
@@ -48,6 +51,18 @@ type Endpoint struct {
 
 	// The ID of the VPC used for the endpoint.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The failure reason, if any, for a create or delete endpoint operation.
+type FailedReason struct {
+
+	// The failure code, if any, for a create or delete endpoint operation.
+	ErrorCode *string
+
+	// Additional error details describing the endpoint failure and recommended action.
+	Message *string
 
 	noSmithyDocumentSerde
 }

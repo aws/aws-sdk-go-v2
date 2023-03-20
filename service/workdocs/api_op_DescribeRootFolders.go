@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -126,6 +127,97 @@ func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeRootFoldersAPIClient is a client that implements the DescribeRootFolders
+// operation.
+type DescribeRootFoldersAPIClient interface {
+	DescribeRootFolders(context.Context, *DescribeRootFoldersInput, ...func(*Options)) (*DescribeRootFoldersOutput, error)
+}
+
+var _ DescribeRootFoldersAPIClient = (*Client)(nil)
+
+// DescribeRootFoldersPaginatorOptions is the paginator options for
+// DescribeRootFolders
+type DescribeRootFoldersPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeRootFoldersPaginator is a paginator for DescribeRootFolders
+type DescribeRootFoldersPaginator struct {
+	options   DescribeRootFoldersPaginatorOptions
+	client    DescribeRootFoldersAPIClient
+	params    *DescribeRootFoldersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeRootFoldersPaginator returns a new DescribeRootFoldersPaginator
+func NewDescribeRootFoldersPaginator(client DescribeRootFoldersAPIClient, params *DescribeRootFoldersInput, optFns ...func(*DescribeRootFoldersPaginatorOptions)) *DescribeRootFoldersPaginator {
+	if params == nil {
+		params = &DescribeRootFoldersInput{}
+	}
+
+	options := DescribeRootFoldersPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeRootFoldersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeRootFoldersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeRootFolders page.
+func (p *DescribeRootFoldersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeRootFoldersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeRootFolders(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeRootFolders(region string) *awsmiddleware.RegisterServiceMetadata {

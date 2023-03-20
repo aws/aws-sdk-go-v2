@@ -43,6 +43,39 @@ type CloudwatchLogsExportConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// This data type is used as a response element in the ModifyDBCluster operation
+// and contains changes that will be applied during the next maintenance window.
+type ClusterPendingModifiedValues struct {
+
+	// The allocated storage size in gibibytes (GiB) for database engines. For Neptune,
+	// AllocatedStorage always returns 1, because Neptune DB cluster storage size isn't
+	// fixed, but instead automatically adjusts as needed.
+	AllocatedStorage *int32
+
+	// The number of days for which automatic DB snapshots are retained.
+	BackupRetentionPeriod *int32
+
+	// The DBClusterIdentifier value for the DB cluster.
+	DBClusterIdentifier *string
+
+	// The database engine version.
+	EngineVersion *string
+
+	// A value that indicates whether mapping of Amazon Web Services Identity and
+	// Access Management (IAM) accounts to database accounts is enabled.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// The Provisioned IOPS (I/O operations per second) value. This setting is only for
+	// non-Aurora Multi-AZ DB clusters.
+	Iops *int32
+
+	// This PendingCloudwatchLogsExports structure specifies pending changes to which
+	// CloudWatch logs are enabled and which are disabled.
+	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details of an Amazon Neptune DB cluster. This data type is used as
 // a response element in the DescribeDBClusters action.
 type DBCluster struct {
@@ -135,6 +168,10 @@ type DBCluster struct {
 	// Indicates the database engine version.
 	EngineVersion *string
 
+	// Contains a user-supplied global database cluster identifier. This identifier is
+	// the unique key that identifies a global database.
+	GlobalClusterIdentifier *string
+
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
@@ -155,6 +192,10 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ bool
+
+	// This data type is used as a response element in the ModifyDBCluster operation
+	// and contains changes that will be applied during the next maintenance window.
+	PendingModifiedValues *ClusterPendingModifiedValues
 
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string

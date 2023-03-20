@@ -12,51 +12,65 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the groups specified by the query. Groups are defined by the
-// underlying Active Directory.
-func (c *Client) DescribeGroups(ctx context.Context, params *DescribeGroupsInput, optFns ...func(*Options)) (*DescribeGroupsOutput, error) {
+// Searches metadata and the content of folders, documents, document versions, and
+// comments.
+func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
-		params = &DescribeGroupsInput{}
+		params = &SearchResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGroups", params, optFns, c.addOperationDescribeGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchResources", params, optFns, c.addOperationSearchResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeGroupsOutput)
+	out := result.(*SearchResourcesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeGroupsInput struct {
+type SearchResourcesInput struct {
 
-	// A query to describe groups by group name.
-	//
-	// This member is required.
-	SearchQuery *string
+	// A list of attributes to include in the response. Used to request fields that are
+	// not normally returned in a standard response.
+	AdditionalResponseFields []types.AdditionalResponseFieldType
 
 	// Amazon WorkDocs authentication token. Not required when using Amazon Web
 	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
-	// The maximum number of items to return with this call.
+	// Filters results based on entity metadata.
+	Filters *types.Filters
+
+	// Max results count per page.
 	Limit *int32
 
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
+	// The marker for the next set of results.
 	Marker *string
 
-	// The ID of the organization.
+	// Order by results in one or more categories.
+	OrderBy []types.SearchSortResult
+
+	// Filters based on the resource owner OrgId. This is a mandatory parameter when
+	// using Admin SigV4 credentials.
 	OrganizationId *string
+
+	// Filter based on the text field type. A Folder has only a name and no content. A
+	// Comment has only content and no name. A Document or Document Version has a name
+	// and content
+	QueryScopes []types.SearchQueryScopeType
+
+	// The String to search for. Searches across different text fields based on request
+	// parameters. Use double quotes around the query string for exact phrase matches.
+	QueryText *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeGroupsOutput struct {
+type SearchResourcesOutput struct {
 
-	// The list of groups.
-	Groups []types.GroupMetadata
+	// List of Documents, Folders, Comments, and Document Versions matching the query.
+	Items []types.ResponseItem
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
@@ -68,12 +82,12 @@ type DescribeGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGroups{}, middleware.After)
+func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchResources{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGroups{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchResources{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -113,10 +127,10 @@ func (c *Client) addOperationDescribeGroupsMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeGroupsValidationMiddleware(stack); err != nil {
+	if err = addOpSearchResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGroups(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,17 +145,17 @@ func (c *Client) addOperationDescribeGroupsMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-// DescribeGroupsAPIClient is a client that implements the DescribeGroups
+// SearchResourcesAPIClient is a client that implements the SearchResources
 // operation.
-type DescribeGroupsAPIClient interface {
-	DescribeGroups(context.Context, *DescribeGroupsInput, ...func(*Options)) (*DescribeGroupsOutput, error)
+type SearchResourcesAPIClient interface {
+	SearchResources(context.Context, *SearchResourcesInput, ...func(*Options)) (*SearchResourcesOutput, error)
 }
 
-var _ DescribeGroupsAPIClient = (*Client)(nil)
+var _ SearchResourcesAPIClient = (*Client)(nil)
 
-// DescribeGroupsPaginatorOptions is the paginator options for DescribeGroups
-type DescribeGroupsPaginatorOptions struct {
-	// The maximum number of items to return with this call.
+// SearchResourcesPaginatorOptions is the paginator options for SearchResources
+type SearchResourcesPaginatorOptions struct {
+	// Max results count per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -149,22 +163,22 @@ type DescribeGroupsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// DescribeGroupsPaginator is a paginator for DescribeGroups
-type DescribeGroupsPaginator struct {
-	options   DescribeGroupsPaginatorOptions
-	client    DescribeGroupsAPIClient
-	params    *DescribeGroupsInput
+// SearchResourcesPaginator is a paginator for SearchResources
+type SearchResourcesPaginator struct {
+	options   SearchResourcesPaginatorOptions
+	client    SearchResourcesAPIClient
+	params    *SearchResourcesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewDescribeGroupsPaginator returns a new DescribeGroupsPaginator
-func NewDescribeGroupsPaginator(client DescribeGroupsAPIClient, params *DescribeGroupsInput, optFns ...func(*DescribeGroupsPaginatorOptions)) *DescribeGroupsPaginator {
+// NewSearchResourcesPaginator returns a new SearchResourcesPaginator
+func NewSearchResourcesPaginator(client SearchResourcesAPIClient, params *SearchResourcesInput, optFns ...func(*SearchResourcesPaginatorOptions)) *SearchResourcesPaginator {
 	if params == nil {
-		params = &DescribeGroupsInput{}
+		params = &SearchResourcesInput{}
 	}
 
-	options := DescribeGroupsPaginatorOptions{}
+	options := SearchResourcesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
 	}
@@ -173,7 +187,7 @@ func NewDescribeGroupsPaginator(client DescribeGroupsAPIClient, params *Describe
 		fn(&options)
 	}
 
-	return &DescribeGroupsPaginator{
+	return &SearchResourcesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -183,12 +197,12 @@ func NewDescribeGroupsPaginator(client DescribeGroupsAPIClient, params *Describe
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeGroupsPaginator) HasMorePages() bool {
+func (p *SearchResourcesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next DescribeGroups page.
-func (p *DescribeGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeGroupsOutput, error) {
+// NextPage retrieves the next SearchResources page.
+func (p *SearchResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -202,7 +216,7 @@ func (p *DescribeGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.Limit = limit
 
-	result, err := p.client.DescribeGroups(ctx, &params, optFns...)
+	result, err := p.client.SearchResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -221,11 +235,11 @@ func (p *DescribeGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opDescribeGroups(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSearchResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "workdocs",
-		OperationName: "DescribeGroups",
+		OperationName: "SearchResources",
 	}
 }

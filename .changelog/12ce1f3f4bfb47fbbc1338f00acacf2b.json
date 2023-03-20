@@ -1,0 +1,8 @@
+{
+    "id": "12ce1f3f-4bfb-47fb-bc13-38f00acacf2b",
+    "type": "feature",
+    "description": "S3 On Outposts added support for endpoint status, and a failed endpoint reason, if any",
+    "modules": [
+        "service/s3outposts"
+    ]
+}

@@ -36,7 +36,7 @@ import (
 // and Step scaling policies
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
 // in the Application Auto Scaling User Guide. If a scalable target is
-// deregistered, the scalable target is no longer available to execute scaling
+// deregistered, the scalable target is no longer available to use scaling
 // policies. Any scaling policies that were specified for the scalable target are
 // deleted.
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {

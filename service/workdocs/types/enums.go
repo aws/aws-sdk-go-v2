@@ -82,6 +82,22 @@ func (ActivityType) Values() []ActivityType {
 	}
 }
 
+type AdditionalResponseFieldType string
+
+// Enum values for AdditionalResponseFieldType
+const (
+	AdditionalResponseFieldTypeWeburl AdditionalResponseFieldType = "WEBURL"
+)
+
+// Values returns all known values for AdditionalResponseFieldType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdditionalResponseFieldType) Values() []AdditionalResponseFieldType {
+	return []AdditionalResponseFieldType{
+		"WEBURL",
+	}
+}
+
 type BooleanEnumType string
 
 // Enum values for BooleanEnumType
@@ -135,6 +151,38 @@ func (CommentVisibilityType) Values() []CommentVisibilityType {
 	return []CommentVisibilityType{
 		"PUBLIC",
 		"PRIVATE",
+	}
+}
+
+type ContentCategoryType string
+
+// Enum values for ContentCategoryType
+const (
+	ContentCategoryTypeImage        ContentCategoryType = "IMAGE"
+	ContentCategoryTypeDocument     ContentCategoryType = "DOCUMENT"
+	ContentCategoryTypePdf          ContentCategoryType = "PDF"
+	ContentCategoryTypeSpreadsheet  ContentCategoryType = "SPREADSHEET"
+	ContentCategoryTypePresentation ContentCategoryType = "PRESENTATION"
+	ContentCategoryTypeAudio        ContentCategoryType = "AUDIO"
+	ContentCategoryTypeVideo        ContentCategoryType = "VIDEO"
+	ContentCategoryTypeSourceCode   ContentCategoryType = "SOURCE_CODE"
+	ContentCategoryTypeOther        ContentCategoryType = "OTHER"
+)
+
+// Values returns all known values for ContentCategoryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentCategoryType) Values() []ContentCategoryType {
+	return []ContentCategoryType{
+		"IMAGE",
+		"DOCUMENT",
+		"PDF",
+		"SPREADSHEET",
+		"PRESENTATION",
+		"AUDIO",
+		"VIDEO",
+		"SOURCE_CODE",
+		"OTHER",
 	}
 }
 
@@ -230,6 +278,82 @@ func (FolderContentType) Values() []FolderContentType {
 	}
 }
 
+type LanguageCodeType string
+
+// Enum values for LanguageCodeType
+const (
+	LanguageCodeTypeAr      LanguageCodeType = "AR"
+	LanguageCodeTypeBg      LanguageCodeType = "BG"
+	LanguageCodeTypeBn      LanguageCodeType = "BN"
+	LanguageCodeTypeDa      LanguageCodeType = "DA"
+	LanguageCodeTypeDe      LanguageCodeType = "DE"
+	LanguageCodeTypeCs      LanguageCodeType = "CS"
+	LanguageCodeTypeEl      LanguageCodeType = "EL"
+	LanguageCodeTypeEn      LanguageCodeType = "EN"
+	LanguageCodeTypeEs      LanguageCodeType = "ES"
+	LanguageCodeTypeFa      LanguageCodeType = "FA"
+	LanguageCodeTypeFi      LanguageCodeType = "FI"
+	LanguageCodeTypeFr      LanguageCodeType = "FR"
+	LanguageCodeTypeHi      LanguageCodeType = "HI"
+	LanguageCodeTypeHu      LanguageCodeType = "HU"
+	LanguageCodeTypeId      LanguageCodeType = "ID"
+	LanguageCodeTypeIt      LanguageCodeType = "IT"
+	LanguageCodeTypeJa      LanguageCodeType = "JA"
+	LanguageCodeTypeKo      LanguageCodeType = "KO"
+	LanguageCodeTypeLt      LanguageCodeType = "LT"
+	LanguageCodeTypeLv      LanguageCodeType = "LV"
+	LanguageCodeTypeNl      LanguageCodeType = "NL"
+	LanguageCodeTypeNo      LanguageCodeType = "NO"
+	LanguageCodeTypePt      LanguageCodeType = "PT"
+	LanguageCodeTypeRo      LanguageCodeType = "RO"
+	LanguageCodeTypeRu      LanguageCodeType = "RU"
+	LanguageCodeTypeSv      LanguageCodeType = "SV"
+	LanguageCodeTypeSw      LanguageCodeType = "SW"
+	LanguageCodeTypeTh      LanguageCodeType = "TH"
+	LanguageCodeTypeTr      LanguageCodeType = "TR"
+	LanguageCodeTypeZh      LanguageCodeType = "ZH"
+	LanguageCodeTypeDefault LanguageCodeType = "DEFAULT"
+)
+
+// Values returns all known values for LanguageCodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LanguageCodeType) Values() []LanguageCodeType {
+	return []LanguageCodeType{
+		"AR",
+		"BG",
+		"BN",
+		"DA",
+		"DE",
+		"CS",
+		"EL",
+		"EN",
+		"ES",
+		"FA",
+		"FI",
+		"FR",
+		"HI",
+		"HU",
+		"ID",
+		"IT",
+		"JA",
+		"KO",
+		"LT",
+		"LV",
+		"NL",
+		"NO",
+		"PT",
+		"RO",
+		"RU",
+		"SV",
+		"SW",
+		"TH",
+		"TR",
+		"ZH",
+		"DEFAULT",
+	}
+}
+
 type LocaleType string
 
 // Enum values for LocaleType
@@ -266,6 +390,30 @@ func (LocaleType) Values() []LocaleType {
 	}
 }
 
+type OrderByFieldType string
+
+// Enum values for OrderByFieldType
+const (
+	OrderByFieldTypeRelevance         OrderByFieldType = "RELEVANCE"
+	OrderByFieldTypeName              OrderByFieldType = "NAME"
+	OrderByFieldTypeSize              OrderByFieldType = "SIZE"
+	OrderByFieldTypeCreatedTimestamp  OrderByFieldType = "CREATED_TIMESTAMP"
+	OrderByFieldTypeModifiedTimestamp OrderByFieldType = "MODIFIED_TIMESTAMP"
+)
+
+// Values returns all known values for OrderByFieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrderByFieldType) Values() []OrderByFieldType {
+	return []OrderByFieldType{
+		"RELEVANCE",
+		"NAME",
+		"SIZE",
+		"CREATED_TIMESTAMP",
+		"MODIFIED_TIMESTAMP",
+	}
+}
+
 type OrderType string
 
 // Enum values for OrderType
@@ -281,6 +429,28 @@ func (OrderType) Values() []OrderType {
 	return []OrderType{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type PrincipalRoleType string
+
+// Enum values for PrincipalRoleType
+const (
+	PrincipalRoleTypeViewer      PrincipalRoleType = "VIEWER"
+	PrincipalRoleTypeContributor PrincipalRoleType = "CONTRIBUTOR"
+	PrincipalRoleTypeOwner       PrincipalRoleType = "OWNER"
+	PrincipalRoleTypeCoowner     PrincipalRoleType = "COOWNER"
+)
+
+// Values returns all known values for PrincipalRoleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalRoleType) Values() []PrincipalRoleType {
+	return []PrincipalRoleType{
+		"VIEWER",
+		"CONTRIBUTOR",
+		"OWNER",
+		"COOWNER",
 	}
 }
 
@@ -382,6 +552,28 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type ResponseItemType string
+
+// Enum values for ResponseItemType
+const (
+	ResponseItemTypeDocument        ResponseItemType = "DOCUMENT"
+	ResponseItemTypeFolder          ResponseItemType = "FOLDER"
+	ResponseItemTypeComment         ResponseItemType = "COMMENT"
+	ResponseItemTypeDocumentVersion ResponseItemType = "DOCUMENT_VERSION"
+)
+
+// Values returns all known values for ResponseItemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseItemType) Values() []ResponseItemType {
+	return []ResponseItemType{
+		"DOCUMENT",
+		"FOLDER",
+		"COMMENT",
+		"DOCUMENT_VERSION",
+	}
+}
+
 type RolePermissionType string
 
 // Enum values for RolePermissionType
@@ -422,6 +614,64 @@ func (RoleType) Values() []RoleType {
 	}
 }
 
+type SearchCollectionType string
+
+// Enum values for SearchCollectionType
+const (
+	SearchCollectionTypeOwned        SearchCollectionType = "OWNED"
+	SearchCollectionTypeSharedWithMe SearchCollectionType = "SHARED_WITH_ME"
+)
+
+// Values returns all known values for SearchCollectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchCollectionType) Values() []SearchCollectionType {
+	return []SearchCollectionType{
+		"OWNED",
+		"SHARED_WITH_ME",
+	}
+}
+
+type SearchQueryScopeType string
+
+// Enum values for SearchQueryScopeType
+const (
+	SearchQueryScopeTypeName    SearchQueryScopeType = "NAME"
+	SearchQueryScopeTypeContent SearchQueryScopeType = "CONTENT"
+)
+
+// Values returns all known values for SearchQueryScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchQueryScopeType) Values() []SearchQueryScopeType {
+	return []SearchQueryScopeType{
+		"NAME",
+		"CONTENT",
+	}
+}
+
+type SearchResourceType string
+
+// Enum values for SearchResourceType
+const (
+	SearchResourceTypeFolder          SearchResourceType = "FOLDER"
+	SearchResourceTypeDocument        SearchResourceType = "DOCUMENT"
+	SearchResourceTypeComment         SearchResourceType = "COMMENT"
+	SearchResourceTypeDocumentVersion SearchResourceType = "DOCUMENT_VERSION"
+)
+
+// Values returns all known values for SearchResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchResourceType) Values() []SearchResourceType {
+	return []SearchResourceType{
+		"FOLDER",
+		"DOCUMENT",
+		"COMMENT",
+		"DOCUMENT_VERSION",
+	}
+}
+
 type ShareStatusType string
 
 // Enum values for ShareStatusType
@@ -437,6 +687,24 @@ func (ShareStatusType) Values() []ShareStatusType {
 	return []ShareStatusType{
 		"SUCCESS",
 		"FAILURE",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
 	}
 }
 

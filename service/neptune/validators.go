@@ -1880,6 +1880,9 @@ func validateOpCreateDBInstanceInput(v *CreateDBInstanceInput) error {
 	if v.Engine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

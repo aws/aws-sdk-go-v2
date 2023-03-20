@@ -57,7 +57,7 @@ type CustomizedMetricSpecification struct {
 	// The name of the metric. To get the exact metric name, namespace, and dimensions,
 	// inspect the Metric
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
-	// object that is returned by a call to ListMetrics
+	// object that's returned by a call to ListMetrics
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
 	MetricName *string
 
@@ -356,6 +356,9 @@ type ScalableTarget struct {
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
+
+	// The ARN of the scalable target.
+	ScalableTargetARN *string
 
 	// Specifies whether the scaling activities for a scalable target are in a
 	// suspended state.
@@ -1021,12 +1024,12 @@ type ScheduledAction struct {
 // the alarm. For the following examples, suppose that you have an alarm with a
 // breach threshold of 50:
 //
-// * To trigger the adjustment when the metric is greater
+// * To initiate the adjustment when the metric is greater
 // than or equal to 50 and less than 60, specify a lower bound of 0 and an upper
 // bound of 10.
 //
-// * To trigger the adjustment when the metric is greater than 40 and
-// less than or equal to 50, specify a lower bound of -10 and an upper bound of
+// * To initiate the adjustment when the metric is greater than 40
+// and less than or equal to 50, specify a lower bound of -10 and an upper bound of
 // 0.
 //
 // There are a few rules for the step adjustments for your step policy:
@@ -1056,7 +1059,7 @@ type StepAdjustment struct {
 	// The lower bound for the difference between the alarm threshold and the
 	// CloudWatch metric. If the metric value is above the breach threshold, the lower
 	// bound is inclusive (the metric must be greater than or equal to the threshold
-	// plus the lower bound). Otherwise, it is exclusive (the metric must be greater
+	// plus the lower bound). Otherwise, it's exclusive (the metric must be greater
 	// than the threshold plus the lower bound). A null value indicates negative
 	// infinity.
 	MetricIntervalLowerBound *float64
@@ -1064,7 +1067,7 @@ type StepAdjustment struct {
 	// The upper bound for the difference between the alarm threshold and the
 	// CloudWatch metric. If the metric value is above the breach threshold, the upper
 	// bound is exclusive (the metric must be less than the threshold plus the upper
-	// bound). Otherwise, it is inclusive (the metric must be less than or equal to the
+	// bound). Otherwise, it's inclusive (the metric must be less than or equal to the
 	// threshold plus the upper bound). A null value indicates positive infinity. The
 	// upper bound must be greater than the lower bound.
 	MetricIntervalUpperBound *float64
@@ -1294,8 +1297,8 @@ type TargetTrackingMetricStat struct {
 	// The statistic to return. It can include any CloudWatch statistic or extended
 	// statistic. For a list of valid values, see the table in Statistics
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
-	// in the Amazon CloudWatch User Guide. The most commonly used metrics for scaling
-	// is Average
+	// in the Amazon CloudWatch User Guide. The most commonly used metric for scaling
+	// is Average.
 	//
 	// This member is required.
 	Stat *string
