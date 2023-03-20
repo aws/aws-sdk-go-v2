@@ -710,6 +710,26 @@ func (m *validateOpRestoreDocumentVersions) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchResources struct {
+}
+
+func (*validateOpSearchResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDocument struct {
 }
 
@@ -930,6 +950,10 @@ func addOpRestoreDocumentVersionsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpRestoreDocumentVersions{}, middleware.After)
 }
 
+func addOpSearchResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchResources{}, middleware.After)
+}
+
 func addOpUpdateDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDocument{}, middleware.After)
 }
@@ -944,6 +968,55 @@ func addOpUpdateFolderValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUser{}, middleware.After)
+}
+
+func validateFilters(v *types.Filters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filters"}
+	if v.Principals != nil {
+		if err := validateSearchPrincipalTypeList(v.Principals); err != nil {
+			invalidParams.AddNested("Principals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchPrincipalType(v *types.SearchPrincipalType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchPrincipalType"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchPrincipalTypeList(v []types.SearchPrincipalType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchPrincipalTypeList"}
+	for i := range v {
+		if err := validateSearchPrincipalType(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateSharePrincipal(v *types.SharePrincipal) error {
@@ -1562,6 +1635,23 @@ func validateOpRestoreDocumentVersionsInput(v *RestoreDocumentVersionsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreDocumentVersionsInput"}
 	if v.DocumentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchResourcesInput(v *SearchResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchResourcesInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -85,6 +85,33 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The service link connection to your Outposts home Region is down. Check your
+// connection and try again.
+type OutpostOfflineException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OutpostOfflineException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OutpostOfflineException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OutpostOfflineException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OutpostOfflineException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OutpostOfflineException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The requested resource was not found.
 type ResourceNotFoundException struct {
 	Message *string

@@ -175,6 +175,62 @@ func (e *ObjectNotFoundException) ErrorCode() string {
 }
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified resource doesn't exist.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceName *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request contains too many tags. Try the request again with fewer tags.
+type TooManyTagsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceName *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An exception was thrown for a validation issue. Review the available parameters
 // for the API request.
 type ValidationException struct {

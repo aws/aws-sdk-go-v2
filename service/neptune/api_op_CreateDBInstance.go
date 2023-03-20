@@ -29,6 +29,12 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 
 type CreateDBInstanceInput struct {
 
+	// The identifier of the DB cluster that the instance will belong to. For
+	// information on creating a DB cluster, see CreateDBCluster. Type: String
+	//
+	// This member is required.
+	DBClusterIdentifier *string
+
 	// The compute and memory capacity of the DB instance, for example, db.m4.large.
 	// Not all DB instance classes are available in all Amazon Regions.
 	//
@@ -88,10 +94,6 @@ type CreateDBInstanceInput struct {
 	// True to copy all tags from the DB instance to snapshots of the DB instance, and
 	// otherwise false. The default is false.
 	CopyTagsToSnapshot *bool
-
-	// The identifier of the DB cluster that the instance will belong to. For
-	// information on creating a DB cluster, see CreateDBCluster. Type: String
-	DBClusterIdentifier *string
 
 	// Not supported.
 	DBName *string

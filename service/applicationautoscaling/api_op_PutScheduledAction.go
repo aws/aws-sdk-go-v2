@@ -16,8 +16,8 @@ import (
 // target. Each scalable target is identified by a service namespace, resource ID,
 // and scalable dimension. A scheduled action applies to the scalable target
 // identified by those three attributes. You cannot create a scheduled action until
-// you have registered the resource as a scalable target. When start and end times
-// are specified with a recurring schedule using a cron expression or rates, they
+// you have registered the resource as a scalable target. When you specify start
+// and end times with a recurring schedule using a cron expression or rates, they
 // form the boundaries for when the recurring action starts and stops. To update a
 // scheduled action, specify the parameters that you want to change. If you don't
 // specify start and end times, the old values are deleted. For more information,

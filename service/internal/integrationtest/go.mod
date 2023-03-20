@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.18
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.6
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.6
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.5
 	github.com/aws/aws-sdk-go-v2/service/athena v1.23.1
@@ -56,7 +56,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.5
-	github.com/aws/aws-sdk-go-v2/service/neptune v1.19.5
+	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.4

@@ -80,6 +80,16 @@
                 "target": "com.amazonaws.applicationautoscaling#Alarm"
             }
         },
+        "com.amazonaws.applicationautoscaling#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:.+:application-autoscaling:.+:[0-9]+:scalable-target\\/[a-zA-Z0-9-]+$"
+            }
+        },
         "com.amazonaws.applicationautoscaling#AnyScaleFrontendService": {
             "type": "service",
             "version": "2016-02-06",
@@ -106,6 +116,9 @@
                     "target": "com.amazonaws.applicationautoscaling#DescribeScheduledActions"
                 },
                 {
+                    "target": "com.amazonaws.applicationautoscaling#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.applicationautoscaling#PutScalingPolicy"
                 },
                 {
@@ -113,6 +126,12 @@
                 },
                 {
                     "target": "com.amazonaws.applicationautoscaling#RegisterScalableTarget"
+                },
+                {
+                    "target": "com.amazonaws.applicationautoscaling#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.applicationautoscaling#UntagResource"
                 }
             ],
             "traits": {
@@ -514,9 +533,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -527,9 +546,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -540,9 +559,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -553,9 +572,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -566,9 +585,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -579,9 +598,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -592,9 +611,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -605,9 +624,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -618,9 +637,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -631,9 +650,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -644,9 +663,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -657,9 +676,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -670,9 +689,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -683,9 +702,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -696,9 +715,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -709,9 +728,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -722,9 +741,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -735,9 +754,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -748,9 +767,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -761,9 +780,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -774,9 +793,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -787,9 +806,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -800,9 +819,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -813,9 +832,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -826,9 +845,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -839,9 +858,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -852,9 +871,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -865,9 +884,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -878,9 +897,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -891,9 +910,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -904,9 +923,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -917,9 +936,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -930,9 +949,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -943,9 +962,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -956,9 +975,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -969,9 +988,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -982,9 +1001,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -995,9 +1014,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1008,9 +1027,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1021,9 +1040,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1034,9 +1053,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1047,9 +1066,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1061,8 +1080,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1072,9 +1091,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1084,9 +1103,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1121,7 +1140,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.applicationautoscaling#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric. To get the exact metric name, namespace, and dimensions, inspect\n         the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>"
+                        "smithy.api#documentation": "<p>The name of the metric. To get the exact metric name, namespace, and dimensions, inspect\n         the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that's returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>"
                     }
                 },
                 "Namespace": {
@@ -1750,6 +1769,9 @@
         "com.amazonaws.applicationautoscaling#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.applicationautoscaling#ExceptionMessage": {
+            "type": "string"
+        },
         "com.amazonaws.applicationautoscaling#Expression": {
             "type": "string",
             "traits": {
@@ -1839,6 +1861,52 @@
                 "smithy.api#documentation": "<p>A per-account resource limit is exceeded. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html\">Application Auto Scaling service quotas</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.applicationautoscaling#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationautoscaling#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationautoscaling#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all the tags on the specified Application Auto Scaling scalable target.</p>\n         <p>For general information about tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n         resources</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.applicationautoscaling#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the ARN of the scalable target.</p>\n         <p>For example:\n         <code>arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123</code>\n         </p>\n         <p>To get the ARN for a scalable target, use <a>DescribeScalableTargets</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationautoscaling#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.applicationautoscaling#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags. Each tag consists of a tag key and a tag value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationautoscaling#MaxResults": {
@@ -2215,7 +2283,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a scaling policy for an Application Auto Scaling scalable target.</p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scaling policy applies to the scalable target identified by those three\n         attributes. You cannot create a scaling policy until you have registered the resource as a\n         scalable target.</p>\n         <p>Multiple scaling policies can be in force at the same time for the same scalable target.\n         You can have one or more target tracking scaling policies, one or more step scaling\n         policies, or both. However, there is a chance that multiple policies could conflict,\n         instructing the scalable target to scale out or in at the same time. Application Auto Scaling gives\n         precedence to the policy that provides the largest capacity for both scale out and scale\n         in. For example, if one policy increases capacity by 3, another policy increases capacity\n         by 200 percent, and the current capacity is 10, Application Auto Scaling uses the policy with the highest\n         calculated capacity (200% of 10 = 20) and scales out to 30. </p>\n         <p>We recommend caution, however, when using target tracking scaling policies with step\n         scaling policies because conflicts between these policies can cause undesirable behavior.\n         For example, if the step scaling policy initiates a scale-in activity before the target\n         tracking policy is ready to scale in, the scale-in activity will not be blocked. After the\n         scale-in activity completes, the target tracking policy could instruct the scalable target\n         to scale out again. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">Target tracking scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">Step scaling policies</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            execute scaling policies. Any scaling policies that were specified for the scalable\n            target are deleted.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a scaling policy for an Application Auto Scaling scalable target.</p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scaling policy applies to the scalable target identified by those three\n         attributes. You cannot create a scaling policy until you have registered the resource as a\n         scalable target.</p>\n         <p>Multiple scaling policies can be in force at the same time for the same scalable target.\n         You can have one or more target tracking scaling policies, one or more step scaling\n         policies, or both. However, there is a chance that multiple policies could conflict,\n         instructing the scalable target to scale out or in at the same time. Application Auto Scaling gives\n         precedence to the policy that provides the largest capacity for both scale out and scale\n         in. For example, if one policy increases capacity by 3, another policy increases capacity\n         by 200 percent, and the current capacity is 10, Application Auto Scaling uses the policy with the highest\n         calculated capacity (200% of 10 = 20) and scales out to 30. </p>\n         <p>We recommend caution, however, when using target tracking scaling policies with step\n         scaling policies because conflicts between these policies can cause undesirable behavior.\n         For example, if the step scaling policy initiates a scale-in activity before the target\n         tracking policy is ready to scale in, the scale-in activity will not be blocked. After the\n         scale-in activity completes, the target tracking policy could instruct the scalable target\n         to scale out again. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">Target tracking scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">Step scaling policies</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            use scaling policies. Any scaling policies that were specified for the scalable target\n            are deleted.</p>\n         </note>"
             }
         },
         "com.amazonaws.applicationautoscaling#PutScalingPolicyRequest": {
@@ -2319,7 +2387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a scheduled action for an Application Auto Scaling scalable target. </p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scheduled action applies to the scalable target identified by those three\n         attributes. You cannot create a scheduled action until you have registered the resource as\n         a scalable target.</p>\n         <p>When start and end times are specified with a recurring schedule using a cron expression\n         or rates, they form the boundaries for when the recurring action starts and stops.</p>\n         <p>To update a scheduled action, specify the parameters that you want to change. If you\n         don't specify start and end times, the old values are deleted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html\">Scheduled scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            run scheduled actions. Any scheduled actions that were specified for the scalable target\n            are deleted.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a scheduled action for an Application Auto Scaling scalable target. </p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scheduled action applies to the scalable target identified by those three\n         attributes. You cannot create a scheduled action until you have registered the resource as\n         a scalable target.</p>\n         <p>When you specify start and end times with a recurring schedule using a cron expression\n         or rates, they form the boundaries for when the recurring action starts and stops.</p>\n         <p>To update a scheduled action, specify the parameters that you want to change. If you\n         don't specify start and end times, the old values are deleted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html\">Scheduled scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            run scheduled actions. Any scheduled actions that were specified for the scalable target\n            are deleted.</p>\n         </note>"
             }
         },
         "com.amazonaws.applicationautoscaling#PutScheduledActionRequest": {
@@ -2418,7 +2486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers or updates a scalable target, the resource that you want to scale.</p>\n         <p>Scalable targets are uniquely identified by the combination of resource ID, scalable\n         dimension, and namespace, which represents some capacity dimension of the underlying\n         service.</p>\n         <p>When you register a new scalable target, you must specify values for the minimum and\n         maximum capacity. If the specified resource is not active in the target service, this\n         operation does not change the resource's current capacity. Otherwise, it changes the\n         resource's current capacity to a value that is inside of this range.</p>\n         <p>If you choose to add a scaling policy, current capacity is adjustable within the\n         specified range when scaling starts. Application Auto Scaling scaling policies will not scale capacity to\n         values that are outside of the minimum and maximum range.</p>\n         <p>After you register a scalable target, you do not need to register it again to use other\n         Application Auto Scaling operations. To see which resources have been registered, use <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. You can also view the scaling policies for a service\n         namespace by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. If you no longer need a scalable target, you can\n         deregister it by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html\">DeregisterScalableTarget</a>.</p>\n         <p>To update a scalable target, specify the parameters that you want to change. Include the\n         parameters that identify the scalable target: resource ID, scalable dimension, and\n         namespace. Any parameters that you don't specify are not changed by this update request. </p>\n         <note>\n            <p>If you call the <code>RegisterScalableTarget</code> API to update an existing\n            scalable target, Application Auto Scaling retrieves the current capacity of the resource. If it is below\n            the minimum capacity or above the maximum capacity, Application Auto Scaling adjusts the capacity of the\n            scalable target to place it within these bounds, even if you don't include the\n               <code>MinCapacity</code> or <code>MaxCapacity</code> request parameters.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Registers or updates a scalable target, which is the resource that you want to\n         scale.</p>\n         <p>Scalable targets are uniquely identified by the combination of resource ID, scalable\n         dimension, and namespace, which represents some capacity dimension of the underlying\n         service.</p>\n         <p>When you register a new scalable target, you must specify values for the minimum and\n         maximum capacity. If the specified resource is not active in the target service, this\n         operation does not change the resource's current capacity. Otherwise, it changes the\n         resource's current capacity to a value that is inside of this range.</p>\n         <p>If you add a scaling policy, current capacity is adjustable within the specified range\n         when scaling starts. Application Auto Scaling scaling policies will not scale capacity to values that are\n         outside of the minimum and maximum range.</p>\n         <p>After you register a scalable target, you do not need to register it again to use other\n         Application Auto Scaling operations. To see which resources have been registered, use <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. You can also view the scaling policies for a service\n         namespace by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. If you no longer need a scalable target, you can\n         deregister it by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html\">DeregisterScalableTarget</a>.</p>\n         <p>To update a scalable target, specify the parameters that you want to change. Include the\n         parameters that identify the scalable target: resource ID, scalable dimension, and\n         namespace. Any parameters that you don't specify are not changed by this update request. </p>\n         <note>\n            <p>If you call the <code>RegisterScalableTarget</code> API operation to create a\n            scalable target, there might be a brief delay until the operation achieves <a href=\"https://en.wikipedia.org/wiki/Eventual_consistency\">eventual\n            consistency</a>. You might become aware of this brief delay if you get unexpected\n            errors when performing sequential operations. The typical strategy is to retry the\n            request, and some Amazon Web Services SDKs include automatic backoff and retry logic.</p>\n            <p>If you call the <code>RegisterScalableTarget</code> API operation to update an\n            existing scalable target, Application Auto Scaling retrieves the current capacity of the resource. If\n            it's below the minimum capacity or above the maximum capacity, Application Auto Scaling adjusts the\n            capacity of the scalable target to place it within these bounds, even if you don't\n            include the <code>MinCapacity</code> or <code>MaxCapacity</code> request\n            parameters.</p>\n         </note>"
             }
         },
         "com.amazonaws.applicationautoscaling#RegisterScalableTargetRequest": {
@@ -2454,7 +2522,7 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.applicationautoscaling#ResourceCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum value that you plan to scale out to. When a scaling policy is in effect,\n         Application Auto Scaling can scale out (expand) as needed to the maximum capacity limit in response to\n         changing demand. This property is required when registering a new scalable target.</p>\n         <p>Although you can specify a large maximum capacity, note that service quotas may impose\n         lower limits. Each service has its own default quotas for the maximum capacity of the\n         resource. If you want to specify a higher limit, you can request an increase. For more\n         information, consult the documentation for that service. For information about the default\n         quotas for each service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html\">Service endpoints and\n            quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The maximum value that you plan to scale out to. When a scaling policy is in effect,\n         Application Auto Scaling can scale out (expand) as needed to the maximum capacity limit in response to\n         changing demand. This property is required when registering a new scalable target.</p>\n         <p>Although you can specify a large maximum capacity, note that service quotas might impose\n         lower limits. Each service has its own default quotas for the maximum capacity of the\n         resource. If you want to specify a higher limit, you can request an increase. For more\n         information, consult the documentation for that service. For information about the default\n         quotas for each service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html\">Service endpoints and\n            quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "RoleARN": {
@@ -2468,6 +2536,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An embedded object that contains attributes and attribute values that are used to\n         suspend and resume automatic scaling. Setting the value of an attribute to\n            <code>true</code> suspends the specified scaling activities. Setting it to\n            <code>false</code> (default) resumes the specified scaling activities. </p>\n         <p>\n            <b>Suspension Outcomes</b>\n         </p>\n         <ul>\n            <li>\n               <p>For <code>DynamicScalingInSuspended</code>, while a suspension is in effect, all\n               scale-in activities that are triggered by a scaling policy are suspended.</p>\n            </li>\n            <li>\n               <p>For <code>DynamicScalingOutSuspended</code>, while a suspension is in effect, all\n               scale-out activities that are triggered by a scaling policy are suspended.</p>\n            </li>\n            <li>\n               <p>For <code>ScheduledScalingSuspended</code>, while a suspension is in effect, all\n               scaling activities that involve scheduled actions are suspended. </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html\">Suspending and resuming scaling</a> in the <i>Application Auto Scaling User\n         Guide</i>.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.applicationautoscaling#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Assigns one or more tags to the scalable target. Use this parameter to tag the scalable\n         target when it is created. To tag an existing scalable target, use the <a>TagResource</a> operation.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are\n         required. You cannot have more than one tag on a scalable target with the same tag\n         key.</p>\n         <p>Use tags to control access to a scalable target. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html\">Tagging support\n         for Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2476,7 +2550,14 @@
         },
         "com.amazonaws.applicationautoscaling#RegisterScalableTargetResponse": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "ScalableTargetARN": {
+                    "target": "com.amazonaws.applicationautoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the scalable target.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -2519,6 +2600,25 @@
                     "min": 1,
                     "max": 1023
                 }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.applicationautoscaling#ExceptionMessage"
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.applicationautoscaling#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Application Auto Scaling resource. This value is an Amazon Resource Name (ARN).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.applicationautoscaling#ReturnData": {
@@ -2705,6 +2805,12 @@
                     "target": "com.amazonaws.applicationautoscaling#SuspendedState",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the scaling activities for a scalable target are in a suspended\n         state.</p>"
+                    }
+                },
+                "ScalableTargetARN": {
+                    "target": "com.amazonaws.applicationautoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the scalable target.</p>"
                     }
                 }
             },
@@ -3151,13 +3257,13 @@
                 "MetricIntervalLowerBound": {
                     "target": "com.amazonaws.applicationautoscaling#MetricScale",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lower bound for the difference between the alarm threshold and the CloudWatch metric. If\n         the metric value is above the breach threshold, the lower bound is inclusive (the metric\n         must be greater than or equal to the threshold plus the lower bound). Otherwise, it is\n         exclusive (the metric must be greater than the threshold plus the lower bound). A null\n         value indicates negative infinity.</p>"
+                        "smithy.api#documentation": "<p>The lower bound for the difference between the alarm threshold and the CloudWatch metric. If\n         the metric value is above the breach threshold, the lower bound is inclusive (the metric\n         must be greater than or equal to the threshold plus the lower bound). Otherwise, it's\n         exclusive (the metric must be greater than the threshold plus the lower bound). A null\n         value indicates negative infinity.</p>"
                     }
                 },
                 "MetricIntervalUpperBound": {
                     "target": "com.amazonaws.applicationautoscaling#MetricScale",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper bound for the difference between the alarm threshold and the CloudWatch metric. If\n         the metric value is above the breach threshold, the upper bound is exclusive (the metric\n         must be less than the threshold plus the upper bound). Otherwise, it is inclusive (the\n         metric must be less than or equal to the threshold plus the upper bound). A null value\n         indicates positive infinity.</p>\n         <p>The upper bound must be greater than the lower bound.</p>"
+                        "smithy.api#documentation": "<p>The upper bound for the difference between the alarm threshold and the CloudWatch metric. If\n         the metric value is above the breach threshold, the upper bound is exclusive (the metric\n         must be less than the threshold plus the upper bound). Otherwise, it's inclusive (the\n         metric must be less than or equal to the threshold plus the upper bound). A null value\n         indicates positive infinity.</p>\n         <p>The upper bound must be greater than the lower bound.</p>"
                     }
                 },
                 "ScalingAdjustment": {
@@ -3169,7 +3275,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a step adjustment for a <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html\">StepScalingPolicyConfiguration</a>. Describes an adjustment based on the difference\n         between the value of the aggregated CloudWatch metric and the breach threshold that you've\n         defined for the alarm. </p>\n         <p>For the following examples, suppose that you have an alarm with a breach threshold of\n         50:</p>\n         <ul>\n            <li>\n               <p>To trigger the adjustment when the metric is greater than or equal to 50 and less\n               than 60, specify a lower bound of 0 and an upper bound of 10.</p>\n            </li>\n            <li>\n               <p>To trigger the adjustment when the metric is greater than 40 and less than or\n               equal to 50, specify a lower bound of -10 and an upper bound of 0.</p>\n            </li>\n         </ul>\n         <p>There are a few rules for the step adjustments for your step policy:</p>\n         <ul>\n            <li>\n               <p>The ranges of your step adjustments can't overlap or have a gap.</p>\n            </li>\n            <li>\n               <p>At most one step adjustment can have a null lower bound. If one step adjustment\n               has a negative lower bound, then there must be a step adjustment with a null lower\n               bound.</p>\n            </li>\n            <li>\n               <p>At most one step adjustment can have a null upper bound. If one step adjustment\n               has a positive upper bound, then there must be a step adjustment with a null upper\n               bound.</p>\n            </li>\n            <li>\n               <p>The upper and lower bound can't be null in the same step adjustment.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Represents a step adjustment for a <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html\">StepScalingPolicyConfiguration</a>. Describes an adjustment based on the difference\n         between the value of the aggregated CloudWatch metric and the breach threshold that you've\n         defined for the alarm. </p>\n         <p>For the following examples, suppose that you have an alarm with a breach threshold of\n         50:</p>\n         <ul>\n            <li>\n               <p>To initiate the adjustment when the metric is greater than or equal to 50 and less\n               than 60, specify a lower bound of <code>0</code> and an upper bound of\n                  <code>10</code>.</p>\n            </li>\n            <li>\n               <p>To initiate the adjustment when the metric is greater than 40 and less than or\n               equal to 50, specify a lower bound of <code>-10</code> and an upper bound of\n                  <code>0</code>.</p>\n            </li>\n         </ul>\n         <p>There are a few rules for the step adjustments for your step policy:</p>\n         <ul>\n            <li>\n               <p>The ranges of your step adjustments can't overlap or have a gap.</p>\n            </li>\n            <li>\n               <p>At most one step adjustment can have a null lower bound. If one step adjustment\n               has a negative lower bound, then there must be a step adjustment with a null lower\n               bound.</p>\n            </li>\n            <li>\n               <p>At most one step adjustment can have a null upper bound. If one step adjustment\n               has a positive upper bound, then there must be a step adjustment with a null upper\n               bound.</p>\n            </li>\n            <li>\n               <p>The upper and lower bound can't be null in the same step adjustment.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.applicationautoscaling#StepAdjustments": {
@@ -3240,6 +3346,97 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies whether the scaling activities for a scalable target are in a suspended state.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.applicationautoscaling#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.applicationautoscaling#TagValue"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationautoscaling#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationautoscaling#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationautoscaling#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.applicationautoscaling#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or edits tags on an Application Auto Scaling scalable target.</p>\n         <p>Each tag consists of a tag key and a tag value, which are both case-sensitive strings.\n         To add a tag, specify a new tag key and a tag value. To edit a tag, specify an existing tag\n         key and a new tag value.</p>\n         <p>You can use this operation to tag an Application Auto Scaling scalable target, but you cannot tag a\n         scaling policy or scheduled action.</p>\n         <p>You can also add tags to an Application Auto Scaling scalable target while creating it\n         (<code>RegisterScalableTarget</code>).</p>\n         <p>For general information about tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n         resources</a> in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>Use tags to control access to a scalable target. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html\">Tagging support\n         for Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.applicationautoscaling#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Application Auto Scaling scalable target that you want to apply tags to.</p>\n         <p>For example:\n         <code>arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123</code>\n         </p>\n         <p>To get the ARN for a scalable target, use <a>DescribeScalableTargets</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.applicationautoscaling#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the resource. A tag is a label that you assign to an AWS\n         resource.</p>\n         <p>Each tag consists of a tag key and a tag value.</p>\n         <p>You cannot have more than one tag on an Application Auto Scaling scalable target with the same tag key.\n         If you specify an existing tag key with a different tag value, Application Auto Scaling replaces the\n         current tag value with the specified one.</p>\n         <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-defined tag\n         restrictions</a> in the <i>Amazon Web Services Billing and Cost Management User\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationautoscaling#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.applicationautoscaling#TargetTrackingMetric": {
@@ -3394,7 +3591,7 @@
                 "Stat": {
                     "target": "com.amazonaws.applicationautoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For a\n         list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n         <p>The most commonly used metrics for scaling is <code>Average</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For a\n         list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n         <p>The most commonly used metric for scaling is <code>Average</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3466,6 +3663,74 @@
         },
         "com.amazonaws.applicationautoscaling#TimestampType": {
             "type": "timestamp"
+        },
+        "com.amazonaws.applicationautoscaling#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.applicationautoscaling#ExceptionMessage"
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.applicationautoscaling#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Application Auto Scaling resource. This value is an Amazon Resource Name (ARN).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request contains too many tags. Try the request again with fewer tags.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.applicationautoscaling#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationautoscaling#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationautoscaling#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationautoscaling#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes tags from an Application Auto Scaling scalable target. To delete a tag, specify the tag key and\n         the Application Auto Scaling scalable target.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.applicationautoscaling#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Application Auto Scaling scalable target from which to remove tags.</p>\n         <p>For example:\n         <code>arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123</code>\n         </p>\n         <p>To get the ARN for a scalable target, use <a>DescribeScalableTargets</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.applicationautoscaling#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tag keys. Specify only the tag keys, not the tag values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationautoscaling#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationautoscaling#ValidationException": {
             "type": "structure",

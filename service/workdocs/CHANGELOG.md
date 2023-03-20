@@ -1,3 +1,7 @@
+# v1.14.0 (2023-03-20)
+
+* **Feature**: This release adds a new API, SearchResources, which enable users to search through metadata and content of folders, documents, document versions and comments in a WorkDocs site.
+
 # v1.13.6 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

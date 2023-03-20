@@ -11155,6 +11155,141 @@ func awsAwsquery_deserializeDocumentCharacterSet(v **types.CharacterSet, decoder
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentClusterPendingModifiedValues(v **types.ClusterPendingModifiedValues, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ClusterPendingModifiedValues
+	if *v == nil {
+		sv = &types.ClusterPendingModifiedValues{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("BackupRetentionPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("EngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineVersion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IAMDatabaseAuthenticationEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.IAMDatabaseAuthenticationEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Iops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("PendingCloudwatchLogsExports", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentPendingCloudwatchLogsExports(&sv.PendingCloudwatchLogsExports, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11483,6 +11618,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.EngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("GlobalClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.GlobalClusterIdentifier = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("HostedZoneId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -11569,6 +11717,12 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.MultiAZ = xtv
+			}
+
+		case strings.EqualFold("PendingModifiedValues", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentClusterPendingModifiedValues(&sv.PendingModifiedValues, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("PercentProgress", t.Name.Local):
