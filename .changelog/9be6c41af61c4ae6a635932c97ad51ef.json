@@ -1,8 +1,0 @@
-{
-    "id": "9be6c41a-f61c-4ae6-a635-932c97ad51ef",
-    "type": "feature",
-    "description": "This release makes following few changes. db-cluster-identifier is now a required parameter of create-db-instance. describe-db-cluster will now return PendingModifiedValues and GlobalClusterIdentifier fields in the response.",
-    "modules": [
-        "service/neptune"
-    ]
-}

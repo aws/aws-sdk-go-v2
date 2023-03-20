@@ -1,3 +1,7 @@
+# v1.20.0 (2023-03-20)
+
+* **Feature**: This release makes following few changes. db-cluster-identifier is now a required parameter of create-db-instance. describe-db-cluster will now return PendingModifiedValues and GlobalClusterIdentifier fields in the response.
+
 # v1.19.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

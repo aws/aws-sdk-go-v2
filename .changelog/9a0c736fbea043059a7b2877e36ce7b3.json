@@ -1,8 +1,0 @@
-{
-    "id": "9a0c736f-bea0-4305-9a7b-2877e36ce7b3",
-    "type": "feature",
-    "description": "This release adds a new API, SearchResources, which enable users to search through metadata and content of folders, documents, document versions and comments in a WorkDocs site.",
-    "modules": [
-        "service/workdocs"
-    ]
-}

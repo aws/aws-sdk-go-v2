@@ -1,3 +1,15 @@
+# Release (2023-03-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.19.0](service/applicationautoscaling/CHANGELOG.md#v1190-2023-03-20)
+  * **Feature**: With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.20.0](service/neptune/CHANGELOG.md#v1200-2023-03-20)
+  * **Feature**: This release makes following few changes. db-cluster-identifier is now a required parameter of create-db-instance. describe-db-cluster will now return PendingModifiedValues and GlobalClusterIdentifier fields in the response.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.16.0](service/s3outposts/CHANGELOG.md#v1160-2023-03-20)
+  * **Feature**: S3 On Outposts added support for endpoint status, and a failed endpoint reason, if any
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.14.0](service/workdocs/CHANGELOG.md#v1140-2023-03-20)
+  * **Feature**: This release adds a new API, SearchResources, which enable users to search through metadata and content of folders, documents, document versions and comments in a WorkDocs site.
+
 # Release (2023-03-17)
 
 ## Module Highlights

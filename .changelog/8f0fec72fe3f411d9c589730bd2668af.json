@@ -1,8 +1,0 @@
-{
-    "id": "8f0fec72-fe3f-411d-9c58-9730bd2668af",
-    "type": "feature",
-    "description": "With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}
