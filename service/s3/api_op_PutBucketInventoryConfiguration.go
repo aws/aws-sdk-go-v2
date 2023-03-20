@@ -181,9 +181,6 @@ func (c *Client) addOperationPutBucketInventoryConfigurationMiddlewares(stack *m
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack, options); err != nil {
-		return err
-	}
 	if err = addPutBucketInventoryConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

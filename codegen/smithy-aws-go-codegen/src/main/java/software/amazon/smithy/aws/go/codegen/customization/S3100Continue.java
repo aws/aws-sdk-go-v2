@@ -14,7 +14,10 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.traits.HttpTrait;
 import software.amazon.smithy.utils.ListUtils;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Add middleware, which adds {Expect: 100-continue} header for s3 client HTTP PUT request larger than 2MB
@@ -23,8 +26,8 @@ import java.util.List;
 public class S3100Continue implements GoIntegration {
     private static final String ADD_100Continue_Header = "add100Continue";
     private static final String ADD_100Continue_Header_INTERNAL = "Add100Continue";
-    private static final String ADD_100Continue_Header_Option = "AddContinueOption";
     private static final String Continue_Client_Option = "ContinueHeaderThresholdBytes";
+    private static final Set<String> Put_Op_Set = new HashSet<>(Arrays.asList("PutObject", "UploadPart"));
 
     /**
      * Return true if service is Amazon S3.
@@ -76,8 +79,9 @@ public class S3100Continue implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) -> isS3Service(model, service) && operation.
-                                getTrait(HttpTrait.class).get().getMethod().equals("PUT"))
+                        .operationPredicate((model, service, operation) ->
+                                isS3Service(model, service) && Put_Op_Set.contains(operation.getId().getName())
+                        )
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header).build())
                                 .useClientOptions()
@@ -92,9 +96,9 @@ public class S3100Continue implements GoIntegration {
                                     .type(SymbolUtils.createValueSymbolBuilder("int64")
                                             .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                             .build())
-                                    .documentation("The threshold ContentLength for HTTP PUT request to receive {Expect: 100-continue} header. " +
-                                            "When set to -1, this header will be opt out of the operation request; when set to 0, the threshold" +
-                                            "will be set to default 2MB")
+                                    .documentation("The threshold ContentLength in bytes for HTTP PUT request to receive {Expect: 100-continue} header. " +
+                                            "Setting to -1 will disable adding the Expect header to requests; setting to 0 will set the threshold " +
+                                            "to default 2MB")
                                     .build()
                         ))
                         .build()

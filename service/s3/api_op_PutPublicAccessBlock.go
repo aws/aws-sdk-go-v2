@@ -163,9 +163,6 @@ func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.S
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack, options); err != nil {
-		return err
-	}
 	if err = addPutPublicAccessBlockInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}

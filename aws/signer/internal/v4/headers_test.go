@@ -41,21 +41,21 @@ func TestIgnoredHeaders(t *testing.T) {
 	}{
 		"expect": {
 			Header:        "Expect",
-			ExpectIgnored: false,
+			ExpectIgnored: true,
 		},
 		"authorization": {
 			Header:        "Authorization",
-			ExpectIgnored: false,
+			ExpectIgnored: true,
 		},
 		"X-AMZ header": {
 			Header:        "X-Amz-Content-Sha256",
-			ExpectIgnored: true,
+			ExpectIgnored: false,
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if e, a := c.ExpectIgnored, IgnoredHeaders.IsValid(c.Header); e != a {
+			if e, a := c.ExpectIgnored, IgnoredHeaders.IsValid(c.Header); e == a {
 				t.Errorf("expect ignored %v, was %v", e, a)
 			}
 		})

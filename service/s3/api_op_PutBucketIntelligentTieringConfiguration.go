@@ -171,9 +171,6 @@ func (c *Client) addOperationPutBucketIntelligentTieringConfigurationMiddlewares
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack, options); err != nil {
-		return err
-	}
 	if err = addPutBucketIntelligentTieringConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

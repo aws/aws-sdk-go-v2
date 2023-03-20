@@ -80,9 +80,9 @@ type Options struct {
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
-	// The threshold ContentLength for HTTP PUT request to receive {Expect:
-	// 100-continue} header. When set to -1, this header will be opt out of the
-	// operation request; when set to 0, the thresholdwill be set to default 2MB
+	// The threshold ContentLength in bytes for HTTP PUT request to receive {Expect:
+	// 100-continue} header. Setting to -1 will disable adding the Expect header to
+	// requests; setting to 0 will set the threshold to default 2MB
 	ContinueHeaderThresholdBytes int64
 
 	// The credentials object to use when signing requests.

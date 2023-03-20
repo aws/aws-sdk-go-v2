@@ -192,9 +192,6 @@ func (c *Client) addOperationPutBucketLifecycleConfigurationMiddlewares(stack *m
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = add100Continue(stack, options); err != nil {
-		return err
-	}
 	if err = addPutBucketLifecycleConfigurationInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
