@@ -6,69 +6,54 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a membership for a specific collaboration identifier and joins the
-// collaboration.
-func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipInput, optFns ...func(*Options)) (*CreateMembershipOutput, error) {
+// Tags a resource.
+func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
-		params = &CreateMembershipInput{}
+		params = &TagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMembership", params, optFns, c.addOperationCreateMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagResource", params, optFns, c.addOperationTagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateMembershipOutput)
+	out := result.(*TagResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateMembershipInput struct {
+type TagResourceInput struct {
 
-	// The unique ID for the associated collaboration.
+	// The Amazon Resource Name (ARN) associated with the resource you want to tag.
 	//
 	// This member is required.
-	CollaborationIdentifier *string
+	ResourceArn *string
 
-	// An indicator as to whether query logging has been enabled or disabled for the
-	// collaboration.
+	// A map of objects specifying each key name and value.
 	//
 	// This member is required.
-	QueryLogStatus types.MembershipQueryLogStatus
-
-	// An optional label that you can assign to a resource when you create it. Each tag
-	// consists of a key and an optional value, both of which you define. When you use
-	// tagging, you can also use tag-based access control in IAM policies to control
-	// access to this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-type CreateMembershipOutput struct {
-
-	// The membership that was created.
-	//
-	// This member is required.
-	Membership *types.Membership
-
+type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMembership{}, middleware.After)
+func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMembership{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -108,10 +93,10 @@ func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateMembershipValidationMiddleware(stack); err != nil {
+	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMembership(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,11 +111,11 @@ func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateMembership(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTagResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "cleanrooms",
-		OperationName: "CreateMembership",
+		OperationName: "TagResource",
 	}
 }

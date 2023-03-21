@@ -29,13 +29,13 @@ import (
 // cannot pause all file writes to the volume, you should unmount the volume from
 // within the instance, issue the snapshot command, and then remount the volume to
 // ensure a consistent and complete snapshot. You may remount and use your volume
-// while the snapshot status is pending. To create a snapshot for Amazon EBS
-// volumes that serve as root devices, you should stop the instance before taking
-// the snapshot. Snapshots that are taken from encrypted volumes are automatically
-// encrypted. Volumes that are created from encrypted snapshots are also
-// automatically encrypted. Your encrypted volumes and any associated snapshots
-// always remain protected. You can tag your snapshots during creation. For more
-// information, see Tag your Amazon EC2 resources
+// while the snapshot status is pending. When you create a snapshot for an EBS
+// volume that serves as a root device, we recommend that you stop the instance
+// before taking the snapshot. Snapshots that are taken from encrypted volumes are
+// automatically encrypted. Volumes that are created from encrypted snapshots are
+// also automatically encrypted. Your encrypted volumes and any associated
+// snapshots always remain protected. You can tag your snapshots during creation.
+// For more information, see Tag your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 // Amazon Elastic Compute Cloud User Guide. For more information, see Amazon
 // Elastic Block Store

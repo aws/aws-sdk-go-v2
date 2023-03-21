@@ -6,69 +6,55 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a membership for a specific collaboration identifier and joins the
-// collaboration.
-func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipInput, optFns ...func(*Options)) (*CreateMembershipOutput, error) {
+// Removes a tag or list of tags from a resource.
+func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
-		params = &CreateMembershipInput{}
+		params = &UntagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMembership", params, optFns, c.addOperationCreateMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagResource", params, optFns, c.addOperationUntagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateMembershipOutput)
+	out := result.(*UntagResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateMembershipInput struct {
+type UntagResourceInput struct {
 
-	// The unique ID for the associated collaboration.
+	// The Amazon Resource Name (ARN) associated with the resource you want to remove
+	// the tag from.
 	//
 	// This member is required.
-	CollaborationIdentifier *string
+	ResourceArn *string
 
-	// An indicator as to whether query logging has been enabled or disabled for the
-	// collaboration.
+	// A list of key names of tags to be removed.
 	//
 	// This member is required.
-	QueryLogStatus types.MembershipQueryLogStatus
-
-	// An optional label that you can assign to a resource when you create it. Each tag
-	// consists of a key and an optional value, both of which you define. When you use
-	// tagging, you can also use tag-based access control in IAM policies to control
-	// access to this resource.
-	Tags map[string]string
+	TagKeys []string
 
 	noSmithyDocumentSerde
 }
 
-type CreateMembershipOutput struct {
-
-	// The membership that was created.
-	//
-	// This member is required.
-	Membership *types.Membership
-
+type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMembership{}, middleware.After)
+func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMembership{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUntagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -108,10 +94,10 @@ func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateMembershipValidationMiddleware(stack); err != nil {
+	if err = addOpUntagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMembership(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,11 +112,11 @@ func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateMembership(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUntagResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "cleanrooms",
-		OperationName: "CreateMembership",
+		OperationName: "UntagResource",
 	}
 }

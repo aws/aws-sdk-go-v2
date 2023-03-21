@@ -51,6 +51,9 @@ type RetryDataReplicationOutput struct {
 	// Source server data replication info.
 	DataReplicationInfo *types.DataReplicationInfo
 
+	// Source server fqdn for action framework.
+	FqdnForActionFramework *string
+
 	// Source server archived status.
 	IsArchived *bool
 
@@ -71,6 +74,9 @@ type RetryDataReplicationOutput struct {
 
 	// Source server Tags.
 	Tags map[string]string
+
+	// Source server user provided ID.
+	UserProvidedID *string
 
 	// Source server vCenter client id.
 	VcenterClientID *string

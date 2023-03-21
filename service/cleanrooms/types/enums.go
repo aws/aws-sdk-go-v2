@@ -423,6 +423,7 @@ type ValidationExceptionReason string
 const (
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
 	ValidationExceptionReasonInvalidConfiguration  ValidationExceptionReason = "INVALID_CONFIGURATION"
+	ValidationExceptionReasonInvalidQuery          ValidationExceptionReason = "INVALID_QUERY"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -432,5 +433,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
 		"FIELD_VALIDATION_FAILED",
 		"INVALID_CONFIGURATION",
+		"INVALID_QUERY",
 	}
 }

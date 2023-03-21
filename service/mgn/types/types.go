@@ -235,6 +235,75 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Export errors data.
+type ExportErrorData struct {
+
+	// Export errors data raw error.
+	RawError *string
+
+	noSmithyDocumentSerde
+}
+
+// Export task.
+type ExportTask struct {
+
+	// Export task creation datetime.
+	CreationDateTime *string
+
+	// Export task end datetime.
+	EndDateTime *string
+
+	// Export task id.
+	ExportID *string
+
+	// Export task progress percentage.
+	ProgressPercentage *float32
+
+	// Export task s3 bucket.
+	S3Bucket *string
+
+	// Export task s3 bucket owner.
+	S3BucketOwner *string
+
+	// Export task s3 key.
+	S3Key *string
+
+	// Export task status.
+	Status ExportStatus
+
+	// Export task summary.
+	Summary *ExportTaskSummary
+
+	noSmithyDocumentSerde
+}
+
+// Export task error.
+type ExportTaskError struct {
+
+	// Export task error data.
+	ErrorData *ExportErrorData
+
+	// Export task error datetime.
+	ErrorDateTime *string
+
+	noSmithyDocumentSerde
+}
+
+// Export task summary.
+type ExportTaskSummary struct {
+
+	// Export task summary applications count.
+	ApplicationsCount int64
+
+	// Export task summary servers count.
+	ServersCount int64
+
+	// Export task summary waves count.
+	WavesCount int64
+
+	noSmithyDocumentSerde
+}
+
 // Identification hints.
 type IdentificationHints struct {
 
@@ -252,6 +321,123 @@ type IdentificationHints struct {
 
 	// vmWare UUID identification hint.
 	VmWareUuid *string
+
+	noSmithyDocumentSerde
+}
+
+// Import error data.
+type ImportErrorData struct {
+
+	// Import error data application ID.
+	ApplicationID *string
+
+	// Import error data ec2 LaunchTemplate ID.
+	Ec2LaunchTemplateID *string
+
+	// Import error data raw error.
+	RawError *string
+
+	// Import error data row number.
+	RowNumber int64
+
+	// Import error data source server ID.
+	SourceServerID *string
+
+	// Import error data wave id.
+	WaveID *string
+
+	noSmithyDocumentSerde
+}
+
+// Import task.
+type ImportTask struct {
+
+	// Import task creation datetime.
+	CreationDateTime *string
+
+	// Import task end datetime.
+	EndDateTime *string
+
+	// Import task id.
+	ImportID *string
+
+	// Import task progress percentage.
+	ProgressPercentage *float32
+
+	// Import task s3 bucket source.
+	S3BucketSource *S3BucketSource
+
+	// Import task status.
+	Status ImportStatus
+
+	// Import task summary.
+	Summary *ImportTaskSummary
+
+	noSmithyDocumentSerde
+}
+
+// Import task error.
+type ImportTaskError struct {
+
+	// Import task error data.
+	ErrorData *ImportErrorData
+
+	// Import task error datetime.
+	ErrorDateTime *string
+
+	// Import task error type.
+	ErrorType ImportErrorType
+
+	noSmithyDocumentSerde
+}
+
+// Import task summary.
+type ImportTaskSummary struct {
+
+	// Import task summary applications.
+	Applications *ImportTaskSummaryApplications
+
+	// Import task summary servers.
+	Servers *ImportTaskSummaryServers
+
+	// Import task summary waves.
+	Waves *ImportTaskSummaryWaves
+
+	noSmithyDocumentSerde
+}
+
+// Import task summary applications.
+type ImportTaskSummaryApplications struct {
+
+	// Import task summary applications created count.
+	CreatedCount int64
+
+	// Import task summary applications modified count.
+	ModifiedCount int64
+
+	noSmithyDocumentSerde
+}
+
+// Import task summary servers.
+type ImportTaskSummaryServers struct {
+
+	// Import task summary servers created count.
+	CreatedCount int64
+
+	// Import task summary servers modified count.
+	ModifiedCount int64
+
+	noSmithyDocumentSerde
+}
+
+// Import task summery waves.
+type ImportTaskSummaryWaves struct {
+
+	// Import task summery waves created count.
+	CreatedCount int64
+
+	// Import task summery waves modified count.
+	ModifiedCount int64
 
 	noSmithyDocumentSerde
 }
@@ -575,6 +761,24 @@ type ListApplicationsRequestFilters struct {
 	noSmithyDocumentSerde
 }
 
+// List exports request filters.
+type ListExportsRequestFilters struct {
+
+	// List exports request filters export ids.
+	ExportIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// List imports request filters.
+type ListImportsRequestFilters struct {
+
+	// List imports request filters import IDs.
+	ImportIDs []string
+
+	noSmithyDocumentSerde
+}
+
 // Waves list filters.
 type ListWavesRequestFilters struct {
 
@@ -739,6 +943,25 @@ type ReplicationConfigurationTemplate struct {
 	noSmithyDocumentSerde
 }
 
+// S3 bucket source.
+type S3BucketSource struct {
+
+	// S3 bucket source s3 bucket.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// S3 bucket source s3 key.
+	//
+	// This member is required.
+	S3Key *string
+
+	// S3 bucket source s3 bucket owner.
+	S3BucketOwner *string
+
+	noSmithyDocumentSerde
+}
+
 // Source server properties.
 type SourceProperties struct {
 
@@ -780,6 +1003,9 @@ type SourceServer struct {
 	// Source server data replication info.
 	DataReplicationInfo *DataReplicationInfo
 
+	// Source server fqdn for action framework.
+	FqdnForActionFramework *string
+
 	// Source server archived status.
 	IsArchived *bool
 
@@ -801,6 +1027,9 @@ type SourceServer struct {
 	// Source server Tags.
 	Tags map[string]string
 
+	// Source server user provided ID.
+	UserProvidedID *string
+
 	// Source server vCenter client id.
 	VcenterClientID *string
 
@@ -818,11 +1047,20 @@ type SourceServerActionDocument struct {
 	// Source server post migration custom action active status.
 	Active *bool
 
+	// Source server post migration custom action category.
+	Category ActionCategory
+
+	// Source server post migration custom action description.
+	Description *string
+
 	// Source server post migration custom action document identifier.
 	DocumentIdentifier *string
 
 	// Source server post migration custom action document version.
 	DocumentVersion *string
+
+	// Source server post migration custom action external parameters.
+	ExternalParameters map[string]SsmExternalParameter
 
 	// Source server post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool
@@ -861,6 +1099,9 @@ type SsmDocument struct {
 	// This member is required.
 	SsmDocumentName *string
 
+	// AWS Systems Manager Document external parameters.
+	ExternalParameters map[string]SsmExternalParameter
+
 	// If true, Cutover will not be enabled if the document has failed.
 	MustSucceedForCutover *bool
 
@@ -872,6 +1113,24 @@ type SsmDocument struct {
 
 	noSmithyDocumentSerde
 }
+
+// AWS Systems Manager Document external parameter.
+//
+// The following types satisfy this interface:
+//
+//	SsmExternalParameterMemberDynamicPath
+type SsmExternalParameter interface {
+	isSsmExternalParameter()
+}
+
+// AWS Systems Manager Document external parameters dynamic path.
+type SsmExternalParameterMemberDynamicPath struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SsmExternalParameterMemberDynamicPath) isSsmExternalParameter() {}
 
 // AWS Systems Manager Parameter Store parameter.
 type SsmParameterStoreParameter struct {
@@ -900,11 +1159,20 @@ type TemplateActionDocument struct {
 	// Template post migration custom action active status.
 	Active *bool
 
+	// Template post migration custom action category.
+	Category ActionCategory
+
+	// Template post migration custom action description.
+	Description *string
+
 	// Template post migration custom action document identifier.
 	DocumentIdentifier *string
 
 	// Template post migration custom action document version.
 	DocumentVersion *string
+
+	// Template post migration custom action external parameters.
+	ExternalParameters map[string]SsmExternalParameter
 
 	// Template post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool
@@ -1029,3 +1297,14 @@ type WaveAggregatedStatus struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isSsmExternalParameter() {}

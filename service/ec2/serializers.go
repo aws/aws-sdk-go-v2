@@ -42820,6 +42820,37 @@ func awsEc2query_serializeDocumentPacketHeaderStatementRequest(v *types.PacketHe
 	return nil
 }
 
+func awsEc2query_serializeDocumentPathRequestFilter(v *types.PathRequestFilter, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DestinationAddress != nil {
+		objectKey := object.Key("DestinationAddress")
+		objectKey.String(*v.DestinationAddress)
+	}
+
+	if v.DestinationPortRange != nil {
+		objectKey := object.Key("DestinationPortRange")
+		if err := awsEc2query_serializeDocumentRequestFilterPortRange(v.DestinationPortRange, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceAddress != nil {
+		objectKey := object.Key("SourceAddress")
+		objectKey.String(*v.SourceAddress)
+	}
+
+	if v.SourcePortRange != nil {
+		objectKey := object.Key("SourcePortRange")
+		if err := awsEc2query_serializeDocumentRequestFilterPortRange(v.SourcePortRange, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentPathStatementRequest(v *types.PathStatementRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -43438,6 +43469,23 @@ func awsEc2query_serializeDocumentReplaceRootVolumeTaskIds(v []string, value que
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentRequestFilterPortRange(v *types.RequestFilterPortRange, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.FromPort != nil {
+		objectKey := object.Key("FromPort")
+		objectKey.Integer(*v.FromPort)
+	}
+
+	if v.ToPort != nil {
+		objectKey := object.Key("ToPort")
+		objectKey.Integer(*v.ToPort)
+	}
+
 	return nil
 }
 
@@ -49625,6 +49673,20 @@ func awsEc2query_serializeOpDocumentCreateNetworkInsightsPathInput(v *CreateNetw
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FilterAtDestination != nil {
+		objectKey := object.Key("FilterAtDestination")
+		if err := awsEc2query_serializeDocumentPathRequestFilter(v.FilterAtDestination, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterAtSource != nil {
+		objectKey := object.Key("FilterAtSource")
+		if err := awsEc2query_serializeDocumentPathRequestFilter(v.FilterAtSource, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Protocol) > 0 {

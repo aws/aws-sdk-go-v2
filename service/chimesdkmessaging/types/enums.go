@@ -213,6 +213,24 @@ func (InvocationType) Values() []InvocationType {
 	}
 }
 
+type MessagingDataType string
+
+// Enum values for MessagingDataType
+const (
+	MessagingDataTypeChannel        MessagingDataType = "Channel"
+	MessagingDataTypeChannelMessage MessagingDataType = "ChannelMessage"
+)
+
+// Values returns all known values for MessagingDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MessagingDataType) Values() []MessagingDataType {
+	return []MessagingDataType{
+		"Channel",
+		"ChannelMessage",
+	}
+}
+
 type PushNotificationType string
 
 // Enum values for PushNotificationType

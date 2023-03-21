@@ -17,7 +17,10 @@ import (
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html).
 // For more information, see Release an allocation
 // (https://docs.aws.amazon.com/vpc/latest/ipam/release-pool-alloc-ipam.html) in
-// the Amazon VPC IPAM User Guide.
+// the Amazon VPC IPAM User Guide. All EC2 API actions follow an eventual
+// consistency
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency)
+// model.
 func (c *Client) ReleaseIpamPoolAllocation(ctx context.Context, params *ReleaseIpamPoolAllocationInput, optFns ...func(*Options)) (*ReleaseIpamPoolAllocationOutput, error) {
 	if params == nil {
 		params = &ReleaseIpamPoolAllocationInput{}

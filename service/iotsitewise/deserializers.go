@@ -6631,6 +6631,15 @@ func awsRestjson1_deserializeOpDocumentDescribeTimeSeriesOutput(v **DescribeTime
 				sv.PropertyId = ptr.String(jtv)
 			}
 
+		case "timeSeriesArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.TimeSeriesArn = ptr.String(jtv)
+			}
+
 		case "timeSeriesCreationDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -18726,6 +18735,15 @@ func awsRestjson1_deserializeDocumentTimeSeriesSummary(v **types.TimeSeriesSumma
 					return fmt.Errorf("expected ID to be of type string, got %T instead", value)
 				}
 				sv.PropertyId = ptr.String(jtv)
+			}
+
+		case "timeSeriesArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.TimeSeriesArn = ptr.String(jtv)
 			}
 
 		case "timeSeriesCreationDate":

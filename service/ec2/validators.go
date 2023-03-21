@@ -12210,9 +12210,6 @@ func validateOpCreateNetworkInsightsPathInput(v *CreateNetworkInsightsPathInput)
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
-	if v.Destination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
-	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}

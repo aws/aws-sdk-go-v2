@@ -12,7 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of all the CIDR allocations in an IPAM pool.
+// Get a list of all the CIDR allocations in an IPAM pool. If you use this action
+// after AllocateIpamPoolCidr
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html)
+// or ReleaseIpamPoolAllocation
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html),
+// note that all EC2 API actions follow an eventual consistency
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency)
+// model.
 func (c *Client) GetIpamPoolAllocations(ctx context.Context, params *GetIpamPoolAllocationsInput, optFns ...func(*Options)) (*GetIpamPoolAllocationsOutput, error) {
 	if params == nil {
 		params = &GetIpamPoolAllocationsInput{}

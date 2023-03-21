@@ -608,6 +608,22 @@ type SearchField struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for connecting a messaging stream to Amazon Kinesis.
+type StreamingConfiguration struct {
+
+	// The data type of the configuration.
+	//
+	// This member is required.
+	DataType MessagingDataType
+
+	// The ARN of the resource in the configuration.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary of the sub-channels associated with the elastic channel.
 type SubChannelSummary struct {
 

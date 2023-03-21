@@ -470,6 +470,46 @@ func (m *validateOpGetReplicationConfiguration) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListExportErrors struct {
+}
+
+func (*validateOpListExportErrors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExportErrors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExportErrorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExportErrorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListImportErrors struct {
+}
+
+func (*validateOpListImportErrors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListImportErrors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListImportErrorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListImportErrorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSourceServerActions struct {
 }
 
@@ -665,6 +705,46 @@ func (m *validateOpStartCutover) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartCutoverInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartExport struct {
+}
+
+func (*validateOpStartExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartImport struct {
+}
+
+func (*validateOpStartImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartImportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1042,6 +1122,14 @@ func addOpGetReplicationConfigurationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetReplicationConfiguration{}, middleware.After)
 }
 
+func addOpListExportErrorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExportErrors{}, middleware.After)
+}
+
+func addOpListImportErrorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListImportErrors{}, middleware.After)
+}
+
 func addOpListSourceServerActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSourceServerActions{}, middleware.After)
 }
@@ -1080,6 +1168,14 @@ func addOpRetryDataReplicationValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpStartCutoverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCutover{}, middleware.After)
+}
+
+func addOpStartExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartExport{}, middleware.After)
+}
+
+func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartImport{}, middleware.After)
 }
 
 func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1162,6 +1258,24 @@ func validatePostLaunchActions(v *types.PostLaunchActions) error {
 		if err := validateSsmDocuments(v.SsmDocuments); err != nil {
 			invalidParams.AddNested("SsmDocuments", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketSource(v *types.S3BucketSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketSource"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1655,6 +1769,36 @@ func validateOpGetReplicationConfigurationInput(v *GetReplicationConfigurationIn
 	}
 }
 
+func validateOpListExportErrorsInput(v *ListExportErrorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExportErrorsInput"}
+	if v.ExportID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListImportErrorsInput(v *ListImportErrorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListImportErrorsInput"}
+	if v.ImportID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListSourceServerActionsInput(v *ListSourceServerActionsInput) error {
 	if v == nil {
 		return nil
@@ -1831,6 +1975,43 @@ func validateOpStartCutoverInput(v *StartCutoverInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartCutoverInput"}
 	if v.SourceServerIDs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerIDs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartExportInput(v *StartExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartExportInput"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartImportInput(v *StartImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartImportInput"}
+	if v.S3BucketSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketSource"))
+	} else if v.S3BucketSource != nil {
+		if err := validateS3BucketSource(v.S3BucketSource); err != nil {
+			invalidParams.AddNested("S3BucketSource", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

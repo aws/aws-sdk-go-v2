@@ -1,0 +1,8 @@
+{
+    "id": "bc95245c-568d-4ba1-9782-cf78152bdbb0",
+    "type": "feature",
+    "description": "This release introduces the Import and export feature and expansion of the post-launch actions",
+    "modules": [
+        "service/mgn"
+    ]
+}

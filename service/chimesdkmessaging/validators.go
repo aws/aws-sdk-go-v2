@@ -290,6 +290,26 @@ func (m *validateOpDeleteChannelModerator) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMessagingStreamingConfigurations struct {
+}
+
+func (*validateOpDeleteMessagingStreamingConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMessagingStreamingConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMessagingStreamingConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMessagingStreamingConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeChannelBan struct {
 }
 
@@ -505,6 +525,26 @@ func (m *validateOpGetChannelMessageStatus) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetChannelMessageStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMessagingStreamingConfigurations struct {
+}
+
+func (*validateOpGetMessagingStreamingConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMessagingStreamingConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMessagingStreamingConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMessagingStreamingConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +790,26 @@ func (m *validateOpPutChannelMembershipPreferences) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutMessagingStreamingConfigurations struct {
+}
+
+func (*validateOpPutMessagingStreamingConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMessagingStreamingConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMessagingStreamingConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMessagingStreamingConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRedactChannelMessage struct {
 }
 
@@ -986,6 +1046,10 @@ func addOpDeleteChannelModeratorValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteChannelModerator{}, middleware.After)
 }
 
+func addOpDeleteMessagingStreamingConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMessagingStreamingConfigurations{}, middleware.After)
+}
+
 func addOpDescribeChannelBanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeChannelBan{}, middleware.After)
 }
@@ -1028,6 +1092,10 @@ func addOpGetChannelMessageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetChannelMessageStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannelMessageStatus{}, middleware.After)
+}
+
+func addOpGetMessagingStreamingConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMessagingStreamingConfigurations{}, middleware.After)
 }
 
 func addOpListChannelBansValidationMiddleware(stack *middleware.Stack) error {
@@ -1076,6 +1144,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutChannelMembershipPreferencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutChannelMembershipPreferences{}, middleware.After)
+}
+
+func addOpPutMessagingStreamingConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMessagingStreamingConfigurations{}, middleware.After)
 }
 
 func addOpRedactChannelMessageValidationMiddleware(stack *middleware.Stack) error {
@@ -1292,6 +1364,41 @@ func validateSearchFields(v []types.SearchField) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SearchFields"}
 	for i := range v {
 		if err := validateSearchField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamingConfiguration(v *types.StreamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamingConfiguration"}
+	if len(v.DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamingConfigurationList(v []types.StreamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamingConfigurationList"}
+	for i := range v {
+		if err := validateStreamingConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1654,6 +1761,21 @@ func validateOpDeleteChannelModeratorInput(v *DeleteChannelModeratorInput) error
 	}
 }
 
+func validateOpDeleteMessagingStreamingConfigurationsInput(v *DeleteMessagingStreamingConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMessagingStreamingConfigurationsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeChannelBanInput(v *DescribeChannelBanInput) error {
 	if v == nil {
 		return nil
@@ -1876,6 +1998,21 @@ func validateOpGetChannelMessageStatusInput(v *GetChannelMessageStatusInput) err
 	}
 }
 
+func validateOpGetMessagingStreamingConfigurationsInput(v *GetMessagingStreamingConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMessagingStreamingConfigurationsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListChannelBansInput(v *ListChannelBansInput) error {
 	if v == nil {
 		return nil
@@ -2078,6 +2215,28 @@ func validateOpPutChannelMembershipPreferencesInput(v *PutChannelMembershipPrefe
 	} else if v.Preferences != nil {
 		if err := validateChannelMembershipPreferences(v.Preferences); err != nil {
 			invalidParams.AddNested("Preferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutMessagingStreamingConfigurationsInput(v *PutMessagingStreamingConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMessagingStreamingConfigurationsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.StreamingConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamingConfigurations"))
+	} else if v.StreamingConfigurations != nil {
+		if err := validateStreamingConfigurationList(v.StreamingConfigurations); err != nil {
+			invalidParams.AddNested("StreamingConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
