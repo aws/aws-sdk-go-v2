@@ -1,0 +1,10 @@
+{
+    "id": "f9c178d0-7e2d-4fff-8bc8-38477c830082",
+    "type": "feature",
+    "description": "modify s3 100continue middleware comment, shrink related operations",
+    "modules": [
+        ".",
+        "service/internal/s3shared",
+        "service/s3"
+    ]
+}
