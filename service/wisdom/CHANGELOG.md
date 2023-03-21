@@ -1,3 +1,7 @@
+# v1.13.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2023-03-13)
 
 * **Feature**: This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField

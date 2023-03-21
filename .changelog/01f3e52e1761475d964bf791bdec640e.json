@@ -1,8 +1,0 @@
-{
-    "id": "01f3e52e-1761-475d-964b-f791bdec640e",
-    "type": "feature",
-    "description": "Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.",
-    "modules": [
-        "service/chimesdkmessaging"
-    ]
-}

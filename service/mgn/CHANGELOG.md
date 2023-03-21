@@ -1,3 +1,8 @@
+# v1.18.0 (2023-03-21)
+
+* **Feature**: This release introduces the Import and export feature and expansion of the post-launch actions
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.18.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-03-16)
 
 * **Feature**: Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.

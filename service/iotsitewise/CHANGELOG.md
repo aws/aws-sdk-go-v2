@@ -1,3 +1,8 @@
+# v1.28.0 (2023-03-21)
+
+* **Feature**: Provide support for tagging of data streams and enabling tag based authorization for property alias
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

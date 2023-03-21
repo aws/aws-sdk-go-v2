@@ -1,3 +1,7 @@
+# v1.19.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-03-20)
 
 * **Feature**: With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.

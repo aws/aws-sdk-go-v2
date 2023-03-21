@@ -1,3 +1,7 @@
+# v1.6.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2023-03-17)
 
 * **Feature**: This release adds a new filter to ListAccountAssociations API and a new filter to ListBillingGroups API.

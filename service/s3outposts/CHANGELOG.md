@@ -1,3 +1,7 @@
+# v1.16.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-03-20)
 
 * **Feature**: S3 On Outposts added support for endpoint status, and a failed endpoint reason, if any

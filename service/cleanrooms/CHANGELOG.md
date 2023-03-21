@@ -1,3 +1,8 @@
+# v1.1.0 (2023-03-21)
+
+* **Feature**: GA Release of AWS Clean Rooms, Added Tagging Functionality
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

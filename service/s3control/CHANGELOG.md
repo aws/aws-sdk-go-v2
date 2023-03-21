@@ -1,3 +1,7 @@
+# v1.31.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2023-03-15)
 
 * **Feature**: Added support for S3 Object Lambda aliases.

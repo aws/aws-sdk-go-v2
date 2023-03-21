@@ -1,8 +1,0 @@
-{
-    "id": "9fe738cb-fcc6-464e-a0f4-09e69b4b3b87",
-    "type": "feature",
-    "description": "GA Release of AWS Clean Rooms, Added Tagging Functionality",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

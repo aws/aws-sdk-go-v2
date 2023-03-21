@@ -1,8 +1,0 @@
-{
-    "id": "feb5eb0a-859d-4ebd-ac8d-3cfa283438e7",
-    "type": "feature",
-    "description": "Provide support for tagging of data streams and enabling tag based authorization for property alias",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

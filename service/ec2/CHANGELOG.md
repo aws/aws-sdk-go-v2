@@ -1,3 +1,8 @@
+# v1.91.0 (2023-03-21)
+
+* **Feature**: This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.90.0 (2023-03-14)
 
 * **Feature**: This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.

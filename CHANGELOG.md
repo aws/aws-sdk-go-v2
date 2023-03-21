@@ -1,3 +1,24 @@
+# Release (2023-03-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.13.0](service/chimesdkmessaging/CHANGELOG.md#v1130-2023-03-21)
+  * **Feature**: Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.1.0](service/cleanrooms/CHANGELOG.md#v110-2023-03-21)
+  * **Feature**: GA Release of AWS Clean Rooms, Added Tagging Functionality
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.91.0](service/ec2/CHANGELOG.md#v1910-2023-03-21)
+  * **Feature**: This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided.
+* `github.com/aws/aws-sdk-go-v2/service/internal/s3shared`: [v1.14.0](service/internal/s3shared/CHANGELOG.md#v1140-2023-03-21)
+  * **Feature**: port v1 sdk 100-continue http header customization for s3 PutObject/UploadPart request and enable user config
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.28.0](service/iotsitewise/CHANGELOG.md#v1280-2023-03-21)
+  * **Feature**: Provide support for tagging of data streams and enabling tag based authorization for property alias
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.18.0](service/mgn/CHANGELOG.md#v1180-2023-03-21)
+  * **Feature**: This release introduces the Import and export feature and expansion of the post-launch actions
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.31.0](service/s3/CHANGELOG.md#v1310-2023-03-21)
+  * **Feature**: port v1 sdk 100-continue http header customization for s3 PutObject/UploadPart request and enable user config
+
 # Release (2023-03-20)
 
 ## Module Highlights

@@ -1,3 +1,8 @@
+# v1.13.0 (2023-03-21)
+
+* **Feature**: Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.5 (2023-03-10)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.18.19 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.18 (2023-03-16)
 
 * **Bug Fix**: Allow RoleARN to be set as functional option on STS WebIdentityRoleOptions. Fixes aws/aws-sdk-go-v2#2015.
