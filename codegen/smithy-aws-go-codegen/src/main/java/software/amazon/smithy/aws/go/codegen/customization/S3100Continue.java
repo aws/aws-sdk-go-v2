@@ -27,7 +27,7 @@ public class S3100Continue implements GoIntegration {
     private static final String ADD_100Continue_Header = "add100Continue";
     private static final String ADD_100Continue_Header_INTERNAL = "Add100Continue";
     private static final String Continue_Client_Option = "ContinueHeaderThresholdBytes";
-    private static final Set<String> Put_Op_Set = new HashSet<>(Arrays.asList("PutObject", "UploadPart"));
+    private static final Set<String> Put_Op_ShapeId_Set = new HashSet<>(Arrays.asList("com.amazonaws.s3#PutObject", "com.amazonaws.s3#UploadPart"));
 
     /**
      * Return true if service is Amazon S3.
@@ -80,7 +80,7 @@ public class S3100Continue implements GoIntegration {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) ->
-                                isS3Service(model, service) && Put_Op_Set.contains(operation.getId().getName())
+                                isS3Service(model, service) && Put_Op_ShapeId_Set.contains(operation.getId().toString())
                         )
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_100Continue_Header).build())

@@ -8,7 +8,7 @@ import (
 )
 
 const s3100ContinueID = "S3100Continue"
-const defaultLimit int64 = 1024 * 1024 * 2
+const default100ContinueThresholdBytes int64 = 1024 * 1024 * 2
 
 // Add100Continue add middleware, which adds {Expect: 100-continue} header for s3 client HTTP PUT request larger than 2MB
 // or with unknown size streaming bodies, during operation builder step
@@ -32,7 +32,7 @@ func (m *s3100Continue) HandleBuild(
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	sizeLimit := defaultLimit
+	sizeLimit := default100ContinueThresholdBytes
 	switch {
 	case m.continueHeaderThresholdBytes == -1:
 		return next.HandleBuild(ctx, in)
